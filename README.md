@@ -17,7 +17,8 @@ game_voice_translator/
 ├── translator.py        # 硅基流动 API 翻译
 ├── overlay.py           # PyQt5 游戏浮窗
 ├── mobile_server.py     # 手机端 WebSocket 服务器
-├── config.json          # 配置文件
+├── config.example.json  # 配置模板
+├── config.json          # 本地配置文件（不会提交到 Git）
 ├── requirements.txt     # Python 依赖
 ├── install.bat          # 安装脚本
 ├── run.bat              # 启动脚本
@@ -33,14 +34,22 @@ pip install -r requirements.txt
 ```
 
 ### 2. 配置 API Key
-编辑 `config.json`，填入你的硅基流动 API Key：
+首次使用先复制配置模板：
+```bash
+copy config.example.json config.json
+```
+
+然后编辑 `config.json`，填入你的硅基流动 API Key：
 ```json
 "translation": {
     "api_key": "你的硅基流动 API Key",
     "model": "Qwen/Qwen3.5-4B"
 }
 ```
-获取地址：https://cloud.siliconflow.cn/
+
+硅基流动提供免费可用的模型/额度，例如模板里默认使用的 `Qwen/Qwen3.5-4B`。只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
+
+注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
 
 ### 3. 设置音频路由 (可选)
 安装 VB-Cable 虚拟音频设备：
@@ -58,8 +67,8 @@ python main.py
 
 ### 浮窗控制
 - **Ctrl+Shift+T**: 切换浮窗显示/隐藏
-- **Ctrl+Shift+C**: 清空翻译历史
-- **Ctrl+Shift+P**: 暂停/恢复翻译
+- **Ctrl+Alt+C**: 清空翻译历史
+- **Ctrl+Alt+S**: 暂停/恢复翻译
 - **拖拽浮窗**: 可移动位置
 
 ### 手机端访问
@@ -117,7 +126,7 @@ python main.py
 - ⚠️ **DRM 保护**: 某些游戏可能阻止音频捕获
 
 ## 📝 注意事项
-1. 首次运行会下载 Whisper 模型 (~500MB)
+1. 首次运行会下载 Whisper 模型（默认 base 约 150MB；更大模型会占用更多空间）
 2. 需要稳定的网络连接用于翻译 API
 3. 建议在游戏前启动本程序
 4. 手机端需要保持浏览器页面打开

@@ -14,16 +14,26 @@ if not exist "requirements.txt" (
 
 :: 检查配置文件
 if not exist "config.json" (
-    echo [错误] config.json 不存在
-    pause
-    exit /b 1
+    if exist "config.example.json" (
+        copy /Y "config.example.json" "config.json" >nul
+        echo [提示] 已从 config.example.json 生成 config.json
+        echo [提示] 请在 config.json 中填入你的硅基流动 API Key
+        echo        注册/获取: https://cloud.siliconflow.cn/i/iA6DF2nP
+        echo.
+        pause
+    ) else (
+        echo [错误] config.json 不存在，且未找到 config.example.json
+        pause
+        exit /b 1
+    )
 )
 
 :: 检查 API Key 配置
 findstr /C:"YOUR_SILICONFLOW_API_KEY" config.json >nul
 if %errorlevel% equ 0 (
     echo [警告] 请在 config.json 中填入你的硅基流动 API Key
-    echo 获取地址: https://cloud.siliconflow.cn/
+    echo 硅基流动提供免费可用的模型/额度，注册并创建 API Key 即可调用
+    echo 获取地址: https://cloud.siliconflow.cn/i/iA6DF2nP
     echo.
     echo 是否继续？(Y/N)
     set /p choice=

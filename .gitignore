@@ -16,6 +16,7 @@ env/
 .env.*
 !.env.example
 config.json
+!config.example.json
 config.local.json
 
 # Test, coverage, and tool caches

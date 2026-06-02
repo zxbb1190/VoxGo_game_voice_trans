@@ -1,0 +1,65 @@
+{
+  "audio": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "chunk_duration_ms": 300,
+    "vad_aggressiveness": 2,
+    "silence_threshold": -3,
+    "speech_threshold_blocks": 2,
+    "silence_limit_blocks": 4,
+    "max_buffer_blocks": 120
+  },
+  "whisper": {
+    "model_size": "base",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language": "auto",
+    "beam_size": 3,
+    "vad_filter": true,
+    "initial_prompt": "以下是游戏语音聊天，可能包含中文、英文以及中英文混杂。请准确保留人名、地名、游戏术语、技能名、枪械名和字母缩写。",
+    "condition_on_previous_text": false,
+    "temperature": 0.0,
+    "no_speech_threshold": 0.6,
+    "log_prob_threshold": -1.0,
+    "compression_ratio_threshold": 2.4
+  },
+  "translation": {
+    "api_key": "YOUR_SILICONFLOW_API_KEY",
+    "model": "Qwen/Qwen3.5-4B",
+    "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+    "max_tokens": 120,
+    "temperature": 0.1,
+    "context_messages": 0,
+    "timeout_seconds": 8
+  },
+  "overlay": {
+    "font_size": 16,
+    "font_family": "Microsoft YaHei",
+    "text_color": "#00FF00",
+    "original_text_color": "#B7C4D8",
+    "bg_color": "#000000AA",
+    "position": "bottom",
+    "max_lines": 5,
+    "fade_duration": 5,
+    "window_width": 620,
+    "window_height": 260,
+    "opacity": 0.88,
+    "show_original": true,
+    "draggable": true
+  },
+  "websocket": {
+    "host": "0.0.0.0",
+    "port": 8765,
+    "mobile_url": "http://localhost:8765/mobile"
+  },
+  "hotkeys": {
+    "toggle_overlay": "ctrl+shift+t",
+    "toggle_translation": "ctrl+alt+s",
+    "clear_history": "ctrl+alt+c"
+  },
+  "debug": {
+    "log_level": "INFO",
+    "save_audio_chunks": false,
+    "save_transcripts": false
+  }
+}
