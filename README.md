@@ -1,7 +1,7 @@
 # 游戏语音实时翻译器 - README
 
 ## 🎮 功能特性
-- **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出
+- **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
 - **本地语音识别**: 基于 faster-whisper 的离线英文转文字
 - **智能翻译**: 硅基流动 API 的英文→中文翻译，针对游戏术语优化
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
@@ -52,7 +52,16 @@ copy config.example.json config.json
 注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
 
 ### 3. 设置音频路由 (可选)
-安装 VB-Cable 虚拟音频设备：
+默认会优先使用 Windows WASAPI Loopback 采集当前扬声器/耳机输出，不需要选择麦克风。
+
+如果设备列表里出现 `[系统声音] Speakers/Headphones/...` 或带有 `Loopback` 的设备，优先选择它；不要选择普通麦克风。麦克风只能录到环境声，通常录不到游戏声音。
+
+如果只看到麦克风，可以运行 `install.bat` 更新依赖，或手动安装：
+```bash
+pip install PyAudioWPatch==0.2.12.8
+```
+
+还可以安装 VB-Cable 虚拟音频设备作为备选：
 1. 下载：https://vb-audio.com/Cable/
 2. 安装后，将系统默认音频输出切换到 VB-Cable
 3. 游戏音频将通过 VB-Cable 被捕获
@@ -90,8 +99,11 @@ python main.py
 ## 🔧 故障排除
 
 ### 1. 无法捕获音频
-- 检查是否安装了 VB-Cable
-- 确保系统音频输出已切换到 VB-Cable
+- 优先选择 `[系统声音]` / `Loopback` 设备，不要选普通麦克风
+- 运行 `python list_devices.py`，确认能看到系统声音设备
+- 确保游戏声音正在从你选择的扬声器/耳机播放
+- 如果只看到麦克风，重新运行 `install.bat` 安装 PyAudioWPatch
+- 如果使用 VB-Cable，确保系统音频输出已切换到 VB-Cable
 - 尝试以管理员身份运行
 
 ### 2. 语音识别不准确

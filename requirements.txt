@@ -4,7 +4,7 @@
 # 音频处理
 sounddevice==0.4.6
 numpy==1.24.3
-pyaudio==0.2.13
+PyAudioWPatch==0.2.12.8
 webrtcvad-wheels==2.0.14
 librosa==0.10.1
 

@@ -319,7 +319,8 @@ class SettingsDialog(QDialog):
             name = device.get("name", "")
             sample_rate = device.get("sample_rate") or 0
             channels = device.get("channels") or 0
-            label = f"[{index}] {name} ({sample_rate}Hz/{channels}ch)"
+            device_type = "系统声音" if device.get("is_loopback") else "输入设备"
+            label = f"[{device_type}] [{index}] {name} ({sample_rate}Hz/{channels}ch)"
             self.audio_device_combo.addItem(label, device)
             if selected_index is not None and int(selected_index) == int(index):
                 selected_row = row

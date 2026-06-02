@@ -20,7 +20,7 @@ python -m pip install --upgrade pip -q
 echo [2/4] 安装 PyTorch (CPU 版本，如需 GPU 加速请手动安装 CUDA 版)...
 python -m pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu -q
 
-echo [3/4] 安装依赖包...
+echo [3/4] 安装依赖包（含 PyAudioWPatch，用于捕获系统声音）...
 python -m pip install -r requirements.txt -q
 
 echo [4/4] 安装 VB-Cable 虚拟音频设备 (可选，用于捕获系统音频)...
@@ -34,7 +34,7 @@ echo ============================================
 echo.
 echo 使用前请:
 echo   1. 编辑 config.json，填入你的硅基流动 API Key
-echo   2. 将系统默认音频输出切换到 VB-Cable
+echo   2. 音频设备优先选择 [系统声音] / Loopback，不要选普通麦克风
 echo   3. 运行 run.bat 启动翻译器
 echo.
 pause
