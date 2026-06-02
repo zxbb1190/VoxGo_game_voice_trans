@@ -18,6 +18,8 @@ env/
 config.json
 !config.example.json
 config.local.json
+user_settings.json
+crash_report.txt
 
 # Test, coverage, and tool caches
 .pytest_cache/

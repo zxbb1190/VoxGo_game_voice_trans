@@ -1,12 +1,13 @@
 """
 翻译模块
-使用硅基流动 API 进行中英文双向翻译
+使用 OpenAI 兼容 Chat Completions API 进行中英文双向翻译
 """
 
 import asyncio
 import re
 import time
 from dataclasses import dataclass
+from urllib.parse import urlparse
 from typing import Optional, List
 
 import aiohttp
@@ -16,7 +17,7 @@ from loguru import logger
 @dataclass
 class TranslationConfig:
     api_key: str = ""
-    model: str = "Qwen/Qwen3.5-4B"
+    model: str = "Qwen/Qwen2.5-7B-Instruct"
     endpoint: str = "https://api.siliconflow.cn/v1/chat/completions"
     max_tokens: int = 1000
     temperature: float = 0.3
@@ -88,12 +89,33 @@ class GameTranslator:
     def _language_name(self, language: str) -> str:
         return "英文" if language == "en" else "中文"
 
+    def _normalized_endpoint(self) -> str:
+        endpoint = (self.config.endpoint or "").strip().rstrip("/")
+        if not endpoint:
+            endpoint = TranslationConfig.endpoint.rstrip("/")
+        if endpoint.endswith("/chat/completions"):
+            return endpoint
+        return f"{endpoint}/chat/completions"
+
+    def _is_placeholder_api_key(self) -> bool:
+        key = (self.config.api_key or "").strip()
+        return key in {
+            "",
+            "YOUR_API_KEY",
+            "YOUR_SILICONFLOW_API_KEY",
+            "YOUR_OPENAI_COMPATIBLE_API_KEY",
+        }
+
+    def _requires_api_key(self) -> bool:
+        host = (urlparse(self._normalized_endpoint()).hostname or "").lower()
+        return host not in {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+
     async def translate(self, text: str, detected_language: str = "") -> str:
         """在中文和英文之间互译"""
         if not text or not text.strip():
             return ""
 
-        if not self.config.api_key or self.config.api_key == "YOUR_SILICONFLOW_API_KEY":
+        if self._is_placeholder_api_key() and self._requires_api_key():
             logger.warning("API Key 未配置，返回原文")
             return f"[未翻译] {text}"
 
@@ -118,18 +140,16 @@ class GameTranslator:
             current_message
         ]
 
-        headers = {
-            "Authorization": f"Bearer {self.config.api_key}",
-            "Content-Type": "application/json"
-        }
+        headers = {"Content-Type": "application/json"}
+        if not self._is_placeholder_api_key():
+            headers["Authorization"] = f"Bearer {self.config.api_key.strip()}"
 
         payload = {
             "model": self.config.model,
             "messages": messages,
             "max_tokens": self.config.max_tokens,
             "temperature": self.config.temperature,
-            "stream": False,
-            "enable_thinking": False
+            "stream": False
         }
 
         start_time = time.time()
@@ -138,7 +158,7 @@ class GameTranslator:
             session = await self._get_session()
 
             async with session.post(
-                self.config.endpoint,
+                self._normalized_endpoint(),
                 headers=headers,
                 json=payload
             ) as response:

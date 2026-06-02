@@ -114,7 +114,7 @@ class GameVoiceTranslator:
         try:
             with open(settings_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            for section in ["audio", "overlay", "hotkeys"]:
+            for section in ["audio", "overlay", "hotkeys", "translation"]:
                 if section in data:
                     target = getattr(config, section)
                     for key, value in data[section].items():
@@ -144,6 +144,15 @@ class GameVoiceTranslator:
                 "toggle_overlay": self.config.hotkeys.toggle_overlay,
                 "toggle_translation": self.config.hotkeys.toggle_translation,
                 "clear_history": self.config.hotkeys.clear_history,
+            },
+            "translation": {
+                "api_key": self.config.translation.api_key,
+                "model": self.config.translation.model,
+                "endpoint": self.config.translation.endpoint,
+                "max_tokens": self.config.translation.max_tokens,
+                "temperature": self.config.translation.temperature,
+                "context_messages": self.config.translation.context_messages,
+                "timeout_seconds": self.config.translation.timeout_seconds,
             },
         }
         try:
@@ -281,6 +290,7 @@ class GameVoiceTranslator:
             self.config.overlay,
             self.config.hotkeys,
             self.config.audio,
+            self.config.translation,
             self._list_audio_devices(),
             self._apply_overlay_settings,
             self._list_audio_devices,
@@ -288,15 +298,24 @@ class GameVoiceTranslator:
         self._overlay.show()
         logger.info("浮窗已启动")
 
-    def _apply_overlay_settings(self, overlay_config: OverlayConfig, hotkey_config: HotkeyConfig, audio_config: AudioConfig):
+    def _apply_overlay_settings(
+        self,
+        overlay_config: OverlayConfig,
+        hotkey_config: HotkeyConfig,
+        audio_config: AudioConfig,
+        translation_config: TranslationConfig,
+    ):
         previous_device = (
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
         )
         self.config.overlay = overlay_config
         self.config.hotkeys = hotkey_config
+        self.config.translation = translation_config
         self.config.audio.input_device_index = audio_config.input_device_index
         self.config.audio.input_device_name = audio_config.input_device_name
+        if self._translator:
+            self._translator.config = self.config.translation
         self._setup_hotkeys()
         self._save_user_settings()
         current_device = (
@@ -306,12 +325,14 @@ class GameVoiceTranslator:
         if self._running and current_device != previous_device:
             self._restart_audio_capture()
         logger.info(
-            "浮窗设置已应用: opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, hotkeys={}/{}/{}",
+            "浮窗设置已应用: opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, model={}, endpoint={}, hotkeys={}/{}/{}",
             overlay_config.opacity,
             overlay_config.text_color,
             overlay_config.show_original,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
+            self.config.translation.model,
+            self.config.translation.endpoint,
             hotkey_config.toggle_overlay,
             hotkey_config.clear_history,
             hotkey_config.toggle_translation,

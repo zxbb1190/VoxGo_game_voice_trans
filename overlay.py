@@ -22,6 +22,7 @@ from PyQt5.QtWidgets import (
 )
 
 from qr_widget import QrCodeWidget
+from translator import TranslationConfig
 
 
 @dataclass
@@ -81,7 +82,7 @@ class OverlaySignals(QObject):
     new_translation = pyqtSignal(str, str)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
-    settings_changed = pyqtSignal(object, object, object)
+    settings_changed = pyqtSignal(object, object, object, object)
     refresh_audio_devices = pyqtSignal()
 
 
@@ -220,13 +221,14 @@ def _make_icon(kind: str, color: str) -> QIcon:
 class SettingsDialog(QDialog):
     """Graphical settings for overlay and hotkeys."""
 
-    settings_changed = pyqtSignal(object, object)
+    settings_changed = pyqtSignal(object, object, object, object)
 
     def __init__(
         self,
         overlay_config: OverlayConfig,
         hotkey_config: HotkeyConfig,
         audio_config: AudioDeviceConfig = None,
+        translation_config: TranslationConfig = None,
         audio_devices: Optional[List[dict]] = None,
         parent=None,
     ):
@@ -236,6 +238,7 @@ class SettingsDialog(QDialog):
         self.overlay_config = overlay_config
         self.hotkey_config = hotkey_config
         self.audio_config = audio_config or AudioDeviceConfig()
+        self.translation_config = translation_config or TranslationConfig()
         self.audio_devices = audio_devices or []
         self._init_ui()
 
@@ -279,7 +282,27 @@ class SettingsDialog(QDialog):
         self.show_original_check.stateChanged.connect(self._preview)
         form.addRow("中英对照", self.show_original_check)
 
+        self.api_key_input = QLineEdit(self.translation_config.api_key)
+        self.api_key_input.setEchoMode(QLineEdit.Password)
+        self.api_key_input.setPlaceholderText("OpenAI 兼容 API Key")
+        self.api_key_input.setToolTip("硅基流动、DeepSeek、Qwen、GLM 或本地兼容服务的 API Key；本地服务不需要时可留空")
+        self.api_key_input.editingFinished.connect(self._preview)
+        form.addRow("API Key", self.api_key_input)
+
+        self.model_input = QLineEdit(self.translation_config.model)
+        self.model_input.setPlaceholderText("Qwen/Qwen2.5-7B-Instruct")
+        self.model_input.setToolTip("填写服务商要求的模型名，例如 Qwen/Qwen2.5-7B-Instruct、deepseek-chat、qwen-plus、glm-4-flash")
+        self.model_input.editingFinished.connect(self._preview)
+        form.addRow("模型名", self.model_input)
+
+        self.endpoint_input = QLineEdit(self.translation_config.endpoint)
+        self.endpoint_input.setPlaceholderText("https://api.siliconflow.cn/v1/chat/completions")
+        self.endpoint_input.setToolTip("填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url")
+        self.endpoint_input.editingFinished.connect(self._preview)
+        form.addRow("兼容地址", self.endpoint_input)
+
         self.audio_device_combo = QComboBox()
+        self.audio_device_combo.setToolTip("优先选择 [系统声音] 或 Loopback；普通麦克风通常录不到游戏声音")
         self.refresh_audio_button = QPushButton("刷新")
         self._fill_audio_devices()
         audio_row = QHBoxLayout()
@@ -305,7 +328,11 @@ class SettingsDialog(QDialog):
         close_button.clicked.connect(self.close)
         layout.addWidget(close_button)
         self.setLayout(layout)
-        self.resize(440, 320)
+        self.resize(640, 500)
+
+    def closeEvent(self, event):
+        self._preview()
+        super().closeEvent(event)
 
     def _fill_audio_devices(self):
         self.audio_device_combo.blockSignals(True)
@@ -341,7 +368,12 @@ class SettingsDialog(QDialog):
 
     def _preview(self, *args):
         self._collect_values()
-        self.settings_changed.emit(self.overlay_config, self.hotkey_config, self.audio_config)
+        self.settings_changed.emit(
+            self.overlay_config,
+            self.hotkey_config,
+            self.audio_config,
+            self.translation_config,
+        )
 
     def _collect_values(self):
         self.overlay_config.opacity = self.opacity_slider.value() / 100
@@ -353,6 +385,10 @@ class SettingsDialog(QDialog):
         self.hotkey_config.toggle_overlay = self.toggle_overlay_input.text().strip() or self.hotkey_config.toggle_overlay
         self.hotkey_config.toggle_translation = self.toggle_translation_input.text().strip() or self.hotkey_config.toggle_translation
         self.hotkey_config.clear_history = self.clear_history_input.text().strip() or self.hotkey_config.clear_history
+
+        self.translation_config.api_key = self.api_key_input.text().strip()
+        self.translation_config.model = self.model_input.text().strip() or self.translation_config.model
+        self.translation_config.endpoint = self.endpoint_input.text().strip() or self.translation_config.endpoint
 
         device = self.audio_device_combo.currentData()
         if device:
@@ -371,14 +407,16 @@ class GameOverlay(QWidget):
         config: OverlayConfig = None,
         hotkeys: HotkeyConfig = None,
         audio_config: AudioDeviceConfig = None,
+        translation_config: TranslationConfig = None,
         audio_devices: Optional[List[dict]] = None,
-        on_settings_changed: Optional[Callable[[OverlayConfig, HotkeyConfig, AudioDeviceConfig], None]] = None,
+        on_settings_changed: Optional[Callable[[OverlayConfig, HotkeyConfig, AudioDeviceConfig, TranslationConfig], None]] = None,
         on_audio_devices_refresh: Optional[Callable[[], List[dict]]] = None,
     ):
         super().__init__()
         self.config = config or OverlayConfig()
         self.hotkeys = hotkeys or HotkeyConfig()
         self.audio_config = audio_config or AudioDeviceConfig()
+        self.translation_config = translation_config or TranslationConfig()
         self.audio_devices = audio_devices or []
         self._on_settings_changed = on_settings_changed
         self._on_audio_devices_refresh = on_audio_devices_refresh
@@ -579,16 +617,24 @@ class GameOverlay(QWidget):
             self.config,
             self.hotkeys,
             self.audio_config,
+            self.translation_config,
             self.audio_devices,
             self,
         )
         self._settings_dialog.settings_changed.connect(self._apply_settings)
         self._settings_dialog.show()
 
-    def _apply_settings(self, overlay_config: OverlayConfig, hotkey_config: HotkeyConfig, audio_config: AudioDeviceConfig):
+    def _apply_settings(
+        self,
+        overlay_config: OverlayConfig,
+        hotkey_config: HotkeyConfig,
+        audio_config: AudioDeviceConfig,
+        translation_config: TranslationConfig,
+    ):
         self.config = overlay_config
         self.hotkeys = hotkey_config
         self.audio_config = audio_config
+        self.translation_config = translation_config
         self.setWindowOpacity(self.config.opacity)
         self._apply_styles()
         self._qr_button.setIcon(_make_icon("qr", self.config.text_color))
@@ -596,7 +642,12 @@ class GameOverlay(QWidget):
         self._refresh_labels()
         self.update()
         if self._on_settings_changed:
-            self._on_settings_changed(self.config, self.hotkeys, self.audio_config)
+            self._on_settings_changed(
+                self.config,
+                self.hotkeys,
+                self.audio_config,
+                self.translation_config,
+            )
 
     def request_audio_device_refresh(self):
         if self._on_audio_devices_refresh:

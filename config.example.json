@@ -24,8 +24,8 @@
     "compression_ratio_threshold": 2.4
   },
   "translation": {
-    "api_key": "YOUR_SILICONFLOW_API_KEY",
-    "model": "Qwen/Qwen3.5-4B",
+    "api_key": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
     "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
     "max_tokens": 120,
     "temperature": 0.1,

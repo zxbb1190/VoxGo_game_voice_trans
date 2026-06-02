@@ -3,7 +3,7 @@
 ## 🎮 功能特性
 - **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
 - **本地语音识别**: 基于 faster-whisper 的离线英文转文字
-- **智能翻译**: 硅基流动 API 的英文→中文翻译，针对游戏术语优化
+- **智能翻译**: OpenAI 兼容 Chat Completions API，默认使用硅基流动，可接入 DeepSeek、Qwen、GLM、本地模型等
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
 - **手机端同步**: WebSocket 实时推送到手机浏览器
 - **全局热键**: Ctrl+Shift+T/C/P 快速控制
@@ -14,7 +14,7 @@ game_voice_translator/
 ├── main.py              # 主程序
 ├── audio_capture.py     # 音频捕获模块
 ├── speech_recognition.py # Whisper 语音识别
-├── translator.py        # 硅基流动 API 翻译
+├── translator.py        # OpenAI 兼容 API 翻译
 ├── overlay.py           # PyQt5 游戏浮窗
 ├── mobile_server.py     # 手机端 WebSocket 服务器
 ├── config.example.json  # 配置模板
@@ -33,28 +33,43 @@ game_voice_translator/
 pip install -r requirements.txt
 ```
 
-### 2. 配置 API Key
+### 2. 配置翻译 API
 首次使用先复制配置模板：
 ```bash
 copy config.example.json config.json
 ```
 
-然后编辑 `config.json`，填入你的硅基流动 API Key：
+然后编辑 `config.json`，或先启动程序后在浮窗右上角齿轮设置里填写 API Key、模型名和兼容地址：
 ```json
 "translation": {
-    "api_key": "你的硅基流动 API Key",
-    "model": "Qwen/Qwen3.5-4B"
+    "api_key": "你的 OpenAI 兼容 API Key",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
 }
 ```
 
-硅基流动提供免费可用的模型/额度，例如模板里默认使用的 `Qwen/Qwen3.5-4B`。只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
+模板默认使用硅基流动的 `Qwen/Qwen2.5-7B-Instruct`。硅基流动提供免费可用的模型/额度，只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
 
 注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
+
+也可以使用其他 OpenAI 兼容接口。常见填写示例：
+
+| 来源 | 兼容地址示例 | 模型名示例 |
+|------|--------------|------------|
+| 硅基流动 | `https://api.siliconflow.cn/v1/chat/completions` | `Qwen/Qwen2.5-7B-Instruct` |
+| DeepSeek | `https://api.deepseek.com/chat/completions` | `deepseek-v4-flash` |
+| Qwen / 阿里云百炼 | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` | `qwen-plus` |
+| GLM / 智谱 | `https://open.bigmodel.cn/api/paas/v4/chat/completions` | `glm-4.7` |
+| 本地模型 | `http://127.0.0.1:11434/v1/chat/completions` 或 `http://127.0.0.1:8000/v1/chat/completions` | 按本地服务填写 |
+
+如果服务商只给了 `base_url`，例如以 `/v1` 结尾，也可以直接填写；程序会自动补上 `/chat/completions`。真实 API Key 会保存在本机 `user_settings.json`，该文件不会提交到 Git。
 
 ### 3. 设置音频路由 (可选)
 默认会优先使用 Windows WASAPI Loopback 采集当前扬声器/耳机输出，不需要选择麦克风。
 
-如果设备列表里出现 `[系统声音] Speakers/Headphones/...` 或带有 `Loopback` 的设备，优先选择它；不要选择普通麦克风。麦克风只能录到环境声，通常录不到游戏声音。
+在浮窗右上角齿轮设置里可以选择音频设备。优先选择和当前 Windows 输出设备同名的 `[系统声音]` 或带有 `Loopback` 的设备，例如你正在用耳机听游戏，就选对应耳机的系统声音/Loopback 项。
+
+不要选择普通 `[输入设备] 麦克风`。麦克风只能录到环境声，通常录不到游戏声音；如果列表里大部分都是麦克风，说明系统声音捕获设备还没暴露出来。
 
 如果只看到麦克风，可以运行 `install.bat` 更新依赖，或手动安装：
 ```bash
@@ -79,6 +94,7 @@ python main.py
 - **Ctrl+Alt+C**: 清空翻译历史
 - **Ctrl+Alt+S**: 暂停/恢复翻译
 - **拖拽浮窗**: 可移动位置
+- **右上角齿轮**: 配置 API Key、模型名、兼容地址、音频设备、透明度和热键
 
 ### 手机端访问
 1. 确保电脑和手机在同一局域网
@@ -94,6 +110,9 @@ python main.py
 | `overlay.position` | 浮窗位置: top/bottom/left/right |
 | `overlay.text_color` | 文字颜色 (十六进制) |
 | `audio.sample_rate` | 采样率 (推荐 16000) |
+| `translation.api_key` | OpenAI 兼容 API Key |
+| `translation.model` | 模型名，默认 `Qwen/Qwen2.5-7B-Instruct` |
+| `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions` |
 | `translation.temperature` | 翻译创造性 (0.1~1.0) |
 
 ## 🔧 故障排除
@@ -102,6 +121,7 @@ python main.py
 - 优先选择 `[系统声音]` / `Loopback` 设备，不要选普通麦克风
 - 运行 `python list_devices.py`，确认能看到系统声音设备
 - 确保游戏声音正在从你选择的扬声器/耳机播放
+- 如果你正在用蓝牙耳机/HDMI 显示器/USB 声卡输出，音频设备也要选择同名的系统声音/Loopback 项
 - 如果只看到麦克风，重新运行 `install.bat` 安装 PyAudioWPatch
 - 如果使用 VB-Cable，确保系统音频输出已切换到 VB-Cable
 - 尝试以管理员身份运行
@@ -109,7 +129,7 @@ python main.py
 ### 2. 语音识别不准确
 - 调高 `whisper.model_size` (small → medium)
 - 降低游戏内背景音乐音量
-- 确保麦克风/音频质量良好
+- 确保游戏语音输出清晰，且选择的是正在播放游戏声音的系统声音设备
 
 ### 3. 翻译延迟高
 - 检查网络连接
@@ -127,7 +147,7 @@ python main.py
 |------|------|----------|
 | 音频捕获 | < 50ms | 低 |
 | Whisper-small | 1-2s | CPU: 中等 / GPU: 低 |
-| 硅基流动 API | 0.5-1.5s | 网络依赖 |
+| OpenAI 兼容 API | 0.5-1.5s | 网络依赖 |
 | 浮窗渲染 | < 10ms | 低 |
 
 ## 🎮 游戏兼容性

@@ -25,7 +25,7 @@ for i in range(p.get_device_count()):
     is_input = info.get("maxInputChannels", 0) > 0
     is_output = info.get("maxOutputChannels", 0) > 0
     is_loopback = bool(info.get("isLoopbackDevice")) or "loopback" in name.lower()
-    marker = "⭐ LOOPBACK" if is_loopback else ""
+    marker = "* LOOPBACK" if is_loopback else ""
     direction = "IN" if is_input else "OUT"
     if is_input and is_output:
         direction = "IO"
