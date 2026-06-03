@@ -6,8 +6,8 @@ English documentation: [README_EN.md](README_EN.md)
 
 ## 🎮 功能特性
 - **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
-- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，支持自动识别中文/英文
-- **智能双向翻译**: 自动判断原文语言，英文自动翻译为中文，中文自动翻译为英文
+- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，支持固定中文/英文识别
+- **固定方向翻译**: 在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
 - **兼容多种模型服务**: OpenAI 兼容 Chat Completions API，默认使用硅基流动，可接入 DeepSeek、Qwen、GLM、本地模型等
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
 - **可见状态提示**: 启动状态、音频设备、暂停/恢复、翻译 API 错误码等会直接显示在浮窗里
@@ -50,12 +50,12 @@ copy config.example.json config.json
 ```json
 "translation": {
     "api_key": "你的 OpenAI 兼容 API Key",
-    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "model": "tencent/Hunyuan-MT-7B",
     "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
 }
 ```
 
-模板默认使用硅基流动的 `Qwen/Qwen2.5-7B-Instruct`。硅基流动提供免费可用的模型/额度，只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
+模板默认使用硅基流动的 `tencent/Hunyuan-MT-7B`，这是面向翻译的免费模型。只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
 
 注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
 
@@ -63,7 +63,7 @@ copy config.example.json config.json
 
 | 来源 | 兼容地址示例 | 模型名示例 |
 |------|--------------|------------|
-| 硅基流动 | `https://api.siliconflow.cn/v1/chat/completions` | `Qwen/Qwen2.5-7B-Instruct` |
+| 硅基流动 | `https://api.siliconflow.cn/v1/chat/completions` | `tencent/Hunyuan-MT-7B` |
 | DeepSeek | `https://api.deepseek.com/chat/completions` | `deepseek-v4-flash` |
 | Qwen / 阿里云百炼 | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` | `qwen-plus` |
 | GLM / 智谱 | `https://open.bigmodel.cn/api/paas/v4/chat/completions` | `glm-4.7` |
@@ -104,9 +104,10 @@ python main.py
 - **右上角齿轮**: 配置 API Key、模型名、兼容地址、音频设备、透明度和热键
 
 ### 翻译方向
-程序会自动识别语音识别结果是中文还是英文：
-- 识别到英文时，自动翻译成中文
-- 识别到中文时，自动翻译成英文
+浮窗标题栏可以直接选择识别语言和翻译目标语言：
+- 左侧下拉框是识别语言
+- 右侧下拉框是翻译目标语言
+- 中间按钮可以一键交换方向
 - 中英文混杂内容会按主要语言判断，并尽量保留游戏术语、缩写、人名和地名
 
 ### 状态与错误提示
@@ -128,14 +129,31 @@ python main.py
 | 配置项 | 说明 |
 |--------|------|
 | `whisper.model_size` | 模型大小: tiny/base/small/medium (越大越准越慢) |
+| `whisper.device` | 识别设备，默认 `auto`：优先 CUDA，失败自动退回 CPU |
+| `whisper.compute_type` | 计算精度，默认 `auto`：CUDA 使用 float16，CPU 使用 int8 |
+| `whisper.language` | 固定识别语言，会随标题栏左侧语言选择同步 |
+| `whisper.prompt_profile` | 识别提示词场景，默认 `none`，避免 Whisper 幻听提示词；必要时可手动改为 `general` 或 `game` |
+| `whisper.vad_filter` | faster-whisper 内部 VAD，默认关闭，避免和外部切段重复吞字 |
 | `overlay.position` | 浮窗位置: top/bottom/left/right |
 | `overlay.text_color` | 文字颜色 (十六进制) |
+| `overlay.bg_color` | 浮窗背景色，默认深灰 `#20242A` |
+| `overlay.bg_opacity` | 浮窗背景透明度，默认 0.82；设置窗口里可调整 |
 | `audio.sample_rate` | 采样率 (推荐 16000) |
+| `audio.silence_threshold` | 静态兜底语音阈值，单位 dBFS；默认 -40，真人语音不建议高于 -20 |
+| `audio.speech_idle_timeout_ms` | 有语音缓冲但没有新音频帧时的主动切段时间，默认 900ms |
+| `audio.soft_silence_margin_db` | 当前片段峰值下降多少 dB 后按尾部静音处理，默认 10 |
+| `audio.soft_silence_gate_margin_db` | 音量接近语音门限时按尾部静音处理的余量，默认 5 |
+| `audio.noise_calibration_seconds` | 启动后采集背景噪声并自动校准阈值的秒数，默认 2 |
+| `audio.noise_margin_db` | 动态阈值相对背景噪声提高的 dB，默认 7 |
 | `audio.max_speech_seconds` | 连续有声时强制切段的最长秒数，推荐 6~10 秒 |
 | `translation.api_key` | OpenAI 兼容 API Key |
-| `translation.model` | 模型名，默认 `Qwen/Qwen2.5-7B-Instruct` |
+| `translation.model` | 模型名，默认 `tencent/Hunyuan-MT-7B` |
 | `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions` |
-| `translation.temperature` | 翻译创造性 (0.1~1.0) |
+| `translation.max_tokens` | 译文最大输出长度，默认 80，避免模型扩写 |
+| `translation.temperature` | 翻译随机性，默认 0，优先忠实稳定 |
+| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里 |
+| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里 |
+| `translation.context_messages` | 翻译历史上下文条数，默认 0，避免历史污染和补全 |
 
 ## 🔧 故障排除
 
@@ -149,7 +167,11 @@ python main.py
 - 尝试以管理员身份运行
 
 ### 2. 语音识别不准确
+- 真人语音比视频声音更容易偏小，确认 `audio.silence_threshold` 不要设得过高；推荐 -40 左右
+- 启动后先保持 2 秒相对安静，让程序完成背景噪声校准
 - 调高 `whisper.model_size` (small → medium)
+- 默认保持 `whisper.prompt_profile=none`；如果出现“请准确转写...”这类文本，说明 Whisper 正在幻听提示词，不要开启长提示词
+- 如果句子开头或结尾容易丢字，先保持 `whisper.vad_filter=false`，避免双重 VAD 切音
 - 降低游戏内背景音乐音量
 - 确保游戏语音输出清晰，且选择的是正在播放游戏声音的系统声音设备
 
@@ -162,6 +184,8 @@ python main.py
 - 检查防火墙是否放行 8765 端口
 - 确认手机和电脑在同一局域网
 - 尝试使用电脑 IP 而非 localhost
+- 如果看到 502，先在电脑浏览器打开 `http://127.0.0.1:8765/mobile`；如果本机可打开，通常是手机访问的 IP、代理或防火墙问题
+- 手机应访问浮窗二维码/启动提示里的电脑地址，不要手动使用浏览器代理给出的公网或代理地址
 
 ## 📊 性能指标
 

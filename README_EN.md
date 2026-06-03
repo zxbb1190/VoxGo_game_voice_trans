@@ -6,8 +6,8 @@ An open-source real-time voice translation overlay for PC gamers, designed for o
 
 ## Features
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
-- **Local speech recognition**: Uses faster-whisper for offline speech-to-text and can auto-detect Chinese or English.
-- **Bidirectional translation**: Automatically translates English to Chinese and Chinese to English.
+- **Local speech recognition**: Uses faster-whisper for offline speech-to-text with a fixed Chinese or English recognition language.
+- **Fixed translation direction**: Choose the recognition language and translation target from the overlay title bar, with one-click swap.
 - **OpenAI-compatible APIs**: Works with Chat Completions-compatible providers such as SiliconFlow, DeepSeek, Qwen, GLM, OpenAI-compatible gateways, and local models.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
@@ -50,12 +50,12 @@ Then edit `config.json`, or start the app and use the gear button in the overlay
 ```json
 "translation": {
   "api_key": "YOUR_OPENAI_COMPATIBLE_API_KEY",
-  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "model": "tencent/Hunyuan-MT-7B",
   "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
 }
 ```
 
-The default template uses SiliconFlow with `Qwen/Qwen2.5-7B-Instruct`. SiliconFlow provides free models/quota; register and create an API Key to use it. Availability and quota are subject to the provider's current policy.
+The default template uses SiliconFlow with `tencent/Hunyuan-MT-7B`, a free translation model. Register and create an API Key to use it. Availability and quota are subject to the provider's current policy.
 
 Register/get API Key: <https://cloud.siliconflow.cn/i/iA6DF2nP>
 
@@ -63,7 +63,7 @@ Common OpenAI-compatible examples:
 
 | Provider | Compatible endpoint example | Model example |
 |----------|-----------------------------|---------------|
-| SiliconFlow | `https://api.siliconflow.cn/v1/chat/completions` | `Qwen/Qwen2.5-7B-Instruct` |
+| SiliconFlow | `https://api.siliconflow.cn/v1/chat/completions` | `tencent/Hunyuan-MT-7B` |
 | DeepSeek | `https://api.deepseek.com/chat/completions` | `deepseek-v4-flash` |
 | Qwen / Alibaba Model Studio | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` | `qwen-plus` |
 | GLM / Zhipu | `https://open.bigmodel.cn/api/paas/v4/chat/completions` | `glm-4.7` |
@@ -102,10 +102,11 @@ python main.py
 - **Gear button**: Configure API Key, model name, endpoint, audio device, opacity, colors, and hotkeys
 
 ### Translation Direction
-The app automatically detects whether recognized text is Chinese or English:
-- English speech is translated to Chinese.
-- Chinese speech is translated to English.
-- Mixed Chinese/English text is handled by the dominant detected language while preserving game terms, acronyms, names, and locations where possible.
+Choose the fixed recognition and translation direction directly in the overlay title bar:
+- The left dropdown is the recognition language.
+- The right dropdown is the translation target language.
+- The middle button swaps the direction.
+- Mixed Chinese/English terms are preserved where possible, but the recognition and translation direction follows the selected dropdowns.
 
 ### Status And Error Messages
 Important user-facing messages are shown in the overlay, including:
@@ -126,13 +127,30 @@ Edit `config.json` or use the overlay settings:
 | Key | Description |
 |-----|-------------|
 | `whisper.model_size` | Whisper model size: tiny/base/small/medium |
+| `whisper.device` | Recognition device, default `auto`: try CUDA first and fall back to CPU |
+| `whisper.compute_type` | Compute precision, default `auto`: float16 on CUDA, int8 on CPU |
+| `whisper.language` | Fixed recognition language, synchronized with the left title-bar language dropdown |
+| `whisper.prompt_profile` | Recognition prompt profile, default `none` to avoid Whisper hallucinating the prompt; optionally use `general` or `game` manually |
+| `whisper.vad_filter` | faster-whisper internal VAD, disabled by default to avoid double-cutting speech |
 | `overlay.text_color` | Overlay text color |
+| `overlay.bg_color` | Overlay background color, default dark gray `#20242A` |
+| `overlay.bg_opacity` | Overlay background opacity, default 0.82 and adjustable in settings |
 | `audio.sample_rate` | Audio sample rate |
+| `audio.silence_threshold` | Static fallback speech threshold in dBFS; default -40, avoid values above -20 for real voice chat |
+| `audio.speech_idle_timeout_ms` | Active segment flush when speech is buffered but no new audio frames arrive, default 900ms |
+| `audio.soft_silence_margin_db` | Treat the tail as silence after it drops this many dB below the segment peak, default 10 |
+| `audio.soft_silence_gate_margin_db` | Treat audio close to the speech gate as tail silence, default 5 |
+| `audio.noise_calibration_seconds` | Seconds of startup background-audio calibration, default 2 |
+| `audio.noise_margin_db` | Dynamic threshold margin above the measured noise floor, default 7 dB |
 | `audio.max_speech_seconds` | Maximum seconds before forced splitting during continuous sound, recommended 6-10 |
 | `translation.api_key` | OpenAI-compatible API Key |
-| `translation.model` | Model name, default `Qwen/Qwen2.5-7B-Instruct` |
+| `translation.model` | Model name, default `tencent/Hunyuan-MT-7B` |
 | `translation.endpoint` | Compatible endpoint or `/v1` base URL |
-| `translation.temperature` | Translation creativity |
+| `translation.max_tokens` | Maximum translation output length, default 80 to avoid expansion |
+| `translation.temperature` | Translation randomness, default 0 for faithful and stable subtitles |
+| `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown |
+| `translation.target_lang` | Fixed translation target saved from the right title-bar dropdown |
+| `translation.context_messages` | Translation history context count, default 0 to avoid stale context pollution and completion |
 
 ## Troubleshooting
 
@@ -152,7 +170,11 @@ Edit `config.json` or use the overlay settings:
 - Increase `translation.timeout_seconds` if the provider is slow.
 
 ### Recognition Is Inaccurate
+- Real voice chat is often quieter than normalized video audio; keep `audio.silence_threshold` around -40.
+- Keep the room/game relatively quiet for the first 2 seconds so the app can calibrate the background noise floor.
 - Increase `whisper.model_size`.
+- Keep `whisper.prompt_profile=none` by default; if phrases from the prompt appear in the transcript, do not enable long Whisper prompts.
+- Keep `whisper.vad_filter=false` if beginnings or endings of sentences are being clipped.
 - Lower background music volume.
 - Ensure the selected audio device is the one actually playing game voice.
 
@@ -166,6 +188,12 @@ Some games, anti-cheat systems, exclusive audio mode, remote streaming tools, DR
 2. Translation requires network access unless you use a local model.
 3. Start this app before joining a game voice session.
 4. Keep the mobile page open if you use mobile mirroring.
+
+## Mobile Troubleshooting
+- Allow port `8765` through Windows Firewall.
+- Keep the phone and PC on the same LAN.
+- If the phone shows 502, first open `http://127.0.0.1:8765/mobile` on the PC. If that works, check the phone URL, proxy, or firewall.
+- Use the URL shown by the overlay QR code/startup notice, not a browser proxy address.
 
 ## License
 This community edition is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).

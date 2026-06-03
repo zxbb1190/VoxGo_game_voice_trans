@@ -11,6 +11,7 @@ import aiohttp
 
 
 CANDIDATES = [
+    "tencent/Hunyuan-MT-7B",
     "Qwen/Qwen3.5-4B",
     "Qwen/Qwen2.5-7B-Instruct",
     "Qwen/Qwen2.5-3B-Instruct",

@@ -24,10 +24,34 @@ from speech_recognition import (
     SpeechRecognizer,
     WhisperConfig,
     DEFAULT_VAD_PARAMS,
+    is_likely_asr_hallucination,
     sanitize_vad_parameters,
 )
 from translator import GameTranslator, TranslationConfig
 from mobile_server import MobileWebSocketManager, WebSocketConfig
+
+
+LANGUAGE_ALIASES = {
+    "en": "en",
+    "eng": "en",
+    "english": "en",
+    "英语": "en",
+    "zh": "zh",
+    "zh-cn": "zh",
+    "zh-tw": "zh",
+    "cmn": "zh",
+    "yue": "zh",
+    "chinese": "zh",
+    "中文": "zh",
+}
+LANGUAGE_NAMES = {"en": "英语", "zh": "中文"}
+OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+
+
+def _normalize_language_code(value: str, default: str = "en") -> str:
+    value = (value or "").strip().lower()
+    normalized = LANGUAGE_ALIASES.get(value, value)
+    return normalized if normalized in LANGUAGE_NAMES else default
 
 
 @dataclass
@@ -35,7 +59,8 @@ class OverlayConfig:
     font_size: int = 16
     font_family: str = "Microsoft YaHei"
     text_color: str = "#00FF00"
-    bg_color: str = "#000000AA"
+    bg_color: str = "#20242A"
+    bg_opacity: float = 0.82
     position: str = "bottom"
     max_lines: int = 5
     fade_duration: int = 5
@@ -79,8 +104,12 @@ class GameVoiceTranslator:
         self._audio_timer = None
         self._mobile_loop: Optional[asyncio.AbstractEventLoop] = None
         self._mobile_thread: Optional[threading.Thread] = None
+        self._mobile_start_error: Optional[BaseException] = None
         self._translation_loop: Optional[asyncio.AbstractEventLoop] = None
         self._translation_thread: Optional[threading.Thread] = None
+        self._startup_thread: Optional[threading.Thread] = None
+        self._startup_signals = None
+        self._backend_ready = False
         self._running = False
         self._paused = False
         self._stopping = False
@@ -88,6 +117,7 @@ class GameVoiceTranslator:
         self._speech_queue = queue.Queue(maxsize=2)
         self._speech_stop_token = object()
         self._speech_worker_thread: Optional[threading.Thread] = None
+        self._translation_item_seq = 0
         self._hotkey_handles = []
         self._pending_notices = []
         self._last_audio_device = (
@@ -100,6 +130,10 @@ class GameVoiceTranslator:
             self.config.translation.api_key,
             self.config.translation.model,
             self.config.translation.endpoint,
+        )
+        self._last_language_flow = (
+            self.config.translation.source_lang,
+            self.config.translation.target_lang,
         )
         self._stats = {
             "audio_chunks": 0, "speech_detected": 0,
@@ -127,6 +161,7 @@ class GameVoiceTranslator:
             except Exception as e:
                 logger.error(f"配置加载失败: {e}")
         self._load_user_settings(default_config)
+        self._sync_language_flow(default_config)
         self._sync_whisper_vad_limit(default_config)
         return default_config
 
@@ -160,6 +195,8 @@ class GameVoiceTranslator:
                 "font_size": self.config.overlay.font_size,
                 "text_color": self.config.overlay.text_color,
                 "original_text_color": self.config.overlay.original_text_color,
+                "bg_color": self.config.overlay.bg_color,
+                "bg_opacity": self.config.overlay.bg_opacity,
                 "window_width": self.config.overlay.window_width,
                 "window_height": self.config.overlay.window_height,
                 "opacity": self.config.overlay.opacity,
@@ -176,6 +213,8 @@ class GameVoiceTranslator:
                 "endpoint": self.config.translation.endpoint,
                 "max_tokens": self.config.translation.max_tokens,
                 "temperature": self.config.translation.temperature,
+                "source_lang": self.config.translation.source_lang,
+                "target_lang": self.config.translation.target_lang,
                 "context_messages": self.config.translation.context_messages,
                 "timeout_seconds": self.config.translation.timeout_seconds,
             },
@@ -184,6 +223,17 @@ class GameVoiceTranslator:
             settings_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception as e:
             logger.warning("用户设置保存失败: {}", e)
+
+    def _sync_language_flow(self, config: AppConfig = None):
+        config = config or self.config
+        source = _normalize_language_code(config.translation.source_lang, "en")
+        target = _normalize_language_code(config.translation.target_lang, OPPOSITE_LANGUAGE[source])
+        if target == source:
+            target = OPPOSITE_LANGUAGE[source]
+        config.translation.source_lang = source
+        config.translation.target_lang = target
+        config.whisper.language = source
+        return source, target
 
     def _sync_whisper_vad_limit(self, config: AppConfig = None):
         config = config or self.config
@@ -194,10 +244,19 @@ class GameVoiceTranslator:
     def _setup_logging(self):
         logger.remove()
         log_target = sys.stderr if sys.stderr is not None else open(os.devnull, "w", encoding="utf-8")
+        log_dir = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
         logger.add(
             log_target,
             level="INFO",
             format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>",
+        )
+        logger.add(
+            log_dir / "app.log",
+            level="INFO",
+            rotation="2 MB",
+            retention=3,
+            encoding="utf-8",
+            format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {message}",
         )
 
     def _runtime_dir(self) -> Path:
@@ -322,6 +381,9 @@ class GameVoiceTranslator:
             text = result.text
             if not text or len(text.strip()) < 2:
                 return
+            if is_likely_asr_hallucination(text):
+                logger.warning("丢弃疑似 ASR 幻觉文本: {}", text[:120])
+                return
             self._stats["transcriptions"] += 1
             logger.info(
                 "[识别] {} (lang={}, prob={:.2f}, {:.1f}s)",
@@ -331,28 +393,10 @@ class GameVoiceTranslator:
                 time.time()-t0
             )
 
-            t0 = time.time()
-            translated = self._translate_text(text, result.language)
-            if not translated or not translated.strip():
-                translated = f"[翻译为空] {text}"
-                logger.warning("翻译返回空结果，显示识别文本")
-            if translated:
-                logger.info(f"[翻译] {translated[:80]} ({time.time()-t0:.1f}s)")
-                is_notice = translated.startswith("[翻译") or translated.startswith("[未翻译]")
-                if is_notice:
-                    if translated.startswith("[翻译"):
-                        self._stats["errors"] += 1
-                    self._notify_user(
-                        "翻译服务异常",
-                        translated,
-                        "错误" if translated.startswith("[翻译") else "提示",
-                    )
-                elif self._overlay:
-                    self._stats["translations"] += 1
-                    logger.info("推送翻译到浮窗")
-                    self._overlay.add_translation(text, translated)
-                if self._mobile_server:
-                    self._broadcast_to_mobile(text, translated)
+            item_id = self._next_translation_item_id()
+            if self._overlay:
+                self._overlay.add_translation_with_id(item_id, text, "...正在翻译")
+            self._start_async_translation(item_id, text, result.language)
         except Exception as e:
             self._stats["errors"] += 1
             logger.exception(f"处理失败: {e}")
@@ -404,9 +448,35 @@ class GameVoiceTranslator:
 
     def _start_qt(self):
         from PyQt5.QtWidgets import QApplication
+        from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt, QTimer
         from overlay import GameOverlay
 
+        class StartupSignals(QObject):
+            backend_ready = pyqtSignal()
+            backend_failed = pyqtSignal(str)
+
+            def __init__(self, owner):
+                super().__init__()
+                self._owner = owner
+
+            @pyqtSlot()
+            def finish_backend_startup(self):
+                self._owner._finish_backend_startup()
+
+            @pyqtSlot(str)
+            def handle_backend_startup_failure(self, message: str):
+                self._owner._handle_backend_startup_failure(message)
+
         self._qt_app = QApplication.instance() or QApplication(sys.argv)
+        self._startup_signals = StartupSignals(self)
+        self._startup_signals.backend_ready.connect(
+            self._startup_signals.finish_backend_startup,
+            Qt.QueuedConnection,
+        )
+        self._startup_signals.backend_failed.connect(
+            self._startup_signals.handle_backend_startup_failure,
+            Qt.QueuedConnection,
+        )
         if self._mobile_server:
             self.config.overlay.mobile_url = self._mobile_server.get_mobile_url()
         self._overlay = GameOverlay(
@@ -414,13 +484,14 @@ class GameVoiceTranslator:
             self.config.hotkeys,
             self.config.audio,
             self.config.translation,
-            self._list_audio_devices(),
+            [],
             self._apply_overlay_settings,
             self._list_audio_devices,
             self._request_shutdown,
         )
         self._overlay.show()
         self._flush_pending_notices()
+        QTimer.singleShot(300, self._refresh_overlay_audio_devices)
         logger.info("浮窗已启动")
 
     def _request_shutdown(self):
@@ -444,6 +515,8 @@ class GameVoiceTranslator:
         self.config.audio.input_device_index = audio_config.input_device_index
         self.config.audio.input_device_name = audio_config.input_device_name
         self.config.audio.max_speech_seconds = audio_config.max_speech_seconds
+        previous_language_flow = self._last_language_flow
+        current_language_flow = self._sync_language_flow()
         self._sync_whisper_vad_limit()
         if self._translator:
             self._translator.config = self.config.translation
@@ -462,6 +535,14 @@ class GameVoiceTranslator:
         )
         if self._running and current_device != previous_device:
             self._restart_audio_capture()
+        if current_language_flow != previous_language_flow:
+            if self._translator:
+                self._translator.clear_context()
+            self._notify_user(
+                "语言方向已更新",
+                f"{LANGUAGE_NAMES[current_language_flow[0]]} → {LANGUAGE_NAMES[current_language_flow[1]]}",
+                "状态",
+            )
         if current_translation != previous_translation:
             self._notify_user(
                 "翻译接口已更新",
@@ -470,14 +551,18 @@ class GameVoiceTranslator:
             )
         self._last_audio_device = current_device
         self._last_translation_settings = current_translation
+        self._last_language_flow = current_language_flow
         logger.info(
-            "浮窗设置已应用: opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, model={}, endpoint={}, hotkeys={}/{}/{}",
+            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, model={}, endpoint={}, hotkeys={}/{}/{}",
             overlay_config.opacity,
+            overlay_config.bg_opacity,
             overlay_config.text_color,
             overlay_config.show_original,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
             self.config.audio.max_speech_seconds,
+            current_language_flow[0],
+            current_language_flow[1],
             self.config.translation.model,
             self.config.translation.endpoint,
             hotkey_config.toggle_overlay,
@@ -487,13 +572,39 @@ class GameVoiceTranslator:
 
     def _start_mobile(self):
         self._mobile_server = MobileWebSocketManager(self.config.websocket)
+        self._mobile_start_error = None
+
         def _run():
-            self._mobile_loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._mobile_loop)
-            self._mobile_loop.run_until_complete(self._mobile_server.start_server())
-        self._mobile_thread = threading.Thread(target=_run, daemon=True)
+            loop = asyncio.new_event_loop()
+            self._mobile_loop = loop
+            asyncio.set_event_loop(loop)
+            try:
+                loop.run_until_complete(self._mobile_server.start_server())
+            except BaseException as e:
+                self._mobile_start_error = e
+                if not self._stopping:
+                    self._write_crash_report("手机端服务启动失败", e)
+                    logger.exception("手机端服务启动失败: {}", e)
+            finally:
+                try:
+                    loop.close()
+                except Exception:
+                    pass
+
+        self._mobile_thread = threading.Thread(target=_run, name="mobile-server", daemon=True)
         self._mobile_thread.start()
-        logger.info(f"手机端: {self._mobile_server.get_mobile_url()}")
+        if self._mobile_server.wait_until_ready(5):
+            logger.info(f"手机端: {self._mobile_server.get_mobile_url()}")
+            return
+
+        if self._mobile_start_error:
+            message = str(self._mobile_start_error)
+        elif self._mobile_thread.is_alive():
+            message = f"手机端服务启动超时，请检查 {self.config.websocket.port} 端口或防火墙"
+        else:
+            message = "手机端服务启动失败，未能监听端口"
+        logger.warning(message)
+        self._notify_user("手机端未启动", message, "错误")
 
     def _start_translation_loop(self):
         def _run():
@@ -506,6 +617,80 @@ class GameVoiceTranslator:
         while not self._translation_loop or not self._translation_loop.is_running():
             time.sleep(0.01)
         logger.info("翻译事件循环已启动")
+
+    def _start_backend_thread(self):
+        if self._startup_thread and self._startup_thread.is_alive():
+            return
+        self._startup_thread = threading.Thread(
+            target=self._initialize_backend_services,
+            name="startup-loader",
+            daemon=True,
+        )
+        self._startup_thread.start()
+        logger.info("后台启动线程已启动")
+
+    def _initialize_backend_services(self):
+        try:
+            self._notify_user("语音识别模型", "正在后台加载 Whisper 模型，首次运行可能需要等待", "状态")
+            self._speech_recognizer = SpeechRecognizer(self.config.whisper)
+            self._translator = GameTranslator(self.config.translation)
+            self._start_translation_loop()
+            self._speech_recognizer.initialize()
+            if self._stopping:
+                return
+            self._backend_ready = True
+            if self._startup_signals:
+                self._startup_signals.backend_ready.emit()
+        except Exception as e:
+            self._stats["errors"] += 1
+            self._write_crash_report("启动失败", e)
+            logger.exception(f"启动失败: {e}")
+            if self._startup_signals:
+                self._startup_signals.backend_failed.emit(str(e))
+
+    def _finish_backend_startup(self):
+        if self._stopping or self._running:
+            return
+        self._setup_hotkeys()
+        signal.signal(signal.SIGINT, lambda s, f: self.stop())
+        signal.signal(signal.SIGTERM, lambda s, f: self.stop())
+
+        self._running = True
+        self._start_speech_worker()
+        self._print_banner()
+        self._notify_user(
+            "程序已启动",
+            (
+                f"当前方向: {LANGUAGE_NAMES[self.config.translation.source_lang]} "
+                f"→ {LANGUAGE_NAMES[self.config.translation.target_lang]}\n"
+                f"手机端: {self._mobile_server.get_mobile_url()}"
+            ),
+            "状态",
+        )
+
+        try:
+            self._start_audio_capture()
+        except Exception as e:
+            self._stats["errors"] += 1
+            self._show_audio_startup_warning(e)
+
+        from PyQt5.QtCore import QTimer
+
+        self._audio_timer = QTimer()
+        self._audio_timer.timeout.connect(self._process_audio_tick)
+        self._audio_timer.start(100)
+        logger.info("后端服务已启动")
+
+    def _handle_backend_startup_failure(self, message: str):
+        if self._stopping:
+            return
+        self._notify_user("启动失败", message, "错误")
+        self._show_error_dialog(
+            "Game Voice Translator 启动失败",
+            f"程序启动失败，已在程序目录生成 crash_report.txt。\n\n{message}",
+        )
+        if self._qt_app:
+            self._qt_app.quit()
 
     def _start_audio_capture(self, notice_title: str = "音频捕获已启动"):
         if self._audio_capture:
@@ -536,6 +721,10 @@ class GameVoiceTranslator:
             self._notify_user("音频设备枚举失败", str(e), "错误")
             return []
 
+    def _refresh_overlay_audio_devices(self):
+        if self._overlay and not self._stopping:
+            self._overlay.request_audio_device_refresh()
+
     def _show_audio_startup_warning(self, exc: Exception):
         detail = (
             "音频采集启动失败，程序已继续运行，但暂时不会识别游戏声音。\n"
@@ -547,25 +736,104 @@ class GameVoiceTranslator:
         logger.exception(detail)
         self._notify_user("音频采集未启动", detail, "错误")
 
-    def _translate_text(self, text: str, detected_language: str = "") -> str:
+    def _next_translation_item_id(self) -> str:
+        self._translation_item_seq += 1
+        return f"translation-{self._translation_item_seq}"
+
+    def _run_in_private_event_loop(self, coro):
+        loop = asyncio.new_event_loop()
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
+
+    def _start_async_translation(self, item_id: str, text: str, detected_language: str = ""):
         if self._translation_loop and self._translation_loop.is_running():
             future = asyncio.run_coroutine_threadsafe(
-                self._translator.translate(text, detected_language),
-                self._translation_loop
+                self._translate_and_update(item_id, text, detected_language),
+                self._translation_loop,
             )
-            return future.result(timeout=45)
-        return asyncio.run(self._translator.translate(text, detected_language))
+            future.add_done_callback(
+                lambda done, current_item_id=item_id: self._handle_translation_task_done(
+                    current_item_id,
+                    done,
+                )
+            )
+            return
+
+        def _run():
+            try:
+                self._run_in_private_event_loop(
+                    self._translate_and_update(item_id, text, detected_language)
+                )
+            except Exception as e:
+                self._handle_translation_error(item_id, e)
+
+        threading.Thread(target=_run, name="translation-fallback", daemon=True).start()
+
+    async def _translate_and_update(self, item_id: str, text: str, detected_language: str = ""):
+        t0 = time.time()
+        translated = await self._translator.translate(text, detected_language)
+        if not translated or not translated.strip():
+            translated = f"[翻译为空] {text}"
+            logger.warning("翻译返回空结果，显示识别文本")
+
+        elapsed = time.time() - t0
+        logger.info(f"[翻译] {translated[:80]} ({elapsed:.1f}s)")
+        is_notice = translated.startswith("[翻译") or translated.startswith("[未翻译]")
+
+        if is_notice:
+            if translated.startswith("[翻译"):
+                self._stats["errors"] += 1
+            if self._overlay:
+                self._overlay.update_translation(item_id, translated)
+            else:
+                self._notify_user(
+                    "翻译服务异常",
+                    translated,
+                    "错误" if translated.startswith("[翻译") else "提示",
+                )
+        else:
+            self._stats["translations"] += 1
+            if self._overlay:
+                logger.info("更新浮窗翻译")
+                self._overlay.update_translation(item_id, translated)
+
+        if self._mobile_server:
+            self._broadcast_to_mobile(text, translated)
+
+    def _handle_translation_task_done(self, item_id: str, future):
+        try:
+            future.result()
+        except Exception as e:
+            logger.exception(f"异步翻译任务失败: {e}")
+            self._stats["errors"] += 1
+            if self._overlay:
+                self._overlay.update_translation(item_id, f"[翻译失败] {str(e)[:180]}")
+
+    def _handle_translation_error(self, item_id: str, exc: Exception):
+        logger.exception(f"翻译任务失败: {exc}")
+        self._stats["errors"] += 1
+        if self._overlay:
+            self._overlay.update_translation(item_id, f"[翻译失败] {str(exc)[:180]}")
 
     def _broadcast_to_mobile(self, original: str, translated: str):
         if not self._mobile_server:
             return
         if self._mobile_loop and self._mobile_loop.is_running():
-            asyncio.run_coroutine_threadsafe(
+            future = asyncio.run_coroutine_threadsafe(
                 self._mobile_server.broadcast_translation(original, translated),
                 self._mobile_loop
             )
-        else:
-            asyncio.run(self._mobile_server.broadcast_translation(original, translated))
+            future.add_done_callback(self._handle_mobile_broadcast_done)
+            return
+        logger.debug("手机端事件循环未运行，跳过本次手机端推送")
+
+    def _handle_mobile_broadcast_done(self, future):
+        try:
+            future.result()
+        except Exception as e:
+            logger.warning("手机端推送失败: {}", e)
 
     def _process_audio_tick(self):
         if not self._running or self._paused:
@@ -579,7 +847,7 @@ class GameVoiceTranslator:
         hotkeys = self.config.hotkeys
         print("""
 ╔══════════════════════════════════════════════╗
-║       游戏语音实时翻译器  v1.0            ║
+║       游戏语音实时翻译器  v0.1.2          ║
 ╠══════════════════════════════════════════════╣
 ║  热键:                                       ║
 ║    {toggle_overlay:<14} 切换浮窗显示/隐藏       ║
@@ -599,40 +867,15 @@ class GameVoiceTranslator:
 
     def start(self):
         logger.info("正在启动...")
-        self._notify_user("正在启动", "正在加载语音识别、翻译服务和浮窗", "状态")
         try:
-            self._speech_recognizer = SpeechRecognizer(self.config.whisper)
-            self._translator = GameTranslator(self.config.translation)
-            self._start_translation_loop()
-            self._notify_user("语音识别模型", "正在加载 Whisper 模型，首次运行可能需要等待", "状态")
-            self._speech_recognizer.initialize()
-
             self._start_mobile()
             self._start_qt()
-            self._setup_hotkeys()
-            signal.signal(signal.SIGINT, lambda s, f: self.stop())
-            signal.signal(signal.SIGTERM, lambda s, f: self.stop())
-
-            self._running = True
-            self._start_speech_worker()
-            self._print_banner()
             self._notify_user(
-                "程序已启动",
-                f"自动识别中文/英文，支持英译中和中译英\n手机端: {self._mobile_server.get_mobile_url()}",
+                "正在启动",
+                "浮窗已显示，正在后台加载语音识别和翻译服务",
                 "状态",
             )
-
-            try:
-                self._start_audio_capture()
-            except Exception as e:
-                self._stats["errors"] += 1
-                self._show_audio_startup_warning(e)
-
-            from PyQt5.QtCore import QTimer
-
-            self._audio_timer = QTimer()
-            self._audio_timer.timeout.connect(self._process_audio_tick)
-            self._audio_timer.start(100)
+            self._start_backend_thread()
 
             self._qt_app.exec_()
         except KeyboardInterrupt:
@@ -660,7 +903,10 @@ class GameVoiceTranslator:
             self._audio_capture.stop()
         speech_worker_stopped = self._stop_speech_worker()
         self._remove_hotkeys()
-        if self._speech_recognizer and speech_worker_stopped:
+        startup_in_progress = self._startup_thread and self._startup_thread.is_alive()
+        if startup_in_progress:
+            logger.warning("后台启动仍在进行，跳过模型清理以避免资源释放冲突")
+        if self._speech_recognizer and speech_worker_stopped and not startup_in_progress:
             self._speech_recognizer.cleanup()
         if self._mobile_server and self._mobile_loop and self._mobile_loop.is_running():
             try:
@@ -671,7 +917,7 @@ class GameVoiceTranslator:
                 future.result(timeout=3)
             except Exception as e:
                 logger.warning(f"手机端服务停止失败: {e}")
-        if self._translator and speech_worker_stopped:
+        if self._translator and speech_worker_stopped and not startup_in_progress:
             try:
                 if self._translation_loop and self._translation_loop.is_running():
                     future = asyncio.run_coroutine_threadsafe(
@@ -680,14 +926,14 @@ class GameVoiceTranslator:
                     )
                     future.result(timeout=3)
                 else:
-                    asyncio.run(self._translator.close())
+                    self._run_in_private_event_loop(self._translator.close())
             except Exception as e:
                 logger.warning(f"翻译器关闭失败: {e}")
-        if self._translation_loop and self._translation_loop.is_running() and speech_worker_stopped:
+        if self._translation_loop and self._translation_loop.is_running() and speech_worker_stopped and not startup_in_progress:
             self._translation_loop.call_soon_threadsafe(self._translation_loop.stop)
-        if self._translation_thread and self._translation_thread.is_alive() and speech_worker_stopped:
+        if self._translation_thread and self._translation_thread.is_alive() and speech_worker_stopped and not startup_in_progress:
             self._translation_thread.join(timeout=3)
-        if self._translation_loop and not self._translation_loop.is_closed() and speech_worker_stopped:
+        if self._translation_loop and not self._translation_loop.is_closed() and speech_worker_stopped and not startup_in_progress:
             self._translation_loop.close()
         if self._overlay:
             self._overlay.close()

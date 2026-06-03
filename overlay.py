@@ -26,12 +26,34 @@ from qr_widget import QrCodeWidget
 from translator import TranslationConfig
 
 
+LANGUAGE_OPTIONS = (("en", "英语"), ("zh", "中文"))
+LANGUAGE_LABELS = dict(LANGUAGE_OPTIONS)
+OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+
+
+def _normalize_language_code(value: str, default: str = "en") -> str:
+    value = (value or "").strip().lower()
+    aliases = {
+        "english": "en",
+        "eng": "en",
+        "英语": "en",
+        "chinese": "zh",
+        "zh-cn": "zh",
+        "zh-tw": "zh",
+        "cmn": "zh",
+        "中文": "zh",
+    }
+    value = aliases.get(value, value)
+    return value if value in LANGUAGE_LABELS else default
+
+
 @dataclass
 class OverlayConfig:
     font_size: int = 16
     font_family: str = "Microsoft YaHei"
     text_color: str = "#00FF00"
-    bg_color: str = "#000000AA"
+    bg_color: str = "#20242A"
+    bg_opacity: float = 0.82
     position: str = "bottom"
     max_lines: int = 5
     fade_duration: int = 5
@@ -62,7 +84,15 @@ class AudioDeviceConfig:
 class TranslationItem:
     """单条翻译记录"""
 
-    def __init__(self, original: str, translated: str, fade_duration: int, timestamp: float = None):
+    def __init__(
+        self,
+        original: str,
+        translated: str,
+        fade_duration: int,
+        timestamp: float = None,
+        item_id: str = "",
+    ):
+        self.item_id = item_id
         self.original = original
         self.translated = translated
         self.fade_duration = max(1, fade_duration)
@@ -83,6 +113,8 @@ class TranslationItem:
 class OverlaySignals(QObject):
     """信号类，用于线程安全更新"""
     new_translation = pyqtSignal(str, str)
+    new_translation_with_id = pyqtSignal(str, str, str)
+    update_translation = pyqtSignal(str, str)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
     settings_changed = pyqtSignal(object, object, object, object)
@@ -216,6 +248,13 @@ def _make_icon(kind: str, color: str) -> QIcon:
             painter.drawLine(0, -11, 0, -8)
             painter.restore()
         painter.drawEllipse(QPoint(14, 14), 10, 10)
+    elif kind == "swap":
+        painter.drawLine(7, 10, 20, 10)
+        painter.drawLine(17, 7, 20, 10)
+        painter.drawLine(17, 13, 20, 10)
+        painter.drawLine(21, 18, 8, 18)
+        painter.drawLine(11, 15, 8, 18)
+        painter.drawLine(11, 21, 8, 18)
     else:
         painter.drawLine(8, 8, 20, 20)
         painter.drawLine(20, 8, 8, 20)
@@ -262,7 +301,18 @@ class SettingsDialog(QDialog):
         opacity_row.addWidget(self.opacity_label)
         self.opacity_slider.valueChanged.connect(lambda value: self.opacity_label.setText(f"{value}%"))
         self.opacity_slider.valueChanged.connect(self._preview)
-        form.addRow("透明度", opacity_row)
+        form.addRow("整体透明度", opacity_row)
+
+        self.bg_opacity_slider = QSlider(Qt.Horizontal)
+        self.bg_opacity_slider.setRange(20, 100)
+        self.bg_opacity_slider.setValue(int(float(getattr(self.overlay_config, "bg_opacity", 0.82)) * 100))
+        self.bg_opacity_label = QLabel(f"{self.bg_opacity_slider.value()}%")
+        bg_opacity_row = QHBoxLayout()
+        bg_opacity_row.addWidget(self.bg_opacity_slider)
+        bg_opacity_row.addWidget(self.bg_opacity_label)
+        self.bg_opacity_slider.valueChanged.connect(lambda value: self.bg_opacity_label.setText(f"{value}%"))
+        self.bg_opacity_slider.valueChanged.connect(self._preview)
+        form.addRow("背景透明度", bg_opacity_row)
 
         self.font_slider = QSlider(Qt.Horizontal)
         self.font_slider.setRange(12, 30)
@@ -296,8 +346,8 @@ class SettingsDialog(QDialog):
         form.addRow("API Key", self.api_key_input)
 
         self.model_input = QLineEdit(self.translation_config.model)
-        self.model_input.setPlaceholderText("Qwen/Qwen2.5-7B-Instruct")
-        self.model_input.setToolTip("填写服务商要求的模型名，例如 Qwen/Qwen2.5-7B-Instruct、deepseek-chat、qwen-plus、glm-4-flash")
+        self.model_input.setPlaceholderText("tencent/Hunyuan-MT-7B")
+        self.model_input.setToolTip("填写服务商要求的模型名，例如 tencent/Hunyuan-MT-7B、deepseek-chat、qwen-plus、glm-4-flash")
         self.model_input.editingFinished.connect(self._preview)
         form.addRow("模型名", self.model_input)
 
@@ -403,6 +453,7 @@ class SettingsDialog(QDialog):
 
     def _collect_values(self):
         self.overlay_config.opacity = self.opacity_slider.value() / 100
+        self.overlay_config.bg_opacity = self.bg_opacity_slider.value() / 100
         self.overlay_config.font_size = self.font_slider.value()
         self.overlay_config.text_color = self.text_color_btn.color()
         self.overlay_config.original_text_color = self.original_color_btn.color()
@@ -458,6 +509,7 @@ class GameOverlay(QWidget):
         self._resizing = False
         self._resize_start_pos = None
         self._resize_start_size = None
+        self._syncing_language_controls = False
         self._settings_dialog = None
         self._fade_timer = QTimer()
         self._fade_timer.timeout.connect(self._update_fade)
@@ -514,6 +566,27 @@ class GameOverlay(QWidget):
         self._title_label = QLabel("实时翻译")
         self._title_label.setObjectName("title")
         toolbar_layout.addWidget(self._title_label)
+
+        self._source_lang_combo = self._create_language_combo("识别语言")
+        self._source_lang_combo.setObjectName("languageCombo")
+        toolbar_layout.addWidget(self._source_lang_combo)
+
+        self._swap_lang_button = QToolButton()
+        self._swap_lang_button.setObjectName("languageSwapButton")
+        self._swap_lang_button.setIcon(_make_icon("swap", self.config.original_text_color))
+        self._swap_lang_button.setToolTip("交换识别语言和翻译目标语言")
+        self._swap_lang_button.setFixedSize(28, 24)
+        self._swap_lang_button.setCursor(Qt.PointingHandCursor)
+        self._swap_lang_button.clicked.connect(self._swap_language_flow)
+        toolbar_layout.addWidget(self._swap_lang_button)
+
+        self._target_lang_combo = self._create_language_combo("翻译目标语言")
+        self._target_lang_combo.setObjectName("languageCombo")
+        toolbar_layout.addWidget(self._target_lang_combo)
+        self._sync_language_controls()
+        self._source_lang_combo.currentIndexChanged.connect(self._language_combo_changed)
+        self._target_lang_combo.currentIndexChanged.connect(self._language_combo_changed)
+
         toolbar_layout.addStretch()
 
         self._qr_button = QToolButton()
@@ -597,6 +670,28 @@ class GameOverlay(QWidget):
                 font-size: {max(10, self.config.font_size - 4)}px;
                 padding: 0 2px;
             }}
+            QComboBox#languageCombo {{
+                color: {self.config.original_text_color};
+                background: transparent;
+                border: 0;
+                padding: 1px 9px 1px 1px;
+                font-size: {max(10, self.config.font_size - 3)}px;
+            }}
+            QComboBox#languageCombo:hover {{
+                background: rgba(255, 255, 255, 24);
+            }}
+            QComboBox#languageCombo::drop-down {{
+                border: 0;
+                width: 10px;
+            }}
+            QToolButton#languageSwapButton {{
+                background: transparent;
+                border: 0;
+                border-radius: 4px;
+            }}
+            QToolButton#languageSwapButton:hover {{
+                background: rgba(255, 255, 255, 28);
+            }}
             QToolButton#qrButton, QToolButton#settingsButton, QToolButton#quitButton {{
                 background: rgba(18, 24, 33, 150);
                 border: 1px solid {self.config.text_color};
@@ -616,6 +711,86 @@ class GameOverlay(QWidget):
                 background: transparent;
             }}
         """)
+        if hasattr(self, "_source_lang_combo"):
+            self._fit_language_combo_width(self._source_lang_combo)
+        if hasattr(self, "_target_lang_combo"):
+            self._fit_language_combo_width(self._target_lang_combo)
+
+    def _create_language_combo(self, tooltip: str) -> QComboBox:
+        combo = QComboBox()
+        combo.setToolTip(tooltip)
+        combo.setCursor(Qt.PointingHandCursor)
+        for code, label in LANGUAGE_OPTIONS:
+            combo.addItem(label, code)
+        self._fit_language_combo_width(combo)
+        return combo
+
+    def _fit_language_combo_width(self, combo: QComboBox):
+        combo.ensurePolished()
+        metrics = combo.fontMetrics()
+        text_width = max(
+            metrics.horizontalAdvance(combo.itemText(index))
+            for index in range(combo.count())
+        )
+        combo.setFixedWidth(text_width + 18)
+
+    def _sync_language_controls(self):
+        source = _normalize_language_code(self.translation_config.source_lang, "en")
+        target = _normalize_language_code(self.translation_config.target_lang, OPPOSITE_LANGUAGE[source])
+        if target == source:
+            target = OPPOSITE_LANGUAGE[source]
+
+        self.translation_config.source_lang = source
+        self.translation_config.target_lang = target
+        self._syncing_language_controls = True
+        try:
+            self._set_combo_language(self._source_lang_combo, source)
+            self._set_combo_language(self._target_lang_combo, target)
+            self._fit_language_combo_width(self._source_lang_combo)
+            self._fit_language_combo_width(self._target_lang_combo)
+        finally:
+            self._syncing_language_controls = False
+
+    def _set_combo_language(self, combo: QComboBox, language: str):
+        for index in range(combo.count()):
+            if combo.itemData(index) == language:
+                combo.setCurrentIndex(index)
+                return
+
+    def _language_combo_changed(self, *args):
+        if self._syncing_language_controls:
+            return
+        source = _normalize_language_code(self._source_lang_combo.currentData(), "en")
+        target = _normalize_language_code(self._target_lang_combo.currentData(), "zh")
+        sender = self.sender()
+        if source == target:
+            if sender is self._source_lang_combo:
+                target = OPPOSITE_LANGUAGE[source]
+            else:
+                source = OPPOSITE_LANGUAGE[target]
+        self._apply_language_flow(source, target)
+
+    def _swap_language_flow(self):
+        source = _normalize_language_code(self.translation_config.source_lang, "en")
+        target = _normalize_language_code(self.translation_config.target_lang, OPPOSITE_LANGUAGE[source])
+        self._apply_language_flow(target, source)
+
+    def _apply_language_flow(self, source: str, target: str):
+        self.translation_config.source_lang = _normalize_language_code(source, "en")
+        self.translation_config.target_lang = _normalize_language_code(
+            target,
+            OPPOSITE_LANGUAGE[self.translation_config.source_lang],
+        )
+        if self.translation_config.source_lang == self.translation_config.target_lang:
+            self.translation_config.target_lang = OPPOSITE_LANGUAGE[self.translation_config.source_lang]
+        self._sync_language_controls()
+        if self._on_settings_changed:
+            self._on_settings_changed(
+                self.config,
+                self.hotkeys,
+                self.audio_config,
+                self.translation_config,
+            )
 
     def _setup_qr_code(self):
         url = self.config.mobile_url or self._guess_mobile_url()
@@ -678,8 +853,10 @@ class GameOverlay(QWidget):
         self.setWindowOpacity(self.config.opacity)
         self._apply_styles()
         self._qr_button.setIcon(_make_icon("qr", self.config.text_color))
+        self._swap_lang_button.setIcon(_make_icon("swap", self.config.original_text_color))
         self._settings_button.setIcon(_make_icon("settings", self.config.text_color))
         self._quit_button.setIcon(_make_icon("close", self.config.text_color))
+        self._sync_language_controls()
         self._refresh_labels()
         self.update()
         if self._on_settings_changed:
@@ -707,6 +884,8 @@ class GameOverlay(QWidget):
     def _connect_signals(self):
         """连接信号"""
         self._signals.new_translation.connect(self._add_translation)
+        self._signals.new_translation_with_id.connect(self._add_translation_with_id)
+        self._signals.update_translation.connect(self._update_translation)
         self._signals.clear_history.connect(self._clear_history)
         self._signals.toggle_visibility.connect(self._toggle_visibility)
 
@@ -714,9 +893,25 @@ class GameOverlay(QWidget):
         """线程安全地添加翻译"""
         self._signals.new_translation.emit(original, translated)
 
+    def add_translation_with_id(self, item_id: str, original: str, translated: str):
+        """线程安全地添加可更新的翻译记录。"""
+        self._signals.new_translation_with_id.emit(item_id, original, translated)
+
+    def update_translation(self, item_id: str, translated: str):
+        """线程安全地更新已有翻译记录。"""
+        self._signals.update_translation.emit(item_id, translated)
+
     def _add_translation(self, original: str, translated: str):
         """添加翻译到浮窗"""
         item = TranslationItem(original, translated, self.config.fade_duration)
+        self._append_translation_item(item)
+
+    def _add_translation_with_id(self, item_id: str, original: str, translated: str):
+        """添加一条之后可用 item_id 更新的翻译。"""
+        item = TranslationItem(original, translated, self.config.fade_duration, item_id=item_id)
+        self._append_translation_item(item)
+
+    def _append_translation_item(self, item: TranslationItem):
         self._translations.append(item)
 
         # 更新标签显示
@@ -728,6 +923,16 @@ class GameOverlay(QWidget):
             oldest = self._translations[0]
             if oldest.fade_start is None:
                 oldest.start_fade()
+
+    def _update_translation(self, item_id: str, translated: str):
+        """更新已有翻译内容，避免慢翻译显示到下一条上。"""
+        for item in self._translations:
+            if item.item_id == item_id:
+                item.translated = translated
+                item.fade_start = None
+                item.timestamp = time.time()
+                self._refresh_labels()
+                return
 
     def _update_fade(self):
         """更新淡出效果"""
@@ -808,6 +1013,10 @@ class GameOverlay(QWidget):
 
         # 背景
         bg_color = QColor(self.config.bg_color)
+        if not bg_color.isValid():
+            bg_color = QColor("#20242A")
+        bg_opacity = max(0.0, min(1.0, float(getattr(self.config, "bg_opacity", 0.82))))
+        bg_color.setAlpha(int(bg_opacity * 255))
         painter.setBrush(QBrush(bg_color))
         painter.setPen(Qt.NoPen)
         painter.drawRoundedRect(self.rect(), 10, 10)

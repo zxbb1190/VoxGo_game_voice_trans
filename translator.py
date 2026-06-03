@@ -18,43 +18,49 @@ from loguru import logger
 @dataclass
 class TranslationConfig:
     api_key: str = ""
-    model: str = "Qwen/Qwen2.5-7B-Instruct"
+    model: str = "tencent/Hunyuan-MT-7B"
     endpoint: str = "https://api.siliconflow.cn/v1/chat/completions"
-    max_tokens: int = 1000
-    temperature: float = 0.3
+    max_tokens: int = 80
+    temperature: float = 0.0
     source_lang: str = "en"
     target_lang: str = "zh"
-    context_messages: int = 3
+    context_messages: int = 0
     timeout_seconds: float = 8.0
 
 
-SYSTEM_PROMPT = """你是一个游戏语音实时翻译助手。你的任务是在中文和英文之间做实时互译。
+SYSTEM_PROMPT = """你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。
 
 翻译规则：
-1. 如果原文是中文，翻译成自然、简洁的英文
-2. 如果原文是英文，翻译成自然、简洁的中文
-3. 保留游戏术语的常用英文原名；必要时用括号补充解释
-4. 口语化表达要翻译成目标语言里的自然口语
-5. 缩写和俚语要正确识别并翻译（如 lol、brb、gg、nt、wp 等）
-6. 不要返回空字符串；如果原文不完整或难以理解，尽量翻译可理解部分，实在无法理解时中文目标返回“（听不清）”，英文目标返回“(unclear)”
-7. 每句话精炼简洁，适合在游戏浮窗中阅读
-8. 只输出翻译结果，不要添加任何解释或说明
-9. 禁止进行思考推理，直接给出翻译结果，不要输出思考过程
-
-常见游戏术语参考：
-- push/peek: 推进/探头
-- flank: 绕后
-- rotate: 转点
-- eco: 经济局
-- full buy: 全起
-- drop: 发枪/丢枪
-- pick: 击杀/拿到
-- one shot/hit: 残血/大残
-- heaven/hell: 高台/地下
-- spawn: 出生点
+1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。
+2. 只做忠实翻译，不补全没听到的内容。
+3. 不要扩写，不要解释，不要润色成完整句。
+4. 如果原文明显不完整，保留不完整感。
+5. 如果某个词无法确定，用“（听不清）”或保留原词。
+6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。
+7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。
+8. 只输出译文，不输出解释、说明、标签或思考过程。
 """
 
 ZH_RE = re.compile(r"[\u4e00-\u9fff]")
+LANGUAGE_ALIASES = {
+    "en": "en",
+    "eng": "en",
+    "english": "en",
+    "英语": "en",
+    "zh": "zh",
+    "zh-cn": "zh",
+    "zh-tw": "zh",
+    "cmn": "zh",
+    "yue": "zh",
+    "chinese": "zh",
+    "中文": "zh",
+}
+OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+
+
+def normalize_language_code(value: str, default: str = "") -> str:
+    value = (value or "").strip().lower()
+    return LANGUAGE_ALIASES.get(value, value) if LANGUAGE_ALIASES.get(value, value) in OPPOSITE_LANGUAGE else default
 
 
 class GameTranslator:
@@ -76,6 +82,9 @@ class GameTranslator:
 
     def detect_language(self, text: str, detected_language: str = "") -> str:
         """Normalize language to zh/en for bidirectional translation."""
+        configured = normalize_language_code(self.config.source_lang)
+        if configured:
+            return configured
         lang = (detected_language or "").lower()
         if lang in ("zh", "zh-cn", "zh-tw", "chinese", "cmn", "yue"):
             return "zh"
@@ -85,7 +94,10 @@ class GameTranslator:
         return "zh" if zh_count >= max(1, len(text.strip()) // 5) else "en"
 
     def get_target_language(self, source_language: str) -> str:
-        return "en" if source_language == "zh" else "zh"
+        configured = normalize_language_code(self.config.target_lang)
+        if configured and configured != source_language:
+            return configured
+        return OPPOSITE_LANGUAGE.get(source_language, "zh")
 
     def _language_name(self, language: str) -> str:
         return "英文" if language == "en" else "中文"
@@ -136,7 +148,7 @@ class GameTranslator:
         return text[:220]
 
     async def translate(self, text: str, detected_language: str = "") -> str:
-        """在中文和英文之间互译"""
+        """按配置的固定语言方向翻译。"""
         if not text or not text.strip():
             return ""
 
@@ -149,8 +161,9 @@ class GameTranslator:
         current_message = {
             "role": "user",
             "content": (
-                f"请将以下{self._language_name(source_language)}内容翻译成"
-                f"{self._language_name(target_language)}，只输出译文：{text}"
+                f"请将 <source_text> 中的{self._language_name(source_language)}"
+                f"翻译成{self._language_name(target_language)}，只输出译文。\n"
+                f"<source_text>{text}</source_text>"
             )
         }
 

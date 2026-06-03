@@ -4,6 +4,7 @@ WebSocket 服务器
 """
 
 import asyncio
+import ipaddress
 import json
 import socket
 import time
@@ -397,10 +398,15 @@ class MobileWebSocketManager:
             self._app,
             host=self.config.host,
             port=self.config.port,
-            log_level="info"
+            log_level="info",
+            log_config=None,
+            access_log=False,
         )
         self._server = uvicorn.Server(config)
-        await self._server.serve()
+        try:
+            await self._server.serve()
+        except SystemExit as exc:
+            raise RuntimeError(f"手机端服务启动失败，端口 {self.config.port} 可能被占用") from exc
 
     async def stop_server(self):
         """停止服务器"""
@@ -423,13 +429,65 @@ class MobileWebSocketManager:
             host = self._get_lan_ip()
         return f"http://{host}:{self.config.port}/mobile"
 
+    def is_running(self) -> bool:
+        """Return whether the HTTP/WebSocket server is currently accepting connections."""
+        return self._can_connect()
+
+    def wait_until_ready(self, timeout_seconds: float = 5.0) -> bool:
+        """Wait briefly for uvicorn to bind the listening socket."""
+        deadline = time.time() + max(0.1, timeout_seconds)
+        while time.time() < deadline:
+            if self._can_connect():
+                return True
+            time.sleep(0.05)
+        return False
+
+    def _can_connect(self) -> bool:
+        host = self.config.host
+        if host in ("", "0.0.0.0", "::"):
+            host = "127.0.0.1"
+        try:
+            with socket.create_connection((host, int(self.config.port)), timeout=0.3):
+                return True
+        except OSError:
+            return False
+
     def _get_lan_ip(self) -> str:
+        candidates = self._lan_ip_candidates()
+        for candidate in candidates:
+            if self._is_usable_ip(candidate):
+                return candidate
+        return "127.0.0.1"
+
+    def _lan_ip_candidates(self):
+        """Return likely LAN addresses, with the active default-route address first."""
+        candidates = []
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
                 sock.connect(("8.8.8.8", 80))
-                return sock.getsockname()[0]
+                candidates.append(sock.getsockname()[0])
         except Exception:
-            return "127.0.0.1"
+            pass
+
+        try:
+            hostname = socket.gethostname()
+            for item in socket.getaddrinfo(hostname, None, socket.AF_INET):
+                candidates.append(item[4][0])
+        except Exception:
+            pass
+
+        unique_candidates = []
+        for candidate in candidates:
+            if candidate not in unique_candidates:
+                unique_candidates.append(candidate)
+        return unique_candidates
+
+    def _is_usable_ip(self, value: str) -> bool:
+        try:
+            ip = ipaddress.ip_address(value)
+        except ValueError:
+            return False
+        return not (ip.is_loopback or ip.is_link_local or ip.is_unspecified)
 
 
 # 快速启动函数
