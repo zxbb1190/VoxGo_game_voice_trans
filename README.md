@@ -88,6 +88,13 @@ pip install PyAudioWPatch==0.2.12.8
 2. 安装后，将系统默认音频输出切换到 VB-Cable
 3. 游戏音频将通过 VB-Cable 被捕获
 
+NVIDIA 显卡用户也可以尝试 NVIDIA Broadcast / RTX Voice 作为语音降噪与虚拟音频设备备选：
+1. 下载 NVIDIA Broadcast：https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/
+2. 在 NVIDIA Broadcast / RTX Voice 中选择实际麦克风或扬声器，并开启需要的降噪效果
+3. 如果本工具的音频设备列表里出现 NVIDIA Broadcast / RTX Voice 虚拟麦克风或扬声器，可以选择它进行测试
+
+注意：NVIDIA Broadcast / RTX Voice 更适合语音聊天降噪和虚拟麦克风/扬声器场景；采集游戏整体系统声音时，仍优先使用 `[系统声音]` / `Loopback`，或使用 VB-Cable。
+
 ### 4. 启动程序
 双击 `run.bat` 或运行：
 ```bash
@@ -129,8 +136,8 @@ python main.py
 | 配置项 | 说明 |
 |--------|------|
 | `whisper.model_size` | 模型大小: tiny/base/small/medium (越大越准越慢) |
-| `whisper.device` | 识别设备，默认 `auto`：优先 CUDA，失败自动退回 CPU |
-| `whisper.compute_type` | 计算精度，默认 `auto`：CUDA 使用 float16，CPU 使用 int8 |
+| `whisper.device` | 识别设备，默认 `cpu`，可在齿轮设置的“识别设备”里选择；确认已安装 NVIDIA CUDA 运行环境后可手动选择 `auto` 或 `cuda` |
+| `whisper.compute_type` | 计算精度，默认 `auto`：CPU 使用 int8，CUDA 使用 float16 |
 | `whisper.language` | 固定识别语言，会随标题栏左侧语言选择同步 |
 | `whisper.prompt_profile` | 识别提示词场景，默认 `none`，避免 Whisper 幻听提示词；必要时可手动改为 `general` 或 `game` |
 | `whisper.vad_filter` | faster-whisper 内部 VAD，默认关闭，避免和外部切段重复吞字 |
@@ -164,6 +171,7 @@ python main.py
 - 如果你正在用蓝牙耳机/HDMI 显示器/USB 声卡输出，音频设备也要选择同名的系统声音/Loopback 项
 - 如果只看到麦克风，重新运行 `install.bat` 安装 PyAudioWPatch
 - 如果使用 VB-Cable，确保系统音频输出已切换到 VB-Cable
+- NVIDIA 显卡用户可尝试 NVIDIA Broadcast / RTX Voice 虚拟设备，但采集游戏整体系统声音仍优先选择 `[系统声音]` / `Loopback`
 - 尝试以管理员身份运行
 
 ### 2. 语音识别不准确
@@ -175,12 +183,18 @@ python main.py
 - 降低游戏内背景音乐音量
 - 确保游戏语音输出清晰，且选择的是正在播放游戏声音的系统声音设备
 
-### 3. 翻译延迟高
+### 3. 启动时提示 cublas64_12.dll 缺失
+- 这是 CUDA/cuBLAS 运行库缺失，不是翻译 API 问题
+- 默认配置已使用 CPU 识别，不需要安装 CUDA
+- 在齿轮设置里把“识别设备”改成 `CPU（推荐）`，然后重启程序
+- 只有确认电脑有 NVIDIA 显卡，并且安装了匹配 faster-whisper/ctranslate2 的 CUDA 12 与 cuDNN 运行库后，才建议开启 `cuda`
+
+### 4. 翻译延迟高
 - 检查网络连接
 - 降低 `whisper.model_size` 以加快识别
 - 使用本地翻译模型 (需自行部署)
 
-### 4. 手机端无法连接
+### 5. 手机端无法连接
 - 检查防火墙是否放行 8765 端口
 - 确认手机和电脑在同一局域网
 - 尝试使用电脑 IP 而非 localhost

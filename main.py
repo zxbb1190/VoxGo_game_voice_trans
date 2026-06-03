@@ -46,12 +46,30 @@ LANGUAGE_ALIASES = {
 }
 LANGUAGE_NAMES = {"en": "英语", "zh": "中文"}
 OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+WHISPER_DEVICE_NAMES = {
+    "cpu": "CPU（推荐）",
+    "auto": "自动检测",
+    "cuda": "NVIDIA GPU / CUDA",
+}
 
 
 def _normalize_language_code(value: str, default: str = "en") -> str:
     value = (value or "").strip().lower()
     normalized = LANGUAGE_ALIASES.get(value, value)
     return normalized if normalized in LANGUAGE_NAMES else default
+
+
+def _normalize_whisper_device(value: str) -> str:
+    value = (value or "").strip().lower()
+    aliases = {
+        "gpu": "cuda",
+        "nvidia": "cuda",
+        "nvidia gpu": "cuda",
+        "自动": "auto",
+        "自动检测": "auto",
+    }
+    value = aliases.get(value, value)
+    return value if value in WHISPER_DEVICE_NAMES else "cpu"
 
 
 @dataclass
@@ -135,6 +153,7 @@ class GameVoiceTranslator:
             self.config.translation.source_lang,
             self.config.translation.target_lang,
         )
+        self._last_whisper_device = _normalize_whisper_device(self.config.whisper.device)
         self._stats = {
             "audio_chunks": 0, "speech_detected": 0,
             "transcriptions": 0, "translations": 0, "errors": 0,
@@ -172,7 +191,7 @@ class GameVoiceTranslator:
         try:
             with open(settings_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            for section in ["audio", "overlay", "hotkeys", "translation"]:
+            for section in ["audio", "overlay", "hotkeys", "translation", "whisper"]:
                 if section in data:
                     target = getattr(config, section)
                     for key, value in data[section].items():
@@ -206,6 +225,9 @@ class GameVoiceTranslator:
                 "toggle_overlay": self.config.hotkeys.toggle_overlay,
                 "toggle_translation": self.config.hotkeys.toggle_translation,
                 "clear_history": self.config.hotkeys.clear_history,
+            },
+            "whisper": {
+                "device": _normalize_whisper_device(self.config.whisper.device),
             },
             "translation": {
                 "api_key": self.config.translation.api_key,
@@ -485,6 +507,7 @@ class GameVoiceTranslator:
             self.config.audio,
             self.config.translation,
             [],
+            self.config.whisper,
             self._apply_overlay_settings,
             self._list_audio_devices,
             self._request_shutdown,
@@ -505,12 +528,17 @@ class GameVoiceTranslator:
         hotkey_config: HotkeyConfig,
         audio_config: AudioConfig,
         translation_config: TranslationConfig,
+        whisper_config: WhisperConfig,
     ):
         previous_device = self._last_audio_device
         previous_translation = self._last_translation_settings
+        previous_whisper_device = self._last_whisper_device
         self.config.overlay = overlay_config
         self.config.hotkeys = hotkey_config
         self.config.translation = translation_config
+        self.config.whisper.device = _normalize_whisper_device(
+            getattr(whisper_config, "device", self.config.whisper.device)
+        )
         self.config.audio.input_device_id = getattr(audio_config, "input_device_id", "")
         self.config.audio.input_device_index = audio_config.input_device_index
         self.config.audio.input_device_name = audio_config.input_device_name
@@ -533,6 +561,7 @@ class GameVoiceTranslator:
             self.config.translation.model,
             self.config.translation.endpoint,
         )
+        current_whisper_device = _normalize_whisper_device(self.config.whisper.device)
         if self._running and current_device != previous_device:
             self._restart_audio_capture()
         if current_language_flow != previous_language_flow:
@@ -549,11 +578,18 @@ class GameVoiceTranslator:
                 f"模型: {self.config.translation.model}\n兼容地址: {self.config.translation.endpoint}",
                 "状态",
             )
+        if current_whisper_device != previous_whisper_device:
+            self._notify_user(
+                "识别设备已更新",
+                f"当前选择: {WHISPER_DEVICE_NAMES[current_whisper_device]}\n重启程序后生效",
+                "状态",
+            )
         self._last_audio_device = current_device
         self._last_translation_settings = current_translation
         self._last_language_flow = current_language_flow
+        self._last_whisper_device = current_whisper_device
         logger.info(
-            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, model={}, endpoint={}, hotkeys={}/{}/{}",
+            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, whisper_device={}, model={}, endpoint={}, hotkeys={}/{}/{}",
             overlay_config.opacity,
             overlay_config.bg_opacity,
             overlay_config.text_color,
@@ -563,6 +599,7 @@ class GameVoiceTranslator:
             self.config.audio.max_speech_seconds,
             current_language_flow[0],
             current_language_flow[1],
+            current_whisper_device,
             self.config.translation.model,
             self.config.translation.endpoint,
             hotkey_config.toggle_overlay,
@@ -847,7 +884,7 @@ class GameVoiceTranslator:
         hotkeys = self.config.hotkeys
         print("""
 ╔══════════════════════════════════════════════╗
-║       游戏语音实时翻译器  v0.1.2          ║
+║       游戏语音实时翻译器  v0.1.3          ║
 ╠══════════════════════════════════════════════╣
 ║  热键:                                       ║
 ║    {toggle_overlay:<14} 切换浮窗显示/隐藏       ║

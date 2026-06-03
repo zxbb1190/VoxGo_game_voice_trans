@@ -59,7 +59,7 @@ _LIBROSA_IMPORT_FAILED = False
 @dataclass
 class WhisperConfig:
     model_size: str = "small"
-    device: str = "auto"
+    device: str = "cpu"
     compute_type: str = "auto"
     language: str = "auto"
     beam_size: int = 5
@@ -143,6 +143,9 @@ class SpeechRecognizer:
     def _model_load_candidates(self):
         configured_device = (self.config.device or "auto").strip().lower()
         if configured_device == "auto":
+            if not self._is_cuda_runtime_available():
+                logger.info("未检测到可用 CUDA 运行环境，Whisper 使用 CPU")
+                return [("cpu", "int8")]
             return [
                 ("cuda", self._compute_type_for_device("cuda")),
                 ("cpu", "int8"),
@@ -154,6 +157,14 @@ class SpeechRecognizer:
         elif candidates[0][1] != "int8":
             candidates.append(("cpu", "int8"))
         return candidates
+
+    def _is_cuda_runtime_available(self) -> bool:
+        try:
+            import ctranslate2
+            return ctranslate2.get_cuda_device_count() > 0
+        except Exception as e:
+            logger.debug("CUDA 运行环境不可用: {}", e)
+            return False
 
     def _compute_type_for_device(self, device: str) -> str:
         configured = (self.config.compute_type or "auto").strip().lower()

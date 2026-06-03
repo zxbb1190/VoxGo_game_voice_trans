@@ -1,5 +1,5 @@
 #define MyAppName "Game Voice Translator"
-#define MyAppVersion "0.1.2"
+#define MyAppVersion "0.1.3"
 #define MyAppPublisher "GameVoiceTranslator"
 #define MyAppExeName "GameVoiceTranslator.exe"
 

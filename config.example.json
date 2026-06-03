@@ -20,7 +20,7 @@
   },
   "whisper": {
     "model_size": "small",
-    "device": "auto",
+    "device": "cpu",
     "compute_type": "auto",
     "language": "en",
     "beam_size": 5,

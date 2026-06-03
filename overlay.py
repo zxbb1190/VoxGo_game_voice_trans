@@ -29,6 +29,12 @@ from translator import TranslationConfig
 LANGUAGE_OPTIONS = (("en", "英语"), ("zh", "中文"))
 LANGUAGE_LABELS = dict(LANGUAGE_OPTIONS)
 OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+WHISPER_DEVICE_OPTIONS = (
+    ("cpu", "CPU（推荐）"),
+    ("auto", "自动检测"),
+    ("cuda", "NVIDIA GPU / CUDA"),
+)
+WHISPER_DEVICE_LABELS = dict(WHISPER_DEVICE_OPTIONS)
 
 
 def _normalize_language_code(value: str, default: str = "en") -> str:
@@ -45,6 +51,19 @@ def _normalize_language_code(value: str, default: str = "en") -> str:
     }
     value = aliases.get(value, value)
     return value if value in LANGUAGE_LABELS else default
+
+
+def _normalize_whisper_device(value: str) -> str:
+    value = (value or "").strip().lower()
+    aliases = {
+        "gpu": "cuda",
+        "nvidia": "cuda",
+        "nvidia gpu": "cuda",
+        "自动": "auto",
+        "自动检测": "auto",
+    }
+    value = aliases.get(value, value)
+    return value if value in WHISPER_DEVICE_LABELS else "cpu"
 
 
 @dataclass
@@ -79,6 +98,11 @@ class AudioDeviceConfig:
     input_device_name: str = ""
     input_device_id: str = ""
     max_speech_seconds: float = 8.0
+
+
+@dataclass
+class WhisperDeviceConfig:
+    device: str = "cpu"
 
 
 class TranslationItem:
@@ -117,7 +141,7 @@ class OverlaySignals(QObject):
     update_translation = pyqtSignal(str, str)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
-    settings_changed = pyqtSignal(object, object, object, object)
+    settings_changed = pyqtSignal(object, object, object, object, object)
     refresh_audio_devices = pyqtSignal()
 
 
@@ -266,7 +290,7 @@ def _make_icon(kind: str, color: str) -> QIcon:
 class SettingsDialog(QDialog):
     """Graphical settings for overlay and hotkeys."""
 
-    settings_changed = pyqtSignal(object, object, object, object)
+    settings_changed = pyqtSignal(object, object, object, object, object)
 
     def __init__(
         self,
@@ -275,6 +299,7 @@ class SettingsDialog(QDialog):
         audio_config: AudioDeviceConfig = None,
         translation_config: TranslationConfig = None,
         audio_devices: Optional[List[dict]] = None,
+        whisper_config=None,
         parent=None,
     ):
         super().__init__(parent)
@@ -285,6 +310,7 @@ class SettingsDialog(QDialog):
         self.audio_config = audio_config or AudioDeviceConfig()
         self.translation_config = translation_config or TranslationConfig()
         self.audio_devices = audio_devices or []
+        self.whisper_config = whisper_config or WhisperDeviceConfig()
         self._init_ui()
 
     def _init_ui(self):
@@ -357,6 +383,12 @@ class SettingsDialog(QDialog):
         self.endpoint_input.editingFinished.connect(self._preview)
         form.addRow("兼容地址", self.endpoint_input)
 
+        self.whisper_device_combo = QComboBox()
+        self.whisper_device_combo.setToolTip("普通用户选 CPU；自动/GPU 需要本机有可用 NVIDIA CUDA 运行环境")
+        self._fill_whisper_devices()
+        self.whisper_device_combo.currentIndexChanged.connect(self._preview)
+        form.addRow("识别设备", self.whisper_device_combo)
+
         self.audio_device_combo = QComboBox()
         self.audio_device_combo.setToolTip("优先选择 [系统声音] 或 Loopback；普通麦克风通常录不到游戏声音")
         self.refresh_audio_button = QPushButton("刷新")
@@ -426,6 +458,18 @@ class SettingsDialog(QDialog):
         self.audio_device_combo.setCurrentIndex(selected_row)
         self.audio_device_combo.blockSignals(False)
 
+    def _fill_whisper_devices(self):
+        self.whisper_device_combo.blockSignals(True)
+        self.whisper_device_combo.clear()
+        selected_device = _normalize_whisper_device(getattr(self.whisper_config, "device", "cpu"))
+        selected_row = 0
+        for row, (device, label) in enumerate(WHISPER_DEVICE_OPTIONS):
+            self.whisper_device_combo.addItem(label, device)
+            if device == selected_device:
+                selected_row = row
+        self.whisper_device_combo.setCurrentIndex(selected_row)
+        self.whisper_device_combo.blockSignals(False)
+
     def set_audio_devices(self, audio_devices: List[dict], audio_config: AudioDeviceConfig):
         self.audio_devices = audio_devices or []
         self.audio_config = audio_config
@@ -449,6 +493,7 @@ class SettingsDialog(QDialog):
             self.hotkey_config,
             self.audio_config,
             self.translation_config,
+            self.whisper_config,
         )
 
     def _collect_values(self):
@@ -466,6 +511,7 @@ class SettingsDialog(QDialog):
         self.translation_config.api_key = self.api_key_input.text().strip()
         self.translation_config.model = self.model_input.text().strip() or self.translation_config.model
         self.translation_config.endpoint = self.endpoint_input.text().strip() or self.translation_config.endpoint
+        self.whisper_config.device = _normalize_whisper_device(self.whisper_device_combo.currentData())
 
         device = self.audio_device_combo.currentData()
         if device:
@@ -489,7 +535,8 @@ class GameOverlay(QWidget):
         audio_config: AudioDeviceConfig = None,
         translation_config: TranslationConfig = None,
         audio_devices: Optional[List[dict]] = None,
-        on_settings_changed: Optional[Callable[[OverlayConfig, HotkeyConfig, AudioDeviceConfig, TranslationConfig], None]] = None,
+        whisper_config=None,
+        on_settings_changed: Optional[Callable[[OverlayConfig, HotkeyConfig, AudioDeviceConfig, TranslationConfig, object], None]] = None,
         on_audio_devices_refresh: Optional[Callable[[], List[dict]]] = None,
         on_shutdown_requested: Optional[Callable[[], None]] = None,
     ):
@@ -499,6 +546,7 @@ class GameOverlay(QWidget):
         self.audio_config = audio_config or AudioDeviceConfig()
         self.translation_config = translation_config or TranslationConfig()
         self.audio_devices = audio_devices or []
+        self.whisper_config = whisper_config or WhisperDeviceConfig()
         self._on_settings_changed = on_settings_changed
         self._on_audio_devices_refresh = on_audio_devices_refresh
         self._on_shutdown_requested = on_shutdown_requested
@@ -790,6 +838,7 @@ class GameOverlay(QWidget):
                 self.hotkeys,
                 self.audio_config,
                 self.translation_config,
+                self.whisper_config,
             )
 
     def _setup_qr_code(self):
@@ -834,6 +883,7 @@ class GameOverlay(QWidget):
             self.audio_config,
             self.translation_config,
             self.audio_devices,
+            self.whisper_config,
             self,
         )
         self._settings_dialog.settings_changed.connect(self._apply_settings)
@@ -845,11 +895,13 @@ class GameOverlay(QWidget):
         hotkey_config: HotkeyConfig,
         audio_config: AudioDeviceConfig,
         translation_config: TranslationConfig,
+        whisper_config,
     ):
         self.config = overlay_config
         self.hotkeys = hotkey_config
         self.audio_config = audio_config
         self.translation_config = translation_config
+        self.whisper_config = whisper_config
         self.setWindowOpacity(self.config.opacity)
         self._apply_styles()
         self._qr_button.setIcon(_make_icon("qr", self.config.text_color))
@@ -865,6 +917,7 @@ class GameOverlay(QWidget):
                 self.hotkeys,
                 self.audio_config,
                 self.translation_config,
+                self.whisper_config,
             )
 
     def request_audio_device_refresh(self):

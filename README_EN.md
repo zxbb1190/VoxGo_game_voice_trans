@@ -86,6 +86,13 @@ You can also use VB-Cable as a fallback:
 2. Set Windows default playback output to VB-Cable.
 3. Select the matching VB-Cable capture/loopback device in the overlay.
 
+NVIDIA GPU users can also try NVIDIA Broadcast / RTX Voice as a speech denoising and virtual-audio fallback:
+1. Download NVIDIA Broadcast: <https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/>
+2. In NVIDIA Broadcast / RTX Voice, select the real microphone or speaker and enable the denoising effects you need.
+3. If this app lists an NVIDIA Broadcast / RTX Voice virtual microphone or speaker, select it and test.
+
+Note: NVIDIA Broadcast / RTX Voice is best for voice-chat denoising and virtual microphone/speaker workflows. For full game/system playback capture, prefer `[System Audio]` / `Loopback`, or use VB-Cable.
+
 ### 4. Start the App
 Double-click `run.bat`, or run:
 ```bash
@@ -127,8 +134,8 @@ Edit `config.json` or use the overlay settings:
 | Key | Description |
 |-----|-------------|
 | `whisper.model_size` | Whisper model size: tiny/base/small/medium |
-| `whisper.device` | Recognition device, default `auto`: try CUDA first and fall back to CPU |
-| `whisper.compute_type` | Compute precision, default `auto`: float16 on CUDA, int8 on CPU |
+| `whisper.device` | Recognition device, default `cpu`; users can change it from the gear settings under Recognition Device. Use `auto` or `cuda` only after installing a matching NVIDIA CUDA runtime |
+| `whisper.compute_type` | Compute precision, default `auto`: int8 on CPU, float16 on CUDA |
 | `whisper.language` | Fixed recognition language, synchronized with the left title-bar language dropdown |
 | `whisper.prompt_profile` | Recognition prompt profile, default `none` to avoid Whisper hallucinating the prompt; optionally use `general` or `game` manually |
 | `whisper.vad_filter` | faster-whisper internal VAD, disabled by default to avoid double-cutting speech |
@@ -161,6 +168,7 @@ Edit `config.json` or use the overlay settings:
 - If you use Bluetooth, HDMI, or a USB sound card, choose the matching system-audio/loopback item.
 - Re-run `install.bat` or install `PyAudioWPatch==0.2.12.8`.
 - Try VB-Cable if your device driver does not expose loopback capture.
+- NVIDIA GPU users can try NVIDIA Broadcast / RTX Voice virtual devices, but full game/system playback capture should still prefer `[System Audio]` / `Loopback`.
 - Try running as administrator.
 
 ### Translation Fails
@@ -177,6 +185,12 @@ Edit `config.json` or use the overlay settings:
 - Keep `whisper.vad_filter=false` if beginnings or endings of sentences are being clipped.
 - Lower background music volume.
 - Ensure the selected audio device is the one actually playing game voice.
+
+### Startup Says cublas64_12.dll Is Missing
+- This means the CUDA/cuBLAS runtime is missing; it is not a translation API problem.
+- The default configuration uses CPU recognition and does not require CUDA.
+- In the gear settings, change Recognition Device to `CPU (Recommended)`, then restart the app.
+- Use `cuda` only on an NVIDIA GPU machine with a matching CUDA 12 and cuDNN runtime for faster-whisper/ctranslate2.
 
 ## Scope
 This tool captures Windows system playback audio. It is not hard-coded for specific games and should not claim individual game compatibility without testing. If the game voice is audible through the selected playback device and Windows exposes a matching system-audio/loopback capture device, it can usually be tried.
