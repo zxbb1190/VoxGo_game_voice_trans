@@ -3,7 +3,9 @@
 使用 PyQt5 创建透明置顶窗口，显示翻译结果
 """
 
+import ctypes
 import socket
+import sys
 import time
 from collections import deque
 from dataclasses import dataclass
@@ -13,17 +15,17 @@ from PyQt5.QtCore import (
     Qt, QEvent, QPoint, QRect, QTimer, pyqtSignal, QObject
 )
 from PyQt5.QtGui import (
-    QColor, QPainter, QPen, QBrush, QIcon, QPixmap
+    QColor, QPainter, QPen, QBrush, QIcon, QPixmap, QTextDocument,
 )
 from PyQt5.QtWidgets import (
     QWidget, QLabel, QVBoxLayout, QHBoxLayout,
     QApplication, QPushButton, QFrame, QDialog, QFormLayout,
     QSlider, QCheckBox, QLineEdit, QColorDialog, QToolButton, QComboBox,
-    QSpinBox
+    QSpinBox, QSizePolicy, QScrollArea
 )
 
 from qr_widget import QrCodeWidget
-from translator import TranslationConfig
+from translator import TranslationConfig, TRANSLATION_PROVIDERS, normalize_translation_provider
 
 
 LANGUAGE_OPTIONS = (("en", "英语"), ("zh", "中文"))
@@ -82,6 +84,7 @@ class OverlayConfig:
     original_text_color: str = "#B7C4D8"
     show_original: bool = True
     draggable: bool = True
+    locked: bool = False
     mobile_url: str = ""
 
 
@@ -272,6 +275,14 @@ def _make_icon(kind: str, color: str) -> QIcon:
             painter.drawLine(0, -11, 0, -8)
             painter.restore()
         painter.drawEllipse(QPoint(14, 14), 10, 10)
+    elif kind in ("lock", "unlock"):
+        painter.drawRoundedRect(QRect(7, 12, 16, 11), 2, 2)
+        if kind == "lock":
+            painter.drawArc(QRect(9, 4, 12, 15), 0, 180 * 16)
+        else:
+            painter.drawArc(QRect(13, 4, 12, 15), 35 * 16, 185 * 16)
+            painter.drawLine(10, 12, 10, 10)
+        painter.drawLine(14, 16, 14, 19)
     elif kind == "swap":
         painter.drawLine(7, 10, 20, 10)
         painter.drawLine(17, 7, 20, 10)
@@ -364,6 +375,12 @@ class SettingsDialog(QDialog):
         self.show_original_check.stateChanged.connect(self._preview)
         form.addRow("中英对照", self.show_original_check)
 
+        self.provider_combo = QComboBox()
+        self.provider_combo.setToolTip("OpenAI 兼容适合硅基流动、DeepSeek、Qwen、GLM 和本地模型；Google 使用 Cloud Translation Basic v2")
+        self._fill_translation_providers()
+        self.provider_combo.currentIndexChanged.connect(self._provider_changed)
+        form.addRow("翻译服务", self.provider_combo)
+
         self.api_key_input = QLineEdit(self.translation_config.api_key)
         self.api_key_input.setEchoMode(QLineEdit.Password)
         self.api_key_input.setPlaceholderText("OpenAI 兼容 API Key")
@@ -382,6 +399,7 @@ class SettingsDialog(QDialog):
         self.endpoint_input.setToolTip("填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url")
         self.endpoint_input.editingFinished.connect(self._preview)
         form.addRow("兼容地址", self.endpoint_input)
+        self._refresh_translation_provider_ui()
 
         self.whisper_device_combo = QComboBox()
         self.whisper_device_combo.setToolTip("普通用户选 CPU；自动/GPU 需要本机有可用 NVIDIA CUDA 运行环境")
@@ -470,6 +488,54 @@ class SettingsDialog(QDialog):
         self.whisper_device_combo.setCurrentIndex(selected_row)
         self.whisper_device_combo.blockSignals(False)
 
+    def _fill_translation_providers(self):
+        self.provider_combo.blockSignals(True)
+        self.provider_combo.clear()
+        selected_provider = normalize_translation_provider(
+            getattr(self.translation_config, "provider", "openai_compatible")
+        )
+        selected_row = 0
+        for row, (provider, label) in enumerate(TRANSLATION_PROVIDERS.items()):
+            self.provider_combo.addItem(label, provider)
+            if provider == selected_provider:
+                selected_row = row
+        self.provider_combo.setCurrentIndex(selected_row)
+        self.provider_combo.blockSignals(False)
+
+    def _provider_changed(self, *args):
+        self._refresh_translation_provider_ui()
+        self._preview()
+
+    def _refresh_translation_provider_ui(self):
+        if not hasattr(self, "provider_combo"):
+            return
+        provider = normalize_translation_provider(self.provider_combo.currentData())
+        is_google = provider == "google"
+        if hasattr(self, "api_key_input"):
+            self.api_key_input.setPlaceholderText(
+                "Google Cloud Translation API Key" if is_google else "OpenAI 兼容 API Key"
+            )
+            self.api_key_input.setToolTip(
+                "Google Cloud 项目中启用 Cloud Translation API 后创建的 API Key"
+                if is_google
+                else "硅基流动、DeepSeek、Qwen、GLM 或本地兼容服务的 API Key；本地服务不需要时可留空"
+            )
+        for widget in (getattr(self, "model_input", None), getattr(self, "endpoint_input", None)):
+            if widget:
+                widget.setEnabled(not is_google)
+        if hasattr(self, "model_input"):
+            self.model_input.setToolTip(
+                "Google Cloud Translation Basic v2 不需要模型名"
+                if is_google
+                else "填写服务商要求的模型名，例如 tencent/Hunyuan-MT-7B、deepseek-chat、qwen-plus、glm-4-flash"
+            )
+        if hasattr(self, "endpoint_input"):
+            self.endpoint_input.setToolTip(
+                "Google Cloud Translation Basic v2 使用固定官方接口，不需要填写兼容地址"
+                if is_google
+                else "填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url"
+            )
+
     def set_audio_devices(self, audio_devices: List[dict], audio_config: AudioDeviceConfig):
         self.audio_devices = audio_devices or []
         self.audio_config = audio_config
@@ -508,6 +574,7 @@ class SettingsDialog(QDialog):
         self.hotkey_config.toggle_translation = self.toggle_translation_input.text().strip() or self.hotkey_config.toggle_translation
         self.hotkey_config.clear_history = self.clear_history_input.text().strip() or self.hotkey_config.clear_history
 
+        self.translation_config.provider = normalize_translation_provider(self.provider_combo.currentData())
         self.translation_config.api_key = self.api_key_input.text().strip()
         self.translation_config.model = self.model_input.text().strip() or self.translation_config.model
         self.translation_config.endpoint = self.endpoint_input.text().strip() or self.translation_config.endpoint
@@ -523,6 +590,27 @@ class SettingsDialog(QDialog):
             self.audio_config.input_device_name = ""
             self.audio_config.input_device_id = ""
         self.audio_config.max_speech_seconds = float(self.max_speech_seconds_spin.value())
+
+
+class OverlayLockButton(QToolButton):
+    """Separate top-level button so the overlay can be mouse-transparent while locked."""
+
+    def __init__(self, owner):
+        super().__init__(None)
+        self._owner = owner
+        flags = Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Tool
+        if hasattr(Qt, "WindowDoesNotAcceptFocus"):
+            flags |= Qt.WindowDoesNotAcceptFocus
+        self.setWindowFlags(flags)
+        self.setAttribute(Qt.WA_ShowWithoutActivating)
+        self.setObjectName("floatingLockButton")
+        self.setFixedSize(28, 24)
+        self.setCursor(Qt.PointingHandCursor)
+        self.setCheckable(True)
+        self.clicked.connect(owner._toggle_lock)
+
+    def closeEvent(self, event):
+        event.accept()
 
 
 class GameOverlay(QWidget):
@@ -663,7 +751,13 @@ class GameOverlay(QWidget):
         self._quit_button.setCursor(Qt.PointingHandCursor)
         self._quit_button.clicked.connect(self._request_shutdown)
         toolbar_layout.addWidget(self._quit_button)
+
+        self._lock_slot = QWidget()
+        self._lock_slot.setFixedSize(28, 24)
+        toolbar_layout.addWidget(self._lock_slot)
         self._layout.addWidget(self._toolbar)
+
+        self._lock_button = OverlayLockButton(self)
 
         self._qr_popup = QFrame(self)
         self._qr_popup.setObjectName("qrPopup")
@@ -682,12 +776,23 @@ class GameOverlay(QWidget):
         self._setup_qr_code()
 
         # 翻译内容容器
+        self._scroll_area = QScrollArea()
+        self._scroll_area.setObjectName("translationScrollArea")
+        self._scroll_area.setWidgetResizable(True)
+        self._scroll_area.setFrameShape(QFrame.NoFrame)
+        self._scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self._scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self._scroll_area.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
         self._content_widget = QWidget()
+        self._content_widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self._content_layout = QVBoxLayout()
         self._content_layout.setContentsMargins(0, 0, 0, 0)
-        self._content_layout.setSpacing(2)
+        self._content_layout.setSpacing(4)
         self._content_widget.setLayout(self._content_layout)
-        self._layout.addWidget(self._content_widget)
+        self._scroll_area.setWidget(self._content_widget)
+        self._layout.addWidget(self._scroll_area, 1)
+        self._content_layout.addStretch(1)
 
         # 翻译标签池
         self._labels: List[QLabel] = []
@@ -696,17 +801,22 @@ class GameOverlay(QWidget):
             label.setWordWrap(True)
             label.setTextFormat(Qt.RichText)
             label.setTextInteractionFlags(Qt.NoTextInteraction)
+            label.setAlignment(Qt.AlignLeft | Qt.AlignBottom)
+            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+            label.setContentsMargins(0, 0, 0, 0)
+            label.setMinimumWidth(0)
             label.hide()
             self._content_layout.addWidget(label)
             self._labels.append(label)
 
-        self._content_layout.addStretch()
         self.setMinimumSize(360, 150)
         self.setMaximumSize(980, 520)
 
         # 设置窗口透明度
         self.setWindowOpacity(self.config.opacity)
         self._apply_styles()
+        self._refresh_lock_state()
+        QTimer.singleShot(0, self._position_lock_button)
 
     def _apply_styles(self):
         self.setStyleSheet(f"""
@@ -753,6 +863,28 @@ class GameOverlay(QWidget):
                 border: 1px solid #D7DFEA;
                 border-radius: 6px;
             }}
+            QScrollArea#translationScrollArea {{
+                background: transparent;
+                border: 0;
+            }}
+            QScrollArea#translationScrollArea > QWidget > QWidget {{
+                background: transparent;
+            }}
+            QScrollArea#translationScrollArea QScrollBar:vertical {{
+                background: transparent;
+                width: 6px;
+                margin: 0;
+            }}
+            QScrollArea#translationScrollArea QScrollBar::handle:vertical {{
+                background: rgba(255, 255, 255, 75);
+                border-radius: 3px;
+                min-height: 18px;
+            }}
+            QScrollArea#translationScrollArea QScrollBar::add-line:vertical,
+            QScrollArea#translationScrollArea QScrollBar::sub-line:vertical {{
+                height: 0;
+                border: 0;
+            }}
             QLabel#qrUrl {{
                 color: #1B2430;
                 font-size: 10px;
@@ -763,6 +895,8 @@ class GameOverlay(QWidget):
             self._fit_language_combo_width(self._source_lang_combo)
         if hasattr(self, "_target_lang_combo"):
             self._fit_language_combo_width(self._target_lang_combo)
+        if hasattr(self, "_lock_button"):
+            self._style_lock_button()
 
     def _create_language_combo(self, tooltip: str) -> QComboBox:
         combo = QComboBox()
@@ -859,6 +993,9 @@ class GameOverlay(QWidget):
 
     def eventFilter(self, watched, event):
         if watched is self._qr_button:
+            if self._is_locked():
+                self._qr_popup.hide()
+                return True
             if event.type() == QEvent.Enter:
                 self._show_qr_popup()
             elif event.type() == QEvent.Leave:
@@ -866,6 +1003,9 @@ class GameOverlay(QWidget):
         return super().eventFilter(watched, event)
 
     def _show_qr_popup(self):
+        if self._is_locked():
+            self._qr_popup.hide()
+            return
         x = max(8, self.width() - self._qr_popup.width() - 8)
         y = self._toolbar.height() + 6
         self._qr_popup.move(x, y)
@@ -873,6 +1013,8 @@ class GameOverlay(QWidget):
         self._qr_popup.raise_()
 
     def _open_settings(self):
+        if self._is_locked():
+            return
         if self._settings_dialog and self._settings_dialog.isVisible():
             self._settings_dialog.raise_()
             self._settings_dialog.activateWindow()
@@ -888,6 +1030,110 @@ class GameOverlay(QWidget):
         )
         self._settings_dialog.settings_changed.connect(self._apply_settings)
         self._settings_dialog.show()
+
+    def _is_locked(self) -> bool:
+        return bool(getattr(self.config, "locked", False))
+
+    def _can_interact(self) -> bool:
+        return not self._is_locked() and bool(getattr(self.config, "draggable", True))
+
+    def _toggle_lock(self, checked=None):
+        self.config.locked = not self._is_locked()
+        self._refresh_lock_state()
+        self._notify_settings_changed()
+
+    def _refresh_lock_state(self):
+        locked = self._is_locked()
+        self.config.locked = locked
+        self._dragging = False
+        self._resizing = False
+        self.setCursor(Qt.ArrowCursor)
+        self._qr_popup.hide()
+        if locked and self._settings_dialog and self._settings_dialog.isVisible():
+            self._settings_dialog.close()
+
+        for widget in (
+            self._source_lang_combo,
+            self._target_lang_combo,
+            self._swap_lang_button,
+            self._qr_button,
+            self._settings_button,
+            self._quit_button,
+        ):
+            widget.setEnabled(not locked)
+
+        self._lock_button.setChecked(locked)
+        self._lock_button.setIcon(_make_icon("unlock" if locked else "lock", self.config.text_color))
+        self._lock_button.setToolTip("解锁浮窗" if locked else "锁定浮窗")
+        self._style_lock_button()
+        self._set_overlay_mouse_passthrough(locked)
+        self._position_lock_button()
+        self.update()
+
+    def _style_lock_button(self):
+        border_color = self.config.text_color
+        bg = "rgba(35, 58, 42, 230)" if self._is_locked() else "rgba(18, 24, 33, 150)"
+        self._lock_button.setStyleSheet(f"""
+            QToolButton#floatingLockButton {{
+                background: {bg};
+                border: 1px solid {border_color};
+                border-radius: 4px;
+            }}
+            QToolButton#floatingLockButton:hover {{
+                background: rgba(40, 60, 48, 230);
+            }}
+        """)
+
+    def _set_overlay_mouse_passthrough(self, enabled: bool):
+        self.setAttribute(Qt.WA_TransparentForMouseEvents, enabled)
+        if not sys.platform.startswith("win"):
+            return
+        try:
+            hwnd = int(self.winId())
+            user32 = ctypes.windll.user32
+            gwl_exstyle = -20
+            ws_ex_transparent = 0x00000020
+            ws_ex_layered = 0x00080000
+            ws_ex_noactivate = 0x08000000
+            if ctypes.sizeof(ctypes.c_void_p) == 8:
+                get_window_long = user32.GetWindowLongPtrW
+                set_window_long = user32.SetWindowLongPtrW
+                get_window_long.restype = ctypes.c_longlong
+                set_window_long.restype = ctypes.c_longlong
+            else:
+                get_window_long = user32.GetWindowLongW
+                set_window_long = user32.SetWindowLongW
+                get_window_long.restype = ctypes.c_long
+                set_window_long.restype = ctypes.c_long
+            get_window_long.argtypes = [ctypes.c_void_p, ctypes.c_int]
+            set_window_long.argtypes = [ctypes.c_void_p, ctypes.c_int, get_window_long.restype]
+            style = int(get_window_long(hwnd, gwl_exstyle))
+            style |= ws_ex_layered | ws_ex_noactivate
+            if enabled:
+                style |= ws_ex_transparent
+            else:
+                style &= ~ws_ex_transparent
+            set_window_long(hwnd, gwl_exstyle, style)
+        except Exception:
+            pass
+
+    def _position_lock_button(self):
+        if not hasattr(self, "_lock_button") or not hasattr(self, "_lock_slot"):
+            return
+        self._lock_button.move(self._lock_slot.mapToGlobal(QPoint(0, 0)))
+        if self.isVisible():
+            self._lock_button.show()
+            self._lock_button.raise_()
+
+    def _notify_settings_changed(self):
+        if self._on_settings_changed:
+            self._on_settings_changed(
+                self.config,
+                self.hotkeys,
+                self.audio_config,
+                self.translation_config,
+                self.whisper_config,
+            )
 
     def _apply_settings(
         self,
@@ -910,6 +1156,7 @@ class GameOverlay(QWidget):
         self._quit_button.setIcon(_make_icon("close", self.config.text_color))
         self._sync_language_controls()
         self._refresh_labels()
+        self._refresh_lock_state()
         self.update()
         if self._on_settings_changed:
             self._on_settings_changed(
@@ -1004,35 +1251,83 @@ class GameOverlay(QWidget):
             self._refresh_labels()
 
     def _refresh_labels(self):
+        if not hasattr(self, "_labels") or not hasattr(self, "_content_widget"):
+            return
         self._render_items(list(self._translations))
 
     def _render_items(self, items: List[TranslationItem]):
-        for i, label in enumerate(self._labels):
-            if i < len(items):
-                item = items[i]
-                label.setText(self._format_item(item, item.opacity))
-                label.show()
-            else:
-                label.hide()
+        text_width = self._label_text_width()
+        visible_items = []
 
-    def _format_item(self, item: TranslationItem, opacity: float) -> str:
-        translated = self._escape(self._truncate(item.translated, 90))
-        original = self._escape(self._truncate(item.original, 120))
+        for item in items[-self.config.max_lines:]:
+            html = self._format_item(item, item.opacity, text_width)
+            height = self._measure_html_height(html, text_width)
+            visible_items.append((html, height))
+
+        for i, label in enumerate(self._labels):
+            if i < len(visible_items):
+                html, height = visible_items[i]
+                label.setText(html)
+                label.setFixedHeight(max(1, height))
+                label.show()
+                label.updateGeometry()
+            else:
+                label.clear()
+                label.setFixedHeight(0)
+                label.hide()
+        self._content_layout.activate()
+        self._content_widget.updateGeometry()
+        if hasattr(self, "_scroll_area"):
+            QTimer.singleShot(0, self._scroll_to_latest)
+
+    def _label_text_width(self) -> int:
+        if hasattr(self, "_scroll_area"):
+            width = self._scroll_area.viewport().contentsRect().width()
+        else:
+            width = self._content_widget.contentsRect().width()
+        if width <= 0:
+            margins = self._layout.contentsMargins()
+            width = self.width() - margins.left() - margins.right()
+        return max(40, int(width) - 2)
+
+    def _measure_html_height(self, html: str, width: int) -> int:
+        doc = QTextDocument()
+        doc.setDocumentMargin(0)
+        doc.setDefaultFont(self.font())
+        doc.setHtml(html)
+        doc.setTextWidth(max(80, width))
+        return max(1, int(doc.size().height()) + 3)
+
+    def _format_item(self, item: TranslationItem, opacity: float, width: int = None) -> str:
+        translated = self._escape(self._normalize_display_text(item.translated))
+        original = self._escape(self._normalize_display_text(item.original))
         main_color = self._rgba_css(self.config.text_color, opacity)
         original_color = self._rgba_css(self.config.original_text_color, opacity * 0.92)
+        family = self._escape(self.config.font_family).replace('"', "&quot;")
         if self.config.show_original:
             return (
-                f'<div style="font-size:{self.config.font_size}px; color:{main_color};">'
+                f'<div style="font-family:&quot;{family}&quot;; font-size:{self.config.font_size}px; '
+                f'line-height:1.25; margin:0; color:{main_color}; white-space:normal; '
+                f'word-wrap:break-word;">'
                 f'{translated}</div>'
-                f'<div style="font-size:{max(10, self.config.font_size - 4)}px; '
-                f'color:{original_color}; margin-top:2px;">{original}</div>'
+                f'<div style="font-family:&quot;{family}&quot;; font-size:{max(10, self.config.font_size - 4)}px; '
+                f'line-height:1.2; margin:2px 0 0 0; color:{original_color}; '
+                f'white-space:normal; word-wrap:break-word;">{original}</div>'
             )
-        return f'<div style="font-size:{self.config.font_size}px; color:{main_color};">{translated}</div>'
+        return (
+            f'<div style="font-family:&quot;{family}&quot;; font-size:{self.config.font_size}px; '
+            f'line-height:1.25; margin:0; color:{main_color}; white-space:normal; '
+            f'word-wrap:break-word;">{translated}</div>'
+        )
 
-    def _truncate(self, text: str, limit: int) -> str:
-        if len(text) <= limit:
-            return text
-        return text[:limit - 1] + "..."
+    def _normalize_display_text(self, text: str) -> str:
+        return " ".join((text or "").split())
+
+    def _scroll_to_latest(self):
+        if not hasattr(self, "_scroll_area"):
+            return
+        bar = self._scroll_area.verticalScrollBar()
+        bar.setValue(bar.maximum())
 
     def _escape(self, text: str) -> str:
         return (
@@ -1084,6 +1379,8 @@ class GameOverlay(QWidget):
         )
 
         # 右下角尺寸拖拽手柄
+        if not self._can_interact():
+            return
         handle_color = QColor(self.config.text_color)
         handle_color.setAlpha(150)
         painter.setPen(QPen(handle_color, 1))
@@ -1096,22 +1393,29 @@ class GameOverlay(QWidget):
             )
 
     def _resize_hit_test(self, pos) -> bool:
-        return pos.x() >= self.width() - 24 and pos.y() >= self.height() - 24
+        return self._can_interact() and pos.x() >= self.width() - 24 and pos.y() >= self.height() - 24
 
     def mousePressEvent(self, event):
         """鼠标按下 - 开始拖拽"""
+        if not self._can_interact():
+            event.ignore()
+            return
         if event.button() == Qt.LeftButton and self._resize_hit_test(event.pos()):
             self._resizing = True
             self._resize_start_pos = event.globalPos()
             self._resize_start_size = self.size()
             event.accept()
-        elif self.config.draggable and event.button() == Qt.LeftButton:
+        elif event.button() == Qt.LeftButton:
             self._dragging = True
             self._drag_pos = event.globalPos() - self.frameGeometry().topLeft()
             event.accept()
 
     def mouseMoveEvent(self, event):
         """鼠标移动 - 拖拽窗口"""
+        if not self._can_interact():
+            self.setCursor(Qt.ArrowCursor)
+            event.ignore()
+            return
         if self._resizing and event.buttons() == Qt.LeftButton:
             delta = event.globalPos() - self._resize_start_pos
             width = max(self.minimumWidth(), min(self.maximumWidth(), self._resize_start_size.width() + delta.x()))
@@ -1119,6 +1423,7 @@ class GameOverlay(QWidget):
             self.resize(width, height)
             self.config.window_width = width
             self.config.window_height = height
+            self._refresh_labels()
             event.accept()
         elif self._dragging and event.buttons() == Qt.LeftButton:
             self.move(event.globalPos() - self._drag_pos)
@@ -1128,18 +1433,49 @@ class GameOverlay(QWidget):
 
     def mouseReleaseEvent(self, event):
         """鼠标释放 - 结束拖拽"""
+        was_resizing = self._resizing
         self._dragging = False
         self._resizing = False
         self.setCursor(Qt.ArrowCursor)
+        self._refresh_labels()
+        if was_resizing:
+            self._notify_settings_changed()
         event.accept()
 
     def enable_drag(self):
         """启用拖拽（临时关闭鼠标穿透）"""
-        self.setAttribute(Qt.WA_TransparentForMouseEvents, False)
+        self.config.draggable = True
+        if not self._is_locked():
+            self._set_overlay_mouse_passthrough(False)
+        self.update()
 
     def disable_drag(self):
         """禁用拖拽（恢复鼠标穿透）"""
-        self.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+        self.config.draggable = False
+        self._set_overlay_mouse_passthrough(True)
+        self.update()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.config.window_width = self.width()
+        self.config.window_height = self.height()
+        self._refresh_labels()
+        self._position_lock_button()
+
+    def moveEvent(self, event):
+        super().moveEvent(event)
+        self._position_lock_button()
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        self._refresh_lock_state()
+        self._refresh_labels()
+        self._position_lock_button()
+
+    def hideEvent(self, event):
+        if hasattr(self, "_lock_button"):
+            self._lock_button.hide()
+        super().hideEvent(event)
 
     def set_position(self, position: str):
         """设置浮窗位置"""
@@ -1159,4 +1495,6 @@ class GameOverlay(QWidget):
     def closeEvent(self, event):
         """关闭事件"""
         self._fade_timer.stop()
+        if hasattr(self, "_lock_button"):
+            self._lock_button.close()
         super().closeEvent(event)

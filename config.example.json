@@ -38,6 +38,7 @@
     "min_gain_rms_dbfs": -50
   },
   "translation": {
+    "provider": "openai_compatible",
     "api_key": "YOUR_OPENAI_COMPATIBLE_API_KEY",
     "model": "tencent/Hunyuan-MT-7B",
     "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
@@ -62,7 +63,8 @@
     "window_height": 260,
     "opacity": 0.88,
     "show_original": true,
-    "draggable": true
+    "draggable": true,
+    "locked": false
   },
   "websocket": {
     "host": "0.0.0.0",

@@ -1,9 +1,10 @@
 """
 翻译模块
-使用 OpenAI 兼容 Chat Completions API 进行中英文双向翻译
+使用 OpenAI 兼容 Chat Completions API 或 Google Cloud Translation 进行中英文双向翻译
 """
 
 import asyncio
+import html
 import json
 import re
 import time
@@ -17,6 +18,7 @@ from loguru import logger
 
 @dataclass
 class TranslationConfig:
+    provider: str = "openai_compatible"
     api_key: str = ""
     model: str = "tencent/Hunyuan-MT-7B"
     endpoint: str = "https://api.siliconflow.cn/v1/chat/completions"
@@ -56,6 +58,30 @@ LANGUAGE_ALIASES = {
     "中文": "zh",
 }
 OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
+TRANSLATION_PROVIDERS = {
+    "openai_compatible": "OpenAI 兼容",
+    "google": "Google Cloud Translation",
+}
+GOOGLE_TRANSLATE_ENDPOINT = "https://translation.googleapis.com/language/translate/v2"
+GOOGLE_LANGUAGE_CODES = {"en": "en", "zh": "zh-CN"}
+
+
+def normalize_translation_provider(value: str, default: str = "openai_compatible") -> str:
+    value = (value or "").strip().lower().replace("-", "_").replace(" ", "_")
+    aliases = {
+        "openai": "openai_compatible",
+        "openai_compat": "openai_compatible",
+        "compatible": "openai_compatible",
+        "chat_completions": "openai_compatible",
+        "siliconflow": "openai_compatible",
+        "google_translate": "google",
+        "google_translation": "google",
+        "google_cloud": "google",
+        "google_cloud_translation": "google",
+        "cloud_translation": "google",
+    }
+    value = aliases.get(value, value)
+    return value if value in TRANSLATION_PROVIDERS else default
 
 
 def normalize_language_code(value: str, default: str = "") -> str:
@@ -117,11 +143,26 @@ class GameTranslator:
             "YOUR_API_KEY",
             "YOUR_SILICONFLOW_API_KEY",
             "YOUR_OPENAI_COMPATIBLE_API_KEY",
+            "YOUR_GOOGLE_TRANSLATE_API_KEY",
+            "YOUR_GOOGLE_CLOUD_TRANSLATION_API_KEY",
         }
 
     def _requires_api_key(self) -> bool:
+        if self._provider() == "google":
+            return True
         host = (urlparse(self._normalized_endpoint()).hostname or "").lower()
         return host not in {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+
+    def _provider(self) -> str:
+        return normalize_translation_provider(getattr(self.config, "provider", "openai_compatible"))
+
+    def _api_key_missing_message(self) -> str:
+        if self._provider() == "google":
+            return "[未翻译] API Key 未配置，请在设置里填写 Google Cloud Translation API Key"
+        return "[未翻译] API Key 未配置，请在设置里填写 OpenAI 兼容 API Key"
+
+    def _google_language_code(self, language: str) -> str:
+        return GOOGLE_LANGUAGE_CODES.get(language, language)
 
     def _short_error_text(self, error_text: str) -> str:
         text = (error_text or "").strip()
@@ -154,10 +195,17 @@ class GameTranslator:
 
         if self._is_placeholder_api_key() and self._requires_api_key():
             logger.warning("API Key 未配置，返回原文")
-            return "[未翻译] API Key 未配置，请在设置里填写 OpenAI 兼容 API Key"
+            return self._api_key_missing_message()
 
         source_language = self.detect_language(text, detected_language)
         target_language = self.get_target_language(source_language)
+        if self._provider() == "google":
+            return await self._translate_google(text, source_language, target_language)
+
+        return await self._translate_openai_compatible(text, source_language, target_language)
+
+    async def _translate_openai_compatible(self, text: str, source_language: str, target_language: str) -> str:
+        """Translate with an OpenAI-compatible Chat Completions endpoint."""
         current_message = {
             "role": "user",
             "content": (
@@ -241,6 +289,54 @@ class GameTranslator:
             return f"[翻译超时] API 请求超过 {self.config.timeout_seconds:g} 秒，请检查网络或服务商状态"
         except Exception as e:
             logger.error(f"翻译异常: {e}")
+            return f"[翻译失败] {str(e)[:180]}"
+
+    async def _translate_google(self, text: str, source_language: str, target_language: str) -> str:
+        """Translate with Google Cloud Translation Basic v2."""
+        params = {
+            "key": self.config.api_key.strip(),
+            "q": text,
+            "source": self._google_language_code(source_language),
+            "target": self._google_language_code(target_language),
+            "format": "text",
+        }
+        headers = {"Content-Type": "application/json; charset=utf-8"}
+        start_time = time.time()
+
+        try:
+            session = await self._get_session()
+            async with session.post(
+                GOOGLE_TRANSLATE_ENDPOINT,
+                params=params,
+                headers=headers,
+            ) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    translations = ((data.get("data") or {}).get("translations") or [])
+                    translation = ""
+                    if translations:
+                        translation = html.unescape((translations[0].get("translatedText") or "").strip())
+                    elapsed = time.time() - start_time
+                    self._translation_count += 1
+                    self._total_time += elapsed
+                    if not translation:
+                        logger.warning("Google 翻译 API 返回空译文: {}", data)
+                    direction = f"{source_language}->{target_language}"
+                    logger.info(f"Google 翻译({direction}): {text[:50]}... → {translation[:50]}... ({elapsed:.2f}s)")
+                    return translation
+
+                error_text = await response.text()
+                logger.error(f"Google 翻译 API 错误: {response.status} - {error_text}")
+                detail = self._short_error_text(error_text)
+                if detail:
+                    return f"[翻译错误 {response.status}] {detail}"
+                return f"[翻译错误 {response.status}] Google Translation API 返回错误"
+
+        except asyncio.TimeoutError:
+            logger.error("Google 翻译 API 超时")
+            return f"[翻译超时] API 请求超过 {self.config.timeout_seconds:g} 秒，请检查网络或 Google Cloud Translation 状态"
+        except Exception as e:
+            logger.error(f"Google 翻译异常: {e}")
             return f"[翻译失败] {str(e)[:180]}"
 
     async def translate_batch(self, texts: List[str]) -> List[str]:

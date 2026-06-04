@@ -8,7 +8,7 @@ An open-source real-time voice translation overlay for PC gamers, designed for o
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
 - **Local speech recognition**: Uses faster-whisper for offline speech-to-text with a fixed Chinese or English recognition language.
 - **Fixed translation direction**: Choose the recognition language and translation target from the overlay title bar, with one-click swap.
-- **OpenAI-compatible APIs**: Works with Chat Completions-compatible providers such as SiliconFlow, DeepSeek, Qwen, GLM, OpenAI-compatible gateways, and local models.
+- **Multiple translation providers**: Supports OpenAI-compatible Chat Completions APIs and Google Cloud Translation Basic v2.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
 - **Mobile mirror**: Pushes translations to a browser on the same LAN through WebSocket.
@@ -20,7 +20,7 @@ game_voice_translator/
 ├── main.py               # Main application
 ├── audio_capture.py      # Windows system-audio capture
 ├── speech_recognition.py # faster-whisper speech recognition
-├── translator.py         # OpenAI-compatible translation client
+├── translator.py         # OpenAI-compatible / Google Cloud Translation client
 ├── overlay.py            # PyQt5 overlay window
 ├── mobile_server.py      # Mobile WebSocket server
 ├── config.example.json   # Configuration template
@@ -46,9 +46,12 @@ Copy the example config first:
 copy config.example.json config.json
 ```
 
-Then edit `config.json`, or start the app and use the gear button in the overlay to configure API Key, model name, and compatible endpoint:
+Then edit `config.json`, or start the app and use the gear button in the overlay to choose a translation provider and enter its API Key.
+
+The default provider is OpenAI-compatible:
 ```json
 "translation": {
+  "provider": "openai_compatible",
   "api_key": "YOUR_OPENAI_COMPATIBLE_API_KEY",
   "model": "tencent/Hunyuan-MT-7B",
   "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
@@ -58,6 +61,8 @@ Then edit `config.json`, or start the app and use the gear button in the overlay
 The default template uses SiliconFlow with `tencent/Hunyuan-MT-7B`, a free translation model. Register and create an API Key to use it. Availability and quota are subject to the provider's current policy.
 
 Register/get API Key: <https://cloud.siliconflow.cn/i/iA6DF2nP>
+
+Note: SiliconFlow account or quota access may require Alipay real-name or face verification, which may not be available to some users outside mainland China. If you cannot complete that verification, use Google Cloud Translation, DeepSeek, Qwen, GLM, or a local model service instead.
 
 Common OpenAI-compatible examples:
 
@@ -70,6 +75,20 @@ Common OpenAI-compatible examples:
 | Local model | `http://127.0.0.1:11434/v1/chat/completions` or `http://127.0.0.1:8000/v1/chat/completions` | Use your local model name |
 
 If your provider only gives you a `base_url` ending in `/v1`, you can enter that too. The app will append `/chat/completions` automatically. Real API keys are saved in local `user_settings.json`, which is ignored by Git.
+
+You can also use Google Cloud Translation:
+```json
+"translation": {
+  "provider": "google",
+  "api_key": "YOUR_GOOGLE_CLOUD_TRANSLATION_API_KEY",
+  "source_lang": "en",
+  "target_lang": "zh"
+}
+```
+
+The Google option uses the official **Cloud Translation API Basic v2**, not a generic Google API. Enable Cloud Translation API in your Google Cloud project, then create an API Key. In Google mode, the model name and compatible endpoint are not used; the settings dialog disables those fields.
+
+Google Cloud Translation pricing and free quota are controlled by Google: <https://cloud.google.com/translate/pricing>
 
 ### 3. Select an Audio Device
 The app is designed to capture the audio that Windows is playing through your speakers, headphones, HDMI output, USB sound card, or virtual cable.
@@ -106,7 +125,7 @@ python main.py
 - **Ctrl+Alt+C**: Clear translation history
 - **Ctrl+Alt+S**: Pause/resume translation
 - **Drag overlay**: Move the overlay window
-- **Gear button**: Configure API Key, model name, endpoint, audio device, opacity, colors, and hotkeys
+- **Gear button**: Configure translation provider, API Key, model name, endpoint, audio device, opacity, colors, and hotkeys
 
 ### Translation Direction
 Choose the fixed recognition and translation direction directly in the overlay title bar:
@@ -150,9 +169,10 @@ Edit `config.json` or use the overlay settings:
 | `audio.noise_calibration_seconds` | Seconds of startup background-audio calibration, default 2 |
 | `audio.noise_margin_db` | Dynamic threshold margin above the measured noise floor, default 7 dB |
 | `audio.max_speech_seconds` | Maximum seconds before forced splitting during continuous sound, recommended 6-10 |
-| `translation.api_key` | OpenAI-compatible API Key |
-| `translation.model` | Model name, default `tencent/Hunyuan-MT-7B` |
-| `translation.endpoint` | Compatible endpoint or `/v1` base URL |
+| `translation.provider` | Translation provider: `openai_compatible` or `google` |
+| `translation.api_key` | API Key for the selected provider; use a Google Cloud Translation API Key in Google mode |
+| `translation.model` | OpenAI-compatible model name, default `tencent/Hunyuan-MT-7B`; unused in Google mode |
+| `translation.endpoint` | OpenAI-compatible endpoint or `/v1` base URL; unused in Google mode |
 | `translation.max_tokens` | Maximum translation output length, default 80 to avoid expansion |
 | `translation.temperature` | Translation randomness, default 0 for faithful and stable subtitles |
 | `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown |

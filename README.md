@@ -8,7 +8,7 @@ English documentation: [README_EN.md](README_EN.md)
 - **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
 - **本地语音识别**: 基于 faster-whisper 的离线语音转文字，支持固定中文/英文识别
 - **固定方向翻译**: 在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
-- **兼容多种模型服务**: OpenAI 兼容 Chat Completions API，默认使用硅基流动，可接入 DeepSeek、Qwen、GLM、本地模型等
+- **兼容多种翻译服务**: 支持 OpenAI 兼容 Chat Completions API，也支持 Google Cloud Translation Basic v2
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
 - **可见状态提示**: 启动状态、音频设备、暂停/恢复、翻译 API 错误码等会直接显示在浮窗里
 - **手机端同步**: WebSocket 实时推送到手机浏览器
@@ -20,7 +20,7 @@ game_voice_translator/
 ├── main.py              # 主程序
 ├── audio_capture.py     # 音频捕获模块
 ├── speech_recognition.py # Whisper 语音识别
-├── translator.py        # OpenAI 兼容 API 翻译
+├── translator.py        # OpenAI 兼容 / Google Cloud Translation 翻译
 ├── overlay.py           # PyQt5 游戏浮窗
 ├── mobile_server.py     # 手机端 WebSocket 服务器
 ├── config.example.json  # 配置模板
@@ -46,9 +46,12 @@ pip install -r requirements.txt
 copy config.example.json config.json
 ```
 
-然后编辑 `config.json`，或先启动程序后在浮窗右上角齿轮设置里填写 API Key、模型名和兼容地址：
+然后编辑 `config.json`，或先启动程序后在浮窗右上角齿轮设置里选择翻译服务并填写 API Key。
+
+默认使用 OpenAI 兼容接口：
 ```json
 "translation": {
+    "provider": "openai_compatible",
     "api_key": "你的 OpenAI 兼容 API Key",
     "model": "tencent/Hunyuan-MT-7B",
     "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
@@ -58,6 +61,8 @@ copy config.example.json config.json
 模板默认使用硅基流动的 `tencent/Hunyuan-MT-7B`，这是面向翻译的免费模型。只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
 
 注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
+
+注意：硅基流动账号/额度可能需要支付宝实名或人脸认证；部分海外地区用户可能无法完成该认证。海外用户如果无法开通硅基流动，可以改用 Google Cloud Translation、DeepSeek、Qwen、GLM，或本地模型服务。
 
 也可以使用其他 OpenAI 兼容接口。常见填写示例：
 
@@ -70,6 +75,20 @@ copy config.example.json config.json
 | 本地模型 | `http://127.0.0.1:11434/v1/chat/completions` 或 `http://127.0.0.1:8000/v1/chat/completions` | 按本地服务填写 |
 
 如果服务商只给了 `base_url`，例如以 `/v1` 结尾，也可以直接填写；程序会自动补上 `/chat/completions`。真实 API Key 会保存在本机 `user_settings.json`，该文件不会提交到 Git。
+
+也可以使用 Google Cloud Translation：
+```json
+"translation": {
+    "provider": "google",
+    "api_key": "你的 Google Cloud Translation API Key",
+    "source_lang": "en",
+    "target_lang": "zh"
+}
+```
+
+Google 这里使用的是官方 **Cloud Translation API Basic v2**，不是通用 Google API。需要在 Google Cloud 项目里启用 Cloud Translation API，然后创建 API Key。Google 模式下不需要填写模型名和兼容地址；设置窗口会自动禁用这两个字段。
+
+Google Cloud Translation 价格和免费额度以官方为准：<https://cloud.google.com/translate/pricing>
 
 ### 3. 设置音频路由 (可选)
 默认会优先使用 Windows WASAPI Loopback 采集当前扬声器/耳机输出，不需要选择麦克风。
@@ -108,7 +127,7 @@ python main.py
 - **Ctrl+Alt+C**: 清空翻译历史
 - **Ctrl+Alt+S**: 暂停/恢复翻译
 - **拖拽浮窗**: 可移动位置
-- **右上角齿轮**: 配置 API Key、模型名、兼容地址、音频设备、透明度和热键
+- **右上角齿轮**: 配置翻译服务、API Key、模型名、兼容地址、音频设备、透明度和热键
 
 ### 翻译方向
 浮窗标题栏可以直接选择识别语言和翻译目标语言：
@@ -153,9 +172,10 @@ python main.py
 | `audio.noise_calibration_seconds` | 启动后采集背景噪声并自动校准阈值的秒数，默认 2 |
 | `audio.noise_margin_db` | 动态阈值相对背景噪声提高的 dB，默认 7 |
 | `audio.max_speech_seconds` | 连续有声时强制切段的最长秒数，推荐 6~10 秒 |
-| `translation.api_key` | OpenAI 兼容 API Key |
-| `translation.model` | 模型名，默认 `tencent/Hunyuan-MT-7B` |
-| `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions` |
+| `translation.provider` | 翻译服务：`openai_compatible` 或 `google` |
+| `translation.api_key` | 当前翻译服务的 API Key；Google 模式下填写 Google Cloud Translation API Key |
+| `translation.model` | OpenAI 兼容模型名，默认 `tencent/Hunyuan-MT-7B`；Google 模式不用填写 |
+| `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions`；Google 模式不用填写 |
 | `translation.max_tokens` | 译文最大输出长度，默认 80，避免模型扩写 |
 | `translation.temperature` | 翻译随机性，默认 0，优先忠实稳定 |
 | `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里 |

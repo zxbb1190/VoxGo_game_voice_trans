@@ -27,7 +27,12 @@ from speech_recognition import (
     is_likely_asr_hallucination,
     sanitize_vad_parameters,
 )
-from translator import GameTranslator, TranslationConfig
+from translator import (
+    GameTranslator,
+    TranslationConfig,
+    TRANSLATION_PROVIDERS,
+    normalize_translation_provider,
+)
 from mobile_server import MobileWebSocketManager, WebSocketConfig
 
 
@@ -88,6 +93,7 @@ class OverlayConfig:
     original_text_color: str = "#B7C4D8"
     show_original: bool = True
     draggable: bool = True
+    locked: bool = False
     mobile_url: str = ""
 
 
@@ -145,6 +151,7 @@ class GameVoiceTranslator:
             self.config.audio.max_speech_seconds,
         )
         self._last_translation_settings = (
+            normalize_translation_provider(self.config.translation.provider),
             self.config.translation.api_key,
             self.config.translation.model,
             self.config.translation.endpoint,
@@ -220,6 +227,8 @@ class GameVoiceTranslator:
                 "window_height": self.config.overlay.window_height,
                 "opacity": self.config.overlay.opacity,
                 "show_original": self.config.overlay.show_original,
+                "draggable": self.config.overlay.draggable,
+                "locked": self.config.overlay.locked,
             },
             "hotkeys": {
                 "toggle_overlay": self.config.hotkeys.toggle_overlay,
@@ -230,6 +239,7 @@ class GameVoiceTranslator:
                 "device": _normalize_whisper_device(self.config.whisper.device),
             },
             "translation": {
+                "provider": normalize_translation_provider(self.config.translation.provider),
                 "api_key": self.config.translation.api_key,
                 "model": self.config.translation.model,
                 "endpoint": self.config.translation.endpoint,
@@ -536,6 +546,7 @@ class GameVoiceTranslator:
         self.config.overlay = overlay_config
         self.config.hotkeys = hotkey_config
         self.config.translation = translation_config
+        self.config.translation.provider = normalize_translation_provider(self.config.translation.provider)
         self.config.whisper.device = _normalize_whisper_device(
             getattr(whisper_config, "device", self.config.whisper.device)
         )
@@ -557,6 +568,7 @@ class GameVoiceTranslator:
             self.config.audio.max_speech_seconds,
         )
         current_translation = (
+            normalize_translation_provider(self.config.translation.provider),
             self.config.translation.api_key,
             self.config.translation.model,
             self.config.translation.endpoint,
@@ -573,9 +585,18 @@ class GameVoiceTranslator:
                 "状态",
             )
         if current_translation != previous_translation:
+            provider_label = TRANSLATION_PROVIDERS.get(
+                normalize_translation_provider(self.config.translation.provider),
+                self.config.translation.provider,
+            )
+            detail = f"服务商: {provider_label}"
+            if normalize_translation_provider(self.config.translation.provider) == "google":
+                detail += "\n接口: Google Cloud Translation Basic v2"
+            else:
+                detail += f"\n模型: {self.config.translation.model}\n兼容地址: {self.config.translation.endpoint}"
             self._notify_user(
                 "翻译接口已更新",
-                f"模型: {self.config.translation.model}\n兼容地址: {self.config.translation.endpoint}",
+                detail,
                 "状态",
             )
         if current_whisper_device != previous_whisper_device:
@@ -589,7 +610,7 @@ class GameVoiceTranslator:
         self._last_language_flow = current_language_flow
         self._last_whisper_device = current_whisper_device
         logger.info(
-            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, whisper_device={}, model={}, endpoint={}, hotkeys={}/{}/{}",
+            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, whisper_device={}, provider={}, model={}, endpoint={}, hotkeys={}/{}/{}",
             overlay_config.opacity,
             overlay_config.bg_opacity,
             overlay_config.text_color,
@@ -600,6 +621,7 @@ class GameVoiceTranslator:
             current_language_flow[0],
             current_language_flow[1],
             current_whisper_device,
+            normalize_translation_provider(self.config.translation.provider),
             self.config.translation.model,
             self.config.translation.endpoint,
             hotkey_config.toggle_overlay,
@@ -884,7 +906,7 @@ class GameVoiceTranslator:
         hotkeys = self.config.hotkeys
         print("""
 ╔══════════════════════════════════════════════╗
-║       游戏语音实时翻译器  v0.1.3          ║
+║       游戏语音实时翻译器  v0.1.4          ║
 ╠══════════════════════════════════════════════╣
 ║  热键:                                       ║
 ║    {toggle_overlay:<14} 切换浮窗显示/隐藏       ║
