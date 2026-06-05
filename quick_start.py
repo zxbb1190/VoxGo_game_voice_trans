@@ -1,5 +1,5 @@
 """
-快速启动 - 游戏语音翻译器演示
+快速启动 - VoxGo 演示
 """
 
 import sys
@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtCore import Qt, QTimer, QPoint
 from PyQt5.QtGui import QFont, QColor, QPainter, QBrush, QPen
 
+from app_info import APP_NAME
+
 class GameTranslatorDemo(QWidget):
     def __init__(self):
         super().__init__()
@@ -15,7 +17,7 @@ class GameTranslatorDemo(QWidget):
         self.setup_timer()
         
     def setup_ui(self):
-        self.setWindowTitle("🎮 游戏语音实时翻译器")
+        self.setWindowTitle(APP_NAME)
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint |
             Qt.FramelessWindowHint |
@@ -29,7 +31,7 @@ class GameTranslatorDemo(QWidget):
         layout.setContentsMargins(10, 10, 10, 10)
         
         # 标题
-        title = QLabel("游戏语音实时翻译器 (演示模式)")
+        title = QLabel(f"{APP_NAME} (演示模式)")
         title.setStyleSheet("""
             QLabel {
                 color: #00FF00;
@@ -124,7 +126,7 @@ class GameTranslatorDemo(QWidget):
             event.accept()
 
 def main():
-    print("🎮 游戏语音实时翻译器 - 演示模式")
+    print(f"{APP_NAME} - 演示模式")
     print("=" * 50)
     print("功能演示:")
     print("  • 透明置顶浮窗")

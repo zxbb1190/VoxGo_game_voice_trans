@@ -9,13 +9,15 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 import uvicorn
 
-app = FastAPI(title="Game Voice Translator Mobile")
+from app_info import APP_NAME, SERVICE_NAME
+
+app = FastAPI(title=f"{APP_NAME} Mobile")
 
 connections = set()
 
 @app.get("/")
 async def index():
-    return {"status": "running", "service": "game_voice_translator"}
+    return {"status": "running", "service": SERVICE_NAME}
 
 @app.get("/mobile")
 async def mobile_page():
@@ -25,7 +27,7 @@ async def mobile_page():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>🎮 游戏语音实时翻译</title>
+        <title>VoxGo Mobile</title>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
@@ -79,7 +81,7 @@ async def mobile_page():
     <body>
         <div class="container">
             <header>
-                <h1>🎮 游戏语音实时翻译</h1>
+                <h1>VoxGo</h1>
                 <p>实时接收游戏内语音翻译结果</p>
                 <div id="status" class="status disconnected">未连接</div>
             </header>

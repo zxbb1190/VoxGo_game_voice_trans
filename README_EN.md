@@ -1,8 +1,11 @@
-# Game Voice Translator
+# VoxGo
 
 Chinese documentation: [README.md](README.md)
 
-An open-source real-time voice translation overlay for PC gamers, designed for overseas servers, guild voice chat, Discord teammates, and live-stream subtitle assistance.
+VoxGo is an open-source real-time voice translation overlay for PC gamers, designed for overseas servers, guild voice chat, Discord teammates, and live-stream subtitle assistance.
+
+Website: <https://voxgo.cn/><br>
+GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
 ## Features
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
@@ -16,7 +19,7 @@ An open-source real-time voice translation overlay for PC gamers, designed for o
 
 ## Project Layout
 ```text
-game_voice_translator/
+VoxGo_game_voice_trans/
 ├── main.py               # Main application
 ├── audio_capture.py      # Windows system-audio capture
 ├── speech_recognition.py # faster-whisper speech recognition
@@ -30,6 +33,8 @@ game_voice_translator/
 ├── requirements.txt      # Python dependencies
 ├── install.bat           # Windows installer script
 ├── run.bat               # Windows launcher
+├── assets/voxgo.ico      # Windows desktop/installer icon
+├── docs/                 # Website and brand assets
 ├── README.md             # Chinese documentation
 └── README_EN.md          # English documentation
 ```
@@ -126,6 +131,8 @@ Double-click `run.bat`, or run:
 ```bash
 python main.py
 ```
+
+If you use a portable Release package, unzip it and run `VoxGo.exe`. The lite package downloads the Whisper model on first run; the full package already includes Whisper small.
 
 ## Usage
 

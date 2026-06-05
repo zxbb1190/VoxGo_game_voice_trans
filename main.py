@@ -1,5 +1,5 @@
 """
-主程序 - 游戏语音实时翻译器
+主程序 - VoxGo
 整合音频捕获、语音识别、翻译和浮窗展示
 """
 
@@ -19,6 +19,7 @@ from typing import Optional
 import keyboard
 from loguru import logger
 
+from app_info import APP_NAME, APP_VERSION
 from audio_capture import SystemAudioCapture, AudioConfig, list_input_devices
 from speech_recognition import (
     MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT,
@@ -119,7 +120,7 @@ class AppConfig:
     hotkeys: HotkeyConfig = None
 
 
-class GameVoiceTranslator:
+class VoxGoApp:
 
     def __init__(self, config_path: str = None):
         self._setup_logging()
@@ -590,6 +591,7 @@ class GameVoiceTranslator:
     def _start_qt(self):
         from PyQt5.QtWidgets import QApplication
         from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt, QTimer
+        from PyQt5.QtGui import QIcon
         from overlay import GameOverlay
 
         class StartupSignals(QObject):
@@ -609,6 +611,11 @@ class GameVoiceTranslator:
                 self._owner._handle_backend_startup_failure(message)
 
         self._qt_app = QApplication.instance() or QApplication(sys.argv)
+        self._qt_app.setApplicationName(APP_NAME)
+        self._qt_app.setApplicationDisplayName(APP_NAME)
+        icon_path = Path(__file__).parent / "assets" / "voxgo.ico"
+        if icon_path.exists():
+            self._qt_app.setWindowIcon(QIcon(str(icon_path)))
         self._startup_signals = StartupSignals(self)
         self._startup_signals.backend_ready.connect(
             self._startup_signals.finish_backend_startup,
@@ -882,7 +889,7 @@ class GameVoiceTranslator:
             return
         self._notify_user("启动失败", message, "错误")
         self._show_error_dialog(
-            "Game Voice Translator 启动失败",
+            f"{APP_NAME} 启动失败",
             f"程序启动失败，已在程序目录生成 crash_report.txt。\n\n{message}",
         )
         if self._qt_app:
@@ -1041,9 +1048,10 @@ class GameVoiceTranslator:
         if sys.stdout is None:
             return
         hotkeys = self.config.hotkeys
+        title = f"{APP_NAME} v{APP_VERSION}"
         print("""
 ╔══════════════════════════════════════════════╗
-║       游戏语音实时翻译器  v0.1.5          ║
+║{title:^46}║
 ╠══════════════════════════════════════════════╣
 ║  热键:                                       ║
 ║    {toggle_overlay:<14} 切换浮窗显示/隐藏       ║
@@ -1055,6 +1063,7 @@ class GameVoiceTranslator:
 ║  按 Ctrl+C 停止                               ║
 ╚══════════════════════════════════════════════╝
 """.format(
+            title=title,
             toggle_overlay=hotkeys.toggle_overlay,
             clear_history=hotkeys.clear_history,
             toggle_translation=hotkeys.toggle_translation,
@@ -1081,7 +1090,7 @@ class GameVoiceTranslator:
             logger.exception(f"启动失败: {e}")
             self._notify_user("启动失败", str(e), "错误")
             self._show_error_dialog(
-                "Game Voice Translator 启动失败",
+                f"{APP_NAME} 启动失败",
                 f"程序启动失败，已在程序目录生成 crash_report.txt。\n\n{e}",
             )
         finally:
@@ -1148,7 +1157,7 @@ def main():
     if default_config.exists():
         config_path = str(default_config)
 
-    app = GameVoiceTranslator(config_path)
+    app = VoxGoApp(config_path)
     app.start()
 
 

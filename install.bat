@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 echo ============================================
-echo   游戏语音实时翻译器 - 环境安装
+echo   VoxGo - 环境安装
 echo ============================================
 echo.
 
@@ -32,6 +32,6 @@ echo.
 echo 使用前请:
 echo   1. 编辑 config.json，填入你的硅基流动 API Key
 echo   2. 音频设备优先选择 [系统声音] / Loopback，不要选普通麦克风
-echo   3. 运行 run.bat 启动翻译器
+echo   3. 运行 run.bat 启动 VoxGo
 echo.
 pause

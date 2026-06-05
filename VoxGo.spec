@@ -20,6 +20,7 @@ safe_config.write_text(
 
 datas = [
     (str(safe_config), "."),
+    (str(root / "assets" / "voxgo.ico"), "assets"),
     (str(root / ".venv-win" / "Lib" / "site-packages" / "faster_whisper" / "assets"), "faster_whisper/assets"),
 ]
 
@@ -145,7 +146,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="GameVoiceTranslator",
+    name="VoxGo",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -156,6 +157,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=str(root / "assets" / "voxgo.ico"),
 )
 
 coll = COLLECT(
@@ -166,5 +168,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name="GameVoiceTranslator",
+    name="VoxGo",
 )

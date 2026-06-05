@@ -1,5 +1,5 @@
 param(
-    [string]$DistRoot = "dist\GameVoiceTranslator"
+    [string]$DistRoot = "dist\VoxGo"
 )
 
 $internal = Join-Path $DistRoot "_internal"

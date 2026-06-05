@@ -6,6 +6,7 @@ import sys
 import time
 import threading
 from PyQt5.QtWidgets import QApplication
+from app_info import APP_NAME
 from overlay import GameOverlay, OverlayConfig
 
 def test_overlay():
@@ -23,7 +24,7 @@ def test_overlay():
     app.exec_()
 
 if __name__ == "__main__":
-    print("🎮 游戏语音翻译器 - 简化测试")
+    print(f"{APP_NAME} - 简化测试")
     print("正在启动浮窗...")
     
     # 在独立线程中启动 Qt

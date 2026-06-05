@@ -1,18 +1,19 @@
-#define MyAppName "Game Voice Translator"
-#define MyAppVersion "0.1.5"
-#define MyAppPublisher "GameVoiceTranslator"
-#define MyAppExeName "GameVoiceTranslator.exe"
+#define MyAppName "VoxGo"
+#define MyAppVersion "0.1.6"
+#define MyAppPublisher "VoxGo"
+#define MyAppExeName "VoxGo.exe"
 
 [Setup]
 AppId={{B7E84C4F-5A22-4B0D-B9A7-835DA2B2272F}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-DefaultDirName={autopf}\GameVoiceTranslator
+DefaultDirName={autopf}\VoxGo
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=..\release
-OutputBaseFilename=GameVoiceTranslator_Setup
+OutputBaseFilename=VoxGo_Setup
+SetupIconFile=..\assets\voxgo.ico
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
@@ -29,7 +30,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加图标："; Flags: unchecked
 
 [Files]
-Source: "..\dist\GameVoiceTranslator\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\dist\VoxGo\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

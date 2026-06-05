@@ -90,7 +90,7 @@ def normalize_language_code(value: str, default: str = "") -> str:
 
 
 class GameTranslator:
-    """游戏语音翻译器"""
+    """VoxGo 翻译器"""
 
     def __init__(self, config: TranslationConfig = None):
         self.config = config or TranslationConfig()

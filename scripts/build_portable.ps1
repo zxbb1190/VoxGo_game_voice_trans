@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.1.5",
+    [string]$Version = "0.1.6",
     [switch]$SkipLite,
     [switch]$SkipFull
 )
@@ -62,17 +62,17 @@ function Build-Portable {
     $env:INCLUDE_MODEL = $IncludeModel
     $env:INCLUDE_CUDA_RUNTIME = "0"
 
-    Remove-Item -Recurse -Force "dist\GameVoiceTranslator" -ErrorAction SilentlyContinue
-    Remove-Item -Recurse -Force "build\game_voice_translator" -ErrorAction SilentlyContinue
-    Invoke-Checked $Python @("-m", "PyInstaller", "--clean", "--noconfirm", "game_voice_translator.spec")
+    Remove-Item -Recurse -Force "dist\VoxGo" -ErrorAction SilentlyContinue
+    Remove-Item -Recurse -Force "build\VoxGo" -ErrorAction SilentlyContinue
+    Invoke-Checked $Python @("-m", "PyInstaller", "--clean", "--noconfirm", "VoxGo.spec")
 
-    $packageName = "GameVoiceTranslator-v$Version-$Edition"
+    $packageName = "VoxGo-v$Version-$Edition"
     $packageDir = "release\$packageName"
     $zipPath = "release\$packageName.zip"
 
     Remove-Item -Recurse -Force $packageDir -ErrorAction SilentlyContinue
     Remove-Item -Force $zipPath -ErrorAction SilentlyContinue
-    Copy-Item -Recurse "dist\GameVoiceTranslator" $packageDir
+    Copy-Item -Recurse "dist\VoxGo" $packageDir
     Compress-Archive -Path $packageDir -DestinationPath $zipPath -CompressionLevel Optimal
 
     $hash = (Get-FileHash $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()

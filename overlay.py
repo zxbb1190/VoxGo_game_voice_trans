@@ -24,6 +24,7 @@ from PyQt5.QtWidgets import (
     QSpinBox, QSizePolicy, QScrollArea
 )
 
+from app_info import APP_NAME
 from qr_widget import QrCodeWidget
 from translator import TranslationConfig, TRANSLATION_PROVIDERS, normalize_translation_provider
 
@@ -776,7 +777,7 @@ class GameOverlay(QWidget):
     def _init_ui(self):
         """初始化界面"""
         # 窗口属性
-        self.setWindowTitle("Game Voice Translator")
+        self.setWindowTitle(APP_NAME)
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint |
             Qt.FramelessWindowHint |

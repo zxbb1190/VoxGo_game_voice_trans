@@ -7,11 +7,13 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget
 
+from app_info import APP_NAME
+
 
 class SimpleOverlay(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("游戏翻译测试")
+        self.setWindowTitle(f"{APP_NAME} 浮窗测试")
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint
             | Qt.FramelessWindowHint
@@ -21,7 +23,7 @@ class SimpleOverlay(QWidget):
         self.setGeometry(100, 100, 400, 150)
 
         self.label = QLabel(
-            "游戏语音翻译器\n\n"
+            f"{APP_NAME}\n\n"
             "测试翻译:\n"
             "- Hello team -> 队友\n"
             "- He's one shot -> 他大残了",

@@ -1,0 +1,97 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version, for example 0.1.6"
+        required: true
+        default: "0.1.6"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        shell: powershell
+        run: |
+          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            $version = "${{ inputs.version }}".TrimStart("v")
+            $tag = "v$version"
+          } else {
+            $tag = "${{ github.ref_name }}"
+            $version = $tag.TrimStart("v")
+          }
+          "APP_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "TAG_NAME=$tag" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          python -m venv .venv-win
+          .\.venv-win\Scripts\python.exe -m pip install --upgrade pip
+          .\.venv-win\Scripts\python.exe -m pip install -r requirements.txt
+          .\.venv-win\Scripts\python.exe -m pip install pyinstaller==6.11.1
+
+      - name: Validate Python sources
+        shell: powershell
+        run: |
+          .\.venv-win\Scripts\python.exe -m py_compile app_info.py main.py overlay.py translator.py audio_capture.py speech_recognition.py mobile_server.py qr_widget.py
+          .\.venv-win\Scripts\python.exe -m unittest discover -s tests -v
+
+      - name: Build lite and full portable packages
+        shell: powershell
+        run: |
+          .\scripts\build_portable.ps1 -Version "$env:APP_VERSION"
+
+      - name: Write release notes
+        shell: powershell
+        run: |
+          $lite = "release\VoxGo-v$env:APP_VERSION-lite.zip"
+          $full = "release\VoxGo-v$env:APP_VERSION-full.zip"
+          $liteHash = (Get-FileHash $lite -Algorithm SHA256).Hash.ToLowerInvariant()
+          $fullHash = (Get-FileHash $full -Algorithm SHA256).Hash.ToLowerInvariant()
+          $liteSize = [math]::Round((Get-Item $lite).Length / 1MB, 1)
+          $fullSize = [math]::Round((Get-Item $full).Length / 1MB, 1)
+          @"
+          ## VoxGo $env:APP_VERSION
+
+          - Rebranded the Windows app, desktop icon, executable, installer metadata, portable packages, docs, and website links to VoxGo.
+          - Updated the GitHub repository links to ``zxbb1190/VoxGo_game_voice_trans`` and the official website to ``https://voxgo.cn/``.
+          - Kept ModelScope as the default lite-package Whisper model source for mainland China users.
+
+          ### Downloads
+
+          - ``VoxGo-v$env:APP_VERSION-lite.zip``: $liteSize MB
+            - SHA256: ``$liteHash``
+          - ``VoxGo-v$env:APP_VERSION-full.zip``: $fullSize MB
+            - SHA256: ``$fullHash``
+          "@ | Set-Content -Encoding UTF8 release-notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: VoxGo ${{ env.APP_VERSION }}
+          body_path: release-notes.md
+          files: |
+            release/VoxGo-v${{ env.APP_VERSION }}-lite.zip
+            release/VoxGo-v${{ env.APP_VERSION }}-full.zip
+          fail_on_unmatched_files: true
+          make_latest: true
+          overwrite_files: true

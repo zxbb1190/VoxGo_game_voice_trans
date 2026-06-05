@@ -28,6 +28,8 @@ except Exception:
     VadOptions = None
 from loguru import logger
 
+from app_info import USER_AGENT
+
 
 GENERAL_INITIAL_PROMPT = (
     "以下是实时语音字幕，内容可能来自 PC 游戏、Discord 语音、直播、视频、网页、"
@@ -344,7 +346,7 @@ class SpeechRecognizer:
 
             url = self._modelscope_resolve_url(repo_id, file_path)
             logger.info("从 ModelScope 下载模型文件: {} -> {}", file_path, dest)
-            request = Request(url, headers={"User-Agent": "GameVoiceTranslator/0.1.5"})
+            request = Request(url, headers={"User-Agent": USER_AGENT})
             try:
                 with urlopen(request, timeout=30) as response, part_path.open("wb") as output:
                     while True:
@@ -390,7 +392,7 @@ class SpeechRecognizer:
 
     def _modelscope_model_files(self, repo_id: str) -> list:
         url = self._modelscope_file_list_url(repo_id)
-        request = Request(url, headers={"User-Agent": "GameVoiceTranslator/0.1.5"})
+        request = Request(url, headers={"User-Agent": USER_AGENT})
         try:
             with urlopen(request, timeout=20) as response:
                 payload = json.loads(response.read().decode("utf-8"))

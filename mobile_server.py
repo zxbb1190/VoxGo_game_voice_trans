@@ -16,6 +16,8 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from loguru import logger
 
+from app_info import APP_NAME, SERVICE_NAME
+
 
 @dataclass
 class WebSocketConfig:
@@ -30,7 +32,7 @@ class MobileWebSocketManager:
     def __init__(self, config: WebSocketConfig = None):
         self.config = config or WebSocketConfig()
         self._connections: Set[WebSocket] = set()
-        self._app = FastAPI(title="Game Voice Translator Mobile")
+        self._app = FastAPI(title=f"{APP_NAME} Mobile")
         self._server = None
         self._setup_routes()
 
@@ -39,7 +41,7 @@ class MobileWebSocketManager:
 
         @self._app.get("/")
         async def index():
-            return {"status": "running", "service": "game_voice_translator"}
+            return {"status": "running", "service": SERVICE_NAME}
 
         @self._app.get("/mobile")
         async def mobile_page():
@@ -50,7 +52,7 @@ class MobileWebSocketManager:
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>🎮 游戏语音实时翻译</title>
+                <title>VoxGo Mobile</title>
                 <style>
                     * {
                         margin: 0;
@@ -182,7 +184,7 @@ class MobileWebSocketManager:
             <body>
                 <div class="container">
                     <header>
-                        <h1>🎮 游戏语音实时翻译</h1>
+                        <h1>VoxGo</h1>
                         <p>实时接收游戏内语音翻译结果</p>
                         <div id="status" class="status disconnected">未连接</div>
                     </header>
@@ -342,7 +344,7 @@ class MobileWebSocketManager:
                 # 发送连接确认
                 await websocket.send_json({
                     "type": "connected",
-                    "message": "已连接到游戏语音翻译服务器",
+                    "message": "已连接到 VoxGo 服务器",
                     "timestamp": time.time()
                 })
 
