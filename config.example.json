@@ -3,23 +3,26 @@
     "setup_completed": false
   },
   "audio": {
+    "latency_mode": "balanced",
     "sample_rate": 44100,
     "channels": 1,
-    "chunk_duration_ms": 300,
+    "chunk_duration_ms": 220,
     "vad_aggressiveness": 2,
     "silence_threshold": -40,
     "speech_threshold_blocks": 2,
-    "silence_limit_blocks": 5,
+    "silence_limit_blocks": 4,
     "max_buffer_blocks": 120,
-    "max_speech_seconds": 8,
-    "pre_roll_ms": 600,
-    "speech_idle_timeout_ms": 900,
+    "max_speech_seconds": 6,
+    "pre_roll_ms": 450,
+    "speech_idle_timeout_ms": 650,
     "soft_silence_margin_db": 10,
     "soft_silence_gate_margin_db": 5,
     "noise_calibration_seconds": 2,
     "noise_margin_db": 7,
     "min_speech_threshold": -45,
-    "max_speech_threshold": -20
+    "max_speech_threshold": -30,
+    "min_segment_seconds": 0.35,
+    "min_segment_peak_margin_db": 1.5
   },
   "whisper": {
     "model_size": "small",
@@ -30,7 +33,7 @@
     "model_download_source": "modelscope",
     "model_download_endpoint": "",
     "language": "en",
-    "beam_size": 5,
+    "beam_size": 1,
     "vad_filter": false,
     "prompt_profile": "none",
     "initial_prompt": "",
@@ -69,10 +72,13 @@
     "fade_duration": 5,
     "window_width": 620,
     "window_height": 260,
+    "window_x": null,
+    "window_y": null,
     "opacity": 0.88,
     "show_original": true,
     "draggable": true,
-    "locked": false
+    "locked": false,
+    "compact_mode": false
   },
   "websocket": {
     "host": "0.0.0.0",
@@ -82,7 +88,9 @@
   "hotkeys": {
     "toggle_overlay": "ctrl+shift+t",
     "toggle_translation": "ctrl+alt+s",
-    "clear_history": "ctrl+alt+c"
+    "clear_history": "ctrl+alt+c",
+    "toggle_lock": "",
+    "toggle_compact": ""
   },
   "debug": {
     "enabled": false,

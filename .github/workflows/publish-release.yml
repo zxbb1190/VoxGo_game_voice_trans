@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.2.1"
+        description: "Release version, for example 0.2.2"
         required: true
-        default: "0.2.1"
+        default: "0.2.2"
 
 permissions:
   contents: write
@@ -71,9 +71,10 @@ jobs:
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Disabled PyInstaller UPX compression to reduce antivirus and SmartScreen false-positive risk for unsigned Windows packages.
-          - Added a short cooldown after the translation API test so repeated button clicks do not trigger repeated provider calls.
-          - Keeps the first-run setup wizard, real API/audio tests, debug latency tracing, and feedback diagnostic template from the 0.2 line.
+          - Added Fast, Balanced, Accurate, and Custom response modes for lower-latency competitive play or more complete slower speech.
+          - Reworked settings into clearer tabs for appearance, translation, voice, advanced tuning, help, hotkeys, and about/update info.
+          - Added compact overlay support, tray controls, fullscreen compatibility guidance, optional lock and compact-mode hotkeys, and persistent overlay size/position.
+          - Improved speech segment filtering and transcription cleanup to reduce missed subtitles and low-confidence noise.
 
           ### Downloads
 

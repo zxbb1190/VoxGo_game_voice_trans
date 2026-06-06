@@ -8,6 +8,7 @@ import gc
 import inspect
 import json
 import os
+import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -64,6 +65,24 @@ ASR_HALLUCINATION_PATTERNS = (
     "感谢观看",
     "谢谢观看",
 )
+SHORT_ASR_FILLER_PATTERNS = {
+    "uh",
+    "um",
+    "umm",
+    "hmm",
+    "hm",
+    "ah",
+    "oh",
+    "er",
+    "呃",
+    "嗯",
+    "啊",
+    "哦",
+    "额",
+}
+CJK_RE = re.compile(r"[\u4e00-\u9fff]")
+LATIN_RE = re.compile(r"[a-zA-Z]")
+REPEAT_NORMALIZE_RE = re.compile(r"[\W_]+", re.UNICODE)
 
 FASTER_WHISPER_MODEL_FILES = [
     "config.json",
@@ -124,6 +143,7 @@ class WhisperConfig:
     no_speech_threshold: float = 0.6
     log_prob_threshold: float = -1.0
     compression_ratio_threshold: float = 2.4
+    min_language_probability: float = 0.35
     normalize_audio: bool = True
     target_rms_dbfs: float = -20.0
     max_gain_db: float = 12.0
@@ -961,3 +981,97 @@ def is_likely_asr_hallucination(text: str) -> bool:
     if normalized in ASR_HALLUCINATION_PATTERNS:
         return True
     return any(pattern in normalized for pattern in ASR_HALLUCINATION_PATTERNS)
+
+
+def normalize_transcript_for_repeat(text: str) -> str:
+    """Normalize ASR text for short-window duplicate suppression."""
+    normalized = " ".join((text or "").strip().casefold().split())
+    return REPEAT_NORMALIZE_RE.sub("", normalized)
+
+
+def _normalize_filter_language(value: str) -> str:
+    value = (value or "").strip().lower()
+    aliases = {
+        "english": "en",
+        "eng": "en",
+        "chinese": "zh",
+        "zh-cn": "zh",
+        "zh-tw": "zh",
+        "cmn": "zh",
+        "yue": "zh",
+    }
+    return aliases.get(value, value if value in {"en", "zh"} else "")
+
+
+def _is_short_anomalous_transcript(text: str) -> bool:
+    stripped = (text or "").strip()
+    compact = normalize_transcript_for_repeat(stripped)
+    if not compact:
+        return True
+
+    lowered = compact.casefold()
+    if lowered in SHORT_ASR_FILLER_PATTERNS:
+        return True
+
+    allowed_short = {
+        "gg",
+        "nt",
+        "wp",
+        "ok",
+        "go",
+        "no",
+        "yes",
+        "run",
+        "push",
+        "mid",
+    }
+    if lowered in allowed_short:
+        return False
+
+    if len(compact) <= 1:
+        return True
+
+    has_cjk = bool(CJK_RE.search(stripped))
+    has_latin = bool(LATIN_RE.search(stripped))
+    has_digit = any(char.isdigit() for char in stripped)
+    if len(compact) <= 3 and not has_digit:
+        if not has_cjk and not has_latin:
+            return True
+        if len(set(compact)) == 1:
+            return True
+
+    return False
+
+
+def should_drop_transcription_result(
+    result: TranscriptionResult,
+    expected_language: str = "",
+    recent_texts=None,
+    config: WhisperConfig = None,
+) -> str:
+    """Return a drop reason for likely ASR false positives after recognition."""
+    text = (getattr(result, "text", "") or "").strip()
+    if not text:
+        return "识别文本为空"
+    if is_likely_asr_hallucination(text):
+        return "疑似 ASR 幻觉文本"
+    if _is_short_anomalous_transcript(text):
+        return "疑似短异常文本"
+
+    compact = normalize_transcript_for_repeat(text)
+    if compact:
+        recent = list(recent_texts or [])
+        recent_compact = [normalize_transcript_for_repeat(item) for item in recent]
+        if compact in recent_compact and len(compact) <= 36:
+            return "短时间重复识别文本"
+
+    min_probability = float(getattr(config, "min_language_probability", 0.35) or 0.0)
+    if min_probability > 0:
+        probability = float(getattr(result, "language_probability", 0.0) or 0.0)
+        detected = _normalize_filter_language(getattr(result, "language", ""))
+        expected = _normalize_filter_language(expected_language)
+        if 0 < probability < min_probability:
+            if not expected or not detected or detected != expected or len(compact) <= 24:
+                return f"语言置信度 {probability:.2f} < {min_probability:.2f}"
+
+    return ""

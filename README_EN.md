@@ -19,7 +19,7 @@ GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
 - **Debug and feedback loop**: Debug mode records the latest recognition/translation/overlay latency, and the feedback button generates a diagnostic template.
 - **Mobile mirror**: Pushes translations to a browser on the same LAN through WebSocket.
-- **Global hotkeys**: Toggle overlay, clear history, and pause/resume translation.
+- **Global hotkeys**: Toggle overlay, clear history, pause/resume translation, plus optional lock and compact-mode hotkeys in settings.
 
 ## Project Layout
 ```text
@@ -205,14 +205,21 @@ Edit `config.json` or use the overlay settings:
 | `overlay.text_color` | Overlay text color |
 | `overlay.bg_color` | Overlay background color, default dark gray `#20242A` |
 | `overlay.bg_opacity` | Overlay background opacity, default 0.82 and adjustable in settings |
+| `audio.latency_mode` | Response mode: `fast`, `balanced` (default), `accurate`, or `custom`; also available from the gear settings |
 | `audio.sample_rate` | Audio sample rate |
+| `audio.chunk_duration_ms` | Audio block length in custom mode, balanced default 220ms; smaller is faster but can split speech more aggressively |
 | `audio.silence_threshold` | Static fallback speech threshold in dBFS; default -40, avoid values above -20 for real voice chat |
-| `audio.speech_idle_timeout_ms` | Active segment flush when speech is buffered but no new audio frames arrive, default 900ms |
+| `audio.speech_threshold_blocks` | Consecutive speech blocks required before speech starts in custom mode, balanced default 2 |
+| `audio.silence_limit_blocks` | Consecutive silent blocks required before segment flush in custom mode, balanced default 4 |
+| `audio.speech_idle_timeout_ms` | Active segment flush when speech is buffered but no new audio frames arrive, balanced default 650ms |
+| `audio.pre_roll_ms` | Audio kept before speech triggers, balanced default 450ms |
 | `audio.soft_silence_margin_db` | Treat the tail as silence after it drops this many dB below the segment peak, default 10 |
 | `audio.soft_silence_gate_margin_db` | Treat audio close to the speech gate as tail silence, default 5 |
 | `audio.noise_calibration_seconds` | Seconds of startup background-audio calibration, default 2 |
 | `audio.noise_margin_db` | Dynamic threshold margin above the measured noise floor, default 7 dB |
-| `audio.max_speech_seconds` | Maximum seconds before forced splitting during continuous sound, recommended 6-10 |
+| `audio.max_speech_seconds` | Maximum seconds before forced splitting during continuous sound, balanced default 6s |
+| `audio.min_segment_seconds` | Drop segments before recognition when active voice is shorter than this, balanced default 0.35s; set 0 to disable |
+| `audio.min_segment_peak_margin_db` | Require the segment peak to exceed the current speech gate by this many dB before recognition, balanced default 1.5; set 0 to disable |
 | `translation.provider` | Translation provider: `openai_compatible` or `google` |
 | `translation.api_key` | API Key for the selected provider; use a Google Cloud Translation API Key in Google mode |
 | `translation.model` | OpenAI-compatible model name, default `tencent/Hunyuan-MT-7B`; unused in Google mode |
@@ -253,6 +260,7 @@ Edit `config.json` or use the overlay settings:
 - Keep `whisper.vad_filter=false` if beginnings or endings of sentences are being clipped.
 - Lower background music volume.
 - Ensure the selected audio device is the one actually playing game voice.
+- If accents, long sentences, livestreams, meetings, or slower games matter more than speed, choose Accurate response mode in the gear settings.
 
 ### Startup Says cublas64_12.dll Is Missing
 - This means the CUDA/cuBLAS runtime is missing; it is not a translation API problem.
@@ -270,6 +278,7 @@ Edit `config.json` or use the overlay settings:
 
 ### Translation Latency Is High
 - Enable debug mode in the gear settings, reproduce once, then use "Submit Feedback" to copy the latest latency data.
+- Switch Response Mode to Fast or Balanced in the gear settings. Fast is intended for PUBG, APEX, Valorant, and similar competitive games; pairing it with `whisper.model_size=base` can reduce recognition time further.
 - Check network connectivity and provider speed.
 - Lower `whisper.model_size` to speed up recognition.
 - Use a local translation model if you already have one deployed.

@@ -20,28 +20,169 @@ except ImportError:
 from loguru import logger
 
 
+LATENCY_MODE_FAST = "fast"
+LATENCY_MODE_BALANCED = "balanced"
+LATENCY_MODE_ACCURATE = "accurate"
+LATENCY_MODE_CUSTOM = "custom"
+LATENCY_MODES = {LATENCY_MODE_FAST, LATENCY_MODE_BALANCED, LATENCY_MODE_ACCURATE, LATENCY_MODE_CUSTOM}
+SAFE_MAX_SPEECH_THRESHOLD_DBFS = -30.0
+LATENCY_PRESET_MATCH_KEYS = (
+    "chunk_duration_ms",
+    "speech_threshold_blocks",
+    "silence_limit_blocks",
+    "max_buffer_blocks",
+    "max_speech_seconds",
+    "pre_roll_ms",
+    "speech_idle_timeout_ms",
+)
+
+AUDIO_LATENCY_PRESETS = {
+    LATENCY_MODE_FAST: {
+        "chunk_duration_ms": 150,
+        "speech_threshold_blocks": 2,
+        "silence_limit_blocks": 3,
+        "max_buffer_blocks": 100,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 350,
+        "speech_idle_timeout_ms": 500,
+        "min_segment_seconds": 0.30,
+        "min_segment_peak_margin_db": 1.0,
+    },
+    LATENCY_MODE_BALANCED: {
+        "chunk_duration_ms": 220,
+        "speech_threshold_blocks": 2,
+        "silence_limit_blocks": 4,
+        "max_buffer_blocks": 120,
+        "max_speech_seconds": 6.0,
+        "pre_roll_ms": 450,
+        "speech_idle_timeout_ms": 650,
+        "min_segment_seconds": 0.35,
+        "min_segment_peak_margin_db": 1.5,
+    },
+    LATENCY_MODE_ACCURATE: {
+        "chunk_duration_ms": 300,
+        "speech_threshold_blocks": 2,
+        "silence_limit_blocks": 5,
+        "max_buffer_blocks": 120,
+        "max_speech_seconds": 8.0,
+        "pre_roll_ms": 600,
+        "speech_idle_timeout_ms": 900,
+        "min_segment_seconds": 0.45,
+        "min_segment_peak_margin_db": 2.0,
+    },
+}
+
+
+def normalize_latency_mode(value: str) -> str:
+    normalized = (value or "").strip().lower().replace("-", "_").replace(" ", "_")
+    aliases = {
+        "": LATENCY_MODE_BALANCED,
+        "default": LATENCY_MODE_BALANCED,
+        "normal": LATENCY_MODE_BALANCED,
+        "standard": LATENCY_MODE_BALANCED,
+        "balanced": LATENCY_MODE_BALANCED,
+        "balance": LATENCY_MODE_BALANCED,
+        "均衡": LATENCY_MODE_BALANCED,
+        "平衡": LATENCY_MODE_BALANCED,
+        "fast": LATENCY_MODE_FAST,
+        "quick": LATENCY_MODE_FAST,
+        "speed": LATENCY_MODE_FAST,
+        "ultra": LATENCY_MODE_FAST,
+        "极速": LATENCY_MODE_FAST,
+        "極速": LATENCY_MODE_FAST,
+        "低延迟": LATENCY_MODE_FAST,
+        "低延時": LATENCY_MODE_FAST,
+        "low": LATENCY_MODE_FAST,
+        "low_latency": LATENCY_MODE_FAST,
+        "accurate": LATENCY_MODE_ACCURATE,
+        "accuracy": LATENCY_MODE_ACCURATE,
+        "quality": LATENCY_MODE_ACCURATE,
+        "precise": LATENCY_MODE_ACCURATE,
+        "准确": LATENCY_MODE_ACCURATE,
+        "準確": LATENCY_MODE_ACCURATE,
+        "高准确": LATENCY_MODE_ACCURATE,
+        "高準確": LATENCY_MODE_ACCURATE,
+        "custom": LATENCY_MODE_CUSTOM,
+        "manual": LATENCY_MODE_CUSTOM,
+        "自定义": LATENCY_MODE_CUSTOM,
+        "自定義": LATENCY_MODE_CUSTOM,
+    }
+    return aliases.get(normalized, normalized if normalized in LATENCY_MODES else LATENCY_MODE_BALANCED)
+
+
+def _values_match(left, right) -> bool:
+    try:
+        return abs(float(left) - float(right)) < 0.001
+    except Exception:
+        return left == right
+
+
+def infer_latency_mode(config) -> str:
+    """Infer whether existing tuning matches a built-in latency preset."""
+    configured_raw = getattr(config, "latency_mode", "")
+    configured = normalize_latency_mode(configured_raw)
+    if configured_raw and configured in LATENCY_MODES:
+        return configured
+    for mode, preset in AUDIO_LATENCY_PRESETS.items():
+        if all(_values_match(getattr(config, key, None), preset[key]) for key in LATENCY_PRESET_MATCH_KEYS):
+            return mode
+    return LATENCY_MODE_CUSTOM
+
+
+def apply_audio_latency_preset(config) -> str:
+    """Apply built-in latency tuning in-place and return the normalized mode."""
+    mode = normalize_latency_mode(getattr(config, "latency_mode", LATENCY_MODE_BALANCED))
+    setattr(config, "latency_mode", mode)
+    preset = AUDIO_LATENCY_PRESETS.get(mode)
+    if not preset:
+        return mode
+    for key, value in preset.items():
+        if hasattr(config, key):
+            setattr(config, key, value)
+    return mode
+
+
 @dataclass
 class AudioConfig:
+    latency_mode: str = ""
     sample_rate: int = 16000
     channels: int = 1
-    chunk_duration_ms: int = 30
+    chunk_duration_ms: int = 220
     silence_threshold: float = -40.0
-    speech_threshold_blocks: int = 8
-    silence_limit_blocks: int = 20
-    max_buffer_blocks: int = 500
-    max_speech_seconds: float = 8.0
-    pre_roll_ms: int = 600
-    speech_idle_timeout_ms: int = 900
+    speech_threshold_blocks: int = 2
+    silence_limit_blocks: int = 4
+    max_buffer_blocks: int = 120
+    max_speech_seconds: float = 6.0
+    pre_roll_ms: int = 450
+    speech_idle_timeout_ms: int = 650
     soft_silence_margin_db: float = 10.0
     soft_silence_gate_margin_db: float = 5.0
     noise_calibration_seconds: float = 2.0
     noise_margin_db: float = 7.0
     min_speech_threshold: float = -45.0
-    max_speech_threshold: float = -20.0
+    max_speech_threshold: float = SAFE_MAX_SPEECH_THRESHOLD_DBFS
+    min_segment_seconds: float = 0.35
+    min_segment_peak_margin_db: float = 1.5
     input_device_index: Optional[int] = None
     input_device_name: str = ""
     input_device_id: str = ""
     format: int = pyaudio.paInt16
+    initial_noise_floor_dbfs: Optional[float] = None
+    initial_energy_threshold_dbfs: Optional[float] = None
+
+
+@dataclass
+class SpeechSegment:
+    audio_data: bytes
+    sample_rate: int
+    duration_seconds: float
+    voice_duration_seconds: float
+    block_count: int
+    voice_blocks: int
+    peak_rms_dbfs: float
+    energy_threshold_dbfs: float
+    noise_floor_dbfs: Optional[float]
+    reason: str
 
 
 def _device_name(info) -> str:
@@ -75,6 +216,38 @@ def calculate_rms_dbfs(audio_np: np.ndarray) -> float:
 
 def _float_or_default(value, default: float) -> float:
     return float(default if value is None else value)
+
+
+def should_drop_speech_segment(segment: SpeechSegment, config: AudioConfig) -> str:
+    """Return a human-readable drop reason for obvious non-speech triggers."""
+    if not segment or not getattr(segment, "audio_data", b""):
+        return "空音频片段"
+
+    has_capture_metadata = bool(getattr(segment, "block_count", 0) or getattr(segment, "voice_blocks", 0))
+    if not has_capture_metadata:
+        return ""
+
+    try:
+        min_seconds = max(0.0, float(getattr(config, "min_segment_seconds", 0.45) or 0.0))
+    except Exception:
+        min_seconds = 0.45
+    voice_seconds = float(getattr(segment, "voice_duration_seconds", 0.0) or 0.0)
+    if voice_seconds <= 0:
+        voice_seconds = float(getattr(segment, "duration_seconds", 0.0) or 0.0)
+    if min_seconds > 0 and voice_seconds < min_seconds:
+        return f"语音活跃时长 {voice_seconds:.2f}s < {min_seconds:.2f}s"
+
+    try:
+        min_peak_margin = max(0.0, float(getattr(config, "min_segment_peak_margin_db", 2.0) or 0.0))
+    except Exception:
+        min_peak_margin = 2.0
+    peak_margin = float(getattr(segment, "peak_rms_dbfs", -120.0)) - float(
+        getattr(segment, "energy_threshold_dbfs", -120.0)
+    )
+    if min_peak_margin > 0 and peak_margin < min_peak_margin:
+        return f"峰值余量 {peak_margin:.1f} dB < {min_peak_margin:.1f} dB"
+
+    return ""
 
 
 def list_input_devices():
@@ -220,6 +393,7 @@ class SystemAudioCapture:
         self._on_speech_callback: Optional[Callable] = None
         self._speech_buffer = []
         self._speech_buffer_samples = 0
+        self._speech_voice_samples = 0
         self._speech_voice_blocks = 0
         self._speech_peak_rms = None
         self._last_tail_silence_reason = ""
@@ -229,12 +403,26 @@ class SystemAudioCapture:
         self._silence_counter = 0
         self._speech_threshold = self.config.speech_threshold_blocks
         self._silence_limit = self.config.silence_limit_blocks
-        self._min_speech_threshold = _float_or_default(self.config.min_speech_threshold, -45.0)
-        self._max_speech_threshold = _float_or_default(self.config.max_speech_threshold, -20.0)
-        if self._min_speech_threshold > self._max_speech_threshold:
-            self._min_speech_threshold, self._max_speech_threshold = (
+        configured_min_speech_threshold = _float_or_default(self.config.min_speech_threshold, -45.0)
+        configured_max_speech_threshold = _float_or_default(
+            self.config.max_speech_threshold,
+            SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+        )
+        if configured_min_speech_threshold > configured_max_speech_threshold:
+            configured_min_speech_threshold, configured_max_speech_threshold = (
+                configured_max_speech_threshold,
+                configured_min_speech_threshold,
+            )
+        self._max_speech_threshold = min(
+            configured_max_speech_threshold,
+            SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+        )
+        self._min_speech_threshold = min(configured_min_speech_threshold, self._max_speech_threshold)
+        if configured_max_speech_threshold > self._max_speech_threshold + 0.1:
+            logger.info(
+                "语音门限上限已收紧: configured={:.1f} dBFS, effective={:.1f} dBFS",
+                configured_max_speech_threshold,
                 self._max_speech_threshold,
-                self._min_speech_threshold,
             )
         self._static_energy_threshold = self._clamp_threshold(
             _float_or_default(self.config.silence_threshold, -40.0)
@@ -249,6 +437,25 @@ class SystemAudioCapture:
         self._noise_samples = 0
         self._noise_floor = None
         self._noise_calibrated = self._noise_calibration_seconds <= 0
+        initial_gate = getattr(self.config, "initial_energy_threshold_dbfs", None)
+        initial_floor = getattr(self.config, "initial_noise_floor_dbfs", None)
+        if initial_gate is not None:
+            try:
+                requested_gate = float(initial_gate)
+                self._energy_threshold = self._clamp_threshold(requested_gate)
+                self._noise_floor = float(initial_floor) if initial_floor is not None else None
+                self._noise_calibrated = True
+                gate_note = ""
+                if requested_gate > self._energy_threshold + 0.1:
+                    gate_note = f" (从 {requested_gate:.1f} dBFS 收紧)"
+                logger.info(
+                    "沿用上次背景噪声门限: noise_floor={}, speech_threshold={:.1f} dBFS{}",
+                    f"{self._noise_floor:.1f} dBFS" if self._noise_floor is not None else "unknown",
+                    self._energy_threshold,
+                    gate_note,
+                )
+            except Exception:
+                pass
         self._max_buffer_blocks = self.config.max_buffer_blocks
         self._max_speech_seconds = float(self.config.max_speech_seconds or 0)
         self._pre_roll_ms = max(0.0, _float_or_default(getattr(self.config, "pre_roll_ms", 600), 600.0))
@@ -553,7 +760,10 @@ class SystemAudioCapture:
         """设置语音检测回调"""
         self._on_speech_callback = callback
 
-    def process_audio(self) -> Optional[bytes]:
+    def current_noise_gate(self):
+        return self._noise_floor, self._energy_threshold, self._noise_calibrated
+
+    def process_audio(self) -> Optional[SpeechSegment]:
         """处理音频队列，检测语音片段"""
         frames = []
         while not self._audio_queue.empty():
@@ -615,6 +825,7 @@ class SystemAudioCapture:
                 self._clear_pre_roll()
             self._speech_buffer.append(audio_data)
             self._speech_buffer_samples += len(audio_np)
+            self._speech_voice_samples += len(audio_np)
             self._speech_voice_blocks += 1
             self._speech_peak_rms = rms if self._speech_peak_rms is None else max(self._speech_peak_rms, rms)
             self._silence_counter = 0
@@ -670,10 +881,14 @@ class SystemAudioCapture:
         dynamic_threshold = self._noise_floor + self._noise_margin_db
         self._energy_threshold = self._clamp_threshold(dynamic_threshold)
         self._noise_calibrated = True
+        gate_note = ""
+        if dynamic_threshold > self._energy_threshold + 0.1:
+            gate_note = f" (动态值 {dynamic_threshold:.1f} dBFS 已收紧)"
         logger.info(
-            "背景噪声校准完成: noise_floor={:.1f} dBFS, speech_threshold={:.1f} dBFS",
+            "背景噪声校准完成: noise_floor={:.1f} dBFS, speech_threshold={:.1f} dBFS{}",
             self._noise_floor,
             self._energy_threshold,
+            gate_note,
         )
 
     def _append_pre_roll(self, audio_data: bytes, sample_count: int):
@@ -725,29 +940,49 @@ class SystemAudioCapture:
     def _reset_speech_buffer(self):
         self._speech_buffer.clear()
         self._speech_buffer_samples = 0
+        self._speech_voice_samples = 0
         self._speech_voice_blocks = 0
         self._speech_peak_rms = None
         self._last_tail_silence_reason = ""
         self._silence_counter = 0
 
-    def _emit_speech_buffer(self, reason: str) -> Optional[bytes]:
+    def _emit_speech_buffer(self, reason: str) -> Optional[SpeechSegment]:
         speech_data = b"".join(self._speech_buffer)
+        sample_rate = max(1, int(self.config.sample_rate or self._capture_sample_rate or 16000))
         duration = self._buffer_duration_seconds()
+        voice_duration = self._speech_voice_samples / sample_rate
         block_count = len(self._speech_buffer)
+        voice_blocks = self._speech_voice_blocks
+        peak_rms = float(self._speech_peak_rms if self._speech_peak_rms is not None else -120.0)
+        segment = SpeechSegment(
+            audio_data=speech_data,
+            sample_rate=sample_rate,
+            duration_seconds=duration,
+            voice_duration_seconds=voice_duration,
+            block_count=block_count,
+            voice_blocks=voice_blocks,
+            peak_rms_dbfs=peak_rms,
+            energy_threshold_dbfs=float(self._energy_threshold),
+            noise_floor_dbfs=self._noise_floor,
+            reason=reason,
+        )
         logger.info(
-            '检测到语音片段: {} 字节, {:.1f}s, {} 块/{} 语音块 ({})',
+            '检测到语音片段: {} 字节, {:.1f}s/{:.1f}s 语音, {} 块/{} 语音块, peak={:.1f} dBFS, gate={:.1f} dBFS ({})',
             len(speech_data),
             duration,
+            voice_duration,
             block_count,
-            self._speech_voice_blocks,
+            voice_blocks,
+            peak_rms,
+            self._energy_threshold,
             reason,
         )
         self._reset_speech_buffer()
 
         if self._on_speech_callback:
-            self._on_speech_callback(speech_data)
+            self._on_speech_callback(segment)
 
-        return speech_data
+        return segment
 
     def save_audio(self, data: bytes, filepath: str):
         """保存音频到文件"""

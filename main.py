@@ -12,6 +12,7 @@ import sys
 import threading
 import time
 import traceback
+from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -20,7 +21,20 @@ import keyboard
 from loguru import logger
 
 from app_info import APP_NAME, APP_VERSION, USER_AGENT
-from audio_capture import SystemAudioCapture, AudioConfig, list_input_devices
+from audio_capture import (
+    LATENCY_MODE_ACCURATE,
+    LATENCY_MODE_BALANCED,
+    LATENCY_MODE_FAST,
+    SystemAudioCapture,
+    AudioConfig,
+    SpeechSegment,
+    SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+    apply_audio_latency_preset,
+    infer_latency_mode,
+    list_input_devices,
+    normalize_latency_mode,
+    should_drop_speech_segment,
+)
 from speech_recognition import (
     MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT,
     ModelDownloadProgress,
@@ -30,8 +44,8 @@ from speech_recognition import (
     describe_model_download_source,
     normalize_model_download_endpoint,
     normalize_model_download_source,
-    is_likely_asr_hallucination,
     sanitize_vad_parameters,
+    should_drop_transcription_result,
 )
 from translator import (
     GameTranslator,
@@ -69,6 +83,11 @@ WHISPER_DEVICE_NAMES = {
     "auto": "自动检测",
     "cuda": "NVIDIA GPU / CUDA",
 }
+WHISPER_BEAM_SIZE_BY_LATENCY_MODE = {
+    LATENCY_MODE_FAST: 1,
+    LATENCY_MODE_BALANCED: 1,
+    LATENCY_MODE_ACCURATE: 5,
+}
 
 
 def _normalize_language_code(value: str, default: str = "en") -> str:
@@ -90,6 +109,10 @@ def _normalize_whisper_device(value: str) -> str:
     return value if value in WHISPER_DEVICE_NAMES else "cpu"
 
 
+def _hotkey_label(value: str) -> str:
+    return str(value or "").strip() or "未设置"
+
+
 @dataclass
 class OverlayConfig:
     font_size: int = 16
@@ -102,11 +125,14 @@ class OverlayConfig:
     fade_duration: int = 5
     window_width: int = 500
     window_height: int = 200
+    window_x: Optional[int] = None
+    window_y: Optional[int] = None
     opacity: float = 0.85
     original_text_color: str = "#B7C4D8"
     show_original: bool = True
     draggable: bool = True
     locked: bool = False
+    compact_mode: bool = False
     mobile_url: str = ""
 
 
@@ -115,6 +141,8 @@ class HotkeyConfig:
     toggle_overlay: str = "ctrl+shift+t"
     toggle_translation: str = "ctrl+alt+s"
     clear_history: str = "ctrl+alt+c"
+    toggle_lock: str = ""
+    toggle_compact: str = ""
 
 
 @dataclass
@@ -165,7 +193,7 @@ class LatencyTrace:
 
 @dataclass
 class SpeechWorkItem:
-    audio_data: bytes
+    segment: SpeechSegment
     trace: LatencyTrace
 
 
@@ -193,6 +221,9 @@ class VoxGoApp:
         self._overlay = None
         self._mobile_server: Optional[MobileWebSocketManager] = None
         self._qt_app = None
+        self._tray_icon = None
+        self._tray_menu = None
+        self._tray_actions = {}
         self._audio_timer = None
         self._mobile_loop: Optional[asyncio.AbstractEventLoop] = None
         self._mobile_thread: Optional[threading.Thread] = None
@@ -215,11 +246,19 @@ class VoxGoApp:
         self._pending_notices = []
         self._latency_traces = {}
         self._last_latency_summary = {}
+        self._recent_transcripts = deque(maxlen=12)
         self._last_audio_device = (
             self.config.audio.input_device_id,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
+            self.config.audio.latency_mode,
+            self.config.audio.chunk_duration_ms,
+            self.config.audio.speech_threshold_blocks,
+            self.config.audio.silence_limit_blocks,
+            self.config.audio.max_buffer_blocks,
             self.config.audio.max_speech_seconds,
+            self.config.audio.pre_roll_ms,
+            self.config.audio.speech_idle_timeout_ms,
         )
         self._last_translation_settings = (
             normalize_translation_provider(self.config.translation.provider),
@@ -247,7 +286,7 @@ class VoxGoApp:
         self._stats = {
             "audio_chunks": 0, "speech_detected": 0,
             "transcriptions": 0, "translations": 0, "errors": 0,
-            "dropped_speech": 0
+            "dropped_speech": 0, "filtered_speech": 0
         }
 
     def _load_config(self, config_path: str = None) -> AppConfig:
@@ -271,7 +310,10 @@ class VoxGoApp:
                             if hasattr(target, k):
                                 setattr(target, k, v)
                 self._migrate_legacy_model_download_settings(default_config, data.get("whisper", {}))
-                self._migrate_runtime_defaults(default_config)
+                self._migrate_runtime_defaults(
+                    default_config,
+                    preserve_existing_audio_tuning="latency_mode" not in data.get("audio", {}),
+                )
                 logger.info(f"已加载配置: {config_path}")
             except Exception as e:
                 logger.error(f"配置加载失败: {e}")
@@ -294,8 +336,13 @@ class VoxGoApp:
                     for key, value in data[section].items():
                         if hasattr(target, key):
                             setattr(target, key, value)
+            if "latency_mode" not in data.get("audio", {}):
+                config.audio.latency_mode = ""
             self._migrate_legacy_model_download_settings(config, data.get("whisper", {}))
-            self._migrate_runtime_defaults(config)
+            self._migrate_runtime_defaults(
+                config,
+                preserve_existing_audio_tuning="latency_mode" not in data.get("audio", {}),
+            )
             logger.info("已加载用户设置: {}", settings_path)
         except Exception as e:
             logger.warning("用户设置加载失败: {}", e)
@@ -307,7 +354,7 @@ class VoxGoApp:
         if endpoint and "model_download_source" not in whisper_data:
             config.whisper.model_download_source = MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT
 
-    def _migrate_runtime_defaults(self, config: AppConfig):
+    def _migrate_runtime_defaults(self, config: AppConfig, preserve_existing_audio_tuning: bool = True):
         if not getattr(config, "update", None):
             config.update = UpdateSettings()
         try:
@@ -328,6 +375,107 @@ class VoxGoApp:
             config.whisper.cpu_threads = 2
         if not hasattr(config.whisper, "num_workers"):
             config.whisper.num_workers = 1
+        if preserve_existing_audio_tuning:
+            config.audio.latency_mode = infer_latency_mode(config.audio)
+        else:
+            config.audio.latency_mode = normalize_latency_mode(
+                getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED)
+            )
+        latency_mode = apply_audio_latency_preset(config.audio)
+        try:
+            config.whisper.beam_size = max(
+                1,
+                min(5, int(getattr(config.whisper, "beam_size", 5) or 5)),
+            )
+        except Exception:
+            config.whisper.beam_size = 5
+        if latency_mode in WHISPER_BEAM_SIZE_BY_LATENCY_MODE:
+            config.whisper.beam_size = WHISPER_BEAM_SIZE_BY_LATENCY_MODE[latency_mode]
+        try:
+            config.audio.chunk_duration_ms = max(
+                60,
+                min(1000, int(getattr(config.audio, "chunk_duration_ms", 220) or 220)),
+            )
+        except Exception:
+            config.audio.chunk_duration_ms = 220
+        try:
+            config.audio.speech_threshold_blocks = max(
+                1,
+                min(20, int(getattr(config.audio, "speech_threshold_blocks", 2) or 2)),
+            )
+        except Exception:
+            config.audio.speech_threshold_blocks = 2
+        try:
+            config.audio.silence_limit_blocks = max(
+                1,
+                min(50, int(getattr(config.audio, "silence_limit_blocks", 4) or 4)),
+            )
+        except Exception:
+            config.audio.silence_limit_blocks = 4
+        try:
+            config.audio.max_buffer_blocks = max(
+                10,
+                min(1000, int(getattr(config.audio, "max_buffer_blocks", 120) or 120)),
+            )
+        except Exception:
+            config.audio.max_buffer_blocks = 120
+        try:
+            config.audio.pre_roll_ms = max(
+                0,
+                min(2000, int(getattr(config.audio, "pre_roll_ms", 450) or 0)),
+            )
+        except Exception:
+            config.audio.pre_roll_ms = 450
+        try:
+            config.audio.speech_idle_timeout_ms = max(
+                100,
+                min(3000, int(getattr(config.audio, "speech_idle_timeout_ms", 650) or 650)),
+            )
+        except Exception:
+            config.audio.speech_idle_timeout_ms = 650
+        try:
+            config.whisper.min_language_probability = max(
+                0.0,
+                min(1.0, float(getattr(config.whisper, "min_language_probability", 0.35) or 0.0)),
+            )
+        except Exception:
+            config.whisper.min_language_probability = 0.35
+        try:
+            config.audio.min_segment_seconds = max(
+                0.0,
+                min(3.0, float(getattr(config.audio, "min_segment_seconds", 0.35) or 0.0)),
+            )
+        except Exception:
+            config.audio.min_segment_seconds = 0.35
+        try:
+            config.audio.min_segment_peak_margin_db = max(
+                0.0,
+                min(12.0, float(getattr(config.audio, "min_segment_peak_margin_db", 1.5) or 0.0)),
+            )
+        except Exception:
+            config.audio.min_segment_peak_margin_db = 1.5
+        try:
+            config.audio.max_speech_threshold = min(
+                SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+                float(
+                    getattr(
+                        config.audio,
+                        "max_speech_threshold",
+                        SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+                    )
+                    or SAFE_MAX_SPEECH_THRESHOLD_DBFS
+                ),
+            )
+        except Exception:
+            config.audio.max_speech_threshold = SAFE_MAX_SPEECH_THRESHOLD_DBFS
+        try:
+            config.audio.min_speech_threshold = float(
+                getattr(config.audio, "min_speech_threshold", -45.0) or -45.0
+            )
+        except Exception:
+            config.audio.min_speech_threshold = -45.0
+        if config.audio.min_speech_threshold > config.audio.max_speech_threshold:
+            config.audio.min_speech_threshold = config.audio.max_speech_threshold
         config.update.enabled = bool(getattr(config.update, "enabled", True))
         config.update.channel = normalize_update_channel(getattr(config.update, "channel", "stable"))
         try:
@@ -344,10 +492,21 @@ class VoxGoApp:
                 "setup_completed": bool(getattr(self.config.app, "setup_completed", False)),
             },
             "audio": {
+                "latency_mode": self.config.audio.latency_mode,
                 "input_device_id": self.config.audio.input_device_id,
                 "input_device_index": self.config.audio.input_device_index,
                 "input_device_name": self.config.audio.input_device_name,
+                "chunk_duration_ms": self.config.audio.chunk_duration_ms,
+                "speech_threshold_blocks": self.config.audio.speech_threshold_blocks,
+                "silence_limit_blocks": self.config.audio.silence_limit_blocks,
+                "max_buffer_blocks": self.config.audio.max_buffer_blocks,
                 "max_speech_seconds": self.config.audio.max_speech_seconds,
+                "pre_roll_ms": self.config.audio.pre_roll_ms,
+                "speech_idle_timeout_ms": self.config.audio.speech_idle_timeout_ms,
+                "min_speech_threshold": self.config.audio.min_speech_threshold,
+                "max_speech_threshold": self.config.audio.max_speech_threshold,
+                "min_segment_seconds": self.config.audio.min_segment_seconds,
+                "min_segment_peak_margin_db": self.config.audio.min_segment_peak_margin_db,
             },
             "overlay": {
                 "font_size": self.config.overlay.font_size,
@@ -357,15 +516,20 @@ class VoxGoApp:
                 "bg_opacity": self.config.overlay.bg_opacity,
                 "window_width": self.config.overlay.window_width,
                 "window_height": self.config.overlay.window_height,
+                "window_x": self.config.overlay.window_x,
+                "window_y": self.config.overlay.window_y,
                 "opacity": self.config.overlay.opacity,
                 "show_original": self.config.overlay.show_original,
                 "draggable": self.config.overlay.draggable,
                 "locked": self.config.overlay.locked,
+                "compact_mode": bool(getattr(self.config.overlay, "compact_mode", False)),
             },
             "hotkeys": {
                 "toggle_overlay": self.config.hotkeys.toggle_overlay,
                 "toggle_translation": self.config.hotkeys.toggle_translation,
                 "clear_history": self.config.hotkeys.clear_history,
+                "toggle_lock": self.config.hotkeys.toggle_lock,
+                "toggle_compact": self.config.hotkeys.toggle_compact,
             },
             "whisper": {
                 "device": _normalize_whisper_device(self.config.whisper.device),
@@ -433,7 +597,14 @@ class VoxGoApp:
             self.config.audio.input_device_id,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
+            self.config.audio.latency_mode,
+            self.config.audio.chunk_duration_ms,
+            self.config.audio.speech_threshold_blocks,
+            self.config.audio.silence_limit_blocks,
+            self.config.audio.max_buffer_blocks,
             self.config.audio.max_speech_seconds,
+            self.config.audio.pre_roll_ms,
+            self.config.audio.speech_idle_timeout_ms,
         )
         self._last_translation_settings = (
             normalize_translation_provider(self.config.translation.provider),
@@ -604,13 +775,59 @@ class VoxGoApp:
             f"({device['sample_rate']}Hz/{device['channels']}ch)"
         )
 
-    def _on_speech_detected(self, audio_data: bytes):
+    def _coerce_speech_segment(self, speech_segment) -> SpeechSegment:
+        if isinstance(speech_segment, SpeechSegment):
+            return speech_segment
+        audio_data = speech_segment or b""
+        sample_rate = max(1, int(getattr(self.config.audio, "sample_rate", 16000) or 16000))
+        duration = (len(audio_data) // 2) / sample_rate
+        return SpeechSegment(
+            audio_data=audio_data,
+            sample_rate=sample_rate,
+            duration_seconds=duration,
+            voice_duration_seconds=duration,
+            block_count=0,
+            voice_blocks=0,
+            peak_rms_dbfs=-120.0,
+            energy_threshold_dbfs=-120.0,
+            noise_floor_dbfs=None,
+            reason="兼容旧音频字节",
+        )
+
+    def _recent_transcript_texts(self, now: float = None) -> list:
+        now = now or time.time()
+        recent = [
+            (created_at, text)
+            for created_at, text in self._recent_transcripts
+            if now - created_at <= 8.0
+        ]
+        self._recent_transcripts = deque(recent, maxlen=12)
+        return [text for _, text in recent]
+
+    def _remember_transcript(self, text: str):
+        self._recent_transcripts.append((time.time(), text))
+
+    def _on_speech_detected(self, speech_segment):
         if self._paused or not self._running:
             return
+        segment = self._coerce_speech_segment(speech_segment)
         self._stats["speech_detected"] += 1
+        drop_reason = should_drop_speech_segment(segment, self.config.audio)
+        if drop_reason:
+            self._stats["filtered_speech"] += 1
+            logger.info(
+                "丢弃疑似误触发音频片段: {}，voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS, cut={}",
+                drop_reason,
+                segment.voice_duration_seconds,
+                segment.duration_seconds,
+                segment.peak_rms_dbfs,
+                segment.energy_threshold_dbfs,
+                segment.reason,
+            )
+            return
         now = time.time()
         work_item = SpeechWorkItem(
-            audio_data=audio_data,
+            segment=segment,
             trace=LatencyTrace(item_id="", speech_detected_at=now, queued_at=now),
         )
         try:
@@ -670,28 +887,71 @@ class VoxGoApp:
             if self._paused or not self._running:
                 return
             if isinstance(work_item, SpeechWorkItem):
-                audio_data = work_item.audio_data
+                segment = work_item.segment
                 trace = work_item.trace
-            else:
-                audio_data = work_item
+            elif isinstance(work_item, SpeechSegment):
+                segment = work_item
                 now = time.time()
                 trace = LatencyTrace(item_id="", speech_detected_at=now, queued_at=now)
+            else:
+                segment = self._coerce_speech_segment(work_item)
+                now = time.time()
+                trace = LatencyTrace(item_id="", speech_detected_at=now, queued_at=now)
+            drop_reason = should_drop_speech_segment(segment, self.config.audio)
+            if drop_reason:
+                self._stats["filtered_speech"] += 1
+                logger.info("处理前丢弃疑似误触发音频片段: {}", drop_reason)
+                return
             trace.dequeued_at = time.time()
             t0 = time.time()
             trace.transcription_started_at = t0
+            logger.info(
+                "开始识别语音片段: voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS, cut={}",
+                segment.voice_duration_seconds,
+                segment.duration_seconds,
+                segment.peak_rms_dbfs,
+                segment.energy_threshold_dbfs,
+                segment.reason,
+            )
             with self._processing_lock:
                 result = self._speech_recognizer.transcribe_audio_bytes_with_language(
-                    audio_data,
-                    sample_rate=self.config.audio.sample_rate
+                    segment.audio_data,
+                    sample_rate=segment.sample_rate or self.config.audio.sample_rate
                 )
             trace.transcription_finished_at = time.time()
             text = result.text
             if not text or len(text.strip()) < 2:
+                self._stats["filtered_speech"] += 1
+                logger.info(
+                    "识别结果为空或过短: text_len={}, lang={}, prob={:.2f}, voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS",
+                    len(text.strip()) if text else 0,
+                    result.language or "unknown",
+                    result.language_probability,
+                    segment.voice_duration_seconds,
+                    segment.duration_seconds,
+                    segment.peak_rms_dbfs,
+                    segment.energy_threshold_dbfs,
+                )
                 return
-            if is_likely_asr_hallucination(text):
-                logger.warning("丢弃疑似 ASR 幻觉文本: {}", text[:120])
+            recent_texts = self._recent_transcript_texts()
+            drop_reason = should_drop_transcription_result(
+                result,
+                expected_language=self.config.whisper.language,
+                recent_texts=recent_texts,
+                config=self.config.whisper,
+            )
+            if drop_reason:
+                self._stats["filtered_speech"] += 1
+                logger.info(
+                    "丢弃疑似误识别文本: {}，text={}, lang={}, prob={:.2f}",
+                    drop_reason,
+                    text[:120],
+                    result.language or "unknown",
+                    result.language_probability,
+                )
                 return
             self._stats["transcriptions"] += 1
+            self._remember_transcript(text)
             logger.info(
                 "[识别] {} (lang={}, prob={:.2f}, {:.1f}s)",
                 text[:80],
@@ -715,16 +975,24 @@ class VoxGoApp:
         try:
             self._remove_hotkeys()
             hotkeys = self.config.hotkeys
-            self._hotkey_handles = [
-                keyboard.add_hotkey(hotkeys.toggle_overlay, self._toggle_overlay),
-                keyboard.add_hotkey(hotkeys.clear_history, self._clear_history),
-                keyboard.add_hotkey(hotkeys.toggle_translation, self._toggle_translation),
-            ]
+            registrations = (
+                ("显示/隐藏", hotkeys.toggle_overlay, self._toggle_overlay),
+                ("清空历史", hotkeys.clear_history, self._clear_history),
+                ("暂停/恢复", hotkeys.toggle_translation, self._toggle_translation),
+                ("锁定/解锁", hotkeys.toggle_lock, self._toggle_lock),
+                ("紧凑模式", hotkeys.toggle_compact, self._toggle_compact_mode),
+            )
+            self._hotkey_handles = []
+            active_hotkeys = []
+            for label, value, callback in registrations:
+                value = str(value or "").strip()
+                if not value:
+                    continue
+                self._hotkey_handles.append(keyboard.add_hotkey(value, callback))
+                active_hotkeys.append(f"{label}={value}")
             logger.info(
-                "热键已注册: {}/{}/{}",
-                hotkeys.toggle_overlay,
-                hotkeys.clear_history,
-                hotkeys.toggle_translation,
+                "热键已注册: {}",
+                ", ".join(active_hotkeys) or "无",
             )
         except Exception as e:
             logger.exception(f"热键注册失败: {e}")
@@ -743,6 +1011,7 @@ class VoxGoApp:
             logger.info("触发热键: 切换浮窗")
             self._overlay._signals.toggle_visibility.emit()
             self._notify_user("热键", f"已触发: {self.config.hotkeys.toggle_overlay}", "状态")
+            self._sync_tray_state()
 
     def _clear_history(self):
         if self._overlay:
@@ -753,10 +1022,25 @@ class VoxGoApp:
     def _toggle_translation(self):
         self._paused = not self._paused
         logger.info(f"翻译{'暂停' if self._paused else '恢复'}")
+        if self._overlay:
+            self._overlay.set_paused(self._paused)
+        self._sync_tray_state()
         self._notify_user("翻译状态", "翻译暂停" if self._paused else "翻译恢复", "状态")
 
+    def _toggle_lock(self):
+        if self._overlay:
+            logger.info("触发热键: 锁定/解锁浮窗")
+            self._overlay._signals.toggle_lock.emit()
+            self._sync_tray_state()
+
+    def _toggle_compact_mode(self):
+        if self._overlay:
+            logger.info("触发热键: 切换紧凑浮窗")
+            self._overlay._signals.toggle_compact.emit()
+            self._sync_tray_state()
+
     def _start_qt(self):
-        from PyQt5.QtWidgets import QApplication
+        from PyQt5.QtWidgets import QApplication, QMenu, QSystemTrayIcon
         from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt, QTimer
         from PyQt5.QtGui import QIcon
         from overlay import GameOverlay
@@ -783,6 +1067,7 @@ class VoxGoApp:
         icon_path = Path(__file__).parent / "assets" / "voxgo.ico"
         if icon_path.exists():
             self._qt_app.setWindowIcon(QIcon(str(icon_path)))
+        self._app_icon = QIcon(str(icon_path)) if icon_path.exists() else QIcon()
         self._startup_signals = StartupSignals(self)
         self._startup_signals.backend_ready.connect(
             self._startup_signals.finish_backend_startup,
@@ -815,10 +1100,96 @@ class VoxGoApp:
             on_overlay_updated=self._on_overlay_updated,
         )
         self._overlay.show()
+        self._setup_tray_icon(QSystemTrayIcon, QMenu)
         self._flush_pending_notices()
         QTimer.singleShot(300, self._refresh_overlay_audio_devices)
         QTimer.singleShot(1200, lambda: self._request_update_check(manual=False))
         logger.info("浮窗已启动")
+
+    def _setup_tray_icon(self, tray_cls=None, menu_cls=None):
+        if not self._qt_app or self._tray_icon:
+            return
+        if tray_cls is None or menu_cls is None:
+            from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
+            tray_cls = QSystemTrayIcon
+            menu_cls = QMenu
+        if not tray_cls.isSystemTrayAvailable():
+            logger.warning("系统托盘不可用，跳过托盘入口")
+            return
+
+        self._tray_icon = tray_cls(getattr(self, "_app_icon", None) or self._qt_app.windowIcon(), self._qt_app)
+        self._tray_icon.setToolTip(f"{APP_NAME} v{APP_VERSION}")
+        self._tray_menu = menu_cls(self._qt_app.activeWindow())
+
+        self._tray_actions = {
+            "toggle_overlay": self._tray_menu.addAction("隐藏浮窗"),
+            "toggle_translation": self._tray_menu.addAction("暂停翻译"),
+            "clear_history": self._tray_menu.addAction("清空字幕"),
+            "compact_mode": self._tray_menu.addAction("启用紧凑浮窗"),
+        }
+        self._tray_menu.addSeparator()
+        self._tray_actions["settings"] = self._tray_menu.addAction("设置")
+        self._tray_actions["fullscreen_help"] = self._tray_menu.addAction("全屏兼容说明")
+        self._tray_menu.addSeparator()
+        self._tray_actions["quit"] = self._tray_menu.addAction("退出")
+
+        self._tray_actions["toggle_overlay"].triggered.connect(self._tray_toggle_overlay)
+        self._tray_actions["toggle_translation"].triggered.connect(self._toggle_translation)
+        self._tray_actions["clear_history"].triggered.connect(self._clear_history)
+        self._tray_actions["compact_mode"].triggered.connect(self._tray_toggle_compact_mode)
+        self._tray_actions["settings"].triggered.connect(self._tray_open_settings)
+        self._tray_actions["fullscreen_help"].triggered.connect(self._tray_show_fullscreen_help)
+        self._tray_actions["quit"].triggered.connect(self._request_shutdown)
+        self._tray_icon.activated.connect(self._handle_tray_activated)
+        self._tray_icon.setContextMenu(self._tray_menu)
+        self._sync_tray_state()
+        self._tray_icon.show()
+
+    def _sync_tray_state(self):
+        if not self._tray_actions:
+            return
+        if "toggle_overlay" in self._tray_actions and self._overlay:
+            self._tray_actions["toggle_overlay"].setText("隐藏浮窗" if self._overlay.isVisible() else "显示浮窗")
+        if "toggle_translation" in self._tray_actions:
+            self._tray_actions["toggle_translation"].setText("恢复翻译" if self._paused else "暂停翻译")
+        if "compact_mode" in self._tray_actions:
+            compact = bool(getattr(self.config.overlay, "compact_mode", False))
+            self._tray_actions["compact_mode"].setText("退出紧凑浮窗" if compact else "启用紧凑浮窗")
+        if self._tray_icon:
+            state = "暂停" if self._paused else "运行中"
+            self._tray_icon.setToolTip(f"{APP_NAME} v{APP_VERSION} - {state}")
+
+    def _tray_toggle_overlay(self):
+        self._toggle_overlay()
+
+    def _tray_toggle_compact_mode(self):
+        if self._overlay:
+            self._overlay.toggle_compact_mode()
+            self.config.overlay = self._overlay.config
+        self._save_user_settings()
+        self._sync_tray_state()
+
+    def _tray_open_settings(self):
+        if self._overlay:
+            self._overlay.show()
+            self._overlay.raise_()
+            self._overlay.show_settings()
+        self._sync_tray_state()
+
+    def _tray_show_fullscreen_help(self):
+        if self._overlay:
+            self._overlay.show()
+            self._overlay.raise_()
+            self._overlay.show_fullscreen_help()
+        self._sync_tray_state()
+
+    def _handle_tray_activated(self, reason):
+        try:
+            from PyQt5.QtWidgets import QSystemTrayIcon
+            if reason == QSystemTrayIcon.Trigger:
+                self._tray_toggle_overlay()
+        except Exception:
+            return
 
     def _start_backend_after_setup(self):
         self._sync_language_flow()
@@ -835,6 +1206,8 @@ class VoxGoApp:
 
     def _request_shutdown(self):
         logger.info("收到退出按钮请求")
+        if self._tray_icon:
+            self._tray_icon.hide()
         if self._qt_app:
             self._qt_app.quit()
 
@@ -860,7 +1233,6 @@ class VoxGoApp:
         self.config.translation = translation_config
         self.config.translation.provider = normalize_translation_provider(self.config.translation.provider)
         self.config.update = update_config or self.config.update or UpdateSettings()
-        self._migrate_runtime_defaults(self.config)
         self.config.whisper.device = _normalize_whisper_device(
             getattr(whisper_config, "device", self.config.whisper.device)
         )
@@ -874,10 +1246,56 @@ class VoxGoApp:
         self.config.audio.input_device_id = getattr(audio_config, "input_device_id", "")
         self.config.audio.input_device_index = audio_config.input_device_index
         self.config.audio.input_device_name = audio_config.input_device_name
+        self.config.audio.latency_mode = normalize_latency_mode(
+            getattr(audio_config, "latency_mode", self.config.audio.latency_mode)
+        )
+        self.config.audio.chunk_duration_ms = getattr(
+            audio_config,
+            "chunk_duration_ms",
+            self.config.audio.chunk_duration_ms,
+        )
+        self.config.audio.speech_threshold_blocks = getattr(
+            audio_config,
+            "speech_threshold_blocks",
+            self.config.audio.speech_threshold_blocks,
+        )
+        self.config.audio.silence_limit_blocks = getattr(
+            audio_config,
+            "silence_limit_blocks",
+            self.config.audio.silence_limit_blocks,
+        )
+        self.config.audio.max_buffer_blocks = getattr(
+            audio_config,
+            "max_buffer_blocks",
+            self.config.audio.max_buffer_blocks,
+        )
         self.config.audio.max_speech_seconds = audio_config.max_speech_seconds
+        self.config.audio.pre_roll_ms = getattr(
+            audio_config,
+            "pre_roll_ms",
+            self.config.audio.pre_roll_ms,
+        )
+        self.config.audio.speech_idle_timeout_ms = getattr(
+            audio_config,
+            "speech_idle_timeout_ms",
+            self.config.audio.speech_idle_timeout_ms,
+        )
+        self.config.audio.min_segment_seconds = getattr(
+            audio_config,
+            "min_segment_seconds",
+            self.config.audio.min_segment_seconds,
+        )
+        self.config.audio.min_segment_peak_margin_db = getattr(
+            audio_config,
+            "min_segment_peak_margin_db",
+            self.config.audio.min_segment_peak_margin_db,
+        )
+        self._migrate_runtime_defaults(self.config, preserve_existing_audio_tuning=False)
         previous_language_flow = self._last_language_flow
         current_language_flow = self._sync_language_flow()
         self._sync_whisper_vad_limit()
+        if self._speech_recognizer:
+            self._speech_recognizer.config = self.config.whisper
         if self._translator:
             self._translator.config = self.config.translation
         self._setup_hotkeys()
@@ -886,7 +1304,14 @@ class VoxGoApp:
             self.config.audio.input_device_id,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
+            self.config.audio.latency_mode,
+            self.config.audio.chunk_duration_ms,
+            self.config.audio.speech_threshold_blocks,
+            self.config.audio.silence_limit_blocks,
+            self.config.audio.max_buffer_blocks,
             self.config.audio.max_speech_seconds,
+            self.config.audio.pre_roll_ms,
+            self.config.audio.speech_idle_timeout_ms,
         )
         current_translation = (
             normalize_translation_provider(self.config.translation.provider),
@@ -909,7 +1334,7 @@ class VoxGoApp:
             normalize_update_channel(getattr(self.config.update, "channel", "stable")),
         )
         if self._running and current_device != previous_device:
-            self._restart_audio_capture()
+            self._restart_audio_capture(reuse_noise_gate=current_device[:3] == previous_device[:3])
         if current_language_flow != previous_language_flow:
             if self._translator:
                 self._translator.clear_context()
@@ -956,15 +1381,20 @@ class VoxGoApp:
         self._last_language_flow = current_language_flow
         self._last_whisper_device = current_whisper_device
         self._last_model_download_source = current_model_download_source
+        self._sync_tray_state()
         logger.info(
-            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, max_speech={}s, language={}→{}, whisper_device={}, model_download_source={}, provider={}, model={}, endpoint={}, hotkeys={}/{}/{}",
+            "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, latency_mode={}, beam_size={}, max_speech={}s, min_segment={:.2f}s, min_peak_margin={:.1f}dB, language={}→{}, whisper_device={}, model_download_source={}, provider={}, model={}, endpoint={}, hotkeys={}/{}/{}/{}/{}",
             overlay_config.opacity,
             overlay_config.bg_opacity,
             overlay_config.text_color,
             overlay_config.show_original,
             self.config.audio.input_device_index,
             self.config.audio.input_device_name,
+            self.config.audio.latency_mode,
+            self.config.whisper.beam_size,
             self.config.audio.max_speech_seconds,
+            self.config.audio.min_segment_seconds,
+            self.config.audio.min_segment_peak_margin_db,
             current_language_flow[0],
             current_language_flow[1],
             current_whisper_device,
@@ -975,6 +1405,8 @@ class VoxGoApp:
             hotkey_config.toggle_overlay,
             hotkey_config.clear_history,
             hotkey_config.toggle_translation,
+            hotkey_config.toggle_lock,
+            hotkey_config.toggle_compact,
         )
 
     def _start_mobile(self):
@@ -1102,10 +1534,22 @@ class VoxGoApp:
         if self._qt_app:
             self._qt_app.quit()
 
-    def _start_audio_capture(self, notice_title: str = "音频捕获已启动"):
+    def _start_audio_capture(self, notice_title: str = "音频捕获已启动", reuse_noise_gate: bool = False):
+        previous_noise_gate = None
         if self._audio_capture:
+            if reuse_noise_gate and hasattr(self._audio_capture, "current_noise_gate"):
+                previous_noise_gate = self._audio_capture.current_noise_gate()
             self._audio_capture.stop()
             self._audio_capture = None
+        if previous_noise_gate and previous_noise_gate[2]:
+            self.config.audio.initial_noise_floor_dbfs = previous_noise_gate[0]
+            self.config.audio.initial_energy_threshold_dbfs = min(
+                float(previous_noise_gate[1]),
+                SAFE_MAX_SPEECH_THRESHOLD_DBFS,
+            )
+        else:
+            self.config.audio.initial_noise_floor_dbfs = None
+            self.config.audio.initial_energy_threshold_dbfs = None
         self._audio_capture = SystemAudioCapture(self.config.audio)
         self._audio_capture.set_speech_callback(self._on_speech_detected)
         self._audio_capture.start()
@@ -1115,9 +1559,9 @@ class VoxGoApp:
             "状态",
         )
 
-    def _restart_audio_capture(self):
+    def _restart_audio_capture(self, reuse_noise_gate: bool = False):
         try:
-            self._start_audio_capture("音频设备已切换")
+            self._start_audio_capture("音频设置已更新", reuse_noise_gate=reuse_noise_gate)
         except Exception as e:
             self._stats["errors"] += 1
             self._show_audio_startup_warning(e)
@@ -1363,6 +1807,8 @@ class VoxGoApp:
 ║    {toggle_overlay:<14} 切换浮窗显示/隐藏       ║
 ║    {clear_history:<14} 清空翻译历史            ║
 ║    {toggle_translation:<14} 暂停/恢复翻译       ║
+║    {toggle_lock:<14} 锁定/解锁浮窗            ║
+║    {toggle_compact:<14} 切换紧凑模式          ║
 ╠══════════════════════════════════════════════╣
 ║  手机端: {url}  ║
 ╠══════════════════════════════════════════════╣
@@ -1370,9 +1816,11 @@ class VoxGoApp:
 ╚══════════════════════════════════════════════╝
 """.format(
             title=title,
-            toggle_overlay=hotkeys.toggle_overlay,
-            clear_history=hotkeys.clear_history,
-            toggle_translation=hotkeys.toggle_translation,
+            toggle_overlay=_hotkey_label(hotkeys.toggle_overlay),
+            clear_history=_hotkey_label(hotkeys.clear_history),
+            toggle_translation=_hotkey_label(hotkeys.toggle_translation),
+            toggle_lock=_hotkey_label(hotkeys.toggle_lock),
+            toggle_compact=_hotkey_label(hotkeys.toggle_compact),
             url=self._mobile_server.get_mobile_url()
         ))
 
@@ -1457,12 +1905,15 @@ class VoxGoApp:
             self._translation_loop.close()
         if self._overlay:
             self._overlay.close()
+        if self._tray_icon:
+            self._tray_icon.hide()
         if self._qt_app:
             self._qt_app.quit()
 
         if sys.stdout is not None:
             print(f"\n翻译统计: 识别 {self._stats['transcriptions']} 条, "
-                  f"翻译 {self._stats['translations']} 条, 错误 {self._stats['errors']} 次")
+                  f"翻译 {self._stats['translations']} 条, "
+                  f"过滤 {self._stats['filtered_speech']} 段, 错误 {self._stats['errors']} 次")
         logger.info("已停止")
 
 
