@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.2.3",
+    [string]$Version = "0.2.4",
     [switch]$SkipLite,
     [switch]$SkipFull
 )
@@ -43,6 +43,29 @@ function Invoke-Checked {
         -PassThru
     if ($process.ExitCode -ne 0) {
         throw "Command failed with exit code $($process.ExitCode): $FilePath $($Arguments -join ' ')"
+    }
+}
+
+function Compress-DirectoryWithRetry {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$SourceDir,
+        [Parameter(Mandatory = $true)]
+        [string]$DestinationPath
+    )
+
+    for ($attempt = 1; $attempt -le 5; $attempt++) {
+        try {
+            Remove-Item -Force $DestinationPath -ErrorAction SilentlyContinue
+            Compress-Archive -Path $SourceDir -DestinationPath $DestinationPath -CompressionLevel Optimal
+            return
+        } catch {
+            if ($attempt -eq 5) {
+                throw
+            }
+            Write-Warning "Compress-Archive failed on attempt $attempt. Retrying..."
+            Start-Sleep -Seconds ([Math]::Min(10, $attempt * 2))
+        }
     }
 }
 
@@ -92,7 +115,7 @@ function Build-Portable {
     Remove-Item -Recurse -Force $packageDir -ErrorAction SilentlyContinue
     Remove-Item -Force $zipPath -ErrorAction SilentlyContinue
     Copy-Item -Recurse "dist\VoxGo" $packageDir
-    Compress-Archive -Path $packageDir -DestinationPath $zipPath -CompressionLevel Optimal
+    Compress-DirectoryWithRetry -SourceDir $packageDir -DestinationPath $zipPath
 
     $hash = (Get-FileHash $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
     $size = [math]::Round((Get-Item $zipPath).Length / 1MB, 1)

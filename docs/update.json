@@ -1,17 +1,16 @@
 {
-  "latest": "0.2.3",
+  "latest": "0.2.4",
   "channel": "stable",
-  "title": "VoxGo v0.2.3",
+  "title": "VoxGo v0.2.4",
   "notes": [
-    "新增英文官网 /en/，补充 Open-source、无游戏进程注入、系统声音捕获、本地 Whisper 识别和手机同步等英文说明。",
-    "设置中新增 Language 选项，支持简体中文和 English，并保存到本机用户设置。",
-    "浮窗工具条、设置页、说明、关于、更新提示、反馈模板和系统托盘等关键界面新增英文文案。",
-    "修复语言配置切换和设置保存链路，确保界面语言变更后主要入口即时刷新。"
+    "Refactored speech candidate handling to preserve low-volume and short voice recall.",
+    "Added short-segment pending/merge, busy-queue protection, and debug audio diagnostics.",
+    "Improved game-noise ASR hallucination filtering and translation tag cleanup."
   ],
-  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.2.3",
-  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.3/VoxGo-v0.2.3-lite.zip",
-  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.3/VoxGo-v0.2.3-full.zip",
-  "sha256_lite": "72221c2050b27f069242d7708946bd6eccdd2ea3d23fe877a0d932cae9681941",
-  "sha256_full": "77f19bd005b38713481146874587b8ea907cc96617ea57956c01545fdd2b2b76",
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.2.4",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.4/VoxGo-v0.2.4-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.4/VoxGo-v0.2.4-full.zip",
+  "sha256_lite": "5abb45c5f132a70ab0dc232b7814b035f4b6f3f6b98decbced4aef1f6be706b2",
+  "sha256_full": "f792197820bb5463dff61c030e1a5d6607647419ead97ead6c99502be2297b05",
   "mandatory": false
 }

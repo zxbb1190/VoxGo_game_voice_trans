@@ -1,5 +1,5 @@
 APP_NAME = "VoxGo"
-APP_VERSION = "0.2.3"
+APP_VERSION = "0.2.4"
 APP_WEBSITE = "https://voxgo.cn/"
 GITHUB_REPOSITORY = "zxbb1190/VoxGo_game_voice_trans"
 GITHUB_URL = f"https://github.com/{GITHUB_REPOSITORY}"
