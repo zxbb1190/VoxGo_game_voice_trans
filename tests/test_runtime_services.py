@@ -56,6 +56,43 @@ class FakeTranslator:
 
 
 class RuntimeServicesTest(unittest.TestCase):
+    def test_latency_trace_summary_includes_recognition_runtime_metadata(self):
+        trace = LatencyTrace(
+            "translation-1",
+            speech_detected_at=1.0,
+            queued_at=1.1,
+            latency_mode="fast",
+            candidate_labels=("candidate", "short_segment"),
+            segment_voice_seconds=0.32,
+            segment_total_seconds=0.58,
+            whisper_model_size="base.en",
+            whisper_device="cpu",
+            whisper_compute_type="int8",
+            whisper_cpu_threads=4,
+            fast_path_allowed=True,
+            fast_path_ready=True,
+            dequeued_at=1.2,
+            transcription_started_at=1.2,
+            transcription_finished_at=1.7,
+            translation_started_at=1.7,
+            translation_finished_at=1.9,
+            overlay_updated_at=2.0,
+        )
+
+        summary = trace.summary_ms()
+
+        self.assertEqual(summary["wait_ms"], 100)
+        self.assertEqual(summary["latency_mode"], "fast")
+        self.assertEqual(summary["candidate_labels"], "candidate,short_segment")
+        self.assertEqual(summary["segment_voice_ms"], 320)
+        self.assertEqual(summary["segment_total_ms"], 580)
+        self.assertEqual(summary["whisper_model_size"], "base.en")
+        self.assertEqual(summary["whisper_device"], "cpu")
+        self.assertEqual(summary["whisper_compute_type"], "int8")
+        self.assertEqual(summary["whisper_cpu_threads"], 4)
+        self.assertTrue(summary["fast_path_allowed"])
+        self.assertTrue(summary["fast_path_ready"])
+
     def test_speech_pipeline_publishes_transcript_ready(self):
         config = AppConfig(
             audio=AudioConfig(min_segment_seconds=0.0),

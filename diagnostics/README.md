@@ -22,4 +22,5 @@ python diagnostics/show_minimal_overlay.py
 Notes:
 - API checks read `config.json` and require a real API key unless the endpoint is local.
 - `benchmark_siliconflow_models.py` is only for SiliconFlow/OpenAI-compatible model comparison.
+  Example: `python diagnostics/benchmark_siliconflow_models.py --models tencent/Hunyuan-MT-7B,Qwen/Qwen2.5-7B-Instruct --text "rush B" --source-lang en --target-lang zh --repeat 3`.
 - `generate_mobile_qr.py` auto-detects the LAN IP by default. Override it with `--url` if needed.

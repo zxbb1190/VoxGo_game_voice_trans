@@ -82,9 +82,9 @@ class AudioLatencyModeTest(unittest.TestCase):
         self.assertEqual(config.chunk_duration_ms, 200)
         self.assertEqual(config.speech_threshold_blocks, 2)
         self.assertEqual(config.silence_limit_blocks, 3)
-        self.assertEqual(config.max_speech_seconds, 6.0)
+        self.assertEqual(config.max_speech_seconds, 4.5)
         self.assertEqual(config.pre_roll_ms, 450)
-        self.assertEqual(config.speech_idle_timeout_ms, 550)
+        self.assertEqual(config.speech_idle_timeout_ms, 450)
         self.assertEqual(config.min_segment_seconds, 0.35)
         self.assertEqual(config.min_segment_peak_margin_db, 1.5)
 

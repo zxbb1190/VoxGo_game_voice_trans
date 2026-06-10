@@ -54,9 +54,9 @@ AUDIO_LATENCY_PRESETS = {
         "speech_threshold_blocks": 2,
         "silence_limit_blocks": 3,
         "max_buffer_blocks": 120,
-        "max_speech_seconds": 6.0,
+        "max_speech_seconds": 4.5,
         "pre_roll_ms": 450,
-        "speech_idle_timeout_ms": 550,
+        "speech_idle_timeout_ms": 450,
         "min_segment_seconds": 0.35,
         "min_segment_peak_margin_db": 1.5,
     },
@@ -75,13 +75,13 @@ AUDIO_LATENCY_PRESETS = {
 
 ENGLISH_AUDIO_LATENCY_BIAS = {
     LATENCY_MODE_FAST: {
-        "speech_idle_timeout_ms": 300,
-        "max_speech_seconds": 2.8,
+        "speech_idle_timeout_ms": 280,
+        "max_speech_seconds": 2.5,
         "pre_roll_ms": 250,
     },
     LATENCY_MODE_BALANCED: {
-        "speech_idle_timeout_ms": 450,
-        "max_speech_seconds": 5.0,
+        "speech_idle_timeout_ms": 400,
+        "max_speech_seconds": 4.0,
         "pre_roll_ms": 350,
     },
 }
@@ -156,8 +156,8 @@ def apply_audio_latency_preset(config) -> str:
     return mode
 
 
-def apply_english_audio_latency_bias(config, latency_mode: str = "") -> bool:
-    """Use shorter English segmentation timing without changing speech capture gates."""
+def apply_english_realtime_latency_bias(config, latency_mode: str = "") -> bool:
+    """Use shorter English-source timing without changing speech capture gates."""
     mode = normalize_latency_mode(latency_mode or getattr(config, "latency_mode", LATENCY_MODE_BALANCED))
     bias = ENGLISH_AUDIO_LATENCY_BIAS.get(mode)
     if not bias:
@@ -166,6 +166,9 @@ def apply_english_audio_latency_bias(config, latency_mode: str = "") -> bool:
         if hasattr(config, key):
             setattr(config, key, value)
     return True
+
+
+apply_english_audio_latency_bias = apply_english_realtime_latency_bias
 
 
 @dataclass
@@ -179,9 +182,9 @@ class AudioConfig:
     speech_threshold_blocks: int = 2
     silence_limit_blocks: int = 3
     max_buffer_blocks: int = 120
-    max_speech_seconds: float = 6.0
+    max_speech_seconds: float = 4.5
     pre_roll_ms: int = 450
-    speech_idle_timeout_ms: int = 550
+    speech_idle_timeout_ms: int = 450
     soft_silence_margin_db: float = 10.0
     soft_silence_gate_margin_db: float = 5.0
     noise_calibration_seconds: float = 2.0

@@ -273,13 +273,15 @@ class SettingsDialog(QDialog):
         self.latency_hint_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
         advanced_form.addRow(_tr(self._ui_language, "识别调校", "Recognition Tuning"), self.latency_hint_label)
 
-        self.max_speech_seconds_spin = QSpinBox()
-        self.max_speech_seconds_spin.setRange(3, 30)
+        self.max_speech_seconds_spin = QDoubleSpinBox()
+        self.max_speech_seconds_spin.setRange(3.0, 30.0)
+        self.max_speech_seconds_spin.setSingleStep(0.5)
+        self.max_speech_seconds_spin.setDecimals(1)
         self.max_speech_seconds_spin.setSuffix(" 秒")
         self.max_speech_seconds_spin.setValue(
-            int(round(float(getattr(self.audio_config, "max_speech_seconds", 8) or 8)))
+            float(getattr(self.audio_config, "max_speech_seconds", 4.5) or 4.5)
         )
-        self.max_speech_seconds_spin.setToolTip("连续有声超过这个时长会强制切成一段，推荐 6-10 秒")
+        self.max_speech_seconds_spin.setToolTip("连续有声超过这个时长会强制切成一段，推荐 4-8 秒")
         self.max_speech_seconds_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "最长捕获", "Max Capture"), self.max_speech_seconds_spin)
 
@@ -322,7 +324,7 @@ class SettingsDialog(QDialog):
         self.speech_idle_timeout_ms_spin.setSingleStep(50)
         self.speech_idle_timeout_ms_spin.setSuffix(" ms")
         self.speech_idle_timeout_ms_spin.setValue(
-            int(getattr(self.audio_config, "speech_idle_timeout_ms", 550) or 550)
+            int(getattr(self.audio_config, "speech_idle_timeout_ms", 450) or 450)
         )
         self.speech_idle_timeout_ms_spin.setToolTip("有语音缓冲但没有新音频块时，等待多久主动切段")
         self.speech_idle_timeout_ms_spin.valueChanged.connect(self._preview)
@@ -586,7 +588,7 @@ class SettingsDialog(QDialog):
             ("chunk_duration_ms", "chunk_duration_spin", int),
             ("speech_threshold_blocks", "speech_threshold_blocks_spin", int),
             ("silence_limit_blocks", "silence_limit_blocks_spin", int),
-            ("max_speech_seconds", "max_speech_seconds_spin", lambda value: int(round(float(value)))),
+            ("max_speech_seconds", "max_speech_seconds_spin", float),
             ("pre_roll_ms", "pre_roll_ms_spin", int),
             ("speech_idle_timeout_ms", "speech_idle_timeout_ms_spin", int),
             ("min_segment_seconds", "min_segment_seconds_spin", float),
@@ -725,9 +727,9 @@ class SettingsDialog(QDialog):
             ("chunk_duration_ms", "chunk_duration_spin", int, 200),
             ("speech_threshold_blocks", "speech_threshold_blocks_spin", int, 2),
             ("silence_limit_blocks", "silence_limit_blocks_spin", int, 3),
-            ("max_speech_seconds", "max_speech_seconds_spin", lambda value: int(round(float(value))), 6),
+            ("max_speech_seconds", "max_speech_seconds_spin", float, 4.5),
             ("pre_roll_ms", "pre_roll_ms_spin", int, 450),
-            ("speech_idle_timeout_ms", "speech_idle_timeout_ms_spin", int, 550),
+            ("speech_idle_timeout_ms", "speech_idle_timeout_ms_spin", int, 450),
         )
         for key, attr, coerce, default in controls:
             widget = getattr(self, attr, None)

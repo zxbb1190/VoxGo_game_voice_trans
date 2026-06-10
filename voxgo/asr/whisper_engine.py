@@ -178,6 +178,7 @@ class WhisperConfig:
     active_model_size: str = ""
     device: str = "cpu"
     compute_type: str = "auto"
+    auto_cpu_threads: bool = True
     cpu_threads: int = 2
     num_workers: int = 1
     language: str = "auto"
@@ -705,12 +706,28 @@ class SpeechRecognizer:
         return configured
 
     def _model_runtime_options(self, device: str) -> dict:
-        cpu_threads = max(1, min(4, int(getattr(self.config, "cpu_threads", 2) or 2)))
+        cpu_threads = self._resolved_cpu_threads()
         num_workers = max(1, min(2, int(getattr(self.config, "num_workers", 1) or 1)))
         options = {"num_workers": num_workers}
         if device == "cpu":
             options["cpu_threads"] = cpu_threads
         return options
+
+    def _resolved_cpu_threads(self) -> int:
+        configured = int(getattr(self.config, "cpu_threads", 2) or 0)
+        if not bool(getattr(self.config, "auto_cpu_threads", True)):
+            return max(1, min(8, configured or 2))
+
+        logical_cpus = os.cpu_count() or 4
+        if logical_cpus >= 16:
+            recommended = 6
+        elif logical_cpus >= 8:
+            recommended = 4
+        elif logical_cpus >= 4:
+            recommended = 3
+        else:
+            recommended = 2
+        return max(1, min(8, recommended))
 
     def _initial_prompt(self) -> Optional[str]:
         custom_prompt = (self.config.initial_prompt or "").strip()

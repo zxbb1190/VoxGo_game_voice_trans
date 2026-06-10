@@ -830,13 +830,21 @@ class VoxGoApp:
         self._last_latency_summary = trace.summary_ms()
         if getattr(self.config.debug, "enabled", False):
             logger.info(
-                "[延迟] item={} wait={}ms recognition={}ms translation={}ms overlay={}ms total={}ms",
+                "[延迟] item={} wait={}ms recognition={}ms translation={}ms overlay={}ms total={}ms mode={} labels={} model={} device={} compute={} threads={} fast_path={}/{}",
                 item_id,
                 self._last_latency_summary.get("wait_ms", 0),
                 self._last_latency_summary.get("recognition_ms", 0),
                 self._last_latency_summary.get("translation_ms", 0),
                 self._last_latency_summary.get("overlay_ms", 0),
                 self._last_latency_summary.get("total_ms", 0),
+                self._last_latency_summary.get("latency_mode", ""),
+                self._last_latency_summary.get("candidate_labels", ""),
+                self._last_latency_summary.get("whisper_model_size", ""),
+                self._last_latency_summary.get("whisper_device", ""),
+                self._last_latency_summary.get("whisper_compute_type", ""),
+                self._last_latency_summary.get("whisper_cpu_threads", 0),
+                self._last_latency_summary.get("fast_path_allowed", False),
+                self._last_latency_summary.get("fast_path_ready", False),
             )
 
     def _get_last_latency_summary(self) -> dict:

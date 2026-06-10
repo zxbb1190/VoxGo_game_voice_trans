@@ -464,8 +464,8 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
                 queue_size=4,
                 pending_timeout_seconds=0.30,
                 allow_fast_output=True,
-                busy_weak_delay_seconds=0.60,
-                busy_weak_stale_seconds=1.80,
+                busy_weak_delay_seconds=0.50,
+                busy_weak_stale_seconds=1.60,
             ),
         )
 
@@ -489,8 +489,8 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
                 queue_size=4,
                 pending_timeout_seconds=0.30,
                 allow_fast_output=True,
-                busy_weak_delay_seconds=0.60,
-                busy_weak_stale_seconds=1.80,
+                busy_weak_delay_seconds=0.50,
+                busy_weak_stale_seconds=1.60,
             ),
         )
 
