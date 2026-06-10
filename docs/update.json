@@ -1,16 +1,16 @@
 {
-  "latest": "0.2.4",
+  "latest": "0.3.0",
   "channel": "stable",
-  "title": "VoxGo v0.2.4",
+  "title": "VoxGo v0.3.0",
   "notes": [
-    "Refactored speech candidate handling to preserve low-volume and short voice recall.",
-    "Added short-segment pending/merge, busy-queue protection, and debug audio diagnostics.",
-    "Improved game-noise ASR hallucination filtering and translation tag cleanup."
+    "Improved English realtime recognition latency for game voice.",
+    "Reduced balanced-mode segmentation delay and queue contention for short voice lines.",
+    "Added richer latency diagnostics including model, device, candidate labels, and fast-path status."
   ],
-  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.2.4",
-  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.4/VoxGo-v0.2.4-lite.zip",
-  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.2.4/VoxGo-v0.2.4-full.zip",
-  "sha256_lite": "943d83c22eec7bdce4add5b05e45674e0c22d11bdbb3eab93d8f8782ff602890",
-  "sha256_full": "53d0447618a7b9e43bbe520b5da596d9e900fa88d2eb8b837ea5b7bd225c977f",
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.3.0",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.3.0/VoxGo-v0.3.0-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.3.0/VoxGo-v0.3.0-full.zip",
+  "sha256_lite": "bcb9e2adc5c12d60d4a3fd39b6b12c4b0c20be0691538448c11d2fa5c7322093",
+  "sha256_full": "ca00ccfbe3e7138bdabddec75445640bbfb6b86d1eed96dcd6dc56a832280d4a",
   "mandatory": false
 }

@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.2.4"
+        description: "Release version, for example 0.3.0"
         required: true
-        default: "0.2.4"
+        default: "0.3.0"
 
 permissions:
   contents: write
@@ -71,10 +71,10 @@ jobs:
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Refactored speech candidate handling to preserve low-volume and short voice recall.
-          - Added short-segment pending/merge, busy-queue protection, and debug audio diagnostics.
-          - Improved game-noise ASR hallucination filtering and translation tag cleanup.
-          - Updated portable build packaging retry handling for transient Windows file locks.
+          - Improved English realtime recognition latency for game voice.
+          - Reduced balanced-mode segmentation delay and queue contention for short voice lines.
+          - Added richer latency diagnostics including model, device, candidate labels, and fast-path status.
+          - Fixed website and update manifest links to target this release tag.
 
           ### Downloads
 
@@ -83,6 +83,43 @@ jobs:
           - ``VoxGo-v$env:APP_VERSION-full.zip``: $fullSize MB
             - SHA256: ``$fullHash``
           "@ | Set-Content -Encoding UTF8 release-notes.md
+
+          "LITE_SHA256=$liteHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "FULL_SHA256=$fullHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Update website release manifest
+        shell: powershell
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main:refs/remotes/origin/main
+          git checkout -B main origin/main
+
+          $manifestPath = "docs\update.json"
+          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+          $manifest.latest = $env:APP_VERSION
+          $manifest.channel = "stable"
+          $manifest.title = "VoxGo v$env:APP_VERSION"
+          $manifest.notes = @(
+            "Improved English realtime recognition latency for game voice.",
+            "Reduced balanced-mode segmentation delay and queue contention for short voice lines.",
+            "Added richer latency diagnostics including model, device, candidate labels, and fast-path status."
+          )
+          $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
+          $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
+          $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
+          $manifest.sha256_lite = $env:LITE_SHA256
+          $manifest.sha256_full = $env:FULL_SHA256
+          $manifest.mandatory = $false
+          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $manifestPath
+
+          git add $manifestPath
+          if (git diff --cached --quiet) {
+            Write-Host "Release manifest already up to date."
+          } else {
+            git commit -m "Update release manifest for $env:TAG_NAME"
+            git push origin HEAD:main
+          }
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -19,7 +19,7 @@ class FeedbackReportTest(unittest.TestCase):
             TranslationConfig(provider="openai_compatible", model="model-a", endpoint="https://example.com/v1"),
             WhisperConfig(device="cpu"),
             DebugConfig(enabled=True),
-            "0.2.4",
+            "0.3.0",
             "C:/VoxGo",
             {
                 "wait_ms": 12,
@@ -56,7 +56,7 @@ class FeedbackReportTest(unittest.TestCase):
             TranslationConfig(provider="openai_compatible", model="model-a", endpoint="https://example.com/v1"),
             WhisperConfig(device="cpu"),
             DebugConfig(enabled=False),
-            "0.2.4",
+            "0.3.0",
             "C:/VoxGo",
             {
                 "latency_mode": "balanced",
