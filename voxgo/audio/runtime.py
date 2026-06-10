@@ -51,6 +51,11 @@ class AudioRuntime:
         if self.capture:
             self.capture.stop()
 
+    def clear_pending_audio(self) -> int:
+        if self.capture and hasattr(self.capture, "clear_pending_audio"):
+            return self.capture.clear_pending_audio()
+        return 0
+
     def process_tick(self, running: bool, paused: bool):
         if not running or paused:
             return

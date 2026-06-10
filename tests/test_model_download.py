@@ -63,6 +63,24 @@ class ModelDownloadConfigTest(unittest.TestCase):
 
         self.assertEqual(recognizer._model_repo_id(), "Systran/faster-whisper-small")
 
+    def test_english_model_size_maps_to_faster_whisper_repo(self):
+        recognizer = SpeechRecognizer(WhisperConfig(model_size="small", active_model_size="small.en"))
+
+        self.assertEqual(recognizer._model_repo_id(), "Systran/faster-whisper-small.en")
+
+    def test_english_model_falls_back_to_configured_multilingual_model(self):
+        recognizer = SpeechRecognizer(
+            WhisperConfig(
+                model_size="small",
+                active_model_size="base.en",
+                english_model_size="small.en",
+                fast_english_model_size="base.en",
+            )
+        )
+
+        self.assertEqual(recognizer._fallback_model_size("base.en"), "small")
+        self.assertEqual(recognizer._fallback_model_size("small"), "")
+
     def test_custom_repo_id_is_used_directly(self):
         recognizer = SpeechRecognizer(WhisperConfig(model_size="example/faster-whisper-custom"))
 

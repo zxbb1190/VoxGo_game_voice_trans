@@ -76,6 +76,73 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
         )
         return pipeline, stats, seen
 
+    def test_language_switch_resets_pending_and_queue(self):
+        recognizer = FakeRecognizer("push")
+        pipeline, stats, _seen = self._pipeline(recognizer)
+        pending = SpeechWorkItem(
+            segment=_segment(voice_duration_seconds=0.2),
+            trace=LatencyTrace("", 1.0, 1.0),
+            candidate_labels=("candidate", "short_segment"),
+            short_segment=True,
+        )
+        queued = SpeechWorkItem(
+            segment=_segment(duration_seconds=1.0, voice_duration_seconds=0.9),
+            trace=LatencyTrace("", 2.0, 2.0),
+            candidate_labels=("candidate",),
+        )
+        pipeline._pending_buffer.add_or_merge(pending, time.time())
+        pipeline._queue.put_nowait(queued)
+
+        pipeline.reset_for_language_switch("zh", "en", 2)
+
+        self.assertFalse(pipeline._pending_buffer.has_pending())
+        self.assertTrue(pipeline._queue.empty())
+        self.assertEqual(stats["dropped_speech"], 2)
+
+    def test_forced_chinese_low_confidence_result_is_filtered(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "就是狗亏警的人 但是剛才你沒有在飛機上面舉行",
+                "zh",
+                1.0,
+                avg_logprob=-0.83,
+                no_speech_prob=0.72,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        config = AppConfig(
+            audio=AudioConfig(latency_mode="balanced"),
+            whisper=WhisperConfig(language="zh"),
+            debug=DebugConfig(),
+        )
+        pipeline, stats, seen = self._pipeline(recognizer, config=config)
+        segment = _segment(
+            duration_seconds=3.8,
+            voice_duration_seconds=2.6,
+            block_count=19,
+            voice_blocks=13,
+            vad_voice_blocks=13,
+            vad_confidence=13 / 19,
+            peak_rms_dbfs=-19.0,
+            energy_threshold_dbfs=-45.0,
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0, source_lang="zh", target_lang="en", whisper_language="zh"),
+                candidate_labels=("candidate",),
+                source_lang="zh",
+                target_lang="en",
+                whisper_language="zh",
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
     def test_low_margin_short_segment_is_candidate_not_dropped_on_detect(self):
         recognizer = FakeRecognizer("go")
         pipeline, stats, seen = self._pipeline(recognizer)
@@ -397,8 +464,8 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
                 queue_size=4,
                 pending_timeout_seconds=0.30,
                 allow_fast_output=True,
-                busy_weak_delay_seconds=0.60,
-                busy_weak_stale_seconds=1.80,
+                busy_weak_delay_seconds=0.50,
+                busy_weak_stale_seconds=1.60,
             ),
         )
 
@@ -422,8 +489,8 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
                 queue_size=4,
                 pending_timeout_seconds=0.30,
                 allow_fast_output=True,
-                busy_weak_delay_seconds=0.60,
-                busy_weak_stale_seconds=1.80,
+                busy_weak_delay_seconds=0.50,
+                busy_weak_stale_seconds=1.60,
             ),
         )
 

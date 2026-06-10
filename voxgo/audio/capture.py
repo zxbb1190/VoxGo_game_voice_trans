@@ -54,9 +54,9 @@ AUDIO_LATENCY_PRESETS = {
         "speech_threshold_blocks": 2,
         "silence_limit_blocks": 3,
         "max_buffer_blocks": 120,
-        "max_speech_seconds": 6.0,
+        "max_speech_seconds": 4.5,
         "pre_roll_ms": 450,
-        "speech_idle_timeout_ms": 550,
+        "speech_idle_timeout_ms": 450,
         "min_segment_seconds": 0.35,
         "min_segment_peak_margin_db": 1.5,
     },
@@ -70,6 +70,19 @@ AUDIO_LATENCY_PRESETS = {
         "speech_idle_timeout_ms": 900,
         "min_segment_seconds": 0.45,
         "min_segment_peak_margin_db": 2.0,
+    },
+}
+
+ENGLISH_AUDIO_LATENCY_BIAS = {
+    LATENCY_MODE_FAST: {
+        "speech_idle_timeout_ms": 280,
+        "max_speech_seconds": 2.5,
+        "pre_roll_ms": 250,
+    },
+    LATENCY_MODE_BALANCED: {
+        "speech_idle_timeout_ms": 400,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 350,
     },
 }
 
@@ -143,6 +156,21 @@ def apply_audio_latency_preset(config) -> str:
     return mode
 
 
+def apply_english_realtime_latency_bias(config, latency_mode: str = "") -> bool:
+    """Use shorter English-source timing without changing speech capture gates."""
+    mode = normalize_latency_mode(latency_mode or getattr(config, "latency_mode", LATENCY_MODE_BALANCED))
+    bias = ENGLISH_AUDIO_LATENCY_BIAS.get(mode)
+    if not bias:
+        return False
+    for key, value in bias.items():
+        if hasattr(config, key):
+            setattr(config, key, value)
+    return True
+
+
+apply_english_audio_latency_bias = apply_english_realtime_latency_bias
+
+
 @dataclass
 class AudioConfig:
     latency_mode: str = ""
@@ -154,9 +182,9 @@ class AudioConfig:
     speech_threshold_blocks: int = 2
     silence_limit_blocks: int = 3
     max_buffer_blocks: int = 120
-    max_speech_seconds: float = 6.0
+    max_speech_seconds: float = 4.5
     pre_roll_ms: int = 450
-    speech_idle_timeout_ms: int = 550
+    speech_idle_timeout_ms: int = 450
     soft_silence_margin_db: float = 10.0
     soft_silence_gate_margin_db: float = 5.0
     noise_calibration_seconds: float = 2.0
@@ -773,6 +801,24 @@ class SystemAudioCapture:
 
     def current_noise_gate(self):
         return self._noise_floor, self._energy_threshold, self._noise_calibrated
+
+    def clear_pending_audio(self) -> int:
+        cleared = 0
+        while True:
+            try:
+                self._audio_queue.get_nowait()
+                cleared += 1
+            except queue.Empty:
+                break
+        if self._speech_buffer:
+            cleared += len(self._speech_buffer)
+        if self._pre_roll_buffer:
+            cleared += len(self._pre_roll_buffer)
+        self._reset_speech_buffer()
+        self._clear_pre_roll()
+        self._last_audio_activity_at = None
+        logger.info("audio pending buffers cleared: blocks={}", cleared)
+        return cleared
 
     def process_audio(self) -> Optional[SpeechSegment]:
         """处理音频队列，检测语音片段"""

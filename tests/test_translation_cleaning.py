@@ -9,7 +9,8 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from voxgo.runtime.events import EventBus, TranslationReady
 from voxgo.runtime.work_items import LatencyTrace
-from voxgo.translation.base import TranslationResult, clean_translation_output
+from voxgo.translation import GameTranslator, TranslationConfig
+from voxgo.translation.base import TranslationResult, clean_translation_output, local_phrase_cache_lookup
 from voxgo.translation.runtime import TranslationRuntime
 
 
@@ -40,6 +41,23 @@ class TranslationCleaningTest(unittest.TestCase):
         asyncio.run(runtime._translate_and_publish("translation-1", "hello", "en", traces["translation-1"]))
 
         self.assertEqual(seen[0].translated, "你好")
+
+
+    def test_local_phrase_cache_translates_common_game_command(self):
+        self.assertEqual(
+            local_phrase_cache_lookup("Enemy spotted!", "en", "zh", TranslationConfig()),
+            "\u53d1\u73b0\u654c\u4eba",
+        )
+
+    def test_game_translator_uses_cache_before_api_key_check(self):
+        translator = GameTranslator(TranslationConfig(source_lang="en", target_lang="zh", api_key=""))
+
+        result = asyncio.run(translator.translate_result("push", "en"))
+
+        self.assertEqual(result.provider, "local_cache")
+        self.assertEqual(result.source_lang, "en")
+        self.assertEqual(result.target_lang, "zh")
+        self.assertEqual(result.translated, "\u538b\u4e0a")
 
 
 if __name__ == "__main__":

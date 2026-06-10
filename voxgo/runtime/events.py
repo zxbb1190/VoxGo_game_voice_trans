@@ -8,6 +8,14 @@ class TranscriptReady:
     text: str
     language: str
     trace_id: str
+    language_probability: float = 0.0
+    source_lang: str = ""
+    target_lang: str = ""
+    whisper_language: str = ""
+    language_revision: int = 0
+    avg_logprob: float = 0.0
+    no_speech_prob: float = 0.0
+    compression_ratio: float = 0.0
 
 
 @dataclass
@@ -17,6 +25,7 @@ class TranslationReady:
     source_lang: str
     target_lang: str
     trace_id: str
+    language_revision: int = 0
 
 
 @dataclass

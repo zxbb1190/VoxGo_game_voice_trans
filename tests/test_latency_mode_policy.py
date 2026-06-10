@@ -8,6 +8,8 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from voxgo.asr.pipeline import CandidatePolicy, RecognitionModePolicy
 from voxgo.audio.capture import LATENCY_MODE_ACCURATE, LATENCY_MODE_BALANCED, LATENCY_MODE_FAST, AudioConfig, SpeechSegment
+from voxgo.config.schema import AppConfig
+from voxgo.translation.base import TranslationConfig
 
 
 def _low_margin_short_segment():
@@ -55,7 +57,7 @@ class LatencyModePolicyTest(unittest.TestCase):
     def test_latency_modes_have_separate_pending_waits(self):
         expectations = {
             LATENCY_MODE_FAST: 0.30,
-            LATENCY_MODE_BALANCED: 0.55,
+            LATENCY_MODE_BALANCED: 0.45,
             LATENCY_MODE_ACCURATE: 1.00,
         }
 
@@ -63,6 +65,82 @@ class LatencyModePolicyTest(unittest.TestCase):
             with self.subTest(mode=mode):
                 policy = RecognitionModePolicy.from_audio_config(AudioConfig(latency_mode=mode))
                 self.assertAlmostEqual(policy.pending_timeout_seconds, expected)
+
+    def test_fast_mode_shortens_busy_weak_wait(self):
+        policy = RecognitionModePolicy.from_audio_config(AudioConfig(latency_mode=LATENCY_MODE_FAST))
+
+        self.assertAlmostEqual(policy.busy_weak_delay_seconds, 0.50)
+        self.assertAlmostEqual(policy.busy_weak_stale_seconds, 1.60)
+
+    def test_balanced_mode_shortens_busy_weak_wait(self):
+        policy = RecognitionModePolicy.from_audio_config(AudioConfig(latency_mode=LATENCY_MODE_BALANCED))
+
+        self.assertAlmostEqual(policy.busy_weak_delay_seconds, 0.70)
+        self.assertAlmostEqual(policy.busy_weak_stale_seconds, 2.20)
+
+    def test_english_direction_uses_multilingual_realtime_wait_without_pure_english_mode(self):
+        from voxgo.asr.pipeline import SpeechPipeline
+        from voxgo.asr.whisper_engine import WhisperConfig
+        from voxgo.config.schema import DebugConfig
+        from voxgo.runtime.events import EventBus
+
+        config = AppConfig(
+            audio=AudioConfig(latency_mode=LATENCY_MODE_FAST),
+            whisper=WhisperConfig(language="auto"),
+            translation=TranslationConfig(source_lang="en", target_lang="zh"),
+            debug=DebugConfig(),
+        )
+        pipeline = SpeechPipeline(
+            lambda: config,
+            lambda: None,
+            EventBus(),
+            {"speech_detected": 0, "filtered_speech": 0, "dropped_speech": 0, "errors": 0},
+            lambda: True,
+            lambda: False,
+            lambda: "translation-1",
+            {},
+            lambda *args: None,
+        )
+
+        mode_policy = pipeline._mode_policy(config)
+        decision = CandidatePolicy().classify(_low_margin_short_segment(), config.audio)
+
+        self.assertAlmostEqual(mode_policy.pending_timeout_seconds, 0.25)
+        self.assertAlmostEqual(mode_policy.busy_weak_delay_seconds, 0.42)
+        self.assertTrue(decision.accepted)
+        self.assertTrue(decision.short_segment)
+
+    def test_pure_english_environment_shortens_pending_wait_without_changing_acceptance(self):
+        from voxgo.asr.pipeline import SpeechPipeline
+        from voxgo.asr.whisper_engine import WhisperConfig
+        from voxgo.config.schema import DebugConfig
+        from voxgo.runtime.events import EventBus
+
+        config = AppConfig(
+            audio=AudioConfig(latency_mode=LATENCY_MODE_FAST),
+            whisper=WhisperConfig(language="en", pure_english_environment=True),
+            translation=TranslationConfig(source_lang="en", target_lang="zh"),
+            debug=DebugConfig(),
+        )
+        pipeline = SpeechPipeline(
+            lambda: config,
+            lambda: None,
+            EventBus(),
+            {"speech_detected": 0, "filtered_speech": 0, "dropped_speech": 0, "errors": 0},
+            lambda: True,
+            lambda: False,
+            lambda: "translation-1",
+            {},
+            lambda *args: None,
+        )
+
+        mode_policy = pipeline._mode_policy(config)
+        decision = CandidatePolicy().classify(_low_margin_short_segment(), config.audio)
+
+        self.assertAlmostEqual(mode_policy.pending_timeout_seconds, 0.20)
+        self.assertAlmostEqual(mode_policy.busy_weak_delay_seconds, 0.35)
+        self.assertTrue(decision.accepted)
+        self.assertTrue(decision.short_segment)
 
 
 if __name__ == "__main__":

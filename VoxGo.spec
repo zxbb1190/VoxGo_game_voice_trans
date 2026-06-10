@@ -34,24 +34,34 @@ if include_model:
         shutil.copy2(cachedir_tag, safe_models / "CACHEDIR.TAG")
 
     config_data = json.loads((root / "config.example.json").read_text(encoding="utf-8"))
-    model_size = config_data.get("whisper", {}).get("model_size", "small")
-    model_repo = f"models--Systran--faster-whisper-{model_size}"
-    source_repo = root / ".models" / model_repo
-    if not source_repo.exists():
-        raise FileNotFoundError(f"Packaged Whisper model cache is missing: {source_repo}")
+    whisper_config = config_data.get("whisper", {})
+    model_sizes = {
+        whisper_config.get("model_size", "small"),
+        whisper_config.get("fast_model_size", ""),
+    }
+    if whisper_config.get("pure_english_environment", False):
+        model_sizes.add(whisper_config.get("english_model_size", "small.en"))
+        model_sizes.add(whisper_config.get("fast_english_model_size", ""))
+    for model_size in sorted(str(item or "").strip() for item in model_sizes):
+        if not model_size:
+            continue
+        model_repo = f"models--Systran--faster-whisper-{model_size}"
+        source_repo = root / ".models" / model_repo
+        if not source_repo.exists():
+            raise FileNotFoundError(f"Packaged Whisper model cache is missing: {source_repo}")
 
-    snapshot = (source_repo / "refs" / "main").read_text(encoding="utf-8").strip()
-    safe_repo = safe_models / model_repo
-    (safe_repo / "refs").mkdir(parents=True, exist_ok=True)
-    (safe_repo / "snapshots" / snapshot).mkdir(parents=True, exist_ok=True)
-    shutil.copy2(source_repo / "refs" / "main", safe_repo / "refs" / "main")
-    for source in (source_repo / "snapshots" / snapshot).iterdir():
-        if source.is_file() or source.is_symlink():
-            shutil.copy2(
-                source,
-                safe_repo / "snapshots" / snapshot / source.name,
-                follow_symlinks=True,
-            )
+        snapshot = (source_repo / "refs" / "main").read_text(encoding="utf-8").strip()
+        safe_repo = safe_models / model_repo
+        (safe_repo / "refs").mkdir(parents=True, exist_ok=True)
+        (safe_repo / "snapshots" / snapshot).mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_repo / "refs" / "main", safe_repo / "refs" / "main")
+        for source in (source_repo / "snapshots" / snapshot).iterdir():
+            if source.is_file() or source.is_symlink():
+                shutil.copy2(
+                    source,
+                    safe_repo / "snapshots" / snapshot / source.name,
+                    follow_symlinks=True,
+                )
     datas.append((str(safe_models), ".models"))
 
 site_packages = root / ".venv-win" / "Lib" / "site-packages"

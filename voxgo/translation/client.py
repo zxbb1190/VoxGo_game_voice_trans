@@ -8,8 +8,10 @@ from loguru import logger
 from .base import (
     TranslationConfig,
     TranslationRequest,
+    TranslationResult,
     detect_language,
     is_placeholder_api_key,
+    local_phrase_cache_lookup,
     normalize_translation_provider,
     target_language,
 )
@@ -76,6 +78,12 @@ class GameTranslator:
             source_language = self.detect_language(text, detected_language)
             return None
 
+        source_language = self.detect_language(text, detected_language)
+        target = self.get_target_language(source_language)
+        cached = self._local_cache_result(text, source_language, target, self.config)
+        if cached:
+            return cached
+
         provider = self._current_provider()
         if is_placeholder_api_key(self.config.api_key) and provider.requires_api_key():
             logger.warning("API Key 未配置，返回原文")
@@ -85,8 +93,6 @@ class GameTranslator:
 
             return TranslationResult(provider.missing_api_key_message(), source_language, target, provider.name)
 
-        source_language = self.detect_language(text, detected_language)
-        target = self.get_target_language(source_language)
         request = TranslationRequest(text=text, source_lang=source_language, target_lang=target, detected_language=detected_language)
         async with self._translation_semaphore():
             session = await self._get_session()
@@ -95,6 +101,70 @@ class GameTranslator:
                 self._translation_count += 1
                 self._total_time += result.elapsed_seconds
             return result
+
+    async def translate_result_with_config(
+        self,
+        text: str,
+        detected_language: str = "",
+        config: TranslationConfig = None,
+    ):
+        config = config or self.config
+        if config is self.config:
+            return await self.translate_result(text, detected_language)
+        if not text or not text.strip():
+            return None
+
+        provider = create_provider(config)
+        source_language = detect_language(text, getattr(config, "source_lang", ""), detected_language)
+        target = target_language(getattr(config, "target_lang", ""), source_language)
+        cached = self._local_cache_result(text, source_language, target, config)
+        if cached:
+            return cached
+        if is_placeholder_api_key(getattr(config, "api_key", "")) and provider.requires_api_key():
+            logger.warning("API Key 鏈厤缃紝杩斿洖鍘熸枃")
+            from .base import TranslationResult
+
+            return TranslationResult(provider.missing_api_key_message(), source_language, target, provider.name)
+
+        request = TranslationRequest(
+            text=text,
+            source_lang=source_language,
+            target_lang=target,
+            detected_language=detected_language,
+        )
+        async with self._translation_semaphore():
+            session = await self._get_session()
+            result = await provider.translate(request, session)
+            if result.translated and not result.translated.startswith("["):
+                self._translation_count += 1
+                self._total_time += result.elapsed_seconds
+            return result
+
+    def _local_cache_result(
+        self,
+        text: str,
+        source_language: str,
+        target_language_code: str,
+        config: TranslationConfig,
+    ):
+        translated = local_phrase_cache_lookup(text, source_language, target_language_code, config)
+        if not translated:
+            return None
+        logger.info(
+            "translation cache hit: {}->{}, text={}, translated={}",
+            source_language or "unknown",
+            target_language_code or "unknown",
+            text[:80],
+            translated[:80],
+        )
+        self._translation_count += 1
+        return TranslationResult(
+            translated=translated,
+            source_lang=source_language,
+            target_lang=target_language_code,
+            provider="local_cache",
+            elapsed_seconds=0.0,
+        )
 
     async def translate(self, text: str, detected_language: str = "") -> str:
         result = await self.translate_result(text, detected_language)

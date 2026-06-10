@@ -8,6 +8,20 @@ class LatencyTrace:
     item_id: str
     speech_detected_at: float
     queued_at: float
+    source_lang: str = ""
+    target_lang: str = ""
+    whisper_language: str = ""
+    language_revision: int = 0
+    latency_mode: str = ""
+    candidate_labels: tuple = field(default_factory=tuple)
+    segment_voice_seconds: float = 0.0
+    segment_total_seconds: float = 0.0
+    whisper_model_size: str = ""
+    whisper_device: str = ""
+    whisper_compute_type: str = ""
+    whisper_cpu_threads: int = 0
+    fast_path_allowed: bool = False
+    fast_path_ready: bool = False
     dequeued_at: float = 0.0
     transcription_started_at: float = 0.0
     transcription_finished_at: float = 0.0
@@ -27,6 +41,16 @@ class LatencyTrace:
             "translation_ms": translation_ms,
             "overlay_ms": overlay_ms,
             "total_ms": total_ms,
+            "latency_mode": self.latency_mode,
+            "candidate_labels": ",".join(self.candidate_labels or ()),
+            "segment_voice_ms": int(round(max(0.0, self.segment_voice_seconds) * 1000)),
+            "segment_total_ms": int(round(max(0.0, self.segment_total_seconds) * 1000)),
+            "whisper_model_size": self.whisper_model_size,
+            "whisper_device": self.whisper_device,
+            "whisper_compute_type": self.whisper_compute_type,
+            "whisper_cpu_threads": self.whisper_cpu_threads,
+            "fast_path_allowed": self.fast_path_allowed,
+            "fast_path_ready": self.fast_path_ready,
         }
 
     @staticmethod
@@ -45,3 +69,7 @@ class SpeechWorkItem:
     low_confidence: bool = False
     short_segment: bool = False
     dumped_low_confidence: bool = False
+    source_lang: str = ""
+    target_lang: str = ""
+    whisper_language: str = ""
+    language_revision: int = 0

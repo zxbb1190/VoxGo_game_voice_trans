@@ -263,9 +263,9 @@ class AudioDeviceConfig:
     speech_threshold_blocks: int = 2
     silence_limit_blocks: int = 3
     max_buffer_blocks: int = 120
-    max_speech_seconds: float = 6.0
+    max_speech_seconds: float = 4.5
     pre_roll_ms: int = 450
-    speech_idle_timeout_ms: int = 550
+    speech_idle_timeout_ms: int = 450
     min_segment_seconds: float = 0.35
     min_segment_peak_margin_db: float = 1.5
 
@@ -273,6 +273,12 @@ class AudioDeviceConfig:
 @dataclass
 class WhisperDeviceConfig:
     device: str = "cpu"
+    model_size: str = "small"
+    fast_model_size: str = ""
+    pure_english_environment: bool = False
+    enable_english_model: bool = False
+    english_model_size: str = "small.en"
+    fast_english_model_size: str = ""
     model_download_source: str = "modelscope"
     model_download_endpoint: str = ""
 
@@ -319,6 +325,32 @@ def _copy_translation_config(config: TranslationConfig) -> TranslationConfig:
             "max_concurrent_requests",
             TranslationConfig.max_concurrent_requests,
         ),
+        skip_language_mismatch=getattr(
+            config,
+            "skip_language_mismatch",
+            TranslationConfig.skip_language_mismatch,
+        ),
+        language_gate_min_probability=getattr(
+            config,
+            "language_gate_min_probability",
+            TranslationConfig.language_gate_min_probability,
+        ),
+        language_gate_short_text_min_probability=getattr(
+            config,
+            "language_gate_short_text_min_probability",
+            TranslationConfig.language_gate_short_text_min_probability,
+        ),
+        language_gate_short_text_chars=getattr(
+            config,
+            "language_gate_short_text_chars",
+            TranslationConfig.language_gate_short_text_chars,
+        ),
+        enable_local_phrase_cache=getattr(
+            config,
+            "enable_local_phrase_cache",
+            TranslationConfig.enable_local_phrase_cache,
+        ),
+        local_phrase_cache=getattr(config, "local_phrase_cache", TranslationConfig.local_phrase_cache),
     )
 
 
@@ -340,6 +372,40 @@ def _device_label(device: Optional[dict]) -> str:
         f"[{device_type}] [{device.get('index')}] {device.get('name', '')} "
         f"({device.get('sample_rate') or 0}Hz/{device.get('channels') or 0}ch)"
     )
+
+
+def _format_bool(value, ui_language: str) -> str:
+    if is_english_ui(ui_language):
+        return "yes" if bool(value) else "no"
+    return "是" if bool(value) else "否"
+
+
+def _recognition_runtime_lines(latency: dict, ui_language: str) -> list:
+    if is_english_ui(ui_language):
+        return [
+            "### Recognition Runtime",
+            f"- Response mode: {latency.get('latency_mode') or 'unknown'}",
+            f"- Candidate labels: {latency.get('candidate_labels') or 'none'}",
+            f"- Segment voice / total: {latency.get('segment_voice_ms', 0)} ms / {latency.get('segment_total_ms', 0)} ms",
+            f"- Whisper model: {latency.get('whisper_model_size') or 'unknown'}",
+            f"- Whisper device: {latency.get('whisper_device') or 'unknown'}",
+            f"- Whisper compute type: {latency.get('whisper_compute_type') or 'unknown'}",
+            f"- Whisper CPU threads: {latency.get('whisper_cpu_threads', 0)}",
+            f"- English fast path allowed: {_format_bool(latency.get('fast_path_allowed'), ui_language)}",
+            f"- English fast path ready: {_format_bool(latency.get('fast_path_ready'), ui_language)}",
+        ]
+    return [
+        "### 识别运行信息",
+        f"- 响应模式：{latency.get('latency_mode') or 'unknown'}",
+        f"- 候选标签：{latency.get('candidate_labels') or 'none'}",
+        f"- 语音片段 / 总片段：{latency.get('segment_voice_ms', 0)} ms / {latency.get('segment_total_ms', 0)} ms",
+        f"- Whisper 模型：{latency.get('whisper_model_size') or 'unknown'}",
+        f"- Whisper 设备：{latency.get('whisper_device') or 'unknown'}",
+        f"- Whisper 计算类型：{latency.get('whisper_compute_type') or 'unknown'}",
+        f"- Whisper CPU 线程：{latency.get('whisper_cpu_threads', 0)}",
+        f"- 英文快路径允许：{_format_bool(latency.get('fast_path_allowed'), ui_language)}",
+        f"- 英文快路径就绪：{_format_bool(latency.get('fast_path_ready'), ui_language)}",
+    ]
 
 
 def _build_feedback_report(
@@ -382,6 +448,8 @@ def _build_feedback_report(
             f"- Overlay update: {latency.get('overlay_ms', 0)} ms",
             f"- Total: {latency.get('total_ms', 0)} ms",
             "",
+            *_recognition_runtime_lines(latency, ui_language),
+            "",
             "### Log Files",
             f"- app.log: {log_dir}/app.log",
             f"- crash_report.txt: {log_dir}/crash_report.txt",
@@ -422,6 +490,8 @@ def _build_feedback_report(
         f"- 翻译耗时：{latency.get('translation_ms', 0)} ms",
         f"- 浮窗更新：{latency.get('overlay_ms', 0)} ms",
         f"- 总延迟：{latency.get('total_ms', 0)} ms",
+        "",
+        *_recognition_runtime_lines(latency, ui_language),
         "",
         "### 日志文件",
         f"- app.log：{log_dir}/app.log",

@@ -18,7 +18,7 @@ class RuntimeEventsTest(unittest.TestCase):
         bus.subscribe(TranslationReady, lambda event: seen.append(("translation", event.translated)))
 
         bus.publish(AppNotice(level="状态", message="ignored"))
-        bus.publish(TranscriptReady(text="hello", language="en", trace_id="t1"))
+        bus.publish(TranscriptReady(text="hello", language="en", trace_id="t1", language_probability=0.95))
         bus.publish(TranslationReady(original="hello", translated="你好", source_lang="en", target_lang="zh", trace_id="t1"))
 
         self.assertEqual(seen, [("transcript", "hello"), ("translation", "你好")])

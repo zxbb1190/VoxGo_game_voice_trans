@@ -97,6 +97,7 @@ class OverlaySignals(QObject):
     new_translation = pyqtSignal(str, str)
     new_translation_with_id = pyqtSignal(str, str, str)
     update_translation = pyqtSignal(str, str)
+    remove_translation = pyqtSignal(str)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
     toggle_lock = pyqtSignal()
@@ -1046,6 +1047,7 @@ class GameOverlay(QWidget):
         self._signals.new_translation.connect(self._add_translation)
         self._signals.new_translation_with_id.connect(self._add_translation_with_id)
         self._signals.update_translation.connect(self._update_translation)
+        self._signals.remove_translation.connect(self._remove_translation)
         self._signals.clear_history.connect(self._clear_history)
         self._signals.toggle_visibility.connect(self._toggle_visibility)
         self._signals.toggle_lock.connect(self._toggle_lock)
@@ -1064,6 +1066,9 @@ class GameOverlay(QWidget):
     def update_translation(self, item_id: str, translated: str):
         """线程安全地更新已有翻译记录。"""
         self._signals.update_translation.emit(item_id, translated)
+
+    def remove_translation(self, item_id: str):
+        self._signals.remove_translation.emit(item_id)
 
     def _add_translation(self, original: str, translated: str):
         """添加翻译到浮窗"""
@@ -1095,6 +1100,15 @@ class GameOverlay(QWidget):
                 item.translated = translated
                 item.fade_start = None
                 item.timestamp = time.time()
+                self._refresh_labels()
+                if self._on_overlay_updated:
+                    self._on_overlay_updated(item_id)
+                return
+
+    def _remove_translation(self, item_id: str):
+        for item in list(self._translations):
+            if item.item_id == item_id:
+                self._translations.remove(item)
                 self._refresh_labels()
                 if self._on_overlay_updated:
                     self._on_overlay_updated(item_id)

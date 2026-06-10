@@ -24,9 +24,11 @@ from voxgo.asr.whisper_engine import (
 from voxgo.translation import (
     TranslationConfig,
     normalize_translation_provider,
+    should_skip_translation_for_language,
 )
 from voxgo.update.checker import UpdateSettings
 from voxgo.config.loader import (
+    apply_language_runtime_policy,
     load_config as load_app_config,
     migrate_runtime_defaults,
     save_user_settings,
@@ -126,6 +128,7 @@ class VoxGoApp:
             self.config.translation.source_lang,
             self.config.translation.target_lang,
         )
+        self._language_flow_revision = 1
         self._last_whisper_device = _normalize_whisper_device(self.config.whisper.device)
         self._last_model_download_source = (
             normalize_model_download_source(
@@ -142,7 +145,8 @@ class VoxGoApp:
         self._stats = {
             "audio_chunks": 0, "speech_detected": 0,
             "transcriptions": 0, "translations": 0, "errors": 0,
-            "dropped_speech": 0, "filtered_speech": 0
+            "dropped_speech": 0, "filtered_speech": 0,
+            "skipped_translations": 0,
         }
         self._translation = TranslationRuntime(
             self._event_bus,
@@ -150,6 +154,7 @@ class VoxGoApp:
             self._latency_traces,
             lambda: self._overlay,
         )
+        self._translation.set_language_revision_getter(lambda: self._language_flow_revision)
         self._speech_pipeline = SpeechPipeline(
             lambda: self.config,
             lambda: self._speech_recognizer,
@@ -160,6 +165,7 @@ class VoxGoApp:
             self._next_translation_item_id,
             self._latency_traces,
             self._notify_user,
+            lambda: self._language_flow_revision,
         )
 
     def _load_config(self, config_path: str = None) -> AppConfig:
@@ -173,11 +179,101 @@ class VoxGoApp:
 
     def _sync_language_flow(self, config: AppConfig = None):
         config = config or self.config
-        return sync_language_flow(config)
+        result = sync_language_flow(config)
+        apply_language_runtime_policy(config)
+        return result
 
     def _sync_whisper_vad_limit(self, config: AppConfig = None):
         config = config or self.config
         sync_whisper_vad_limit(config)
+
+    def _translation_config_snapshot(self, source_lang: str = "", target_lang: str = "") -> TranslationConfig:
+        base = self.config.translation
+        snapshot = TranslationConfig(
+            provider=getattr(base, "provider", TranslationConfig.provider),
+            api_key=getattr(base, "api_key", TranslationConfig.api_key),
+            model=getattr(base, "model", TranslationConfig.model),
+            endpoint=getattr(base, "endpoint", TranslationConfig.endpoint),
+            max_tokens=getattr(base, "max_tokens", TranslationConfig.max_tokens),
+            temperature=getattr(base, "temperature", TranslationConfig.temperature),
+            source_lang=source_lang or getattr(base, "source_lang", TranslationConfig.source_lang),
+            target_lang=target_lang or getattr(base, "target_lang", TranslationConfig.target_lang),
+            context_messages=getattr(base, "context_messages", TranslationConfig.context_messages),
+            timeout_seconds=getattr(base, "timeout_seconds", TranslationConfig.timeout_seconds),
+            max_concurrent_requests=getattr(
+                base,
+                "max_concurrent_requests",
+                TranslationConfig.max_concurrent_requests,
+            ),
+            skip_language_mismatch=getattr(base, "skip_language_mismatch", TranslationConfig.skip_language_mismatch),
+            language_gate_min_probability=getattr(
+                base,
+                "language_gate_min_probability",
+                TranslationConfig.language_gate_min_probability,
+            ),
+            language_gate_short_text_min_probability=getattr(
+                base,
+                "language_gate_short_text_min_probability",
+                TranslationConfig.language_gate_short_text_min_probability,
+            ),
+            language_gate_short_text_chars=getattr(
+                base,
+                "language_gate_short_text_chars",
+                TranslationConfig.language_gate_short_text_chars,
+            ),
+            enable_local_phrase_cache=getattr(
+                base,
+                "enable_local_phrase_cache",
+                TranslationConfig.enable_local_phrase_cache,
+            ),
+            local_phrase_cache=getattr(base, "local_phrase_cache", TranslationConfig.local_phrase_cache),
+        )
+        return snapshot
+
+    def _handle_language_flow_changed(self, source_lang: str, target_lang: str):
+        previous_model = self._current_recognizer_model_size()
+        self._language_flow_revision += 1
+        self._translation.clear_context()
+        self._translation.set_language_revision_getter(lambda: self._language_flow_revision)
+        self._speech_pipeline.reset_for_language_switch(
+            source_lang,
+            target_lang,
+            self._language_flow_revision,
+        )
+        cleared_audio_blocks = self._audio.clear_pending_audio()
+        current_model = self._effective_whisper_model_size()
+        if self._speech_recognizer and previous_model and current_model != previous_model:
+            self._speech_recognizer.config = self.config.whisper
+            self._speech_recognizer.cleanup()
+            logger.info(
+                "Whisper model will reload for language direction: {} -> {}",
+                previous_model,
+                current_model,
+            )
+        elif self._speech_recognizer:
+            self._speech_recognizer.config = self.config.whisper
+        logger.info(
+            "language flow changed: revision={}, direction={}->{}, cleared_audio_blocks={}",
+            self._language_flow_revision,
+            source_lang,
+            target_lang,
+            cleared_audio_blocks,
+        )
+
+    def _effective_whisper_model_size(self) -> str:
+        active = str(getattr(self.config.whisper, "active_model_size", "") or "").strip()
+        if active:
+            return active
+        return str(getattr(self.config.whisper, "model_size", "small") or "small").strip() or "small"
+
+    def _current_recognizer_model_size(self) -> str:
+        if self._speech_recognizer:
+            loaded = str(getattr(self._speech_recognizer, "_loaded_model_size", "") or "").strip()
+            if loaded:
+                return loaded
+        if self._speech_recognizer and hasattr(self._speech_recognizer, "_effective_model_size"):
+            return self._speech_recognizer._effective_model_size()
+        return self._effective_whisper_model_size()
 
     def _refresh_cached_settings(self):
         self._last_audio_device = (
@@ -245,11 +341,88 @@ class VoxGoApp:
         self._stats["transcriptions"] += 1
         self._speech_pipeline.remember_transcript(event.text)
         trace = self._latency_traces.get(event.trace_id)
+        language_probability = getattr(event, "language_probability", 0.0)
+        event_revision = int(getattr(event, "language_revision", 0) or 0)
+        source_lang = getattr(event, "source_lang", "") or getattr(self.config.translation, "source_lang", "")
+        target_lang = getattr(event, "target_lang", "") or getattr(self.config.translation, "target_lang", "")
+        if event_revision and event_revision != self._language_flow_revision:
+            if trace:
+                trace.translation_started_at = time.time()
+                trace.translation_finished_at = trace.translation_started_at
+                self._latency_traces.pop(event.trace_id, None)
+            self._stats["skipped_translations"] = self._stats.get("skipped_translations", 0) + 1
+            logger.info(
+                "translation skipped: stale_language_flow, item_revision={}, current_revision={}, snapshot={}->{}, current={}->{}, text={}",
+                event_revision,
+                self._language_flow_revision,
+                source_lang or "unknown",
+                target_lang or "unknown",
+                getattr(self.config.translation, "source_lang", "") or "unknown",
+                getattr(self.config.translation, "target_lang", "") or "unknown",
+                event.text[:80],
+            )
+            return
+        gate_config = self._translation_config_snapshot(source_lang, target_lang)
+        skip_reason = should_skip_translation_for_language(
+            event.text,
+            source_lang,
+            event.language,
+            language_probability,
+            gate_config,
+        )
+        if skip_reason:
+            if trace:
+                trace.translation_started_at = time.time()
+                trace.translation_finished_at = trace.translation_started_at
+                self._latency_traces.pop(event.trace_id, None)
+            self._stats["skipped_translations"] = self._stats.get("skipped_translations", 0) + 1
+            logger.info(
+                "translation skipped: {}, detected={}, expected={}, prob={:.2f}, text={}",
+                skip_reason,
+                event.language or "unknown",
+                source_lang or "unknown",
+                float(language_probability or 0.0),
+                event.text[:80],
+            )
+            return
         if self._overlay:
             self._overlay.add_translation_with_id(event.trace_id, event.text, "...正在翻译")
-        self._start_async_translation(event.trace_id, event.text, event.language, trace)
+        logger.info(
+            "language gate accepted: detected={}, expected={}, prob={:.2f}, snapshot={}->{}, revision={}",
+            event.language or "unknown",
+            source_lang or "unknown",
+            float(language_probability or 0.0),
+            source_lang or "unknown",
+            target_lang or "unknown",
+            event_revision,
+        )
+        self._start_async_translation(
+            event.trace_id,
+            event.text,
+            event.language,
+            language_probability,
+            source_lang,
+            target_lang,
+            event_revision,
+            trace,
+        )
 
     def _handle_translation_ready(self, event: TranslationReady):
+        event_revision = int(getattr(event, "language_revision", 0) or 0)
+        if event_revision and event_revision != self._language_flow_revision:
+            self._latency_traces.pop(event.trace_id, None)
+            if self._overlay and hasattr(self._overlay, "remove_translation"):
+                self._overlay.remove_translation(event.trace_id)
+            self._stats["skipped_translations"] = self._stats.get("skipped_translations", 0) + 1
+            logger.info(
+                "translation result ignored: stale_language_flow, item_revision={}, current_revision={}, source={}, target={}, text={}",
+                event_revision,
+                self._language_flow_revision,
+                event.source_lang or "unknown",
+                event.target_lang or "unknown",
+                event.original[:80],
+            )
+            return
         translated = event.translated
         is_notice = translated.startswith("[翻译") or translated.startswith("[未翻译]")
         if is_notice:
@@ -627,8 +800,27 @@ class VoxGoApp:
         self._translation_item_seq += 1
         return f"translation-{self._translation_item_seq}"
 
-    def _start_async_translation(self, item_id: str, text: str, detected_language: str = "", trace=None):
-        self._translation.translate_async(item_id, text, detected_language, trace)
+    def _start_async_translation(
+        self,
+        item_id: str,
+        text: str,
+        detected_language: str = "",
+        language_probability: float = 0.0,
+        source_lang: str = "",
+        target_lang: str = "",
+        language_revision: int = 0,
+        trace=None,
+    ):
+        self._translation.translate_async(
+            item_id,
+            text,
+            detected_language,
+            language_probability,
+            source_lang,
+            target_lang,
+            language_revision,
+            trace,
+        )
 
     def _on_overlay_updated(self, item_id: str):
         trace = self._latency_traces.pop(item_id, None)
@@ -638,13 +830,21 @@ class VoxGoApp:
         self._last_latency_summary = trace.summary_ms()
         if getattr(self.config.debug, "enabled", False):
             logger.info(
-                "[延迟] item={} wait={}ms recognition={}ms translation={}ms overlay={}ms total={}ms",
+                "[延迟] item={} wait={}ms recognition={}ms translation={}ms overlay={}ms total={}ms mode={} labels={} model={} device={} compute={} threads={} fast_path={}/{}",
                 item_id,
                 self._last_latency_summary.get("wait_ms", 0),
                 self._last_latency_summary.get("recognition_ms", 0),
                 self._last_latency_summary.get("translation_ms", 0),
                 self._last_latency_summary.get("overlay_ms", 0),
                 self._last_latency_summary.get("total_ms", 0),
+                self._last_latency_summary.get("latency_mode", ""),
+                self._last_latency_summary.get("candidate_labels", ""),
+                self._last_latency_summary.get("whisper_model_size", ""),
+                self._last_latency_summary.get("whisper_device", ""),
+                self._last_latency_summary.get("whisper_compute_type", ""),
+                self._last_latency_summary.get("whisper_cpu_threads", 0),
+                self._last_latency_summary.get("fast_path_allowed", False),
+                self._last_latency_summary.get("fast_path_ready", False),
             )
 
     def _get_last_latency_summary(self) -> dict:
@@ -721,6 +921,7 @@ class VoxGoApp:
         if sys.stdout is not None:
             print(f"\n翻译统计: 识别 {self._stats['transcriptions']} 条, "
                   f"翻译 {self._stats['translations']} 条, "
+                  f"跳过 {self._stats.get('skipped_translations', 0)} 条, "
                   f"过滤 {self._stats['filtered_speech']} 段, 错误 {self._stats['errors']} 次")
         logger.info("已停止")
 

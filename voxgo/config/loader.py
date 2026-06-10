@@ -8,6 +8,7 @@ from voxgo.audio.capture import (
     LATENCY_MODE_BALANCED,
     LATENCY_MODE_FAST,
     AudioConfig,
+    apply_english_realtime_latency_bias,
     SAFE_MAX_SPEECH_THRESHOLD_DBFS,
     apply_audio_latency_preset,
     infer_latency_mode,
@@ -91,8 +92,36 @@ def load_config(config_path: str = None, runtime_dir: Path = None) -> AppConfig:
         load_user_settings(config, Path(runtime_dir))
     migrate_runtime_defaults(config)
     sync_language_flow(config)
+    apply_language_runtime_policy(config)
     sync_whisper_vad_limit(config)
     return config
+
+
+def _use_pure_english_model(config: AppConfig, is_english_to_chinese: bool) -> bool:
+    return bool(is_english_to_chinese and getattr(config.whisper, "pure_english_environment", False))
+
+
+def _active_whisper_model_size(config: AppConfig, latency_mode: str, is_english_to_chinese: bool) -> str:
+    if _use_pure_english_model(config, is_english_to_chinese):
+        if latency_mode == LATENCY_MODE_FAST:
+            fast_english = str(getattr(config.whisper, "fast_english_model_size", "") or "").strip()
+            if fast_english:
+                return fast_english
+        return str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip() or "small.en"
+    return (
+        config.whisper.fast_model_size
+        if latency_mode == LATENCY_MODE_FAST and config.whisper.fast_model_size
+        else ""
+    )
+
+
+def apply_language_runtime_policy(config: AppConfig):
+    """Apply language-direction runtime choices after source/target are normalized."""
+    latency_mode = normalize_latency_mode(getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED))
+    is_english_to_chinese = config.translation.source_lang == "en" and config.translation.target_lang == "zh"
+    if is_english_to_chinese:
+        apply_english_realtime_latency_bias(config.audio, latency_mode)
+    config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
 
 
 def apply_section_data(config: AppConfig, data: dict, sections: list):
@@ -152,6 +181,35 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
         )
     except Exception:
         config.translation.max_concurrent_requests = 2
+    config.translation.skip_language_mismatch = bool(
+        getattr(config.translation, "skip_language_mismatch", True)
+    )
+    try:
+        config.translation.language_gate_min_probability = max(
+            0.0,
+            min(1.0, float(getattr(config.translation, "language_gate_min_probability", 0.60) or 0.0)),
+        )
+    except Exception:
+        config.translation.language_gate_min_probability = 0.60
+    try:
+        config.translation.language_gate_short_text_min_probability = max(
+            0.0,
+            min(1.0, float(getattr(config.translation, "language_gate_short_text_min_probability", 0.85) or 0.0)),
+        )
+    except Exception:
+        config.translation.language_gate_short_text_min_probability = 0.85
+    try:
+        config.translation.language_gate_short_text_chars = max(
+            0,
+            min(32, int(getattr(config.translation, "language_gate_short_text_chars", 6) or 0)),
+        )
+    except Exception:
+        config.translation.language_gate_short_text_chars = 6
+    config.translation.enable_local_phrase_cache = bool(
+        getattr(config.translation, "enable_local_phrase_cache", True)
+    )
+    if not isinstance(getattr(config.translation, "local_phrase_cache", None), dict):
+        config.translation.local_phrase_cache = None
     if not getattr(config, "debug", None):
         config.debug = DebugConfig()
     if not hasattr(config.debug, "save_failed_audio"):
@@ -169,14 +227,41 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     ).strip() or "diagnostics/audio"
     if not hasattr(config.whisper, "cpu_threads"):
         config.whisper.cpu_threads = 2
+    if not hasattr(config.whisper, "auto_cpu_threads"):
+        config.whisper.auto_cpu_threads = True
     if not hasattr(config.whisper, "num_workers"):
         config.whisper.num_workers = 1
     if not hasattr(config.whisper, "fast_model_size"):
         config.whisper.fast_model_size = ""
+    if not hasattr(config.whisper, "pure_english_environment"):
+        config.whisper.pure_english_environment = False
+    if not hasattr(config.whisper, "enable_english_model"):
+        config.whisper.enable_english_model = False
+    if not hasattr(config.whisper, "english_model_size"):
+        config.whisper.english_model_size = "small.en"
+    if not hasattr(config.whisper, "fast_english_model_size"):
+        config.whisper.fast_english_model_size = ""
     if not hasattr(config.whisper, "active_model_size"):
         config.whisper.active_model_size = ""
     config.whisper.model_size = str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small"
     config.whisper.fast_model_size = str(getattr(config.whisper, "fast_model_size", "") or "").strip()
+    config.whisper.pure_english_environment = bool(getattr(config.whisper, "pure_english_environment", False))
+    config.whisper.enable_english_model = config.whisper.pure_english_environment
+    config.whisper.english_model_size = (
+        str(getattr(config.whisper, "english_model_size", "small.en") or "").strip() or "small.en"
+    )
+    config.whisper.fast_english_model_size = (
+        str(getattr(config.whisper, "fast_english_model_size", "") or "").strip()
+    )
+    config.whisper.auto_cpu_threads = _coerce_bool(getattr(config.whisper, "auto_cpu_threads", True), True)
+    try:
+        config.whisper.cpu_threads = max(1, min(8, int(getattr(config.whisper, "cpu_threads", 2) or 2)))
+    except Exception:
+        config.whisper.cpu_threads = 2
+    try:
+        config.whisper.num_workers = max(1, min(2, int(getattr(config.whisper, "num_workers", 1) or 1)))
+    except Exception:
+        config.whisper.num_workers = 1
     if preserve_existing_audio_tuning:
         config.audio.latency_mode = infer_latency_mode(config.audio)
     else:
@@ -184,9 +269,13 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
             getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED)
         )
     latency_mode = apply_audio_latency_preset(config.audio)
-    config.whisper.active_model_size = (
-        config.whisper.fast_model_size if latency_mode == LATENCY_MODE_FAST and config.whisper.fast_model_size else ""
+    is_english_to_chinese = (
+        str(getattr(config.translation, "source_lang", "") or "").strip().lower() == "en"
+        and str(getattr(config.translation, "target_lang", "") or "").strip().lower() == "zh"
     )
+    if is_english_to_chinese:
+        apply_english_realtime_latency_bias(config.audio, latency_mode)
+    config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
     try:
         config.whisper.beam_size = max(
             1,
@@ -234,10 +323,10 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     try:
         config.audio.speech_idle_timeout_ms = max(
             100,
-            min(3000, int(getattr(config.audio, "speech_idle_timeout_ms", 550) or 550)),
+            min(3000, int(getattr(config.audio, "speech_idle_timeout_ms", 450) or 450)),
         )
     except Exception:
-        config.audio.speech_idle_timeout_ms = 550
+        config.audio.speech_idle_timeout_ms = 450
     try:
         config.whisper.min_language_probability = max(
             0.0,
@@ -349,7 +438,12 @@ def serialize_user_settings(config: AppConfig) -> dict:
         "whisper": {
             "model_size": str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small",
             "fast_model_size": str(getattr(config.whisper, "fast_model_size", "") or "").strip(),
+            "pure_english_environment": bool(getattr(config.whisper, "pure_english_environment", False)),
+            "enable_english_model": bool(getattr(config.whisper, "pure_english_environment", False)),
+            "english_model_size": str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip(),
+            "fast_english_model_size": str(getattr(config.whisper, "fast_english_model_size", "") or "").strip(),
             "device": normalize_whisper_device(config.whisper.device),
+            "auto_cpu_threads": _coerce_bool(getattr(config.whisper, "auto_cpu_threads", True), True),
             "cpu_threads": int(getattr(config.whisper, "cpu_threads", 2) or 2),
             "num_workers": int(getattr(config.whisper, "num_workers", 1) or 1),
             "model_download_source": normalize_model_download_source(
@@ -372,6 +466,18 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "context_messages": config.translation.context_messages,
             "timeout_seconds": config.translation.timeout_seconds,
             "max_concurrent_requests": config.translation.max_concurrent_requests,
+            "skip_language_mismatch": bool(getattr(config.translation, "skip_language_mismatch", True)),
+            "language_gate_min_probability": float(
+                getattr(config.translation, "language_gate_min_probability", 0.60) or 0.0
+            ),
+            "language_gate_short_text_min_probability": float(
+                getattr(config.translation, "language_gate_short_text_min_probability", 0.85) or 0.0
+            ),
+            "language_gate_short_text_chars": int(
+                getattr(config.translation, "language_gate_short_text_chars", 6) or 0
+            ),
+            "enable_local_phrase_cache": bool(getattr(config.translation, "enable_local_phrase_cache", True)),
+            "local_phrase_cache": getattr(config.translation, "local_phrase_cache", None) or {},
         },
         "debug": {
             "enabled": bool(getattr(config.debug, "enabled", False)),
@@ -403,8 +509,24 @@ def sync_language_flow(config: AppConfig):
         target = OPPOSITE_LANGUAGE[source]
     config.translation.source_lang = source
     config.translation.target_lang = target
-    config.whisper.language = source
+    # The selected source language is the recognition language. Keep model choice
+    # separate so English fast path can still be only about using *.en models.
+    config.whisper.language = source if source in OPPOSITE_LANGUAGE else "auto"
     return source, target
+
+
+def _coerce_bool(value, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if text in {"1", "true", "yes", "on", "y", "enabled", "enable"}:
+            return True
+        if text in {"0", "false", "no", "off", "n", "disabled", "disable"}:
+            return False
+    return bool(value)
 
 
 def sync_whisper_vad_limit(config: AppConfig):
