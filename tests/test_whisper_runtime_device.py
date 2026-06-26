@@ -67,7 +67,7 @@ class WhisperRuntimeDeviceTest(unittest.TestCase):
 
         self.assertEqual(
             recognizer._model_load_candidates(),
-            [("cuda", "float16"), ("cuda", "float32"), ("cpu", "int8")],
+            [("cuda", "float16"), ("cuda", "int8_float16"), ("cuda", "float32"), ("cpu", "int8")],
         )
 
     def test_auto_device_candidates_try_cuda_float32_before_cpu_when_cuda_exists(self):
@@ -76,12 +76,12 @@ class WhisperRuntimeDeviceTest(unittest.TestCase):
 
         self.assertEqual(
             recognizer._model_load_candidates(),
-            [("cuda", "float16"), ("cuda", "float32"), ("cpu", "int8")],
+            [("cuda", "float16"), ("cuda", "int8_float16"), ("cuda", "float32"), ("cpu", "int8")],
         )
 
     def test_runtime_cpu_fallback_does_not_overwrite_configured_cuda(self):
         fake_model = FakeWhisperModelFactory(
-            failures={("cuda", "float16"), ("cuda", "float32")}
+            failures={("cuda", "float16"), ("cuda", "int8_float16"), ("cuda", "float32")}
         )
         with tempfile.TemporaryDirectory() as tmp, patch(
             "voxgo.asr.whisper_engine.WhisperModel",
@@ -101,7 +101,7 @@ class WhisperRuntimeDeviceTest(unittest.TestCase):
 
         self.assertEqual(
             fake_model.calls,
-            [("cuda", "float16"), ("cuda", "float32"), ("cpu", "int8")],
+            [("cuda", "float16"), ("cuda", "int8_float16"), ("cuda", "float32"), ("cpu", "int8")],
         )
         self.assertEqual(config.device, "cuda")
         self.assertEqual(config.compute_type, "auto")
@@ -130,11 +130,11 @@ class WhisperRuntimeDeviceTest(unittest.TestCase):
 
             recognizer.initialize()
 
-        self.assertEqual(fake_model.calls, [("cuda", "float16"), ("cuda", "float32")])
+        self.assertEqual(fake_model.calls, [("cuda", "float16"), ("cuda", "int8_float16")])
         self.assertEqual(config.device, "cuda")
         self.assertEqual(config.compute_type, "auto")
         self.assertEqual(recognizer.runtime_device, "cuda")
-        self.assertEqual(recognizer.runtime_compute_type, "float32")
+        self.assertEqual(recognizer.runtime_compute_type, "int8_float16")
 
     def test_cuda_transcription_runtime_error_falls_back_to_cpu_for_session(self):
         fake_model = TranscribeRuntimeModelFactory()

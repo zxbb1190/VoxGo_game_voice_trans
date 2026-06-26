@@ -11,6 +11,18 @@ from voxgo.audio.capture import AudioConfig, SystemAudioCapture
 
 
 class CaptureVoiceCandidateTest(unittest.TestCase):
+    def test_raw_audio_queue_drops_oldest_block_when_full(self):
+        config = AudioConfig(audio_queue_max_blocks=2)
+        capture = SystemAudioCapture(config)
+
+        capture._enqueue_audio_block(b"one")
+        capture._enqueue_audio_block(b"two")
+        capture._enqueue_audio_block(b"three")
+
+        self.assertEqual(capture._audio_queue.get_nowait(), b"two")
+        self.assertEqual(capture._audio_queue.get_nowait(), b"three")
+        self.assertEqual(capture._dropped_audio_queue_blocks, 1)
+
     def test_short_vad_segment_is_emitted_not_reset_before_pipeline(self):
         config = AudioConfig(
             sample_rate=16000,

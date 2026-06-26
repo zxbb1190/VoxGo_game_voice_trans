@@ -3,6 +3,7 @@
 整合音频捕获、语音识别、翻译和浮窗展示
 """
 
+import argparse
 import signal
 import sys
 import threading
@@ -17,7 +18,7 @@ configure_local_dll_paths()
 from loguru import logger
 
 from voxgo.app_info import APP_NAME, APP_VERSION
-from voxgo.audio.capture import AudioConfig
+from voxgo.audio.capture import AudioConfig, LATENCY_MODE_FAST
 from voxgo.asr.whisper_engine import (
     ModelDownloadProgress,
     SpeechRecognizer,
@@ -59,10 +60,15 @@ from voxgo.runtime.cuda_runtime import (
 )
 from voxgo.runtime.events import AppNotice, EventBus, TranscriptReady, TranslationReady
 from voxgo.runtime.hotkeys import HotkeyManager
+from voxgo.runtime.priority import (
+    apply_game_friendly_process_priority,
+    apply_game_friendly_thread_priority,
+)
 from voxgo.runtime.settings_controller import OverlaySettingsController
 from voxgo.diagnostics.reporter import DiagnosticsReporter
 from voxgo.asr.model_download_notice import ModelDownloadNoticeFormatter
 from voxgo.asr.pipeline import SpeechPipeline
+from voxgo.audio.benchmark import BenchmarkAudioOptions, resolve_benchmark_audio_path
 from voxgo.audio.runtime import AudioRuntime
 from voxgo.translation.runtime import TranslationRuntime
 from voxgo.ui.tray_controller import TrayController
@@ -73,10 +79,22 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 class VoxGoApp:
 
-    def __init__(self, config_path: str = None):
+    def __init__(
+        self,
+        config_path: str = None,
+        benchmark_audio: BenchmarkAudioOptions = None,
+        benchmark_game_mode: bool = False,
+    ):
         self._diagnostics = DiagnosticsReporter(PROJECT_ROOT)
         self._setup_logging()
+        apply_game_friendly_process_priority()
         self.config = self._load_config(config_path)
+        self._benchmark_audio = benchmark_audio
+        self._benchmark_game_mode = bool(benchmark_game_mode)
+        if self._benchmark_game_mode:
+            self._apply_benchmark_game_mode()
+        if self._benchmark_audio:
+            logger.info("benchmark audio mode enabled: {}", self._benchmark_audio.path)
         self._speech_recognizer: Optional[SpeechRecognizer] = None
         self._overlay = None
         self._mobile = MobileRuntime(
@@ -92,6 +110,7 @@ class VoxGoApp:
             self._on_speech_detected,
             self._notify_user,
             self._write_crash_report,
+            benchmark_options=self._benchmark_audio,
         )
         self._updates = UpdateRuntime(
             APP_VERSION,
@@ -198,6 +217,21 @@ class VoxGoApp:
     def _sync_whisper_vad_limit(self, config: AppConfig = None):
         config = config or self.config
         sync_whisper_vad_limit(config)
+
+    def _apply_benchmark_game_mode(self):
+        self.config.audio.latency_mode = LATENCY_MODE_FAST
+        self._migrate_runtime_defaults(self.config, preserve_existing_audio_tuning=False)
+        self._sync_language_flow(self.config)
+        self._sync_whisper_vad_limit(self.config)
+        logger.info(
+            "benchmark game mode override enabled: model={}, device={}, compute={}, cpu_threads={}, workers={}, translation_concurrency={}",
+            self._effective_whisper_model_size(),
+            self.config.whisper.device,
+            self.config.whisper.compute_type,
+            self.config.whisper.cpu_threads,
+            self.config.whisper.num_workers,
+            self.config.translation.max_concurrent_requests,
+        )
 
     def _translation_config_snapshot(self, source_lang: str = "", target_lang: str = "") -> TranslationConfig:
         base = self.config.translation
@@ -548,6 +582,7 @@ class VoxGoApp:
         self._cuda_runtime_download_thread.start()
 
     def _download_cuda_runtime_worker(self, ui_language: str):
+        apply_game_friendly_thread_priority("cuda-runtime-download", lowest=True)
         last_notice_at = 0.0
 
         def _progress(downloaded: int, total: int):
@@ -617,6 +652,11 @@ class VoxGoApp:
     def _stop_speech_worker(self):
         return self._speech_pipeline.stop()
 
+    def _clear_realtime_buffers(self, reason: str) -> tuple:
+        audio_blocks = self._audio.clear_pending_audio()
+        speech_items = self._speech_pipeline.clear_pending_work(reason)
+        return audio_blocks, speech_items
+
     def _setup_hotkeys(self):
         self._hotkeys.setup(
             self.config.hotkeys,
@@ -647,10 +687,19 @@ class VoxGoApp:
 
     def _toggle_translation(self):
         self._paused = not self._paused
+        audio_blocks, speech_items = self._clear_realtime_buffers(
+            "translation_paused" if self._paused else "translation_resumed"
+        )
         logger.info(f"翻译{'暂停' if self._paused else '恢复'}")
         if self._overlay:
             self._overlay.set_paused(self._paused)
         self._sync_tray_state()
+        logger.info(
+            "translation toggle cleared realtime buffers: paused={}, audio_blocks={}, speech_items={}",
+            self._paused,
+            audio_blocks,
+            speech_items,
+        )
         self._notify_user("翻译状态", "翻译暂停" if self._paused else "翻译恢复", "状态")
 
     def _toggle_lock(self):
@@ -835,6 +884,7 @@ class VoxGoApp:
         logger.info("后台启动线程已启动")
 
     def _initialize_backend_services(self):
+        apply_game_friendly_thread_priority("startup-loader")
         try:
             self._notify_user("语音识别模型", "正在后台加载 Whisper 模型，首次运行可能需要等待", "状态")
             self._speech_recognizer = SpeechRecognizer(
@@ -1064,13 +1114,44 @@ class VoxGoApp:
         logger.info("已停止")
 
 
-def main():
+def _parse_args(argv=None):
+    parser = argparse.ArgumentParser(description=f"{APP_NAME} game voice translator")
+    parser.add_argument("--config", default="", help="Path to config.json")
+    parser.add_argument("--benchmark-audio", default="", help="Inject a fixed WAV/M4A file instead of capturing a real audio device")
+    parser.add_argument("--benchmark-speech-seconds", type=float, default=4.0, help="Speech segment duration per benchmark loop")
+    parser.add_argument("--benchmark-gap-seconds", type=float, default=3.0, help="Silent gap after each benchmark segment")
+    parser.add_argument("--benchmark-duration-seconds", type=float, default=300.0, help="Total benchmark injection duration; 0 means unlimited")
+    parser.add_argument("--benchmark-game-mode", action="store_true", help="Temporarily force Fast/Game Performance mode without saving user settings")
+    args, remaining = parser.parse_known_args(argv)
+    return args, remaining
+
+
+def main(argv=None):
+    args, qt_args = _parse_args(argv)
+    if argv is None:
+        sys.argv = [sys.argv[0], *qt_args]
+
     config_path = None
+    if args.config:
+        config_path = str(resolve_benchmark_audio_path(args.config, PROJECT_ROOT))
     default_config = PROJECT_ROOT / "config.json"
-    if default_config.exists():
+    if not config_path and default_config.exists():
         config_path = str(default_config)
 
-    app = VoxGoApp(config_path)
+    benchmark_audio = None
+    if args.benchmark_audio:
+        benchmark_audio = BenchmarkAudioOptions(
+            path=resolve_benchmark_audio_path(args.benchmark_audio, PROJECT_ROOT),
+            speech_seconds=max(0.05, float(args.benchmark_speech_seconds)),
+            gap_seconds=max(0.0, float(args.benchmark_gap_seconds)),
+            duration_seconds=max(0.0, float(args.benchmark_duration_seconds)),
+        )
+
+    app = VoxGoApp(
+        config_path,
+        benchmark_audio=benchmark_audio,
+        benchmark_game_mode=bool(args.benchmark_game_mode),
+    )
     app.start()
 
 

@@ -5,6 +5,7 @@ from typing import Optional
 
 from loguru import logger
 
+from voxgo.runtime.priority import apply_game_friendly_thread_priority
 from voxgo.runtime.events import TranslationReady
 from voxgo.runtime.work_items import LatencyTrace
 from voxgo.translation import (
@@ -46,6 +47,7 @@ class TranslationRuntime:
             return
 
         def _run():
+            apply_game_friendly_thread_priority("translation-loop")
             self.loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self.loop)
             self.loop.run_forever()

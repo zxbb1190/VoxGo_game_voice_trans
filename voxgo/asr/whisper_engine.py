@@ -784,7 +784,7 @@ class SpeechRecognizer:
         if configured not in ("", "auto", "default"):
             return [(device, configured)]
         if device == "cuda":
-            return [("cuda", "float16"), ("cuda", "float32")]
+            return [("cuda", "float16"), ("cuda", "int8_float16"), ("cuda", "float32")]
         return [(device, "int8")]
 
     def _model_runtime_options(self, device: str) -> dict:

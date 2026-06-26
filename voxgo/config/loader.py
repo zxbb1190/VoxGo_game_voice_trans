@@ -57,6 +57,9 @@ WHISPER_BEAM_SIZE_BY_LATENCY_MODE = {
     LATENCY_MODE_BALANCED: 1,
     LATENCY_MODE_ACCURATE: 5,
 }
+GAME_PERFORMANCE_MODEL_SIZE = "base"
+GAME_PERFORMANCE_ENGLISH_MODEL_SIZE = "base.en"
+GAME_PERFORMANCE_CPU_THREADS = 2
 
 
 def default_app_config() -> AppConfig:
@@ -106,14 +109,26 @@ def _active_whisper_model_size(config: AppConfig, latency_mode: str, is_english_
     if _use_pure_english_model(config, is_english_to_chinese):
         if latency_mode == LATENCY_MODE_FAST:
             fast_english = str(getattr(config.whisper, "fast_english_model_size", "") or "").strip()
-            if fast_english:
-                return fast_english
+            return fast_english or GAME_PERFORMANCE_ENGLISH_MODEL_SIZE
         return str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip() or "small.en"
-    return (
-        config.whisper.fast_model_size
-        if latency_mode == LATENCY_MODE_FAST and config.whisper.fast_model_size
-        else ""
-    )
+    if latency_mode == LATENCY_MODE_FAST:
+        fast_model = str(getattr(config.whisper, "fast_model_size", "") or "").strip()
+        return fast_model or GAME_PERFORMANCE_MODEL_SIZE
+    return ""
+
+
+def apply_game_performance_policy(config: AppConfig) -> bool:
+    """Clamp runtime work for fast mode so games keep priority."""
+    if normalize_latency_mode(getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED)) != LATENCY_MODE_FAST:
+        return False
+    config.whisper.device = "cpu"
+    config.whisper.compute_type = "int8"
+    config.whisper.auto_cpu_threads = False
+    config.whisper.cpu_threads = GAME_PERFORMANCE_CPU_THREADS
+    config.whisper.num_workers = 1
+    config.translation.max_concurrent_requests = 1
+    config.translation.context_messages = 0
+    return True
 
 
 def apply_language_runtime_policy(config: AppConfig):
@@ -123,6 +138,7 @@ def apply_language_runtime_policy(config: AppConfig):
     if is_english_to_chinese:
         apply_english_realtime_latency_bias(config.audio, latency_mode)
     config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
+    apply_game_performance_policy(config)
 
 
 def apply_section_data(config: AppConfig, data: dict, sections: list):
@@ -277,6 +293,7 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
         config.whisper.num_workers = max(1, min(2, int(getattr(config.whisper, "num_workers", 1) or 1)))
     except Exception:
         config.whisper.num_workers = 1
+    config.whisper.compute_type = str(getattr(config.whisper, "compute_type", "auto") or "auto").strip().lower() or "auto"
     if preserve_existing_audio_tuning:
         config.audio.latency_mode = infer_latency_mode(config.audio)
     else:
@@ -291,6 +308,7 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     if is_english_to_chinese:
         apply_english_realtime_latency_bias(config.audio, latency_mode)
     config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
+    apply_game_performance_policy(config)
     try:
         config.whisper.beam_size = max(
             1,
@@ -459,6 +477,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "english_model_size": str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip(),
             "fast_english_model_size": str(getattr(config.whisper, "fast_english_model_size", "") or "").strip(),
             "device": normalize_whisper_device(config.whisper.device),
+            "compute_type": str(getattr(config.whisper, "compute_type", "auto") or "auto").strip() or "auto",
             "auto_cpu_threads": _coerce_bool(getattr(config.whisper, "auto_cpu_threads", True), True),
             "cpu_threads": int(getattr(config.whisper, "cpu_threads", 2) or 2),
             "num_workers": int(getattr(config.whisper, "num_workers", 1) or 1),

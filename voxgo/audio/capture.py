@@ -36,6 +36,7 @@ LATENCY_PRESET_MATCH_KEYS = (
     "pre_roll_ms",
     "speech_idle_timeout_ms",
 )
+DEFAULT_AUDIO_QUEUE_MAX_BLOCKS = 5
 
 AUDIO_LATENCY_PRESETS = {
     LATENCY_MODE_FAST: {
@@ -196,6 +197,7 @@ class AudioConfig:
     input_device_index: Optional[int] = None
     input_device_name: str = ""
     input_device_id: str = ""
+    audio_queue_max_blocks: int = DEFAULT_AUDIO_QUEUE_MAX_BLOCKS
     format: int = pyaudio.paInt16
     initial_noise_floor_dbfs: Optional[float] = None
     initial_energy_threshold_dbfs: Optional[float] = None
@@ -423,7 +425,13 @@ class SystemAudioCapture:
         self._audio = pyaudio.PyAudio()
         self._stream: Optional[pyaudio.Stream] = None
         self._running = False
-        self._audio_queue = queue.Queue()
+        self._audio_queue_max_blocks = max(
+            1,
+            min(50, int(getattr(self.config, "audio_queue_max_blocks", DEFAULT_AUDIO_QUEUE_MAX_BLOCKS) or DEFAULT_AUDIO_QUEUE_MAX_BLOCKS)),
+        )
+        self._audio_queue = queue.Queue(maxsize=self._audio_queue_max_blocks)
+        self._dropped_audio_queue_blocks = 0
+        self._last_audio_queue_drop_log_at = 0.0
         self._on_speech_callback: Optional[Callable] = None
         self._speech_buffer = []
         self._speech_buffer_samples = 0
@@ -751,8 +759,38 @@ class SystemAudioCapture:
                 in_data = mono.tobytes()
             except ValueError:
                 logger.warning("音频通道数据长度异常，按原始数据处理")
-        self._audio_queue.put(in_data)
+        self._enqueue_audio_block(in_data)
         return (None, pyaudio.paContinue)
+
+    def _enqueue_audio_block(self, data: bytes):
+        try:
+            self._audio_queue.put_nowait(data)
+            return
+        except queue.Full:
+            pass
+
+        dropped = 0
+        try:
+            self._audio_queue.get_nowait()
+            dropped = 1
+        except queue.Empty:
+            pass
+
+        try:
+            self._audio_queue.put_nowait(data)
+        except queue.Full:
+            dropped += 1
+
+        if dropped:
+            self._dropped_audio_queue_blocks += dropped
+            now = time.monotonic()
+            if now - self._last_audio_queue_drop_log_at >= 5.0:
+                self._last_audio_queue_drop_log_at = now
+                logger.warning(
+                    "raw audio queue full: dropped old blocks, queue_max={}, total_dropped={}",
+                    self._audio_queue_max_blocks,
+                    self._dropped_audio_queue_blocks,
+                )
 
     def start(self):
         """开始音频捕获"""

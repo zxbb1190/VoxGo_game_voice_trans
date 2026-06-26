@@ -96,7 +96,7 @@ class ConfigLoaderTest(unittest.TestCase):
             self.assertEqual(config.translation.target_lang, "en")
             self.assertEqual(config.whisper.language, "zh")
             self.assertEqual(config.translation.timeout_seconds, 12)
-            self.assertEqual(config.translation.max_concurrent_requests, 4)
+            self.assertEqual(config.translation.max_concurrent_requests, 1)
             self.assertEqual(config.whisper.model_download_source, MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT)
 
     def test_save_user_settings_normalizes_serialized_values(self):
@@ -134,6 +134,13 @@ class ConfigLoaderTest(unittest.TestCase):
 
         self.assertEqual(load_like_fast.whisper.model_size, "small")
         self.assertEqual(load_like_fast.whisper.active_model_size, "base")
+        self.assertEqual(load_like_fast.whisper.device, "cpu")
+        self.assertEqual(load_like_fast.whisper.compute_type, "int8")
+        self.assertFalse(load_like_fast.whisper.auto_cpu_threads)
+        self.assertEqual(load_like_fast.whisper.cpu_threads, 2)
+        self.assertEqual(load_like_fast.whisper.num_workers, 1)
+        self.assertEqual(load_like_fast.translation.max_concurrent_requests, 1)
+        self.assertEqual(load_like_fast.translation.context_messages, 0)
 
         balanced = copy.deepcopy(config)
         balanced.audio.latency_mode = LATENCY_MODE_BALANCED
@@ -141,6 +148,22 @@ class ConfigLoaderTest(unittest.TestCase):
 
         self.assertEqual(balanced.whisper.model_size, "small")
         self.assertEqual(balanced.whisper.active_model_size, "")
+
+    def test_fast_mode_defaults_to_base_without_forcing_english(self):
+        config = default_app_config()
+        config.audio.latency_mode = LATENCY_MODE_FAST
+        config.translation.source_lang = "en"
+        config.translation.target_lang = "zh"
+
+        migrate_runtime_defaults(config, preserve_existing_audio_tuning=False)
+        sync_language_flow(config)
+        apply_language_runtime_policy(config)
+
+        self.assertEqual(config.whisper.language, "auto")
+        self.assertEqual(config.whisper.active_model_size, "base")
+        self.assertFalse(config.whisper.pure_english_environment)
+        self.assertEqual(config.whisper.device, "cpu")
+        self.assertEqual(config.whisper.cpu_threads, 2)
 
     def test_english_to_chinese_uses_auto_language_without_specialized_model(self):
         config = default_app_config()

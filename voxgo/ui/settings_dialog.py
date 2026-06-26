@@ -240,15 +240,21 @@ class SettingsDialog(QDialog):
         audio_form.addRow(_tr(self._ui_language, "测试音频", "Test Audio"), self.audio_test_panel)
 
         self.latency_mode_combo = QComboBox()
-        self.latency_mode_combo.setToolTip("极速适合竞技游戏；均衡适合默认使用；准确适合直播、会议、慢节奏和口音较重的语音")
+        self.latency_mode_combo.setToolTip(_tr(
+            self._ui_language,
+            "极速/游戏性能会优先保护游戏帧时间：CPU int8、2 线程、单 worker、翻译单并发；均衡适合默认使用；准确适合直播、会议、慢节奏和口音较重的语音",
+            "Fast/Game Performance protects game frame time first: CPU int8, 2 threads, one worker, one translation request; Balanced is the default; Accurate is for streams, meetings, slower speech, and heavier accents.",
+        ))
         self._fill_latency_modes()
         self.latency_mode_combo.currentIndexChanged.connect(self._latency_mode_changed)
         audio_form.addRow(_tr(self._ui_language, "响应模式", "Response Mode"), self.latency_mode_combo)
 
         self.whisper_device_combo = QComboBox()
-        self.whisper_device_combo.setToolTip(
-            "自动检测会优先尝试 NVIDIA GPU，失败后降级 CPU；手动选择 NVIDIA GPU / CUDA 时，如本包未内置 CUDA DLL，会先检测 NVIDIA 显卡并按需下载运行库"
-        )
+        self.whisper_device_combo.setToolTip(_tr(
+            self._ui_language,
+            "自动检测会优先尝试 NVIDIA GPU，失败后降级 CPU；GPU 在游戏显卡接近满载时可能造成帧时间波动。极速/游戏性能模式会改用 CPU 低资源档。",
+            "Auto detect tries NVIDIA GPU first, then falls back to CPU. GPU recognition can disturb frame time when the game is near full GPU load. Fast/Game Performance uses a low-resource CPU profile.",
+        ))
         self._fill_whisper_devices()
         self.whisper_device_combo.currentIndexChanged.connect(self._preview)
         audio_form.addRow(_tr(self._ui_language, "识别设备", "Recognition Device"), self.whisper_device_combo)

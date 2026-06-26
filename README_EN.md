@@ -163,6 +163,13 @@ python main.py
 
 Before joining a game or voice channel, use the gear settings to confirm both "Test Translation" and "Test Audio" pass. If you get stuck, click "Submit Feedback" in settings and paste the generated diagnostic template into a GitHub Issue.
 
+For developer performance benchmarks, skip the real audio device and inject a fixed file into the recognition pipeline with a 4-second speech + 3-second gap loop:
+```bash
+python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
+```
+
+Optional knobs: `--benchmark-speech-seconds 4`, `--benchmark-gap-seconds 3`, and `--benchmark-duration-seconds 300`. WAV works directly; M4A/AAC requires PyAV, which is normally available through the faster-whisper install.
+
 ## Usage
 
 ### Overlay Controls
@@ -207,7 +214,7 @@ Edit `config.json` or use the overlay settings:
 | `debug.enabled` | Whether debug mode records the latest end-to-end latency |
 | `whisper.model_size` | Whisper model size: tiny/base/small/medium |
 | `whisper.device` | Recognition device, default `auto`: try NVIDIA GPU first, then fall back to CPU with a visible reason. Users can also choose `cpu` or `cuda` manually |
-| `whisper.compute_type` | Compute precision, default `auto`: int8 on CPU; CUDA tries float16 then float32 before falling back to CPU |
+| `whisper.compute_type` | Compute precision, default `auto`: int8 on CPU; CUDA tries float16, int8_float16, then float32 before falling back to CPU |
 | `whisper.auto_cpu_threads` | Whether to choose recognition thread count from CPU cores automatically, enabled by default; disable it to use `whisper.cpu_threads` |
 | `whisper.cpu_threads` | CPU load/recognition threads, default 2; keeping this small is more stable after a first-run model download |
 | `whisper.num_workers` | Whisper worker count, default 1; increasing it uses more memory |
@@ -233,6 +240,7 @@ Edit `config.json` or use the overlay settings:
 | `audio.noise_margin_db` | Dynamic threshold margin above the measured noise floor, default 7 dB |
 | `audio.max_speech_seconds` | Maximum seconds before forced splitting during continuous sound, balanced default 4.5s |
 | `audio.min_segment_seconds` | Drop segments before recognition when active voice is shorter than this, balanced default 0.35s; set 0 to disable |
+| `audio.audio_queue_max_blocks` | Raw audio queue limit, default 5; old audio is dropped when full to avoid buildup while paused or busy |
 | `audio.min_segment_peak_margin_db` | Require the segment peak to exceed the current speech gate by this many dB before recognition, balanced default 1.5; set 0 to disable |
 | `translation.provider` | Translation provider: `openai_compatible` or `google` |
 | `translation.api_key` | API Key for the selected provider; use a Google Cloud Translation API Key in Google mode |
@@ -292,7 +300,7 @@ Edit `config.json` or use the overlay settings:
 
 ### Translation Latency Is High
 - Enable debug mode in the gear settings, reproduce once, then use "Submit Feedback" to copy the latest latency data.
-- Switch Response Mode to Fast or Balanced in the gear settings. Fast is intended for PUBG, APEX, Valorant, and similar competitive games; pairing it with `whisper.model_size=base` can reduce recognition time further.
+- Switch Response Mode to Fast / Game Performance or Balanced in the gear settings. Fast uses CPU int8, 2 threads, one worker, one translation request, and a base-level performance model by default to protect frame time in PUBG, APEX, Valorant, and similar competitive games.
 - Check network connectivity and provider speed.
 - Lower `whisper.model_size` to speed up recognition.
 - Use a local translation model if you already have one deployed.

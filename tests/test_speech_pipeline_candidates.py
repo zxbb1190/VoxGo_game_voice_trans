@@ -409,6 +409,30 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
         self.assertIn(strong_incoming, queued)
         self.assertEqual(stats["dropped_speech"], 1)
 
+    def test_clear_pending_work_drops_queued_and_pending_items(self):
+        recognizer = FakeRecognizer("push")
+        pipeline, stats, _seen = self._pipeline(recognizer)
+        pending = SpeechWorkItem(
+            segment=_segment(voice_duration_seconds=0.15),
+            trace=LatencyTrace("", 1.0, 1.0),
+            candidate_labels=("candidate", "short_segment"),
+            short_segment=True,
+        )
+        queued = SpeechWorkItem(
+            segment=_segment(duration_seconds=1.0, voice_duration_seconds=0.9, peak_rms_dbfs=-24.0),
+            trace=LatencyTrace("", 2.0, 2.0),
+            candidate_labels=("candidate",),
+        )
+        pipeline._pending_buffer.add_or_merge(pending, now=1.0)
+        pipeline._queue.put_nowait(queued)
+
+        dropped = pipeline.clear_pending_work("test_clear")
+
+        self.assertEqual(dropped, 2)
+        self.assertFalse(pipeline._pending_buffer.has_pending())
+        self.assertTrue(pipeline._queue.empty())
+        self.assertEqual(stats["dropped_speech"], 2)
+
     def test_queue_full_with_only_strong_segments_drops_current_weak_candidate(self):
         recognizer = FakeRecognizer("push")
         pipeline, stats, _seen = self._pipeline(recognizer)

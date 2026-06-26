@@ -5,14 +5,23 @@ from voxgo.audio.capture import (
     SystemAudioCapture,
     list_input_devices,
 )
+from voxgo.audio.benchmark import BenchmarkAudioOptions, BenchmarkAudioSource
 
 
 class AudioRuntime:
-    def __init__(self, config_getter, speech_callback, notify_user, write_crash_report):
+    def __init__(
+        self,
+        config_getter,
+        speech_callback,
+        notify_user,
+        write_crash_report,
+        benchmark_options: BenchmarkAudioOptions = None,
+    ):
         self._config_getter = config_getter
         self._speech_callback = speech_callback
         self._notify_user = notify_user
         self._write_crash_report = write_crash_report
+        self._benchmark_options = benchmark_options
         self.capture = None
 
     def start(self, notice_title: str = "音频捕获已启动", reuse_noise_gate: bool = False):
@@ -32,7 +41,11 @@ class AudioRuntime:
         else:
             config.audio.initial_noise_floor_dbfs = None
             config.audio.initial_energy_threshold_dbfs = None
-        self.capture = SystemAudioCapture(config.audio)
+        if self._benchmark_options:
+            self.capture = BenchmarkAudioSource(config.audio, self._benchmark_options)
+            notice_title = "基准音频已启动"
+        else:
+            self.capture = SystemAudioCapture(config.audio)
         self.capture.set_speech_callback(self._speech_callback)
         self.capture.start()
         self._notify_user(
@@ -57,7 +70,10 @@ class AudioRuntime:
         return 0
 
     def process_tick(self, running: bool, paused: bool):
-        if not running or paused:
+        if not running:
+            return
+        if paused:
+            self.clear_pending_audio()
             return
         if self.capture:
             self.capture.process_audio()
@@ -75,6 +91,8 @@ class AudioRuntime:
         )
 
     def list_devices(self):
+        if self._benchmark_options:
+            return []
         try:
             return list_input_devices()
         except Exception as exc:

@@ -23,7 +23,8 @@
     "min_speech_threshold": -45,
     "max_speech_threshold": -30,
     "min_segment_seconds": 0.35,
-    "min_segment_peak_margin_db": 1.5
+    "min_segment_peak_margin_db": 1.5,
+    "audio_queue_max_blocks": 5
   },
   "whisper": {
     "model_size": "small",

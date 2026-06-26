@@ -19,6 +19,7 @@ from voxgo.audio.capture import (
     normalize_latency_mode,
 )
 from voxgo.asr.whisper_engine import normalize_transcript_for_repeat, should_drop_transcription_result
+from voxgo.runtime.priority import apply_game_friendly_thread_priority
 from voxgo.runtime.events import TranscriptReady
 from voxgo.runtime.work_items import LatencyTrace, SpeechWorkItem
 
@@ -433,6 +434,30 @@ class SpeechPipeline:
             len(dropped),
         )
 
+    def clear_pending_work(self, reason: str = "manual_clear") -> int:
+        dropped = []
+        pending = self._pending_buffer.clear()
+        if pending:
+            dropped.append(("pending", pending))
+        busy = self._busy_weak_buffer.clear()
+        if busy:
+            dropped.append(("busy_weak", busy))
+
+        restore = []
+        for item in self._drain_queue_items():
+            if item is self._stop_token:
+                restore.append(item)
+            elif isinstance(item, SpeechWorkItem):
+                dropped.append(("queued", item))
+        self._restore_queue_items(restore)
+
+        for queue_name, item in dropped:
+            self._stats["dropped_speech"] = self._stats.get("dropped_speech", 0) + 1
+            self._debug_audio.dump_if_enabled(item.segment, f"{reason}_{queue_name}", "save_dropped_audio")
+        if dropped:
+            logger.info("speech pending work cleared: reason={}, dropped={}", reason, len(dropped))
+        return len(dropped)
+
     def on_speech_detected(self, speech_segment):
         if self._is_paused() or not self._is_running():
             return
@@ -528,6 +553,7 @@ class SpeechPipeline:
         return True
 
     def _worker(self):
+        apply_game_friendly_thread_priority("speech-worker")
         while True:
             try:
                 work_item = self._queue.get(timeout=0.1)
