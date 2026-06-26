@@ -68,8 +68,8 @@ If you use a portable Release package, unzip it and run `VoxGo.exe`. Starting wi
 | Package | Contents | Best for |
 |---------|----------|----------|
 | Lite | No Whisper model, no CUDA DLLs, smallest archive; downloads the model on first use | Most users who can download the model |
-| Full | Bundled Whisper small model, no CUDA DLLs | CPU users with unstable model-download networks |
-| Full-CUDA / GPU | Bundled Whisper small model plus CUDA DLLs | NVIDIA users who want GPU recognition immediately |
+| Full | Bundled Whisper small/base models, no CUDA DLLs | CPU users with unstable model-download networks |
+| Full-CUDA / GPU | Bundled Whisper small/base models plus CUDA DLLs | NVIDIA users who want GPU recognition immediately |
 
 Lite and Full do not download CUDA DLLs at startup. CUDA is checked only when you explicitly select `NVIDIA GPU / CUDA` in settings. VoxGo detects the current GPU first: AMD/Intel users get a clear "GPU unavailable" notice and keep the previous device; NVIDIA users without bundled CUDA DLLs are prompted while VoxGo downloads the CUDA runtime from the current Release into the app folder, then GPU takes effect after restart.
 
@@ -213,9 +213,9 @@ Edit `config.json` or use the overlay settings:
 | `app.setup_completed` | Whether the first-run wizard has been completed; saved to `user_settings.json` after setup |
 | `debug.enabled` | Whether debug mode records the latest end-to-end latency |
 | `whisper.model_size` | Whisper model size: tiny/base/small/medium |
-| `whisper.device` | Recognition device, default `auto`: try NVIDIA GPU first, then fall back to CPU with a visible reason. Users can also choose `cpu` or `cuda` manually |
-| `whisper.compute_type` | Compute precision, default `auto`: int8 on CPU; CUDA tries float16, int8_float16, then float32 before falling back to CPU |
-| `whisper.auto_cpu_threads` | Whether to choose recognition thread count from CPU cores automatically, enabled by default; disable it to use `whisper.cpu_threads` |
+| `whisper.device` | Recognition device, default `cpu` for Game Performance. Users can manually choose `cuda` for NVIDIA GPU / CUDA mode, or `auto` for GPU-first fallback behavior |
+| `whisper.compute_type` | Compute precision, default `int8` on CPU. In CUDA mode, `auto` tries float16, int8_float16, then float32 before falling back to CPU; use int8_float16 as an experiment rather than the default |
+| `whisper.auto_cpu_threads` | Whether to choose recognition thread count from CPU cores automatically, disabled by default for Game Performance; when disabled, VoxGo uses `whisper.cpu_threads` |
 | `whisper.cpu_threads` | CPU load/recognition threads, default 2; keeping this small is more stable after a first-run model download |
 | `whisper.num_workers` | Whisper worker count, default 1; increasing it uses more memory |
 | `whisper.model_download_source` | First-run Whisper model download source for lite packages: `modelscope` for ModelScope China source (default and recommended for mainland China), `huggingface` for the official Hugging Face Hub, or `custom_hf_endpoint` for a custom Hugging Face Endpoint |
@@ -226,7 +226,7 @@ Edit `config.json` or use the overlay settings:
 | `overlay.text_color` | Overlay text color |
 | `overlay.bg_color` | Overlay background color, default dark gray `#20242A` |
 | `overlay.bg_opacity` | Overlay background opacity, default 0.82 and adjustable in settings |
-| `audio.latency_mode` | Response mode: `fast`, `balanced` (default), `accurate`, or `custom`; also available from the gear settings |
+| `audio.latency_mode` | Response mode: `fast` (default Game Performance), `balanced`, `accurate`, or `custom`; also available from the gear settings |
 | `audio.sample_rate` | Audio sample rate |
 | `audio.chunk_duration_ms` | Audio block length in custom mode, balanced default 200ms; smaller is faster but can split speech more aggressively |
 | `audio.silence_threshold` | Static fallback speech threshold in dBFS; default -40, avoid values above -20 for real voice chat |
@@ -293,14 +293,14 @@ Edit `config.json` or use the overlay settings:
 ### Lite Package Model Download Is Slow Or Fails
 - The overlay shows the Whisper model, repository, download source, downloaded size, total size, and percentage.
 - Download failures show the concrete network error and are also written to `app.log` and `crash_report.txt` in the app folder.
-- The default source is ModelScope and downloads the required `Systran/faster-whisper-small` files from `modelscope.cn`.
+- The default source is ModelScope and downloads the required `Systran/faster-whisper-small` / `Systran/faster-whisper-base` files from `modelscope.cn`.
 - `hf-mirror.com` currently redirects back to `huggingface.co`, so it is unreliable when the user's network cannot reach Hugging Face. If you still want to try it, enter it only as a custom Hugging Face Endpoint.
 - If ModelScope or a custom source still fails, switch to the official Hugging Face source and restart, or use the full package.
-- The full package already includes the Whisper small model and does not need the first-run model download.
+- The full package already includes the Whisper small and base models, so the default Game Performance profile does not need the first-run model download.
 
 ### Translation Latency Is High
 - Enable debug mode in the gear settings, reproduce once, then use "Submit Feedback" to copy the latest latency data.
-- Switch Response Mode to Fast / Game Performance or Balanced in the gear settings. Fast uses CPU int8, 2 threads, one worker, one translation request, and a base-level performance model by default to protect frame time in PUBG, APEX, Valorant, and similar competitive games.
+- The default real-user profile is Fast / Game Performance: CPU int8, 2 threads, one worker, one translation request, and a base-level performance model to protect frame time in PUBG, APEX, Valorant, and similar competitive games. GPU mode remains a manual high-performance hardware option, not the default game profile.
 - Check network connectivity and provider speed.
 - Lower `whisper.model_size` to speed up recognition.
 - Use a local translation model if you already have one deployed.
@@ -311,7 +311,7 @@ This tool captures Windows system playback audio. It is not hard-coded for speci
 Some games, anti-cheat systems, exclusive audio mode, remote streaming tools, DRM protection, or special sound drivers may block capture. Use another output device, disable exclusive mode, or route audio through VB-Cable when needed.
 
 ## Notes
-1. Lite downloads the Whisper model on first use; Full and Full-CUDA include Whisper small.
+1. Lite downloads the Whisper model on first use; Full and Full-CUDA include Whisper small and base.
 2. Translation requires network access unless you use a local model.
 3. Start this app before joining a game voice session.
 4. Keep the mobile page open if you use mobile mirroring.

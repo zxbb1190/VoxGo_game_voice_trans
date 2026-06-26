@@ -16,7 +16,7 @@ from voxgo.audio.benchmark import (
     load_benchmark_audio,
     resolve_benchmark_audio_path,
 )
-from voxgo.audio.capture import AudioConfig
+from voxgo.audio.capture import AudioConfig, LATENCY_MODE_BALANCED, LATENCY_MODE_FAST
 from voxgo.config.loader import default_app_config
 from voxgo.app import VoxGoApp
 
@@ -93,6 +93,36 @@ class BenchmarkAudioTest(unittest.TestCase):
         self.assertEqual(app.config.whisper.cpu_threads, 2)
         self.assertEqual(app.config.whisper.num_workers, 1)
         self.assertEqual(app.config.translation.max_concurrent_requests, 1)
+
+    def test_benchmark_profile_d_forces_cuda_float16_without_game_policy(self):
+        app = object.__new__(VoxGoApp)
+        app.config = default_app_config()
+        app._benchmark_profile = "d"
+        app.config.audio.latency_mode = LATENCY_MODE_FAST
+        app.config.whisper.device = "cpu"
+        app.config.whisper.compute_type = "int8"
+
+        VoxGoApp._apply_benchmark_profile(app)
+
+        self.assertEqual(app.config.audio.latency_mode, LATENCY_MODE_BALANCED)
+        self.assertEqual(app.config.whisper.active_model_size, "")
+        self.assertEqual(app.config.whisper.device, "cuda")
+        self.assertEqual(app.config.whisper.compute_type, "float16")
+
+    def test_benchmark_profile_e_forces_cuda_int8_float16_without_game_policy(self):
+        app = object.__new__(VoxGoApp)
+        app.config = default_app_config()
+        app._benchmark_profile = "e"
+        app.config.audio.latency_mode = LATENCY_MODE_FAST
+        app.config.whisper.device = "cpu"
+        app.config.whisper.compute_type = "int8"
+
+        VoxGoApp._apply_benchmark_profile(app)
+
+        self.assertEqual(app.config.audio.latency_mode, LATENCY_MODE_BALANCED)
+        self.assertEqual(app.config.whisper.active_model_size, "")
+        self.assertEqual(app.config.whisper.device, "cuda")
+        self.assertEqual(app.config.whisper.compute_type, "int8_float16")
 
     @staticmethod
     def _write_wav(path: Path, sample_rate: int, seconds: float, channels: int = 1):

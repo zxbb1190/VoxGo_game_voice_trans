@@ -180,16 +180,7 @@ def migrate_legacy_model_download_settings(config: AppConfig, whisper_data: dict
 
 
 def migrate_recognition_device_policy(config: AppConfig, user_settings_data: dict):
-    app_data = user_settings_data.get("app", {}) if isinstance(user_settings_data, dict) else {}
-    whisper_data = user_settings_data.get("whisper", {}) if isinstance(user_settings_data, dict) else {}
-    try:
-        version = int(app_data.get("recognition_device_policy_version", 0) or 0)
-    except Exception:
-        version = 0
-    if version >= RECOGNITION_DEVICE_POLICY_VERSION:
-        return
-    if normalize_whisper_device(whisper_data.get("device", "")) == "cpu":
-        config.whisper.device = "auto"
+    return
 
 
 def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: bool = True):
@@ -259,11 +250,11 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     if not hasattr(config.whisper, "cpu_threads"):
         config.whisper.cpu_threads = 2
     if not hasattr(config.whisper, "auto_cpu_threads"):
-        config.whisper.auto_cpu_threads = True
+        config.whisper.auto_cpu_threads = False
     if not hasattr(config.whisper, "num_workers"):
         config.whisper.num_workers = 1
     if not hasattr(config.whisper, "fast_model_size"):
-        config.whisper.fast_model_size = ""
+        config.whisper.fast_model_size = GAME_PERFORMANCE_MODEL_SIZE
     if not hasattr(config.whisper, "pure_english_environment"):
         config.whisper.pure_english_environment = False
     if not hasattr(config.whisper, "enable_english_model"):
@@ -275,7 +266,9 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     if not hasattr(config.whisper, "active_model_size"):
         config.whisper.active_model_size = ""
     config.whisper.model_size = str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small"
-    config.whisper.fast_model_size = str(getattr(config.whisper, "fast_model_size", "") or "").strip()
+    config.whisper.fast_model_size = str(
+        getattr(config.whisper, "fast_model_size", GAME_PERFORMANCE_MODEL_SIZE) or ""
+    ).strip()
     config.whisper.pure_english_environment = bool(getattr(config.whisper, "pure_english_environment", False))
     config.whisper.enable_english_model = config.whisper.pure_english_environment
     config.whisper.english_model_size = (
@@ -284,7 +277,7 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     config.whisper.fast_english_model_size = (
         str(getattr(config.whisper, "fast_english_model_size", "") or "").strip()
     )
-    config.whisper.auto_cpu_threads = _coerce_bool(getattr(config.whisper, "auto_cpu_threads", True), True)
+    config.whisper.auto_cpu_threads = _coerce_bool(getattr(config.whisper, "auto_cpu_threads", False), False)
     try:
         config.whisper.cpu_threads = max(1, min(8, int(getattr(config.whisper, "cpu_threads", 2) or 2)))
     except Exception:

@@ -46,8 +46,8 @@ WHISPER_DOWNLOAD_SOURCE_OPTIONS = (
 )
 TRANSLATION_TEST_COOLDOWN_SECONDS = 5
 AUDIO_LATENCY_MODE_OPTIONS = (
-    (LATENCY_MODE_FAST, "极速 / 游戏性能"),
-    (LATENCY_MODE_BALANCED, "均衡（推荐）"),
+    (LATENCY_MODE_FAST, "极速 / 游戏性能（推荐）"),
+    (LATENCY_MODE_BALANCED, "均衡"),
     (LATENCY_MODE_ACCURATE, "准确"),
     (LATENCY_MODE_CUSTOM, "自定义"),
 )
@@ -92,8 +92,8 @@ def _model_download_source_options(ui_language: str):
 def _audio_latency_mode_options(ui_language: str):
     if is_english_ui(ui_language):
         return (
-            (LATENCY_MODE_FAST, "Fast / Game Performance"),
-            (LATENCY_MODE_BALANCED, "Balanced (Recommended)"),
+            (LATENCY_MODE_FAST, "Fast / Game Performance (Recommended)"),
+            (LATENCY_MODE_BALANCED, "Balanced"),
             (LATENCY_MODE_ACCURATE, "Accurate"),
             (LATENCY_MODE_CUSTOM, "Custom"),
         )
@@ -255,26 +255,26 @@ class HotkeyConfig:
 
 @dataclass
 class AudioDeviceConfig:
-    latency_mode: str = LATENCY_MODE_BALANCED
+    latency_mode: str = LATENCY_MODE_FAST
     input_device_index: Optional[int] = None
     input_device_name: str = ""
     input_device_id: str = ""
-    chunk_duration_ms: int = 200
+    chunk_duration_ms: int = 120
     speech_threshold_blocks: int = 2
     silence_limit_blocks: int = 3
-    max_buffer_blocks: int = 120
-    max_speech_seconds: float = 4.5
-    pre_roll_ms: int = 450
-    speech_idle_timeout_ms: int = 450
-    min_segment_seconds: float = 0.35
-    min_segment_peak_margin_db: float = 1.5
+    max_buffer_blocks: int = 100
+    max_speech_seconds: float = 3.0
+    pre_roll_ms: int = 300
+    speech_idle_timeout_ms: int = 350
+    min_segment_seconds: float = 0.30
+    min_segment_peak_margin_db: float = 1.0
 
 
 @dataclass
 class WhisperDeviceConfig:
-    device: str = "auto"
+    device: str = "cpu"
     model_size: str = "small"
-    fast_model_size: str = ""
+    fast_model_size: str = "base"
     pure_english_environment: bool = False
     enable_english_model: bool = False
     english_model_size: str = "small.en"
@@ -481,7 +481,7 @@ def _build_feedback_report(
         f"- 翻译服务：{provider_label}",
         f"- 模型名：{getattr(translation_config, 'model', '')}",
         f"- 兼容地址：{getattr(translation_config, 'endpoint', '')}",
-        f"- 识别设备：{WHISPER_DEVICE_LABELS.get(_normalize_whisper_device(getattr(whisper_config, 'device', 'auto')), '自动检测（GPU 优先）')}",
+        f"- 识别设备：{WHISPER_DEVICE_LABELS.get(_normalize_whisper_device(getattr(whisper_config, 'device', 'cpu')), 'CPU')}",
         f"- 调试模式：{'开启' if getattr(debug_config, 'enabled', False) else '关闭'}",
         "",
         "### 最近一次延迟",

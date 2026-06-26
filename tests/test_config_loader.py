@@ -24,12 +24,34 @@ from voxgo.asr.whisper_engine import MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT
 
 
 class ConfigLoaderTest(unittest.TestCase):
-    def test_default_recognition_device_is_auto_gpu_first(self):
+    def test_default_config_uses_cpu_game_performance_profile(self):
         config = default_app_config()
+        migrate_runtime_defaults(config, preserve_existing_audio_tuning=False)
+        sync_language_flow(config)
+        apply_language_runtime_policy(config)
 
-        self.assertEqual(config.whisper.device, "auto")
+        self.assertEqual(config.audio.latency_mode, LATENCY_MODE_FAST)
+        self.assertEqual(config.whisper.active_model_size, "base")
+        self.assertEqual(config.whisper.device, "cpu")
+        self.assertEqual(config.whisper.compute_type, "int8")
+        self.assertFalse(config.whisper.auto_cpu_threads)
+        self.assertEqual(config.whisper.cpu_threads, 2)
+        self.assertEqual(config.whisper.num_workers, 1)
+        self.assertEqual(config.translation.max_concurrent_requests, 1)
 
-    def test_legacy_cpu_user_setting_migrates_to_auto_device(self):
+    def test_packaged_example_config_uses_real_user_cpu_game_profile(self):
+        config = load_config(str(PROJECT_ROOT / "config.example.json"), runtime_dir=None)
+
+        self.assertEqual(config.audio.latency_mode, LATENCY_MODE_FAST)
+        self.assertEqual(config.whisper.active_model_size, "base")
+        self.assertEqual(config.whisper.device, "cpu")
+        self.assertEqual(config.whisper.compute_type, "int8")
+        self.assertFalse(config.whisper.auto_cpu_threads)
+        self.assertEqual(config.whisper.cpu_threads, 2)
+        self.assertEqual(config.whisper.num_workers, 1)
+        self.assertEqual(config.translation.max_concurrent_requests, 1)
+
+    def test_legacy_cpu_user_setting_is_preserved_for_game_performance(self):
         with tempfile.TemporaryDirectory() as tmp:
             runtime_dir = Path(tmp)
             (runtime_dir / "user_settings.json").write_text(
@@ -39,7 +61,7 @@ class ConfigLoaderTest(unittest.TestCase):
 
             config = load_config(runtime_dir=runtime_dir)
 
-            self.assertEqual(config.whisper.device, "auto")
+            self.assertEqual(config.whisper.device, "cpu")
 
     def test_current_cpu_user_setting_is_preserved(self):
         with tempfile.TemporaryDirectory() as tmp:

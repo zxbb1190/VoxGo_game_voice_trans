@@ -18,7 +18,7 @@ configure_local_dll_paths()
 from loguru import logger
 
 from voxgo.app_info import APP_NAME, APP_VERSION
-from voxgo.audio.capture import AudioConfig, LATENCY_MODE_FAST
+from voxgo.audio.capture import AudioConfig, LATENCY_MODE_BALANCED, LATENCY_MODE_FAST
 from voxgo.asr.whisper_engine import (
     ModelDownloadProgress,
     SpeechRecognizer,
@@ -84,6 +84,7 @@ class VoxGoApp:
         config_path: str = None,
         benchmark_audio: BenchmarkAudioOptions = None,
         benchmark_game_mode: bool = False,
+        benchmark_profile: str = "",
     ):
         self._diagnostics = DiagnosticsReporter(PROJECT_ROOT)
         self._setup_logging()
@@ -91,8 +92,11 @@ class VoxGoApp:
         self.config = self._load_config(config_path)
         self._benchmark_audio = benchmark_audio
         self._benchmark_game_mode = bool(benchmark_game_mode)
+        self._benchmark_profile = self._normalize_benchmark_profile(benchmark_profile)
         if self._benchmark_game_mode:
             self._apply_benchmark_game_mode()
+        if self._benchmark_profile:
+            self._apply_benchmark_profile()
         if self._benchmark_audio:
             logger.info("benchmark audio mode enabled: {}", self._benchmark_audio.path)
         self._speech_recognizer: Optional[SpeechRecognizer] = None
@@ -231,6 +235,49 @@ class VoxGoApp:
             self.config.whisper.cpu_threads,
             self.config.whisper.num_workers,
             self.config.translation.max_concurrent_requests,
+        )
+
+    @staticmethod
+    def _normalize_benchmark_profile(profile: str) -> str:
+        profile = str(profile or "").strip().lower()
+        aliases = {
+            "d": "d",
+            "gpu-float16": "d",
+            "cuda-float16": "d",
+            "e": "e",
+            "gpu-int8-float16": "e",
+            "cuda-int8-float16": "e",
+            "int8-float16": "e",
+            "int8_float16": "e",
+        }
+        return aliases.get(profile, profile)
+
+    def _apply_benchmark_profile(self):
+        compute_types = {
+            "d": "float16",
+            "e": "int8_float16",
+        }
+        compute_type = compute_types.get(self._benchmark_profile)
+        if not compute_type:
+            raise ValueError(f"Unsupported benchmark profile: {self._benchmark_profile}")
+
+        self.config.audio.latency_mode = LATENCY_MODE_BALANCED
+        self.config.whisper.device = "cuda"
+        self.config.whisper.compute_type = compute_type
+        self._migrate_runtime_defaults(self.config, preserve_existing_audio_tuning=False)
+        self.config.whisper.device = "cuda"
+        self.config.whisper.compute_type = compute_type
+        self._sync_language_flow(self.config)
+        self.config.whisper.device = "cuda"
+        self.config.whisper.compute_type = compute_type
+        self._sync_whisper_vad_limit(self.config)
+        logger.info(
+            "benchmark profile {} override enabled: model={}, device={}, compute={}, latency_mode={}",
+            self._benchmark_profile.upper(),
+            self._effective_whisper_model_size(),
+            self.config.whisper.device,
+            self.config.whisper.compute_type,
+            self.config.audio.latency_mode,
         )
 
     def _translation_config_snapshot(self, source_lang: str = "", target_lang: str = "") -> TranslationConfig:
@@ -1122,6 +1169,24 @@ def _parse_args(argv=None):
     parser.add_argument("--benchmark-gap-seconds", type=float, default=3.0, help="Silent gap after each benchmark segment")
     parser.add_argument("--benchmark-duration-seconds", type=float, default=300.0, help="Total benchmark injection duration; 0 means unlimited")
     parser.add_argument("--benchmark-game-mode", action="store_true", help="Temporarily force Fast/Game Performance mode without saving user settings")
+    parser.add_argument(
+        "--benchmark-profile",
+        default="",
+        choices=[
+            "",
+            "D",
+            "d",
+            "gpu-float16",
+            "cuda-float16",
+            "E",
+            "e",
+            "gpu-int8-float16",
+            "cuda-int8-float16",
+            "int8-float16",
+            "int8_float16",
+        ],
+        help="Temporary benchmark profile override. D uses CUDA float16; E uses CUDA int8_float16",
+    )
     args, remaining = parser.parse_known_args(argv)
     return args, remaining
 
@@ -1151,6 +1216,7 @@ def main(argv=None):
         config_path,
         benchmark_audio=benchmark_audio,
         benchmark_game_mode=bool(args.benchmark_game_mode),
+        benchmark_profile=args.benchmark_profile,
     )
     app.start()
 

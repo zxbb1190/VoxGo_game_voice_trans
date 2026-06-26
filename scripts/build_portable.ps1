@@ -79,28 +79,30 @@ function Build-Portable {
     )
 
     if ($IncludeModel -eq "1") {
-        $modelRoot = ".models\models--Systran--faster-whisper-small"
-        $modelRef = Join-Path $modelRoot "refs\main"
-        $hasModelCache = $false
-        if (Test-Path $modelRef) {
-            $snapshot = (Get-Content $modelRef -Raw).Trim()
-            if ($snapshot) {
-                $snapshotRoot = Join-Path $modelRoot ("snapshots\" + $snapshot)
-                $hasModelCache = (
-                    (Test-Path (Join-Path $snapshotRoot "config.json")) -and
-                    (Test-Path (Join-Path $snapshotRoot "model.bin")) -and
-                    (Test-Path (Join-Path $snapshotRoot "tokenizer.json")) -and
-                    (Test-Path (Join-Path $snapshotRoot "vocabulary.txt"))
-                )
+        foreach ($modelSize in @("small", "base")) {
+            $modelRoot = ".models\models--Systran--faster-whisper-$modelSize"
+            $modelRef = Join-Path $modelRoot "refs\main"
+            $hasModelCache = $false
+            if (Test-Path $modelRef) {
+                $snapshot = (Get-Content $modelRef -Raw).Trim()
+                if ($snapshot) {
+                    $snapshotRoot = Join-Path $modelRoot ("snapshots\" + $snapshot)
+                    $hasModelCache = (
+                        (Test-Path (Join-Path $snapshotRoot "config.json")) -and
+                        (Test-Path (Join-Path $snapshotRoot "model.bin")) -and
+                        (Test-Path (Join-Path $snapshotRoot "tokenizer.json")) -and
+                        (Test-Path (Join-Path $snapshotRoot "vocabulary.txt"))
+                    )
+                }
             }
-        }
-        if (-not $hasModelCache) {
-            Invoke-Checked $Python @(
-                "-c",
-                "from faster_whisper import WhisperModel; WhisperModel('small', device='cpu', compute_type='int8', download_root='.models')"
-            )
-        } else {
-            Write-Host "Using existing faster-whisper-small cache."
+            if (-not $hasModelCache) {
+                Invoke-Checked $Python @(
+                    "-c",
+                    "from faster_whisper import WhisperModel; WhisperModel('$modelSize', device='cpu', compute_type='int8', download_root='.models')"
+                )
+            } else {
+                Write-Host "Using existing faster-whisper-$modelSize cache."
+            }
         }
     }
 

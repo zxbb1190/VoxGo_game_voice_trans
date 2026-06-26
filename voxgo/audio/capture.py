@@ -174,26 +174,26 @@ apply_english_audio_latency_bias = apply_english_realtime_latency_bias
 
 @dataclass
 class AudioConfig:
-    latency_mode: str = ""
+    latency_mode: str = LATENCY_MODE_FAST
     sample_rate: int = 16000
     channels: int = 1
-    chunk_duration_ms: int = 200
+    chunk_duration_ms: int = 120
     vad_aggressiveness: int = 2
     silence_threshold: float = -40.0
     speech_threshold_blocks: int = 2
     silence_limit_blocks: int = 3
-    max_buffer_blocks: int = 120
-    max_speech_seconds: float = 4.5
-    pre_roll_ms: int = 450
-    speech_idle_timeout_ms: int = 450
+    max_buffer_blocks: int = 100
+    max_speech_seconds: float = 3.0
+    pre_roll_ms: int = 300
+    speech_idle_timeout_ms: int = 350
     soft_silence_margin_db: float = 10.0
     soft_silence_gate_margin_db: float = 5.0
     noise_calibration_seconds: float = 2.0
     noise_margin_db: float = 7.0
     min_speech_threshold: float = -45.0
     max_speech_threshold: float = SAFE_MAX_SPEECH_THRESHOLD_DBFS
-    min_segment_seconds: float = 0.35
-    min_segment_peak_margin_db: float = 1.5
+    min_segment_seconds: float = 0.30
+    min_segment_peak_margin_db: float = 1.0
     input_device_index: Optional[int] = None
     input_device_name: str = ""
     input_device_id: str = ""

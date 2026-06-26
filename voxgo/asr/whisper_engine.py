@@ -175,15 +175,15 @@ class _TqdmOutputSink:
 @dataclass
 class WhisperConfig:
     model_size: str = "small"
-    fast_model_size: str = ""
+    fast_model_size: str = "base"
     pure_english_environment: bool = False
     enable_english_model: bool = False
     english_model_size: str = "small.en"
     fast_english_model_size: str = ""
     active_model_size: str = ""
-    device: str = "auto"
-    compute_type: str = "auto"
-    auto_cpu_threads: bool = True
+    device: str = "cpu"
+    compute_type: str = "int8"
+    auto_cpu_threads: bool = False
     cpu_threads: int = 2
     num_workers: int = 1
     language: str = "auto"
