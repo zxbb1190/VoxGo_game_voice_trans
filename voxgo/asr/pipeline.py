@@ -27,6 +27,9 @@ from voxgo.runtime.work_items import LatencyTrace, SpeechWorkItem
 SHORT_SEGMENT_PENDING_SECONDS = 0.8
 LOW_CONFIDENCE_PEAK_MARGIN_DB = 1.0
 SUSPECT_TRANSCRIPT_TTL_SECONDS = 12.0
+ASR_IMPACT_MODE_NORMAL = "normal"
+ASR_IMPACT_MODE_LOW = "low"
+ASR_IMPACT_MODE_ULTRA_LOW = "ultra_low"
 SUSPECT_SHORT_TRANSCRIPTS = {
     "you",
     "thankyou",
@@ -70,6 +73,8 @@ class RecognitionModePolicy:
     allow_fast_output: bool
     busy_weak_delay_seconds: float = 0.0
     busy_weak_stale_seconds: float = 0.0
+    weak_cooldown_seconds: float = 0.0
+    weak_stale_drop_seconds: float = 0.0
 
     @classmethod
     def from_audio_config(cls, audio_config) -> "RecognitionModePolicy":
@@ -82,6 +87,8 @@ class RecognitionModePolicy:
                 allow_fast_output=True,
                 busy_weak_delay_seconds=0.50,
                 busy_weak_stale_seconds=1.60,
+                weak_cooldown_seconds=0.20,
+                weak_stale_drop_seconds=1.50,
             )
         if mode == LATENCY_MODE_ACCURATE:
             return cls(mode=mode, queue_size=8, pending_timeout_seconds=1.00, allow_fast_output=False)
@@ -92,6 +99,8 @@ class RecognitionModePolicy:
             allow_fast_output=False,
             busy_weak_delay_seconds=0.70,
             busy_weak_stale_seconds=2.20,
+            weak_cooldown_seconds=0.10,
+            weak_stale_drop_seconds=2.00,
         )
 
 
@@ -400,6 +409,8 @@ class SpeechPipeline:
         self._busy_weak_buffer = BusyWeakCandidateBuffer(initial_policy.busy_weak_delay_seconds)
         self._debug_audio = DebugAudioDumper(config_getter)
         self._recognition_busy = False
+        self._last_transcription_finished_at = 0.0
+        self._last_transcription_duration_seconds = 0.0
 
     def remember_transcript(self, text: str):
         self._recent_transcripts.append((time.time(), text))
@@ -611,6 +622,11 @@ class SpeechPipeline:
                 )
             self._refresh_trace_recognizer_metadata(trace, recognizer)
             trace.transcription_finished_at = time.time()
+            self._last_transcription_finished_at = trace.transcription_finished_at
+            self._last_transcription_duration_seconds = max(
+                0.0,
+                trace.transcription_finished_at - trace.transcription_started_at,
+            )
             text = result.text
             current_revision = int(self._language_revision_getter() or 0)
             if item.language_revision and current_revision and item.language_revision != current_revision:
@@ -882,6 +898,7 @@ class SpeechPipeline:
         pure_english = bool(getattr(getattr(config, "whisper", None), "pure_english_environment", False))
         if source_lang == "en" and target_lang == "zh":
             policy = self._pure_english_mode_policy(policy) if pure_english else self._english_realtime_mode_policy(policy)
+        policy = self._impact_mode_policy(policy, getattr(getattr(config, "whisper", None), "asr_impact_mode", "low"))
         self._pending_buffer.timeout_seconds = policy.pending_timeout_seconds
         self._busy_weak_buffer.timeout_seconds = max(0.0, policy.busy_weak_delay_seconds)
         self._ensure_queue_capacity(policy.queue_size)
@@ -897,6 +914,8 @@ class SpeechPipeline:
                 allow_fast_output=policy.allow_fast_output,
                 busy_weak_delay_seconds=0.42,
                 busy_weak_stale_seconds=1.50,
+                weak_cooldown_seconds=policy.weak_cooldown_seconds,
+                weak_stale_drop_seconds=policy.weak_stale_drop_seconds,
             )
         if policy.mode == LATENCY_MODE_BALANCED:
             return RecognitionModePolicy(
@@ -906,6 +925,8 @@ class SpeechPipeline:
                 allow_fast_output=policy.allow_fast_output,
                 busy_weak_delay_seconds=0.60,
                 busy_weak_stale_seconds=1.80,
+                weak_cooldown_seconds=policy.weak_cooldown_seconds,
+                weak_stale_drop_seconds=policy.weak_stale_drop_seconds,
             )
         return policy
 
@@ -919,6 +940,8 @@ class SpeechPipeline:
                 allow_fast_output=policy.allow_fast_output,
                 busy_weak_delay_seconds=0.35,
                 busy_weak_stale_seconds=1.30,
+                weak_cooldown_seconds=policy.weak_cooldown_seconds,
+                weak_stale_drop_seconds=policy.weak_stale_drop_seconds,
             )
         if policy.mode == LATENCY_MODE_BALANCED:
             return RecognitionModePolicy(
@@ -928,8 +951,56 @@ class SpeechPipeline:
                 allow_fast_output=policy.allow_fast_output,
                 busy_weak_delay_seconds=0.50,
                 busy_weak_stale_seconds=1.60,
+                weak_cooldown_seconds=policy.weak_cooldown_seconds,
+                weak_stale_drop_seconds=policy.weak_stale_drop_seconds,
             )
         return policy
+
+    @staticmethod
+    def _impact_mode_policy(policy: RecognitionModePolicy, impact_mode: str) -> RecognitionModePolicy:
+        mode = SpeechPipeline._normalize_asr_impact_mode(impact_mode)
+        if mode == ASR_IMPACT_MODE_NORMAL:
+            return RecognitionModePolicy(
+                mode=policy.mode,
+                queue_size=policy.queue_size,
+                pending_timeout_seconds=policy.pending_timeout_seconds,
+                allow_fast_output=policy.allow_fast_output,
+                busy_weak_delay_seconds=policy.busy_weak_delay_seconds,
+                busy_weak_stale_seconds=policy.busy_weak_stale_seconds,
+            )
+        if mode == ASR_IMPACT_MODE_ULTRA_LOW:
+            return RecognitionModePolicy(
+                mode=policy.mode,
+                queue_size=min(policy.queue_size, 2),
+                pending_timeout_seconds=max(policy.pending_timeout_seconds, 0.35),
+                allow_fast_output=policy.allow_fast_output,
+                busy_weak_delay_seconds=max(policy.busy_weak_delay_seconds, 0.80),
+                busy_weak_stale_seconds=min(
+                    policy.busy_weak_stale_seconds or 1.40,
+                    1.40,
+                ),
+                weak_cooldown_seconds=0.70,
+                weak_stale_drop_seconds=1.20,
+            )
+        return RecognitionModePolicy(
+            mode=policy.mode,
+            queue_size=min(policy.queue_size, 3),
+            pending_timeout_seconds=policy.pending_timeout_seconds,
+            allow_fast_output=policy.allow_fast_output,
+            busy_weak_delay_seconds=policy.busy_weak_delay_seconds,
+            busy_weak_stale_seconds=policy.busy_weak_stale_seconds,
+            weak_cooldown_seconds=0.35,
+            weak_stale_drop_seconds=1.60,
+        )
+
+    @staticmethod
+    def _normalize_asr_impact_mode(value: str) -> str:
+        text = str(value or "").strip().lower().replace("-", "_")
+        if text in {"normal", "off", "none"}:
+            return ASR_IMPACT_MODE_NORMAL
+        if text in {"ultra", "ultralow", "ultra_low", "minimum", "safe"}:
+            return ASR_IMPACT_MODE_ULTRA_LOW
+        return ASR_IMPACT_MODE_LOW
 
     def _ensure_queue_capacity(self, queue_size: int):
         queue_size = max(2, int(queue_size or 2))
@@ -1028,6 +1099,17 @@ class SpeechPipeline:
     ):
         self._ensure_queue_capacity(mode_policy.queue_size)
         work_item.trace.queued_at = time.time()
+        if self._should_drop_weak_for_inference_budget(work_item, mode_policy, work_item.trace.queued_at):
+            self._stats["dropped_speech"] = self._stats.get("dropped_speech", 0) + 1
+            logger.info(
+                "weak candidate dropped by asr budget: labels={}, voice={:.2f}s, total={:.2f}s, last_asr={:.0f}ms",
+                ",".join(work_item.candidate_labels or ()),
+                work_item.segment.voice_duration_seconds,
+                work_item.segment.duration_seconds,
+                self._last_transcription_duration_seconds * 1000,
+            )
+            self._debug_audio.dump_if_enabled(work_item.segment, "asr_budget_weak_drop", "save_dropped_audio")
+            return
         if protect_busy_weak and self._should_buffer_busy_weak_candidate(work_item, mode_policy):
             self._buffer_busy_weak_candidate(work_item, mode_policy, time.time())
             return
@@ -1130,6 +1212,25 @@ class SpeechPipeline:
             ",".join(work_item.candidate_labels or ()),
         )
         return True
+
+    def _should_drop_weak_for_inference_budget(
+        self,
+        work_item: SpeechWorkItem,
+        mode_policy: RecognitionModePolicy,
+        now: float,
+    ) -> bool:
+        if not self._is_weak_work_item(work_item):
+            return False
+        cooldown = max(0.0, float(getattr(mode_policy, "weak_cooldown_seconds", 0.0) or 0.0))
+        stale_drop = max(0.0, float(getattr(mode_policy, "weak_stale_drop_seconds", 0.0) or 0.0))
+        queued_at = float(getattr(work_item.trace, "queued_at", 0.0) or 0.0)
+        detected_at = float(getattr(work_item.trace, "speech_detected_at", 0.0) or 0.0)
+        age_seconds = now - (queued_at or detected_at or now)
+        if stale_drop > 0 and age_seconds >= stale_drop:
+            return True
+        if not self._last_transcription_finished_at or cooldown <= 0:
+            return False
+        return now - self._last_transcription_finished_at < cooldown
 
     def _try_merge_with_queued_short_segment(self, work_item: SpeechWorkItem) -> bool:
         items = self._drain_queue_items()

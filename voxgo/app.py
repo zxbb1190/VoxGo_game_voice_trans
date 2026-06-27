@@ -85,6 +85,7 @@ class VoxGoApp:
         benchmark_audio: BenchmarkAudioOptions = None,
         benchmark_game_mode: bool = False,
         benchmark_profile: str = "",
+        benchmark_asr_impact_mode: str = "",
     ):
         self._diagnostics = DiagnosticsReporter(PROJECT_ROOT)
         self._setup_logging()
@@ -93,6 +94,7 @@ class VoxGoApp:
         self._benchmark_audio = benchmark_audio
         self._benchmark_game_mode = bool(benchmark_game_mode)
         self._benchmark_profile = self._normalize_benchmark_profile(benchmark_profile)
+        self._benchmark_asr_impact_mode = str(benchmark_asr_impact_mode or "").strip()
         if self._benchmark_game_mode:
             self._apply_benchmark_game_mode()
         if self._benchmark_profile:
@@ -224,6 +226,9 @@ class VoxGoApp:
 
     def _apply_benchmark_game_mode(self):
         self.config.audio.latency_mode = LATENCY_MODE_FAST
+        benchmark_asr_impact_mode = str(getattr(self, "_benchmark_asr_impact_mode", "") or "").strip()
+        if benchmark_asr_impact_mode:
+            self.config.whisper.asr_impact_mode = benchmark_asr_impact_mode
         self._migrate_runtime_defaults(self.config, preserve_existing_audio_tuning=False)
         self._sync_language_flow(self.config)
         self._sync_whisper_vad_limit(self.config)
@@ -1170,6 +1175,12 @@ def _parse_args(argv=None):
     parser.add_argument("--benchmark-duration-seconds", type=float, default=300.0, help="Total benchmark injection duration; 0 means unlimited")
     parser.add_argument("--benchmark-game-mode", action="store_true", help="Temporarily force Fast/Game Performance mode without saving user settings")
     parser.add_argument(
+        "--benchmark-asr-impact-mode",
+        default="",
+        choices=["", "normal", "low", "ultra_low", "ultra-low"],
+        help="Temporary ASR impact profile for benchmark game mode",
+    )
+    parser.add_argument(
         "--benchmark-profile",
         default="",
         choices=[
@@ -1217,6 +1228,7 @@ def main(argv=None):
         benchmark_audio=benchmark_audio,
         benchmark_game_mode=bool(args.benchmark_game_mode),
         benchmark_profile=args.benchmark_profile,
+        benchmark_asr_impact_mode=args.benchmark_asr_impact_mode,
     )
     app.start()
 

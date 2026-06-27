@@ -191,6 +191,50 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
         self.assertAlmostEqual(item.segment.voice_duration_seconds, 1.15)
         self.assertFalse(pipeline._pending_buffer.has_pending())
 
+    def test_low_impact_cooldown_drops_weak_candidate_before_whisper(self):
+        recognizer = FakeRecognizer("push")
+        pipeline, stats, seen = self._pipeline(recognizer)
+        pipeline._last_transcription_finished_at = time.time()
+        pipeline._last_transcription_duration_seconds = 0.8
+
+        pipeline.on_speech_detected(
+            _segment(
+                duration_seconds=0.7,
+                voice_duration_seconds=0.2,
+                peak_rms_dbfs=-39.5,
+                energy_threshold_dbfs=-40.0,
+            )
+        )
+        pipeline._flush_expired_pending(time.time() + 2.0)
+
+        self.assertEqual(recognizer.calls, 0)
+        self.assertEqual(seen, [])
+        self.assertTrue(pipeline._queue.empty())
+        self.assertEqual(stats["dropped_speech"], 1)
+
+    def test_low_impact_cooldown_keeps_strong_candidate(self):
+        recognizer = FakeRecognizer("push")
+        pipeline, stats, seen = self._pipeline(recognizer)
+        pipeline._last_transcription_finished_at = time.time()
+        pipeline._last_transcription_duration_seconds = 0.8
+
+        pipeline.on_speech_detected(
+            _segment(
+                duration_seconds=1.2,
+                voice_duration_seconds=1.0,
+                block_count=8,
+                voice_blocks=7,
+                peak_rms_dbfs=-25.0,
+                energy_threshold_dbfs=-40.0,
+            )
+        )
+        item = pipeline._queue.get_nowait()
+        pipeline._process(item)
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(stats["dropped_speech"], 0)
+
     def test_empty_audio_is_still_dropped_immediately(self):
         recognizer = FakeRecognizer("push")
         pipeline, stats, _seen = self._pipeline(recognizer)

@@ -29,6 +29,7 @@
   "whisper": {
     "model_size": "small",
     "fast_model_size": "base",
+    "asr_impact_mode": "low",
     "pure_english_environment": false,
     "enable_english_model": false,
     "english_model_size": "small.en",

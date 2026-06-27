@@ -176,6 +176,7 @@ class _TqdmOutputSink:
 class WhisperConfig:
     model_size: str = "small"
     fast_model_size: str = "base"
+    asr_impact_mode: str = "low"
     pure_english_environment: bool = False
     enable_english_model: bool = False
     english_model_size: str = "small.en"

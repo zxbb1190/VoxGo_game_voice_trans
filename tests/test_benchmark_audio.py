@@ -90,9 +90,23 @@ class BenchmarkAudioTest(unittest.TestCase):
         self.assertEqual(app.config.whisper.device, "cpu")
         self.assertEqual(app.config.whisper.compute_type, "int8")
         self.assertFalse(app.config.whisper.auto_cpu_threads)
-        self.assertEqual(app.config.whisper.cpu_threads, 2)
+        self.assertEqual(app.config.whisper.asr_impact_mode, "low")
+        self.assertEqual(app.config.whisper.cpu_threads, 1)
         self.assertEqual(app.config.whisper.num_workers, 1)
         self.assertEqual(app.config.translation.max_concurrent_requests, 1)
+
+    def test_benchmark_game_mode_accepts_ultra_low_asr_impact_override(self):
+        app = object.__new__(VoxGoApp)
+        app.config = default_app_config()
+        app.config.audio.latency_mode = "balanced"
+        app._benchmark_asr_impact_mode = "ultra-low"
+
+        VoxGoApp._apply_benchmark_game_mode(app)
+
+        self.assertEqual(app.config.audio.latency_mode, "fast")
+        self.assertEqual(app.config.whisper.asr_impact_mode, "ultra_low")
+        self.assertEqual(app.config.whisper.active_model_size, "tiny")
+        self.assertEqual(app.config.whisper.cpu_threads, 1)
 
     def test_benchmark_profile_d_forces_cuda_float16_without_game_policy(self):
         app = object.__new__(VoxGoApp)

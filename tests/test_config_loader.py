@@ -34,8 +34,9 @@ class ConfigLoaderTest(unittest.TestCase):
         self.assertEqual(config.whisper.active_model_size, "base")
         self.assertEqual(config.whisper.device, "cpu")
         self.assertEqual(config.whisper.compute_type, "int8")
+        self.assertEqual(config.whisper.asr_impact_mode, "low")
         self.assertFalse(config.whisper.auto_cpu_threads)
-        self.assertEqual(config.whisper.cpu_threads, 2)
+        self.assertEqual(config.whisper.cpu_threads, 1)
         self.assertEqual(config.whisper.num_workers, 1)
         self.assertEqual(config.translation.max_concurrent_requests, 1)
 
@@ -46,8 +47,9 @@ class ConfigLoaderTest(unittest.TestCase):
         self.assertEqual(config.whisper.active_model_size, "base")
         self.assertEqual(config.whisper.device, "cpu")
         self.assertEqual(config.whisper.compute_type, "int8")
+        self.assertEqual(config.whisper.asr_impact_mode, "low")
         self.assertFalse(config.whisper.auto_cpu_threads)
-        self.assertEqual(config.whisper.cpu_threads, 2)
+        self.assertEqual(config.whisper.cpu_threads, 1)
         self.assertEqual(config.whisper.num_workers, 1)
         self.assertEqual(config.translation.max_concurrent_requests, 1)
 
@@ -128,6 +130,7 @@ class ConfigLoaderTest(unittest.TestCase):
             config.app.setup_completed = True
             config.whisper.device = "gpu"
             config.whisper.fast_model_size = "base"
+            config.whisper.asr_impact_mode = "ultra-low"
             config.whisper.pure_english_environment = True
             config.translation.provider = "openai"
             config.update.ignored_version = "v0.3.0"
@@ -139,6 +142,7 @@ class ConfigLoaderTest(unittest.TestCase):
             self.assertEqual(data["whisper"]["device"], "cuda")
             self.assertEqual(data["whisper"]["model_size"], "small")
             self.assertEqual(data["whisper"]["fast_model_size"], "base")
+            self.assertEqual(data["whisper"]["asr_impact_mode"], "ultra_low")
             self.assertTrue(data["whisper"]["pure_english_environment"])
             self.assertTrue(data["whisper"]["enable_english_model"])
             self.assertEqual(data["translation"]["provider"], "openai_compatible")
@@ -159,7 +163,7 @@ class ConfigLoaderTest(unittest.TestCase):
         self.assertEqual(load_like_fast.whisper.device, "cpu")
         self.assertEqual(load_like_fast.whisper.compute_type, "int8")
         self.assertFalse(load_like_fast.whisper.auto_cpu_threads)
-        self.assertEqual(load_like_fast.whisper.cpu_threads, 2)
+        self.assertEqual(load_like_fast.whisper.cpu_threads, 1)
         self.assertEqual(load_like_fast.whisper.num_workers, 1)
         self.assertEqual(load_like_fast.translation.max_concurrent_requests, 1)
         self.assertEqual(load_like_fast.translation.context_messages, 0)
@@ -185,7 +189,49 @@ class ConfigLoaderTest(unittest.TestCase):
         self.assertEqual(config.whisper.active_model_size, "base")
         self.assertFalse(config.whisper.pure_english_environment)
         self.assertEqual(config.whisper.device, "cpu")
+        self.assertEqual(config.whisper.cpu_threads, 1)
+
+    def test_fast_mode_normal_asr_impact_keeps_two_cpu_threads(self):
+        config = default_app_config()
+        config.audio.latency_mode = LATENCY_MODE_FAST
+        config.whisper.asr_impact_mode = "normal"
+
+        migrate_runtime_defaults(config, preserve_existing_audio_tuning=False)
+        sync_language_flow(config)
+        apply_language_runtime_policy(config)
+
+        self.assertEqual(config.whisper.asr_impact_mode, "normal")
+        self.assertEqual(config.whisper.active_model_size, "base")
         self.assertEqual(config.whisper.cpu_threads, 2)
+
+    def test_fast_mode_ultra_low_asr_impact_uses_tiny_one_thread(self):
+        config = default_app_config()
+        config.audio.latency_mode = LATENCY_MODE_FAST
+        config.whisper.asr_impact_mode = "ultra-low"
+
+        migrate_runtime_defaults(config, preserve_existing_audio_tuning=False)
+        sync_language_flow(config)
+        apply_language_runtime_policy(config)
+
+        self.assertEqual(config.whisper.asr_impact_mode, "ultra_low")
+        self.assertEqual(config.whisper.active_model_size, "tiny")
+        self.assertEqual(config.whisper.cpu_threads, 1)
+
+    def test_fast_pure_english_ultra_low_asr_impact_uses_tiny_en(self):
+        config = default_app_config()
+        config.audio.latency_mode = LATENCY_MODE_FAST
+        config.translation.source_lang = "en"
+        config.translation.target_lang = "zh"
+        config.whisper.pure_english_environment = True
+        config.whisper.asr_impact_mode = "ultra_low"
+
+        migrate_runtime_defaults(config, preserve_existing_audio_tuning=False)
+        sync_language_flow(config)
+        apply_language_runtime_policy(config)
+
+        self.assertEqual(config.whisper.language, "en")
+        self.assertEqual(config.whisper.active_model_size, "tiny.en")
+        self.assertEqual(config.whisper.cpu_threads, 1)
 
     def test_english_to_chinese_uses_auto_language_without_specialized_model(self):
         config = default_app_config()

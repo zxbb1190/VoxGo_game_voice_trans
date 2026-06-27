@@ -60,6 +60,14 @@ WHISPER_BEAM_SIZE_BY_LATENCY_MODE = {
 GAME_PERFORMANCE_MODEL_SIZE = "base"
 GAME_PERFORMANCE_ENGLISH_MODEL_SIZE = "base.en"
 GAME_PERFORMANCE_CPU_THREADS = 2
+ASR_IMPACT_MODE_NORMAL = "normal"
+ASR_IMPACT_MODE_LOW = "low"
+ASR_IMPACT_MODE_ULTRA_LOW = "ultra_low"
+ASR_IMPACT_MODES = {
+    ASR_IMPACT_MODE_NORMAL,
+    ASR_IMPACT_MODE_LOW,
+    ASR_IMPACT_MODE_ULTRA_LOW,
+}
 
 
 def default_app_config() -> AppConfig:
@@ -106,15 +114,47 @@ def _use_pure_english_model(config: AppConfig, is_english_to_chinese: bool) -> b
 
 
 def _active_whisper_model_size(config: AppConfig, latency_mode: str, is_english_to_chinese: bool) -> str:
+    impact_mode = normalize_asr_impact_mode(getattr(config.whisper, "asr_impact_mode", ASR_IMPACT_MODE_LOW))
     if _use_pure_english_model(config, is_english_to_chinese):
+        if latency_mode == LATENCY_MODE_FAST and impact_mode == ASR_IMPACT_MODE_ULTRA_LOW:
+            return "tiny.en"
         if latency_mode == LATENCY_MODE_FAST:
             fast_english = str(getattr(config.whisper, "fast_english_model_size", "") or "").strip()
             return fast_english or GAME_PERFORMANCE_ENGLISH_MODEL_SIZE
         return str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip() or "small.en"
     if latency_mode == LATENCY_MODE_FAST:
+        if impact_mode == ASR_IMPACT_MODE_ULTRA_LOW:
+            return "tiny"
         fast_model = str(getattr(config.whisper, "fast_model_size", "") or "").strip()
         return fast_model or GAME_PERFORMANCE_MODEL_SIZE
     return ""
+
+
+def normalize_asr_impact_mode(value: str) -> str:
+    text = str(value or "").strip().lower().replace("-", "_")
+    aliases = {
+        "": ASR_IMPACT_MODE_LOW,
+        "default": ASR_IMPACT_MODE_LOW,
+        "balanced": ASR_IMPACT_MODE_LOW,
+        "game": ASR_IMPACT_MODE_LOW,
+        "fast": ASR_IMPACT_MODE_LOW,
+        "ultra": ASR_IMPACT_MODE_ULTRA_LOW,
+        "ultralow": ASR_IMPACT_MODE_ULTRA_LOW,
+        "ultra_low": ASR_IMPACT_MODE_ULTRA_LOW,
+        "minimum": ASR_IMPACT_MODE_ULTRA_LOW,
+        "safe": ASR_IMPACT_MODE_ULTRA_LOW,
+        "off": ASR_IMPACT_MODE_NORMAL,
+        "none": ASR_IMPACT_MODE_NORMAL,
+    }
+    text = aliases.get(text, text)
+    return text if text in ASR_IMPACT_MODES else ASR_IMPACT_MODE_LOW
+
+
+def _game_performance_cpu_threads(config: AppConfig) -> int:
+    impact_mode = normalize_asr_impact_mode(getattr(config.whisper, "asr_impact_mode", ASR_IMPACT_MODE_LOW))
+    if impact_mode in {ASR_IMPACT_MODE_LOW, ASR_IMPACT_MODE_ULTRA_LOW}:
+        return 1
+    return GAME_PERFORMANCE_CPU_THREADS
 
 
 def apply_game_performance_policy(config: AppConfig) -> bool:
@@ -124,7 +164,7 @@ def apply_game_performance_policy(config: AppConfig) -> bool:
     config.whisper.device = "cpu"
     config.whisper.compute_type = "int8"
     config.whisper.auto_cpu_threads = False
-    config.whisper.cpu_threads = GAME_PERFORMANCE_CPU_THREADS
+    config.whisper.cpu_threads = _game_performance_cpu_threads(config)
     config.whisper.num_workers = 1
     config.translation.max_concurrent_requests = 1
     config.translation.context_messages = 0
@@ -255,6 +295,8 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
         config.whisper.num_workers = 1
     if not hasattr(config.whisper, "fast_model_size"):
         config.whisper.fast_model_size = GAME_PERFORMANCE_MODEL_SIZE
+    if not hasattr(config.whisper, "asr_impact_mode"):
+        config.whisper.asr_impact_mode = ASR_IMPACT_MODE_LOW
     if not hasattr(config.whisper, "pure_english_environment"):
         config.whisper.pure_english_environment = False
     if not hasattr(config.whisper, "enable_english_model"):
@@ -269,6 +311,9 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
     config.whisper.fast_model_size = str(
         getattr(config.whisper, "fast_model_size", GAME_PERFORMANCE_MODEL_SIZE) or ""
     ).strip()
+    config.whisper.asr_impact_mode = normalize_asr_impact_mode(
+        getattr(config.whisper, "asr_impact_mode", ASR_IMPACT_MODE_LOW)
+    )
     config.whisper.pure_english_environment = bool(getattr(config.whisper, "pure_english_environment", False))
     config.whisper.enable_english_model = config.whisper.pure_english_environment
     config.whisper.english_model_size = (
@@ -465,6 +510,9 @@ def serialize_user_settings(config: AppConfig) -> dict:
         "whisper": {
             "model_size": str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small",
             "fast_model_size": str(getattr(config.whisper, "fast_model_size", "") or "").strip(),
+            "asr_impact_mode": normalize_asr_impact_mode(
+                getattr(config.whisper, "asr_impact_mode", ASR_IMPACT_MODE_LOW)
+            ),
             "pure_english_environment": bool(getattr(config.whisper, "pure_english_environment", False)),
             "enable_english_model": bool(getattr(config.whisper, "pure_english_environment", False)),
             "english_model_size": str(getattr(config.whisper, "english_model_size", "small.en") or "small.en").strip(),
