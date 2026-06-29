@@ -16,6 +16,7 @@ from voxgo.runtime.cuda_runtime import (  # noqa: E402
     missing_local_cuda_runtime_dlls,
     resolve_cuda_runtime_download_url,
 )
+from voxgo.app_info import APP_VERSION  # noqa: E402
 
 
 class CudaRuntimeTest(unittest.TestCase):
@@ -69,7 +70,7 @@ class CudaRuntimeTest(unittest.TestCase):
 
         self.assertEqual(
             resolve_cuda_runtime_download_url(
-                fetcher=lambda _: {"latest": "0.3.1", "cuda_runtime_url": url}
+                fetcher=lambda _: {"latest": APP_VERSION, "cuda_runtime_url": url}
             ),
             url,
         )

@@ -169,6 +169,230 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
         self.assertEqual(seen[0].text, "push")
         self.assertEqual(stats["filtered_speech"], 0)
 
+    def test_fast_mode_tiny_low_confidence_segment_is_dropped_before_whisper(self):
+        recognizer = FakeRecognizer("Okay.")
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=0.84,
+            voice_duration_seconds=0.24,
+            block_count=7,
+            voice_blocks=2,
+            vad_voice_blocks=1,
+            energy_voice_blocks=2,
+            vad_confidence=1 / 7,
+            peak_rms_dbfs=-44.8,
+            energy_threshold_dbfs=-44.2,
+            activity_source="energy",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "short_segment", "low_confidence"),
+                low_confidence=True,
+                short_segment=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 0)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
+    def test_fast_mode_short_real_game_command_can_still_reach_whisper(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "push",
+                "en",
+                0.95,
+                avg_logprob=-0.2,
+                no_speech_prob=0.1,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=0.84,
+            voice_duration_seconds=0.36,
+            block_count=7,
+            voice_blocks=3,
+            vad_voice_blocks=3,
+            energy_voice_blocks=3,
+            vad_confidence=3 / 7,
+            peak_rms_dbfs=-38.5,
+            energy_threshold_dbfs=-44.2,
+            activity_source="vad",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "short_segment"),
+                short_segment=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(seen[0].text, "push")
+        self.assertEqual(stats["filtered_speech"], 0)
+
+    def test_repeated_short_phrase_hallucination_is_filtered_after_whisper(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "Okay. Okay. Okay. Okay. Okay. Okay.",
+                "en",
+                1.0,
+                avg_logprob=-0.23,
+                no_speech_prob=0.69,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=0.84,
+            voice_duration_seconds=0.36,
+            block_count=7,
+            voice_blocks=3,
+            vad_voice_blocks=3,
+            energy_voice_blocks=3,
+            vad_confidence=3 / 7,
+            peak_rms_dbfs=-38.5,
+            energy_threshold_dbfs=-44.2,
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "short_segment"),
+                short_segment=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
+    def test_weak_long_low_confidence_result_is_filtered_after_whisper(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "I'm gonna get this. Yeah, this is...",
+                "en",
+                0.42,
+                avg_logprob=-1.60,
+                no_speech_prob=0.38,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=4.0,
+            voice_duration_seconds=4.0,
+            block_count=1,
+            voice_blocks=1,
+            vad_voice_blocks=1,
+            energy_voice_blocks=1,
+            vad_confidence=1.0,
+            peak_rms_dbfs=-53.0,
+            energy_threshold_dbfs=-40.0,
+            activity_source="benchmark",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "low_confidence"),
+                low_confidence=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
+    def test_weak_noisy_long_result_is_filtered_after_whisper(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "I'm gonna blow out the blood. For the first time. For the last year.",
+                "en",
+                0.73,
+                avg_logprob=-1.14,
+                no_speech_prob=0.37,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=4.0,
+            voice_duration_seconds=4.0,
+            block_count=1,
+            voice_blocks=1,
+            vad_voice_blocks=1,
+            energy_voice_blocks=1,
+            vad_confidence=1.0,
+            peak_rms_dbfs=-48.7,
+            energy_threshold_dbfs=-40.0,
+            activity_source="benchmark",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "low_confidence"),
+                low_confidence=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
+    def test_clear_long_sentence_is_not_filtered_for_weak_capture_alone(self):
+        recognizer = FakeRecognizer(
+            result=TranscriptionResult(
+                "I was just trying to grab the car, you know",
+                "en",
+                0.90,
+                avg_logprob=-0.58,
+                no_speech_prob=0.06,
+                compression_ratio=1.0,
+                segment_count=1,
+            )
+        )
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=2.0,
+            voice_duration_seconds=1.4,
+            block_count=12,
+            voice_blocks=9,
+            vad_voice_blocks=9,
+            energy_voice_blocks=9,
+            vad_confidence=0.75,
+            peak_rms_dbfs=-31.0,
+            energy_threshold_dbfs=-44.0,
+            activity_source="vad",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate",),
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(stats["filtered_speech"], 0)
+
     def test_pending_short_segment_merges_with_following_neighbor(self):
         recognizer = FakeRecognizer("push")
         pipeline, _stats, _seen = self._pipeline(recognizer)
@@ -246,9 +470,38 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
         self.assertFalse(pipeline._pending_buffer.has_pending())
         self.assertEqual(recognizer.calls, 0)
 
-    def test_energy_only_short_low_confidence_asr_is_filtered_after_whisper(self):
+    def test_fast_mode_energy_only_low_confidence_is_dropped_before_whisper(self):
         recognizer = FakeRecognizer("ok")
         pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            voice_duration_seconds=0.0,
+            vad_voice_blocks=0,
+            energy_voice_blocks=2,
+            vad_confidence=0.0,
+            activity_source="energy",
+        )
+
+        pipeline._process(
+            SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0),
+                candidate_labels=("candidate", "low_confidence"),
+                low_confidence=True,
+            )
+        )
+
+        self.assertEqual(recognizer.calls, 0)
+        self.assertEqual(seen, [])
+        self.assertEqual(stats["filtered_speech"], 1)
+
+    def test_balanced_mode_energy_only_short_low_confidence_asr_is_filtered_after_whisper(self):
+        recognizer = FakeRecognizer("ok")
+        config = AppConfig(
+            audio=AudioConfig(latency_mode="balanced"),
+            whisper=WhisperConfig(language="en"),
+            debug=DebugConfig(),
+        )
+        pipeline, stats, seen = self._pipeline(recognizer, config=config)
         segment = _segment(
             voice_duration_seconds=0.0,
             vad_voice_blocks=0,
@@ -306,7 +559,7 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
             )
         )
 
-        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(recognizer.calls, 0)
         self.assertEqual(seen, [])
         self.assertEqual(stats["filtered_speech"], 1)
 

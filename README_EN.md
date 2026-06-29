@@ -63,15 +63,17 @@ Double-click `install.bat`, or run:
 pip install -r requirements.txt
 ```
 
-If you use a portable Release package, unzip it and run `VoxGo.exe`. Starting with v0.3.1 there are 3 packages:
+If you use a portable Release package, unzip it and run `VoxGo.exe`. The current Release provides 3 packages:
 
 | Package | Contents | Best for |
 |---------|----------|----------|
 | Lite | No Whisper model, no CUDA DLLs, smallest archive; downloads the model on first use | Most users who can download the model |
-| Full | Bundled Whisper small/base models, no CUDA DLLs | CPU users with unstable model-download networks |
-| Full-CUDA / GPU | Bundled Whisper small/base models plus CUDA DLLs | NVIDIA users who want GPU recognition immediately |
+| Full | Bundled multilingual Whisper small/base models, no CUDA DLLs | CPU users with unstable model-download networks |
+| Full-CUDA / GPU | Bundled multilingual Whisper small/base models plus CUDA DLLs | NVIDIA users who want GPU recognition immediately |
 
 Lite and Full do not download CUDA DLLs at startup. CUDA is checked only when you explicitly select `NVIDIA GPU / CUDA` in settings. VoxGo detects the current GPU first: AMD/Intel users get a clear "GPU unavailable" notice and keep the previous device; NVIDIA users without bundled CUDA DLLs are prompted while VoxGo downloads the CUDA runtime from the current Release into the app folder, then GPU takes effect after restart.
+
+Full and Full-CUDA do not bundle the English-only `small.en` / `base.en` models. VoxGo downloads them on demand only after you enable the English Fast Path / Pure English environment, so users who do not need that path do not pay the extra package size.
 
 ### 2. Complete The First-Run Wizard
 The first launch opens the setup wizard before Whisper starts loading. Complete this loop:
@@ -163,6 +165,15 @@ python main.py
 
 Before joining a game or voice channel, use the gear settings to confirm both "Test Translation" and "Test Audio" pass. If you get stuck, click "Submit Feedback" in settings and paste the generated diagnostic template into a GitHub Issue.
 
+### 6. Recommended Competitive Game Settings
+For PUBG, APEX, Valorant, and similar real-time competitive games, prioritize frame time and response speed:
+
+- Response Mode: `Fast / Game Performance`
+- Recognition Device: `CPU`
+- English Fast Path: enable Pure English environment only when teammate voice is almost entirely English
+
+`Fast + Pure English` uses the English-only `base.en` model, which is usually faster than the multilingual `base` model for English game voice. The first enable downloads `base.en` on demand; even the Full package does not pre-bundle it. Keep Pure English off when the audio often contains Chinese or mixed-language speech, so the multilingual model can keep language detection active.
+
 For developer performance benchmarks, skip the real audio device and inject a fixed file into the recognition pipeline with a 4-second speech + 3-second gap loop:
 ```bash
 python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
@@ -213,6 +224,9 @@ Edit `config.json` or use the overlay settings:
 | `app.setup_completed` | Whether the first-run wizard has been completed; saved to `user_settings.json` after setup |
 | `debug.enabled` | Whether debug mode records the latest end-to-end latency |
 | `whisper.model_size` | Whisper model size: tiny/base/small/medium |
+| `whisper.fast_model_size` | Multilingual model used by Fast / Game Performance, default `base` |
+| `whisper.pure_english_environment` | Pure English environment switch; uses an English-only model for faster English voice, useful for mostly-English PUBG/APEX/Valorant comms |
+| `whisper.fast_english_model_size` | English-only model used by Fast + Pure English, default `base.en`; downloaded on first use |
 | `whisper.device` | Recognition device, default `cpu` for Game Performance. Users can manually choose `cuda` for NVIDIA GPU / CUDA mode, or `auto` for GPU-first fallback behavior |
 | `whisper.compute_type` | Compute precision, default `int8` on CPU. In CUDA mode, `auto` tries float16, int8_float16, then float32 before falling back to CPU; use int8_float16 as an experiment rather than the default |
 | `whisper.auto_cpu_threads` | Whether to choose recognition thread count from CPU cores automatically, disabled by default for Game Performance; when disabled, VoxGo uses `whisper.cpu_threads` |
@@ -294,13 +308,15 @@ Edit `config.json` or use the overlay settings:
 - The overlay shows the Whisper model, repository, download source, downloaded size, total size, and percentage.
 - Download failures show the concrete network error and are also written to `app.log` and `crash_report.txt` in the app folder.
 - The default source is ModelScope and downloads the required `Systran/faster-whisper-small` / `Systran/faster-whisper-base` files from `modelscope.cn`.
+- Enabling Pure English downloads `Systran/faster-whisper-base.en` or the configured English-only model on demand.
 - `hf-mirror.com` currently redirects back to `huggingface.co`, so it is unreliable when the user's network cannot reach Hugging Face. If you still want to try it, enter it only as a custom Hugging Face Endpoint.
 - If ModelScope or a custom source still fails, switch to the official Hugging Face source and restart, or use the full package.
-- The full package already includes the Whisper small and base models, so the default Game Performance profile does not need the first-run model download.
+- The full package already includes the Whisper small and base multilingual models, so the default Game Performance profile does not need the first-run multilingual model download; English-only models still download on demand.
 
 ### Translation Latency Is High
 - Enable debug mode in the gear settings, reproduce once, then use "Submit Feedback" to copy the latest latency data.
 - The default real-user profile is Fast / Game Performance: CPU int8, 2 threads, one worker, one translation request, and a base-level performance model to protect frame time in PUBG, APEX, Valorant, and similar competitive games. GPU mode remains a manual high-performance hardware option, not the default game profile.
+- If voice is almost entirely English, enable Pure English to use `base.en`, which is usually faster than multilingual `base`; the model downloads on first use.
 - Check network connectivity and provider speed.
 - Lower `whisper.model_size` to speed up recognition.
 - Use a local translation model if you already have one deployed.
@@ -311,7 +327,7 @@ This tool captures Windows system playback audio. It is not hard-coded for speci
 Some games, anti-cheat systems, exclusive audio mode, remote streaming tools, DRM protection, or special sound drivers may block capture. Use another output device, disable exclusive mode, or route audio through VB-Cable when needed.
 
 ## Notes
-1. Lite downloads the Whisper model on first use; Full and Full-CUDA include Whisper small and base.
+1. Lite downloads the Whisper model on first use; Full and Full-CUDA include multilingual Whisper small and base, while English-only models download on demand.
 2. Translation requires network access unless you use a local model.
 3. Start this app before joining a game voice session.
 4. Keep the mobile page open if you use mobile mirroring.

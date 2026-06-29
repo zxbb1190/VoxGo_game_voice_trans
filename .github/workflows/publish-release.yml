@@ -54,7 +54,12 @@ jobs:
           .\.venv-win\Scripts\python.exe -m compileall voxgo tests main.py
           .\.venv-win\Scripts\python.exe -m unittest discover -s tests -v
 
-      - name: Build lite and full portable packages
+      - name: Collect CUDA runtime
+        shell: powershell
+        run: |
+          .\scripts\collect_cuda_runtime.ps1 -InstallNvidiaPipPackages
+
+      - name: Build portable packages
         shell: powershell
         run: |
           .\scripts\build_portable.ps1 -Version "$env:APP_VERSION"
@@ -64,17 +69,23 @@ jobs:
         run: |
           $lite = "release\VoxGo-v$env:APP_VERSION-lite.zip"
           $full = "release\VoxGo-v$env:APP_VERSION-full.zip"
+          $fullCuda = "release\VoxGo-v$env:APP_VERSION-full-cuda.zip"
+          $cudaRuntime = "release\VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
           $liteHash = (Get-FileHash $lite -Algorithm SHA256).Hash.ToLowerInvariant()
           $fullHash = (Get-FileHash $full -Algorithm SHA256).Hash.ToLowerInvariant()
+          $fullCudaHash = (Get-FileHash $fullCuda -Algorithm SHA256).Hash.ToLowerInvariant()
+          $cudaRuntimeHash = (Get-FileHash $cudaRuntime -Algorithm SHA256).Hash.ToLowerInvariant()
           $liteSize = [math]::Round((Get-Item $lite).Length / 1MB, 1)
           $fullSize = [math]::Round((Get-Item $full).Length / 1MB, 1)
+          $fullCudaSize = [math]::Round((Get-Item $fullCuda).Length / 1MB, 1)
+          $cudaRuntimeSize = [math]::Round((Get-Item $cudaRuntime).Length / 1MB, 1)
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Improved English realtime recognition latency for game voice.
-          - Reduced balanced-mode segmentation delay and queue contention for short voice lines.
-          - Added richer latency diagnostics including model, device, candidate labels, and fast-path status.
-          - Fixed website and update manifest links to target this release tag.
+          - Reduced ASR impact on PUBG/APEX/Valorant-style gameplay with stricter weak-candidate budgeting.
+          - Improved Fast + Pure English guidance for English game voice; English-only models download on demand.
+          - Filtered repeated short-phrase Whisper hallucinations before they reach translation.
+          - Kept Full packages focused on bundled multilingual small/base models; English-only models are not pre-bundled.
 
           ### Downloads
 
@@ -82,10 +93,16 @@ jobs:
             - SHA256: ``$liteHash``
           - ``VoxGo-v$env:APP_VERSION-full.zip``: $fullSize MB
             - SHA256: ``$fullHash``
+          - ``VoxGo-v$env:APP_VERSION-full-cuda.zip``: $fullCudaSize MB
+            - SHA256: ``$fullCudaHash``
+          - ``VoxGo-v$env:APP_VERSION-cuda-runtime.zip``: $cudaRuntimeSize MB
+            - SHA256: ``$cudaRuntimeHash``
           "@ | Set-Content -Encoding UTF8 release-notes.md
 
           "LITE_SHA256=$liteHash" | Out-File -FilePath $env:GITHUB_ENV -Append
           "FULL_SHA256=$fullHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "FULL_CUDA_SHA256=$fullCudaHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "CUDA_RUNTIME_SHA256=$cudaRuntimeHash" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Update website release manifest
         shell: powershell
@@ -101,15 +118,20 @@ jobs:
           $manifest.channel = "stable"
           $manifest.title = "VoxGo v$env:APP_VERSION"
           $manifest.notes = @(
-            "Improved English realtime recognition latency for game voice.",
-            "Reduced balanced-mode segmentation delay and queue contention for short voice lines.",
-            "Added richer latency diagnostics including model, device, candidate labels, and fast-path status."
+            "Reduced ASR impact on PUBG/APEX/Valorant-style gameplay with stricter weak-candidate budgeting.",
+            "Improved Fast + Pure English guidance for English game voice; English-only models download on demand.",
+            "Filtered repeated short-phrase Whisper hallucinations before they reach translation.",
+            "Kept Full packages focused on bundled multilingual small/base models; English-only models are not pre-bundled."
           )
           $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
           $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
           $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
+          $manifest.download_full_cuda_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full-cuda.zip"
+          $manifest.cuda_runtime_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
           $manifest.sha256_lite = $env:LITE_SHA256
           $manifest.sha256_full = $env:FULL_SHA256
+          $manifest.sha256_full_cuda = $env:FULL_CUDA_SHA256
+          $manifest.sha256_cuda_runtime = $env:CUDA_RUNTIME_SHA256
           $manifest.mandatory = $false
           $manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $manifestPath
 
@@ -130,6 +152,8 @@ jobs:
           files: |
             release/VoxGo-v${{ env.APP_VERSION }}-lite.zip
             release/VoxGo-v${{ env.APP_VERSION }}-full.zip
+            release/VoxGo-v${{ env.APP_VERSION }}-full-cuda.zip
+            release/VoxGo-v${{ env.APP_VERSION }}-cuda-runtime.zip
           fail_on_unmatched_files: true
           make_latest: true
           overwrite_files: true

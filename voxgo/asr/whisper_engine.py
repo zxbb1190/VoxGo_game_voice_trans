@@ -92,6 +92,7 @@ CJK_RE = re.compile(r"[\u4e00-\u9fff]")
 LATIN_RE = re.compile(r"[a-zA-Z]")
 REPEAT_NORMALIZE_RE = re.compile(r"[\W_]+", re.UNICODE)
 REPEATED_NOISE_RUN_RE = re.compile(r"(.)\1{4,}", re.UNICODE)
+REPEATED_PHRASE_SPLIT_RE = re.compile(r"[.!?。！？,，;；:：]+|\s{2,}", re.UNICODE)
 GLOBAL_ASR_NO_SPEECH_SHORT_THRESHOLD = 0.65
 GLOBAL_ASR_LOW_LOGPROB_SHORT_THRESHOLD = -1.10
 GLOBAL_ASR_NOISE_TOKEN_NO_SPEECH_THRESHOLD = 0.30
@@ -1263,6 +1264,50 @@ def _is_repeated_noise_transcript(text: str) -> bool:
     return len(set(compact)) <= 2 and len(compact) >= 8
 
 
+def _repeat_unit(text: str) -> str:
+    compact = normalize_transcript_for_repeat(text)
+    if compact == "okay":
+        return "ok"
+    return compact
+
+
+def _repeated_phrase_count(text: str) -> int:
+    stripped = (text or "").strip()
+    if not stripped:
+        return 0
+    units = [
+        _repeat_unit(part)
+        for part in REPEATED_PHRASE_SPLIT_RE.split(stripped)
+        if _repeat_unit(part)
+    ]
+    if len(units) < 2:
+        return 0
+    counts = {}
+    for unit in units:
+        counts[unit] = counts.get(unit, 0) + 1
+    return max(counts.values(), default=0)
+
+
+def _is_repeated_phrase_transcript(text: str, min_repeats: int = 3) -> bool:
+    stripped = (text or "").strip()
+    if not stripped:
+        return False
+    units = [
+        _repeat_unit(part)
+        for part in REPEATED_PHRASE_SPLIT_RE.split(stripped)
+        if _repeat_unit(part)
+    ]
+    if len(units) < min_repeats:
+        return False
+    counts = {}
+    for unit in units:
+        counts[unit] = counts.get(unit, 0) + 1
+    top_count = max(counts.values(), default=0)
+    if top_count >= min_repeats and top_count / max(1, len(units)) >= 0.55:
+        return True
+    return len(units) >= 5 and len(counts) <= 2 and top_count >= 3
+
+
 def _is_global_short_or_suspicious_transcript(text: str) -> bool:
     stripped = (text or "").strip()
     compact = normalize_transcript_for_repeat(stripped)
@@ -1357,6 +1402,10 @@ def should_drop_transcription_result(
     avg_logprob = float(getattr(result, "avg_logprob", 0.0) or 0.0)
     if _is_repeated_noise_transcript(text):
         return "global_asr_repeated_noise"
+    if _is_repeated_phrase_transcript(text):
+        return f"global_asr_repeated_phrase repeats={_repeated_phrase_count(text)}"
+    if no_speech_prob >= 0.55 and _is_repeated_phrase_transcript(text, min_repeats=2):
+        return f"global_asr_no_speech_repeated_phrase no_speech={no_speech_prob:.2f}"
     if _is_suspicious_noise_token(text) and (
         no_speech_prob >= GLOBAL_ASR_NOISE_TOKEN_NO_SPEECH_THRESHOLD
         or avg_logprob <= GLOBAL_ASR_NOISE_TOKEN_LOGPROB_THRESHOLD

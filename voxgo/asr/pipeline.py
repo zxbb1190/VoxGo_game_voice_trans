@@ -257,6 +257,7 @@ class WeakCandidateTranscriptFilter:
         avg_logprob = float(getattr(result, "avg_logprob", 0.0) or 0.0)
         no_speech_prob = float(getattr(result, "no_speech_prob", 0.0) or 0.0)
         compression_ratio = float(getattr(result, "compression_ratio", 0.0) or 0.0)
+        language_probability = float(getattr(result, "language_probability", 0.0) or 0.0)
         compact_len = len(compact)
 
         weak_capture = (
@@ -296,6 +297,29 @@ class WeakCandidateTranscriptFilter:
                 f"(text={compact}, avg_logprob={avg_logprob:.2f}, no_speech={no_speech_prob:.2f}, "
                 f"compression={compression_ratio:.2f})"
             )
+
+        if weak_capture and compact_len <= 96:
+            if avg_logprob <= -1.05 and no_speech_prob >= 0.35:
+                self._remember(compact, now)
+                return (
+                    "weak_candidate_noisy_long "
+                    f"(text_len={compact_len}, lang_prob={language_probability:.2f}, "
+                    f"avg_logprob={avg_logprob:.2f}, no_speech={no_speech_prob:.2f})"
+                )
+            if avg_logprob <= -1.20 and (language_probability < 0.60 or no_speech_prob >= 0.30):
+                self._remember(compact, now)
+                return (
+                    "weak_candidate_low_asr_confidence_long "
+                    f"(text_len={compact_len}, lang_prob={language_probability:.2f}, "
+                    f"avg_logprob={avg_logprob:.2f}, no_speech={no_speech_prob:.2f})"
+                )
+            if avg_logprob <= -0.95 and language_probability < 0.50 and no_speech_prob >= 0.35:
+                self._remember(compact, now)
+                return (
+                    "weak_candidate_uncertain_language_long "
+                    f"(text_len={compact_len}, lang_prob={language_probability:.2f}, "
+                    f"avg_logprob={avg_logprob:.2f}, no_speech={no_speech_prob:.2f})"
+                )
 
         if weak_capture and self._recent_suspect_count(compact, now) >= 1 and compact_len <= 24:
             self._remember(compact, now)
@@ -594,6 +618,21 @@ class SpeechPipeline:
                 self._stats["filtered_speech"] += 1
                 logger.info("candidate dropped before whisper: {}", fatal_reason)
                 self._debug_audio.dump_if_enabled(segment, fatal_reason, "save_dropped_audio")
+                return
+            weak_pre_drop_reason = self._weak_pre_whisper_drop_reason(item, mode_policy)
+            if weak_pre_drop_reason:
+                self._stats["filtered_speech"] += 1
+                logger.info(
+                    "candidate dropped before whisper: {}, labels={}, voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS, vad={:.2f}",
+                    weak_pre_drop_reason,
+                    ",".join(item.candidate_labels or ("candidate",)),
+                    segment.voice_duration_seconds,
+                    segment.duration_seconds,
+                    segment.peak_rms_dbfs,
+                    segment.energy_threshold_dbfs,
+                    getattr(segment, "vad_confidence", 0.0),
+                )
+                self._debug_audio.dump_if_enabled(segment, weak_pre_drop_reason, "save_dropped_audio")
                 return
             trace.dequeued_at = time.time()
             t0 = time.time()
@@ -1315,6 +1354,69 @@ class SpeechPipeline:
             or "low_confidence" in labels
             or "short_segment" in labels
         )
+
+    @staticmethod
+    def _weak_pre_whisper_drop_reason(item: SpeechWorkItem, mode_policy: RecognitionModePolicy) -> str:
+        if not SpeechPipeline._is_weak_work_item(item):
+            return ""
+        if normalize_latency_mode(getattr(mode_policy, "mode", LATENCY_MODE_BALANCED)) != LATENCY_MODE_FAST:
+            return ""
+
+        segment = item.segment
+        labels = set(item.candidate_labels or ())
+        voice_seconds = max(0.0, float(getattr(segment, "voice_duration_seconds", 0.0) or 0.0))
+        total_seconds = max(0.001, float(getattr(segment, "duration_seconds", 0.0) or 0.0))
+        voice_ratio = voice_seconds / total_seconds
+        peak_margin = float(getattr(segment, "peak_rms_dbfs", -120.0) or -120.0) - float(
+            getattr(segment, "energy_threshold_dbfs", -120.0) or -120.0
+        )
+        block_count = int(getattr(segment, "block_count", 0) or 0)
+        vad_blocks = int(getattr(segment, "vad_voice_blocks", 0) or 0)
+        vad_confidence = float(getattr(segment, "vad_confidence", 0.0) or 0.0)
+        if vad_confidence <= 0 and block_count > 0:
+            vad_confidence = vad_blocks / max(1, block_count)
+        energy_blocks = int(getattr(segment, "energy_voice_blocks", 0) or 0)
+        activity_source = str(getattr(segment, "activity_source", "") or "")
+        low_confidence = bool(getattr(item, "low_confidence", False) or "low_confidence" in labels)
+        short_segment = bool(getattr(item, "short_segment", False) or "short_segment" in labels)
+        merged = "merged" in labels
+
+        if low_confidence and not merged and voice_seconds < 0.25:
+            return (
+                "weak_fast_pre_asr_low_confidence_tiny_voice "
+                f"(voice={voice_seconds:.2f}s, peak_margin={peak_margin:.1f}dB)"
+            )
+        if (
+            low_confidence
+            and short_segment
+            and peak_margin < 0.0
+            and voice_seconds < 0.55
+            and (vad_blocks <= 1 or vad_confidence < 0.25)
+        ):
+            return (
+                "weak_fast_pre_asr_below_gate "
+                f"(voice={voice_seconds:.2f}s, peak_margin={peak_margin:.1f}dB)"
+            )
+        if activity_source == "energy" and vad_blocks <= 0 and voice_seconds < 0.55 and peak_margin < 2.0:
+            return (
+                "weak_fast_pre_asr_energy_only "
+                f"(voice={voice_seconds:.2f}s, peak_margin={peak_margin:.1f}dB)"
+            )
+        if (
+            not merged
+            and short_segment
+            and voice_seconds < 0.30
+            and vad_blocks <= 1
+            and vad_confidence < 0.30
+            and voice_ratio < 0.35
+            and peak_margin < 3.0
+        ):
+            return (
+                "weak_fast_pre_asr_low_vad_short "
+                f"(voice={voice_seconds:.2f}s, vad={vad_confidence:.2f}, ratio={voice_ratio:.2f}, "
+                f"peak_margin={peak_margin:.1f}dB, energy_blocks={energy_blocks})"
+            )
+        return ""
 
     @staticmethod
     def _vad_whisper_drop_reason(segment: SpeechSegment, result) -> str:
