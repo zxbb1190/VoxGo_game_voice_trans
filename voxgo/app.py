@@ -423,6 +423,9 @@ class VoxGoApp:
     def _notify_user(self, title: str, message: str, level: str = "状态"):
         self._event_bus.publish(AppNotice(level=level, title=title, message=message))
 
+    def _ui_language(self) -> str:
+        return normalize_ui_language(getattr(getattr(self.config, "app", None), "language", ""))
+
     def _handle_app_notice(self, event: AppNotice):
         title = (event.title or "").strip()
         message = (event.message or "").strip()
@@ -727,9 +730,21 @@ class VoxGoApp:
     def _toggle_overlay(self):
         if self._overlay:
             logger.info("触发热键: 切换浮窗")
+            was_visible = self._overlay.isVisible()
             self._overlay._signals.toggle_visibility.emit()
-            self._notify_user("热键", f"已触发: {self.config.hotkeys.toggle_overlay}", "状态")
+            ui_language = self._ui_language()
+            self._notify_user(
+                ui_text(ui_language, "快捷键", "Hotkey"),
+                ui_text(
+                    ui_language,
+                    f"已触发: {self.config.hotkeys.toggle_overlay}",
+                    f"Triggered: {self.config.hotkeys.toggle_overlay}",
+                ),
+                ui_text(ui_language, "状态", "Status"),
+            )
             self._sync_tray_state()
+            if was_visible:
+                self._tray.show_restore_hint()
 
     def _clear_history(self):
         if self._overlay:
@@ -752,7 +767,16 @@ class VoxGoApp:
             audio_blocks,
             speech_items,
         )
-        self._notify_user("翻译状态", "翻译暂停" if self._paused else "翻译恢复", "状态")
+        ui_language = self._ui_language()
+        self._notify_user(
+            ui_text(ui_language, "翻译状态", "Translation Status"),
+            ui_text(
+                ui_language,
+                "翻译已暂停" if self._paused else "翻译已恢复",
+                "Translation paused" if self._paused else "Translation resumed",
+            ),
+            ui_text(ui_language, "状态", "Status"),
+        )
 
     def _toggle_lock(self):
         if self._overlay:
@@ -789,6 +813,7 @@ class VoxGoApp:
                 self._owner._handle_backend_startup_failure(message)
 
         self._qt_app = QApplication.instance() or QApplication(sys.argv)
+        self._qt_app.setQuitOnLastWindowClosed(False)
         self._qt_app.setApplicationName(APP_NAME)
         self._qt_app.setApplicationDisplayName(APP_NAME)
         icon_path = PROJECT_ROOT / "assets" / "voxgo.ico"
@@ -824,6 +849,7 @@ class VoxGoApp:
             on_audio_devices_refresh=self._list_audio_devices,
             on_update_check_requested=self._request_update_check,
             on_update_version_ignored=self._ignore_update_version,
+            on_pause_toggle_requested=self._toggle_translation,
             on_shutdown_requested=self._request_shutdown,
             on_overlay_updated=self._on_overlay_updated,
         )
@@ -839,13 +865,32 @@ class VoxGoApp:
             from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
             tray_cls = QSystemTrayIcon
             menu_cls = QMenu
-        self._tray.setup(
+        tray_ready = self._tray.setup(
             tray_cls,
             menu_cls,
             self._qt_app,
             getattr(self, "_app_icon", None) or self._qt_app.windowIcon(),
             self._overlay,
         )
+        if not tray_ready:
+            ui_language = self._ui_language()
+            hotkey = str(getattr(self.config.hotkeys, "toggle_overlay", "") or "").strip()
+            detail = ui_text(
+                ui_language,
+                f"Windows 系统托盘不可用。请使用 {hotkey} 显示或隐藏浮窗。",
+                f"The Windows system tray is unavailable. Use {hotkey} to show or hide the overlay.",
+            )
+            if self._tray.setup_error:
+                detail += ui_text(
+                    ui_language,
+                    f"\n诊断: {self._tray.setup_error}",
+                    f"\nDiagnostic: {self._tray.setup_error}",
+                )
+            self._notify_user(
+                ui_text(ui_language, "系统托盘不可用", "System Tray Unavailable"),
+                detail,
+                ui_text(ui_language, "警告", "Warning"),
+            )
 
     def _sync_tray_state(self):
         self._tray.sync_state(self._overlay)
@@ -888,10 +933,15 @@ class VoxGoApp:
         self.config.app.setup_completed = True
         self._save_user_settings()
         self._refresh_cached_settings()
+        ui_language = self._ui_language()
         self._notify_user(
-            "设置已保存",
-            "正在后台加载语音识别和翻译服务",
-            "状态",
+            ui_text(ui_language, "设置已保存", "Settings Saved"),
+            ui_text(
+                ui_language,
+                "正在后台加载语音识别和翻译服务",
+                "Loading speech recognition and translation services in the background",
+            ),
+            ui_text(ui_language, "状态", "Status"),
         )
         self._start_backend_thread()
 

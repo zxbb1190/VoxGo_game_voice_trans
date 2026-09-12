@@ -106,7 +106,6 @@ class OverlaySignals(QObject):
     refresh_audio_devices = pyqtSignal()
     update_checking = pyqtSignal(bool)
     update_check_result = pyqtSignal(object, bool)
-    pause_state_changed = pyqtSignal(bool)
 
 class GameOverlay(QWidget):
     """游戏浮窗叠加层"""
@@ -134,6 +133,7 @@ class GameOverlay(QWidget):
         on_audio_devices_refresh: Optional[Callable[[], List[dict]]] = None,
         on_update_check_requested: Optional[Callable[[bool], None]] = None,
         on_update_version_ignored: Optional[Callable[[str], None]] = None,
+        on_pause_toggle_requested: Optional[Callable[[], None]] = None,
         on_shutdown_requested: Optional[Callable[[], None]] = None,
         on_overlay_updated: Optional[Callable[[str], None]] = None,
     ):
@@ -155,6 +155,7 @@ class GameOverlay(QWidget):
         self._on_audio_devices_refresh = on_audio_devices_refresh
         self._on_update_check_requested = on_update_check_requested
         self._on_update_version_ignored = on_update_version_ignored
+        self._on_pause_toggle_requested = on_pause_toggle_requested
         self._on_shutdown_requested = on_shutdown_requested
         self._on_overlay_updated = on_overlay_updated
         self._translations: deque = deque(maxlen=self.config.max_lines)
@@ -236,6 +237,19 @@ class GameOverlay(QWidget):
         self._target_lang_combo.currentIndexChanged.connect(self._language_combo_changed)
 
         toolbar_layout.addStretch()
+
+        self._paused_status_label = QLabel()
+        self._paused_status_label.setObjectName("pausedStatus")
+        self._paused_status_label.setAlignment(Qt.AlignCenter)
+        self._paused_status_label.setFixedHeight(24)
+        toolbar_layout.addWidget(self._paused_status_label)
+
+        self._pause_button = QToolButton()
+        self._pause_button.setObjectName("pauseButton")
+        self._pause_button.setFixedSize(28, 24)
+        self._pause_button.setCursor(Qt.PointingHandCursor)
+        self._pause_button.clicked.connect(self._request_pause_toggle)
+        toolbar_layout.addWidget(self._pause_button)
 
         self._compact_button = QToolButton()
         self._compact_button.setObjectName("compactButton")
@@ -413,14 +427,24 @@ class GameOverlay(QWidget):
             QToolButton#languageSwapButton:hover {{
                 background: rgba(255, 255, 255, 28);
             }}
-            QToolButton#compactButton, QToolButton#qrButton, QToolButton#settingsButton, QToolButton#quitButton {{
+            QToolButton#pauseButton, QToolButton#compactButton, QToolButton#qrButton,
+            QToolButton#settingsButton, QToolButton#quitButton {{
                 background: rgba(18, 24, 33, 150);
                 border: 1px solid {self.config.text_color};
                 border-radius: 4px;
             }}
-            QToolButton#compactButton:hover, QToolButton#qrButton:hover,
+            QToolButton#pauseButton:hover, QToolButton#compactButton:hover, QToolButton#qrButton:hover,
             QToolButton#settingsButton:hover, QToolButton#quitButton:hover {{
                 background: rgba(40, 60, 48, 210);
+            }}
+            QLabel#pausedStatus {{
+                color: #FFE3A3;
+                background: rgba(190, 96, 20, 190);
+                border: 1px solid #FFB547;
+                border-radius: 4px;
+                padding: 1px 7px;
+                font-size: {max(10, self.config.font_size - 4)}px;
+                font-weight: 600;
             }}
             QFrame#qrPopup {{
                 background: rgba(255, 255, 255, 245);
@@ -563,6 +587,16 @@ class GameOverlay(QWidget):
 
     def _refresh_control_state(self):
         ui_language = self._ui_language()
+        if hasattr(self, "_pause_button"):
+            self._pause_button.setIcon(_make_icon("play" if self._paused else "pause", self.config.text_color))
+            self._pause_button.setToolTip(_tr(
+                ui_language,
+                "恢复翻译" if self._paused else "暂停翻译",
+                "Resume translation" if self._paused else "Pause translation",
+            ))
+        if hasattr(self, "_paused_status_label"):
+            self._paused_status_label.setText(_tr(ui_language, "已暂停", "PAUSED"))
+            self._paused_status_label.setVisible(self._paused and self.width() >= 500)
         if hasattr(self, "_compact_button"):
             compact = bool(getattr(self.config, "compact_mode", False))
             self._compact_button.setIcon(_make_icon("expand" if compact else "compact", self.config.text_color))
@@ -587,7 +621,11 @@ class GameOverlay(QWidget):
     def set_paused(self, paused: bool):
         self._paused = bool(paused)
         self._refresh_control_state()
-        self._signals.pause_state_changed.emit(self._paused)
+        self.update()
+
+    def _request_pause_toggle(self):
+        if self._on_pause_toggle_requested:
+            self._on_pause_toggle_requested()
 
     def is_paused(self) -> bool:
         return bool(self._paused)
@@ -650,15 +688,18 @@ class GameOverlay(QWidget):
         return f"http://{host}:8765/mobile"
 
     def eventFilter(self, watched, event):
-        if watched is self._qr_button:
+        qr_button = getattr(self, "_qr_button", None)
+        qr_popup = getattr(self, "_qr_popup", None)
+        if qr_button is not None and watched is qr_button:
             if self._is_locked():
-                self._qr_popup.hide()
+                if qr_popup is not None:
+                    qr_popup.hide()
                 return True
             if event.type() == QEvent.Enter:
                 self._show_qr_popup()
             elif event.type() == QEvent.Leave:
                 QTimer.singleShot(140, self._hide_qr_popup_if_unhovered)
-        elif watched is self._qr_popup:
+        elif qr_popup is not None and watched is qr_popup:
             if event.type() == QEvent.Leave:
                 QTimer.singleShot(140, self._hide_qr_popup_if_unhovered)
         return super().eventFilter(watched, event)
@@ -751,7 +792,7 @@ class GameOverlay(QWidget):
         self._first_run_wizard.activateWindow()
 
     def _handle_first_run_completed(self, on_completed: Optional[Callable[[], None]] = None):
-        self._sync_language_controls()
+        self.refresh_language()
         if on_completed:
             on_completed()
 
@@ -812,6 +853,7 @@ class GameOverlay(QWidget):
             self._source_lang_combo,
             self._target_lang_combo,
             self._swap_lang_button,
+            self._pause_button,
             self._compact_button,
             self._qr_button,
             self._settings_button,
@@ -1250,8 +1292,9 @@ class GameOverlay(QWidget):
         painter.drawRoundedRect(self.rect(), 10, 10)
 
         # 边框
-        pen = QPen(QColor(self.config.text_color))
-        pen.setWidth(1)
+        border_color = QColor("#FFB547" if self._paused else self.config.text_color)
+        pen = QPen(border_color)
+        pen.setWidth(2 if self._paused else 1)
         painter.setPen(pen)
         painter.setBrush(Qt.NoBrush)
         painter.drawRoundedRect(
@@ -1339,6 +1382,7 @@ class GameOverlay(QWidget):
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self._remember_window_geometry()
+        self._refresh_control_state()
         self._refresh_labels()
         self._position_lock_button()
 

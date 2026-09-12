@@ -8,7 +8,7 @@ Website: <https://voxgo.cn/><br>
 GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
 ## Features
-- **First-run setup wizard**: The first launch walks the player through translation and audio tests, then saves `setup_completed`.
+- **First-run setup wizard**: The first launch starts with a Chinese/English UI choice, then walks through translation and audio tests before saving `setup_completed`.
 - **API Key test**: The wizard and settings dialog can make one real translation request to verify the Key, model, and endpoint.
 - **Audio device test**: Opens the selected device and shows a live level bar so players can confirm game/Discord/video audio is detected.
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
@@ -17,6 +17,7 @@ GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 - **Multiple translation providers**: Supports OpenAI-compatible Chat Completions APIs and Google Cloud Translation Basic v2.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
+- **Overlay pause control**: Pause or resume directly from the main overlay; paused mode keeps a visible status and highlighted border.
 - **Debug and feedback loop**: Debug mode records the latest recognition/translation/overlay latency, and the feedback button generates a diagnostic template.
 - **Mobile mirror**: Pushes translations to a browser on the same LAN through WebSocket.
 - **Global hotkeys**: Toggle overlay, clear history, pause/resume translation, plus optional lock and compact-mode hotkeys in settings.
@@ -77,6 +78,7 @@ Full and Full-CUDA do not bundle the English-only `small.en` / `base.en` models.
 
 ### 2. Complete The First-Run Wizard
 The first launch opens the setup wizard before Whisper starts loading. Complete this loop:
+- Choose Simplified Chinese or English; the rest of the wizard and main UI switch immediately.
 - Choose a translation provider and fill in the API Key, model name, and compatible endpoint.
 - Click "Test API Key" to confirm the real translation API returns a result.
 - Choose a `[System Audio]` / `Loopback` audio device.
@@ -188,6 +190,8 @@ Optional knobs: `--benchmark-speech-seconds 4`, `--benchmark-gap-seconds 3`, and
 - **Ctrl+Alt+C**: Clear translation history
 - **Ctrl+Alt+S**: Pause/resume translation
 - **Drag overlay**: Move the overlay window
+- **Overlay buttons**: Pause/resume translation, toggle compact mode, open the mobile QR code or settings, quit, or lock the overlay.
+- **Paused state**: The overlay shows `PAUSED` with a highlighted border; narrow layouts keep the highlighted border and resume button.
 - **Gear button**: Configure translation provider, test API Key, test audio device, enable debug mode, submit feedback, and adjust opacity, colors, and hotkeys
 
 ### Translation Direction

@@ -22,7 +22,7 @@ from PyQt5.QtWidgets import (
 
 from voxgo.app_info import APP_VERSION
 from voxgo.audio.capture import AudioConfig
-from voxgo.i18n import UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateInfo
 from voxgo.ui.config_models import (
@@ -254,7 +254,6 @@ class FirstRunWizard(QDialog):
         parent=None,
     ):
         super().__init__(parent)
-        self.setWindowTitle("VoxGo 首次启动向导")
         self.setWindowFlags(self.windowFlags() | Qt.Tool)
         self.audio_config = audio_config or AudioDeviceConfig()
         self.translation_config = translation_config or TranslationConfig()
@@ -276,16 +275,17 @@ class FirstRunWizard(QDialog):
     def _init_ui(self):
         root = QVBoxLayout()
         self.stack = QStackedWidget()
+        self.stack.addWidget(self._build_language_page())
         self.stack.addWidget(self._build_translation_page())
         self.stack.addWidget(self._build_audio_page())
         self.stack.addWidget(self._build_finish_page())
         self.stack.currentChanged.connect(self._refresh_buttons)
 
         nav_row = QHBoxLayout()
-        self.skip_button = QPushButton("稍后设置并启动")
-        self.back_button = QPushButton("上一步")
-        self.next_button = QPushButton("下一步")
-        self.finish_button = QPushButton("完成并启动")
+        self.skip_button = QPushButton()
+        self.back_button = QPushButton()
+        self.next_button = QPushButton()
+        self.finish_button = QPushButton()
         self.skip_button.clicked.connect(self._complete_setup)
         self.back_button.clicked.connect(self._go_back)
         self.next_button.clicked.connect(self._go_next)
@@ -300,47 +300,82 @@ class FirstRunWizard(QDialog):
         root.addLayout(nav_row)
         self.setLayout(root)
         self.resize(760, 560)
+        self._refresh_ui_language()
         self._refresh_buttons()
+
+    def _build_language_page(self) -> QWidget:
+        page = QWidget()
+        layout = QVBoxLayout()
+        self.wizard_language_title = QLabel()
+        self.wizard_language_title.setObjectName("wizardTitle")
+        self.wizard_language_title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        self.wizard_language_note = QLabel()
+        self.wizard_language_note.setWordWrap(True)
+        self.wizard_language_label = QLabel("Language")
+        self.wizard_language_combo = QComboBox()
+        selected_row = 0
+        for row, (code, label) in enumerate(UI_LANGUAGE_OPTIONS):
+            self.wizard_language_combo.addItem(label, code)
+            if code == self._ui_language:
+                selected_row = row
+        self.wizard_language_combo.setCurrentIndex(selected_row)
+        self.wizard_language_combo.currentIndexChanged.connect(self._wizard_language_changed)
+
+        form = QFormLayout()
+        form.setLabelAlignment(Qt.AlignRight)
+        form.addRow(self.wizard_language_label, self.wizard_language_combo)
+        layout.addWidget(self.wizard_language_title)
+        layout.addWidget(self.wizard_language_note)
+        layout.addSpacing(10)
+        layout.addLayout(form)
+        layout.addStretch()
+        page.setLayout(layout)
+        return page
 
     def _build_translation_page(self) -> QWidget:
         page = QWidget()
         layout = QVBoxLayout()
-        title = QLabel("先确认翻译接口")
-        title.setObjectName("wizardTitle")
-        title.setStyleSheet("font-size: 18px; font-weight: 600;")
-        note = QLabel("填写你准备用来翻译游戏语音的服务。测试成功后再进入游戏，少走一圈弯路。")
-        note.setWordWrap(True)
+        self.wizard_translation_title = QLabel()
+        self.wizard_translation_title.setObjectName("wizardTitle")
+        self.wizard_translation_title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        self.wizard_translation_note = QLabel()
+        self.wizard_translation_note.setWordWrap(True)
 
         form = QFormLayout()
         form.setLabelAlignment(Qt.AlignRight)
         self.wizard_provider_combo = QComboBox()
         self._fill_wizard_translation_providers()
         self.wizard_provider_combo.currentIndexChanged.connect(self._wizard_provider_changed)
-        form.addRow("翻译服务", self.wizard_provider_combo)
+        self.wizard_provider_label = QLabel()
+        form.addRow(self.wizard_provider_label, self.wizard_provider_combo)
 
         self.wizard_api_key_input = QLineEdit(self.translation_config.api_key)
         self.wizard_api_key_input.setEchoMode(QLineEdit.Password)
-        form.addRow("API Key", self.wizard_api_key_input)
+        self.wizard_api_key_label = QLabel("API Key")
+        form.addRow(self.wizard_api_key_label, self.wizard_api_key_input)
 
         self.wizard_model_input = QLineEdit(self.translation_config.model)
         self.wizard_model_input.setPlaceholderText("tencent/Hunyuan-MT-7B")
-        form.addRow("模型名", self.wizard_model_input)
+        self.wizard_model_label = QLabel()
+        form.addRow(self.wizard_model_label, self.wizard_model_input)
 
         self.wizard_endpoint_input = QLineEdit(self.translation_config.endpoint)
         self.wizard_endpoint_input.setPlaceholderText("https://api.siliconflow.cn/v1/chat/completions")
-        form.addRow("兼容地址", self.wizard_endpoint_input)
+        self.wizard_endpoint_label = QLabel()
+        form.addRow(self.wizard_endpoint_label, self.wizard_endpoint_input)
 
         test_row = QHBoxLayout()
-        self.wizard_translation_test_button = QPushButton("测试 API Key")
-        self.wizard_translation_test_label = QLabel("会发送一句测试文本；每次点击只调用一次接口，结束后按钮会短暂冷却。")
+        self.wizard_translation_test_button = QPushButton()
+        self.wizard_translation_test_label = QLabel()
         self.wizard_translation_test_label.setWordWrap(True)
         self.wizard_translation_test_button.clicked.connect(self._test_translation)
         test_row.addWidget(self.wizard_translation_test_button)
         test_row.addWidget(self.wizard_translation_test_label, 1)
-        form.addRow("接口测试", test_row)
+        self.wizard_translation_test_form_label = QLabel()
+        form.addRow(self.wizard_translation_test_form_label, test_row)
 
-        layout.addWidget(title)
-        layout.addWidget(note)
+        layout.addWidget(self.wizard_translation_title)
+        layout.addWidget(self.wizard_translation_note)
         layout.addSpacing(10)
         layout.addLayout(form)
         layout.addStretch()
@@ -351,27 +386,29 @@ class FirstRunWizard(QDialog):
     def _build_audio_page(self) -> QWidget:
         page = QWidget()
         layout = QVBoxLayout()
-        title = QLabel("再确认能听到游戏声音")
-        title.setStyleSheet("font-size: 18px; font-weight: 600;")
-        note = QLabel("优先选择和你正在用的耳机、扬声器、HDMI 或 USB 声卡同名的 [系统声音] / Loopback 设备。普通麦克风通常录不到游戏声音。")
-        note.setWordWrap(True)
+        self.wizard_audio_title = QLabel()
+        self.wizard_audio_title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        self.wizard_audio_note = QLabel()
+        self.wizard_audio_note.setWordWrap(True)
 
         form = QFormLayout()
         form.setLabelAlignment(Qt.AlignRight)
         audio_row = QHBoxLayout()
         self.wizard_audio_device_combo = QComboBox()
-        self.wizard_refresh_audio_button = QPushButton("刷新")
+        self.wizard_refresh_audio_button = QPushButton()
         self._fill_wizard_audio_devices()
         self.wizard_refresh_audio_button.clicked.connect(self._refresh_wizard_audio_devices)
         audio_row.addWidget(self.wizard_audio_device_combo)
         audio_row.addWidget(self.wizard_refresh_audio_button)
-        form.addRow("音频设备", audio_row)
+        self.wizard_audio_device_label = QLabel()
+        form.addRow(self.wizard_audio_device_label, audio_row)
 
-        self.wizard_audio_test_panel = AudioTestPanel(self._current_audio_config, self)
-        form.addRow("音频测试", self.wizard_audio_test_panel)
+        self.wizard_audio_test_panel = AudioTestPanel(self._current_audio_config, self, self._ui_language)
+        self.wizard_audio_test_label = QLabel()
+        form.addRow(self.wizard_audio_test_label, self.wizard_audio_test_panel)
 
-        layout.addWidget(title)
-        layout.addWidget(note)
+        layout.addWidget(self.wizard_audio_title)
+        layout.addWidget(self.wizard_audio_note)
         layout.addSpacing(10)
         layout.addLayout(form)
         layout.addStretch()
@@ -381,35 +418,38 @@ class FirstRunWizard(QDialog):
     def _build_finish_page(self) -> QWidget:
         page = QWidget()
         layout = QVBoxLayout()
-        title = QLabel("准备启动实时翻译")
-        title.setStyleSheet("font-size: 18px; font-weight: 600;")
-        note = QLabel("完成后会保存首次设置状态，并开始加载 Whisper。Lite 包首次加载模型可能需要等待。")
-        note.setWordWrap(True)
-        self.wizard_debug_check = QCheckBox("开启调试模式，记录最近一次识别、翻译和浮窗更新延迟")
+        self.wizard_finish_title = QLabel()
+        self.wizard_finish_title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        self.wizard_finish_note = QLabel()
+        self.wizard_finish_note.setWordWrap(True)
+        self.wizard_debug_check = QCheckBox()
         self.wizard_debug_check.setChecked(bool(getattr(self.debug_config, "enabled", False)))
         self.wizard_summary_label = QLabel()
         self.wizard_summary_label.setWordWrap(True)
-        feedback_button = QPushButton("生成反馈模板")
-        feedback_button.clicked.connect(self._open_feedback_dialog)
+        self.wizard_feedback_button = QPushButton()
+        self.wizard_feedback_button.clicked.connect(self._open_feedback_dialog)
 
-        layout.addWidget(title)
-        layout.addWidget(note)
+        layout.addWidget(self.wizard_finish_title)
+        layout.addWidget(self.wizard_finish_note)
         layout.addSpacing(10)
         layout.addWidget(self.wizard_debug_check)
         layout.addWidget(self.wizard_summary_label)
-        layout.addWidget(feedback_button, 0, Qt.AlignLeft)
+        layout.addWidget(self.wizard_feedback_button, 0, Qt.AlignLeft)
         layout.addStretch()
         page.setLayout(layout)
         return page
 
     def _fill_wizard_translation_providers(self):
+        current_provider = self.wizard_provider_combo.currentData()
         self.wizard_provider_combo.blockSignals(True)
         self.wizard_provider_combo.clear()
         selected_provider = normalize_translation_provider(
-            getattr(self.translation_config, "provider", "openai_compatible")
+            current_provider or getattr(self.translation_config, "provider", "openai_compatible")
         )
         selected_row = 0
         for row, (provider, label) in enumerate(TRANSLATION_PROVIDERS.items()):
+            if provider == "openai_compatible" and is_english_ui(self._ui_language):
+                label = "OpenAI-compatible"
             self.wizard_provider_combo.addItem(label, provider)
             if provider == selected_provider:
                 selected_row = row
@@ -419,11 +459,83 @@ class FirstRunWizard(QDialog):
     def _wizard_provider_changed(self, *args):
         self._refresh_wizard_translation_provider_ui()
 
+    def _wizard_language_changed(self, *args):
+        self._ui_language = normalize_ui_language(self.wizard_language_combo.currentData())
+        self.app_config.language = self._ui_language
+        self._refresh_ui_language()
+
+    def _refresh_ui_language(self):
+        language = self._ui_language
+        self.app_config.language = language
+        self.setWindowTitle(_tr(language, "VoxGo 首次启动向导", "VoxGo First-Run Setup"))
+
+        self.wizard_language_title.setText(_tr(language, "选择界面语言", "Choose Your Interface Language"))
+        self.wizard_language_note.setText(_tr(
+            language,
+            "此选择会立即应用到首次启动向导，并保存为 VoxGo 的界面语言。",
+            "This choice applies to the setup wizard immediately and becomes the VoxGo interface language.",
+        ))
+        self.wizard_language_label.setText(_tr(language, "界面语言", "Interface Language"))
+
+        self.wizard_translation_title.setText(_tr(language, "先确认翻译接口", "Check Your Translation Provider"))
+        self.wizard_translation_note.setText(_tr(
+            language,
+            "填写你准备用来翻译游戏语音的服务。测试成功后再进入游戏，少走一圈弯路。",
+            "Configure the service that will translate game voice, then test it before entering a game.",
+        ))
+        self.wizard_provider_label.setText(_tr(language, "翻译服务", "Translation Provider"))
+        self.wizard_model_label.setText(_tr(language, "模型名", "Model"))
+        self.wizard_endpoint_label.setText(_tr(language, "兼容地址", "Compatible Endpoint"))
+        self.wizard_translation_test_form_label.setText(_tr(language, "接口测试", "API Test"))
+        self.wizard_translation_test_button.setText(_tr(language, "测试 API Key", "Test API Key"))
+        self.wizard_translation_test_label.setText(_tr(
+            language,
+            "会发送一句测试文本；每次点击只调用一次接口，结束后按钮会短暂冷却。",
+            "Sends one test sentence per click. The button briefly cools down after the request.",
+        ))
+
+        self.wizard_audio_title.setText(_tr(language, "再确认能听到游戏声音", "Check Your Game Audio"))
+        self.wizard_audio_note.setText(_tr(
+            language,
+            "优先选择和你正在用的耳机、扬声器、HDMI 或 USB 声卡同名的 [系统声音] / Loopback 设备。普通麦克风通常录不到游戏声音。",
+            "Choose the [System Audio] / Loopback device matching your headphones, speakers, HDMI, or USB audio output. A normal microphone usually cannot capture game audio.",
+        ))
+        self.wizard_refresh_audio_button.setText(_tr(language, "刷新", "Refresh"))
+        self.wizard_audio_device_label.setText(_tr(language, "音频设备", "Audio Device"))
+        self.wizard_audio_test_label.setText(_tr(language, "音频测试", "Audio Test"))
+        self.wizard_audio_test_panel.set_ui_language(language)
+
+        self.wizard_finish_title.setText(_tr(language, "准备启动实时翻译", "Ready to Start Live Translation"))
+        self.wizard_finish_note.setText(_tr(
+            language,
+            "完成后会保存首次设置状态，并开始加载 Whisper。Lite 包首次加载模型可能需要等待。",
+            "Finishing saves your setup and starts loading Whisper. The Lite package may need time to download its first model.",
+        ))
+        self.wizard_debug_check.setText(_tr(
+            language,
+            "开启调试模式，记录最近一次识别、翻译和浮窗更新延迟",
+            "Enable debug mode to record recognition, translation, and overlay latency",
+        ))
+        self.wizard_feedback_button.setText(_tr(language, "生成反馈模板", "Generate Feedback Template"))
+
+        self.skip_button.setText(_tr(language, "稍后设置并启动", "Set Up Later and Start"))
+        self.back_button.setText(_tr(language, "上一步", "Back"))
+        self.next_button.setText(_tr(language, "下一步", "Next"))
+        self.finish_button.setText(_tr(language, "完成并启动", "Finish and Start"))
+
+        self._fill_wizard_translation_providers()
+        self._refresh_wizard_translation_provider_ui()
+        self._fill_wizard_audio_devices()
+        if self.stack.currentIndex() == self.stack.count() - 1:
+            self._refresh_summary()
+
     def _refresh_wizard_translation_provider_ui(self):
         provider = normalize_translation_provider(self.wizard_provider_combo.currentData())
         is_google = provider == "google"
         self.wizard_api_key_input.setPlaceholderText(
-            "Google Cloud Translation API Key" if is_google else "OpenAI 兼容 API Key"
+            "Google Cloud Translation API Key"
+            if is_google
+            else _tr(self._ui_language, "OpenAI 兼容 API Key", "OpenAI-compatible API Key")
         )
         self.wizard_model_input.setEnabled(not is_google)
         self.wizard_endpoint_input.setEnabled(not is_google)
@@ -431,13 +543,13 @@ class FirstRunWizard(QDialog):
     def _fill_wizard_audio_devices(self):
         self.wizard_audio_device_combo.blockSignals(True)
         self.wizard_audio_device_combo.clear()
-        self.wizard_audio_device_combo.addItem("自动选择", None)
+        self.wizard_audio_device_combo.addItem(_tr(self._ui_language, "自动选择", "Auto select"), None)
         selected_row = 0
         selected_index = getattr(self.audio_config, "input_device_index", None)
         selected_name = (getattr(self.audio_config, "input_device_name", "") or "").strip()
         selected_device_id = (getattr(self.audio_config, "input_device_id", "") or "").strip()
         for row, device in enumerate(self.audio_devices, start=1):
-            self.wizard_audio_device_combo.addItem(_device_label(device), device)
+            self.wizard_audio_device_combo.addItem(self._wizard_device_label(device), device)
             index = device.get("index")
             name = device.get("name", "")
             device_id = (device.get("device_id") or "").strip()
@@ -449,6 +561,17 @@ class FirstRunWizard(QDialog):
                 selected_row = row
         self.wizard_audio_device_combo.setCurrentIndex(selected_row)
         self.wizard_audio_device_combo.blockSignals(False)
+
+    def _wizard_device_label(self, device: Optional[dict]) -> str:
+        if not is_english_ui(self._ui_language):
+            return _device_label(device)
+        if not device:
+            return "Auto select"
+        device_type = "System Audio" if device.get("is_loopback") else "Input Device"
+        return (
+            f"[{device_type}] [{device.get('index')}] {device.get('name', '')} "
+            f"({device.get('sample_rate') or 0}Hz/{device.get('channels') or 0}ch)"
+        )
 
     def _refresh_wizard_audio_devices(self):
         if self._on_audio_devices_refresh:
@@ -478,6 +601,7 @@ class FirstRunWizard(QDialog):
             self.audio_config.input_device_id = ""
 
     def _collect_values(self):
+        self.app_config.language = normalize_ui_language(self._ui_language)
         self._collect_translation_values()
         self._collect_audio_values()
         self.debug_config.enabled = self.wizard_debug_check.isChecked()
@@ -485,8 +609,12 @@ class FirstRunWizard(QDialog):
     def _test_translation(self):
         self._collect_translation_values()
         self.wizard_translation_test_button.setEnabled(False)
-        self.wizard_translation_test_button.setText("测试中...")
-        self.wizard_translation_test_label.setText("正在测试翻译接口...")
+        self.wizard_translation_test_button.setText(_tr(self._ui_language, "测试中...", "Testing..."))
+        self.wizard_translation_test_label.setText(_tr(
+            self._ui_language,
+            "正在测试翻译接口...",
+            "Testing the translation endpoint...",
+        ))
         self._translation_test_runner = TranslationTestRunner(
             self.translation_config,
             self._handle_translation_test_result,
@@ -494,17 +622,21 @@ class FirstRunWizard(QDialog):
         self._translation_test_runner.start()
 
     def _handle_translation_test_result(self, ok: bool, message: str):
-        prefix = "成功" if ok else "失败"
-        self.wizard_translation_test_label.setText(f"{prefix}：{message}")
-        _start_button_cooldown(self.wizard_translation_test_button, "测试 API Key")
+        prefix = _tr(self._ui_language, "成功", "Success") if ok else _tr(self._ui_language, "失败", "Failed")
+        separator = ": " if is_english_ui(self._ui_language) else "："
+        self.wizard_translation_test_label.setText(f"{prefix}{separator}{message}")
+        _start_button_cooldown(
+            self.wizard_translation_test_button,
+            _tr(self._ui_language, "测试 API Key", "Test API Key"),
+        )
 
     def _go_back(self):
         self.stack.setCurrentIndex(max(0, self.stack.currentIndex() - 1))
 
     def _go_next(self):
-        if self.stack.currentIndex() == 0:
+        if self.stack.currentIndex() == 1:
             self._collect_translation_values()
-        elif self.stack.currentIndex() == 1:
+        elif self.stack.currentIndex() == 2:
             self._collect_audio_values()
             self.wizard_audio_test_panel.stop_test()
         self.stack.setCurrentIndex(min(self.stack.count() - 1, self.stack.currentIndex() + 1))
@@ -524,11 +656,23 @@ class FirstRunWizard(QDialog):
         self._collect_values()
         provider = normalize_translation_provider(getattr(self.translation_config, "provider", "openai_compatible"))
         provider_label = TRANSLATION_PROVIDERS.get(provider, provider)
-        audio_label = self.wizard_audio_device_combo.currentText() or "自动选择"
+        if provider == "openai_compatible" and is_english_ui(self._ui_language):
+            provider_label = "OpenAI-compatible"
+        audio_label = self.wizard_audio_device_combo.currentText() or _tr(
+            self._ui_language,
+            "自动选择",
+            "Auto select",
+        )
         self.wizard_summary_label.setText(
-            f"翻译服务：{provider_label}\n"
-            f"音频设备：{audio_label}\n"
-            f"调试模式：{'开启' if self.debug_config.enabled else '关闭'}"
+            _tr(
+                self._ui_language,
+                f"翻译服务：{provider_label}\n"
+                f"音频设备：{audio_label}\n"
+                f"调试模式：{'开启' if self.debug_config.enabled else '关闭'}",
+                f"Translation provider: {provider_label}\n"
+                f"Audio device: {audio_label}\n"
+                f"Debug mode: {'On' if self.debug_config.enabled else 'Off'}",
+            )
         )
 
     def _complete_setup(self):

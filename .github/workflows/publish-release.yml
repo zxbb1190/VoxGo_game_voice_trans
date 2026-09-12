@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.3.0"
+        description: "Release version, for example 0.4.1"
         required: true
-        default: "0.3.0"
+        default: "0.4.1"
 
 permissions:
   contents: write
@@ -82,10 +82,10 @@ jobs:
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Reduced ASR impact on PUBG/APEX/Valorant-style gameplay with stricter weak-candidate budgeting.
-          - Improved Fast + Pure English guidance for English game voice; English-only models download on demand.
-          - Filtered repeated short-phrase Whisper hallucinations before they reach translation.
-          - Kept Full packages focused on bundled multilingual small/base models; English-only models are not pre-bundled.
+          - Added Chinese/English language selection as the first setup step, with immediate wizard localization.
+          - Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.
+          - Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.
+          - Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable.
 
           ### Downloads
 
@@ -104,45 +104,6 @@ jobs:
           "FULL_CUDA_SHA256=$fullCudaHash" | Out-File -FilePath $env:GITHUB_ENV -Append
           "CUDA_RUNTIME_SHA256=$cudaRuntimeHash" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: Update website release manifest
-        shell: powershell
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main:refs/remotes/origin/main
-          git checkout -B main origin/main
-
-          $manifestPath = "docs\update.json"
-          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
-          $manifest.latest = $env:APP_VERSION
-          $manifest.channel = "stable"
-          $manifest.title = "VoxGo v$env:APP_VERSION"
-          $manifest.notes = @(
-            "Reduced ASR impact on PUBG/APEX/Valorant-style gameplay with stricter weak-candidate budgeting.",
-            "Improved Fast + Pure English guidance for English game voice; English-only models download on demand.",
-            "Filtered repeated short-phrase Whisper hallucinations before they reach translation.",
-            "Kept Full packages focused on bundled multilingual small/base models; English-only models are not pre-bundled."
-          )
-          $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
-          $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
-          $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
-          $manifest.download_full_cuda_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full-cuda.zip"
-          $manifest.cuda_runtime_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
-          $manifest.sha256_lite = $env:LITE_SHA256
-          $manifest.sha256_full = $env:FULL_SHA256
-          $manifest.sha256_full_cuda = $env:FULL_CUDA_SHA256
-          $manifest.sha256_cuda_runtime = $env:CUDA_RUNTIME_SHA256
-          $manifest.mandatory = $false
-          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $manifestPath
-
-          git add $manifestPath
-          if (git diff --cached --quiet) {
-            Write-Host "Release manifest already up to date."
-          } else {
-            git commit -m "Update release manifest for $env:TAG_NAME"
-            git push origin HEAD:main
-          }
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -157,3 +118,49 @@ jobs:
           fail_on_unmatched_files: true
           make_latest: true
           overwrite_files: true
+
+      - name: Update website release manifest
+        shell: powershell
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main:refs/remotes/origin/main
+          git checkout -B main origin/main
+
+          $manifestPath = "docs\update.json"
+          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+          $manifest.latest = $env:APP_VERSION
+          $manifest.channel = "stable"
+          $manifest.title = "VoxGo v$env:APP_VERSION"
+          $manifest.notes = @(
+            "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
+            "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
+            "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
+            "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
+          )
+          $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
+          $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
+          $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
+          $manifest.download_full_cuda_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full-cuda.zip"
+          $manifest.cuda_runtime_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
+          $manifest.sha256_lite = $env:LITE_SHA256
+          $manifest.sha256_full = $env:FULL_SHA256
+          $manifest.sha256_full_cuda = $env:FULL_CUDA_SHA256
+          $manifest.sha256_cuda_runtime = $env:CUDA_RUNTIME_SHA256
+          $manifest.mandatory = $false
+          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $manifestPath
+
+          foreach ($pagePath in @("docs/index.html", "docs/en/index.html")) {
+            $page = Get-Content $pagePath -Raw -Encoding UTF8
+            $page = $page -replace 'VoxGo-v\d+\.\d+\.\d+', "VoxGo-v$env:APP_VERSION"
+            $page = $page -replace 'releases/download/v\d+\.\d+\.\d+', "releases/download/$env:TAG_NAME"
+            $page = $page -replace 'VoxGo v\d+\.\d+\.\d+', "VoxGo v$env:APP_VERSION"
+            [System.IO.File]::WriteAllText((Join-Path $pwd $pagePath), $page, (New-Object System.Text.UTF8Encoding($false)))
+          }
+          git add $manifestPath docs/index.html docs/en/index.html
+          if (git diff --cached --quiet) {
+            Write-Host "Release manifest already up to date."
+          } else {
+            git commit -m "Update release manifest for $env:TAG_NAME"
+            git push origin HEAD:main
+          }
