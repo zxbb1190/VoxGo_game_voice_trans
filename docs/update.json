@@ -1,21 +1,21 @@
 ﻿{
-    "latest":  "0.4.0",
+    "latest":  "0.4.1",
     "channel":  "stable",
-    "title":  "VoxGo v0.4.0",
+    "title":  "VoxGo v0.4.1",
     "notes":  [
-                  "Reduced ASR impact on PUBG/APEX/Valorant-style gameplay with stricter weak-candidate budgeting.",
-                  "Improved Fast + Pure English guidance for English game voice; English-only models download on demand.",
-                  "Filtered repeated short-phrase Whisper hallucinations before they reach translation.",
-                  "Kept Full packages focused on bundled multilingual small/base models; English-only models are not pre-bundled."
+                  "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
+                  "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
+                  "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
+                  "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
               ],
-    "release_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.4.0",
-    "download_lite_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.0/VoxGo-v0.4.0-lite.zip",
-    "download_full_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.0/VoxGo-v0.4.0-full.zip",
-    "download_full_cuda_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.0/VoxGo-v0.4.0-full-cuda.zip",
-    "cuda_runtime_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.0/VoxGo-v0.4.0-cuda-runtime.zip",
-    "sha256_lite":  "dbe134060a20852cd950b804613cc1213ded30a36eb3f4b961e14252ea91090f",
-    "sha256_full":  "78d48e2832f9aced7f831da6ee2fd41ec25a2838d05c9ef2a49077b116a906f6",
-    "sha256_full_cuda":  "48aa9650611421382e2f84a3ff3b98a9dac14873729322745bb8850b68114cb2",
-    "sha256_cuda_runtime":  "8bf75c833cd322900cd1d65caf0a1a73619708b2625d1e522af97ee1530eee54",
+    "release_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.4.1",
+    "download_lite_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip",
+    "download_full_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full.zip",
+    "download_full_cuda_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full-cuda.zip",
+    "cuda_runtime_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-cuda-runtime.zip",
+    "sha256_lite":  "6816f59adf6061d206176967ba198b7e4c357db8f32dd111ced441e208f10974",
+    "sha256_full":  "3a571feb7f92f61fd5ea738eae815484e101b5925b60e7f26f93ffba10b1a294",
+    "sha256_full_cuda":  "5c834491ed2f4ffdd354027e9fb3a8ce23be28ca9cc99f83ab5c4a7cd9c713d8",
+    "sha256_cuda_runtime":  "2ab61a190a46c0b3960d37537affafbed9537faa7982e5af4910893d7c9dbd6f",
     "mandatory":  false
 }
