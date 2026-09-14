@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.4.1"
+        description: "Release version, for example 0.4.2"
         required: true
-        default: "0.4.1"
+        default: "0.4.2"
 
 permissions:
   contents: write
@@ -82,10 +82,10 @@ jobs:
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Added Chinese/English language selection as the first setup step, with immediate wizard localization.
-          - Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.
-          - Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.
-          - Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable.
+          - Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.
+          - Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.
+          - Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.
+          - Added resilient model download sources and bilingual update notes.
 
           ### Downloads
 
@@ -133,13 +133,13 @@ jobs:
           $manifest.channel = "stable"
           $manifest.title = "VoxGo v$env:APP_VERSION"
           $manifest.notes = @(
-            "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
-            "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
-            "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
-            "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
+            "Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.",
+            "Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.",
+            "Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.",
+            "Added resilient model download sources and bilingual update notes."
           )
           $manifest | Add-Member -NotePropertyName notes_en -NotePropertyValue $manifest.notes -Force
-          $manifest | Add-Member -NotePropertyName notes_zh -NotePropertyValue @("首次设置新增中英文选择，向导即时切换语言。", "浮窗新增暂停和恢复按钮、持续暂停标识及高亮边框。", "暂停提示和托盘菜单支持中英文，隐藏浮窗时提示恢复方式。", "隐藏浮窗后程序继续运行，托盘不可用时显示诊断提示。") -Force
+          $manifest | Add-Member -NotePropertyName notes_zh -NotePropertyValue @("新增应用内更新下载、SHA256 校验和安装重启，保留配置与模型，失败时回滚；0.4.1 用户首次升级仍需手动下载。", "新增 OPUS-MT 中英双向本地离线翻译，首次下载模型后可断网使用。", "修正简体中文目标语言标记，新增带语境判断的游戏术语规则；复杂游戏对话的翻译质量仍有限。", "增强模型下载源容错，更新提示支持双语发布说明。") -Force
           $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
           $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
           $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
