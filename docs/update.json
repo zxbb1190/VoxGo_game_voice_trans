@@ -1,21 +1,33 @@
-﻿{
-    "latest":  "0.4.1",
-    "channel":  "stable",
-    "title":  "VoxGo v0.4.1",
-    "notes":  [
-                  "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
-                  "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
-                  "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
-                  "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
-              ],
-    "release_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.4.1",
-    "download_lite_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip",
-    "download_full_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full.zip",
-    "download_full_cuda_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full-cuda.zip",
-    "cuda_runtime_url":  "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-cuda-runtime.zip",
-    "sha256_lite":  "6816f59adf6061d206176967ba198b7e4c357db8f32dd111ced441e208f10974",
-    "sha256_full":  "3a571feb7f92f61fd5ea738eae815484e101b5925b60e7f26f93ffba10b1a294",
-    "sha256_full_cuda":  "5c834491ed2f4ffdd354027e9fb3a8ce23be28ca9cc99f83ab5c4a7cd9c713d8",
-    "sha256_cuda_runtime":  "2ab61a190a46c0b3960d37537affafbed9537faa7982e5af4910893d7c9dbd6f",
-    "mandatory":  false
+{
+  "latest": "0.4.2",
+  "channel": "stable",
+  "title": "VoxGo v0.4.2",
+  "notes": [
+    "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
+    "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
+    "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
+    "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
+  ],
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.4.2",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full.zip",
+  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full-cuda.zip",
+  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-cuda-runtime.zip",
+  "sha256_lite": "6816f59adf6061d206176967ba198b7e4c357db8f32dd111ced441e208f10974",
+  "sha256_full": "3a571feb7f92f61fd5ea738eae815484e101b5925b60e7f26f93ffba10b1a294",
+  "sha256_full_cuda": "5c834491ed2f4ffdd354027e9fb3a8ce23be28ca9cc99f83ab5c4a7cd9c713d8",
+  "sha256_cuda_runtime": "2ab61a190a46c0b3960d37537affafbed9537faa7982e5af4910893d7c9dbd6f",
+  "mandatory": false,
+  "notes_en": [
+    "Added Chinese/English language selection as the first setup step, with immediate wizard localization.",
+    "Added an overlay pause/resume button, a persistent paused indicator, and a highlighted border.",
+    "Localized pause/resume notices and tray controls, with a restore hint when hiding the overlay.",
+    "Kept VoxGo running when the overlay is hidden and added diagnostics when the system tray is unavailable."
+  ],
+  "notes_zh": [
+    "首次设置新增中英文选择，向导即时切换语言。",
+    "浮窗新增暂停和恢复按钮、持续暂停标识及高亮边框。",
+    "暂停提示和托盘菜单支持中英文，隐藏浮窗时提示恢复方式。",
+    "隐藏浮窗后程序继续运行，托盘不可用时显示诊断提示。"
+  ]
 }

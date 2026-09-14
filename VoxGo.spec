@@ -79,6 +79,8 @@ if include_cuda_runtime:
             binaries.append((str(dll_path), "ctranslate2"))
 
 hiddenimports = [
+    "sentencepiece",
+    "sentencepiece._sentencepiece",
     "uvicorn.lifespan.on",
     "uvicorn.lifespan.off",
     "uvicorn.protocols.websockets.auto",

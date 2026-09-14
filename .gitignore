@@ -31,6 +31,7 @@ htmlcov/
 
 # Local model caches and packaged model copies
 .models/
+.translation-models/
 .packaged_models/
 
 # PyInstaller and release artifacts
@@ -65,3 +66,5 @@ mobile_qr_test.png
 Thumbs.db
 .idea/
 .vscode/
+
+voxgo-upload-token.txt

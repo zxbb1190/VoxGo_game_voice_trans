@@ -58,6 +58,7 @@
   },
   "translation": {
     "provider": "openai_compatible",
+        "local_model": "opus-mt-en-zh",
     "api_key": "YOUR_OPENAI_COMPATIBLE_API_KEY",
     "model": "tencent/Hunyuan-MT-7B",
     "endpoint": "https://api.siliconflow.cn/v1/chat/completions",

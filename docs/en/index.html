@@ -5,9 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-    content="VoxGo is an open-source real-time voice translation overlay for PC gamers. Capture Windows system audio, transcribe speech locally with Whisper, and show translated subtitles in a lightweight game overlay." />
+    content="VoxGo is an open-source real-time game voice translator for PC gamers, with English-Chinese translation, subtitle overlay, local speech recognition, and an offline translation mode." />
   <meta name="keywords"
-    content="VoxGo, game voice translator, PC game voice translation, real-time voice translation, game subtitle overlay, Discord voice translator, PC game subtitle overlay, Whisper ASR, faster-whisper, system audio capture, WASAPI loopback, OpenAI compatible translation, Google Translation, mobile mirror, open source game translation" />
+    content="VoxGo, game voice translator, PC game voice translation, real-time voice translation, game subtitle overlay, Discord voice translator, foreign teammate voice translation, PUBG voice translator, APEX voice translator, PC game subtitle overlay, Whisper ASR, faster-whisper, system audio capture, WASAPI loopback, OpenAI compatible translation, Google Translation, mobile mirror, open source game translation" />
   <link rel="canonical" href="https://voxgo.cn/en/" />
   <link rel="alternate" hreflang="zh-CN" href="https://voxgo.cn/" />
   <link rel="alternate" hreflang="en" href="https://voxgo.cn/en/" />
@@ -561,13 +561,13 @@ var _hmt = _hmt || [];
         <p class="lead">Capture Windows system audio, transcribe speech locally with Whisper, and show translated
           subtitles in a lightweight game overlay.</p>
         <div class="actions"><a class="btn btn-primary"
-            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip">Download
+            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip">Download
             Lite</a><a class="btn"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Latest Release</a><a
             class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
         <div class="hero-notes"><span class="pill">Open-source</span><span class="pill">No game process
             injection</span><span class="pill">System audio by default</span><span class="pill">Local Whisper
-            ASR</span><span class="pill">Mobile mirror</span></div>
+            ASR</span><span class="pill">Offline translation mode</span><span class="pill">Mobile mirror</span></div>
       </div>
       <div class="mock">
         <div class="game-screen">
@@ -621,6 +621,11 @@ var _hmt = _hmt || [];
             <p>Use OpenAI-compatible providers, local compatible services, or Google Cloud Translation Basic v2.</p>
           </div>
           <div class="card">
+            <div class="icon">L</div>
+            <h3>Offline translation mode</h3>
+            <p>No API key configuration is required. Choose the local mode and prepare the model when prompted.</p>
+          </div>
+          <div class="card">
             <div class="icon">O</div>
             <h3>Game overlay</h3>
             <p>A transparent, always-on-top overlay shows translated subtitles without injecting into the game process.
@@ -655,8 +660,8 @@ var _hmt = _hmt || [];
             <p>Smaller download. On first run, VoxGo downloads the speech recognition model and guides you through API
               and audio tests.</p>
             <a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip">Download
-              VoxGo v0.4.1 Lite</a>
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip">Download
+              VoxGo v0.4.2 Lite</a>
           </div>
           <div class="card download-card">
             <span class="tag">Bundled model</span>
@@ -664,8 +669,8 @@ var _hmt = _hmt || [];
             <p>Includes multilingual Whisper small/base models and no CUDA DLLs. English-only models download on demand
               after enabling Pure English.</p>
             <a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full.zip">Download
-              VoxGo v0.4.1 Full</a>
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full.zip">Download
+              VoxGo v0.4.2 Full</a>
           </div>
           <div class="card download-card">
             <span class="tag">NVIDIA GPU</span>
@@ -673,8 +678,8 @@ var _hmt = _hmt || [];
             <p>Includes multilingual Whisper small/base models plus CUDA DLLs. English-only models still download on
               demand after enabling Pure English.</p>
             <a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full-cuda.zip">Download
-              VoxGo v0.4.1 GPU</a>
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full-cuda.zip">Download
+              VoxGo v0.4.2 GPU</a>
           </div>
         </div>
       </div>
@@ -719,6 +724,14 @@ var _hmt = _hmt || [];
           <p>Short answers for the things people usually ask before trusting an overlay tool.</p>
         </div>
         <div class="faq">
+          <details open>
+            <summary>Can VoxGo translate foreign teammate voice in real time?</summary>
+            <p>Yes. VoxGo captures game or Discord system audio and shows English-Chinese speech as live subtitles.</p>
+          </details>
+          <details>
+            <summary>Does VoxGo support local translation?</summary>
+            <p>Yes. Choose Offline Translation Mode and prepare the model when prompted; no API key is required.</p>
+          </details>
           <details open>
             <summary>Does VoxGo record my microphone?</summary>
             <p>Not by default. VoxGo is designed to capture Windows system audio output, such as game voice, Discord, or

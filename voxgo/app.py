@@ -160,6 +160,7 @@ class VoxGoApp:
             self.config.translation.api_key,
             self.config.translation.model,
             self.config.translation.endpoint,
+            self.config.translation.local_model,
         )
         self._last_language_flow = (
             self.config.translation.source_lang,
@@ -392,6 +393,7 @@ class VoxGoApp:
             self.config.translation.api_key,
             self.config.translation.model,
             self.config.translation.endpoint,
+            self.config.translation.local_model,
         )
         self._last_language_flow = (
             self.config.translation.source_lang,

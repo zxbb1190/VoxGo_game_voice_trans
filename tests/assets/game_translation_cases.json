@@ -1,0 +1,1438 @@
+{
+  "schema_version": 1,
+  "provenance": "Authored evaluation scenarios; not real-user transcripts or measured production traffic.",
+  "evaluation_notes": [
+    "Expected concepts describe semantic requirements. any_of contains illustrative target-language phrases, not an exhaustive list of valid translations.",
+    "Phrase matching is diagnostic triage only. A missing phrase is not automatically a semantic failure; human review should record meaning, negation, pronouns, count and direction.",
+    "Forbidden phrases flag likely errors in the supplied context, not universal forbidden translations. Review their surrounding negation before assigning failure.",
+    "These scenarios include no asserted model results. Report actual output, latency and reviewer decision separately."
+  ],
+  "cases": [
+    {
+      "id": "authored-001",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "reload",
+      "text": "I am reloading. Cover me.",
+      "expected_concepts": [
+        {
+          "concept": "speaker reloading",
+          "any_of": [
+            "我在换弹",
+            "我正在换弹",
+            "我在装弹",
+            "我正在装填"
+          ]
+        },
+        {
+          "concept": "request cover",
+          "any_of": [
+            "掩护我"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "重新加载网页"
+      ],
+      "notes": "Keep the speaker as the person reloading."
+    },
+    {
+      "id": "authored-002",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "reload",
+      "text": "我没在换弹，你先换弹。",
+      "expected_concepts": [
+        {
+          "concept": "negation",
+          "any_of": [
+            "not reloading"
+          ]
+        },
+        {
+          "concept": "other player first",
+          "any_of": [
+            "you reload first",
+            "reload first"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not exchange speaker and addressee."
+    },
+    {
+      "id": "authored-003",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "cover",
+      "text": "Cover him while I reload.",
+      "expected_concepts": [
+        {
+          "concept": "cover teammate",
+          "any_of": [
+            "掩护他"
+          ]
+        },
+        {
+          "concept": "speaker reload",
+          "any_of": [
+            "我换弹",
+            "我装弹",
+            "我装填"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "掩护我"
+      ],
+      "notes": "The teammate needs cover, not the speaker."
+    },
+    {
+      "id": "authored-004",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "cover",
+      "text": "别冲，先找掩体。",
+      "expected_concepts": [
+        {
+          "concept": "do not rush",
+          "any_of": [
+            "do not rush",
+            "don't rush"
+          ]
+        },
+        {
+          "concept": "cover",
+          "any_of": [
+            "cover"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "blanket"
+      ],
+      "notes": "Cover means protection from fire."
+    },
+    {
+      "id": "authored-005",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "angles",
+      "text": "Hold this angle and watch the stairs.",
+      "expected_concepts": [
+        {
+          "concept": "hold angle",
+          "any_of": [
+            "架住",
+            "守住",
+            "看住"
+          ]
+        },
+        {
+          "concept": "stairs",
+          "any_of": [
+            "楼梯"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "角度不变"
+      ],
+      "notes": "An instruction to watch a line of sight."
+    },
+    {
+      "id": "authored-006",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "angles",
+      "text": "你架右边，我看左边。",
+      "expected_concepts": [
+        {
+          "concept": "addressee right",
+          "any_of": [
+            "right"
+          ]
+        },
+        {
+          "concept": "speaker left",
+          "any_of": [
+            "left"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Both assignments and pronouns matter."
+    },
+    {
+      "id": "authored-007",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "flank",
+      "text": "Two enemies are flanking us from the left.",
+      "expected_concepts": [
+        {
+          "concept": "two enemies",
+          "any_of": [
+            "两个敌人",
+            "两名敌人"
+          ]
+        },
+        {
+          "concept": "flank",
+          "any_of": [
+            "绕后",
+            "包抄",
+            "侧翼"
+          ]
+        },
+        {
+          "concept": "left",
+          "any_of": [
+            "左"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Preserve count and direction."
+    },
+    {
+      "id": "authored-008",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "flank",
+      "text": "别从正面打，我们绕后。",
+      "expected_concepts": [
+        {
+          "concept": "avoid frontal attack",
+          "any_of": [
+            "not attack head-on",
+            "don't attack head-on",
+            "avoid the front",
+            "don't fight from the front"
+          ]
+        },
+        {
+          "concept": "flank",
+          "any_of": [
+            "flank",
+            "go around",
+            "get behind"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Negated front and intended rear approach."
+    },
+    {
+      "id": "authored-009",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "recoil",
+      "text": "This rifle has too much recoil.",
+      "expected_concepts": [
+        {
+          "concept": "rifle",
+          "any_of": [
+            "步枪"
+          ]
+        },
+        {
+          "concept": "recoil",
+          "any_of": [
+            "后坐力"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "退缩"
+      ],
+      "notes": "Weapon recoil, not emotional recoil."
+    },
+    {
+      "id": "authored-010",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "recoil",
+      "text": "这把枪后坐力很大，压不住。",
+      "expected_concepts": [
+        {
+          "concept": "recoil",
+          "any_of": [
+            "recoil"
+          ]
+        },
+        {
+          "concept": "hard to control",
+          "any_of": [
+            "control",
+            "handle"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not literalize pressing a gun down."
+    },
+    {
+      "id": "authored-011",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "loot",
+      "text": "Do not loot yet. There is another squad nearby.",
+      "expected_concepts": [
+        {
+          "concept": "no looting yet",
+          "any_of": [
+            "先别舔包",
+            "先别搜",
+            "不要搜",
+            "别急着搜"
+          ]
+        },
+        {
+          "concept": "nearby squad",
+          "any_of": [
+            "附近",
+            "旁边"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Delay looting because of another squad."
+    },
+    {
+      "id": "authored-012",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "loot",
+      "text": "先别舔包，楼里还有人。",
+      "expected_concepts": [
+        {
+          "concept": "do not loot",
+          "any_of": [
+            "do not loot",
+            "don't loot",
+            "don't loot yet"
+          ]
+        },
+        {
+          "concept": "building",
+          "any_of": [
+            "building"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "lick the bag"
+      ],
+      "notes": "Game loot slang must not become literal licking."
+    },
+    {
+      "id": "authored-013",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "knock",
+      "text": "I knocked one, but his teammate is still up.",
+      "expected_concepts": [
+        {
+          "concept": "downed one",
+          "any_of": [
+            "击倒一个",
+            "击倒了一个",
+            "打倒一个",
+            "打倒了一个"
+          ]
+        },
+        {
+          "concept": "teammate active",
+          "any_of": [
+            "队友"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "敲门"
+      ],
+      "notes": "Knocked is downed, not necessarily killed."
+    },
+    {
+      "id": "authored-014",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "knock",
+      "text": "我击倒一个，但没击杀。",
+      "expected_concepts": [
+        {
+          "concept": "downed",
+          "any_of": [
+            "knocked",
+            "downed"
+          ]
+        },
+        {
+          "concept": "not killed",
+          "any_of": [
+            "not killed",
+            "didn't kill",
+            "not kill",
+            "haven't killed"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not collapse knock into kill."
+    },
+    {
+      "id": "authored-015",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "revive",
+      "text": "Revive her first. I can wait.",
+      "expected_concepts": [
+        {
+          "concept": "revive her",
+          "any_of": [
+            "先救她",
+            "先扶她",
+            "先复活她"
+          ]
+        },
+        {
+          "concept": "speaker can wait",
+          "any_of": [
+            "我可以等",
+            "我能等"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "先救我"
+      ],
+      "notes": "Pronoun preservation is required."
+    },
+    {
+      "id": "authored-016",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "revive",
+      "text": "别扶我，先打他。",
+      "expected_concepts": [
+        {
+          "concept": "do not revive speaker",
+          "any_of": [
+            "do not revive me",
+            "don't revive me",
+            "do not pick me up",
+            "don't pick me up"
+          ]
+        },
+        {
+          "concept": "attack other",
+          "any_of": [
+            "shoot him",
+            "attack him",
+            "fight him"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Negation must attach to revive, not attack."
+    },
+    {
+      "id": "authored-017",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "finish",
+      "text": "Finish the downed enemy before he gets revived.",
+      "expected_concepts": [
+        {
+          "concept": "finish enemy",
+          "any_of": [
+            "补掉",
+            "补枪",
+            "击杀",
+            "杀死"
+          ]
+        },
+        {
+          "concept": "revive",
+          "any_of": [
+            "救",
+            "复活",
+            "扶"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "完成敌人"
+      ],
+      "notes": "Finish means eliminate a downed opponent."
+    },
+    {
+      "id": "authored-018",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "finish",
+      "text": "别补他，留着钓他的队友。",
+      "expected_concepts": [
+        {
+          "concept": "do not finish",
+          "any_of": [
+            "do not finish",
+            "don't finish",
+            "do not kill",
+            "don't kill"
+          ]
+        },
+        {
+          "concept": "bait teammate",
+          "any_of": [
+            "bait",
+            "lure"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not reverse the negation."
+    },
+    {
+      "id": "authored-019",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "health",
+      "text": "I am low on health. Give me a medkit.",
+      "expected_concepts": [
+        {
+          "concept": "low health",
+          "any_of": [
+            "血量低",
+            "血不多",
+            "残血",
+            "生命值很低"
+          ]
+        },
+        {
+          "concept": "medkit",
+          "any_of": [
+            "医疗包",
+            "急救包"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Health is the game resource."
+    },
+    {
+      "id": "authored-020",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "health",
+      "text": "我满血，你把药留着。",
+      "expected_concepts": [
+        {
+          "concept": "full health",
+          "any_of": [
+            "full health"
+          ]
+        },
+        {
+          "concept": "keep healing item",
+          "any_of": [
+            "keep",
+            "save"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Speaker does not need healing."
+    },
+    {
+      "id": "authored-021",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "footsteps",
+      "text": "I hear footsteps upstairs, not outside.",
+      "expected_concepts": [
+        {
+          "concept": "footsteps",
+          "any_of": [
+            "脚步"
+          ]
+        },
+        {
+          "concept": "upstairs",
+          "any_of": [
+            "楼上"
+          ]
+        },
+        {
+          "concept": "not outside",
+          "any_of": [
+            "不是外面",
+            "不在外面"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Preserve spatial negation."
+    },
+    {
+      "id": "authored-022",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "footsteps",
+      "text": "左边有脚步，可能不止一个人。",
+      "expected_concepts": [
+        {
+          "concept": "left",
+          "any_of": [
+            "left"
+          ]
+        },
+        {
+          "concept": "footsteps",
+          "any_of": [
+            "footsteps"
+          ]
+        },
+        {
+          "concept": "more than one",
+          "any_of": [
+            "more than one"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Uncertainty and possible plurality matter."
+    },
+    {
+      "id": "authored-023",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "armor",
+      "text": "His armor is broken. Push together.",
+      "expected_concepts": [
+        {
+          "concept": "armor broken",
+          "any_of": [
+            "护甲碎",
+            "护甲破",
+            "破甲"
+          ]
+        },
+        {
+          "concept": "together",
+          "any_of": [
+            "一起"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not confuse armor with weapon."
+    },
+    {
+      "id": "authored-024",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "armor",
+      "text": "我没有护甲，等我补甲再打。",
+      "expected_concepts": [
+        {
+          "concept": "no armor",
+          "any_of": [
+            "no armor",
+            "don't have armor",
+            "without armor"
+          ]
+        },
+        {
+          "concept": "wait",
+          "any_of": [
+            "wait"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Armor restoration precedes fight."
+    },
+    {
+      "id": "authored-025",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "grenade",
+      "text": "Grenade behind you! Move away!",
+      "expected_concepts": [
+        {
+          "concept": "grenade",
+          "any_of": [
+            "手雷",
+            "榴弹"
+          ]
+        },
+        {
+          "concept": "behind addressee",
+          "any_of": [
+            "你后面",
+            "你身后"
+          ]
+        },
+        {
+          "concept": "move",
+          "any_of": [
+            "躲",
+            "离开",
+            "跑"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Urgent location warning."
+    },
+    {
+      "id": "authored-026",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "grenade",
+      "text": "我没雷了，你往窗里扔一颗。",
+      "expected_concepts": [
+        {
+          "concept": "no grenades",
+          "any_of": [
+            "no grenades",
+            "out of grenades",
+            "no grenade"
+          ]
+        },
+        {
+          "concept": "window",
+          "any_of": [
+            "window"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "thunder"
+      ],
+      "notes": "雷 is a grenade here."
+    },
+    {
+      "id": "authored-027",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "smoke",
+      "text": "Throw smoke between us and the sniper.",
+      "expected_concepts": [
+        {
+          "concept": "smoke grenade",
+          "any_of": [
+            "烟雾",
+            "封烟"
+          ]
+        },
+        {
+          "concept": "sniper",
+          "any_of": [
+            "狙击手"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "抽烟"
+      ],
+      "notes": "Smoke means cover from a smoke grenade."
+    },
+    {
+      "id": "authored-028",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "smoke",
+      "text": "先封烟再救人，别直接跑过去。",
+      "expected_concepts": [
+        {
+          "concept": "smoke",
+          "any_of": [
+            "smoke"
+          ]
+        },
+        {
+          "concept": "revive",
+          "any_of": [
+            "revive",
+            "rescue"
+          ]
+        },
+        {
+          "concept": "do not run",
+          "any_of": [
+            "do not run",
+            "don't run"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Keep action sequence and prohibition."
+    },
+    {
+      "id": "authored-029",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "rotate",
+      "text": "We need to rotate to the next zone now.",
+      "expected_concepts": [
+        {
+          "concept": "move position",
+          "any_of": [
+            "转移",
+            "转点",
+            "进圈"
+          ]
+        },
+        {
+          "concept": "zone",
+          "any_of": [
+            "圈",
+            "区域"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "旋转身体"
+      ],
+      "notes": "Rotate is repositioning, not turning in place."
+    },
+    {
+      "id": "authored-030",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "rotate",
+      "text": "这里太危险，往右边转移。",
+      "expected_concepts": [
+        {
+          "concept": "dangerous",
+          "any_of": [
+            "dangerous"
+          ]
+        },
+        {
+          "concept": "right",
+          "any_of": [
+            "right"
+          ]
+        },
+        {
+          "concept": "move",
+          "any_of": [
+            "move",
+            "rotate",
+            "relocate"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Reposition to the right."
+    },
+    {
+      "id": "authored-031",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "one_shot",
+      "text": "He is one shot. One more bullet should knock him.",
+      "expected_concepts": [
+        {
+          "concept": "low health",
+          "any_of": [
+            "残血",
+            "一枪",
+            "一发"
+          ]
+        },
+        {
+          "concept": "down",
+          "any_of": [
+            "倒"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "一次拍摄"
+      ],
+      "notes": "Low remaining health, not number of kills."
+    },
+    {
+      "id": "authored-032",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "one_shot",
+      "text": "他不是残血，别一个人冲。",
+      "expected_concepts": [
+        {
+          "concept": "not low health",
+          "any_of": [
+            "not low",
+            "isn't low",
+            "not weak",
+            "isn't weak"
+          ]
+        },
+        {
+          "concept": "do not rush alone",
+          "any_of": [
+            "don't rush alone",
+            "do not rush alone",
+            "don't push alone"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Do not erase not."
+    },
+    {
+      "id": "authored-033",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "pronouns",
+      "text": "You stay here. She and I will flank them.",
+      "expected_concepts": [
+        {
+          "concept": "addressee stay",
+          "any_of": [
+            "你留",
+            "你待"
+          ]
+        },
+        {
+          "concept": "speaker plus her",
+          "any_of": [
+            "我和她",
+            "她和我"
+          ]
+        },
+        {
+          "concept": "flank",
+          "any_of": [
+            "绕后",
+            "包抄"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Track three participant groups."
+    },
+    {
+      "id": "authored-034",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "pronouns",
+      "text": "不是我打的，是他打的。",
+      "expected_concepts": [
+        {
+          "concept": "not speaker",
+          "any_of": [
+            "wasn't me",
+            "not me",
+            "I didn't"
+          ]
+        },
+        {
+          "concept": "other male",
+          "any_of": [
+            "he",
+            "him"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Attribution must not invert."
+    },
+    {
+      "id": "authored-035",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "negation",
+      "text": "Do not shoot. That is our teammate.",
+      "expected_concepts": [
+        {
+          "concept": "do not shoot",
+          "any_of": [
+            "别开枪",
+            "不要开枪",
+            "别射击"
+          ]
+        },
+        {
+          "concept": "teammate",
+          "any_of": [
+            "队友"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "A friendly-fire prevention command."
+    },
+    {
+      "id": "authored-036",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "negation",
+      "text": "我说的是撤退，不是进攻。",
+      "expected_concepts": [
+        {
+          "concept": "retreat",
+          "any_of": [
+            "retreat",
+            "fall back"
+          ]
+        },
+        {
+          "concept": "not attack",
+          "any_of": [
+            "not attack",
+            "not an attack",
+            "not advance"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [],
+      "notes": "Both opposed instructions matter."
+    },
+    {
+      "id": "authored-037",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "Hold the door open for her.",
+      "expected_concepts": [
+        {
+          "concept": "door",
+          "any_of": [
+            "门"
+          ]
+        },
+        {
+          "concept": "for her",
+          "any_of": [
+            "她"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "架枪",
+        "架住枪线"
+      ],
+      "notes": "Ordinary hold; no invented game action."
+    },
+    {
+      "id": "authored-038",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "帮我拿一下这个杯子。",
+      "expected_concepts": [
+        {
+          "concept": "cup",
+          "any_of": [
+            "cup",
+            "mug"
+          ]
+        },
+        {
+          "concept": "help hold",
+          "any_of": [
+            "hold",
+            "take"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "cover me",
+        "revive me"
+      ],
+      "notes": "Ordinary assistance, not combat cover."
+    },
+    {
+      "id": "authored-039",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "We filmed the scene in one shot.",
+      "expected_concepts": [
+        {
+          "concept": "filming",
+          "any_of": [
+            "拍摄",
+            "镜头"
+          ]
+        },
+        {
+          "concept": "single take",
+          "any_of": [
+            "一镜",
+            "一次",
+            "一个镜头"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "残血",
+        "击倒"
+      ],
+      "notes": "One shot in a filmmaking context."
+    },
+    {
+      "id": "authored-040",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "这张照片只拍了一次。",
+      "expected_concepts": [
+        {
+          "concept": "photo",
+          "any_of": [
+            "photo",
+            "picture"
+          ]
+        },
+        {
+          "concept": "once",
+          "any_of": [
+            "once",
+            "one shot",
+            "single"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "low health"
+      ],
+      "notes": "Do not inject an enemy health interpretation."
+    },
+    {
+      "id": "authored-041",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "Please cover the soup so it stays warm.",
+      "expected_concepts": [
+        {
+          "concept": "soup",
+          "any_of": [
+            "汤"
+          ]
+        },
+        {
+          "concept": "keep warm",
+          "any_of": [
+            "保温",
+            "暖",
+            "热"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "掩护汤"
+      ],
+      "notes": "Cover means placing a lid."
+    },
+    {
+      "id": "authored-042",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "请把书的封面擦干净。",
+      "expected_concepts": [
+        {
+          "concept": "book",
+          "any_of": [
+            "book"
+          ]
+        },
+        {
+          "concept": "cover",
+          "any_of": [
+            "cover"
+          ]
+        },
+        {
+          "concept": "clean",
+          "any_of": [
+            "clean",
+            "wipe"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "cover fire"
+      ],
+      "notes": "Book cover is not suppressive fire."
+    },
+    {
+      "id": "authored-043",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "I need to finish my homework before dinner.",
+      "expected_concepts": [
+        {
+          "concept": "homework",
+          "any_of": [
+            "作业"
+          ]
+        },
+        {
+          "concept": "before dinner",
+          "any_of": [
+            "晚饭前",
+            "晚餐前"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "补枪",
+        "击杀"
+      ],
+      "notes": "Everyday completion."
+    },
+    {
+      "id": "authored-044",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "请把椅子转过去。",
+      "expected_concepts": [
+        {
+          "concept": "chair",
+          "any_of": [
+            "chair"
+          ]
+        },
+        {
+          "concept": "turn",
+          "any_of": [
+            "turn",
+            "rotate"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "next zone"
+      ],
+      "notes": "Literal rotation of furniture."
+    },
+    {
+      "id": "authored-045",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "There is smoke coming from the kitchen.",
+      "expected_concepts": [
+        {
+          "concept": "smoke",
+          "any_of": [
+            "烟"
+          ]
+        },
+        {
+          "concept": "kitchen",
+          "any_of": [
+            "厨房"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "封烟",
+        "烟雾弹"
+      ],
+      "notes": "A report, not an instruction to throw a grenade."
+    },
+    {
+      "id": "authored-046",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "救我，我不会游泳！",
+      "expected_concepts": [
+        {
+          "concept": "help speaker",
+          "any_of": [
+            "help me",
+            "save me"
+          ]
+        },
+        {
+          "concept": "cannot swim",
+          "any_of": [
+            "can't swim",
+            "cannot swim",
+            "don't know how to swim"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "revive me"
+      ],
+      "notes": "Rescue from drowning, not a downed game state."
+    },
+    {
+      "id": "authored-047",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_short",
+      "text": "Help me!",
+      "expected_concepts": [
+        {
+          "concept": "help speaker",
+          "any_of": [
+            "帮我",
+            "救我"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "我被击倒了",
+        "扶我起来"
+      ],
+      "notes": "Insufficient evidence to assert being knocked."
+    },
+    {
+      "id": "authored-048",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_short",
+      "text": "有人吗？",
+      "expected_concepts": [
+        {
+          "concept": "anyone present",
+          "any_of": [
+            "anyone",
+            "anybody"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "enemy spotted",
+        "enemies here"
+      ],
+      "notes": "Question about presence, not confirmed hostile contact."
+    },
+    {
+      "id": "authored-049",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "Someone is at the door. Do not open it yet.",
+      "expected_concepts": [
+        {
+          "concept": "someone at door",
+          "any_of": [
+            "门口",
+            "门外"
+          ]
+        },
+        {
+          "concept": "do not open",
+          "any_of": [
+            "别开",
+            "不要开"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "敌人已标记"
+      ],
+      "notes": "Someone is not necessarily an enemy."
+    },
+    {
+      "id": "authored-050",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "他敲了三下门，然后走了。",
+      "expected_concepts": [
+        {
+          "concept": "knocked door",
+          "any_of": [
+            "knocked",
+            "knock"
+          ]
+        },
+        {
+          "concept": "three",
+          "any_of": [
+            "three"
+          ]
+        },
+        {
+          "concept": "left",
+          "any_of": [
+            "left",
+            "walked away"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "downed three",
+        "three kills"
+      ],
+      "notes": "Literal knocking, not three combat knockdowns."
+    },
+    {
+      "id": "authored-051",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "category": "ambiguity_everyday",
+      "text": "Reload the page if the image does not appear.",
+      "expected_concepts": [
+        {
+          "concept": "web page",
+          "any_of": [
+            "页面",
+            "网页"
+          ]
+        },
+        {
+          "concept": "reload",
+          "any_of": [
+            "刷新",
+            "重新加载"
+          ]
+        },
+        {
+          "concept": "image",
+          "any_of": [
+            "图片",
+            "图像"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "换弹"
+      ],
+      "notes": "Reload in browser context."
+    },
+    {
+      "id": "authored-052",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "category": "ambiguity_everyday",
+      "text": "医生说他的健康状况很好。",
+      "expected_concepts": [
+        {
+          "concept": "doctor",
+          "any_of": [
+            "doctor"
+          ]
+        },
+        {
+          "concept": "health",
+          "any_of": [
+            "health"
+          ]
+        }
+      ],
+      "forbidden_mistranslations": [
+        "full HP",
+        "medkit"
+      ],
+      "notes": "Do not inject game-specific resource claims."
+    }
+  ]
+}

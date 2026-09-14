@@ -282,6 +282,7 @@ class GameOverlay(QWidget):
             "background: #F04438; border: 1px solid #FFFFFF; border-radius: 4px;"
         )
         self._settings_badge.hide()
+        self._settings_button.installEventFilter(self)
 
         self._quit_button = QToolButton()
         self._quit_button.setObjectName("quitButton")
@@ -941,6 +942,10 @@ class GameOverlay(QWidget):
     def _set_update_badge_visible(self, visible: bool):
         if hasattr(self, "_settings_badge"):
             self._settings_badge.setVisible(bool(visible) and not self._is_locked())
+            self._settings_button.setToolTip(
+                _tr(self._ui_language(), "有可用更新，点击打开设置", "Update available; click to open Settings")
+                if visible else _tr(self._ui_language(), "浮窗设置", "Overlay Settings")
+            )
             self._position_settings_badge()
 
     def request_update_check(self, manual: bool = False):

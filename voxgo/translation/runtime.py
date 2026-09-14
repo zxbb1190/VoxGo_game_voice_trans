@@ -245,6 +245,8 @@ class TranslationRuntime:
         return TranslationConfig(
             provider=getattr(current, "provider", TranslationConfig.provider),
             api_key=getattr(current, "api_key", TranslationConfig.api_key),
+            local_model=getattr(current, "local_model", TranslationConfig.local_model),
+            local_download_source=getattr(current, "local_download_source", "modelscope"),
             model=getattr(current, "model", TranslationConfig.model),
             endpoint=getattr(current, "endpoint", TranslationConfig.endpoint),
             max_tokens=getattr(current, "max_tokens", TranslationConfig.max_tokens),

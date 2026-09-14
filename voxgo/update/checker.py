@@ -31,6 +31,8 @@ class UpdateInfo:
     channel: str = "stable"
     title: str = ""
     notes: List[str] = field(default_factory=list)
+    notes_zh: List[str] = field(default_factory=list)
+    notes_en: List[str] = field(default_factory=list)
     release_url: str = ""
     download_lite_url: str = ""
     download_full_url: str = ""
@@ -116,6 +118,8 @@ def parse_update_manifest(data: dict) -> UpdateInfo:
         channel=channel,
         title=str(data.get("title") or f"VoxGo v{latest}").strip(),
         notes=notes,
+        notes_zh=[str(x) for x in data.get("notes_zh", [])] if isinstance(data.get("notes_zh"), list) else [],
+        notes_en=[str(x) for x in data.get("notes_en", [])] if isinstance(data.get("notes_en"), list) else [],
         release_url=str(data.get("release_url") or "").strip(),
         download_lite_url=str(data.get("download_lite_url") or "").strip(),
         download_full_url=str(data.get("download_full_url") or "").strip(),

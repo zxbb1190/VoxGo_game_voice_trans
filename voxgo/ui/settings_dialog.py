@@ -31,6 +31,7 @@ from voxgo.audio.capture import (
 )
 from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
+from voxgo.ui.download_panels import LocalModelPanel
 from voxgo.update.checker import UpdateCheckResult, UpdateInfo, UpdateSettings, normalize_update_channel
 from voxgo.ui.config_models import (
     AudioDeviceConfig,
@@ -171,6 +172,9 @@ class SettingsDialog(QDialog):
         self._fill_translation_providers()
         self.provider_combo.currentIndexChanged.connect(self._provider_changed)
         translation_form.addRow(_tr(self._ui_language, "翻译服务", "Translation Provider"), self.provider_combo)
+        self.provider_hint = QLabel()
+        self.provider_hint.setWordWrap(True)
+        translation_form.addRow(self.provider_hint)
 
         self.api_key_input = QLineEdit(self.translation_config.api_key)
         self.api_key_input.setEchoMode(QLineEdit.Password)
@@ -203,6 +207,8 @@ class SettingsDialog(QDialog):
         self.endpoint_input.setToolTip("填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url")
         self.endpoint_input.editingFinished.connect(self._preview)
         translation_form.addRow(_tr(self._ui_language, "兼容地址", "Compatible Endpoint"), self.endpoint_input)
+        self.local_model_panel = LocalModelPanel(self.translation_config, self._ui_language, self)
+        translation_form.addRow(self.local_model_panel)
         self._refresh_translation_provider_ui()
 
         self.model_download_source_combo = QComboBox()
@@ -658,6 +664,22 @@ class SettingsDialog(QDialog):
             return
         provider = normalize_translation_provider(self.provider_combo.currentData())
         is_google = provider == "google"
+        is_local = provider == "local"
+        if hasattr(self, "provider_hint"):
+            self.provider_hint.setText(_tr(
+                self._ui_language,
+                "支持本地离线翻译；选择后可下载模型。",
+                "Offline translation is supported; select it to download the model.",
+            ))
+        if hasattr(self, "local_model_panel"):
+            self.local_model_panel.setVisible(is_local)
+            self.local_model_panel.refresh_language(self._ui_language)
+            if is_local:
+                self.provider_hint.setText(_tr(self._ui_language,
+                    "本地离线模式：无需网络或 API Key；首次下载约 317 MB，占用更多内存，游戏术语和复杂句质量可能弱于在线 API。",
+                    "Offline mode: no network or API key; first download is about 317 MB, uses more memory, and may be weaker than online APIs on gaming slang and complex sentences."))
+        if hasattr(self, "api_key_input"):
+            self.api_key_input.setEnabled(not is_local)
         if hasattr(self, "api_key_input"):
             self.api_key_input.setPlaceholderText(
                 "Google Cloud Translation API Key"
@@ -679,7 +701,7 @@ class SettingsDialog(QDialog):
             )
         for widget in (getattr(self, "model_input", None), getattr(self, "endpoint_input", None)):
             if widget:
-                widget.setEnabled(not is_google)
+                widget.setEnabled(not is_google and not is_local)
         if hasattr(self, "model_input"):
             self.model_input.setToolTip(
                 _tr(

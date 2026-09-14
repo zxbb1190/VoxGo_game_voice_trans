@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="VoxGo 是一个面向 PC 游戏玩家的开源语音实时翻译浮窗工具，当前支持英语和中文双向识别翻译，并支持系统声音捕获、Whisper 识别、游戏浮窗和手机同步。" />
+  <meta name="description" content="VoxGo 是面向 PC 游戏玩家的开源实时游戏语音翻译工具，支持英语中文双向翻译、游戏字幕浮窗、本地语音识别和本地翻译模式。" />
   <meta name="keywords"
-    content="VoxGo, 游戏语音翻译, PC游戏语音翻译, 实时语音翻译, 游戏字幕浮窗, 游戏实时字幕, 游戏语音实时翻译, 英语中文翻译, 英译中, 中译英, Discord语音翻译, Discord实时字幕, 海外服开黑翻译, 队友语音翻译, 游戏队友语音翻译, Windows语音翻译工具, PC语音翻译工具, Whisper语音识别, faster-whisper, Whisper实时字幕, 系统声音捕获, WASAPI Loopback, OpenAI兼容翻译, Google Cloud Translation, 手机字幕同步, 游戏翻译工具, 实时字幕工具, 开源语音翻译工具, game voice translator, real-time game voice translation, PC game subtitle overlay, Discord voice translator" />
+    content="VoxGo, 游戏语音翻译, PC游戏语音翻译, 实时语音翻译, 游戏字幕浮窗, 游戏实时字幕, 游戏语音实时翻译, 外国队友语音翻译, PUBG语音翻译, APEX语音翻译, Discord游戏语音翻译, 英语中文翻译, 英译中, 中译英, Discord语音翻译, Discord实时字幕, 海外服开黑翻译, 队友语音翻译, 游戏队友语音翻译, Windows语音翻译工具, PC语音翻译工具, Whisper语音识别, faster-whisper, Whisper实时字幕, 系统声音捕获, WASAPI Loopback, OpenAI兼容翻译, Google Cloud Translation, 手机字幕同步, 游戏翻译工具, 实时字幕工具, 开源语音翻译工具, game voice translator, real-time game voice translation, PC game subtitle overlay, Discord voice translator" />
   <link rel="canonical" href="https://voxgo.cn/" />
   <link rel="alternate" hreflang="zh-CN" href="https://voxgo.cn/" />
   <link rel="alternate" hreflang="en" href="https://voxgo.cn/en/" />
@@ -14,7 +14,7 @@
 
   <meta property="og:title" content="VoxGo - PC 游戏语音实时翻译浮窗" />
   <meta property="og:description"
-    content="VoxGo 是一个面向 PC 游戏玩家的开源语音实时翻译浮窗工具，当前支持英语和中文双向识别翻译，并支持系统声音捕获、Whisper 识别、游戏浮窗和手机同步。" />
+    content="VoxGo 是面向 PC 游戏玩家的开源实时游戏语音翻译工具，支持英语中文双向翻译、游戏字幕浮窗、本地语音识别和本地翻译模式。" />
   <meta property="og:url" content="https://voxgo.cn/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://voxgo.cn/assets/logo.png" />
@@ -671,13 +671,12 @@ var _hmt = _hmt || [];
     <div class="container hero">
       <div><span class="eyebrow">开源 · Windows · 游戏语音实时翻译</span>
         <h1><span class="gradient-text">听不懂外国队友语音？</span><br />开一个游戏字幕浮窗。</h1>
-        <p class="lead">捕获 Windows 系统声音，将游戏、Discord、视频或直播语音实时识别并翻译成字幕。当前支持英语 ↔ 中文双向，首次启动会带你测试 API Key 和系统声音，再进入游戏验证。</p>
+        <p class="lead">捕获 Windows 系统声音，将游戏、Discord、视频或直播语音实时识别并翻译成字幕。当前支持英语 ↔ 中文双向，支持在线 API 和本地翻译模式；首次启动会带你测试翻译和系统声音。</p>
         <div class="actions"><a class="btn btn-primary"
-            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip">下载
+            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip">下载
             Lite 版</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">查看
             Release</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码</a></div>
-        <div class="hero-notes"><span class="pill">英语 ↔ 中文</span><span class="pill">首次启动向导</span><span class="pill">API
-            Key 测试</span><span class="pill">音频音量条测试</span></div>
+        <div class="hero-notes"><span class="pill">英语 ↔ 中文</span><span class="pill">首次启动向导</span><span class="pill">支持本地翻译模式</span><span class="pill">API Key 测试</span><span class="pill">音频音量条测试</span></div>
       </div>
       <div class="mock">
         <div class="game-screen">
@@ -727,6 +726,11 @@ var _hmt = _hmt || [];
             <p>当前正式支持英语 → 中文、中文 → 英语。其它语言暂未作为可选语言开放。</p>
           </div>
           <div class="card">
+            <div class="icon">📴</div>
+            <h3>支持本地翻译模式</h3>
+            <p>无需配置 API Key。选择本地翻译模式并按提示准备模型，即可使用本地翻译。</p>
+          </div>
+          <div class="card">
             <div class="icon">🪟</div>
             <h3>游戏浮窗</h3>
             <p>透明置顶字幕窗口，支持拖拽、调整透明度、显示原文和译文，不需要切出游戏查看翻译。</p>
@@ -755,21 +759,21 @@ var _hmt = _hmt || [];
             <h3>Lite 版</h3>
             <p>体积更小，适合大多数用户。首次运行时会下载语音识别模型，并先通过向导测试翻译接口和系统声音。</p>
             <div class="price-line">适合：第一次尝试、网络可用、想要更小下载包。</div><a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-lite.zip">下载
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip">下载
               Lite 版</a>
           </div>
           <div class="card download-card"><span class="tag">完整包</span>
             <h3>Full 版</h3>
             <p>内置 Whisper small/base 通用模型，不带 CUDA DLL。英文专用模型不随包内置，开启纯英文环境后按需下载。</p>
             <div class="price-line">适合：网络较差、想减少首次启动等待。</div><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full.zip">下载
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full.zip">下载
               Full 版</a>
           </div>
           <div class="card download-card"><span class="tag">NVIDIA GPU</span>
             <h3>Full-CUDA / GPU 版</h3>
             <p>内置 Whisper small/base 通用模型和 CUDA DLL，解压后可直接尝试 NVIDIA GPU 识别；英文专用模型仍按需下载。</p>
             <div class="price-line">适合：NVIDIA 显卡、想减少 GPU 配置步骤。</div><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.1/VoxGo-v0.4.1-full-cuda.zip">下载
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full-cuda.zip">下载
               GPU 版</a>
           </div>
         </div>
@@ -812,6 +816,14 @@ var _hmt = _hmt || [];
           <p>把用户最担心的问题先说清楚，可以减少误解，也方便你收集更高质量的测试反馈。</p>
         </div>
         <div class="faq">
+          <details open>
+            <summary>VoxGo 能实时翻译外国队友语音吗？</summary>
+            <p>可以。VoxGo 捕获游戏或 Discord 的系统声音，将英语和中文语音识别并显示为实时字幕。</p>
+          </details>
+          <details>
+            <summary>支持本地翻译模式吗？</summary>
+            <p>支持。选择本地翻译模式后无需配置 API Key，按提示准备模型即可使用。</p>
+          </details>
           <details open>
             <summary>它会录我的麦克风吗？</summary>
             <p>默认目标是捕获 Windows 系统声音输出，不是麦克风。设置里应优先选择 [系统声音] / Loopback 设备；普通麦克风通常录不到游戏声音。</p>

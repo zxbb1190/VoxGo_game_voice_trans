@@ -312,6 +312,8 @@ def _copy_translation_config(config: TranslationConfig) -> TranslationConfig:
     return TranslationConfig(
         provider=normalize_translation_provider(getattr(config, "provider", "openai_compatible")),
         api_key=getattr(config, "api_key", ""),
+        local_model=getattr(config, "local_model", TranslationConfig.local_model),
+        local_download_source=getattr(config, "local_download_source", "modelscope"),
         model=getattr(config, "model", TranslationConfig.model),
         endpoint=getattr(config, "endpoint", TranslationConfig.endpoint),
         max_tokens=getattr(config, "max_tokens", 80),

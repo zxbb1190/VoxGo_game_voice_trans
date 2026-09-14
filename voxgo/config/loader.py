@@ -533,6 +533,8 @@ def serialize_user_settings(config: AppConfig) -> dict:
         "translation": {
             "provider": normalize_translation_provider(config.translation.provider),
             "api_key": config.translation.api_key,
+            "local_model": getattr(config.translation, "local_model", "opus-mt-en-zh"),
+            "local_download_source": getattr(config.translation, "local_download_source", "modelscope"),
             "model": config.translation.model,
             "endpoint": config.translation.endpoint,
             "max_tokens": config.translation.max_tokens,

@@ -11,7 +11,8 @@ soxr==1.1.0
 faster-whisper==1.2.1
 onnxruntime==1.23.2
 
-# 翻译 API
+# 翻译 API / 离线分词
+sentencepiece==0.2.0
 aiohttp==3.9.1
 
 # 界面

@@ -34,6 +34,8 @@ class TranslationTestRunner:
         self.signals = TranslationTestSignals()
         self.signals.finished.connect(callback)
         self._config = _copy_translation_config(config)
+        if self._config.provider == "local":
+            self._config.enable_local_phrase_cache = False
 
     def start(self):
         threading.Thread(target=self._run, name="translation-test", daemon=True).start()
@@ -44,9 +46,9 @@ class TranslationTestRunner:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         try:
-            translated = loop.run_until_complete(
-                translator.translate("Hello, can you hear me?", "en")
-            )
+            source = "zh" if self._config.provider == "local" and self._config.source_lang == "zh" else "en"
+            text = "请在桥边等我。" if source == "zh" else "Hello, can you hear me?"
+            translated = loop.run_until_complete(translator.translate(text, source))
             elapsed_ms = int(round((time.time() - started_at) * 1000))
             translated = (translated or "").strip()
             if not translated:

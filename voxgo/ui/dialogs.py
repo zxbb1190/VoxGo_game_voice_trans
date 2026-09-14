@@ -25,6 +25,7 @@ from voxgo.audio.capture import AudioConfig
 from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateInfo
+from voxgo.ui.download_panels import LocalModelPanel, UpdateInstallPanel
 from voxgo.ui.config_models import (
     AudioDeviceConfig,
     DebugConfig,
@@ -96,19 +97,24 @@ class UpdatePromptDialog(QDialog):
         self._update = update
         self._current_version = current_version or APP_VERSION
         self._on_ignore = on_ignore
+        self._on_shutdown = getattr(parent, "_request_shutdown", None)
         self._init_ui()
 
     def _init_ui(self):
         layout = QVBoxLayout()
         message = QLabel(self._build_message())
+        self.message_label = message
         message.setWordWrap(True)
         message.setTextInteractionFlags(Qt.TextSelectableByMouse)
         layout.addWidget(message)
+        self.install_panel = UpdateInstallPanel(self._update, self._ui_language, self._on_shutdown, self)
+        layout.addWidget(self.install_panel)
 
         button_row = QHBoxLayout()
         open_button = QPushButton(_tr(self._ui_language, "打开下载页", "Open Downloads"))
         later_button = QPushButton(_tr(self._ui_language, "稍后提醒", "Later"))
         ignore_button = QPushButton(_tr(self._ui_language, "忽略此版本", "Ignore This Version"))
+        self.open_button, self.later_button, self.ignore_button = open_button, later_button, ignore_button
         open_button.clicked.connect(self._open_download_page)
         later_button.clicked.connect(self.close)
         ignore_button.clicked.connect(self._ignore_version)
@@ -120,8 +126,21 @@ class UpdatePromptDialog(QDialog):
         self.setLayout(layout)
         self.resize(460, 260)
 
+    def reject(self):
+        if not self.install_panel.busy:
+            self.install_panel.discard()
+            super().reject()
+
+    def closeEvent(self, event):
+        if self.install_panel.busy:
+            event.ignore()
+        else:
+            self.install_panel.discard()
+            super().closeEvent(event)
+
     def _build_message(self) -> str:
-        notes = "\n".join(f"- {note}" for note in self._update.notes)
+        localized = self._update.notes_en if is_english_ui(self._ui_language) else self._update.notes_zh
+        notes = "\n".join(f"- {note}" for note in (localized or self._update.notes))
         if not notes:
             notes = _tr(self._ui_language, "- 查看下载页面了解更新内容", "- Open the download page for details")
         if is_english_ui(self._ui_language):
@@ -348,6 +367,9 @@ class FirstRunWizard(QDialog):
         self.wizard_provider_combo.currentIndexChanged.connect(self._wizard_provider_changed)
         self.wizard_provider_label = QLabel()
         form.addRow(self.wizard_provider_label, self.wizard_provider_combo)
+        self.wizard_provider_hint = QLabel()
+        self.wizard_provider_hint.setWordWrap(True)
+        form.addRow(self.wizard_provider_hint)
 
         self.wizard_api_key_input = QLineEdit(self.translation_config.api_key)
         self.wizard_api_key_input.setEchoMode(QLineEdit.Password)
@@ -361,6 +383,8 @@ class FirstRunWizard(QDialog):
 
         self.wizard_endpoint_input = QLineEdit(self.translation_config.endpoint)
         self.wizard_endpoint_input.setPlaceholderText("https://api.siliconflow.cn/v1/chat/completions")
+        self.wizard_local_model_panel = LocalModelPanel(self.translation_config, self._ui_language, self)
+        form.addRow(self.wizard_local_model_panel)
         self.wizard_endpoint_label = QLabel()
         form.addRow(self.wizard_endpoint_label, self.wizard_endpoint_input)
 
@@ -532,13 +556,30 @@ class FirstRunWizard(QDialog):
     def _refresh_wizard_translation_provider_ui(self):
         provider = normalize_translation_provider(self.wizard_provider_combo.currentData())
         is_google = provider == "google"
+        is_local = provider == "local"
+        self.wizard_provider_hint.setText(_tr(self._ui_language,
+            "支持本地离线翻译；选择后可下载模型。",
+            "Offline translation is supported; select it to download the model."))
+        if is_local:
+            self.wizard_provider_hint.setText(_tr(self._ui_language,
+                "本地离线模式：无需网络或 API Key；首次下载约 317 MB，占用更多内存，游戏术语和复杂句质量可能弱于在线 API。",
+                "Offline mode: no network or API key; first download is about 317 MB, uses more memory, and may be weaker than online APIs on gaming slang and complex sentences."))
+        self.wizard_local_model_panel.setVisible(is_local)
+        self.wizard_local_model_panel.refresh_language(self._ui_language)
+        self.wizard_api_key_input.setEnabled(not is_local)
         self.wizard_api_key_input.setPlaceholderText(
             "Google Cloud Translation API Key"
             if is_google
             else _tr(self._ui_language, "OpenAI 兼容 API Key", "OpenAI-compatible API Key")
         )
-        self.wizard_model_input.setEnabled(not is_google)
-        self.wizard_endpoint_input.setEnabled(not is_google)
+        self.wizard_model_input.setEnabled(not is_google and not is_local)
+        self.wizard_endpoint_input.setEnabled(not is_google and not is_local)
+        self.wizard_translation_test_button.setText(_tr(self._ui_language, "测试翻译" if is_local else "测试 API Key", "Test Translation" if is_local else "Test API Key"))
+        self.wizard_translation_note.setText(_tr(
+            self._ui_language,
+            "下载本地模型后测试翻译，无需填写 API Key。" if is_local else "填写翻译服务信息并测试，确认可用后再进入游戏。",
+            "Download the local model, then test translation. No API key is needed." if is_local else "Configure and test your translation service before entering the game.",
+        ))
 
     def _fill_wizard_audio_devices(self):
         self.wizard_audio_device_combo.blockSignals(True)
@@ -627,7 +668,7 @@ class FirstRunWizard(QDialog):
         self.wizard_translation_test_label.setText(f"{prefix}{separator}{message}")
         _start_button_cooldown(
             self.wizard_translation_test_button,
-            _tr(self._ui_language, "测试 API Key", "Test API Key"),
+            _tr(self._ui_language, "测试翻译", "Test Translation") if self.translation_config.provider == "local" else _tr(self._ui_language, "测试 API Key", "Test API Key"),
         )
 
     def _go_back(self):

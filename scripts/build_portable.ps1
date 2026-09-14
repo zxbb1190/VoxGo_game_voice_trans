@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.4.1",
+    [string]$Version = "0.4.2",
     [switch]$SkipLite,
     [switch]$SkipFull,
     [switch]$SkipFullCuda,

@@ -190,6 +190,7 @@ class OverlaySettingsController:
             app.config.translation.api_key,
             app.config.translation.model,
             app.config.translation.endpoint,
+            app.config.translation.local_model,
         )
         current_whisper_device = normalize_whisper_device(app.config.whisper.device)
         if current_whisper_device != previous_whisper_device and current_whisper_device == "cuda":
@@ -236,6 +237,8 @@ class OverlaySettingsController:
                     "\n接口: Google Cloud Translation Basic v2",
                     "\nAPI: Google Cloud Translation Basic v2",
                 )
+            elif normalize_translation_provider(app.config.translation.provider) == "local":
+                detail += ui_text(current_ui_language, "\n本地中英双向翻译，无需 API Key", "\nLocal English-Chinese translation; no API key needed")
             else:
                 detail += ui_text(
                     current_ui_language,

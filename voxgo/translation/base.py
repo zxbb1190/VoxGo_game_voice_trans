@@ -10,6 +10,8 @@ import aiohttp
 @dataclass
 class TranslationConfig:
     provider: str = "openai_compatible"
+    local_model: str = "opus-mt-en-zh"
+    local_download_source: str = "modelscope"
     api_key: str = ""
     model: str = "tencent/Hunyuan-MT-7B"
     endpoint: str = "https://api.siliconflow.cn/v1/chat/completions"
@@ -56,6 +58,7 @@ class ProviderTestResult:
 TRANSLATION_PROVIDERS = {
     "openai_compatible": "OpenAI 兼容",
     "google": "Google Cloud Translation",
+    "local": "本地离线翻译 / Offline Translation",
 }
 LANGUAGE_ALIASES = {
     "en": "en",
@@ -351,4 +354,3 @@ class TranslatorProvider:
 
     def requires_api_key(self) -> bool:
         return True
-

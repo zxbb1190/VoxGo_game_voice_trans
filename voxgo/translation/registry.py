@@ -1,11 +1,13 @@
 from .base import TRANSLATION_PROVIDERS, normalize_translation_provider
 from .google import GoogleCloudProvider
+from .local import LocalTranslationProvider
 from .openai_compatible import OpenAICompatibleProvider
 
 
 PROVIDER_CLASSES = {
     "openai_compatible": OpenAICompatibleProvider,
     "google": GoogleCloudProvider,
+    "local": LocalTranslationProvider,
 }
 
 

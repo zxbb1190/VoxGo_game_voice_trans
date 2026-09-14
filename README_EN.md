@@ -72,9 +72,23 @@ If you use a portable Release package, unzip it and run `VoxGo.exe`. The current
 | Full | Bundled multilingual Whisper small/base models, no CUDA DLLs | CPU users with unstable model-download networks |
 | Full-CUDA / GPU | Bundled multilingual Whisper small/base models plus CUDA DLLs | NVIDIA users who want GPU recognition immediately |
 
+The offline translation model is not bundled into Lite, Full, or Full-CUDA by default. All three use the same explicit download from Settings. The bundle is about 317 MB and both directions use about 381 MiB working set, so users who stay online do not pay that download and memory cost. A separate Offline Bundle can be added later for air-gapped deployments.
+
 Lite and Full do not download CUDA DLLs at startup. CUDA is checked only when you explicitly select `NVIDIA GPU / CUDA` in settings. VoxGo detects the current GPU first: AMD/Intel users get a clear "GPU unavailable" notice and keep the previous device; NVIDIA users without bundled CUDA DLLs are prompted while VoxGo downloads the CUDA runtime from the current Release into the app folder, then GPU takes effect after restart.
 
 Full and Full-CUDA do not bundle the English-only `small.en` / `base.en` models. VoxGo downloads them on demand only after you enable the English Fast Path / Pure English environment, so users who do not need that path do not pay the extra package size.
+
+### Offline Translation
+
+Choose **本地离线翻译 / Offline Translation** in setup or Settings, download the approximately 317 MB model bundle, then click **Test Translation**. English ↔ Chinese translation works offline after preparation, needs no API key, and does not fall back to a cloud provider. Models live in `.translation-models` beside the app; **Verify / Repair Model** repairs damaged files. App updates preserve this directory. Whisper speech recognition models must be prepared separately (already bundled in Full).
+
+OPUS-MT models (Apache-2.0) run locally with CPU int8 inference and do not require a GPU. One isolated Windows measurement with both directions loaded used about 381 MiB working set and 1.2 GiB committed memory, excluding Whisper and the game. Gaming slang and context quality may be lower than cloud models.
+
+### Installing App Updates
+
+When an update appears, click **Download Update**, wait for SHA256 verification, then click **Install and Restart**. The updater waits for VoxGo to exit, replaces the application, preserves settings/models/CUDA runtime, and restarts. Failed replacement or detected startup failure triggers an attempt to restore the old installation. Source checkouts continue to use the download page.
+
+The old installation remains in a sibling `.backup-*` directory for recovery; remove it manually after confirming the new version works. Installation requires a writable application location and space for both versions. Version 0.4.2 cannot install updates itself: the first upgrade to a version supporting this feature remains manual.
 
 ### 2. Complete The First-Run Wizard
 The first launch opens the setup wizard before Whisper starts loading. Complete this loop:
@@ -346,3 +360,5 @@ Some games, anti-cheat systems, exclusive audio mode, remote streaming tools, DR
 This community edition is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).
 
 Closed-source commercial use, private custom distribution, or commercial edition licensing requires separate authorization.
+
+Offline game glossary rules cover combat, movement, armor/healing, grenades, loot and teamwork, with guarded phrase composition and embedded normalization. Questions, quotations and unmatched contexts remain model-driven. English→Chinese explicitly selects Simplified Mandarin. See the [52-case development comparison](docs/evaluations/game-glossary.md); it is not a general quality benchmark.
