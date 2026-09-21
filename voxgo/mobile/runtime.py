@@ -76,10 +76,11 @@ class MobileRuntime:
             logger.warning("手机端推送失败: {}", exc)
 
     def stop(self):
-        if not self.server or not self.loop or not self.loop.is_running():
-            return
-        try:
+        if self.server and self.loop and self.loop.is_running():
             future = asyncio.run_coroutine_threadsafe(self.server.stop_server(), self.loop)
             future.result(timeout=3)
-        except Exception as exc:
-            logger.warning("手机端服务停止失败: {}", exc)
+        if self.thread and self.thread.is_alive():
+            self.thread.join(timeout=3)
+            if self.thread.is_alive():
+                return False
+        return True

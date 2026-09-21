@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QLineEdit,
+    QMessageBox,
     QPushButton,
     QSizePolicy,
     QSlider,
@@ -61,6 +62,7 @@ class SettingsDialog(QDialog):
     """Graphical settings for overlay and hotkeys."""
 
     settings_changed = pyqtSignal(object, object, object, object, object, object, object)
+    model_recovery_requested = pyqtSignal(bool)
 
     def __init__(
         self,
@@ -115,6 +117,18 @@ class SettingsDialog(QDialog):
         self._fill_ui_languages()
         self.ui_language_combo.currentIndexChanged.connect(self._ui_language_changed)
         appearance_form.addRow("Language", self.ui_language_combo)
+        self.close_action_combo = QComboBox()
+        for label, value in [
+            (_tr(self._ui_language, "每次询问", "Ask every time"), "ask"),
+            (_tr(self._ui_language, "最小化到托盘", "Minimize to tray"), "minimize"),
+            (_tr(self._ui_language, "退出程序", "Quit VoxGo"), "quit"),
+        ]:
+            self.close_action_combo.addItem(label, value)
+        selected_close_action = self.app_config.close_action if self.app_config.close_action_remember else "ask"
+        self.close_action_combo.setCurrentIndex(max(0, self.close_action_combo.findData(selected_close_action)))
+        self.close_action_combo.currentIndexChanged.connect(self._close_action_changed)
+        self.close_action_label = QLabel(_tr(self._ui_language, "点击关闭按钮", "Close button"))
+        appearance_form.addRow(self.close_action_label, self.close_action_combo)
 
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setRange(30, 100)
@@ -264,6 +278,19 @@ class SettingsDialog(QDialog):
         self._fill_whisper_devices()
         self.whisper_device_combo.currentIndexChanged.connect(self._preview)
         audio_form.addRow(_tr(self._ui_language, "识别设备", "Recognition Device"), self.whisper_device_combo)
+
+        self.model_retry_button = QPushButton()
+        self.model_reset_button = QPushButton()
+        self.model_recovery_hint = QLabel()
+        self.model_recovery_hint.setWordWrap(True)
+        self.model_retry_button.clicked.connect(lambda: self._request_model_recovery(False))
+        self.model_reset_button.clicked.connect(lambda: self._request_model_recovery(True))
+        recovery_row = QHBoxLayout()
+        recovery_row.addWidget(self.model_retry_button)
+        recovery_row.addWidget(self.model_reset_button)
+        audio_form.addRow(recovery_row)
+        audio_form.addRow(self.model_recovery_hint)
+        self._refresh_model_recovery_text()
 
         self.pure_english_environment_check = QCheckBox(_tr(
             self._ui_language,
@@ -449,7 +476,46 @@ class SettingsDialog(QDialog):
         about_form.addRow(_tr(self._ui_language, "链接", "Links"), about_links_label)
 
         about_form.addRow(_tr(self._ui_language, "检查更新", "Updates"), update_row)
+        from voxgo.app_info import GITHUB_ISSUES_URL, KOOK_URL, DISCORD_URL
+        from urllib.parse import urlsplit
+        import webbrowser
+        feedback_form = self._make_settings_tab(tabs, _tr(self._ui_language, "帮助与反馈", "Help & Feedback"))
+        diagnostics_button = QPushButton(_tr(self._ui_language, "预览并复制诊断信息", "Preview and Copy Diagnostics"))
+        diagnostics_button.clicked.connect(self._open_feedback_dialog)
+        feedback_form.addRow(diagnostics_button)
+        self.feedback_link_buttons = {}
+        for name, url, domains in [
+            ('GitHub Issues', GITHUB_ISSUES_URL, {'github.com'}),
+            ('KOOK', KOOK_URL, {'kook.vip', 'www.kookapp.cn', 'kook.top'}),
+            ('Discord', DISCORD_URL, {'discord.gg', 'discord.com'}),
+        ]:
+            parsed = urlsplit(url)
+            if parsed.scheme != 'https' or parsed.hostname not in domains or parsed.username or parsed.password:
+                continue
+            button = QPushButton(name)
+            button.clicked.connect(lambda checked=False, target=url: webbrowser.open(target))
+            feedback_form.addRow(button)
+            self.feedback_link_buttons[name] = button
         layout.addWidget(tabs, 1)
+        from voxgo.analytics.consent import CONSENT_VERSION, telemetry_title, telemetry_summary
+        privacy_form = self._make_settings_tab(tabs, _tr(self._ui_language, '隐私', 'Privacy'))
+        self.privacy_title = QLabel(telemetry_title(is_english_ui(self._ui_language)))
+        title_font = self.privacy_title.font()
+        title_font.setBold(True)
+        self.privacy_title.setFont(title_font)
+        privacy_form.addRow(self.privacy_title)
+        privacy_notice = QLabel(telemetry_summary(is_english_ui(self._ui_language)))
+        privacy_notice.setWordWrap(True)
+        privacy_notice.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        privacy_form.addRow(privacy_notice)
+        self.telemetry_consent_check = QCheckBox(_tr(self._ui_language,
+            '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
+        self.telemetry_consent_check.setChecked(
+            self.app_config.telemetry_consent == 'allowed'
+            and self.app_config.telemetry_consent_version == CONSENT_VERSION)
+        self.telemetry_consent_check.clicked.connect(self._change_telemetry_consent)
+        privacy_form.addRow(self.telemetry_consent_check)
+        self.privacy_notice = privacy_notice
 
         action_row = QHBoxLayout()
         feedback_button = QPushButton(_tr(self._ui_language, "提交反馈", "Submit Feedback"))
@@ -475,6 +541,31 @@ class SettingsDialog(QDialog):
         tabs.addTab(page, title)
         return form
 
+    def _close_action_changed(self):
+        self.app_config.close_action = self.close_action_combo.currentData()
+        self.app_config.close_action_remember = self.app_config.close_action != "ask"
+
+    def _change_telemetry_consent(self, allowed):
+        from PyQt5.QtWidgets import QMessageBox
+        from voxgo.analytics.consent import CONSENT_VERSION
+        from voxgo.ui.telemetry_consent import confirm_telemetry
+        if allowed:
+            answer = confirm_telemetry(self, is_english_ui(self._ui_language))
+            if answer != QMessageBox.Yes:
+                self.telemetry_consent_check.setChecked(False)
+                return
+        import uuid
+        if allowed and (self.app_config.telemetry_consent != 'allowed'
+                        or self.app_config.telemetry_consent_version != CONSENT_VERSION
+                        or not self.app_config.telemetry_epoch):
+            self.app_config.telemetry_epoch = str(uuid.uuid4())
+        elif not allowed:
+            self.app_config.telemetry_epoch = ''
+        self.app_config.telemetry_consent = 'allowed' if allowed else 'denied'
+        self.app_config.telemetry_consent_version = CONSENT_VERSION
+        self.app_config._telemetry_consent_changed = True
+        self._preview()
+
     def _fill_ui_languages(self):
         self.ui_language_combo.blockSignals(True)
         self.ui_language_combo.clear()
@@ -490,8 +581,19 @@ class SettingsDialog(QDialog):
     def _ui_language_changed(self, *args):
         self.app_config.language = normalize_ui_language(self.ui_language_combo.currentData())
         self._ui_language = self.app_config.language
+        if hasattr(self, 'privacy_notice'):
+            from voxgo.analytics.consent import telemetry_title, telemetry_summary
+            self.privacy_title.setText(telemetry_title(is_english_ui(self._ui_language)))
+            self.privacy_notice.setText(telemetry_summary(is_english_ui(self._ui_language)))
+            self.telemetry_consent_check.setText(_tr(self._ui_language,
+                '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
+        if hasattr(self, "close_action_combo"):
+            self.close_action_label.setText(_tr(self._ui_language, "点击关闭按钮", "Close button"))
+            for index, (zh, en) in enumerate([("每次询问", "Ask every time"), ("最小化到托盘", "Minimize to tray"), ("退出程序", "Quit VoxGo")]):
+                self.close_action_combo.setItemText(index, _tr(self._ui_language, zh, en))
         if hasattr(self, "audio_test_panel"):
             self.audio_test_panel.set_ui_language(self._ui_language)
+        self._refresh_model_recovery_text()
         self._fill_whisper_devices()
         self._fill_model_download_sources()
         self._fill_latency_modes()
@@ -906,6 +1008,33 @@ class SettingsDialog(QDialog):
             selected_device,
             self._ui_language,
         )
+
+    def _refresh_model_recovery_text(self):
+        self.model_retry_button.setText(_tr(self._ui_language, "重试加载识别模型", "Retry Model Load"))
+        self.model_reset_button.setText(_tr(self._ui_language, "重置识别模型并重新下载", "Reset Model and Download Again"))
+        self.model_recovery_hint.setText(_tr(
+            self._ui_language,
+            "模型下载或加载失败时，可先调整下载源或识别设备，再重试。若缓存损坏，可重置模型并重新下载。此操作用于加载失败后的恢复；加载中或正在使用的模型不会被重置。",
+            "If model download or loading fails, adjust the download source or recognition device and retry. Reset a damaged model cache to download again. Recovery is available after loading fails; models loading or in use cannot be reset.",
+        ))
+
+    def _request_model_recovery(self, reset: bool):
+        if reset:
+            answer = QMessageBox.question(
+                self,
+                _tr(self._ui_language, "重置识别模型", "Reset Recognition Model"),
+                _tr(
+                    self._ui_language,
+                    "将仅删除当前选用的 Whisper 官方模型缓存，并重新下载模型。不会删除 API 配置、其他设置或自定义模型。\n\n下载需要网络连接，可能耗时较长。是否继续？",
+                    "Only the selected official Whisper model cache will be deleted and downloaded again. API configuration, other settings, and custom models will not be deleted.\n\nDownloading requires an internet connection and may take a while. Continue?",
+                ),
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No,
+            )
+            if answer != QMessageBox.Yes:
+                return
+        self._preview()
+        self.model_recovery_requested.emit(bool(reset))
 
     def _preview(self, *args):
         self._collect_values()

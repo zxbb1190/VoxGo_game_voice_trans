@@ -17,8 +17,13 @@ safe_config.write_text(
     (root / "config.example.json").read_text(encoding="utf-8"),
     encoding="utf-8",
 )
+package_info = safe_config.parent / "package-info.json"
+package_info.write_text(json.dumps({
+    "package_type": "full-cuda" if include_cuda_runtime else "full" if include_model else "lite"
+}), encoding="utf-8")
 
 datas = [
+    (str(package_info), "."),
     (str(safe_config), "."),
     (str(root / "assets" / "voxgo.ico"), "assets"),
     (str(root / "voxgo" / "mobile" / "static"), "voxgo/mobile/static"),

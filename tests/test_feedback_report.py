@@ -14,6 +14,22 @@ from voxgo.ui.config_models import _build_feedback_report
 
 
 class FeedbackReportTest(unittest.TestCase):
+    def test_diagnostics_exclude_private_config_and_runtime_strings(self):
+        secret = 'PRIVATE_SENTINEL'
+        for language in (UI_LANGUAGE_EN, UI_LANGUAGE_ZH):
+            report = _build_feedback_report(
+                TranslationConfig(api_key=secret, model=secret,
+                                  endpoint='https://user:' + secret + '@private.invalid/v1'),
+                WhisperConfig(device='cpu'), DebugConfig(), '0.4.3',
+                'C:/Users/' + secret,
+                {'whisper_model_size': secret, 'candidate_labels': secret,
+                 'recognition_ms': secret, 'whisper_compute_type': secret},
+                secret, language)
+            self.assertNotIn(secret, report)
+            self.assertNotIn('private.invalid', report)
+            self.assertNotIn('C:/Users', report)
+            self.assertNotIn('app.log', report)
+
     def test_feedback_report_includes_recognition_runtime_metadata_in_chinese(self):
         report = _build_feedback_report(
             TranslationConfig(provider="openai_compatible", model="model-a", endpoint="https://example.com/v1"),

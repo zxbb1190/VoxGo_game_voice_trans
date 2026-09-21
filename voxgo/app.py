@@ -4,6 +4,7 @@
 """
 
 import argparse
+import os
 import signal
 import sys
 import threading
@@ -133,6 +134,10 @@ class VoxGoApp:
         self._running = False
         self._paused = False
         self._stopping = False
+        self._shutdown_state = "idle"
+        self._shutdown_thread = None
+        self._shutdown_timer = None
+        self._shutdown_errors = []
         self._translation_item_seq = 0
         self._hotkeys = HotkeyManager(self._notify_user)
         self._pending_notices = []
@@ -208,6 +213,19 @@ class VoxGoApp:
 
     def _load_config(self, config_path: str = None) -> AppConfig:
         return load_app_config(config_path, self._runtime_dir())
+
+    def _analytics_call(self, method, *args):
+        try:
+            analytics = getattr(self, '_analytics', None)
+            if analytics:
+                getattr(analytics, method)(*args)
+        except Exception:
+            pass
+
+    def _sync_analytics_activity(self):
+        self._analytics_call('set_active',
+            bool(getattr(self, '_running', False) and not self._paused and not getattr(self, '_stopping', False)),
+            'offline' if getattr(getattr(self.config, 'translation', None), 'provider', '') == 'local' else 'api')
 
     def _migrate_runtime_defaults(self, config: AppConfig, preserve_existing_audio_tuning: bool = True):
         migrate_runtime_defaults(config, preserve_existing_audio_tuning=preserve_existing_audio_tuning)
@@ -441,9 +459,14 @@ class VoxGoApp:
             self._pending_notices.append((original, message))
 
     def _handle_transcript_ready(self, event: TranscriptReady):
+        if self._stopping:
+            return
         self._stats["transcriptions"] += 1
         self._speech_pipeline.remember_transcript(event.text)
         trace = self._latency_traces.get(event.trace_id)
+        if trace and trace.transcription_started_at and trace.transcription_finished_at:
+            self._analytics_call('observe', 'asr',
+                (trace.transcription_finished_at - trace.transcription_started_at) * 1000)
         language_probability = getattr(event, "language_probability", 0.0)
         event_revision = int(getattr(event, "language_revision", 0) or 0)
         source_lang = getattr(event, "source_lang", "") or getattr(self.config.translation, "source_lang", "")
@@ -511,6 +534,8 @@ class VoxGoApp:
         )
 
     def _handle_translation_ready(self, event: TranslationReady):
+        if self._stopping:
+            return
         event_revision = int(getattr(event, "language_revision", 0) or 0)
         if event_revision and event_revision != self._language_flow_revision:
             self._latency_traces.pop(event.trace_id, None)
@@ -755,7 +780,10 @@ class VoxGoApp:
             self._notify_user("翻译历史", "已清空", "状态")
 
     def _toggle_translation(self):
+        if getattr(self, "_stopping", False):
+            return
         self._paused = not self._paused
+        self._sync_analytics_activity()
         audio_blocks, speech_items = self._clear_realtime_buffers(
             "translation_paused" if self._paused else "translation_resumed"
         )
@@ -855,12 +883,25 @@ class VoxGoApp:
             on_shutdown_requested=self._request_shutdown,
             on_overlay_updated=self._on_overlay_updated,
         )
+        self._overlay.model_recovery_requested.connect(self._request_model_recovery)
+        self._overlay._on_close_requested = self._request_window_close
         self._overlay.show()
         self._setup_tray_icon(QSystemTrayIcon, QMenu)
+        self._tray_retry_timer = QTimer(self._qt_app)
+        self._tray_retry_timer.timeout.connect(self._retry_tray_icon)
+        self._tray_retry_timer.start(5000)
         self._flush_pending_notices()
         QTimer.singleShot(300, self._refresh_overlay_audio_devices)
         QTimer.singleShot(1200, lambda: self._request_update_check(manual=False))
         logger.info("浮窗已启动")
+
+    def _retry_tray_icon(self):
+        from PyQt5.QtWidgets import QSystemTrayIcon, QMenu
+        if getattr(self, "_shutdown_state", "idle") == "complete":
+            return
+        if QSystemTrayIcon.isSystemTrayAvailable():
+            self._tray.setup(QSystemTrayIcon, QMenu, self._qt_app,
+                             getattr(self, "_app_icon", None), self._overlay)
 
     def _setup_tray_icon(self, tray_cls=None, menu_cls=None):
         if tray_cls is None or menu_cls is None:
@@ -947,11 +988,215 @@ class VoxGoApp:
         )
         self._start_backend_thread()
 
-    def _request_shutdown(self):
-        logger.info("收到退出按钮请求")
+    def _request_shutdown(self, *args, **kwargs):
+        """Gate work immediately; keep Qt responsive while services are stopped."""
+        if getattr(self, "_shutdown_state", "idle") in ("stopping", "complete") or (getattr(self, "_shutdown_thread", None) and self._shutdown_thread.is_alive()):
+            return
+        self._stopping = True
+        self._paused = True
+        self._running = False
+        self._shutdown_state = "stopping"
+        self._analytics_call('stop')
+        self._shutdown_errors = []
+        self._shutdown_started_at = time.monotonic()
+        self._translation.begin_shutdown()
+        if self._audio_timer:
+            self._audio_timer.stop()
+        if self._overlay:
+            self._overlay.set_paused(True)
+            try:
+                monitors = self._overlay.prepare_shutdown()
+                self._shutdown_monitors = getattr(self, "_shutdown_monitors", []) + monitors
+            except Exception:
+                logger.exception("Could not prepare all shutdown UI controls")
+        self._sync_tray_state()
+        from PyQt5.QtCore import QTimer
+        if not getattr(self, "_shutdown_timer", None):
+            self._shutdown_timer = QTimer(self._qt_app)
+            self._shutdown_timer.timeout.connect(self._poll_shutdown)
+        self._shutdown_thread = threading.Thread(
+            target=self._cleanup_services, name="shutdown-cleanup", daemon=True,
+        )
+        self._shutdown_thread.start()
+        self._shutdown_timer.start(100)
+
+    def _cleanup_services(self):
+        """Worker-only resource cleanup. Never manipulate Qt objects here."""
+        errors = []
+        def attempt(name, callback):
+            try:
+                result = callback()
+                if result is False:
+                    raise RuntimeError("service is still running")
+                return True
+            except Exception as exc:
+                errors.append(f"{name}: {exc}")
+                logger.warning("Shutdown cleanup failed for {}: {}", name, exc)
+                return False
+        attempt("audio", self._audio.stop)
+        monitors_remaining = []
+        for monitor in getattr(self, "_shutdown_monitors", []):
+            if not attempt("audio test", monitor.stop):
+                monitors_remaining.append(monitor)
+        self._shutdown_monitors = monitors_remaining
+        speech_stopped = attempt("speech", self._stop_speech_worker)
+        attempt("hotkeys", self._remove_hotkeys)
+        attempt("mobile", self._mobile.stop)
+        startup = self._startup_thread
+        if startup and startup.is_alive():
+            startup.join(timeout=3)
+        startup_done = not (startup and startup.is_alive())
+        if not startup_done:
+            errors.append("Startup is still loading; retry after it finishes")
+        if self._speech_recognizer and speech_stopped and startup_done:
+            attempt("recognizer", self._speech_recognizer.cleanup)
+        attempt("translation", lambda: self._translation.close(cleanup_allowed=startup_done))
+        # Native inference cannot be cancelled mid-call. Keep the recovery UI
+        # alive until its executor exits, instead of leaving an invisible process.
+        local_module = sys.modules.get("voxgo.translation.local")
+        if local_module:
+            attempt("local translation", local_module.shutdown_local_translation)
+        main_thread = threading.main_thread()
+        current_thread = threading.current_thread()
+        remaining = [thread.name for thread in threading.enumerate()
+                     if thread is not main_thread and thread is not current_thread
+                     and not thread.daemon and thread.is_alive()]
+        if remaining:
+            errors.append("Background threads still running: " + ", ".join(remaining))
+        self._shutdown_errors = errors
+
+    def _poll_shutdown(self):
+        if self._shutdown_thread and self._shutdown_thread.is_alive():
+            if time.monotonic() - self._shutdown_started_at > 20 and self._shutdown_state != "failed":
+                self._shutdown_state = "failed"
+                self._sync_tray_state()
+                self._notify_user("VoxGo", ui_text(self._ui_language(),
+                    "退出超时，翻译已暂停。可从托盘强制退出。",
+                    "Shutdown timed out. Translation is paused. You can force quit from the tray."))
+                self._show_shutdown_recovery()
+            return
+        self._shutdown_timer.stop()
+        if self._shutdown_errors:
+            self._shutdown_state = "failed"
+            self._sync_tray_state()
+            self._notify_user("VoxGo", ui_text(self._ui_language(),
+                "退出未完成，翻译已暂停。请从托盘重试退出。",
+                "Shutdown is incomplete. Translation is paused. Please retry quitting from the tray."))
+            if self._overlay:
+                self._overlay.show()
+            self._show_shutdown_recovery()
+            return
+        self._shutdown_state = "complete"
+        if self._overlay:
+            self._overlay._allow_close = True
+            self._overlay.close()
         self._tray.hide()
         if self._qt_app:
             self._qt_app.quit()
+
+    def _show_shutdown_recovery(self):
+        from PyQt5.QtWidgets import QMessageBox
+        if self._overlay:
+            self._overlay.show()
+            self._overlay.raise_()
+        existing = getattr(self, "_shutdown_dialog", None)
+        if existing and existing.isVisible():
+            existing.raise_()
+            return
+        box = QMessageBox(self._overlay)
+        box.setWindowTitle(ui_text(self._ui_language(), "退出未完成", "Shutdown incomplete"))
+        box.setText(ui_text(self._ui_language(),
+            "翻译已暂停，尚有后台资源未释放。可以稍后重试，或强制退出当前 VoxGo。",
+            "Translation is paused, but some background resources have not stopped. Retry later or force quit this VoxGo process."))
+        retry = box.addButton(ui_text(self._ui_language(), "重试退出", "Retry quit"), QMessageBox.AcceptRole)
+        force = box.addButton(ui_text(self._ui_language(), "强制退出", "Force quit"), QMessageBox.DestructiveRole)
+        box.addButton(QMessageBox.Cancel)
+        def chosen(button):
+            if button is retry:
+                from PyQt5.QtCore import QTimer
+                QTimer.singleShot(0, self._request_shutdown)
+            elif button is force:
+                from PyQt5.QtCore import QTimer
+                QTimer.singleShot(0, self._force_shutdown)
+        box.buttonClicked.connect(chosen)
+        self._shutdown_dialog = box
+        box.show()
+
+    def _force_shutdown(self, *args):
+        from PyQt5.QtWidgets import QMessageBox
+        answer = QMessageBox.question(self._overlay, "VoxGo", ui_text(self._ui_language(),
+            "强制退出当前 VoxGo 进程？尚未保存的内容可能丢失。",
+            "Force quit this VoxGo process? Unsaved changes may be lost."),
+            QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if answer == QMessageBox.Yes:
+            self._stopping = True
+            self._paused = True
+            self._running = False
+            self._translation.begin_shutdown()
+            os._exit(1)
+
+    def _request_window_close(self):
+        state = getattr(self, "_shutdown_state", "idle")
+        if state == "failed":
+            self._show_shutdown_recovery()
+        elif state == "idle" and self._confirm_close_action():
+            self._request_shutdown()
+
+    def _minimize_to_tray(self):
+        from PyQt5.QtWidgets import QSystemTrayIcon, QMessageBox
+        self._setup_tray_icon()
+        icon = self._tray.icon
+        if not QSystemTrayIcon.isSystemTrayAvailable() or not icon or not icon.isVisible():
+            QMessageBox.warning(self._overlay, APP_NAME, ui_text(self._ui_language(),
+                "系统托盘不可用，浮窗将保持显示。请稍后重试或选择退出程序。",
+                "The system tray is unavailable. The overlay will stay visible. Retry later or choose Quit."))
+            return False
+        self._overlay.hide()
+        if hasattr(self._overlay, "_qr_popup"):
+            self._overlay._qr_popup.hide()
+        self._sync_tray_state()
+        self._tray.show_restore_hint()
+        return True
+
+    def _confirm_close_action(self):
+        """Ask whether the overlay close button should hide or quit."""
+        try:
+            from PyQt5.QtWidgets import QMessageBox, QCheckBox
+            remember = getattr(self.config.app, "close_action_remember", False)
+            action = getattr(self.config.app, "close_action", "ask")
+            if remember and action in ("minimize", "quit"):
+                if action == "minimize":
+                    self._minimize_to_tray()
+                    return False
+                return True
+            box = QMessageBox(self._overlay)
+            box.setWindowTitle(ui_text(self._ui_language(), "关闭 VoxGo", "Close VoxGo"))
+            box.setText(ui_text(self._ui_language(), "关闭按钮要执行什么操作？", "What should the close button do?"))
+            box.setInformativeText(ui_text(self._ui_language(),
+                "最小化后翻译保持当前状态，可在浮窗扫码用手机查看结果。退出会先停止翻译。可在设置中修改关闭行为。",
+                "Minimizing keeps the current translation state. Scan the overlay QR code to view results on your phone. Quitting stops translation first. Change this choice in Settings."))
+            minimize = box.addButton(ui_text(self._ui_language(), "最小化到托盘", "Minimize to tray"), QMessageBox.AcceptRole)
+            quit_button = box.addButton(ui_text(self._ui_language(), "退出程序", "Quit VoxGo"), QMessageBox.DestructiveRole)
+            cancel = box.addButton(QMessageBox.Cancel)
+            box.setEscapeButton(cancel)
+            checkbox = QCheckBox(ui_text(self._ui_language(), "以后不再提示", "Remember my choice"), box)
+            box.setCheckBox(checkbox)
+            box.exec_()
+            if box.clickedButton() not in (minimize, quit_button):
+                return False
+            chosen = "minimize" if box.clickedButton() is minimize else "quit"
+            if chosen == "minimize" and not self._minimize_to_tray():
+                return False
+            if checkbox.isChecked():
+                self.config.app.close_action = chosen
+                self.config.app.close_action_remember = True
+                self._save_user_settings()
+            if chosen == "minimize":
+                return False
+            return True
+        except Exception as exc:
+            logger.exception("关闭确认失败，保留浮窗: {}", exc)
+            return False
 
     def _apply_overlay_settings(
         self,
@@ -963,6 +1208,8 @@ class VoxGoApp:
         app_config: RuntimeConfig,
         update_config: UpdateSettings,
     ):
+        if self._stopping:
+            return
         self._settings_controller.apply(
             overlay_config,
             hotkey_config,
@@ -977,6 +1224,8 @@ class VoxGoApp:
         self._mobile.start(self.config.websocket)
 
     def _start_backend_thread(self):
+        if self._stopping:
+            return
         if self._startup_thread and self._startup_thread.is_alive():
             return
         self._startup_thread = threading.Thread(
@@ -996,6 +1245,12 @@ class VoxGoApp:
                 self._notify_model_download_progress,
                 self._notify_recognition_device_fallback,
             )
+            if getattr(self, '_reset_whisper_cache', False):
+                self._reset_whisper_cache = False
+                from voxgo.asr.model_recovery import reset_model_cache
+                reset_model_cache(self._speech_recognizer._model_dir,
+                                  self._speech_recognizer._effective_model_size())
+                self.config.whisper.local_files_only = False
             self._translation.initialize(self.config.translation)
             self._speech_recognizer.initialize()
             if self._stopping:
@@ -1014,8 +1269,8 @@ class VoxGoApp:
         if self._stopping or self._running:
             return
         self._setup_hotkeys()
-        signal.signal(signal.SIGINT, lambda s, f: self.stop())
-        signal.signal(signal.SIGTERM, lambda s, f: self.stop())
+        signal.signal(signal.SIGINT, lambda s, f: self._request_shutdown())
+        signal.signal(signal.SIGTERM, lambda s, f: self._request_shutdown())
 
         self._running = True
         self._start_speech_worker()
@@ -1046,13 +1301,39 @@ class VoxGoApp:
     def _handle_backend_startup_failure(self, message: str):
         if self._stopping:
             return
-        self._notify_user("启动失败", message, "错误")
-        self._show_error_dialog(
-            f"{APP_NAME} 启动失败",
-            f"程序启动失败，已在程序目录生成 crash_report.txt。\n\n{message}",
-        )
-        if self._qt_app:
-            self._qt_app.quit()
+        self._backend_ready = False
+        self._running = False
+        language = self._ui_language()
+        title = ui_text(language, "语音服务暂不可用", "Speech service unavailable")
+        detail = ui_text(language,
+            "模型下载或加载失败，程序将保持运行。\n"
+            "请打开设置 → 语音识别，检查网络、下载源和可用磁盘空间，选择重试加载。\n"
+            "若仍失败，可选择重置模型缓存并重新下载，或换用较小模型 / CPU。\n"
+            "其他设置和已下载的翻译模型不会被重置。\n\n",
+            "Model download or loading failed. VoxGo will stay open.\n"
+            "Open Settings → Speech Recognition, check network, download source and free disk space, "
+            "then retry loading. Reset the model cache and download again if needed, "
+            "or choose a smaller model / CPU. Other settings and translation models are preserved.\n\n")
+        self._notify_user(title, detail + message, "错误")
+        self._show_error_dialog(title, detail + message)
+
+    def _request_model_recovery(self, reset=False):
+        if self._stopping:
+            return
+        if self._startup_thread and self._startup_thread.is_alive():
+            self._notify_user(ui_text(self._ui_language(), "模型恢复", "Model recovery"), ui_text(self._ui_language(), "模型正在加载或下载，请等待当前任务完成。", "Model loading or downloading is in progress. Please wait."), "状态")
+            return
+        if self._running or self._backend_ready:
+            self._notify_user(ui_text(self._ui_language(), "模型恢复", "Model recovery"), ui_text(self._ui_language(), "模型正在使用中。请退出后重新启动；若加载失败，可在设置中重试或重置缓存。", "The model is in use. Restart VoxGo; if loading fails, retry or reset the cache in Settings."), "状态")
+            return
+        if self._speech_recognizer:
+            try:
+                self._speech_recognizer.cleanup()
+            except Exception:
+                self._notify_user(ui_text(self._ui_language(), "模型恢复", "Model recovery"), ui_text(self._ui_language(), "无法释放模型，请退出程序后重试。", "Could not release the model. Exit VoxGo and retry."), "错误")
+                return
+        self._reset_whisper_cache = bool(reset)
+        self._start_backend_thread()
 
     def _start_audio_capture(self, notice_title: str = "音频捕获已启动", reuse_noise_gate: bool = False):
         self._audio.start(notice_title, reuse_noise_gate=reuse_noise_gate)
@@ -1146,13 +1427,21 @@ class VoxGoApp:
         self._mobile.broadcast_translation(original, translated)
 
     def _process_audio_tick(self):
+        self._sync_analytics_activity()
         self._audio.process_tick(self._running, self._paused)
 
     def _print_banner(self):
         print_startup_banner(self.config, self._mobile.get_mobile_url())
 
     def start(self):
+        try:
+            from voxgo.analytics.client import AuthorizedAnalytics
+            self._analytics = AuthorizedAnalytics(self._runtime_dir(), APP_VERSION, lambda: self.config.app)
+            self._translation.analytics = self._analytics
+        except Exception:
+            self._analytics = None
         logger.info("正在启动...")
+        normal_exit = False
         try:
             self._start_mobile()
             self._start_qt()
@@ -1173,8 +1462,9 @@ class VoxGoApp:
                     self._overlay.show_first_run_wizard(self._start_backend_after_setup)
 
             self._qt_app.exec_()
+            normal_exit = True
         except KeyboardInterrupt:
-            pass
+            normal_exit = True
         except Exception as e:
             self._write_crash_report("启动失败", e)
             logger.exception(f"启动失败: {e}")
@@ -1185,37 +1475,28 @@ class VoxGoApp:
             )
         finally:
             self.stop()
+            if normal_exit and getattr(self, '_shutdown_state', None) == 'complete':
+                self._analytics_call('mark_clean_exit')
 
     def stop(self):
-        if self._stopping:
+        """Synchronous fallback after Qt has ended (normal UI exit is asynchronous)."""
+        self._analytics_call('stop')
+        if getattr(self, "_shutdown_state", "idle") == "complete":
+            return
+        worker = getattr(self, "_shutdown_thread", None)
+        if worker and worker.is_alive():
             return
         self._stopping = True
-        logger.info("正在停止...")
+        self._paused = True
         self._running = False
+        self._translation.begin_shutdown()
         if self._audio_timer:
             self._audio_timer.stop()
-        self._audio.stop()
-        speech_worker_stopped = self._stop_speech_worker()
-        self._remove_hotkeys()
-        startup_in_progress = self._startup_thread and self._startup_thread.is_alive()
-        if startup_in_progress:
-            logger.warning("后台启动仍在进行，跳过模型清理以避免资源释放冲突")
-        if self._speech_recognizer and speech_worker_stopped and not startup_in_progress:
-            self._speech_recognizer.cleanup()
-        self._mobile.stop()
-        self._translation.close(cleanup_allowed=speech_worker_stopped and not startup_in_progress)
-        if self._overlay:
-            self._overlay.close()
-        self._tray.hide()
-        if self._qt_app:
-            self._qt_app.quit()
-
-        if sys.stdout is not None:
-            print(f"\n翻译统计: 识别 {self._stats['transcriptions']} 条, "
-                  f"翻译 {self._stats['translations']} 条, "
-                  f"跳过 {self._stats.get('skipped_translations', 0)} 条, "
-                  f"过滤 {self._stats['filtered_speech']} 段, 错误 {self._stats['errors']} 次")
-        logger.info("已停止")
+        self._cleanup_services()
+        self._shutdown_state = "failed" if self._shutdown_errors else "complete"
+        if self._shutdown_state == "complete":
+            self._tray.hide()
+        logger.info("Shutdown finished: {}", self._shutdown_state)
 
 
 def _parse_args(argv=None):

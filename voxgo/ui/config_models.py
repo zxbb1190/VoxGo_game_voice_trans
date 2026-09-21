@@ -114,10 +114,17 @@ def _hotkey_label_for_ui(value: str, ui_language: str) -> str:
 
 
 def _copy_runtime_config(config):
-    return RuntimeConfig(
+    copied = RuntimeConfig(
         setup_completed=bool(getattr(config, "setup_completed", False)),
         language=normalize_ui_language(getattr(config, "language", UI_LANGUAGE_ZH)),
+        close_action=getattr(config, "close_action", "ask"),
+        close_action_remember=bool(getattr(config, "close_action_remember", False)),
+        telemetry_consent=getattr(config, 'telemetry_consent', 'unknown'),
+        telemetry_consent_version=getattr(config, 'telemetry_consent_version', 0),
+        telemetry_epoch=getattr(config, 'telemetry_epoch', ''),
     )
+    copied._telemetry_consent_changed = bool(getattr(config, '_telemetry_consent_changed', False))
+    return copied
 
 
 def _start_button_cooldown(button: QPushButton, idle_text: str, seconds: int = TRANSLATION_TEST_COOLDOWN_SECONDS):
@@ -287,6 +294,11 @@ class WhisperDeviceConfig:
 class RuntimeConfig:
     setup_completed: bool = False
     language: str = UI_LANGUAGE_ZH
+    close_action: str = "ask"
+    close_action_remember: bool = False
+    telemetry_consent: str = 'unknown'
+    telemetry_consent_version: int = 0
+    telemetry_epoch: str = ''
 
 
 @dataclass
@@ -422,8 +434,31 @@ def _build_feedback_report(
 ) -> str:
     provider = normalize_translation_provider(getattr(translation_config, "provider", "openai_compatible"))
     provider_label = TRANSLATION_PROVIDERS.get(provider, provider)
-    latency = last_latency_summary or {}
-    log_dir = runtime_dir or "."
+    # Build from known diagnostic fields, never arbitrary config/log strings.
+    source = last_latency_summary or {}
+    latency = {}
+    for key in ('wait_ms', 'recognition_ms', 'translation_ms', 'overlay_ms', 'total_ms',
+                'segment_voice_ms', 'segment_total_ms', 'whisper_cpu_threads'):
+        value = source.get(key, 0)
+        latency[key] = value if type(value) is int and 0 <= value <= 3600000 else 0
+    for key, allowed in {
+        'latency_mode': {'fast', 'balanced', 'accurate', 'custom'},
+        'whisper_model_size': {'tiny', 'tiny.en', 'base', 'base.en', 'small', 'small.en', 'medium', 'medium.en', 'large', 'large-v2', 'large-v3', 'turbo'},
+        'whisper_device': {'cpu', 'cuda', 'auto'},
+        'whisper_compute_type': {'auto', 'int8', 'float16', 'float32', 'int8_float16'},
+    }.items():
+        value = source.get(key, '')
+        latency[key] = value if isinstance(value, str) and value in allowed else 'unknown'
+    labels = str(source.get('candidate_labels', '')).split(',')
+    latency['candidate_labels'] = ','.join(label for label in labels
+        if label in {'candidate', 'short_segment', 'low_confidence'})
+    for key in ('fast_path_allowed', 'fast_path_ready'):
+        latency[key] = source.get(key) is True
+    model = 'OPUS-MT en/zh' if provider == 'local' else 'custom / not shared'
+    device = getattr(whisper_config, 'device', 'unknown')
+    device = device if device in ('cpu', 'cuda', 'auto') else 'unknown'
+    import re
+    app_version = app_version if re.fullmatch(r'\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?', app_version or '') else APP_VERSION
     if is_english_ui(ui_language):
         return "\n".join([
             "## VoxGo Feedback",
@@ -431,16 +466,14 @@ def _build_feedback_report(
             "### Basic Info",
             f"- VoxGo version: {app_version or APP_VERSION}",
             "- Package: Lite / Full (keep the one you used)",
-            f"- Windows version: {platform.platform()}",
+            f"- Windows version: {platform.win32_ver()[0]} {platform.win32_ver()[1]}",
             "- Game:",
             "- Bluetooth headset: yes / no",
             "",
             "### Current Settings",
-            f"- Audio device: {selected_audio_device or 'Auto select'}",
             f"- Translation provider: {provider_label}",
-            f"- Model: {getattr(translation_config, 'model', '')}",
-            f"- Endpoint: {getattr(translation_config, 'endpoint', '')}",
-            f"- Recognition device: {getattr(whisper_config, 'device', 'cpu')}",
+            f"- Model: {model}",
+            f"- Recognition device (configured): {device}",
             f"- Debug mode: {'on' if getattr(debug_config, 'enabled', False) else 'off'}",
             "",
             "### Latest Latency",
@@ -452,9 +485,7 @@ def _build_feedback_report(
             "",
             *_recognition_runtime_lines(latency, ui_language),
             "",
-            "### Log Files",
-            f"- app.log: {log_dir}/app.log",
-            f"- crash_report.txt: {log_dir}/crash_report.txt",
+            "- Tray / shutdown / recent error code: not recorded",
             "",
             "### Problem Type",
             "- Startup failed / no sound / sound but no subtitles / inaccurate recognition / slow translation / mobile mirror failed / other",
@@ -474,16 +505,14 @@ def _build_feedback_report(
         "### 基本信息",
         f"- VoxGo 版本：{app_version or APP_VERSION}",
         "- 包类型：Lite / Full（请保留实际使用的一项）",
-        f"- Windows 版本：{platform.platform()}",
+        f"- Windows 版本：{platform.win32_ver()[0]} {platform.win32_ver()[1]}",
         "- 游戏名：",
         "- 是否使用蓝牙耳机：是 / 否",
         "",
         "### 当前配置",
-        f"- 音频设备：{selected_audio_device or '自动选择'}",
         f"- 翻译服务：{provider_label}",
-        f"- 模型名：{getattr(translation_config, 'model', '')}",
-        f"- 兼容地址：{getattr(translation_config, 'endpoint', '')}",
-        f"- 识别设备：{WHISPER_DEVICE_LABELS.get(_normalize_whisper_device(getattr(whisper_config, 'device', 'cpu')), 'CPU')}",
+        f"- 模型名：{model}",
+        f"- 识别设备（配置）：{device}",
         f"- 调试模式：{'开启' if getattr(debug_config, 'enabled', False) else '关闭'}",
         "",
         "### 最近一次延迟",
@@ -495,9 +524,7 @@ def _build_feedback_report(
         "",
         *_recognition_runtime_lines(latency, ui_language),
         "",
-        "### 日志文件",
-        f"- app.log：{log_dir}/app.log",
-        f"- crash_report.txt：{log_dir}/crash_report.txt",
+        "- 托盘 / 退出 / 最近错误码：未记录",
         "",
         "### 问题类型",
         "- 启动失败 / 无声音 / 有声音无字幕 / 识别不准 / 翻译慢 / 手机同步失败 / 其他",

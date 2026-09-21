@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "install_id": "01234567-89ab-4cde-8fab-0123456789ab",
+  "date": "2026-09-17",
+  "revision": 12,
+  "app_version": "0.4.3",
+  "package_type": "lite",
+  "metrics": {
+    "app_starts": 2,
+    "sessions": 3,
+    "session_seconds": 15120,
+    "offline_sessions": 2,
+    "api_sessions": 1,
+    "translation_success": 763,
+    "translation_failed": 19,
+    "asr_latency_sum_ms": 335000,
+    "asr_latency_samples": 802,
+    "translation_latency_sum_ms": 81000,
+    "translation_latency_samples": 782
+  },
+  "snapshot_id": "90e264b62f1a0f4d30dcacb4f2cc9d7607d7a21938347b335bc158c44f16e129"
+}

@@ -1,4 +1,5 @@
 import asyncio
+import concurrent.futures
 import threading
 import time
 from typing import Optional
@@ -23,12 +24,30 @@ class TranslationRuntime:
         self._latency_traces = latency_traces
         self._overlay_getter = overlay_getter
         self._language_revision_getter = lambda: 0
+        self._shutdown_requested = threading.Event()
+        self._pending_lock = threading.RLock()
+        self._pending = set()
+        self._fallback_loops = set()
+        self.analytics = None
         self.client: Optional[GameTranslator] = None
         self.loop: Optional[asyncio.AbstractEventLoop] = None
         self.thread: Optional[threading.Thread] = None
 
+    def _record_analytics(self, success, elapsed_ms=None):
+        try:
+            if self.analytics:
+                self.analytics.increment('translation_success' if success else 'translation_failed')
+                if elapsed_ms is not None:
+                    self.analytics.observe('translation', elapsed_ms)
+        except Exception:
+            pass
+
     def initialize(self, config: TranslationConfig):
+        if self._shutdown_requested.is_set():
+            return
         self.client = GameTranslator(config)
+        if self._shutdown_requested.is_set():
+            return
         self.start_loop()
 
     def update_config(self, config: TranslationConfig):
@@ -69,6 +88,8 @@ class TranslationRuntime:
         language_revision: int = 0,
         trace: Optional[LatencyTrace] = None,
     ):
+        if self._shutdown_requested.is_set():
+            return
         if isinstance(language_probability, LatencyTrace) and trace is None:
             trace = language_probability
             language_probability = 0.0
@@ -91,6 +112,10 @@ class TranslationRuntime:
                 ),
                 self.loop,
             )
+            with self._pending_lock:
+                self._pending.add(future)
+                if self._shutdown_requested.is_set():
+                    future.cancel()
             future.add_done_callback(
                 lambda done, current_item_id=item_id: self._handle_task_done(
                     current_item_id,
@@ -113,37 +138,79 @@ class TranslationRuntime:
                         language_revision,
                     )
                 )
+            except asyncio.CancelledError:
+                pass
             except Exception as exc:
                 self._handle_error(item_id, exc)
 
         threading.Thread(target=_run, name="translation-fallback", daemon=True).start()
 
-    def close(self, cleanup_allowed: bool = True):
-        if not cleanup_allowed:
-            return
-        if self.client:
-            try:
-                if self.loop and self.loop.is_running():
-                    future = asyncio.run_coroutine_threadsafe(self.client.close(), self.loop)
-                    future.result(timeout=3)
-                else:
-                    self._run_in_private_event_loop(self.client.close())
-            except Exception as exc:
-                logger.warning("翻译器关闭失败: {}", exc)
-        if self.loop and self.loop.is_running():
-            self.loop.call_soon_threadsafe(self.loop.stop)
-        if self.thread and self.thread.is_alive():
-            self.thread.join(timeout=3)
-        if self.loop and not self.loop.is_closed():
-            self.loop.close()
+    def begin_shutdown(self):
+        """Stop admission immediately and cancel submitted network requests."""
+        self._shutdown_requested.set()
+        with self._pending_lock:
+            pending = tuple(self._pending)
+            loops = tuple(self._fallback_loops)
+        for future in pending:
+            future.cancel()
+        for loop in loops:
+            if loop.is_running():
+                try:
+                    loop.call_soon_threadsafe(self._cancel_loop_tasks, loop)
+                except RuntimeError:
+                    # A fallback request can finish and close its private loop
+                    # between the state check and cancellation scheduling.
+                    pass
 
     @staticmethod
-    def _run_in_private_event_loop(coro):
+    def _cancel_loop_tasks(loop):
+        for task in asyncio.all_tasks(loop):
+            task.cancel()
+
+    def close(self, cleanup_allowed: bool = True):
+        self.begin_shutdown()
+        if not cleanup_allowed:
+            return False
+        async def cleanup():
+            current = asyncio.current_task()
+            tasks = [task for task in asyncio.all_tasks() if task is not current]
+            for task in tasks:
+                task.cancel()
+            if tasks:
+                await asyncio.gather(*tasks, return_exceptions=True)
+            if self.client:
+                await self.client.close()
+        if self.loop and self.loop.is_running():
+            future = asyncio.run_coroutine_threadsafe(cleanup(), self.loop)
+            try:
+                future.result(timeout=3)
+            except Exception:
+                future.cancel()
+                raise
+            self.loop.call_soon_threadsafe(self.loop.stop)
+        elif self.client:
+            self._run_in_private_event_loop(self.client.close())
+        if self.thread and self.thread.is_alive():
+            self.thread.join(timeout=3)
+            if self.thread.is_alive():
+                return False
+        if self.loop and not self.loop.is_closed():
+            self.loop.close()
+        with self._pending_lock:
+            if self._fallback_loops:
+                return False
+        return True
+
+    def _run_in_private_event_loop(self, coro):
         loop = asyncio.new_event_loop()
+        with self._pending_lock:
+            self._fallback_loops.add(loop)
         try:
             return loop.run_until_complete(coro)
         finally:
             loop.close()
+            with self._pending_lock:
+                self._fallback_loops.discard(loop)
 
     async def _translate_and_publish(
         self,
@@ -156,6 +223,8 @@ class TranslationRuntime:
         target_lang: str = "",
         language_revision: int = 0,
     ):
+        if self._shutdown_requested.is_set():
+            return
         if not self.client:
             raise RuntimeError("翻译器未初始化")
         t0 = time.time()
@@ -166,6 +235,8 @@ class TranslationRuntime:
             target_lang = target_lang or getattr(trace, "target_lang", "")
             language_revision = language_revision or int(getattr(trace, "language_revision", 0) or 0)
         config = self._config_snapshot(source_lang, target_lang)
+        if self._shutdown_requested.is_set():
+            return
         if self._is_stale_language_flow(language_revision):
             if trace:
                 trace.translation_finished_at = time.time()
@@ -203,6 +274,8 @@ class TranslationRuntime:
             )
             return
         result = await self._translate_with_config_snapshot(config, text, detected_language)
+        if self._shutdown_requested.is_set():
+            return
         if self._is_stale_language_flow(language_revision):
             if trace:
                 trace.translation_finished_at = time.time()
@@ -228,6 +301,8 @@ class TranslationRuntime:
         target_lang = getattr(result, "target_lang", "")
 
         elapsed = time.time() - t0
+        if not translated.startswith('[未翻译]'):
+            self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000)
         logger.info("translated: {} ({:.1f}s)", translated[:80], elapsed)
         self._event_bus.publish(
             TranslationReady(
@@ -299,16 +374,23 @@ class TranslationRuntime:
             overlay.remove_translation(item_id)
 
     def _handle_task_done(self, item_id: str, future):
+        with self._pending_lock:
+            self._pending.discard(future)
         try:
             future.result()
+        except (asyncio.CancelledError, concurrent.futures.CancelledError):
+            return
         except Exception as exc:
             logger.exception("异步翻译任务失败: {}", exc)
             self._handle_error(item_id, exc, already_logged=True)
 
     def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False):
+        if self._shutdown_requested.is_set():
+            return
         if not already_logged:
             logger.exception("翻译任务失败: {}", exc)
         self._stats["errors"] += 1
+        self._record_analytics(False)
         trace = self._latency_traces.get(item_id)
         if trace and not trace.translation_finished_at:
             trace.translation_finished_at = time.time()

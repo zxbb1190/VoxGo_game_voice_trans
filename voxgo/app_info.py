@@ -1,7 +1,11 @@
 APP_NAME = "VoxGo"
-APP_VERSION = "0.4.2"
+APP_VERSION = "0.5.0"
 APP_WEBSITE = "https://voxgo.cn/"
 GITHUB_REPOSITORY = "zxbb1190/VoxGo_game_voice_trans"
 GITHUB_URL = f"https://github.com/{GITHUB_REPOSITORY}"
+GITHUB_ISSUES_URL = f"{GITHUB_URL}/issues/new"
+# Populate only with verified community invitation URLs.
+KOOK_URL = ""
+DISCORD_URL = ""
 SERVICE_NAME = "voxgo"
 USER_AGENT = f"{APP_NAME}/{APP_VERSION}"

@@ -18,6 +18,8 @@ GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
 - **Overlay pause control**: Pause or resume directly from the main overlay; paused mode keeps a visible status and highlighted border.
+- **Close behavior and tray**: Choose whether closing minimizes to the tray or quits, optionally remembering the choice. Change it later under Settings → Close button. Minimizing preserves the current translation state; the overlay stays visible if the tray is unavailable. Windows may place the tray icon in its hidden-icons area.
+- **Shutdown recovery**: Quitting pauses translation and rejects new requests before background cleanup. If cleanup fails, the tray and recovery dialog offer retry or force quit of the current process. Requests already sent to a provider may still be billed.
 - **Debug and feedback loop**: Debug mode records the latest recognition/translation/overlay latency, and the feedback button generates a diagnostic template.
 - **Mobile mirror**: Pushes translations to a browser on the same LAN through WebSocket.
 - **Global hotkeys**: Toggle overlay, clear history, pause/resume translation, plus optional lock and compact-mode hotkeys in settings.
@@ -227,7 +229,7 @@ Important user-facing messages are shown in the overlay, including:
 - Translation API timeout, provider HTTP status code, and provider error message
 
 ### Debug And Feedback
-The settings dialog can enable debug mode. The app writes the latest speech-detected, recognition, translation, and overlay-update latency to `app.log`. The "Submit Feedback" button generates a diagnostic template with version, Windows build, audio device, translation provider, latest latency, and log paths.
+The settings dialog can enable debug mode. The app writes latency information to `app.log`. Help & Feedback provides a diagnostic preview, manual copying and GitHub Issues. Community buttons appear only when valid invitation URLs are configured. Diagnostics exclude endpoints, keys, device names and local paths; custom model names are not shared. Actual debug logs differ from this template and should be checked for sensitive content before sharing.
 
 ### Mobile View
 1. Keep your PC and phone on the same LAN.

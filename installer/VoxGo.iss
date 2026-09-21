@@ -1,5 +1,5 @@
 #define MyAppName "VoxGo"
-#define MyAppVersion "0.4.2"
+#define MyAppVersion "0.5.0"
 #define MyAppPublisher "VoxGo"
 #define MyAppExeName "VoxGo.exe"
 

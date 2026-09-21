@@ -198,6 +198,14 @@ def load_user_settings(config: AppConfig, runtime_dir: Path):
         with open(settings_path, "r", encoding="utf-8-sig") as f:
             data = json.load(f)
         apply_section_data(config, data, USER_SETTINGS_SECTIONS)
+        try:
+            authority = json.loads((Path(runtime_dir) / 'telemetry_consent.json').read_text(encoding='utf-8'))
+            for key in ('telemetry_consent', 'telemetry_consent_version', 'telemetry_epoch'):
+                setattr(config.app, key, authority[key])
+        except (OSError, ValueError, KeyError, TypeError):
+            config.app.telemetry_consent = 'unknown'
+            config.app.telemetry_consent_version = 0
+            config.app.telemetry_epoch = ''
         migrate_recognition_device_policy(config, data)
         if "latency_mode" not in data.get("audio", {}):
             config.audio.latency_mode = ""
@@ -454,6 +462,31 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
 def save_user_settings(config: AppConfig, runtime_dir: Path):
     settings_path = Path(runtime_dir) / "user_settings.json"
     data = serialize_user_settings(config)
+    # Only explicit UI consent actions may update the independent authority.
+    # Unrelated saves from another process cannot revive an old grant.
+    if getattr(config.app, '_telemetry_consent_changed', False):
+        import os
+        import tempfile
+        fields = ('telemetry_consent', 'telemetry_consent_version', 'telemetry_epoch')
+        consent = {key: data['app'][key] for key in fields}
+        temp = None
+        try:
+            with tempfile.NamedTemporaryFile('w', encoding='utf-8', dir=runtime_dir,
+                                             prefix='.consent-', delete=False) as stream:
+                temp = Path(stream.name)
+                json.dump(consent, stream)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temp, Path(runtime_dir) / 'telemetry_consent.json')
+            config.app._telemetry_consent_changed = False
+        except OSError:
+            pass
+        finally:
+            if temp is not None:
+                try:
+                    temp.unlink(missing_ok=True)
+                except OSError:
+                    pass
     try:
         settings_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception as e:
@@ -464,6 +497,11 @@ def serialize_user_settings(config: AppConfig) -> dict:
     return {
         "app": {
             "setup_completed": bool(getattr(config.app, "setup_completed", False)),
+            "close_action": getattr(config.app, "close_action", "ask"),
+            "close_action_remember": bool(getattr(config.app, "close_action_remember", False)),
+            "telemetry_consent": getattr(config.app, 'telemetry_consent', 'unknown'),
+            "telemetry_consent_version": getattr(config.app, 'telemetry_consent_version', 0),
+            "telemetry_epoch": getattr(config.app, 'telemetry_epoch', ''),
             "language": normalize_ui_language(getattr(config.app, "language", UI_LANGUAGE_ZH)),
             "recognition_device_policy_version": RECOGNITION_DEVICE_POLICY_VERSION,
         },

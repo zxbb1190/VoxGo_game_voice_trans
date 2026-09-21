@@ -67,6 +67,11 @@ class HotkeyConfig:
 class RuntimeConfig:
     setup_completed: bool = False
     language: str = UI_LANGUAGE_ZH
+    close_action: str = "ask"
+    close_action_remember: bool = False
+    telemetry_consent: str = 'unknown'
+    telemetry_consent_version: int = 0
+    telemetry_epoch: str = ''
 
 
 @dataclass

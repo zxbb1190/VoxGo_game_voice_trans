@@ -110,6 +110,8 @@ class OverlaySignals(QObject):
 class GameOverlay(QWidget):
     """游戏浮窗叠加层"""
 
+    model_recovery_requested = pyqtSignal(bool)
+
     def __init__(
         self,
         config: OverlayConfig = None,
@@ -287,10 +289,10 @@ class GameOverlay(QWidget):
         self._quit_button = QToolButton()
         self._quit_button.setObjectName("quitButton")
         self._quit_button.setIcon(_make_icon("close", self.config.text_color))
-        self._quit_button.setToolTip(_tr(ui_language, "退出程序", "Quit"))
+        self._quit_button.setToolTip(_tr(ui_language, "关闭", "Close"))
         self._quit_button.setFixedSize(28, 24)
         self._quit_button.setCursor(Qt.PointingHandCursor)
-        self._quit_button.clicked.connect(self._request_shutdown)
+        self._quit_button.clicked.connect(self.close)
         toolbar_layout.addWidget(self._quit_button)
 
         self._lock_slot = QWidget()
@@ -617,7 +619,7 @@ class GameOverlay(QWidget):
         if hasattr(self, "_target_lang_combo"):
             self._target_lang_combo.setToolTip(_tr(ui_language, "翻译目标语言", "Target Language"))
         if hasattr(self, "_quit_button"):
-            self._quit_button.setToolTip(_tr(ui_language, "退出程序", "Quit"))
+            self._quit_button.setToolTip(_tr(ui_language, "关闭", "Close"))
 
     def set_paused(self, paused: bool):
         self._paused = bool(paused)
@@ -758,6 +760,7 @@ class GameOverlay(QWidget):
                 self,
             )
             self._settings_dialog.settings_changed.connect(self._apply_settings)
+            self._settings_dialog.model_recovery_requested.connect(self.model_recovery_requested.emit)
             if self._pending_update:
                 self._settings_dialog.show_pending_update(self._pending_update)
             self._set_update_badge_visible(False)
@@ -1428,8 +1431,36 @@ class GameOverlay(QWidget):
             self._remember_window_geometry()
             self._notify_settings_changed()
 
+    def prepare_shutdown(self):
+        """Prevent auxiliary dialogs from starting more work while quitting."""
+        monitors = []
+        for dialog in (self._settings_dialog, self._first_run_wizard):
+            if dialog:
+                runner = getattr(dialog, "_translation_test_runner", None)
+                if runner:
+                    runner.cancel()
+                for name in ("audio_test_panel", "wizard_audio_test_panel"):
+                    panel = getattr(dialog, name, None)
+                    if panel:
+                        monitor = getattr(panel, "_monitor", None)
+                        panel._monitor = None
+                        if monitor:
+                            monitors.append(monitor)
+                dialog.setEnabled(False)
+                dialog.hide()
+        for widget in (self._pause_button, self._settings_button):
+            widget.setEnabled(False)
+        for widget in self.findChildren(QComboBox):
+            widget.setEnabled(False)
+        return monitors
+
     def closeEvent(self, event):
         """关闭事件"""
+        callback = getattr(self, "_on_close_requested", None)
+        if callback and not getattr(self, "_allow_close", False):
+            event.ignore()
+            callback()
+            return
         self._fade_timer.stop()
         if hasattr(self, "_lock_button"):
             self._lock_button.close()

@@ -59,7 +59,7 @@ class FeedbackDialog(QDialog):
         self.text = QPlainTextEdit(report_text)
         self.text.setMinimumSize(640, 360)
         button_row = QHBoxLayout()
-        copy_button = QPushButton(_tr(self._ui_language, "复制模板", "Copy Template"))
+        copy_button = QPushButton(_tr(self._ui_language, "复制诊断信息", "Copy Diagnostics"))
         open_button = QPushButton(_tr(self._ui_language, "打开 Issue", "Open Issue"))
         close_button = QPushButton(_tr(self._ui_language, "关闭", "Close"))
         copy_button.clicked.connect(self._copy)
@@ -78,7 +78,8 @@ class FeedbackDialog(QDialog):
         QApplication.clipboard().setText(self.text.toPlainText())
 
     def _open_issue(self):
-        webbrowser.open("https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new")
+        from voxgo.app_info import GITHUB_ISSUES_URL
+        webbrowser.open(GITHUB_ISSUES_URL)
 
 
 class UpdatePromptDialog(QDialog):
@@ -446,6 +447,10 @@ class FirstRunWizard(QDialog):
         self.wizard_finish_title.setStyleSheet("font-size: 18px; font-weight: 600;")
         self.wizard_finish_note = QLabel()
         self.wizard_finish_note.setWordWrap(True)
+        self.wizard_telemetry_check = QCheckBox()
+        self.wizard_telemetry_check.setChecked(True)
+        self._telemetry_confirmed = False
+        self.wizard_telemetry_check.clicked.connect(self._confirm_telemetry)
         self.wizard_debug_check = QCheckBox()
         self.wizard_debug_check.setChecked(bool(getattr(self.debug_config, "enabled", False)))
         self.wizard_summary_label = QLabel()
@@ -456,6 +461,7 @@ class FirstRunWizard(QDialog):
         layout.addWidget(self.wizard_finish_title)
         layout.addWidget(self.wizard_finish_note)
         layout.addSpacing(10)
+        layout.addWidget(self.wizard_telemetry_check)
         layout.addWidget(self.wizard_debug_check)
         layout.addWidget(self.wizard_summary_label)
         layout.addWidget(self.wizard_feedback_button, 0, Qt.AlignLeft)
@@ -529,6 +535,7 @@ class FirstRunWizard(QDialog):
         self.wizard_audio_test_label.setText(_tr(language, "音频测试", "Audio Test"))
         self.wizard_audio_test_panel.set_ui_language(language)
 
+        self.wizard_telemetry_check.setText(_tr(language, "愿意帮助 VoxGo 改进体验", "Help improve VoxGo"))
         self.wizard_finish_title.setText(_tr(language, "准备启动实时翻译", "Ready to Start Live Translation"))
         self.wizard_finish_note.setText(_tr(
             language,
@@ -716,7 +723,21 @@ class FirstRunWizard(QDialog):
             )
         )
 
+    def _confirm_telemetry(self, checked):
+        if not checked:
+            return
+        from PyQt5.QtWidgets import QMessageBox
+        from voxgo.ui.telemetry_consent import confirm_telemetry
+        answer = confirm_telemetry(self, is_english_ui(self._ui_language))
+        if answer != QMessageBox.Yes:
+            self.wizard_telemetry_check.setChecked(False)
+            self._telemetry_confirmed = False
+        else:
+            self._telemetry_confirmed = True
+
     def _complete_setup(self):
+        if self.wizard_telemetry_check.isChecked() and not self._telemetry_confirmed:
+            self._confirm_telemetry(True)
         self._mark_completed()
         self.accept()
 
@@ -726,6 +747,13 @@ class FirstRunWizard(QDialog):
         self._collect_values()
         if hasattr(self, "wizard_audio_test_panel"):
             self.wizard_audio_test_panel.stop_test()
+        from voxgo.analytics.consent import CONSENT_VERSION
+        import uuid
+        allowed = self.wizard_telemetry_check.isChecked() and self._telemetry_confirmed
+        self.app_config.telemetry_consent = "allowed" if allowed else "denied"
+        self.app_config.telemetry_consent_version = CONSENT_VERSION
+        self.app_config.telemetry_epoch = str(uuid.uuid4()) if allowed else ""
+        self.app_config._telemetry_consent_changed = True
         self.app_config.setup_completed = True
         self._completed = True
         self.setup_completed.emit()

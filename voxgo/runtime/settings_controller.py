@@ -172,6 +172,8 @@ class OverlaySettingsController:
         app._translation.update_config(app.config.translation)
         app._setup_hotkeys()
         app._save_user_settings()
+        if hasattr(app, "_analytics_call"):
+            app._analytics_call("refresh_consent")
         current_device = (
             app.config.audio.input_device_id,
             app.config.audio.input_device_index,

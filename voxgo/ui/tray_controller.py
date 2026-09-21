@@ -1,3 +1,6 @@
+from pathlib import Path
+import sys
+
 from loguru import logger
 
 from voxgo.app_info import APP_NAME, APP_VERSION
@@ -13,17 +16,60 @@ class TrayController:
         self.actions = {}
         self.setup_error = ""
 
+    @staticmethod
+    def _resolve_icon(qt_app, app_icon):
+        # Null QIcon objects are truthy; explicitly check their image data.
+        for candidate in (app_icon, qt_app.windowIcon()):
+            if candidate is not None and (not hasattr(candidate, "isNull") or not candidate.isNull()):
+                return candidate
+        from PyQt5.QtGui import QIcon
+        from PyQt5.QtWidgets import QStyle
+
+        roots = [Path(__file__).resolve().parents[2]]
+        if getattr(sys, "_MEIPASS", None):
+            roots.insert(0, Path(sys._MEIPASS))
+        for root in roots:
+            candidate = QIcon(str(root / "assets" / "voxgo.ico"))
+            if not candidate.isNull():
+                return candidate
+        candidate = qt_app.style().standardIcon(QStyle.SP_ComputerIcon)
+        if candidate.isNull():
+            raise RuntimeError("No usable system tray icon could be loaded")
+        logger.warning("Using Qt fallback icon for system tray")
+        return candidate
+
+    def _discard(self):
+        for item in (self.icon, self.menu):
+            if item is not None:
+                try:
+                    if hasattr(item, "hide"):
+                        item.hide()
+                    if hasattr(item, "deleteLater"):
+                        item.deleteLater()
+                except Exception:
+                    logger.debug("Could not dispose failed tray object")
+        self.icon = None
+        self.menu = None
+        self.actions = {}
+
     def setup(self, tray_cls, menu_cls, qt_app, app_icon, overlay):
         self.setup_error = ""
-        if not qt_app or self.icon:
-            return bool(self.icon)
+        if not qt_app:
+            self.setup_error = "Qt application is not available"
+            return False
         if not tray_cls.isSystemTrayAvailable():
             self.setup_error = "system tray is not available"
             logger.warning("系统托盘不可用，跳过托盘入口")
             return False
 
         try:
-            self.icon = tray_cls(app_icon or qt_app.windowIcon(), qt_app)
+            if self.icon is not None:
+                self.sync_state(overlay)
+                self.icon.show()
+                if not hasattr(self.icon, "isVisible") or self.icon.isVisible():
+                    return True
+                self._discard()
+            self.icon = tray_cls(self._resolve_icon(qt_app, app_icon), qt_app)
             self.icon.setToolTip(f"{APP_NAME} v{APP_VERSION}")
             self.menu = menu_cls(qt_app.activeWindow())
             ui_language = ui_language_of(self._owner.config)
@@ -39,6 +85,9 @@ class TrayController:
             self.actions["fullscreen_help"] = self.menu.addAction(ui_text(ui_language, "全屏兼容说明", "Fullscreen Compatibility"))
             self.menu.addSeparator()
             self.actions["quit"] = self.menu.addAction(ui_text(ui_language, "退出", "Quit"))
+            if hasattr(self._owner, "_force_shutdown"):
+                self.actions["force_quit"] = self.menu.addAction(ui_text(ui_language, "强制退出", "Force Quit"))
+                self.actions["force_quit"].triggered.connect(self._owner._force_shutdown)
 
             self.actions["toggle_overlay"].triggered.connect(self._owner._tray_toggle_overlay)
             self.actions["toggle_translation"].triggered.connect(self._owner._toggle_translation)
@@ -46,30 +95,32 @@ class TrayController:
             self.actions["compact_mode"].triggered.connect(self._owner._tray_toggle_compact_mode)
             self.actions["settings"].triggered.connect(self._owner._tray_open_settings)
             self.actions["fullscreen_help"].triggered.connect(self._owner._tray_show_fullscreen_help)
-            self.actions["quit"].triggered.connect(self._owner._request_shutdown)
+            self.actions["quit"].triggered.connect(lambda: self._owner._request_shutdown(from_tray=True))
             self.icon.activated.connect(self._owner._handle_tray_activated)
             self.icon.setContextMenu(self.menu)
             self.sync_state(overlay)
             self.icon.show()
             visible = bool(self.icon.isVisible()) if hasattr(self.icon, "isVisible") else True
             logger.info("system tray initialized: visible={}", visible)
-            return visible
+            if not visible:
+                raise RuntimeError("System tray icon did not become visible")
+            return True
         except Exception as exc:
             self.setup_error = str(exc)
             logger.exception("系统托盘初始化失败: {}", exc)
-            if self.icon:
-                try:
-                    self.icon.hide()
-                except Exception:
-                    pass
-            self.icon = None
-            self.menu = None
-            self.actions = {}
+            self._discard()
             return False
 
     def sync_state(self, overlay):
         if not self.actions:
             return
+        shutdown = getattr(self._owner, "_shutdown_state", "idle")
+        for name, action in self.actions.items():
+            if hasattr(action, "setEnabled"):
+                action.setEnabled(shutdown == "idle" or name == "toggle_overlay" or
+                                  (shutdown == "failed" and name in {"quit", "force_quit"}))
+            if name == "force_quit" and hasattr(action, "setVisible"):
+                action.setVisible(shutdown == "failed")
         config = self._owner.config
         ui_language = ui_language_of(config)
         if "toggle_overlay" in self.actions and overlay:
@@ -101,6 +152,12 @@ class TrayController:
         for key, (zh, en) in static_labels.items():
             if key in self.actions:
                 self.actions[key].setText(ui_text(ui_language, zh, en))
+        if shutdown in {"stopping", "failed"}:
+            self.actions["quit"].setText(ui_text(
+                ui_language,
+                "正在退出…" if shutdown == "stopping" else "再次退出",
+                "Exiting…" if shutdown == "stopping" else "Retry Exit",
+            ))
         if self.icon:
             paused = bool(getattr(self._owner, "_paused", False))
             state = ui_text(
@@ -108,6 +165,9 @@ class TrayController:
                 "暂停" if paused else "运行中",
                 "Paused" if paused else "Running",
             )
+            if shutdown in {"stopping", "failed"}:
+                state = ui_text(ui_language, "正在退出" if shutdown == "stopping" else "退出失败 · 翻译已停止",
+                                "Exiting" if shutdown == "stopping" else "Exit failed · Translation stopped")
             self.icon.setToolTip(f"{APP_NAME} v{APP_VERSION} - {state}")
 
     def hide(self):
@@ -124,6 +184,12 @@ class TrayController:
             f"VoxGo 仍在运行。点击托盘图标或按 {hotkey} 恢复浮窗。",
             f"VoxGo is still running. Click the tray icon or press {hotkey} to restore the overlay.",
         )
+        mobile = getattr(self._owner, "_mobile", None)
+        if (mobile and getattr(mobile, "server", None) and
+                getattr(mobile, "loop", None) and mobile.loop.is_running() and
+                not getattr(mobile, "start_error", None)):
+            message += ui_text(ui_language, " 可通过浮窗的手机二维码，用手机查看翻译结果。",
+                               " Use the overlay’s Mobile QR Code to view translations on your phone.")
         try:
             self.icon.showMessage(APP_NAME, message)
         except Exception as exc:

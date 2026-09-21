@@ -34,21 +34,43 @@ class TranslationTestRunner:
         self.signals = TranslationTestSignals()
         self.signals.finished.connect(callback)
         self._config = _copy_translation_config(config)
+        self._cancelled = threading.Event()
+        self._loop = None
+        self._task = None
         if self._config.provider == "local":
             self._config.enable_local_phrase_cache = False
 
     def start(self):
         threading.Thread(target=self._run, name="translation-test", daemon=True).start()
 
+    def cancel(self):
+        self._cancelled.set()
+        loop, task = self._loop, self._task
+        if loop and task and not loop.is_closed():
+            try:
+                loop.call_soon_threadsafe(task.cancel)
+            except RuntimeError:
+                pass
+
     def _run(self):
+        if self._cancelled.is_set():
+            return
         started_at = time.time()
         translator = GameTranslator(self._config)
         loop = asyncio.new_event_loop()
+        self._loop = loop
         asyncio.set_event_loop(loop)
         try:
             source = "zh" if self._config.provider == "local" and self._config.source_lang == "zh" else "en"
             text = "请在桥边等我。" if source == "zh" else "Hello, can you hear me?"
-            translated = loop.run_until_complete(translator.translate(text, source))
+            if self._cancelled.is_set():
+                return
+            self._task = loop.create_task(translator.translate(text, source))
+            if self._cancelled.is_set():
+                self._task.cancel()
+            translated = loop.run_until_complete(self._task)
+            if self._cancelled.is_set():
+                return
             elapsed_ms = int(round((time.time() - started_at) * 1000))
             translated = (translated or "").strip()
             if not translated:
@@ -57,6 +79,8 @@ class TranslationTestRunner:
                 self.signals.finished.emit(False, translated)
             else:
                 self.signals.finished.emit(True, f"测试成功：{translated}\n耗时：{elapsed_ms} ms")
+        except asyncio.CancelledError:
+            pass
         except Exception as e:
             self.signals.finished.emit(False, f"测试失败：{str(e)[:220]}")
         finally:

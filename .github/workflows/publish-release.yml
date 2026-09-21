@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.4.2"
+        description: "Release version, for example 0.5.0"
         required: true
-        default: "0.4.2"
+        default: "0.5.0"
 
 permissions:
   contents: write
@@ -65,7 +65,7 @@ jobs:
           .\scripts\build_portable.ps1 -Version "$env:APP_VERSION"
 
       - name: Write release notes
-        shell: powershell
+        shell: pwsh
         run: |
           $lite = "release\VoxGo-v$env:APP_VERSION-lite.zip"
           $full = "release\VoxGo-v$env:APP_VERSION-full.zip"
@@ -82,10 +82,21 @@ jobs:
           @"
           ## VoxGo $env:APP_VERSION
 
-          - Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.
-          - Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.
-          - Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.
-          - Added resilient model download sources and bilingual update notes.
+          ### 更新内容
+
+          - 优化关闭与托盘体验：关闭窗口时可选择最小化到托盘或退出程序，并记住选择；托盘不可用时保留窗口，避免程序隐藏后无法操作。
+          - 改进退出流程：优化后台任务与资源清理，退出未完成时支持重试或强制退出，改善窗口关闭后进程残留的问题。
+          - 新增模型恢复操作：模型加载失败时，可在设置中重试加载，或重置所选模型缓存后重新下载。
+          - 完善帮助与反馈：支持预览、复制诊断信息并打开 GitHub Issues，诊断模板减少敏感信息暴露。
+          - 新增自愿体验改进计划：经确认后发送使用情况与运行稳定性统计，帮助优化 VoxGo；不包含语音、识别或翻译内容，可随时在设置中关闭。
+
+          ### What's new
+
+          - Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.
+          - Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.
+          - Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.
+          - Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.
+          - Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time.
 
           ### Downloads
 
@@ -120,7 +131,7 @@ jobs:
           overwrite_files: true
 
       - name: Update website release manifest
-        shell: powershell
+        shell: pwsh
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -128,18 +139,27 @@ jobs:
           git checkout -B main origin/main
 
           $manifestPath = "docs\update.json"
-          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+          $manifest = Get-Content $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
           $manifest.latest = $env:APP_VERSION
           $manifest.channel = "stable"
           $manifest.title = "VoxGo v$env:APP_VERSION"
-          $manifest.notes = @(
-            "Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.",
-            "Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.",
-            "Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.",
-            "Added resilient model download sources and bilingual update notes."
+          $notesEn = @(
+            "Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.",
+            "Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.",
+            "Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.",
+            "Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.",
+            "Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time."
           )
-          $manifest | Add-Member -NotePropertyName notes_en -NotePropertyValue $manifest.notes -Force
-          $manifest | Add-Member -NotePropertyName notes_zh -NotePropertyValue @("新增应用内更新下载、SHA256 校验和安装重启，保留配置与模型，失败时回滚；0.4.1 用户首次升级仍需手动下载。", "新增 OPUS-MT 中英双向本地离线翻译，首次下载模型后可断网使用。", "修正简体中文目标语言标记，新增带语境判断的游戏术语规则；复杂游戏对话的翻译质量仍有限。", "增强模型下载源容错，更新提示支持双语发布说明。") -Force
+          $notesZh = @(
+            "优化关闭与托盘体验：关闭窗口时可选择最小化到托盘或退出程序，并记住选择；托盘不可用时保留窗口，避免程序隐藏后无法操作。",
+            "改进退出流程：优化后台任务与资源清理，退出未完成时支持重试或强制退出，改善窗口关闭后进程残留的问题。",
+            "新增模型恢复操作：模型加载失败时，可在设置中重试加载，或重置所选模型缓存后重新下载。",
+            "完善帮助与反馈：支持预览、复制诊断信息并打开 GitHub Issues，诊断模板减少敏感信息暴露。",
+            "新增自愿体验改进计划：经确认后发送使用情况与运行稳定性统计，帮助优化 VoxGo；不包含语音、识别或翻译内容，可随时在设置中关闭。"
+          )
+          $manifest.notes = $notesEn
+          $manifest | Add-Member -NotePropertyName notes_en -NotePropertyValue $notesEn -Force
+          $manifest | Add-Member -NotePropertyName notes_zh -NotePropertyValue $notesZh -Force
           $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
           $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
           $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
@@ -160,7 +180,8 @@ jobs:
             [System.IO.File]::WriteAllText((Join-Path $pwd $pagePath), $page, (New-Object System.Text.UTF8Encoding($false)))
           }
           git add $manifestPath docs/index.html docs/en/index.html
-          if (git diff --cached --quiet) {
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
             Write-Host "Release manifest already up to date."
           } else {
             git commit -m "Update release manifest for $env:TAG_NAME"

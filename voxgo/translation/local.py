@@ -17,6 +17,15 @@ _SLOTS = threading.BoundedSemaphore(2)
 _ENGINES = OrderedDict()
 
 
+def shutdown_local_translation():
+    """Cancel queued inference and report native work that cannot be interrupted."""
+    _EXECUTOR.shutdown(wait=False, cancel_futures=True)
+    deadline = time.monotonic() + 3
+    for thread in tuple(_EXECUTOR._threads):
+        thread.join(timeout=max(0, deadline - time.monotonic()))
+    return not any(thread.is_alive() for thread in _EXECUTOR._threads)
+
+
 class LocalTranslationProvider(TranslatorProvider):
     name = "local"
 
