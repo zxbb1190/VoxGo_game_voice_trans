@@ -1,33 +1,36 @@
 {
-  "latest": "0.4.2",
+  "latest": "0.5.0",
   "channel": "stable",
-  "title": "VoxGo v0.4.2",
+  "title": "VoxGo v0.5.0",
   "notes": [
-    "Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.",
-    "Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.",
-    "Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.",
-    "Added resilient model download sources and bilingual update notes."
+    "Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.",
+    "Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.",
+    "Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.",
+    "Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.",
+    "Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time."
   ],
-  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.4.2",
-  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-lite.zip",
-  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full.zip",
-  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-full-cuda.zip",
-  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.4.2/VoxGo-v0.4.2-cuda-runtime.zip",
-  "sha256_lite": "29376732996a3aa26b3fda74afa3bf4e955a4dfde5b07c8c67899332465ce547",
-  "sha256_full": "3d92adf0058f28cf45033605b255967d4c1a4f44f5a1d8258ce7056903c88d5a",
-  "sha256_full_cuda": "3767e06950ae24f2390b044a2112c83db12db0c7933a0c441a4f25ca829dc306",
-  "sha256_cuda_runtime": "3970ee39d240629351f44e5833ced0f53809f474041e7df52e38f6611dfe3e12",
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.0",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-full.zip",
+  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-full-cuda.zip",
+  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-cuda-runtime.zip",
+  "sha256_lite": "11f32f1094b89e1cb771f881431abdac0a2bd6616ca32ff962996afb7c747c72",
+  "sha256_full": "cf11e054153893f96525cc49578c36583465a300480a995c76b5bc241f376ef5",
+  "sha256_full_cuda": "242ed8aa36d5372e18ef9b647c20211dda1329ec3d01c16397d4f10b8591fc41",
+  "sha256_cuda_runtime": "0651d9a4c0fb9ab6e75c1e3abe43883b082624c5830cc1d9a969374ed7a29936",
   "mandatory": false,
   "notes_en": [
-    "Added in-app update downloads with SHA256 verification, install-and-restart, configuration/model preservation, and rollback on failure. Users upgrading from 0.4.1 must download manually once.",
-    "Added local offline Chinese/English translation with OPUS-MT models; download models once before offline use.",
-    "Fixed the Simplified Chinese target language token and added contextual game terminology rules. Translation quality remains limited for complex game dialogue.",
-    "Added resilient model download sources and bilingual update notes."
+    "Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.",
+    "Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.",
+    "Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.",
+    "Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.",
+    "Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time."
   ],
   "notes_zh": [
-    "新增应用内更新下载、SHA256 校验和安装重启，保留配置与模型，失败时回滚；0.4.1 用户首次升级仍需手动下载。",
-    "新增 OPUS-MT 中英双向本地离线翻译，首次下载模型后可断网使用。",
-    "修正简体中文目标语言标记，新增带语境判断的游戏术语规则；复杂游戏对话的翻译质量仍有限。",
-    "增强模型下载源容错，更新提示支持双语发布说明。"
+    "优化关闭与托盘体验：关闭窗口时可选择最小化到托盘或退出程序，并记住选择；托盘不可用时保留窗口，避免程序隐藏后无法操作。",
+    "改进退出流程：优化后台任务与资源清理，退出未完成时支持重试或强制退出，改善窗口关闭后进程残留的问题。",
+    "新增模型恢复操作：模型加载失败时，可在设置中重试加载，或重置所选模型缓存后重新下载。",
+    "完善帮助与反馈：支持预览、复制诊断信息并打开 GitHub Issues，诊断模板减少敏感信息暴露。",
+    "新增自愿体验改进计划：经确认后发送使用情况与运行稳定性统计，帮助优化 VoxGo；不包含语音、识别或翻译内容，可随时在设置中关闭。"
   ]
 }
