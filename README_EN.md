@@ -364,3 +364,7 @@ This community edition is licensed under the GNU General Public License v3.0. Se
 Closed-source commercial use, private custom distribution, or commercial edition licensing requires separate authorization.
 
 Offline game glossary rules cover combat, movement, armor/healing, grenades, loot and teamwork, with guarded phrase composition and embedded normalization. Questions, quotations and unmatched contexts remain model-driven. English→Chinese explicitly selects Simplified Mandarin. See the [52-case development comparison](docs/evaluations/game-glossary.md); it is not a general quality benchmark.
+
+## Contact
+
+Email: [douyaj33@gmail.com](mailto:douyaj33@gmail.com)
