@@ -22,8 +22,11 @@ class AnalyticsIntegrationTests(unittest.TestCase):
     def test_success_records_once_and_no_text_is_passed(self):
         runtime = self.runtime()
         asyncio.run(runtime._translate_and_publish('one', 'private speech', 'en'))
-        runtime.analytics.increment.assert_called_once_with('translation_success')
-        self.assertEqual(runtime.analytics.observe.call_args.args[0], 'translation')
+        runtime.analytics.translation_result.assert_called_once()
+        success, elapsed, mode = runtime.analytics.translation_result.call_args.args
+        self.assertTrue(success)
+        self.assertGreaterEqual(elapsed, 0)
+        self.assertEqual(mode, 'api')
         self.assertNotIn('private speech', str(runtime.analytics.mock_calls))
 
     def test_empty_result_counts_failure(self):
@@ -32,31 +35,32 @@ class AnalyticsIntegrationTests(unittest.TestCase):
             return None
         runtime._translate_with_config_snapshot = empty
         asyncio.run(runtime._translate_and_publish('one', 'private speech', 'en'))
-        runtime.analytics.increment.assert_called_once_with('translation_failed')
+        runtime.analytics.translation_result.assert_called_once()
+        self.assertFalse(runtime.analytics.translation_result.call_args.args[0])
 
     def test_error_counts_failure_but_cancel_and_shutdown_do_not(self):
         runtime = self.runtime()
         future = concurrent.futures.Future()
         future.set_exception(RuntimeError('network failed'))
         runtime._handle_task_done('one', future)
-        runtime.analytics.increment.assert_called_once_with('translation_failed')
+        runtime.analytics.translation_result.assert_called_once_with(False, None, None)
         runtime.analytics.reset_mock()
         cancelled = concurrent.futures.Future()
         cancelled.cancel()
         runtime._handle_task_done('two', cancelled)
         runtime.begin_shutdown()
         runtime._handle_error('three', RuntimeError('cancelled'))
-        runtime.analytics.increment.assert_not_called()
+        runtime.analytics.translation_result.assert_not_called()
 
     def test_stale_result_does_not_count(self):
         runtime = self.runtime()
         runtime.set_language_revision_getter(lambda: 2)
         asyncio.run(runtime._translate_and_publish('one', 'private speech', 'en', language_revision=1))
-        runtime.analytics.increment.assert_not_called()
+        runtime.analytics.translation_result.assert_not_called()
 
     def test_analytics_failure_cannot_break_translation(self):
         runtime = self.runtime()
-        runtime.analytics.increment.side_effect = OSError('disk failure')
+        runtime.analytics.translation_result.side_effect = OSError('disk failure')
         asyncio.run(runtime._translate_and_publish('one', 'private speech', 'en'))
         self.assertEqual(runtime._stats['errors'], 0)
 

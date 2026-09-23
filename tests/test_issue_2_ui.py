@@ -182,6 +182,7 @@ class Issue2UiTest(unittest.TestCase):
             ),
             _paused=False,
             _tray_toggle_overlay=lambda: None,
+            _tray_reset_overlay_position=lambda: None,
             _toggle_translation=lambda: None,
             _clear_history=lambda: None,
             _tray_toggle_compact_mode=lambda: None,

@@ -19,7 +19,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
-from voxgo.audio.capture import AudioConfig, AudioLevelMonitor
+from voxgo.audio.capture import AudioConfig, AudioLevelMonitor, AudioRecoveryInProgress
 from voxgo.i18n import UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
 from voxgo.translation import GameTranslator, TranslationConfig
 from voxgo.ui.config_models import _copy_audio_config, _copy_translation_config, _tr
@@ -155,7 +155,8 @@ class AudioTestPanel(QWidget):
         self.setLayout(layout)
 
     def start_test(self):
-        self.stop_test()
+        if not self.stop_test():
+            return
         self.level_bar.setValue(0)
         self.status_label.setText(_tr(self._ui_language, "正在打开音频设备...", "Opening audio device..."))
         self.start_button.setEnabled(False)
@@ -170,23 +171,53 @@ class AudioTestPanel(QWidget):
                 "Listening. Play game, video, or Discord audio and watch the meter.",
             ))
         except Exception as e:
+            if self._monitor and not self.stop_test():
+                return
+            if isinstance(e, AudioRecoveryInProgress):
+                self.status_label.setText(_tr(
+                    self._ui_language,
+                    "音频设备正在恢复，请稍后再测试。",
+                    "Audio device is recovering. Please test again shortly.",
+                ))
+            else:
+                self.status_label.setText(_tr(
+                    self._ui_language,
+                    f"音频测试失败：{str(e)[:220]}",
+                    f"Audio test failed: {str(e)[:220]}",
+                ))
+
+    def stop_test(self):
+        if self._monitor:
+            try:
+                self._monitor.stop()
+            except Exception:
+                self.start_button.setEnabled(False)
+                self.stop_button.setEnabled(True)
+                self.status_label.setText(_tr(
+                    self._ui_language,
+                    "音频测试尚未停止，请重试。",
+                    "Audio test has not stopped. Please try again.",
+                ))
+                return False
             self._monitor = None
+        self.start_button.setEnabled(True)
+        self.stop_button.setEnabled(False)
+        return True
+
+    def _handle_level_update(self, payload: dict):
+        if payload.get("recovery"):
+            if self._monitor is None or id(self._monitor) != payload.get("monitor_token"):
+                return
+            self._monitor = None
+            self.level_bar.setValue(0)
             self.start_button.setEnabled(True)
             self.stop_button.setEnabled(False)
             self.status_label.setText(_tr(
                 self._ui_language,
-                f"音频测试失败：{str(e)[:220]}",
-                f"Audio test failed: {str(e)[:220]}",
+                "音频测试已因设备恢复停止。",
+                "Audio test stopped while the device was recovering.",
             ))
-
-    def stop_test(self):
-        if self._monitor:
-            self._monitor.stop()
-            self._monitor = None
-        self.start_button.setEnabled(True)
-        self.stop_button.setEnabled(False)
-
-    def _handle_level_update(self, payload: dict):
+            return
         if payload.get("error"):
             self.status_label.setText(_tr(
                 self._ui_language,

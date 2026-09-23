@@ -11,7 +11,8 @@ class TransportTests(unittest.TestCase):
     def test_post_and_config_request_timeouts(self):
         with patch('urllib.request.build_opener') as opener:
             for method, path, timeout in [('GET', '/v1/config', 5),
-                                          ('POST', '/v1/telemetry/sync', 15)]:
+                                          ('POST', '/v1/telemetry/sync', 15),
+                                          ('POST', '/v1/telemetry/basic', 15)]:
                 opener.return_value.open.return_value = Response(b'{}')
                 HTTPTransport()(method, path, {'schema_version': 1} if method == 'POST' else None)
                 self.assertEqual(opener.return_value.open.call_args.kwargs['timeout'], timeout)

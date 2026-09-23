@@ -215,6 +215,13 @@ class VoxGoApp:
         return load_app_config(config_path, self._runtime_dir())
 
     def _analytics_call(self, method, *args):
+        if method == 'stop':
+            try:
+                basic = getattr(self, '_basic_telemetry', None)
+                if basic:
+                    basic.stop()
+            except Exception:
+                logger.debug('Basic telemetry stop failed')
         try:
             analytics = getattr(self, '_analytics', None)
             if analytics:
@@ -231,7 +238,20 @@ class VoxGoApp:
         migrate_runtime_defaults(config, preserve_existing_audio_tuning=preserve_existing_audio_tuning)
 
     def _save_user_settings(self):
-        save_user_settings(self.config, self._runtime_dir())
+        saved = save_user_settings(self.config, self._runtime_dir())
+        if saved is False:
+            language = self._ui_language()
+            consent_failed = getattr(self.config.app, '_telemetry_save_error', '') == 'consent_not_saved'
+            self._notify_user(
+                ui_text(language, "设置未保存", "Settings Not Saved"),
+                ui_text(language,
+                    "统计授权选择未能保存，请稍后重新应用设置。其他运行中的 VoxGo 和重启后的授权状态可能仍为原值。"
+                    if consent_failed else "设置未能保存，请稍后重新应用设置。",
+                    "The statistics choice could not be saved. Please apply Settings again. Other running VoxGo instances and future launches may still use the previous choice."
+                    if consent_failed else "Settings could not be saved. Please apply Settings again."),
+                ui_text(language, "警告", "Warning"),
+            )
+        return saved
 
     def _sync_language_flow(self, config: AppConfig = None):
         config = config or self.config
@@ -557,7 +577,7 @@ class VoxGoApp:
             if translated.startswith("[翻译"):
                 self._stats["errors"] += 1
             if self._overlay:
-                self._overlay.update_translation(event.trace_id, translated)
+                self._overlay.update_translation(event.trace_id, translated, copyable=False)
             else:
                 self._notify_user(
                     "翻译服务异常",
@@ -568,7 +588,7 @@ class VoxGoApp:
             self._stats["translations"] += 1
             if self._overlay:
                 logger.info("更新浮窗翻译")
-                self._overlay.update_translation(event.trace_id, translated)
+                self._overlay.update_translation(event.trace_id, translated, copyable=True)
 
         if self._mobile.server:
             self._broadcast_to_mobile(event.original, translated)
@@ -955,6 +975,12 @@ class VoxGoApp:
             self._overlay.show_settings()
         self._sync_tray_state()
 
+    def _tray_reset_overlay_position(self):
+        if self._overlay:
+            self._overlay.reset_overlay_position()
+            self._save_user_settings()
+        self._sync_tray_state()
+
     def _tray_show_fullscreen_help(self):
         if self._overlay:
             self._overlay.show()
@@ -974,11 +1000,15 @@ class VoxGoApp:
         self._sync_language_flow()
         self._sync_whisper_vad_limit()
         self.config.app.setup_completed = True
-        self._save_user_settings()
+        saved = self._save_user_settings()
+        if saved is False:
+            # A new installation must not start Full before setup is durable.
+            self.config.app.setup_completed = False
         self._refresh_cached_settings()
         ui_language = self._ui_language()
         self._notify_user(
-            ui_text(ui_language, "设置已保存", "Settings Saved"),
+            ui_text(ui_language, "设置尚未保存" if saved is False else "设置已保存",
+                    "Settings Not Saved" if saved is False else "Settings Saved"),
             ui_text(
                 ui_language,
                 "正在后台加载语音识别和翻译服务",
@@ -993,6 +1023,7 @@ class VoxGoApp:
         if getattr(self, "_shutdown_state", "idle") in ("stopping", "complete") or (getattr(self, "_shutdown_thread", None) and self._shutdown_thread.is_alive()):
             return
         self._stopping = True
+        self._audio.cancel_recovery()
         self._paused = True
         self._running = False
         self._shutdown_state = "stopping"
@@ -1434,6 +1465,13 @@ class VoxGoApp:
         print_startup_banner(self.config, self._mobile.get_mobile_url())
 
     def start(self):
+        # Basic has its own lifecycle; failure or revocation of Full cannot gate it.
+        try:
+            from voxgo.analytics.basic import BasicTelemetry
+            self._basic_telemetry = BasicTelemetry(self._runtime_dir(), APP_VERSION)
+        except Exception:
+            self._basic_telemetry = None
+            logger.debug('Basic telemetry startup failed')
         try:
             from voxgo.analytics.client import AuthorizedAnalytics
             self._analytics = AuthorizedAnalytics(self._runtime_dir(), APP_VERSION, lambda: self.config.app)

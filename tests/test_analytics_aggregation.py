@@ -30,7 +30,7 @@ class AggregationTests(unittest.TestCase):
         original = self.store.snapshots()
         restarted = AggregateStore(self.root, '0.4.4', today=lambda: self.day)
         self.assertEqual(original, restarted.snapshots())
-        self.assertEqual(len(original[0]['metrics']), 13)
+        self.assertEqual(len(original[0]['metrics']), 27)
 
     def test_old_ack_cannot_erase_new_revision(self):
         self.write(3)

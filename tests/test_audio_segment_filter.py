@@ -140,6 +140,7 @@ class AudioNoiseGateTest(unittest.TestCase):
         )
 
         capture = SystemAudioCapture(config)
+        self.addCleanup(capture.stop)
 
         self.assertEqual(capture.current_noise_gate()[1], SAFE_MAX_SPEECH_THRESHOLD_DBFS)
 

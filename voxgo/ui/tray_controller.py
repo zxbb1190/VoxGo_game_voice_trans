@@ -76,6 +76,7 @@ class TrayController:
 
             self.actions = {
                 "toggle_overlay": self.menu.addAction(ui_text(ui_language, "隐藏浮窗", "Hide Overlay")),
+                "reset_overlay_position": self.menu.addAction(ui_text(ui_language, "重置浮窗位置", "Reset Overlay Position")),
                 "toggle_translation": self.menu.addAction(ui_text(ui_language, "暂停翻译", "Pause Translation")),
                 "clear_history": self.menu.addAction(ui_text(ui_language, "清空字幕", "Clear Subtitles")),
                 "compact_mode": self.menu.addAction(ui_text(ui_language, "启用紧凑浮窗", "Enable Compact Overlay")),
@@ -90,6 +91,7 @@ class TrayController:
                 self.actions["force_quit"].triggered.connect(self._owner._force_shutdown)
 
             self.actions["toggle_overlay"].triggered.connect(self._owner._tray_toggle_overlay)
+            self.actions["reset_overlay_position"].triggered.connect(self._owner._tray_reset_overlay_position)
             self.actions["toggle_translation"].triggered.connect(self._owner._toggle_translation)
             self.actions["clear_history"].triggered.connect(self._owner._clear_history)
             self.actions["compact_mode"].triggered.connect(self._owner._tray_toggle_compact_mode)
@@ -117,7 +119,7 @@ class TrayController:
         shutdown = getattr(self._owner, "_shutdown_state", "idle")
         for name, action in self.actions.items():
             if hasattr(action, "setEnabled"):
-                action.setEnabled(shutdown == "idle" or name == "toggle_overlay" or
+                action.setEnabled(shutdown == "idle" or name in {"toggle_overlay", "reset_overlay_position"} or
                                   (shutdown == "failed" and name in {"quit", "force_quit"}))
             if name == "force_quit" and hasattr(action, "setVisible"):
                 action.setVisible(shutdown == "failed")
@@ -145,6 +147,7 @@ class TrayController:
             ))
         static_labels = {
             "clear_history": ("清空字幕", "Clear Subtitles"),
+            "reset_overlay_position": ("重置浮窗位置", "Reset Overlay Position"),
             "settings": ("设置", "Settings"),
             "fullscreen_help": ("全屏兼容说明", "Fullscreen Compatibility"),
             "quit": ("退出", "Quit"),

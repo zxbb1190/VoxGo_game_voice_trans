@@ -14,6 +14,7 @@ class CaptureVoiceCandidateTest(unittest.TestCase):
     def test_raw_audio_queue_drops_oldest_block_when_full(self):
         config = AudioConfig(audio_queue_max_blocks=2)
         capture = SystemAudioCapture(config)
+        self.addCleanup(capture.stop)
 
         capture._enqueue_audio_block(b"one")
         capture._enqueue_audio_block(b"two")
@@ -33,6 +34,7 @@ class CaptureVoiceCandidateTest(unittest.TestCase):
             silence_threshold=-10,
         )
         capture = SystemAudioCapture(config)
+        self.addCleanup(capture.stop)
         capture._audio_queue.put(b"\x01\x00" * 1600)
 
         with patch.object(capture, "_is_vad_speech", side_effect=[(True, 1.0), (False, 0.0)]):
@@ -56,6 +58,7 @@ class CaptureVoiceCandidateTest(unittest.TestCase):
             silence_threshold=-80,
         )
         capture = SystemAudioCapture(config)
+        self.addCleanup(capture.stop)
         capture._audio_queue.put(b"\x20\x00" * 1600)
 
         with patch.object(capture, "_is_vad_speech", side_effect=[(False, 0.0), (False, 0.0)]):

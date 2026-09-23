@@ -155,7 +155,9 @@ class InstallerTests(unittest.TestCase):
                 (app / 'old.txt').write_text('old')
                 for relative in ('config.json', 'user_settings.json', '.models/model.bin',
                                  '.translation-models/model.bin', 'runtime/cuda/cuda.dll',
-                                 '_internal/.models/whisper.bin'):
+                                 '_internal/.models/whisper.bin', 'telemetry_consent.json',
+                                 'analytics-remote/epoch/state.json', 'analytics/shards/lifecycle.json',
+                                 'analytics-basic/state.json'):
                     target = app / relative
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_text('user data')
@@ -181,6 +183,9 @@ class InstallerTests(unittest.TestCase):
                                         capture_output=True, timeout=30)
                 running.wait(timeout=10)
                 self.assertTrue((stage / 'ready').exists(), result.stderr)
+                for preserved in ('telemetry_consent.json', 'analytics-remote/epoch/state.json',
+                                  'analytics/shards/lifecycle.json', 'analytics-basic/state.json'):
+                    self.assertEqual((app / preserved).read_text(), 'user data')
                 self.assertEqual((app / 'config.json').read_text(), 'user data')
                 self.assertEqual((app / '.translation-models/model.bin').read_text(), 'user data')
                 self.assertEqual((app / 'runtime/cuda/cuda.dll').read_text(), 'user data')

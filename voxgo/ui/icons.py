@@ -57,6 +57,9 @@ def _make_icon(kind: str, color: str) -> QIcon:
         painter.drawRoundedRect(QRect(10, 11, 10, 13), 2, 2)
         painter.drawLine(13, 14, 13, 21)
         painter.drawLine(17, 14, 17, 21)
+    elif kind == "copy":
+        painter.drawRoundedRect(QRect(8, 5, 12, 14), 1, 1)
+        painter.drawRoundedRect(QRect(5, 9, 12, 14), 1, 1)
     elif kind == "compact":
         painter.drawRect(QRect(7, 8, 16, 12))
         painter.drawLine(7, 14, 12, 14)

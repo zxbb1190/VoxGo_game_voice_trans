@@ -9,6 +9,12 @@ UI_LANGUAGE_OPTIONS = (
 UI_LANGUAGE_LABELS = dict(UI_LANGUAGE_OPTIONS)
 
 
+def system_ui_language() -> str:
+    """First-run policy; intentionally excludes other Chinese territories."""
+    from PyQt5.QtCore import QLocale
+    return UI_LANGUAGE_ZH if QLocale.system().name() in ('zh_CN', 'zh_TW') else UI_LANGUAGE_EN
+
+
 def normalize_ui_language(value: str) -> str:
     text = str(value or "").strip().lower().replace("_", "-")
     aliases = {

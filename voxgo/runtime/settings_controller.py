@@ -170,6 +170,9 @@ class OverlaySettingsController:
                     current_whisper_model,
                 )
         app._translation.update_config(app.config.translation)
+        if app._overlay:
+            app._overlay.translation_config = app.config.translation
+            app._overlay.refresh_translation_mode()
         app._setup_hotkeys()
         app._save_user_settings()
         if hasattr(app, "_analytics_call"):

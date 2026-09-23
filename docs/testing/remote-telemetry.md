@@ -1,17 +1,25 @@
-# Remote telemetry v1 (0.4.3)
+# Remote telemetry transport and consent
 
 Current backend: Cloudflare Worker + D1, origin https://api.voxgo.cn.
 Local implementation tests do not substitute for staging HTTP/D1 acceptance.
 
 ## Cloudflare client hardening (2026-09-21)
 
-Consent version remains 2: the receiving HTTPS origin, numeric fields and purpose
-are unchanged. Provider/retention disclosure now names Cloudflare and hourly cleanup;
-a provider move alone does not force renewed consent. Material scope changes must
-be reviewed separately. No lifecycle behavior is changed.
+Telemetry v2 has two independent channels. Basic counts daily active installations
+using an identifier that rotates on UTC dates and is not linked across days. It is
+always enabled locally and sends only the Basic allowlist when its remote switch
+permits. Full contains optional numeric usage and stability aggregates.
 
-HTTP transport accepts only an explicitly selected HTTPS origin and the two fixed
-API paths. Production remains https://api.voxgo.cn. All redirects, including same
+Consent version remains 3 for refinements of already authorized numeric categories.
+A new installation defaults Full on in the wizard but cannot start Full before
+setup completion and successful persistence. Historical allowed, denied and unknown
+choices are preserved. Settings toggles apply without a second confirmation dialog.
+An existing consent authority always wins; absent authority may be restored from
+strictly validated preserved user settings. Invalid data never grants permission.
+New data categories still require renewed authorization.
+
+HTTP transport accepts only an explicitly selected HTTPS origin and the fixed
+API paths, including /v1/telemetry/basic and /v1/telemetry/sync. Production remains https://api.voxgo.cn. All redirects, including same
 origin, are refused. There is no user-controlled URL in remote configuration.
 
 Retry classification:
@@ -29,6 +37,17 @@ Aggregate totals/watermarks and pending outbox are distinct fields in the same
 atomic state file. Exact ACK only clears pending. Baselines expire under the
 seven-day window rather than being deleted after each successful upload.
 
-Production TELEMETRY_ENABLED remains false. No real or synthetic production
-telemetry requests are permitted for acceptance. Staging HTTP writes are pending
-creation of the isolated environment below; local test results are not cloud proof.
+Live remote switches are deployment configuration, not constants established by
+these local tests. Keep cloud acceptance isolated; local test results do not prove
+production HTTP or D1 behavior.
+
+## Upgrade preservation
+
+The new updater preserves user_settings.json, telemetry_consent.json, analytics,
+analytics-remote and analytics-basic. The 0.5.0 updater can lose old remote state;
+only preserved settings authorization is recovered, without scanning rollback
+backups. An installation / baseline / outbox discontinuity on that one upgrade is
+accepted. Basic seed and immutable first-run date live in user_settings.json.
+Atomic replacement and a bounded cross-process lock prevent simultaneous identity
+creation. Persistence failures do not enable uploads with an unpersisted identity.
+A failed explicit consent save is surfaced to the user and remains retryable.

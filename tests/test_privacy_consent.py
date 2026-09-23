@@ -30,16 +30,14 @@ class PrivacyConsentTests(unittest.TestCase):
         config.telemetry_consent_version = 0
         self.assertFalse(may_upload(config, True))
 
-    def test_explicit_allow_cancel_and_revoke_persist(self):
+    def test_toggle_without_modal_and_revoke_persist(self):
         config = default_app_config()
         dialog = SettingsDialog(config.overlay, config.hotkeys, app_config=config.app)
         try:
             self.assertFalse(dialog.telemetry_consent_check.isChecked())
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry', return_value=QMessageBox.No):
+            with patch('voxgo.ui.telemetry_consent.confirm_telemetry') as prompt:
                 dialog.telemetry_consent_check.click()
-            self.assertEqual(dialog.app_config.telemetry_consent, 'unknown')
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry', return_value=QMessageBox.Yes):
-                dialog.telemetry_consent_check.click()
+                prompt.assert_not_called()
             self.assertTrue(may_upload(dialog.app_config, True))
             first_epoch = dialog.app_config.telemetry_epoch
             self.assertEqual(str(uuid.UUID(first_epoch)), first_epoch)
@@ -63,6 +61,7 @@ class PrivacyConsentTests(unittest.TestCase):
 
     def test_first_run_optional_explicit_consent(self):
         config = default_app_config()
+        config.app.telemetry_install_origin = 'new_install'
         wizard = FirstRunWizard(None, translation_config=config.translation, app_config=config.app)
         try:
             self.assertTrue(wizard.wizard_telemetry_check.isChecked())
@@ -100,3 +99,41 @@ class PrivacyConsentTests(unittest.TestCase):
             load_user_settings(loaded, root)
             self.assertEqual(loaded.app.telemetry_consent, 'denied')
             self.assertFalse(may_upload(loaded.app, True))
+
+    def test_historical_unfinished_wizard_preserves_unknown_or_denied(self):
+        for state in ('unknown', 'denied'):
+            config = default_app_config()
+            config.app.telemetry_consent = state
+            wizard = FirstRunWizard(None, translation_config=config.translation, app_config=config.app)
+            try:
+                self.assertFalse(wizard.wizard_telemetry_check.isChecked())
+                wizard._complete_setup()
+                self.assertEqual(wizard.app_config.telemetry_consent, state)
+                self.assertFalse(may_upload(wizard.app_config, True))
+            finally:
+                wizard.close()
+
+    def test_new_wizard_cancelled_checkbox_and_abandoned_wizard_do_not_grant(self):
+        config = default_app_config()
+        config.app.telemetry_install_origin = 'new_install'
+        wizard = FirstRunWizard(None, translation_config=config.translation, app_config=config.app)
+        try:
+            self.assertFalse(may_upload(wizard.app_config, True))
+            wizard.wizard_telemetry_check.click()
+            with patch('voxgo.ui.telemetry_consent.confirm_telemetry') as prompt:
+                wizard._complete_setup()
+                prompt.assert_not_called()
+            self.assertEqual(wizard.app_config.telemetry_consent, 'denied')
+            self.assertEqual(wizard.app_config.full_telemetry_source, 'user_disabled')
+        finally:
+            wizard.close()
+
+    def test_new_install_settings_grant_waits_for_setup_completion(self):
+        config = default_app_config().app
+        config.telemetry_install_origin = 'new_install'
+        config.telemetry_consent = 'allowed'
+        config.telemetry_consent_version = CONSENT_VERSION
+        config.telemetry_epoch = str(uuid.uuid4())
+        self.assertFalse(may_upload(config, True))
+        config.setup_completed = True
+        self.assertTrue(may_upload(config, True))

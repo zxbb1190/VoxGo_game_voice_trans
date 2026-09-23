@@ -6,8 +6,14 @@ from copy import deepcopy
 COUNTERS = {'app_starts', 'sessions', 'session_seconds', 'offline_sessions',
             'api_sessions', 'translation_success', 'translation_failed',
             'clean_exits', 'unclean_starts'}
+V1_COUNTERS = COUNTERS.copy()
+COUNTERS |= {mode + '_translation_' + result for mode in ('api', 'offline')
+             for result in ('success', 'failed')}
+BUCKETS = ('lt_500', '500_1000', '1000_2000', '2000_5000', 'ge_5000')
 LATENCIES = {'asr_latency', 'translation_latency'}
 METRICS = COUNTERS | {n + s for n in LATENCIES for s in ('_sum_ms', '_samples')}
+V1_METRICS = V1_COUNTERS | {n + s for n in LATENCIES for s in ('_sum_ms', '_samples')}
+METRICS |= {n + '_' + bucket for n in LATENCIES for bucket in BUCKETS}
 LIMIT = 10 ** 12
 
 
@@ -26,11 +32,11 @@ class DailyMetrics:
     def _load(self, day):
         data = self.store.load(day)
         metrics = data.get('metrics', {})
-        valid = (data.get('schema_version') == 1 and data.get('date') == day
+        valid = (data.get('schema_version') in (1, 2) and data.get('date') == day
                  and isinstance(metrics, dict))
         clean = {k: v for k, v in metrics.items()
                  if k in METRICS and type(v) is int and 0 <= v <= LIMIT} if valid else {}
-        return {'schema_version': 1, 'date': day, 'app_version': self.app_version,
+        return {'schema_version': 2, 'date': day, 'app_version': self.app_version,
                 'package_type': self.package_type, 'environment': self.environment.copy(),
                 'metrics': clean}
 
@@ -53,17 +59,47 @@ class DailyMetrics:
             metrics[name] = min(LIMIT, metrics.get(name, 0) + value)
         return True
 
+    @staticmethod
+    def _valid_elapsed(elapsed_ms):
+        return (type(elapsed_ms) in (int, float) and math.isfinite(elapsed_ms)
+                and 0 <= elapsed_ms <= 3600000)
+
+    def _observe_locked(self, prefix, elapsed_ms):
+        metrics = self.snapshot['metrics']
+        if metrics.get(prefix + '_samples', 0) >= LIMIT:
+            return False
+        # Bucket original milliseconds, before rounding the accumulated sum.
+        bucket = BUCKETS[sum(elapsed_ms >= edge for edge in (500, 1000, 2000, 5000))]
+        for suffix, amount in [('_sum_ms', round(elapsed_ms)), ('_samples', 1),
+                               ('_' + bucket, 1)]:
+            key = prefix + suffix
+            metrics[key] = min(LIMIT, metrics.get(key, 0) + amount)
+        return True
+
     def observe(self, name, elapsed_ms):
         prefix = name if name.endswith('_latency') else name + '_latency'
-        if (prefix not in LATENCIES or type(elapsed_ms) not in (int, float)
-                or not math.isfinite(elapsed_ms) or not 0 <= elapsed_ms <= 3600000):
+        if prefix not in LATENCIES or not self._valid_elapsed(elapsed_ms):
+            return False
+        with self._lock:
+            self._rollover()
+            return self._observe_locked(prefix, elapsed_ms)
+
+    def translation_result(self, success, elapsed_ms=None, mode=None):
+        """Apply one result as a single day/lock transaction, or drop it whole."""
+        if type(success) is not bool or mode not in (None, 'api', 'offline'):
             return False
         with self._lock:
             self._rollover()
             metrics = self.snapshot['metrics']
-            for suffix, amount in [('_sum_ms', round(elapsed_ms)), ('_samples', 1)]:
-                key = prefix + suffix
-                metrics[key] = min(LIMIT, metrics.get(key, 0) + amount)
+            result = 'translation_success' if success else 'translation_failed'
+            if metrics.get(result, 0) >= LIMIT:
+                return False
+            metrics[result] = metrics.get(result, 0) + 1
+            if mode is not None:
+                key = mode + '_' + result
+                metrics[key] = min(LIMIT, metrics.get(key, 0) + 1)
+            if self._valid_elapsed(elapsed_ms):
+                self._observe_locked('translation_latency', elapsed_ms)
         return True
 
     def flush(self):

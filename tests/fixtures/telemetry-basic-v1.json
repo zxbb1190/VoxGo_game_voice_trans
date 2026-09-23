@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "daily_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "date": "2026-09-17",
+  "revision": 1,
+  "app_version": "0.6.0",
+  "package_type": "lite",
+  "first_run": true,
+  "setup_completed": false,
+  "full_telemetry": false,
+  "full_telemetry_source": "new_install_pending",
+  "snapshot_id": "309962fabfaa107289ecd14abbdc1f879d94e12b9c8efede0f9f3b285a307e54"
+}

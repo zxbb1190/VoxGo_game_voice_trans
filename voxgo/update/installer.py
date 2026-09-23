@@ -27,6 +27,7 @@ MAX_DOWNLOAD_BYTES = 8 * 1024**3
 MAX_EXTRACTED_BYTES = 16 * 1024**3
 MAX_ARCHIVE_ENTRIES = 100000
 PRESERVE_PATHS = (
+    'analytics', 'analytics-remote', 'analytics-basic', 'telemetry_consent.json',
     'config.json', '_internal/config.json', 'user_settings.json', '.models', '.translation-models', '.translation_models',
     'models', 'runtime/cuda', '_internal/.models',
     '_internal/.translation_models', '_internal/runtime/cuda',

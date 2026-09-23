@@ -33,12 +33,10 @@ class TranslationRuntime:
         self.loop: Optional[asyncio.AbstractEventLoop] = None
         self.thread: Optional[threading.Thread] = None
 
-    def _record_analytics(self, success, elapsed_ms=None):
+    def _record_analytics(self, success, elapsed_ms=None, mode=None):
         try:
             if self.analytics:
-                self.analytics.increment('translation_success' if success else 'translation_failed')
-                if elapsed_ms is not None:
-                    self.analytics.observe('translation', elapsed_ms)
+                self.analytics.translation_result(success, elapsed_ms, mode)
         except Exception:
             pass
 
@@ -273,7 +271,19 @@ class TranslationRuntime:
                 text[:80],
             )
             return
-        result = await self._translate_with_config_snapshot(config, text, detected_language)
+        # Attribute to the task configuration, never the current mutable mode.
+        provider = getattr(config, 'provider', '')
+        mode = ('offline' if provider == 'local' else
+                'api' if provider in ('openai_compatible', 'google') else None)
+        if not hasattr(self.client, 'translate_result_with_config'):
+            mode = None
+        try:
+            result = await self._translate_with_config_snapshot(config, text, detected_language)
+        except Exception as exc:
+            self._handle_error(item_id, exc, mode=mode)
+            return
+        if getattr(result, 'provider', '') == 'local_cache':
+            mode = None
         if self._shutdown_requested.is_set():
             return
         if self._is_stale_language_flow(language_revision):
@@ -302,7 +312,7 @@ class TranslationRuntime:
 
         elapsed = time.time() - t0
         if not translated.startswith('[未翻译]'):
-            self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000)
+            self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000, mode=mode)
         logger.info("translated: {} ({:.1f}s)", translated[:80], elapsed)
         self._event_bus.publish(
             TranslationReady(
@@ -384,13 +394,13 @@ class TranslationRuntime:
             logger.exception("异步翻译任务失败: {}", exc)
             self._handle_error(item_id, exc, already_logged=True)
 
-    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False):
+    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False, mode=None):
         if self._shutdown_requested.is_set():
             return
         if not already_logged:
             logger.exception("翻译任务失败: {}", exc)
         self._stats["errors"] += 1
-        self._record_analytics(False)
+        self._record_analytics(False, mode=mode)
         trace = self._latency_traces.get(item_id)
         if trace and not trace.translation_finished_at:
             trace.translation_finished_at = time.time()

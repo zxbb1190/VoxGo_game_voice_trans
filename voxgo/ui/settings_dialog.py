@@ -504,17 +504,23 @@ class SettingsDialog(QDialog):
         title_font.setBold(True)
         self.privacy_title.setFont(title_font)
         privacy_form.addRow(self.privacy_title)
-        privacy_notice = QLabel(telemetry_summary(is_english_ui(self._ui_language)))
-        privacy_notice.setWordWrap(True)
-        privacy_notice.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        privacy_form.addRow(privacy_notice)
+        privacy_notice = QLabel('?')
+        privacy_notice.setFixedSize(16, 16)
+        privacy_notice.setAlignment(Qt.AlignCenter)
+        privacy_notice.setStyleSheet('color: #666; border: 1px solid #999; border-radius: 8px;')
+        privacy_notice.setToolTip('<qt>' + telemetry_summary(is_english_ui(self._ui_language)) + '</qt>')
+        privacy_notice.setAccessibleName(_tr(self._ui_language, '隐私说明', 'Privacy information'))
         self.telemetry_consent_check = QCheckBox(_tr(self._ui_language,
             '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
         self.telemetry_consent_check.setChecked(
             self.app_config.telemetry_consent == 'allowed'
             and self.app_config.telemetry_consent_version == CONSENT_VERSION)
         self.telemetry_consent_check.clicked.connect(self._change_telemetry_consent)
-        privacy_form.addRow(self.telemetry_consent_check)
+        telemetry_row = QHBoxLayout()
+        telemetry_row.addWidget(self.telemetry_consent_check)
+        telemetry_row.addWidget(privacy_notice)
+        telemetry_row.addStretch()
+        privacy_form.addRow(telemetry_row)
         self.privacy_notice = privacy_notice
 
         action_row = QHBoxLayout()
@@ -546,14 +552,7 @@ class SettingsDialog(QDialog):
         self.app_config.close_action_remember = self.app_config.close_action != "ask"
 
     def _change_telemetry_consent(self, allowed):
-        from PyQt5.QtWidgets import QMessageBox
         from voxgo.analytics.consent import CONSENT_VERSION
-        from voxgo.ui.telemetry_consent import confirm_telemetry
-        if allowed:
-            answer = confirm_telemetry(self, is_english_ui(self._ui_language))
-            if answer != QMessageBox.Yes:
-                self.telemetry_consent_check.setChecked(False)
-                return
         import uuid
         if allowed and (self.app_config.telemetry_consent != 'allowed'
                         or self.app_config.telemetry_consent_version != CONSENT_VERSION
@@ -563,6 +562,7 @@ class SettingsDialog(QDialog):
             self.app_config.telemetry_epoch = ''
         self.app_config.telemetry_consent = 'allowed' if allowed else 'denied'
         self.app_config.telemetry_consent_version = CONSENT_VERSION
+        self.app_config.full_telemetry_source = 'user_enabled' if allowed else 'user_disabled'
         self.app_config._telemetry_consent_changed = True
         self._preview()
 
@@ -584,7 +584,8 @@ class SettingsDialog(QDialog):
         if hasattr(self, 'privacy_notice'):
             from voxgo.analytics.consent import telemetry_title, telemetry_summary
             self.privacy_title.setText(telemetry_title(is_english_ui(self._ui_language)))
-            self.privacy_notice.setText(telemetry_summary(is_english_ui(self._ui_language)))
+            self.privacy_notice.setToolTip('<qt>' + telemetry_summary(is_english_ui(self._ui_language)) + '</qt>')
+            self.privacy_notice.setAccessibleName(_tr(self._ui_language, '隐私说明', 'Privacy information'))
             self.telemetry_consent_check.setText(_tr(self._ui_language,
                 '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
         if hasattr(self, "close_action_combo"):

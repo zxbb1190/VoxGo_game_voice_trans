@@ -101,7 +101,13 @@ def load_config(config_path: str = None, runtime_dir: Path = None) -> AppConfig:
             logger.error(f"配置加载失败: {e}")
 
     if runtime_dir is not None:
+        if config_path and Path(config_path).exists():
+            bundled = Path(runtime_dir) / '_internal' / 'config.json'
+            config.app._telemetry_existing_config = (Path(config_path).resolve() != bundled.resolve()
+                and Path(config_path).name != 'config.example.json')
         load_user_settings(config, Path(runtime_dir))
+        from voxgo.analytics.migration import initialize_telemetry_v2
+        initialize_telemetry_v2(config, Path(runtime_dir))
     migrate_runtime_defaults(config)
     sync_language_flow(config)
     apply_language_runtime_policy(config)
@@ -198,14 +204,10 @@ def load_user_settings(config: AppConfig, runtime_dir: Path):
         with open(settings_path, "r", encoding="utf-8-sig") as f:
             data = json.load(f)
         apply_section_data(config, data, USER_SETTINGS_SECTIONS)
-        try:
-            authority = json.loads((Path(runtime_dir) / 'telemetry_consent.json').read_text(encoding='utf-8'))
-            for key in ('telemetry_consent', 'telemetry_consent_version', 'telemetry_epoch'):
-                setattr(config.app, key, authority[key])
-        except (OSError, ValueError, KeyError, TypeError):
-            config.app.telemetry_consent = 'unknown'
-            config.app.telemetry_consent_version = 0
-            config.app.telemetry_epoch = ''
+        from voxgo.analytics.migration import read_consent_authority
+        authority = read_consent_authority(Path(runtime_dir), data.get('app', {}))
+        for key, value in authority.items():
+            setattr(config.app, key, value)
         migrate_recognition_device_policy(config, data)
         if "latency_mode" not in data.get("audio", {}):
             config.audio.latency_mode = ""
@@ -460,37 +462,16 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
 
 
 def save_user_settings(config: AppConfig, runtime_dir: Path):
-    settings_path = Path(runtime_dir) / "user_settings.json"
-    data = serialize_user_settings(config)
-    # Only explicit UI consent actions may update the independent authority.
-    # Unrelated saves from another process cannot revive an old grant.
-    if getattr(config.app, '_telemetry_consent_changed', False):
-        import os
-        import tempfile
-        fields = ('telemetry_consent', 'telemetry_consent_version', 'telemetry_epoch')
-        consent = {key: data['app'][key] for key in fields}
-        temp = None
-        try:
-            with tempfile.NamedTemporaryFile('w', encoding='utf-8', dir=runtime_dir,
-                                             prefix='.consent-', delete=False) as stream:
-                temp = Path(stream.name)
-                json.dump(consent, stream)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.replace(temp, Path(runtime_dir) / 'telemetry_consent.json')
-            config.app._telemetry_consent_changed = False
-        except OSError:
-            pass
-        finally:
-            if temp is not None:
-                try:
-                    temp.unlink(missing_ok=True)
-                except OSError:
-                    pass
+    from voxgo.analytics.migration import persist_user_settings
     try:
-        settings_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        persist_user_settings(config, Path(runtime_dir), serialize_user_settings(config))
+        config.app._telemetry_save_error = ''
+        return True
     except Exception as e:
+        config.app._telemetry_save_error = ('consent_not_saved' if getattr(config.app, '_telemetry_consent_changed', False)
+                                            else 'settings_save_failed')
         logger.warning("用户设置保存失败: {}", e)
+        return False
 
 
 def serialize_user_settings(config: AppConfig) -> dict:
@@ -502,6 +483,10 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "telemetry_consent": getattr(config.app, 'telemetry_consent', 'unknown'),
             "telemetry_consent_version": getattr(config.app, 'telemetry_consent_version', 0),
             "telemetry_epoch": getattr(config.app, 'telemetry_epoch', ''),
+            **{key: getattr(config.app, key, default) for key, default in (
+                ('basic_install_seed', ''), ('basic_first_run_date', ''),
+                ('telemetry_v2_migrated', False), ('telemetry_install_origin', 'historical_install'),
+                ('full_telemetry_source', 'migration_unknown'))},
             "language": normalize_ui_language(getattr(config.app, "language", UI_LANGUAGE_ZH)),
             "recognition_device_policy_version": RECOGNITION_DEVICE_POLICY_VERSION,
         },

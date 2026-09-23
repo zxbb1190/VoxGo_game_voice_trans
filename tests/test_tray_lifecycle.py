@@ -53,7 +53,7 @@ class TrayLifecycleTests(unittest.TestCase):
                                    overlay=SimpleNamespace(compact_mode=False)),
             _shutdown_state="idle", _paused=False,
         )
-        for method in ("_tray_toggle_overlay", "_toggle_translation", "_clear_history",
+        for method in ("_tray_toggle_overlay", "_tray_reset_overlay_position", "_toggle_translation", "_clear_history",
                        "_tray_toggle_compact_mode", "_tray_open_settings",
                        "_tray_show_fullscreen_help", "_request_shutdown",
                        "_handle_tray_activated", "_force_shutdown"):
@@ -121,6 +121,12 @@ class TrayLifecycleTests(unittest.TestCase):
         actions["force_quit"].trigger()
         self.owner._force_shutdown.assert_called_once()
         self.assertTrue(self.controller.icon.isVisible())
+
+    def test_reset_overlay_position_action_calls_owner(self):
+        self.assertTrue(self.setup_tray())
+        self.assertEqual(self.controller.actions["reset_overlay_position"].text(), "Reset Overlay Position")
+        self.controller.actions["reset_overlay_position"].trigger()
+        self.owner._tray_reset_overlay_position.assert_called_once()
 
 
 if __name__ == "__main__":

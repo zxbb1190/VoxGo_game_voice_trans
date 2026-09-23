@@ -57,6 +57,9 @@ class LocalAnalytics:
     def observe(self, name, elapsed_ms):
         self._submit('observe', name, elapsed_ms)
 
+    def translation_result(self, success, elapsed_ms=None, mode=None):
+        self._submit('translation_result', success, elapsed_ms, mode)
+
     def set_active(self, active, mode=None):
         try:
             if not self._stopped.is_set():
@@ -324,7 +327,8 @@ class AuthorizedAnalytics:
                 valid_epoch = str(uuid.UUID(epoch)) == epoch
             except (ValueError, TypeError, AttributeError):
                 valid_epoch = False
-            allowed = not self._stopping and may_upload(config, True) and valid_epoch
+            allowed = (not self._stopping and may_upload(config, True) and valid_epoch
+                       and may_upload(self._remote_consent(epoch), True))
             if not allowed or epoch != self._epoch:
                 if self.uploader:
                     self.uploader.stop()
@@ -363,6 +367,9 @@ class AuthorizedAnalytics:
 
     def observe(self, name, elapsed_ms):
         self._call('observe', name, elapsed_ms)
+
+    def translation_result(self, success, elapsed_ms=None, mode=None):
+        self._call('translation_result', success, elapsed_ms, mode)
 
     def set_active(self, active, mode=None):
         self._active = (active, mode)

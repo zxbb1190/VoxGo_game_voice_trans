@@ -25,8 +25,12 @@ class RemoteConsentRuntimeTests(unittest.TestCase):
             config.telemetry_epoch = str(uuid.uuid4())
             analytics.refresh_consent()
             epoch = config.telemetry_epoch
+            uploader.assert_not_called()
+            self.assertIsNone(analytics.remote)
             self.assertIsNone(analytics._remote_consent(epoch))
             (root / 'telemetry_consent.json').write_text(json.dumps(vars(config)))
+            analytics.refresh_consent()
+            uploader.assert_called_once()
             self.assertTrue(may_upload(analytics._remote_consent(epoch), True))
             # Another process revokes consent while our in-memory copy stays allowed.
             (root / 'telemetry_consent.json').write_text(json.dumps({'telemetry_consent': 'denied'}))
@@ -38,6 +42,7 @@ class RemoteConsentRuntimeTests(unittest.TestCase):
             uploader.return_value.stop.assert_called()
             config.telemetry_consent = 'allowed'
             config.telemetry_epoch = str(uuid.uuid4())
+            (root / 'telemetry_consent.json').write_text(json.dumps(vars(config)))
             analytics.refresh_consent()
             self.assertNotEqual(analytics._epoch, epoch)
             self.assertIsNone(analytics._remote_consent(epoch))
@@ -63,12 +68,14 @@ class RemoteConsentRuntimeTests(unittest.TestCase):
                 patch('voxgo.analytics.uploader.RemoteUploader'):
             config = SimpleNamespace(telemetry_consent='allowed',
                 telemetry_consent_version=CONSENT_VERSION, telemetry_epoch=str(uuid.uuid4()))
+            (Path(tmp) / 'telemetry_consent.json').write_text(json.dumps(vars(config)))
             analytics = AuthorizedAnalytics(tmp, '0.4.3', lambda: config)
             self.assertTrue(collector.call_args.kwargs['count_start'])
             config.telemetry_consent = 'denied'
             analytics.refresh_consent()
             config.telemetry_consent = 'allowed'
             config.telemetry_epoch = str(uuid.uuid4())
+            (Path(tmp) / 'telemetry_consent.json').write_text(json.dumps(vars(config)))
             analytics.refresh_consent()
             self.assertFalse(collector.call_args.kwargs['count_start'])
             analytics.stop()

@@ -74,8 +74,10 @@ class TranslationItem:
         fade_duration: int,
         timestamp: float = None,
         item_id: str = "",
+        copyable: bool = False,
     ):
         self.item_id = item_id
+        self.copyable = copyable
         self.original = original
         self.translated = translated
         self.fade_duration = max(1, fade_duration)
@@ -96,7 +98,7 @@ class OverlaySignals(QObject):
     """信号类，用于线程安全更新"""
     new_translation = pyqtSignal(str, str)
     new_translation_with_id = pyqtSignal(str, str, str)
-    update_translation = pyqtSignal(str, str)
+    update_translation = pyqtSignal(str, str, bool)
     remove_translation = pyqtSignal(str)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
@@ -168,6 +170,7 @@ class GameOverlay(QWidget):
         self._resize_start_pos = None
         self._resize_start_size = None
         self._initializing_geometry = True
+        self._screen_connections = []
         self._syncing_language_controls = False
         self._settings_dialog = None
         self._first_run_wizard = None
@@ -182,6 +185,7 @@ class GameOverlay(QWidget):
 
         self._init_ui()
         self._connect_signals()
+        self._connect_screen_changes()
 
     def _ui_language(self) -> str:
         return normalize_ui_language(getattr(self.app_config or RuntimeConfig(), "language", UI_LANGUAGE_ZH))
@@ -239,6 +243,11 @@ class GameOverlay(QWidget):
         self._target_lang_combo.currentIndexChanged.connect(self._language_combo_changed)
 
         toolbar_layout.addStretch()
+
+        self._provider_label = QLabel()
+        self._provider_label.setObjectName("providerStatus")
+        self._provider_label.setAlignment(Qt.AlignCenter)
+        toolbar_layout.addWidget(self._provider_label)
 
         self._paused_status_label = QLabel()
         self._paused_status_label.setObjectName("pausedStatus")
@@ -342,7 +351,15 @@ class GameOverlay(QWidget):
 
         # 翻译标签池
         self._labels: List[QLabel] = []
+        self._subtitle_rows: List[QWidget] = []
+        self._copy_buttons: List[QToolButton] = []
+        self._visible_items: List[TranslationItem] = []
         for i in range(self.config.max_lines):
+            row = QWidget()
+            row.setObjectName("subtitleRow")
+            row_layout = QHBoxLayout(row)
+            row_layout.setContentsMargins(0, 0, 0, 0)
+            row_layout.setSpacing(2)
             label = QLabel()
             label.setWordWrap(True)
             label.setTextFormat(Qt.RichText)
@@ -351,9 +368,22 @@ class GameOverlay(QWidget):
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
             label.setContentsMargins(0, 0, 0, 0)
             label.setMinimumWidth(0)
-            label.hide()
-            self._content_layout.addWidget(label)
+            row_layout.addWidget(label, 1)
+            copy_button = QToolButton(row)
+            copy_button.setObjectName("copyTranslationButton")
+            copy_button.setFixedSize(22, 22)
+            copy_button.setCursor(Qt.PointingHandCursor)
+            copy_button.setIcon(_make_icon("copy", self.config.text_color))
+            copy_button.clicked.connect(lambda checked=False, index=i: self._copy_translation_at(index))
+            copy_button.hide()
+            row.installEventFilter(self)
+            label.installEventFilter(self)
+            copy_button.installEventFilter(self)
+            row.hide()
+            self._content_layout.addWidget(row)
             self._labels.append(label)
+            self._subtitle_rows.append(row)
+            self._copy_buttons.append(copy_button)
 
         # 设置窗口透明度
         self.setWindowOpacity(self.config.opacity)
@@ -365,10 +395,7 @@ class GameOverlay(QWidget):
         QTimer.singleShot(0, self._position_lock_button)
 
     def _restore_window_geometry(self):
-        primary = QApplication.primaryScreen().geometry()
-        screen = primary
-        for item in QApplication.screens():
-            screen = screen.united(item.geometry())
+        primary = QApplication.primaryScreen().availableGeometry()
         width = max(260, min(980, int(getattr(self.config, "window_width", 500) or 500)))
         height = max(92, min(520, int(getattr(self.config, "window_height", 200) or 200)))
         self.resize(width, height)
@@ -376,19 +403,72 @@ class GameOverlay(QWidget):
         y = getattr(self.config, "window_y", None)
         if x is None or y is None:
             x, y = self._default_position_for_size(primary, width, height)
-        x = max(screen.left(), min(int(x), screen.right() - width + 1))
-        y = max(screen.top(), min(int(y), screen.bottom() - height + 1))
+        if not self._geometry_reasonably_visible(QRect(int(x), int(y), width, height)):
+            x, y = self._default_position_for_size(primary, width, height)
         self.move(x, y)
         self._remember_window_geometry()
 
     def _default_position_for_size(self, screen: QRect, width: int, height: int):
         if self.config.position == "top":
-            return (screen.width() - width) // 2, 50
-        if self.config.position == "right":
-            return screen.width() - width - 20, (screen.height() - height) // 2
-        if self.config.position == "left":
-            return 20, (screen.height() - height) // 2
-        return (screen.width() - width) // 2, screen.height() - height - 50
+            x, y = (screen.width() - width) // 2, 50
+        elif self.config.position == "right":
+            x, y = screen.width() - width - 20, (screen.height() - height) // 2
+        elif self.config.position == "left":
+            x, y = 20, (screen.height() - height) // 2
+        else:
+            x, y = (screen.width() - width) // 2, screen.height() - height - 50
+        return (
+            max(screen.left(), min(screen.left() + x, screen.right() - width + 1)),
+            max(screen.top(), min(screen.top() + y, screen.bottom() - height + 1)),
+        )
+
+    @staticmethod
+    def _geometry_reasonably_visible(rect: QRect) -> bool:
+        for screen in QApplication.screens():
+            intersection = rect.intersected(screen.availableGeometry())
+            if (intersection.width() >= min(80, max(32, rect.width() // 4)) and
+                    intersection.height() >= min(40, max(24, rect.height() // 4))):
+                return True
+        return False
+
+    def _connect_screen_changes(self):
+        application = QApplication.instance()
+        if not application:
+            return
+        application.screenAdded.connect(self._screens_changed)
+        application.screenRemoved.connect(self._screens_changed)
+        self._screen_connections.extend((application.screenAdded, application.screenRemoved))
+        self._screens_changed()
+
+    def _screens_changed(self, *args):
+        for signal in self._screen_connections[2:]:
+            try:
+                signal.disconnect(self._schedule_geometry_recovery)
+            except (TypeError, RuntimeError):
+                pass
+        del self._screen_connections[2:]
+        for screen in QApplication.screens():
+            for signal in (screen.availableGeometryChanged, screen.geometryChanged):
+                signal.connect(self._schedule_geometry_recovery)
+                self._screen_connections.append(signal)
+        self._schedule_geometry_recovery()
+
+    def _schedule_geometry_recovery(self, *args):
+        QTimer.singleShot(0, self._ensure_visible_geometry)
+
+    def _ensure_visible_geometry(self):
+        if not self._geometry_reasonably_visible(self.geometry()):
+            self.reset_overlay_position(show=False)
+
+    def reset_overlay_position(self, show: bool = True):
+        primary = QApplication.primaryScreen()
+        if not primary:
+            return
+        self.move(*self._default_position_for_size(primary.availableGeometry(), self.width(), self.height()))
+        self._remember_window_geometry()
+        self._notify_settings_changed()
+        if show:
+            self.show()
 
     def _remember_window_geometry(self):
         if not hasattr(self, "config"):
@@ -448,6 +528,21 @@ class GameOverlay(QWidget):
                 padding: 1px 7px;
                 font-size: {max(10, self.config.font_size - 4)}px;
                 font-weight: 600;
+            }}
+            QLabel#providerStatus {{
+                color: {self.config.original_text_color};
+                background: rgba(18, 24, 33, 125);
+                border-radius: 4px;
+                padding: 1px 4px;
+                font-size: {max(10, self.config.font_size - 4)}px;
+            }}
+            QToolButton#copyTranslationButton {{
+                background: rgba(18, 24, 33, 160);
+                border: 0;
+                border-radius: 4px;
+            }}
+            QToolButton#copyTranslationButton:hover {{
+                background: rgba(40, 60, 48, 210);
             }}
             QFrame#qrPopup {{
                 background: rgba(255, 255, 255, 245);
@@ -590,6 +685,7 @@ class GameOverlay(QWidget):
 
     def _refresh_control_state(self):
         ui_language = self._ui_language()
+        self.refresh_translation_mode()
         if hasattr(self, "_pause_button"):
             self._pause_button.setIcon(_make_icon("play" if self._paused else "pause", self.config.text_color))
             self._pause_button.setToolTip(_tr(
@@ -620,6 +716,22 @@ class GameOverlay(QWidget):
             self._target_lang_combo.setToolTip(_tr(ui_language, "翻译目标语言", "Target Language"))
         if hasattr(self, "_quit_button"):
             self._quit_button.setToolTip(_tr(ui_language, "关闭", "Close"))
+        for button in getattr(self, "_copy_buttons", ()):
+            button.setToolTip(_tr(ui_language, "复制译文", "Copy translation"))
+
+    def refresh_translation_mode(self):
+        """Refresh the short provider label after settings or language changes."""
+        if not hasattr(self, "_provider_label"):
+            return
+        provider = getattr(self.translation_config, "provider", "openai_compatible")
+        labels = {
+            "openai_compatible": "API",
+            "google": "Google",
+            "local": _tr(self._ui_language(), "本地", "Local"),
+        }
+        label = labels.get(provider, "API")
+        self._provider_label.setText(label)
+        self._provider_label.setToolTip(_tr(self._ui_language(), "当前翻译方式", "Current translation provider") + ": " + label)
 
     def set_paused(self, paused: bool):
         self._paused = bool(paused)
@@ -691,6 +803,16 @@ class GameOverlay(QWidget):
         return f"http://{host}:8765/mobile"
 
     def eventFilter(self, watched, event):
+        for index, row in enumerate(getattr(self, "_subtitle_rows", ())):
+            if watched in (row, self._labels[index], self._copy_buttons[index]):
+                if watched is row and event.type() == QEvent.Resize:
+                    button = self._copy_buttons[index]
+                    button.move(max(0, row.width() - button.width() - 2), 2)
+                elif event.type() == QEvent.Enter:
+                    self._set_copy_button_hover(index, True)
+                elif event.type() == QEvent.Leave:
+                    QTimer.singleShot(0, lambda row_index=index: self._hide_copy_button_if_unhovered(row_index))
+                break
         qr_button = getattr(self, "_qr_button", None)
         qr_popup = getattr(self, "_qr_popup", None)
         if qr_button is not None and watched is qr_button:
@@ -706,6 +828,22 @@ class GameOverlay(QWidget):
             if event.type() == QEvent.Leave:
                 QTimer.singleShot(140, self._hide_qr_popup_if_unhovered)
         return super().eventFilter(watched, event)
+
+    def _set_copy_button_hover(self, index: int, hovered: bool):
+        if index >= len(self._visible_items):
+            return
+        item = self._visible_items[index]
+        button = self._copy_buttons[index]
+        button.setVisible(hovered and item.copyable and self._can_interact())
+        if button.isVisible():
+            button.raise_()
+
+    def _hide_copy_button_if_unhovered(self, index: int):
+        if index >= len(self._subtitle_rows):
+            return
+        row = self._subtitle_rows[index]
+        if not row.rect().contains(row.mapFromGlobal(QCursor.pos())):
+            self._copy_buttons[index].hide()
 
     def _show_qr_popup(self):
         if self._is_locked():
@@ -1058,6 +1196,8 @@ class GameOverlay(QWidget):
         self._swap_lang_button.setIcon(_make_icon("swap", self.config.original_text_color))
         self._settings_button.setIcon(_make_icon("settings", self.config.text_color))
         self._quit_button.setIcon(_make_icon("close", self.config.text_color))
+        for button in self._copy_buttons:
+            button.setIcon(_make_icon("copy", self.config.text_color))
         self._sync_language_controls()
         self._refresh_control_state()
         self._refresh_compact_mode()
@@ -1113,9 +1253,9 @@ class GameOverlay(QWidget):
         """线程安全地添加可更新的翻译记录。"""
         self._signals.new_translation_with_id.emit(item_id, original, translated)
 
-    def update_translation(self, item_id: str, translated: str):
+    def update_translation(self, item_id: str, translated: str, copyable: bool = False):
         """线程安全地更新已有翻译记录。"""
-        self._signals.update_translation.emit(item_id, translated)
+        self._signals.update_translation.emit(item_id, translated, bool(copyable))
 
     def remove_translation(self, item_id: str):
         self._signals.remove_translation.emit(item_id)
@@ -1143,11 +1283,12 @@ class GameOverlay(QWidget):
             if oldest.fade_start is None:
                 oldest.start_fade()
 
-    def _update_translation(self, item_id: str, translated: str):
+    def _update_translation(self, item_id: str, translated: str, copyable: bool = False):
         """更新已有翻译内容，避免慢翻译显示到下一条上。"""
         for item in self._translations:
             if item.item_id == item_id:
                 item.translated = translated
+                item.copyable = bool(copyable) and bool(translated.strip())
                 item.fade_start = None
                 item.timestamp = time.time()
                 self._refresh_labels()
@@ -1192,19 +1333,25 @@ class GameOverlay(QWidget):
         for item in items[-self.config.max_lines:]:
             html = self._format_item(item, item.opacity, text_width)
             height = self._measure_html_height(html, text_width)
-            visible_items.append((html, height))
+            visible_items.append((item, html, height))
+
+        self._visible_items = [item for item, _, _ in visible_items]
 
         for i, label in enumerate(self._labels):
+            row = self._subtitle_rows[i]
+            button = self._copy_buttons[i]
             if i < len(visible_items):
-                html, height = visible_items[i]
+                item, html, height = visible_items[i]
                 label.setText(html)
                 label.setFixedHeight(max(1, height))
-                label.show()
+                row.show()
+                button.setVisible(bool(item.copyable) and row.underMouse() and self._can_interact())
                 label.updateGeometry()
             else:
                 label.clear()
                 label.setFixedHeight(0)
-                label.hide()
+                button.hide()
+                row.hide()
         self._content_layout.activate()
         self._content_widget.updateGeometry()
         if hasattr(self, "_scroll_area"):
@@ -1253,6 +1400,12 @@ class GameOverlay(QWidget):
     def _normalize_display_text(self, text: str) -> str:
         return " ".join((text or "").split())
 
+    def _copy_translation_at(self, index: int):
+        if 0 <= index < len(self._visible_items):
+            item = self._visible_items[index]
+            if item.copyable and item.translated.strip():
+                QApplication.clipboard().setText(item.translated)
+
     def _scroll_to_latest(self):
         if not hasattr(self, "_scroll_area"):
             return
@@ -1274,8 +1427,7 @@ class GameOverlay(QWidget):
     def _clear_history(self):
         """清除翻译历史"""
         self._translations.clear()
-        for label in self._labels:
-            label.hide()
+        self._refresh_labels()
 
     def _toggle_visibility(self):
         """切换可见性"""
@@ -1403,6 +1555,7 @@ class GameOverlay(QWidget):
 
     def showEvent(self, event):
         super().showEvent(event)
+        self._schedule_geometry_recovery()
         self._refresh_lock_state()
         self._refresh_labels()
         self._position_lock_button()
@@ -1416,20 +1569,9 @@ class GameOverlay(QWidget):
 
     def set_position(self, position: str):
         """设置浮窗位置"""
-        screen = QApplication.primaryScreen().geometry()
-        positions = {
-            "top": (screen.width() // 2 - self.width() // 2, 50),
-            "bottom": (screen.width() // 2 - self.width() // 2,
-                       screen.height() - self.height() - 50),
-            "left": (20, screen.height() // 2 - self.height() // 2),
-            "right": (screen.width() - self.width() - 20,
-                      screen.height() // 2 - self.height() // 2),
-        }
-        if position in positions:
-            self.move(*positions[position])
+        if position in {"top", "bottom", "left", "right"}:
             self.config.position = position
-            self._remember_window_geometry()
-            self._notify_settings_changed()
+            self.reset_overlay_position(show=False)
 
     def prepare_shutdown(self):
         """Prevent auxiliary dialogs from starting more work while quitting."""
@@ -1462,6 +1604,12 @@ class GameOverlay(QWidget):
             callback()
             return
         self._fade_timer.stop()
+        for index, signal in enumerate(self._screen_connections):
+            try:
+                signal.disconnect(self._screens_changed if index < 2 else self._schedule_geometry_recovery)
+            except (TypeError, RuntimeError):
+                pass
+        self._screen_connections.clear()
         if hasattr(self, "_lock_button"):
             self._lock_button.close()
         if hasattr(self, "_qr_popup"):

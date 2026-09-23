@@ -32,7 +32,7 @@ class HTTPTransport:
         self.api_root = api_root.rstrip('/')
 
     def __call__(self, method, path, payload=None):
-        if path not in ('/v1/config', '/v1/telemetry/sync'):
+        if path not in ('/v1/config', '/v1/telemetry/sync', '/v1/telemetry/basic'):
             raise ValueError('invalid API path')
         body = json.dumps(payload, sort_keys=True, separators=(',', ':')).encode() if payload else None
         request = urllib.request.Request(self.api_root + path, data=body, method=method,

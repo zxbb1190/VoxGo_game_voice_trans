@@ -2,7 +2,7 @@
 
 LocalAnalytics is connected to application startup, translation runtime results,
 accepted ASR transcripts, pause state, active processing time and shutdown.
-This local-only buffer is never uploaded. A separate consent-only remote buffer is
+This local-only buffer is never uploaded. Separate always-enabled Basic installation statistics and optional Full remote buffers are
 described in [remote-telemetry.md](remote-telemetry.md). Each process writes
 runtime_dir/analytics/<random UUID>/
 YYYY-MM-DD.json. UUIDs isolate simultaneous writers; they are not installation IDs.
@@ -56,3 +56,16 @@ keys instead of overwriting daily totals with one process's counters.
 Windows validation: 8 storage tests cover stale acknowledgements, today's file,
 cross-day reload, concurrent increments, no per-event IO, retention, total byte
 and file limits, corruption, write failures and invalid inputs.
+
+## Telemetry v2 channel separation
+
+Basic is not built from these cumulative metric snapshots. Its independent bounded
+analytics-basic state holds revisioned daily installation status, exact ACKs and
+retry state. Seed, immutable first-run date and migration marker are persisted in
+user_settings.json. Basic stays enabled when Full is disabled; it cannot correlate
+daily IDs across dates or measure unique people / cross-day retention.
+
+Full uses analytics-remote authorized epochs, preserves cumulative baselines after
+exact ACK, and never backfills periods when disabled. Local analytics includes
+lifecycle state used for clean / unclean exit accounting and is retained by the
+updater along with both remote channel directories and the consent authority.

@@ -192,7 +192,7 @@ class AggregateStore:
                     path.unlink(missing_ok=True)
                     continue
                 shard = self._read(path, 32768)
-                if shard.get('schema_version') != 1 or shard.get('date') != path.stem:
+                if shard.get('schema_version') not in (1, 2) or shard.get('date') != path.stem:
                     continue
                 metrics = self._metrics(shard.get('metrics'))
             except (ValueError, KeyError, OSError, TypeError):
@@ -215,7 +215,7 @@ class AggregateStore:
         for day in changed:
             entry = state['days'][day]
             entry['revision'] += 1
-            entry['pending'] = {'schema_version': 1, 'install_id': state['install_id'],
+            entry['pending'] = {'schema_version': 2, 'install_id': state['install_id'],
                                 'date': day, 'revision': entry['revision'],
                                 'app_version': self.app_version,
                                 'package_type': self.package_type, 'metrics': deepcopy(entry['totals'])}

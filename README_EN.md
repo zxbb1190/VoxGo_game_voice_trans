@@ -365,6 +365,12 @@ Closed-source commercial use, private custom distribution, or commercial edition
 
 Offline game glossary rules cover combat, movement, armor/healing, grenades, loot and teamwork, with guarded phrase composition and embedded normalization. Questions, quotations and unmatched contexts remain model-driven. English→Chinese explicitly selects Simplified Mandarin. See the [52-case development comparison](docs/evaluations/game-glossary.md); it is not a general quality benchmark.
 
+## Usage Statistics and Privacy
+
+Basic statistics are always enabled to count Daily Active Installations using identifiers that are not linked across UTC dates. They include version, package edition, same-day first-run status, setup completion, and the Full statistics state and source. These are installation counts, not unique people or cross-day retention. The receiving service sees the network IP but does not store it in D1.
+
+Optional Full usage and stability statistics can be disabled in Settings. New installations default to checked in the setup wizard and start Full only after completion; upgrades preserve historical allowed, denied or unknown choices. Disabling Full does not disable Basic. Neither channel uploads audio, recognized text, translations, API keys, hardware identifiers, file paths, crash stacks or error messages.
+
 ## Contact
 
 Email: [douyaj33@gmail.com](mailto:douyaj33@gmail.com)

@@ -7,6 +7,7 @@ import queue
 import threading
 import time
 import wave
+import weakref
 from dataclasses import dataclass
 from typing import Optional, Callable
 
@@ -37,6 +38,38 @@ LATENCY_PRESET_MATCH_KEYS = (
     "speech_idle_timeout_ms",
 )
 DEFAULT_AUDIO_QUEUE_MAX_BLOCKS = 5
+# PortAudio's Windows/WASAPI host APIs are process-global. Initializing or
+# tearing down a second PyAudio instance while another thread enumerates or
+# opens a stream can corrupt native state. Keep every lifecycle call under one
+# reentrant lock; never hold it while processing speech on the UI thread.
+PORTAUDIO_LIFECYCLE_LOCK = threading.RLock()
+_ACTIVE_LEVEL_MONITORS = weakref.WeakSet()
+_LEVEL_MONITOR_REGISTRY_LOCK = threading.Lock()
+_AUDIO_REINITIALIZING = False
+
+
+class AudioRecoveryInProgress(RuntimeError):
+    """An audio-test stream cannot open during device re-enumeration."""
+
+
+def stop_active_audio_monitors():
+    """Stop audio-test streams before PortAudio is re-initialized for recovery."""
+    global _AUDIO_REINITIALIZING
+    with _LEVEL_MONITOR_REGISTRY_LOCK:
+        _AUDIO_REINITIALIZING = True
+        monitors = list(_ACTIVE_LEVEL_MONITORS)
+    try:
+        for monitor in monitors:
+            monitor.stop(for_recovery=True)
+    except Exception:
+        finish_audio_reinitialization()
+        raise
+
+
+def finish_audio_reinitialization():
+    global _AUDIO_REINITIALIZING
+    with _LEVEL_MONITOR_REGISTRY_LOCK:
+        _AUDIO_REINITIALIZING = False
 
 AUDIO_LATENCY_PRESETS = {
     LATENCY_MODE_FAST: {
@@ -286,8 +319,30 @@ def should_drop_speech_segment(segment: SpeechSegment, config: AudioConfig) -> s
     return ""
 
 
-def list_input_devices():
+def _acquire_portaudio_for_probe(cancel_event=None):
+    if cancel_event is None:
+        PORTAUDIO_LIFECYCLE_LOCK.acquire()
+        return True
+    while not cancel_event.is_set():
+        if PORTAUDIO_LIFECYCLE_LOCK.acquire(timeout=0.1):
+            if cancel_event.is_set():
+                PORTAUDIO_LIFECYCLE_LOCK.release()
+                return False
+            return True
+    return False
+
+
+def list_input_devices(cancel_event=None):
     """Return system-audio loopback devices first, then normal inputs."""
+    if not _acquire_portaudio_for_probe(cancel_event):
+        return []
+    try:
+        return _list_input_devices_locked()
+    finally:
+        PORTAUDIO_LIFECYCLE_LOCK.release()
+
+
+def _list_input_devices_locked():
     audio = pyaudio.PyAudio()
     devices = []
     seen_indexes = set()
@@ -323,6 +378,25 @@ def list_input_devices():
     return devices
 
 
+def default_loopback_device_id(cancel_event=None) -> str:
+    """Read the current Windows default output on a worker thread."""
+    if not HAS_WASAPI_LOOPBACK:
+        return ""
+    if not _acquire_portaudio_for_probe(cancel_event):
+        return ""
+    try:
+        audio = pyaudio.PyAudio()
+        try:
+            if hasattr(audio, "get_default_wasapi_loopback"):
+                info = audio.get_default_wasapi_loopback()
+                return stable_device_id(info, is_loopback=True)
+        finally:
+            audio.terminate()
+    finally:
+        PORTAUDIO_LIFECYCLE_LOCK.release()
+    return ""
+
+
 class AudioLevelMonitor:
     """Lightweight live level monitor for setup and diagnostics."""
 
@@ -333,58 +407,78 @@ class AudioLevelMonitor:
         self._stream: Optional[pyaudio.Stream] = None
         self._thread: Optional[threading.Thread] = None
         self._running = False
+        self._stop_lock = threading.RLock()
         self._stream_channels = 1
         self._sample_rate = self.config.sample_rate
         self.selected_device = None
         self.peak_dbfs = -120.0
 
     def start(self):
-        if self._running:
-            return
-        self._selector = SystemAudioCapture(self.config)
-        device_index = self._selector.find_loopback_device()
-        if device_index is None:
-            raise RuntimeError("未找到可用的音频输入设备")
+        with _LEVEL_MONITOR_REGISTRY_LOCK:
+            if _AUDIO_REINITIALIZING:
+                raise AudioRecoveryInProgress()
+            _ACTIVE_LEVEL_MONITORS.add(self)
+        with self._stop_lock:
+            if self._running:
+                return
+            try:
+                self._selector = SystemAudioCapture(self.config)
+                with PORTAUDIO_LIFECYCLE_LOCK:
+                    device_index = self._selector.find_loopback_device()
+                    if device_index is None:
+                        raise RuntimeError("未找到可用的音频输入设备")
 
-        self._stream_channels = self._selector._stream_channels
-        self._sample_rate = self._selector._capture_sample_rate
-        self.selected_device = self._selector.selected_device
-        frames_per_buffer = max(256, int(self._sample_rate * 0.05))
-        self._stream = self._selector._audio.open(
-            format=self.config.format,
-            channels=self._stream_channels,
-            rate=self._sample_rate,
-            input=True,
-            input_device_index=device_index,
-            frames_per_buffer=frames_per_buffer,
-        )
-        self._running = True
-        self._thread = threading.Thread(target=self._read_loop, name="audio-level-monitor", daemon=True)
-        self._thread.start()
-        logger.info("音频测试已启动: {}Hz/{}ch", self._sample_rate, self._stream_channels)
+                    self._stream_channels = self._selector._stream_channels
+                    self._sample_rate = self._selector._capture_sample_rate
+                    self.selected_device = self._selector.selected_device
+                    frames_per_buffer = max(256, int(self._sample_rate * 0.05))
+                    self._stream = self._selector._audio.open(
+                        format=self.config.format,
+                        channels=self._stream_channels,
+                        rate=self._sample_rate,
+                        input=True,
+                        input_device_index=device_index,
+                        frames_per_buffer=frames_per_buffer,
+                    )
+                self._running = True
+                self._thread = threading.Thread(target=self._read_loop, name="audio-level-monitor", daemon=True)
+                self._thread.start()
+                logger.info("音频测试已启动: {}Hz/{}ch", self._sample_rate, self._stream_channels)
+            except Exception:
+                self.stop()
+                raise
 
-    def stop(self):
-        self._running = False
-        if self._thread and self._thread.is_alive():
-            self._thread.join(timeout=1.5)
-        self._thread = None
-        if self._stream:
-            try:
-                self._stream.stop_stream()
-            except Exception:
-                pass
-            try:
-                self._stream.close()
-            except Exception:
-                pass
-            self._stream = None
-        if self._selector:
-            try:
-                self._selector._audio.terminate()
-            except Exception:
-                pass
-            self._selector = None
-        logger.info("音频测试已停止")
+    def stop(self, for_recovery=False):
+        with self._stop_lock:
+            was_active = self._running or self._stream is not None or self._selector is not None
+            self._running = False
+            if self._thread and self._thread.is_alive():
+                self._thread.join(timeout=1.5)
+                if self._thread.is_alive():
+                    raise RuntimeError("audio level monitor read did not stop")
+            self._thread = None
+            with PORTAUDIO_LIFECYCLE_LOCK:
+                if self._stream:
+                    try:
+                        self._stream.stop_stream()
+                    except Exception:
+                        pass
+                    try:
+                        self._stream.close()
+                    except Exception:
+                        pass
+                    self._stream = None
+                if self._selector:
+                    try:
+                        self._selector._audio.terminate()
+                    except Exception:
+                        pass
+                    self._selector = None
+            with _LEVEL_MONITOR_REGISTRY_LOCK:
+                _ACTIVE_LEVEL_MONITORS.discard(self)
+            if for_recovery and was_active and self._on_level:
+                self._on_level({"recovery": True, "monitor_token": id(self)})
+            logger.info("音频测试已停止")
 
     def _read_loop(self):
         frames_per_buffer = max(256, int(self._sample_rate * 0.05))
@@ -422,9 +516,11 @@ class SystemAudioCapture:
 
     def __init__(self, config: AudioConfig = None):
         self.config = config or AudioConfig()
-        self._audio = pyaudio.PyAudio()
+        with PORTAUDIO_LIFECYCLE_LOCK:
+            self._audio = pyaudio.PyAudio()
         self._stream: Optional[pyaudio.Stream] = None
         self._running = False
+        self._capture_fault = None
         self._audio_queue_max_blocks = max(
             1,
             min(50, int(getattr(self.config, "audio_queue_max_blocks", DEFAULT_AUDIO_QUEUE_MAX_BLOCKS) or DEFAULT_AUDIO_QUEUE_MAX_BLOCKS)),
@@ -522,16 +618,22 @@ class SystemAudioCapture:
         self._vad = webrtcvad.Vad(aggressiveness)
         self._vad_sample_rate = 16000
 
-    def find_loopback_device(self) -> Optional[int]:
+    def find_loopback_device(self, allow_fallback: bool = False) -> Optional[int]:
         """Find the configured or most likely system-audio input device."""
+        with PORTAUDIO_LIFECYCLE_LOCK:
+            return self._find_loopback_device_locked(allow_fallback)
+
+    def _find_loopback_device_locked(self, allow_fallback: bool = False) -> Optional[int]:
         configured = self._configured_device_candidates()
         if configured:
             selected = self._first_usable_device(configured)
             if selected is not None:
                 return selected
-            logger.error("已选择的音频设备不可用，已停止自动切换到其他设备")
-            return None
-        if self._has_configured_device():
+            if not allow_fallback:
+                logger.error("已选择的音频设备不可用，已停止自动切换到其他设备")
+                return None
+            logger.warning("已选择的音频设备不可用，尝试系统默认音频设备")
+        elif self._has_configured_device() and not allow_fallback:
             logger.error("已选择的音频设备未找到，已停止自动切换到其他设备")
             return None
 
@@ -598,6 +700,9 @@ class SystemAudioCapture:
                 if stable_device_id(info) == configured_device_id:
                     candidates.append((index, info))
                     break
+            # A saved stable identity is authoritative. A reused numeric index
+            # or a similarly named device must not masquerade as the old one.
+            return candidates
 
         if configured_name:
             for index, info in entries:
@@ -751,15 +856,20 @@ class SystemAudioCapture:
         """音频回调"""
         if status:
             logger.warning(f"音频状态: {status}")
-        if self._stream_channels > 1:
-            samples = np.frombuffer(in_data, dtype=np.int16)
-            try:
+        try:
+            if self._stream_channels > 1:
+                samples = np.frombuffer(in_data, dtype=np.int16)
                 samples = samples.reshape(-1, self._stream_channels)
                 mono = samples.mean(axis=1).astype(np.int16)
                 in_data = mono.tobytes()
-            except ValueError:
-                logger.warning("音频通道数据长度异常，按原始数据处理")
-        self._enqueue_audio_block(in_data)
+            self._enqueue_audio_block(in_data)
+        except ValueError:
+            logger.warning("音频通道数据长度异常，按原始数据处理")
+            self._enqueue_audio_block(in_data)
+        except Exception as exc:
+            self._capture_fault = exc
+            logger.warning("音频回调异常: {}", exc)
+            return (None, pyaudio.paAbort)
         return (None, pyaudio.paContinue)
 
     def _enqueue_audio_block(self, data: bytes):
@@ -792,46 +902,71 @@ class SystemAudioCapture:
                     self._dropped_audio_queue_blocks,
                 )
 
-    def start(self):
+    def start(self, allow_fallback: bool = False):
         """开始音频捕获"""
-        device_index = self.find_loopback_device()
-        if device_index is None:
-            raise RuntimeError("未找到可用的音频输入设备")
+        with PORTAUDIO_LIFECYCLE_LOCK:
+            device_index = self.find_loopback_device(allow_fallback=allow_fallback)
+            if device_index is None:
+                raise RuntimeError("未找到可用的音频输入设备")
 
-        self.config.sample_rate = self._capture_sample_rate
-        self.config.channels = 1
-        self._stream = self._audio.open(
-            format=self.config.format,
-            channels=self._stream_channels,
-            rate=self._capture_sample_rate,
-            input=True,
-            input_device_index=device_index,
-            frames_per_buffer=int(
-                self._capture_sample_rate * self.config.chunk_duration_ms / 1000
-            ),
-            stream_callback=self._audio_callback,
-        )
+            self.config.sample_rate = self._capture_sample_rate
+            self.config.channels = 1
+            self._stream = self._audio.open(
+                format=self.config.format,
+                channels=self._stream_channels,
+                rate=self._capture_sample_rate,
+                input=True,
+                input_device_index=device_index,
+                frames_per_buffer=int(
+                    self._capture_sample_rate * self.config.chunk_duration_ms / 1000
+                ),
+                stream_callback=self._audio_callback,
+            )
 
-        self._running = True
-        self._stream.start_stream()
+            self._capture_fault = None
+            self._running = True
+            self._stream.start_stream()
         logger.info("音频捕获已启动: {}Hz/{}ch -> mono", self._capture_sample_rate, self._stream_channels)
 
     def stop(self):
         """停止音频捕获"""
         self._running = False
-        if self._stream:
-            try:
-                self._stream.stop_stream()
-            except Exception:
-                pass
-            try:
-                self._stream.close()
-            except Exception:
-                pass
-            self._stream = None
-        if self._audio:
-            self._audio.terminate()
+        if not PORTAUDIO_LIFECYCLE_LOCK.acquire(timeout=2):
+            raise RuntimeError("PortAudio lifecycle is busy")
+        try:
+            if self._stream:
+                try:
+                    self._stream.stop_stream()
+                except Exception:
+                    pass
+                try:
+                    self._stream.close()
+                except Exception:
+                    pass
+                self._stream = None
+            if self._audio:
+                self._audio.terminate()
+                self._audio = None
+        finally:
+            PORTAUDIO_LIFECYCLE_LOCK.release()
         logger.info("音频捕获已停止")
+
+    def health_error(self):
+        """Return a device/stream failure without treating ordinary silence as a fault."""
+        if not self._running:
+            return None
+        if self._capture_fault is not None:
+            return self._capture_fault
+        if not PORTAUDIO_LIFECYCLE_LOCK.acquire(blocking=False):
+            return None
+        try:
+            if self._stream is None or not self._stream.is_active():
+                return RuntimeError("audio input stream is inactive")
+        except Exception as exc:
+            return exc
+        finally:
+            PORTAUDIO_LIFECYCLE_LOCK.release()
+        return None
 
     def set_speech_callback(self, callback: Callable):
         """设置语音检测回调"""
