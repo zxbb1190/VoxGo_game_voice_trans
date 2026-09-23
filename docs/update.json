@@ -1,36 +1,39 @@
 {
-  "latest": "0.5.0",
+  "latest": "0.5.1",
   "channel": "stable",
-  "title": "VoxGo v0.5.0",
+  "title": "VoxGo v0.5.1",
   "notes": [
-    "Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.",
-    "Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.",
-    "Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.",
-    "Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.",
-    "Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time."
+    "Automatic audio recovery: detect USB, Bluetooth, and HDMI output changes, reconnect the original device or fall back to the system default, and show recovery status.",
+    "Overlay position recovery: bring an invisible overlay back after display changes, with a new Reset Overlay Position tray action.",
+    "The overlay now shows the current translation provider: API, Google, or Local, updating immediately after a switch.",
+    "Hover over a completed subtitle to copy its translation with one click.",
+    "First launch follows the system language: Chinese for zh_CN and zh_TW, English for all other locales. Existing language preferences are preserved.",
+    "Updated usage statistics: Basic is always enabled and measures daily active installations using daily identifiers that are not linked across days. Optional detailed usage and stability statistics can be disabled in Settings; neither includes audio, recognition, or translation content. Updates preserve statistics state."
   ],
-  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.0",
-  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-lite.zip",
-  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-full.zip",
-  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-full-cuda.zip",
-  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.0/VoxGo-v0.5.0-cuda-runtime.zip",
-  "sha256_lite": "11f32f1094b89e1cb771f881431abdac0a2bd6616ca32ff962996afb7c747c72",
-  "sha256_full": "cf11e054153893f96525cc49578c36583465a300480a995c76b5bc241f376ef5",
-  "sha256_full_cuda": "242ed8aa36d5372e18ef9b647c20211dda1329ec3d01c16397d4f10b8591fc41",
-  "sha256_cuda_runtime": "0651d9a4c0fb9ab6e75c1e3abe43883b082624c5830cc1d9a969374ed7a29936",
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.1",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip",
+  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip",
+  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-cuda-runtime.zip",
+  "sha256_lite": "5bade5ef1f90c4eb22e17719bbaadc5edf23d2d65e507b4b9e1ef2660b9468c9",
+  "sha256_full": "6bd9f227d9768c1511e48f0827ff3a0f4e7798bb3a0f46f212c44ddb3f12bf45",
+  "sha256_full_cuda": "c8011965f0925391a9b3af9e6bcb0ae4eb4394bff466bab6015d00ab29506d9a",
+  "sha256_cuda_runtime": "5509a5e80979875b9749f22a733f5ce0eba4e0ccb190cd4a3ff2b8c7a57a7c1d",
   "mandatory": false,
   "notes_en": [
-    "Improved close and tray behavior: choose to minimize to the tray or exit when closing the window, with the choice remembered; the window remains available if the tray is unavailable.",
-    "Improved shutdown: background tasks and resources are cleaned up more safely, with retry or force-exit options when shutdown cannot finish, reducing residual processes after closing the window.",
-    "Added model recovery: retry loading a failed model from Settings, or reset the selected model cache and download it again.",
-    "Improved Help and Feedback: preview and copy diagnostic information, open GitHub Issues, and use diagnostic templates that reduce sensitive-data exposure.",
-    "Added an opt-in experience-improvement program: after consent, VoxGo sends usage and stability statistics to help improve the app. It never includes audio, recognition, or translation content, and can be disabled at any time."
+    "Automatic audio recovery: detect USB, Bluetooth, and HDMI output changes, reconnect the original device or fall back to the system default, and show recovery status.",
+    "Overlay position recovery: bring an invisible overlay back after display changes, with a new Reset Overlay Position tray action.",
+    "The overlay now shows the current translation provider: API, Google, or Local, updating immediately after a switch.",
+    "Hover over a completed subtitle to copy its translation with one click.",
+    "First launch follows the system language: Chinese for zh_CN and zh_TW, English for all other locales. Existing language preferences are preserved.",
+    "Updated usage statistics: Basic is always enabled and measures daily active installations using daily identifiers that are not linked across days. Optional detailed usage and stability statistics can be disabled in Settings; neither includes audio, recognition, or translation content. Updates preserve statistics state."
   ],
   "notes_zh": [
-    "优化关闭与托盘体验：关闭窗口时可选择最小化到托盘或退出程序，并记住选择；托盘不可用时保留窗口，避免程序隐藏后无法操作。",
-    "改进退出流程：优化后台任务与资源清理，退出未完成时支持重试或强制退出，改善窗口关闭后进程残留的问题。",
-    "新增模型恢复操作：模型加载失败时，可在设置中重试加载，或重置所选模型缓存后重新下载。",
-    "完善帮助与反馈：支持预览、复制诊断信息并打开 GitHub Issues，诊断模板减少敏感信息暴露。",
-    "新增自愿体验改进计划：经确认后发送使用情况与运行稳定性统计，帮助优化 VoxGo；不包含语音、识别或翻译内容，可随时在设置中关闭。"
+    "音频设备异常后自动恢复：重新检测 USB、蓝牙和 HDMI 输出，优先恢复原设备，必要时回退系统默认输出，并显示恢复状态。",
+    "浮窗位置自动恢复：屏幕配置变化后自动找回不可见浮窗，托盘新增重置浮窗位置。",
+    "浮窗显示当前翻译方式：API、Google 或本地，切换后立即更新。",
+    "字幕支持悬停复制：鼠标移入正常字幕后可一键复制译文。",
+    "首次启动跟随系统语言：zh_CN、zh_TW 使用中文，其他语言使用英文；已有用户设置保持不变。",
+    "更新使用统计：基础统计始终启用，用于每日活跃安装数，使用不跨日关联的每日标识；详细使用与稳定性统计可在设置中关闭，均不包含语音、识别或翻译内容。升级时保留统计状态。"
   ]
 }
