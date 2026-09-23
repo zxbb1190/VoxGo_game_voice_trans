@@ -133,6 +133,8 @@ jobs:
           overwrite_files: true
 
       - name: Sync GitCode Lite mirror
+        # A mirror outage must not block the already-published GitHub update.
+        continue-on-error: true
         shell: pwsh
         env:
           GITCODE_TOKEN: ${{ secrets.GITCODE_TOKEN }}
