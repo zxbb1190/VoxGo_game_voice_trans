@@ -132,6 +132,23 @@ jobs:
           make_latest: true
           overwrite_files: true
 
+      - name: Sync GitCode Lite mirror
+        shell: pwsh
+        env:
+          GITCODE_TOKEN: ${{ secrets.GITCODE_TOKEN }}
+        run: |
+          if (-not $env:GITCODE_TOKEN) {
+            Write-Warning "GITCODE_TOKEN is not configured; China mirror synchronization requires a follow-up."
+            exit 0
+          }
+          # This repository hosts release downloads, not a second client source tree.
+          $mirrorHead = git ls-remote https://gitcode.com/zxbb1190/VoxGo.git HEAD
+          if ($LASTEXITCODE -ne 0 -or -not $mirrorHead) { throw "Cannot resolve GitCode mirror HEAD" }
+          $mirrorCommit = ($mirrorHead -split '\s+')[0]
+          .\.venv-win\Scripts\python.exe scripts/publish_gitcode_release.py --tag "$env:TAG_NAME" --zip "release/VoxGo-v$env:APP_VERSION-lite.zip" --notes-file release-notes.md --sha256 "$env:LITE_SHA256" --target-commitish "$mirrorCommit"
+          if ($LASTEXITCODE -ne 0) { throw "GitCode mirror synchronization failed" }
+          "GITCODE_MIRROR_VERIFIED=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+
       - name: Update website release manifest
         shell: pwsh
         run: |
@@ -178,11 +195,8 @@ jobs:
 
           # Advance the China mirror only when the matching ZIP is available.
           $mirrorUrl = "https://gitcode.com/zxbb1190/VoxGo/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
-          $mirrorReady = $false
-          try {
-            $mirror = Invoke-WebRequest -Uri $mirrorUrl -Method Head -MaximumRedirection 5 -TimeoutSec 20
-            $mirrorReady = ($mirror.StatusCode -eq 200 -and [long]$mirror.Headers['Content-Length'][0] -eq (Get-Item "release/VoxGo-v$env:APP_VERSION-lite.zip").Length)
-          } catch { Write-Warning "China mirror not ready; retaining its previous version." }
+          $mirrorReady = $env:GITCODE_MIRROR_VERIFIED -eq 'true'
+          if (-not $mirrorReady) { Write-Warning "China mirror not verified; retaining its previous version." }
           # Protect old mirror links from the general website version replacement.
           foreach ($pagePath in @("docs/index.html", "docs/en/index.html")) {
             $page = Get-Content $pagePath -Raw -Encoding UTF8
