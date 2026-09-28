@@ -221,6 +221,19 @@ var _hmt = _hmt || [];
       margin-top: 24px
     }
 
+    .hero-community { display: inline-block; margin-top: 16px; color: #bbf7d0; font-size: 14px; font-weight: 700 }
+    .hero-community:hover { text-decoration: underline }
+    #community { scroll-margin-top: 88px }
+    .community-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px }
+    .community-card { display: flex; flex-direction: column; align-items: flex-start; padding: 30px; border: 1px solid var(--line); border-radius: 8px; background: rgba(15, 23, 42, .68) }
+    .community-card.featured { border-color: rgba(34, 197, 94, .55); background: linear-gradient(145deg, rgba(34, 197, 94, .14), rgba(15, 23, 42, .78)) }
+    .community-card h3 { margin: 0 0 8px; font-size: 28px }
+    .community-card .community-label { color: #bbf7d0; font-size: 14px; font-weight: 700 }
+    .community-card p { color: var(--muted); line-height: 1.7; flex: 1 }
+    .community-card .btn { margin-top: 24px }
+    .community-help { margin: 20px 0 0; color: var(--muted); line-height: 1.8; font-size: 14px }
+    .community-help a { color: #bbf7d0; text-decoration: underline }
+
     .pill {
       border: 1px solid rgba(148, 163, 184, .22);
       background: rgba(15, 23, 42, .55);
@@ -507,6 +520,8 @@ var _hmt = _hmt || [];
       .steps {
         grid-template-columns: 1fr
       }
+
+      .community-grid { grid-template-columns: 1fr }
     }
 
     @media (max-width: 700px) {
@@ -547,7 +562,7 @@ var _hmt = _hmt || [];
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top"><img class="brand-logo" src="../assets/logo.png?v=2" alt="VoxGo Logo" /><span>VoxGo</span></a>
-      <div class="nav-links"><a href="#features">Features</a><a href="#download">Download</a><a
+      <div class="nav-links"><a href="#features">Features</a><a href="#download">Download</a><a href="#community">Community</a><a
           href="#steps">How to use</a><a href="#faq">FAQ</a><a href="#safety">Privacy / Safety</a><a
           href="/">中文</a><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
     </div>
@@ -566,6 +581,7 @@ var _hmt = _hmt || [];
             <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">China mirror (Lite v0.5.1)</a><a class="btn"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Latest Release</a><a
             class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
+        <a class="hero-community" href="#community">Join the community →</a>
         <div class="hero-notes"><span class="pill">Open-source</span><span class="pill">No game process
             injection</span><span class="pill">System audio by default</span><span class="pill">Local Whisper
             ASR</span><span class="pill">Offline translation mode</span><span class="pill">Mobile mirror</span></div>
@@ -687,6 +703,27 @@ var _hmt = _hmt || [];
       </div>
     </section>
 
+    <section id="community">
+      <div class="container">
+        <div class="section-head">
+          <h2>Join the VoxGo community</h2>
+          <p>Share your experience, get help and release news, and discuss what VoxGo should build next.</p>
+        </div>
+        <div class="community-grid">
+          <article class="community-card featured">
+            <h3>Discord</h3><span class="community-label">International community · Recommended</span>
+            <p>Announcements, support, feedback, and community discussion.</p>
+            <a class="btn btn-primary" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord</a>
+          </article>
+          <article class="community-card">
+            <h3>KOOK</h3><span class="community-label">中文社区</span>
+            <p>Announcements, usage questions, feedback, and feature ideas in Chinese.</p>
+            <a class="btn" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">Join KOOK</a>
+          </article>
+        </div>
+        <p class="community-help">For discussion, usage questions, and feature ideas, join either community. For reproducible bugs or code issues, open a <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">GitHub Issue</a>.</p>
+      </div>
+    </section>
     <section id="steps">
       <div class="container">
         <div class="section-head">
@@ -790,12 +827,10 @@ var _hmt = _hmt || [];
     <section>
       <div class="container">
         <div class="cta">
-          <h2>Try it, break it, report real game cases.</h2>
-          <p>VoxGo needs feedback from different games, headsets, languages, accents, and Windows audio setups. The
-            built-in feedback template includes version, device, provider, latency, and log paths.</p>
+          <h2>Report reproducible technical issues</h2>
+          <p>For reproducible bugs, the built-in feedback template includes version, device, provider, latency, and log paths. Join the community for usage questions and feature ideas.</p>
           <div class="actions" style="justify-content:center"><a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">Open an Issue</a><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans">Star on GitHub</a></div>
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">Open a GitHub Issue</a><a class="btn" href="#community">Join the community</a></div>
         </div>
       </div>
     </section>
@@ -804,10 +839,17 @@ var _hmt = _hmt || [];
   <footer>
     <div class="container footer-inner"><span>© <span id="year"></span> VoxGo. Open-source community edition.</span><span><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans/blob/main/LICENSE">GPLv3 License</a> · <a
-          href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
+          href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Discord</a> · <a href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">KOOK</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Releases</a> · <a href="mailto:douyaj33@gmail.com">Email: douyaj33@gmail.com</a></span></div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('a[data-community]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        _hmt.push(['_trackEvent', 'community', 'click', link.dataset.community]);
+      });
+    });
+  </script>
 </body>
 
 </html>

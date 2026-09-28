@@ -214,6 +214,19 @@ var _hmt = _hmt || [];
       font-size: 13px
     }
 
+    .hero-community { display: inline-block; margin: 0 0 22px; color: #bae6fd; font-size: 14px; font-weight: 700 }
+    .hero-community:hover { text-decoration: underline }
+    #community { scroll-margin-top: 88px }
+    .community-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px }
+    .community-card { display: flex; flex-direction: column; align-items: flex-start; padding: 30px; border: 1px solid rgba(148, 163, 184, .22); border-radius: 22px; background: rgba(15, 23, 42, .68) }
+    .community-card.featured { border-color: rgba(56, 189, 248, .52); background: linear-gradient(145deg, rgba(56, 189, 248, .14), rgba(15, 23, 42, .78)) }
+    .community-card h3 { margin: 0 0 8px; font-size: 28px }
+    .community-card .community-label { color: #bae6fd; font-size: 14px; font-weight: 700 }
+    .community-card p { color: var(--muted); line-height: 1.7; flex: 1 }
+    .community-card .btn { margin-top: 24px }
+    .community-help { margin: 20px 0 0; color: var(--muted); line-height: 1.8; font-size: 14px }
+    .community-help a { color: #bae6fd; text-decoration: underline }
+
     .pill {
       padding: 7px 10px;
       border-radius: 999px;
@@ -631,6 +644,8 @@ var _hmt = _hmt || [];
         grid-template-columns: 1fr
       }
 
+      .community-grid { grid-template-columns: 1fr }
+
       .mock {
         min-height: 500px;
         border-radius: 22px
@@ -662,7 +677,7 @@ var _hmt = _hmt || [];
   <nav class="nav">
     <div class="container nav-inner"><a class="brand" href="#top"><img class="brand-logo" src="./assets/logo.png?v=2"
           alt="VoxGo Logo" /><span>VoxGo</span></a>
-      <div class="nav-links"><a href="#features">功能</a><a href="#download">下载</a><a href="#steps">使用步骤</a><a
+      <div class="nav-links"><a href="#features">功能</a><a href="#download">下载</a><a href="#community">社区</a><a href="#steps">使用步骤</a><a
           href="#faq">FAQ</a><a href="/en/">English</a><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
     </div>
@@ -677,6 +692,7 @@ var _hmt = _hmt || [];
             Lite 版</a>
             <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">国内镜像下载（Lite v0.5.1）</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">查看
             Release</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码</a></div>
+        <a class="hero-community" href="#community">加入社区 →</a>
         <div class="hero-notes"><span class="pill">英语 ↔ 中文</span><span class="pill">首次启动向导</span><span class="pill">支持本地翻译模式</span><span class="pill">API Key 测试</span><span class="pill">音频音量条测试</span></div>
       </div>
       <div class="mock">
@@ -781,6 +797,27 @@ var _hmt = _hmt || [];
         </div>
       </div>
     </section>
+    <section id="community">
+      <div class="container">
+        <div class="section-head">
+          <h2>加入 VoxGo 社区</h2>
+          <p>交流使用体验、反馈问题、获取版本更新，也欢迎一起讨论游戏语音翻译和 VoxGo 的后续方向。</p>
+        </div>
+        <div class="community-grid">
+          <article class="community-card featured">
+            <h3>KOOK</h3><span class="community-label">中文社区 · 推荐</span>
+            <p>公告、使用交流、问题反馈与功能建议。</p>
+            <a class="btn btn-primary" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">加入 KOOK</a>
+          </article>
+          <article class="community-card">
+            <h3>Discord</h3><span class="community-label">International community</span>
+            <p>Announcements, support, feedback, and community discussion.</p>
+            <a class="btn" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord</a>
+          </article>
+        </div>
+        <p class="community-help">一般交流、使用问题和功能建议欢迎到社区讨论；可复现的 Bug 或代码问题请提交到 <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">GitHub Issues</a>。</p>
+      </div>
+    </section>
     <section id="steps">
       <div class="container">
         <div class="section-head">
@@ -861,11 +898,10 @@ var _hmt = _hmt || [];
     <section>
       <div class="container">
         <div class="cta">
-          <h2>帮它变得更适合真实游戏语音</h2>
-          <p>现在最需要的是不同游戏、不同设备、不同语音环境的真实反馈。打开设置里的提交反馈，模板会带上版本、音频设备、翻译服务、最近延迟和日志路径。</p>
+          <h2>报告可复现的技术问题</h2>
+          <p>遇到可复现的 Bug，可通过设置里的提交反馈模板附上版本、音频设备、翻译服务、最近延迟和日志路径；使用交流和功能建议欢迎到社区讨论。</p>
           <div class="actions" style="justify-content:center"><a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">提交反馈</a><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans">Star on GitHub</a></div>
+              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">提交 GitHub Issue</a><a class="btn" href="#community">加入社区</a></div>
         </div>
       </div>
     </section>
@@ -873,10 +909,17 @@ var _hmt = _hmt || [];
   <footer>
     <div class="container footer-inner"><span>© <span id="year"></span> VoxGo. Open-source community
         edition.</span><span><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/blob/main/LICENSE">GPLv3
-          License</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
+          License</a> · <a href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">KOOK</a> · <a href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Discord</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Releases</a> · <a href="mailto:douyaj33@gmail.com">联系邮箱：douyaj33@gmail.com</a></span></div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('a[data-community]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        _hmt.push(['_trackEvent', 'community', 'click', link.dataset.community]);
+      });
+    });
+  </script>
 
 
 </body>
