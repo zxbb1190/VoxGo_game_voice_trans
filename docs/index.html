@@ -671,13 +671,14 @@ var _hmt = _hmt || [];
       }
     }
   </style>
+  <link rel="stylesheet" href="/assets/css/v2.css" />
 </head>
 
 <body>
   <nav class="nav">
     <div class="container nav-inner"><a class="brand" href="#top"><img class="brand-logo" src="./assets/logo.png?v=2"
           alt="VoxGo Logo" /><span>VoxGo</span></a>
-      <div class="nav-links"><a href="#features">功能</a><a href="#download">下载</a><a href="#community">社区</a><a href="#steps">使用步骤</a><a
+      <div class="nav-links"><a href="#story">工作原理</a><a href="#modes">翻译方式</a><a href="#patch-notes">更新日志</a><a href="#download">下载</a><a href="#steps">使用步骤</a><a href="#community">社区</a><a
           href="#faq">FAQ</a><a href="/en/">English</a><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
     </div>
@@ -686,20 +687,19 @@ var _hmt = _hmt || [];
     <div class="container hero">
       <div><span class="eyebrow">开源 · Windows · 游戏语音实时翻译</span>
         <h1><span class="gradient-text">听不懂外国队友语音？</span><br />开一个游戏字幕浮窗。</h1>
-        <p class="lead">捕获 Windows 系统声音，将游戏、Discord、视频或直播语音实时识别并翻译成字幕。当前支持英语 ↔ 中文双向，支持在线 API 和本地翻译模式；首次启动会带你测试翻译和系统声音。</p>
+        <p class="lead">游戏、Discord 或视频的声音，经过本地 Whisper 识别与实时翻译，直接进入游戏字幕浮窗。VoxGo 支持英语 ↔ 中文双向翻译。</p>
         <div class="actions"><a class="btn btn-primary"
-            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">下载
-            Lite 版</a>
-            <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">国内镜像下载（Lite v0.5.1）</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">查看
-            Release</a><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码</a></div>
-        <a class="hero-community" href="#community">加入社区 →</a>
-        <div class="hero-notes"><span class="pill">英语 ↔ 中文</span><span class="pill">首次启动向导</span><span class="pill">支持本地翻译模式</span><span class="pill">API Key 测试</span><span class="pill">音频音量条测试</span></div>
+            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">下载 VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">国内镜像下载（Lite v0.5.1）</a></div>
+        <div class="hero-links"><a class="hero-community" href="#story">看看声音如何变成字幕 ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码 ↗</a></div>
+        <div class="hero-notes"><span class="pill">LOCAL WHISPER ASR</span><span class="pill">API / LOCAL TRANSLATION</span><span class="pill">LIVE OVERLAY</span></div>
       </div>
       <div class="mock">
         <div class="game-screen">
           <div class="hud"><span>VoxGo</span>
             <div class="radar"></div>
           </div><img class="hero-logo" src="./assets/logo-op.png?v=2" alt="VoxGo Logo" />
+          <div class="hero-readout" aria-hidden="true"><span>INPUT / WINDOWS AUDIO</span><span>ASR / WHISPER LOCAL <b>ACTIVE</b></span><span>TRANSLATION / API</span></div>
+          <div class="signal-strip" aria-hidden="true"><i style="--bar:18px"></i><i style="--bar:35px"></i><i style="--bar:62px"></i><i style="--bar:24px"></i><i style="--bar:76px"></i><i style="--bar:42px"></i><i style="--bar:55px"></i><i style="--bar:22px"></i><i style="--bar:70px"></i><i style="--bar:37px"></i><i style="--bar:58px"></i><i style="--bar:20px"></i><i style="--bar:45px"></i><i style="--bar:67px"></i><i style="--bar:25px"></i></div>
           <div class="phone">
             <div class="phone-screen"><strong style="color:#e2e8f0">手机同步</strong>
               <div class="phone-card">Push left with me.</div>
@@ -720,102 +720,51 @@ var _hmt = _hmt || [];
         </div>
       </div>
     </div>
-    <section id="features">
-      <div class="container">
-        <div class="section-head">
-          <h2>为游戏语音场景做的实时字幕工具</h2>
-          <p>它不是通用会议软件，而是围绕 PC 游戏、Discord 队友沟通、海外服开黑和直播字幕辅助设计的轻量桌面工具。</p>
+    <section id="story" class="story">
+      <div class="container story-intro"><span class="section-kicker">SIGNAL PATH / 01—04</span>
+        <h2>你听见的游戏语音，<br />变成你看得懂的游戏字幕。</h2>
+        <p>VoxGo 捕获 Windows 正在播放的声音，本地语音识别，翻译，然后把结果送入浮窗。向下滚动，看完整条信号链。</p>
+      </div>
+      <div class="container story-shell" data-active="1">
+        <div class="story-visual" aria-hidden="true">
+          <div class="story-topline hud-label"><span>VOXGO / SIGNAL VIEW</span><span>LIVE ●</span></div>
+          <div class="scene scene-1"><span class="scene-number">01</span><h3 class="scene-title">GAME AUDIO</h3><div class="waveform"><i style="--bar:19px"></i><i style="--bar:44px"></i><i style="--bar:73px"></i><i style="--bar:37px"></i><i style="--bar:91px"></i><i style="--bar:58px"></i><i style="--bar:25px"></i><i style="--bar:75px"></i><i style="--bar:46px"></i><i style="--bar:85px"></i><i style="--bar:35px"></i><i style="--bar:58px"></i><i style="--bar:21px"></i></div><span class="scene-caption">GAME / DISCORD / WINDOWS SYSTEM AUDIO</span></div>
+          <div class="scene scene-2"><span class="scene-number">02</span><h3 class="scene-title">WHISPER ASR</h3><div class="scene-transcript">He is one shot behind the box.</div><span class="scene-caption">VOICE → TEXT · RECOGNITION RUNS ON YOUR PC</span></div>
+          <div class="scene scene-3"><span class="scene-number">03</span><h3 class="scene-title">TRANSLATION</h3><div class="scene-transcript">Rotate B, don't peek mid.<br /><strong>转 B，别探中路。</strong></div><div class="scene-pipeline"><span>API</span><span>LOCAL</span></div></div>
+          <div class="scene scene-4"><span class="scene-number">04</span><div class="scene-pipeline"><span>AUDIO</span><span>ASR</span><span>TRANSLATION</span><span>OVERLAY</span></div><div class="scene-subtitle"><small>VOXGO / LIVE SUBTITLE</small>Rotate B, don't peek mid.<strong>转 B，别探中路。</strong></div><span class="scene-caption">THE SUBTITLE STAYS WITH YOUR GAME</span></div>
+          <div class="story-progress"></div>
         </div>
-        <div class="grid">
-          <div class="card">
-            <div class="icon">🔊</div>
-            <h3>系统声音捕获</h3>
-            <p>通过 WASAPI Loopback 捕获电脑正在播放的声音。首次向导和设置窗口都能显示音量条，先确认真的听到了游戏或 Discord。</p>
-          </div>
-          <div class="card">
-            <div class="icon">🧠</div>
-            <h3>本地语音识别</h3>
-            <p>基于 faster-whisper 离线识别语音，当前可固定英语或中文识别，Lite 版首次运行下载模型。</p>
-          </div>
-          <div class="card">
-            <div class="icon">🌐</div>
-            <h3>中英双向翻译</h3>
-            <p>当前正式支持英语 → 中文、中文 → 英语。其它语言暂未作为可选语言开放。</p>
-          </div>
-          <div class="card">
-            <div class="icon">📴</div>
-            <h3>支持本地翻译模式</h3>
-            <p>无需配置 API Key。选择本地翻译模式并按提示准备模型，即可使用本地翻译。</p>
-          </div>
-          <div class="card">
-            <div class="icon">🪟</div>
-            <h3>游戏浮窗</h3>
-            <p>透明置顶字幕窗口，支持拖拽、调整透明度、显示原文和译文，不需要切出游戏查看翻译。</p>
-          </div>
-          <div class="card">
-            <div class="icon">⚡</div>
-            <h3>响应模式</h3>
-            <p>设置里可切换极速、均衡、准确和自定义。PUBG、APEX、Valorant 这类英文队友语音建议使用“极速/游戏性能 + 纯英文环境”。</p>
-          </div>
-          <div class="card">
-            <div class="icon">🛠️</div>
-            <h3>反馈诊断模板</h3>
-            <p>调试模式会记录最近一次识别、翻译和浮窗更新延迟。提交反馈时会自动生成带版本、设备、服务商和日志路径的模板。</p>
-          </div>
+        <div class="story-steps">
+          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>通过 WASAPI Loopback 捕获你正在听到的游戏、Discord 或视频系统声音。先看音量条，确认 VoxGo 听到了正确设备。</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
+          <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper 在 PC 本地完成语音识别，把队友的话变成文字。Lite 版首次运行会按提示下载识别模型。</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
+          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>识别文本进入 API 或本地翻译模式。当前正式支持英语与中文双向翻译，翻译方式会在浮窗中显示。</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
+          <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>原文与译文进入透明置顶的游戏字幕浮窗。字幕可悬停复制，也可同步到同一局域网内的手机。</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
         </div>
       </div>
     </section>
+    <section id="modes" class="mode-section">
+      <div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>选择翻译方式，不改变信号路径。</h2><p>本地识别始终在 PC 上运行；翻译可以使用在线服务，也可以选择本地模型。</p></div>
+        <div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>接入已有翻译服务</h3><p>支持 OpenAI 兼容接口和 Google Cloud Translation Basic v2。首次向导可测试 API Key、模型和地址。</p><ul><li>配置灵活</li><li>可测试翻译接口</li><li>适合在线使用</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>无 API Key 翻译</h3><p>选择本地翻译模式，按提示准备本地模型。适合希望减少在线服务依赖的环境。</p><ul><li>无须配置 API Key</li><li>模型按需下载</li><li>识别与翻译可在本机完成</li></ul></div></div>
+      </div>
+    </section>
+    <section class="experience"><div class="container experience-stage"><div><span class="section-kicker">IN GAME / ALWAYS VISIBLE</span><h2>不用切出游戏，<br />字幕就在那里。</h2><p>浮窗可拖拽、调整透明度并显示原文和译文。响应模式可选极速、均衡、准确或自定义；调试模式提供延迟和设备诊断。</p><div class="experience-meta"><span>OVERLAY POSITION RECOVERY</span><span>HOVER TO COPY</span><span>DEVICE DIAGNOSTICS</span></div></div><div class="experience-overlay"><small>● LIVE TRANSLATION / API</small><span>Push left with me.</span><b>跟我一起从左边推进。</b></div></div></section>
+    <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">LATEST UPDATE / PATCH NOTES</span><h2>更新日志</h2><p>每一次改进，都能在这里追溯到 GitHub Release。</p></div>
+      <!-- CHANGELOG_HOME_START -->
+      <div class="patch-board"><div class="patch-version" aria-hidden="true">0.5.1</div><div class="patch-content"><span class="patch-date">2026-09-23 / LATEST RELEASE</span><h3><a href="/changelog/v0.5.1/">VoxGo 0.5.1</a></h3><ul><li>音频设备异常后自动恢复：重新检测 USB、蓝牙和 HDMI 输出，优先恢复原设备，必要时回退系统默认输出，并显示恢复状态。</li><li>浮窗位置自动恢复：屏幕配置变化后自动找回不可见浮窗，托盘新增重置浮窗位置。</li><li>浮窗显示当前翻译方式：API、Google 或本地，切换后立即更新。</li><li>字幕支持悬停复制：鼠标移入正常字幕后可一键复制译文。</li><li>首次启动跟随系统语言：zh_CN、zh_TW 使用中文，其他语言使用英文；已有用户设置保持不变。</li></ul></div></div><div class="patch-history"><a href="/changelog/v0.5.0/">VoxGo 0.5.0</a><time datetime="2026-09-21">2026-09-21</time></div>
+      <!-- CHANGELOG_HOME_END -->
+      <a class="patch-more" href="/changelog/">查看完整更新日志 →</a>
+    </div></section>
     <section id="download">
       <div class="container">
         <div class="section-head">
-          <h2>选择适合你的下载版本</h2>
-          <p>第一次体验建议下载 Lite 版。网络环境较差可选 Full；NVIDIA 显卡用户想直接使用 GPU 识别可下载 Full-CUDA / GPU 版。</p>
+          <span class="section-kicker">DOWNLOAD / WINDOWS</span><h2>先从 Lite 开始。</h2>
+          <p>适合大多数玩家。首次运行按向导测试翻译和系统声音，并下载所需的语音识别模型。</p>
         </div>
         <div class="download">
-          <div class="card download-card recommended"><span class="tag">推荐</span>
-            <h3>Lite 版</h3>
-            <p>体积更小，适合大多数用户。首次运行时会下载语音识别模型，并先通过向导测试翻译接口和系统声音。</p>
-            <div class="price-line">适合：第一次尝试、网络可用、想要更小下载包。</div><a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">下载
-              Lite 版</a>
-            <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">国内镜像下载（Lite v0.5.1）</a>
-          </div>
-          <div class="card download-card"><span class="tag">完整包</span>
-            <h3>Full 版</h3>
-            <p>内置 Whisper small/base 通用模型，不带 CUDA DLL。英文专用模型不随包内置，开启纯英文环境后按需下载。</p>
-            <div class="price-line">适合：网络较差、想减少首次启动等待。</div><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip">下载
-              Full 版</a>
-          </div>
-          <div class="card download-card"><span class="tag">NVIDIA GPU</span>
-            <h3>Full-CUDA / GPU 版</h3>
-            <p>内置 Whisper small/base 通用模型和 CUDA DLL，解压后可直接尝试 NVIDIA GPU 识别；英文专用模型仍按需下载。</p>
-            <div class="price-line">适合：NVIDIA 显卡、想减少 GPU 配置步骤。</div><a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip">下载
-              GPU 版</a>
-          </div>
+          <div class="download-primary"><div><span class="tag">RECOMMENDED / VoxGo v0.5.1</span><h3>VoxGo Lite</h3><p>下载包更小，适合第一次体验。支持本地 Whisper 识别、API 或本地翻译，以及游戏字幕浮窗。</p></div><div class="download-actions"><a class="btn btn-primary" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">下载 Lite 版</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">国内镜像下载（Lite v0.5.1）</a></div></div>
+          <div class="download-secondary"><div class="download-option"><div><h3>Full</h3><p>内置 Whisper small/base 通用模型，减少首次下载等待。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip">下载 Full ↗</a></div><div class="download-option"><div><h3>Full-CUDA / GPU</h3><p>内置通用模型和 CUDA DLL，适合 NVIDIA GPU 用户。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip">下载 GPU ↗</a></div></div>
         </div>
-      </div>
-    </section>
-    <section id="community">
-      <div class="container">
-        <div class="section-head">
-          <h2>加入 VoxGo 社区</h2>
-          <p>交流使用体验、反馈问题、获取版本更新，也欢迎一起讨论游戏语音翻译和 VoxGo 的后续方向。</p>
-        </div>
-        <div class="community-grid">
-          <article class="community-card featured">
-            <h3>KOOK</h3><span class="community-label">中文社区 · 推荐</span>
-            <p>公告、使用交流、问题反馈与功能建议。</p>
-            <a class="btn btn-primary" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">加入 KOOK</a>
-          </article>
-          <article class="community-card">
-            <h3>Discord</h3><span class="community-label">International community</span>
-            <p>Announcements, support, feedback, and community discussion.</p>
-            <a class="btn" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord</a>
-          </article>
-        </div>
-        <p class="community-help">一般交流、使用问题和功能建议欢迎到社区讨论；可复现的 Bug 或代码问题请提交到 <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">GitHub Issues</a>。</p>
+        <p class="download-latest">想查看全部附件和校验信息？<a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">查看 Latest Release</a></p>
       </div>
     </section>
     <section id="steps">
@@ -846,6 +795,21 @@ var _hmt = _hmt || [];
             <p>如果卡住，开启调试模式并点击提交反馈，复制包含设备、服务商、延迟和日志路径的模板。</p>
           </div>
         </div>
+      </div>
+    </section>
+    <section id="community">
+      <div class="container">
+        <div class="section-head">
+          <h2>加入 VoxGo 社区</h2>
+          <p>交流使用体验、反馈问题、获取版本更新，也欢迎一起讨论游戏语音翻译和 VoxGo 的后续方向。</p>
+        </div>
+        <div class="community-grid">
+          <article class="community-card featured"><span class="community-index">01 / ZH</span><h3>KOOK</h3><span class="community-label">中文社区 · 推荐</span><p>公告、使用交流与功能建议。</p><a class="btn" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">加入 KOOK ↗</a></article>
+          <article class="community-card"><span class="community-index">02 / GLOBAL</span><h3>Discord</h3><span class="community-label">International</span><p>Announcements and community discussion.</p><a class="btn" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord ↗</a></article>
+          <article class="community-card"><span class="community-index">03 / BUG</span><h3>Issues</h3><span class="community-label">可复现技术问题</span><p>附上版本、设备与复现步骤。</p><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">提交 Issue ↗</a></article>
+          <article class="community-card"><span class="community-index">04 / SOURCE</span><h3>GitHub</h3><span class="community-label">开源项目</span><p>查看源码、贡献与发行版。</p><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">查看源码 ↗</a></article>
+        </div>
+        <p class="community-help">一般交流、使用问题和功能建议欢迎到社区讨论；可复现的 Bug 或代码问题请提交到 <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">GitHub Issues</a>。</p>
       </div>
     </section>
     <section id="faq">
@@ -909,7 +873,7 @@ var _hmt = _hmt || [];
   <footer>
     <div class="container footer-inner"><span>© <span id="year"></span> VoxGo. Open-source community
         edition.</span><span><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/blob/main/LICENSE">GPLv3
-          License</a> · <a href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">KOOK</a> · <a href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Discord</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
+          License</a> · <a href="/changelog/">更新日志</a> · <a href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">KOOK</a> · <a href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Discord</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Releases</a> · <a href="mailto:douyaj33@gmail.com">联系邮箱：douyaj33@gmail.com</a></span></div>
   </footer>
   <script>
@@ -920,6 +884,7 @@ var _hmt = _hmt || [];
       });
     });
   </script>
+  <script src="/assets/js/scroll-story.js" defer></script>
 
 
 </body>

@@ -510,6 +510,11 @@ var _hmt = _hmt || [];
     }
 
     @media (max-width: 940px) {
+      .nav-links {
+        max-width: calc(100vw - 180px);
+        overflow-x: auto
+      }
+
       .hero {
         grid-template-columns: 1fr;
         padding-top: 52px
@@ -556,14 +561,15 @@ var _hmt = _hmt || [];
       }
     }
   </style>
+  <link rel="stylesheet" href="/assets/css/v2.css" />
 </head>
 
 <body>
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top"><img class="brand-logo" src="../assets/logo.png?v=2" alt="VoxGo Logo" /><span>VoxGo</span></a>
-      <div class="nav-links"><a href="#features">Features</a><a href="#download">Download</a><a href="#community">Community</a><a
-          href="#steps">How to use</a><a href="#faq">FAQ</a><a href="#safety">Privacy / Safety</a><a
+      <div class="nav-links"><a href="#story">How it works</a><a href="#modes">Translation</a><a href="#patch-notes">Patch Notes</a><a href="#download">Download</a><a href="#steps">Setup</a><a
+          href="#community">Community</a><a href="#faq">FAQ</a><a href="#safety">Privacy</a><a
           href="/">中文</a><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
     </div>
   </nav>
@@ -571,26 +577,22 @@ var _hmt = _hmt || [];
   <main id="top">
     <div class="container hero">
       <div>
-        <span class="eyebrow">Open-source · Windows · PC game voice translation</span>
-        <h1><span class="gradient-text">VoxGo</span><br />Real-time voice translation overlay for PC gamers.</h1>
-        <p class="lead">Capture Windows system audio, transcribe speech locally with Whisper, and show translated
-          subtitles in a lightweight game overlay.</p>
+        <span class="eyebrow">OPEN SOURCE · WINDOWS · LIVE GAME SUBTITLES</span>
+        <h1><span class="gradient-text">Understand your squad.</span><br />See every callout.</h1>
+        <p class="lead">VoxGo turns the game, Discord, or video audio you hear into live subtitles: local Whisper speech recognition, English ↔ Chinese translation, then an overlay that stays with your game.</p>
         <div class="actions"><a class="btn btn-primary"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">Download
-            Lite</a>
-            <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">China mirror (Lite v0.5.1)</a><a class="btn"
-            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Latest Release</a><a
-            class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
-        <a class="hero-community" href="#community">Join the community →</a>
-        <div class="hero-notes"><span class="pill">Open-source</span><span class="pill">No game process
-            injection</span><span class="pill">System audio by default</span><span class="pill">Local Whisper
-            ASR</span><span class="pill">Offline translation mode</span><span class="pill">Mobile mirror</span></div>
+            VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">China mirror (Lite v0.5.1)</a></div>
+        <div class="hero-links"><a class="hero-community" href="#story">See how audio becomes subtitles ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub source ↗</a></div>
+        <div class="hero-notes"><span class="pill">LOCAL WHISPER ASR</span><span class="pill">API / LOCAL TRANSLATION</span><span class="pill">LIVE OVERLAY</span></div>
       </div>
       <div class="mock">
         <div class="game-screen">
           <div class="hud"><span>VoxGo</span>
             <div class="radar"></div>
           </div><img class="hero-logo" src="../assets/logo-op.png?v=2" alt="VoxGo Logo" />
+          <div class="hero-readout" aria-hidden="true"><span>INPUT / WINDOWS AUDIO</span><span>ASR / WHISPER LOCAL <b>ACTIVE</b></span><span>TRANSLATION / API</span></div>
+          <div class="signal-strip" aria-hidden="true"><i style="--bar:18px"></i><i style="--bar:35px"></i><i style="--bar:62px"></i><i style="--bar:24px"></i><i style="--bar:76px"></i><i style="--bar:42px"></i><i style="--bar:55px"></i><i style="--bar:22px"></i><i style="--bar:70px"></i><i style="--bar:37px"></i><i style="--bar:58px"></i><i style="--bar:20px"></i><i style="--bar:45px"></i><i style="--bar:67px"></i><i style="--bar:25px"></i></div>
           <div class="phone">
             <div class="phone-screen"><strong style="color:#e2e8f0">Mobile mirror</strong>
               <div class="phone-card">Rotate B, do not peek mid.</div>
@@ -612,92 +614,72 @@ var _hmt = _hmt || [];
       </div>
     </div>
 
-    <section id="features">
-      <div class="container">
-        <div class="section-head">
-          <h2>Built for real PC game voice, not meeting rooms.</h2>
-          <p>VoxGo focuses on overseas servers, Discord voice, squad comms, and lightweight subtitle mirroring while you
-            keep playing.</p>
+    <section id="story" class="story">
+      <div class="container story-intro"><span class="section-kicker">SIGNAL PATH / 01—04</span><h2>From the voices you hear<br />to subtitles you can act on.</h2><p>VoxGo captures Windows system audio, recognizes speech on your PC, translates it, and sends the result to your game overlay. Scroll through the signal path.</p></div>
+      <div class="container story-shell" data-active="1">
+        <div class="story-visual" aria-hidden="true">
+          <div class="story-topline hud-label"><span>VOXGO / SIGNAL VIEW</span><span>LIVE ●</span></div>
+          <div class="scene scene-1"><span class="scene-number">01</span><h3 class="scene-title">GAME AUDIO</h3><div class="waveform"><i style="--bar:19px"></i><i style="--bar:44px"></i><i style="--bar:73px"></i><i style="--bar:37px"></i><i style="--bar:91px"></i><i style="--bar:58px"></i><i style="--bar:25px"></i><i style="--bar:75px"></i><i style="--bar:46px"></i><i style="--bar:85px"></i><i style="--bar:35px"></i><i style="--bar:58px"></i><i style="--bar:21px"></i></div><span class="scene-caption">GAME / DISCORD / WINDOWS SYSTEM AUDIO</span></div>
+          <div class="scene scene-2"><span class="scene-number">02</span><h3 class="scene-title">WHISPER ASR</h3><div class="scene-transcript">He is one shot behind the box.</div><span class="scene-caption">VOICE → TEXT · RECOGNITION RUNS ON YOUR PC</span></div>
+          <div class="scene scene-3"><span class="scene-number">03</span><h3 class="scene-title">TRANSLATION</h3><div class="scene-transcript">Rotate B, don't peek mid.<br /><strong>转 B，别探中路。</strong></div><div class="scene-pipeline"><span>API</span><span>LOCAL</span></div></div>
+          <div class="scene scene-4"><span class="scene-number">04</span><div class="scene-pipeline"><span>AUDIO</span><span>ASR</span><span>TRANSLATION</span><span>OVERLAY</span></div><div class="scene-subtitle"><small>VOXGO / LIVE SUBTITLE</small>Rotate B, don't peek mid.<strong>转 B，别探中路。</strong></div><span class="scene-caption">THE SUBTITLE STAYS WITH YOUR GAME</span></div>
+          <div class="story-progress"></div>
         </div>
-        <div class="grid">
-          <div class="card">
-            <div class="icon">A</div>
-            <h3>System audio capture</h3>
-            <p>Captures the sound Windows is already playing through WASAPI loopback. It is not microphone capture by
-              default.</p>
-          </div>
-          <div class="card">
-            <div class="icon">W</div>
-            <h3>Local Whisper ASR</h3>
-            <p>Speech recognition runs locally with faster-whisper. The Lite package downloads the model on first use;
-              the Full package includes multilingual small/base models.</p>
-          </div>
-          <div class="card">
-            <div class="icon">T</div>
-            <h3>Flexible translation</h3>
-            <p>Use OpenAI-compatible providers, local compatible services, or Google Cloud Translation Basic v2.</p>
-          </div>
-          <div class="card">
-            <div class="icon">L</div>
-            <h3>Offline translation mode</h3>
-            <p>No API key configuration is required. Choose the local mode and prepare the model when prompted.</p>
-          </div>
-          <div class="card">
-            <div class="icon">O</div>
-            <h3>Game overlay</h3>
-            <p>A transparent, always-on-top overlay shows translated subtitles without injecting into the game process.
-            </p>
-          </div>
-          <div class="card">
-            <div class="icon">M</div>
-            <h3>Mobile mirror</h3>
-            <p>Open the built-in QR code to mirror subtitles on a phone or a second device on your local network.</p>
-          </div>
-          <div class="card">
-            <div class="icon">D</div>
-            <h3>Diagnostics included</h3>
-            <p>Audio testing, translation testing, latency metrics, and feedback templates make troubleshooting less
-              mysterious.</p>
-          </div>
+        <div class="story-steps">
+          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>WASAPI loopback captures the game, Discord, or video audio already playing through Windows. Use the audio meter to confirm the right output device.</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
+          <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper recognizes speech locally on your PC. VoxGo Lite downloads its recognition model on first use.</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
+          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>Choose an API provider or local translation. The current release supports English ↔ Chinese, and the overlay shows the active translation mode.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
+          <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>Original speech and translation appear in a transparent always-on-top subtitle window. Copy a completed subtitle or mirror it to a phone on your local network.</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
         </div>
       </div>
     </section>
+    <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>Choose your translation mode.</h2><p>Speech recognition runs locally in either mode. Translation can use a configured online provider or an on-device model.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>Your chosen provider</h3><p>Connect an OpenAI-compatible service or Google Cloud Translation Basic v2. Test the API key, model, and endpoint in setup.</p><ul><li>Flexible provider configuration</li><li>Built-in connection test</li><li>For online use</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>No API key required</h3><p>Choose local translation and prepare the model when prompted. Reduce dependence on an online translation service.</p><ul><li>No API key setup</li><li>Download the model when needed</li><li>Recognition and translation can run on your PC</li></ul></div></div></div></section>
+    <section class="experience"><div class="container experience-stage"><div><span class="section-kicker">IN GAME / ALWAYS VISIBLE</span><h2>Keep playing.<br />Read the callout.</h2><p>Drag the overlay, adjust its transparency, and see both the original and translated subtitle. Choose speed, balanced, accuracy, or custom response settings; diagnostics show device and latency details.</p><div class="experience-meta"><span>OVERLAY POSITION RECOVERY</span><span>HOVER TO COPY</span><span>DEVICE DIAGNOSTICS</span></div></div><div class="experience-overlay"><small>● LIVE TRANSLATION / API</small><span>Push left with me.</span><b>跟我一起从左边推进。</b></div></div></section>
 
+    <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">LATEST UPDATE / PATCH NOTES</span><h2>Patch Notes</h2><p>Trace every improvement to its GitHub Release.</p></div>
+      <!-- CHANGELOG_HOME_START -->
+      <div class="patch-board"><div class="patch-version" aria-hidden="true">0.5.1</div><div class="patch-content"><span class="patch-date">2026-09-23 / LATEST RELEASE</span><h3><a href="/changelog/v0.5.1/">VoxGo 0.5.1</a></h3><ul><li>Automatic audio recovery: detect USB, Bluetooth, and HDMI output changes, reconnect the original device or fall back to the system default, and show recovery status.</li><li>Overlay position recovery: bring an invisible overlay back after display changes, with a new Reset Overlay Position tray action.</li><li>The overlay now shows the current translation provider: API, Google, or Local, updating immediately after a switch.</li><li>Hover over a completed subtitle to copy its translation with one click.</li><li>First launch follows the system language: Chinese for zh_CN and zh_TW, English for all other locales. Existing language preferences are preserved.</li></ul></div></div><div class="patch-history"><a href="/changelog/v0.5.0/">VoxGo 0.5.0</a><time datetime="2026-09-21">2026-09-21</time></div>
+      <!-- CHANGELOG_HOME_END -->
+      <a class="patch-more" href="/changelog/">All Patch Notes →</a>
+    </div></section>
     <section id="download">
       <div class="container">
-        <div class="section-head">
-          <h2>Download VoxGo</h2>
-          <p>Start with Lite if your network can download the Whisper model. Use Full if you want multilingual models
-            bundled, or Full-CUDA / GPU if you are on NVIDIA and want GPU recognition immediately.</p>
-        </div>
+        <div class="section-head"><span class="section-kicker">DOWNLOAD / WINDOWS</span><h2>Start with Lite.</h2><p>Recommended for most players. First run guides you through translation and audio tests, then downloads the speech recognition model.</p></div>
         <div class="download">
-          <div class="card download-card">
-            <span class="tag">Recommended</span>
-            <h3>Lite package</h3>
-            <p>Smaller download. On first run, VoxGo downloads the speech recognition model and guides you through API
-              and audio tests.</p>
-            <a class="btn btn-primary"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">Download
-              VoxGo v0.5.1 Lite</a>
-            <a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">China mirror (Lite v0.5.1)</a>
+          <div class="download-primary"><div><span class="tag">RECOMMENDED / VoxGo v0.5.1</span><h3>VoxGo Lite</h3><p>A smaller download for your first run. Includes local Whisper recognition, API or local translation, and the game subtitle overlay.</p></div><div class="download-actions"><a class="btn btn-primary" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">Download Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip">China mirror (Lite v0.5.1)</a></div></div>
+          <div class="download-secondary"><div class="download-option"><div><h3>Full</h3><p>Includes multilingual Whisper small/base models to reduce the first-run download.</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip">Download Full ↗</a></div><div class="download-option"><div><h3>Full-CUDA / GPU</h3><p>Includes multilingual models and CUDA DLLs for NVIDIA users.</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip">Download GPU ↗</a></div></div>
+        </div>
+        <p class="download-latest">Need every package and checksum? <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">View the Latest Release</a></p>
+      </div>
+    </section>
+
+    <section id="steps">
+      <div class="container">
+        <div class="section-head">
+          <h2>How to use</h2>
+          <p>Check translation and audio before joining a match. Most subtitle issues come from the wrong Windows output
+            device.</p>
+        </div>
+        <div class="steps">
+          <div class="card step">
+            <h3>Download</h3>
+            <p>Download Lite, Full, or Full-CUDA and unzip the archive.</p>
           </div>
-          <div class="card download-card">
-            <span class="tag">Bundled model</span>
-            <h3>Full package</h3>
-            <p>Includes multilingual Whisper small/base models and no CUDA DLLs. English-only models download on demand
-              after enabling Pure English.</p>
-            <a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip">Download
-              VoxGo v0.5.1 Full</a>
+          <div class="card step">
+            <h3>Run VoxGo</h3>
+            <p>Launch VoxGo.exe and complete the first-run setup.</p>
           </div>
-          <div class="card download-card">
-            <span class="tag">NVIDIA GPU</span>
-            <h3>Full-CUDA / GPU package</h3>
-            <p>Includes multilingual Whisper small/base models plus CUDA DLLs. English-only models still download on
-              demand after enabling Pure English.</p>
-            <a class="btn"
-              href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip">Download
-              VoxGo v0.5.1 GPU</a>
+          <div class="card step">
+            <h3>Test API</h3>
+            <p>Choose OpenAI-compatible or Google Translation and run the API test.</p>
+          </div>
+          <div class="card step">
+            <h3>Test audio</h3>
+            <p>Select a system audio / loopback device and make sure the level meter moves.</p>
+          </div>
+          <div class="card step">
+            <h3>Play</h3>
+            <p>Move and lock the overlay, then use hotkeys or the tray icon in-game.</p>
           </div>
         </div>
       </div>
@@ -710,52 +692,14 @@ var _hmt = _hmt || [];
           <p>Share your experience, get help and release news, and discuss what VoxGo should build next.</p>
         </div>
         <div class="community-grid">
-          <article class="community-card featured">
-            <h3>Discord</h3><span class="community-label">International community · Recommended</span>
-            <p>Announcements, support, feedback, and community discussion.</p>
-            <a class="btn btn-primary" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord</a>
-          </article>
-          <article class="community-card">
-            <h3>KOOK</h3><span class="community-label">中文社区</span>
-            <p>Announcements, usage questions, feedback, and feature ideas in Chinese.</p>
-            <a class="btn" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">Join KOOK</a>
-          </article>
+          <article class="community-card featured"><span class="community-index">01 / GLOBAL</span><h3>Discord</h3><span class="community-label">International · Recommended</span><p>Announcements, support, and feature ideas.</p><a class="btn" href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Join Discord ↗</a></article>
+          <article class="community-card"><span class="community-index">02 / ZH</span><h3>KOOK</h3><span class="community-label">中文社区</span><p>Announcements and discussion in Chinese.</p><a class="btn" href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">Join KOOK ↗</a></article>
+          <article class="community-card"><span class="community-index">03 / BUG</span><h3>Issues</h3><span class="community-label">Reproducible bugs</span><p>Include version, device, and steps to reproduce.</p><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">Open an Issue ↗</a></article>
+          <article class="community-card"><span class="community-index">04 / SOURCE</span><h3>GitHub</h3><span class="community-label">Open-source project</span><p>Browse the code, contribute, and find releases.</p><a class="btn" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">View source ↗</a></article>
         </div>
         <p class="community-help">For discussion, usage questions, and feature ideas, join either community. For reproducible bugs or code issues, open a <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new">GitHub Issue</a>.</p>
       </div>
     </section>
-    <section id="steps">
-      <div class="container">
-        <div class="section-head">
-          <h2>How to use</h2>
-          <p>Check translation and audio before joining a match. Most subtitle issues come from the wrong Windows output
-            device.</p>
-        </div>
-        <div class="steps">
-          <div class="card step"><strong>1</strong>
-            <h3>Download</h3>
-            <p>Download Lite, Full, or Full-CUDA and unzip the archive.</p>
-          </div>
-          <div class="card step"><strong>2</strong>
-            <h3>Run VoxGo</h3>
-            <p>Launch VoxGo.exe and complete the first-run setup.</p>
-          </div>
-          <div class="card step"><strong>3</strong>
-            <h3>Test API</h3>
-            <p>Choose OpenAI-compatible or Google Translation and run the API test.</p>
-          </div>
-          <div class="card step"><strong>4</strong>
-            <h3>Test audio</h3>
-            <p>Select a system audio / loopback device and make sure the level meter moves.</p>
-          </div>
-          <div class="card step"><strong>5</strong>
-            <h3>Play</h3>
-            <p>Move and lock the overlay, then use hotkeys or the tray icon in-game.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="faq">
       <div class="container">
         <div class="section-head">
@@ -807,16 +751,16 @@ var _hmt = _hmt || [];
           <p>VoxGo keeps the risky parts explicit: no game process injection, system audio capture instead of microphone
             by default, local Whisper ASR, and user-controlled translation providers.</p>
         </div>
-        <div class="grid">
-          <div class="card">
+        <div class="safety-grid">
+          <div class="safety-item">
             <h3>No game injection</h3>
             <p>The overlay is an independent window. It does not patch, hook, or modify game clients.</p>
           </div>
-          <div class="card">
+          <div class="safety-item">
             <h3>Local transcription</h3>
             <p>Whisper transcription runs on your PC. Translation requests go to the provider you configure.</p>
           </div>
-          <div class="card">
+          <div class="safety-item">
             <h3>Open source</h3>
             <p>The code is available on GitHub, including packaging scripts, update manifest, and runtime behavior.</p>
           </div>
@@ -840,7 +784,7 @@ var _hmt = _hmt || [];
     <div class="container footer-inner"><span>© <span id="year"></span> VoxGo. Open-source community edition.</span><span><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans/blob/main/LICENSE">GPLv3 License</a> · <a
           href="https://discord.gg/mtnFmUJJ4y" target="_blank" rel="noopener noreferrer" data-community="discord">Discord</a> · <a href="https://kook.vip/hr0hMS" target="_blank" rel="noopener noreferrer" data-community="kook">KOOK</a> · <a href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a> · <a
-          href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Releases</a> · <a href="mailto:douyaj33@gmail.com">Email: douyaj33@gmail.com</a></span></div>
+          href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">Releases</a> · <a href="/changelog/">Patch Notes</a> · <a href="mailto:douyaj33@gmail.com">Email: douyaj33@gmail.com</a></span></div>
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -850,6 +794,7 @@ var _hmt = _hmt || [];
       });
     });
   </script>
+  <script src="/assets/js/scroll-story.js" defer></script>
 </body>
 
 </html>

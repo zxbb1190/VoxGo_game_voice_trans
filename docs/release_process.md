@@ -1,5 +1,13 @@
 # 发布流程
 
+## 官网静态更新日志（v2 草案）
+
+`scripts/build_website_changelog.py` 从已经发布的 GitHub Release 正文读取中英文更新条目、发布日期和附件，生成 `docs/changelog/`、首页最新更新摘要和 `docs/sitemap.xml`。GitHub Release 是唯一的版本内容来源，网页在构建后就是完整静态 HTML，不依赖访客浏览器请求 GitHub API。
+
+本地生成示例：`.\.venv-win\Scripts\python.exe scripts/build_website_changelog.py --tags v0.5.1 v0.5.0`。现有更早版本的 Release 正文缺少双语结构，首次生成应明确指定 `--tags`；不指定时会校验全部正式版本，可能因旧版格式失败。首页只显示最新三个已生成版本。匿名 GitHub API 有速率限制；在 CI 中使用 `GITHUB_TOKEN`。生成后检查版本页与 Release 正文、下载链接和 sitemap，再提交官网文件。
+
+当前发布工作流只更新 `docs/update.json` 和首页下载链接，**尚未接入更新日志生成**。后续最小接入点是在 Release 创建成功后、工作流提交官网文件前，以 `GITHUB_TOKEN` 运行生成脚本，并把 `docs/changelog/` 与 `docs/sitemap.xml` 一起提交。接入时要处理 Release API 刚发布时的短暂延迟和主分支并发写入；本次不改动正式发版工作流。
+
 1. 更新 `voxgo/app_info.py`、`installer/VoxGo.iss` 和 `scripts/build_portable.ps1` 的版本号。
 2. 在 `.github/workflows/publish-release.yml` 中同步版本示例和发布说明。
 3. 发布说明必须同时填写 `notes_zh` 和 `notes_en`；`docs/update.json` 的下载地址、版本号和 SHA256 必须指向同一个 tag。
