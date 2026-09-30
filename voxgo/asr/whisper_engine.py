@@ -36,6 +36,7 @@ except Exception:
 from loguru import logger
 
 from voxgo.app_info import USER_AGENT
+from voxgo.asr.runaway_repetition import is_runaway_repetition
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -54,11 +55,17 @@ GAME_INITIAL_PROMPT = (
     "Steam、Valorant、Apex、GG、NT、WP、FPS。"
 )
 
+GAME_EN_INITIAL_PROMPT = (
+    "HP, GG, NT, WP, mid, rotate, push, reload, flank, spike, site, ultimate, "
+    "shield, revive, A site, B site."
+)
+
 PROMPT_PROFILES = {
     "none": None,
     "off": None,
     "general": GENERAL_INITIAL_PROMPT,
     "game": GAME_INITIAL_PROMPT,
+    "game_en": GAME_EN_INITIAL_PROMPT,
 }
 
 ASR_HALLUCINATION_PATTERNS = (
@@ -220,6 +227,8 @@ class TranscriptionResult:
     compression_ratio: float = 0.0
     segment_count: int = 0
     duration_seconds: float = 0.0
+    raw_text: str = ""
+    runaway_guarded: bool = False
 
 
 @dataclass
@@ -818,6 +827,8 @@ class SpeechRecognizer:
         if custom_prompt:
             return custom_prompt
         profile = (self.config.prompt_profile or "none").strip().lower()
+        if profile == "game" and self._effective_model_size().lower().endswith(".en"):
+            return GAME_EN_INITIAL_PROMPT
         return PROMPT_PROFILES.get(profile)
 
     def _resample_to_16k(self, audio_array: np.ndarray, sample_rate: int) -> np.ndarray:
@@ -964,9 +975,18 @@ class SpeechRecognizer:
         avg_logprob = sum(avg_logprob_values) / len(avg_logprob_values) if avg_logprob_values else 0.0
         no_speech_prob = max(no_speech_values) if no_speech_values else 0.0
         compression_ratio = max(compression_values) if compression_values else 0.0
+        duration_seconds = len(audio_array) / 16000.0 if len(audio_array) else 0.0
+        runaway_guarded = is_runaway_repetition(
+            full_text, duration_seconds=duration_seconds, compression_ratio=compression_ratio
+        )
+        if runaway_guarded:
+            logger.warning(
+                "Discarding extreme ASR repetition: words={}, duration={:.2f}s, compression={:.2f}",
+                len(full_text.split()), duration_seconds, compression_ratio,
+            )
         logger.debug(
             "transcription complete: chars={}, language={}, prob={:.2f}, avg_logprob={:.2f}, no_speech={:.2f}, compression={:.2f}, segments={}, elapsed={:.2f}s",
-            len(full_text),
+            0 if runaway_guarded else len(full_text),
             detected_language,
             language_probability,
             avg_logprob,
@@ -976,14 +996,16 @@ class SpeechRecognizer:
             elapsed,
         )
         return TranscriptionResult(
-            full_text,
+            "" if runaway_guarded else full_text,
             detected_language,
             language_probability,
             avg_logprob=avg_logprob,
             no_speech_prob=no_speech_prob,
             compression_ratio=compression_ratio,
             segment_count=segment_count,
-            duration_seconds=len(audio_array) / 16000.0 if len(audio_array) else 0.0,
+            duration_seconds=duration_seconds,
+            raw_text=full_text,
+            runaway_guarded=runaway_guarded,
         )
 
     def transcribe_audio_file(self, audio_file: str) -> str:
@@ -1255,7 +1277,17 @@ def normalize_transcript_for_repeat(text: str) -> str:
     return REPEAT_NORMALIZE_RE.sub("", normalized)
 
 
+def _is_short_repeated_game_command(text: str) -> bool:
+    """Keep brief repeated callouts even when Whisper marks them as quiet."""
+    words = re.findall(r"[A-Za-z]+", (text or "").casefold())
+    return 1 < len(words) <= 4 and len(set(words)) == 1 and words[0] in {
+        "go", "push", "run", "no", "yes", "gg", "nt", "wp", "mid",
+    }
+
+
 def _is_repeated_noise_transcript(text: str) -> bool:
+    if _is_short_repeated_game_command(text):
+        return False
     compact = normalize_transcript_for_repeat(text)
     if len(compact) < 6:
         return False
@@ -1396,16 +1428,22 @@ def should_drop_transcription_result(
 ) -> str:
     """Return a drop reason for likely ASR false positives after recognition."""
     text = (getattr(result, "text", "") or "").strip()
+    if getattr(result, "runaway_guarded", False):
+        return "global_asr_runaway_repetition"
     if not text:
         return "识别文本为空"
+    if _is_short_repeated_game_command(text):
+        return ""
     no_speech_prob = float(getattr(result, "no_speech_prob", 0.0) or 0.0)
     avg_logprob = float(getattr(result, "avg_logprob", 0.0) or 0.0)
     if _is_repeated_noise_transcript(text):
         return "global_asr_repeated_noise"
-    if _is_repeated_phrase_transcript(text):
-        return f"global_asr_repeated_phrase repeats={_repeated_phrase_count(text)}"
     if no_speech_prob >= 0.55 and _is_repeated_phrase_transcript(text, min_repeats=2):
         return f"global_asr_no_speech_repeated_phrase no_speech={no_speech_prob:.2f}"
+    # Keep the older phrase-loop protection for longer multilingual output.
+    # The three or four repeated callouts common in games stay valid.
+    if len(text) >= 30 and _is_repeated_phrase_transcript(text, min_repeats=5):
+        return f"global_asr_repeated_phrase repeats={_repeated_phrase_count(text)}"
     if _is_suspicious_noise_token(text) and (
         no_speech_prob >= GLOBAL_ASR_NOISE_TOKEN_NO_SPEECH_THRESHOLD
         or avg_logprob <= GLOBAL_ASR_NOISE_TOKEN_LOGPROB_THRESHOLD

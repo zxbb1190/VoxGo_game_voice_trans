@@ -1,0 +1,115 @@
+# Synthetic phrase prompts only. Import audio made from these with --game-tsv,
+# or generate synthetic Windows SAPI audio with --game-tts.
+# These prompts/audio are category=game, never natural speech.
+one hp
+rotate B
+behind you
+I'm reloading
+two on me
+enemy at mid
+watch the flank
+they're pushing left
+I need ammo
+hold this angle
+last player alive
+planting the bomb
+spike down
+don't peek
+fall back
+cover me
+they're in the building
+knocked one
+reviving now
+clear the room
+enemy spotted
+contact front
+one crossing
+two crossing
+three at A
+one in garage
+sniper on roof
+watch the stairs
+check the corner
+clear left
+clear right
+room is clear
+they're outside
+they're inside
+enemy below us
+enemy above us
+footsteps nearby
+I hear movement
+reloading behind cover
+I'm out of ammo
+need a reload
+drop me a rifle
+take my ammo
+use your utility
+save your grenade
+smoke the doorway
+flash through the window
+grenade out
+smoke deployed
+flash coming in
+watch for the flank
+hold the objective
+defend the site
+rotate to A
+rotate to B
+go through mid
+take the long route
+push together
+wait for my call
+hold your fire
+don't shoot yet
+I'm watching back
+cover the entrance
+keep an eye on mid
+they're rotating
+they're going B
+they're going A
+bomb is planted
+defuse the bomb
+tap the bomb
+stick the defuse
+we have time
+we're out of time
+save your weapon
+play for picks
+trade me out
+one shot on me
+he's weak
+they're low
+I got one
+I got two
+that's the last one
+last seen mid
+last seen back site
+one behind the box
+two in the hallway
+enemy at the door
+enemy on the balcony
+watch the window
+don't cross yet
+crossing now
+I'm going wide
+I'm holding close
+fall back to spawn
+meet at the objective
+regroup on me
+I'm going to flank
+take the high ground
+use the zipline
+watch the bridge
+they're near the vehicle
+clear the tunnel
+moving to cover
+need a medkit
+I'm healing
+revive our teammate
+stay with the squad
+wait for the respawn
+play the timer
+objective is contested
+we lost the point
+point is clear

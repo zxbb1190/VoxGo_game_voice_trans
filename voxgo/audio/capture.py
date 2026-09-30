@@ -541,6 +541,7 @@ class SystemAudioCapture:
         self._capture_sample_rate = self.config.sample_rate
         self.selected_device = None
         self._silence_counter = 0
+        self._inactive_peak_rms = None
         self._speech_threshold = self.config.speech_threshold_blocks
         self._silence_limit = self.config.silence_limit_blocks
         configured_min_speech_threshold = _float_or_default(self.config.min_speech_threshold, -45.0)
@@ -1019,6 +1020,31 @@ class SystemAudioCapture:
         vad_speech, vad_ratio = self._is_vad_speech(audio_np)
         energy_activity = rms > self._energy_threshold
         is_activity = bool(vad_speech or energy_activity)
+        # Compare an energy-only onset with the preceding inactive windows.
+        # A steady low-level tail may pass the absolute energy gate while still
+        # being a tail; it must not keep resetting silence forever.
+        energy_reentry = bool(
+            energy_activity
+            and self._inactive_peak_rms is not None
+            and rms > self._inactive_peak_rms + min(4.0, self._soft_silence_margin_db)
+        )
+        renewed_activity = bool(vad_speech or energy_reentry)
+        emitted_on_reentry = None
+        # A new voice window after an established pause belongs to the next
+        # utterance.  The soft-tail gate below can otherwise classify a quiet
+        # new onset as more of the previous tail, append it to the old segment,
+        # and make Whisper decode an unfinished phrase with the wrong boundary.
+        if (
+            self._speech_buffer
+            and self._speech_voice_blocks >= self._speech_threshold
+            and self._silence_counter >= max(1, self._silence_limit - 1)
+            and renewed_activity
+        ):
+            logger.debug(
+                "speech reentry after {} inactive windows: rms={:.1f} dBFS, vad={}, energy={}",
+                self._silence_counter, rms, vad_speech, energy_activity,
+            )
+            emitted_on_reentry = self._emit_speech_buffer("speech_reentry")
         tail_silence_reason = ""
         if self._speech_buffer and self._speech_peak_rms is not None:
             enough_voice = self._speech_voice_blocks >= self._speech_threshold
@@ -1031,7 +1057,11 @@ class SystemAudioCapture:
                 and rms <= self._energy_threshold + self._soft_silence_gate_margin_db
                 and rms <= self._speech_peak_rms - min(4.0, self._soft_silence_margin_db)
             )
-            if enough_voice and (relative_tail or near_noise_gate):
+            # An accepted onset after an inactive window is renewed speech,
+            # even when its level is still far below the earlier speech peak.
+            if enough_voice and (relative_tail or near_noise_gate) and not (
+                self._silence_counter > 0 and renewed_activity
+            ):
                 is_activity = False
                 tail_silence_reason = "尾音下降" if relative_tail else "接近噪声门限"
                 self._last_tail_silence_reason = tail_silence_reason
@@ -1068,6 +1098,7 @@ class SystemAudioCapture:
                 self._speech_energy_voice_blocks += 1
             self._speech_peak_rms = rms if self._speech_peak_rms is None else max(self._speech_peak_rms, rms)
             self._silence_counter = 0
+            self._inactive_peak_rms = None
             self._last_tail_silence_reason = ""
             logger.debug(
                 '语音缓冲区: {} 块, {:.1f}s',
@@ -1082,6 +1113,9 @@ class SystemAudioCapture:
             self._speech_buffer.append(audio_data)
             self._speech_buffer_samples += len(audio_np)
             self._silence_counter += 1
+            self._inactive_peak_rms = (
+                rms if self._inactive_peak_rms is None else max(self._inactive_peak_rms, rms)
+            )
             if not self._last_tail_silence_reason:
                 self._last_tail_silence_reason = tail_silence_reason or "低于语音门限"
             logger.debug(f'静音计数: {self._silence_counter}/{self._silence_limit}')
@@ -1112,7 +1146,7 @@ class SystemAudioCapture:
                 reason = f"{reason}/{self._last_tail_silence_reason}"
             return self._emit_speech_buffer(reason)
 
-        return None
+        return emitted_on_reentry
 
     def _clamp_threshold(self, threshold: float) -> float:
         return max(self._min_speech_threshold, min(self._max_speech_threshold, float(threshold)))
@@ -1225,6 +1259,7 @@ class SystemAudioCapture:
         self._speech_peak_rms = None
         self._last_tail_silence_reason = ""
         self._silence_counter = 0
+        self._inactive_peak_rms = None
 
     def _emit_speech_buffer(self, reason: str) -> Optional[SpeechSegment]:
         speech_data = b"".join(self._speech_buffer)

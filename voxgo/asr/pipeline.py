@@ -682,6 +682,20 @@ class SpeechPipeline:
                 )
                 self._debug_audio.dump_if_enabled(segment, "stale_language_flow", "save_dropped_audio")
                 return
+            if getattr(result, "runaway_guarded", False):
+                self._stats["filtered_speech"] += 1
+                logger.info(
+                    "filtered transcription: global_asr_runaway_repetition, raw_words={}, "
+                    "voice={:.2f}s, total={:.2f}s, compression={:.2f}",
+                    len((getattr(result, "raw_text", "") or "").split()),
+                    segment.voice_duration_seconds,
+                    segment.duration_seconds,
+                    getattr(result, "compression_ratio", 0.0),
+                )
+                self._debug_audio.dump_if_enabled(
+                    segment, "global_asr_runaway_repetition", "save_dropped_audio"
+                )
+                return
             if not text or len(text.strip()) < 2:
                 self._stats["filtered_speech"] += 1
                 logger.info(

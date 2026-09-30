@@ -2,6 +2,7 @@ import sys
 import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -75,6 +76,29 @@ class SpeechPipelineCandidateTest(unittest.TestCase):
             lambda *args: None,
         )
         return pipeline, stats, seen
+
+    def test_runaway_guard_has_specific_production_drop_reason(self):
+        recognizer = FakeRecognizer(result=TranscriptionResult(
+            "", "en", 0.95, compression_ratio=22.0, segment_count=1,
+            raw_text="The site is southwest. " * 40, runaway_guarded=True,
+        ))
+        pipeline, stats, seen = self._pipeline(recognizer)
+        segment = _segment(
+            duration_seconds=2.0, voice_duration_seconds=1.2,
+            block_count=10, voice_blocks=6, vad_voice_blocks=6,
+            vad_confidence=0.6, peak_rms_dbfs=-20.0,
+        )
+        with patch.object(pipeline._debug_audio, "dump_if_enabled") as dump:
+            pipeline._process(SpeechWorkItem(
+                segment=segment,
+                trace=LatencyTrace("", 1.0, 1.0, whisper_language="en"),
+                whisper_language="en",
+            ))
+
+        self.assertEqual(recognizer.calls, 1)
+        self.assertEqual(stats["filtered_speech"], 1)
+        self.assertEqual(seen, [])
+        dump.assert_called_once_with(segment, "global_asr_runaway_repetition", "save_dropped_audio")
 
     def test_language_switch_resets_pending_and_queue(self):
         recognizer = FakeRecognizer("push")

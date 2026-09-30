@@ -1,0 +1,101 @@
+subset	text
+normal	I will be there in a minute.
+normal	Can you hear me clearly?
+normal	I think we should wait here.
+normal	That sounds like a good idea.
+normal	Let me check the map again.
+normal	I cannot see the entrance.
+normal	We can talk after the match.
+normal	Please give me a little more time.
+normal	I left the item near the door.
+normal	The path is quieter on this side.
+normal	I heard something behind the wall.
+normal	Could you repeat the last part?
+normal	I am ready whenever you are.
+normal	We should save that for later.
+normal	The sound came from upstairs.
+normal	I will follow you through the tunnel.
+normal	There is a light on in that room.
+normal	I need to adjust my headset.
+normal	That was closer than I expected.
+normal	We have enough time to look around.
+normal	I am checking the other route now.
+normal	The door opened from the other side.
+normal	I think the area is clear.
+normal	Let us stay together for a moment.
+normal	I found another way outside.
+normal	The next round starts very soon.
+normal	I will mark the place on the map.
+normal	That player moved toward the stairs.
+normal	We can leave when everyone is ready.
+normal	I am listening for footsteps.
+game	One HP, play safe.
+game	Rotate to B now.
+game	Enemy mid, watch the angle.
+game	I am reloading, cover me.
+game	Two on me, near the truck.
+game	Push together on my mark.
+game	They are holding the site.
+game	Save your utility for next round.
+game	I cracked the shield on the left.
+game	Take the high ground.
+game	Plant the spike after the smoke.
+game	Fall back, we lost the trade.
+game	I have no ammo in this weapon.
+game	Watch flank, someone is behind us.
+game	Use your ultimate before they rotate.
+game	Nice try, reset and buy.
+game	I tagged one near the blue container.
+game	Hold fire until they cross.
+game	Clear the corners before we enter.
+game	Keep pressure on their back line.
+game	The objective is contested.
+game	I can revive you behind cover.
+game	Throw a flash through the window.
+game	They used their last smoke.
+game	Stack on me and breach the door.
+game	Do not chase, protect the objective.
+game	I hear a vehicle approaching.
+game	We need one more point to win.
+game	Drop me a spare med kit.
+game	GG, that was a close match.
+longer	I will watch the hallway while you check the rooms on the left.
+longer	There should be a supply box somewhere behind the old building.
+longer	If they push through the center, fall back and use the side entrance.
+longer	I heard two sets of footsteps, but I cannot tell which way they went.
+longer	Wait until the vehicle passes, then cross the road together.
+longer	We can hold this position until the rest of the team catches up.
+longer	The map shows a narrow route between the tower and the river.
+longer	I am going to reload before we move into the next area.
+longer	Their team used several abilities, so we should have an opening soon.
+longer	Stay close to the wall because the open ground is easy to watch.
+longer	I will mark the entrance and then rotate back toward the objective.
+longer	There is enough time to revive our teammate before the zone closes.
+longer	Keep your microphone open while I check whether the room is clear.
+longer	We should wait for the smoke to fade before crossing the courtyard.
+longer	I saw one player near the bridge and another moving behind the hill.
+longer	Save your last charge in case they defend the final capture point.
+longer	After we clear this building, we can move east along the train tracks.
+longer	The enemy squad is split up, so call out anyone you see from above.
+longer	I do not have enough health to lead the push, so take the first angle.
+longer	When the timer reaches zero, leave the room and regroup at the exit.
+number_direction_place	Two enemies east of the red house.
+number_direction_place	Three players moving north across mid.
+number_direction_place	One target west, behind the stone wall.
+number_direction_place	Four squads left near the river bend.
+number_direction_place	I see two on the roof at twelve o'clock.
+number_direction_place	A player is south of the blue bridge.
+number_direction_place	Turn ninety degrees right at the next doorway.
+number_direction_place	The marker is about fifty meters northeast.
+number_direction_place	One enemy is hiding inside the yellow building.
+number_direction_place	Two footsteps below us, close to the stairs.
+number_direction_place	Move north west toward the small warehouse.
+number_direction_place	Three contacts east side, one is in the tower.
+number_direction_place	The second marker is behind the gas station.
+number_direction_place	I spotted a vehicle south of point seven.
+number_direction_place	Go left at the fork, then head toward the docks.
+number_direction_place	One player is on the upper floor of the hotel.
+number_direction_place	They are rotating from B toward the central lane.
+number_direction_place	Two enemies near grid four, just past the bridge.
+number_direction_place	The exit is southwest, beside the stone arch.
+number_direction_place	Three targets at the far end of the eastern corridor.

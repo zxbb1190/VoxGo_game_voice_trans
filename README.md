@@ -202,6 +202,8 @@ python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
 
 可选参数：`--benchmark-speech-seconds 4`、`--benchmark-gap-seconds 3`、`--benchmark-duration-seconds 300`。WAV 可直接使用；M4A/AAC 需要当前环境可导入 PyAV，标准安装通常会随 faster-whisper 一起具备。
 
+带标准答案的批量 ASR 对比（模型、响应模式、游戏 Prompt、整段与实时切段）见 [VoxGo ASR Benchmark](docs/asr_benchmark.md)。
+
 ## 🎯 使用说明
 
 ### 浮窗控制

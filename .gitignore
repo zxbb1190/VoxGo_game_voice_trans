@@ -57,6 +57,8 @@ release/
 *.temp
 temp/
 diagnostics/audio/
+diagnostics/asr-benchmark/
+data/asr_benchmark/
 
 # Generated QR/test images
 mobile_qr_test.png

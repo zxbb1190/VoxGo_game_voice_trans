@@ -199,6 +199,8 @@ python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
 
 Optional knobs: `--benchmark-speech-seconds 4`, `--benchmark-gap-seconds 3`, and `--benchmark-duration-seconds 300`. WAV works directly; M4A/AAC requires PyAV, which is normally available through the faster-whisper install.
 
+For labelled batch ASR comparisons across models, response modes, game Prompt, and whole versus live capture cuts, see [VoxGo ASR Benchmark](docs/asr_benchmark.md).
+
 ## Usage
 
 ### Overlay Controls
