@@ -25,6 +25,28 @@ def write_wav(path: Path, samples, rate=16000):
 
 
 class PrepareAsrBenchmarkTest(unittest.TestCase):
+    def test_librispeech_sampling_spreads_speakers_and_lengths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for speaker in range(10):
+                chapter = root / "LibriSpeech" / "test-clean" / str(speaker) / "1"
+                chapter.mkdir(parents=True)
+                lines = []
+                for index, words in enumerate(("short spoken phrase", "a few more ordinary words in this sentence today",
+                                               "this is a substantially longer natural human spoken passage with many more words in the same recorded sentence than the other examples")):
+                    clip = f"{speaker}-1-{index:04d}"
+                    (chapter / f"{clip}.flac").write_bytes(b"flac-placeholder")
+                    lines.append(f"{clip} {words}")
+                (chapter / f"{speaker}-1.trans.txt").write_text("\n".join(lines), encoding="utf-8")
+            rows = module._librispeech_rows(root, 20, 20260930)
+            again = module._librispeech_rows(root, 20, 20260930)
+            self.assertEqual([row["id"] for row in rows], [row["id"] for row in again])
+            self.assertEqual(len(rows), 20)
+            self.assertGreaterEqual(len({row["speaker_id"] for row in rows}), 8)
+            self.assertEqual({row["subset"] for row in rows}, {"short", "ordinary", "longer"})
+            self.assertTrue(all(row["category"] == "natural" and row["license"] == "CC BY 4.0"
+                                for row in rows))
+
     def test_common_voice_sampling_is_repeatable_and_manifest_is_correct(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

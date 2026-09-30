@@ -108,6 +108,75 @@ def _common_voice_rows(root: Path, limit: int, seed: int, split: str = "test") -
             for i, (_clip, sentence, audio) in enumerate(usable, 1)]
 
 
+def _librispeech_rows(root: Path, limit: int, seed: int) -> list[dict]:
+    """Select diverse speakers and utterance lengths from LibriSpeech test-clean."""
+    transcripts = sorted(root.rglob("*.trans.txt"))
+    if not transcripts:
+        raise FileNotFoundError(f"no LibriSpeech transcript files under {root}")
+    buckets = {"short": {}, "ordinary": {}, "longer": {}}
+    for transcript in transcripts:
+        if "test-clean" not in transcript.parts:
+            continue
+        for line in transcript.read_text(encoding="utf-8").splitlines():
+            clip_id, separator, sentence = line.partition(" ")
+            sentence = sentence.strip()
+            if not separator or not sentence:
+                continue
+            audio = transcript.parent / f"{clip_id}.flac"
+            if not audio.is_file():
+                continue
+            count = len(sentence.split())
+            if count <= 8:
+                subset = "short"
+            elif count <= 18:
+                subset = "ordinary"
+            elif count <= 35:
+                subset = "longer"
+            else:
+                continue
+            speaker = clip_id.split("-", 1)[0]
+            buckets[subset].setdefault(speaker, []).append((clip_id, sentence, audio))
+    if not any(buckets.values()):
+        raise ValueError("LibriSpeech input has no usable test-clean FLAC/transcript pairs")
+
+    rng = random.Random(seed)
+    for speakers in buckets.values():
+        for clips in speakers.values():
+            rng.shuffle(clips)
+    selected = []
+    target = limit if limit > 0 else sum(len(clips) for speakers in buckets.values()
+                                          for clips in speakers.values())
+    quotas = {"short": target // 4, "ordinary": target // 2,
+              "longer": target - target // 4 - target // 2}
+    for subset in ("short", "ordinary", "longer"):
+        speakers = buckets[subset]
+        order = sorted(speakers)
+        rng.shuffle(order)
+        while order and sum(row[0] == subset for row in selected) < quotas[subset]:
+            next_order = []
+            for speaker in order:
+                if sum(row[0] == subset for row in selected) >= quotas[subset]:
+                    break
+                clips = speakers[speaker]
+                if clips:
+                    selected.append((subset, speaker, *clips.pop()))
+                if clips:
+                    next_order.append(speaker)
+            order = next_order
+    if len(selected) < target:
+        remaining = [(subset, speaker, *clip)
+                     for subset, speakers in buckets.items()
+                     for speaker, clips in speakers.items() for clip in clips]
+        rng.shuffle(remaining)
+        selected.extend(remaining[:target - len(selected)])
+    selected.sort(key=lambda row: row[2])
+    return [{"id": f"librispeech-{clip_id}", "category": "natural", "subset": subset,
+             "audio": str(audio.resolve()), "reference": sentence,
+             "source": "OpenSLR SLR12 LibriSpeech test-clean", "license": "CC BY 4.0",
+             "speaker_id": speaker}
+            for subset, speaker, clip_id, sentence, audio in selected]
+
+
 def import_game_tsv(tsv_path: Path) -> list[dict]:
     """Import user-recorded or locally generated audio; columns: audio, reference."""
     rows = []
@@ -373,6 +442,13 @@ def prepare(args: argparse.Namespace) -> list[dict]:
             source = _safe_extract(source, Path(args.extract_to or output.parent / "common_voice_extracted").resolve())
         natural_rows = _common_voice_rows(source, args.limit, args.seed, args.cv_split)
         rows.extend(natural_rows)
+    if args.librispeech:
+        source = Path(args.librispeech).expanduser().resolve()
+        if source.is_file():
+            source = _safe_extract(source, Path(args.extract_to or output.parent / "librispeech_extracted").resolve())
+        librispeech_rows = _librispeech_rows(source, args.limit, args.seed)
+        natural_rows.extend(librispeech_rows)
+        rows.extend(librispeech_rows)
     if args.game_tsv:
         game_rows = import_game_tsv(Path(args.game_tsv).resolve())
         rows.extend(game_rows)
@@ -416,6 +492,7 @@ def prepare(args: argparse.Namespace) -> list[dict]:
                                  "clean_category": row["category"], "noise_audio": str(noise_file),
                                  "noise_level": "light" if snr >= 10 else "heavy" if snr <= 0 else "medium",
                                  **({"subset": row["subset"]} if row.get("subset") else {}),
+                                  **({"speaker_id": row["speaker_id"]} if row.get("speaker_id") else {}),
                                  **({"synthetic": True} if row.get("synthetic") else {}),
                                  "license": f"speech: {row.get('license') or 'unspecified'}; "
                                             f"noise: {args.noise_license or 'unspecified'}",
@@ -434,6 +511,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default="data/asr_benchmark/manifest.jsonl")
     parser.add_argument("--common-voice", help="user-downloaded archive or extracted Common Voice spontaneous corpus")
+    parser.add_argument("--librispeech", help="official OpenSLR SLR12 test-clean archive or extracted directory")
     parser.add_argument("--extract-to", help="where to extract a supplied ZIP/TAR archive")
     parser.add_argument("--limit", type=int, default=200, help="maximum Common Voice clips; 0 means all")
     parser.add_argument("--cv-split", choices=("test", "dev", "train", "all"), default="test",

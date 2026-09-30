@@ -51,6 +51,7 @@ class Case:
     snr_db: float = None
     subset: str = ""
     clean_category: str = ""
+    speaker_id: str = ""
 
 
 def load_manifest(path: Path, limit: int = 0) -> list:
@@ -76,7 +77,8 @@ def load_manifest(path: Path, limit: int = 0) -> list:
                 raise FileNotFoundError(f"{path}:{line_number}: {audio}")
             cases.append(Case(case_id, category, audio, reference, str(row.get("source", "")),
                               str(row.get("license", "")), row.get("snr_db"),
-                              str(row.get("subset", "")), str(row.get("clean_category", ""))))
+                              str(row.get("subset", "")), str(row.get("clean_category", "")),
+                              str(row.get("speaker_id", ""))))
             ids.add(case_id)
             if limit and len(cases) >= limit:
                 break
@@ -104,9 +106,13 @@ def tokens(text: str) -> list:
     return TOKEN_RE.findall(normalized)
 
 
-def word_errors(reference: str, hypothesis: str) -> dict:
-    """Levenshtein edit counts with a deterministic deletion-first tie break."""
-    ref, hyp = tokens(reference), tokens(hypothesis)
+def literal_tokens(text: str) -> list:
+    """Case/punctuation-insensitive words without numeric or contraction rewriting."""
+    return TOKEN_RE.findall(ANNOTATION_RE.sub(" ", text).casefold().replace("’", "'"))
+
+
+def _word_errors(reference: str, hypothesis: str, tokenize) -> dict:
+    ref, hyp = tokenize(reference), tokenize(hypothesis)
     rows = [[(0, 0, 0, 0)] * (len(hyp) + 1) for _ in range(len(ref) + 1)]
     for i in range(1, len(ref) + 1):
         rows[i][0] = (i, 0, i, 0)
@@ -128,33 +134,72 @@ def word_errors(reference: str, hypothesis: str) -> dict:
             "errors": subs + deletes + inserts}
 
 
-def capture_segments(samples: np.ndarray, preset: str) -> list:
+def word_errors(reference: str, hypothesis: str) -> dict:
+    """Legacy normalized WER counts, retained for baseline comparison."""
+    return _word_errors(reference, hypothesis, tokens)
+
+
+def literal_word_errors(reference: str, hypothesis: str) -> dict:
+    return _word_errors(reference, hypothesis, literal_tokens)
+
+
+def prompt_leakage(reference: str, hypothesis: str, prompt: str) -> bool:
+    if prompt != "game_en":
+        return False
+    prompt_words = ["hp", "gg", "nt", "wp", "mid", "rotate", "push", "reload",
+                    "flank", "spike", "site", "ultimate", "shield", "revive"]
+    output = tokens(hypothesis)
+    expected = tokens(reference)
+    for start in range(len(prompt_words) - 3):
+        phrase = prompt_words[start:start + 4]
+        if any(output[index:index + 4] == phrase for index in range(len(output) - 3)):
+            if not any(expected[index:index + 4] == phrase for index in range(len(expected) - 3)):
+                return True
+    return False
+
+
+def capture_segments(samples: np.ndarray, preset: str, on_segment=None,
+                     pace_realtime: bool = False) -> list:
     """Replay 16 kHz mono PCM through the live capture VAD, one configured block at a time."""
     config = AudioConfig(latency_mode=preset, sample_rate=16000, channels=1)
     apply_audio_latency_preset(config)
     apply_english_realtime_latency_bias(config, preset)
     capture = SystemAudioCapture(config)
     segments = []
-    capture.set_speech_callback(segments.append)
+    replay_seconds = 0.0
+
+    def emit(segment):
+        segments.append(segment)
+        if on_segment:
+            on_segment(segment, replay_seconds)
+
+    capture.set_speech_callback(emit)
     block_size = int(16000 * config.chunk_duration_ms / 1000)
     try:
         for start in range(0, len(samples), block_size):
+            replay_seconds = min((start + block_size) / 16000.0, len(samples) / 16000.0)
             chunk = samples[start:start + block_size]
             if len(chunk) < block_size:
                 chunk = np.pad(chunk, (0, block_size - len(chunk)))
             capture._enqueue_audio_block(chunk.astype("<i2", copy=False).tobytes())
             capture.process_audio()
+            if pace_realtime:
+                time.sleep(config.chunk_duration_ms / 1000.0)
         # A real capture stream receives silence after an utterance. Feed enough
         # silence to close the final segment without waiting on wall-clock time.
         silence_blocks = max(config.silence_limit_blocks + 1,
                              int(np.ceil(config.speech_idle_timeout_ms / config.chunk_duration_ms)) + 1)
         blank = np.zeros(block_size, dtype="<i2").tobytes()
         for _ in range(silence_blocks):
+            replay_seconds += config.chunk_duration_ms / 1000.0
             capture._enqueue_audio_block(blank)
             capture.process_audio()
+            if pace_realtime:
+                time.sleep(config.chunk_duration_ms / 1000.0)
         # A low-energy tail can remain buffered after finite silence; simulate
         # the live idle timeout deterministically, rather than dropping speech.
         if capture._speech_buffer:
+            replay_seconds += config.speech_idle_timeout_ms / 1000.0
             capture._handle_idle_timeout(time.monotonic() + config.speech_idle_timeout_ms / 1000 + 0.01)
     finally:
         capture._audio.terminate()
@@ -167,7 +212,8 @@ def score_record(case: Case, model: str, preset: str, prompt: str, path: str,
                  model_fingerprint: str = "", cpu_threads: int = 0,
                  segment_diagnostics: list = None, raw_hypothesis: str = None,
                  runaway_guarded: bool = False) -> dict:
-    counts = word_errors(case.reference, hypothesis)
+    counts = literal_word_errors(case.reference, hypothesis)
+    normalized = word_errors(case.reference, hypothesis)
     reference_words = counts["reference_words"]
     raw_text = hypothesis if raw_hypothesis is None else raw_hypothesis
     raw_words = tokens(raw_text)
@@ -181,6 +227,7 @@ def score_record(case: Case, model: str, preset: str, prompt: str, path: str,
     repetition_failure = is_runaway_repetition(hypothesis, duration_seconds=duration)
     raw_repetition_failure = is_runaway_repetition(raw_text, duration_seconds=duration)
     return {"id": case.id, "category": case.category, "subset": case.subset,
+            "speaker_id": case.speaker_id,
             "clean_category": case.clean_category, "audio": str(case.audio),
             "source": case.source, "license": case.license,
             "snr_db": case.snr_db, "model": model, "preset": preset,
@@ -202,6 +249,9 @@ def score_record(case: Case, model: str, preset: str, prompt: str, path: str,
             "max_repeat_count": delivered_repetition.max_repeat_count,
             "max_repeat_span_words": delivered_repetition.max_repeat_span_words,
             "runaway_guarded": bool(runaway_guarded),
+            "normalized_reference_words": normalized["reference_words"],
+            "normalized_errors": normalized["errors"],
+            "prompt_leakage": prompt_leakage(case.reference, hypothesis, prompt),
             "raw_hypothesis": raw_text,
             "segment_diagnostics": list(segment_diagnostics or [])}
 
@@ -222,10 +272,14 @@ def summarize(records: list) -> list:
         words = sum(row["reference_words"] for row in rows)
         errors = sum(row["errors"] for row in rows)
         deletions = sum(row["deletions"] for row in rows)
+        normalized_words = sum(row.get("normalized_reference_words", row["reference_words"]) for row in rows)
+        normalized_errors = sum(row.get("normalized_errors", row["errors"]) for row in rows)
         output.append({"model": model, "preset": preset, "prompt": prompt,
                        "path": path, "category": category, "clean_category": clean_category,
                        "subset": subset, "snr_db": snr_db, "cases": len(rows),
+                        "speakers": len({row.get("speaker_id") for row in rows if row.get("speaker_id")}),
                        "wer": errors / words if words else None,
+                        "normalized_wer": normalized_errors / normalized_words if normalized_words else None,
                        "deletion_rate": deletions / words if words else None,
                        "exact_hit_rate": sum(row["hit"] for row in rows) / len(rows),
                        "mean_inference_seconds": statistics.mean(row["inference_seconds"] for row in rows),
@@ -236,6 +290,7 @@ def summarize(records: list) -> list:
                        "raw_repetition_failure_count": sum(bool(row.get("raw_repetition_failure")) for row in rows),
                        "raw_repetition_failure_rate": sum(bool(row.get("raw_repetition_failure")) for row in rows) / len(rows),
                        "runaway_guarded_count": sum(bool(row.get("runaway_guarded")) for row in rows),
+                        "prompt_leakage_count": sum(bool(row.get("prompt_leakage")) for row in rows),
                        "abnormal_length_count": sum(bool(row.get("abnormal_length")) for row in rows),
                        "abnormal_length_rate": sum(bool(row.get("abnormal_length")) for row in rows) / len(rows),
                        "max_output_reference_length_ratio": max(
@@ -244,6 +299,12 @@ def summarize(records: list) -> list:
                             for row in rows),
                            default=0.0),
                        "average_segment_count": statistics.mean(row.get("segments", 0) for row in rows),
+                        "average_capture_segment_count": statistics.mean(
+                            row.get("capture_segment_count", row.get("segments", 0)) for row in rows),
+                        "filtered_candidate_count": sum(
+                            row.get("pipeline_stats", {}).get("filtered_speech", 0) for row in rows),
+                        "dropped_queue_count": sum(
+                            row.get("pipeline_stats", {}).get("dropped_speech", 0) for row in rows),
                        "average_segment_duration_seconds": statistics.mean(
                            [float(segment.get("duration_seconds", 0) or 0)
                             for row in rows for segment in row.get("segment_diagnostics", [])]
@@ -321,16 +382,19 @@ def render_html(summary: list, records: list, failures: list, metadata: dict) ->
             row["model"], row["preset"], row["prompt"], row["path"], row["category"],
             row["subset"],
             "—" if row["snr_db"] is None else f'{row["snr_db"]:g} dB',
-            row["cases"], pct(row["wer"]), pct(row["deletion_rate"]),
+            row["cases"], row.get("speakers", 0), pct(row["wer"]), pct(row.get("normalized_wer")), pct(row["deletion_rate"]),
             pct(row["exact_hit_rate"]) if row["subset"] == "game" else "—",
             f'{row["mean_inference_seconds"]:.2f}s',
             f'{row["p50_inference_seconds"]:.2f}s', f'{row["p95_inference_seconds"]:.2f}s',
             f'{row["repetition_failure_count"]}/{row["cases"]} ({pct(row["repetition_failure_rate"])})',
+            row.get("prompt_leakage_count", 0),
             f'{row["raw_repetition_failure_count"]}/{row["cases"]} ({pct(row["raw_repetition_failure_rate"])})',
             f'{row["abnormal_length_count"]}/{row["cases"]} ({pct(row["abnormal_length_rate"])})',
             f'{row["max_output_reference_length_ratio"]:.2f}x raw',
             f'{row["average_segment_count"]:.2f}',
+            f'{row.get("average_capture_segment_count", 0):.2f}',
             f'{row["average_segment_duration_seconds"]:.2f}s',
+            row.get("filtered_candidate_count", 0), row.get("dropped_queue_count", 0),
             row["device"], row["compute_type"],
             row["cpu_threads"])) + "</tr>"
         for row in summary)
@@ -349,10 +413,10 @@ def render_html(summary: list, records: list, failures: list, metadata: dict) ->
 table{{border-collapse:collapse;width:100%;font-size:13px}}th,td{{border:1px solid #d9e1e9;padding:.55rem;text-align:left;vertical-align:top}}
 th{{background:#eff4fa;position:sticky;top:0}}tr:nth-child(even){{background:#f8fafc}}.wrap{{overflow:auto}}
 code{{background:#f1f4f8;padding:.1rem .25rem}}</style><h1>VoxGo ASR Benchmark</h1>
-<p>生成于 {esc(metadata['created_at'])}；样本 {esc(metadata['cases'])} 条。WER 与漏词率均按标准答案词数加权；游戏命中率是规范化后的整句完全匹配率。耗时只计识别调用，不含模型加载、音频解码、切段或翻译。</p>
+ <p>生成于 {esc(metadata['created_at'])}；样本 {esc(metadata['cases'])} 条。WER 忽略大小写和标点；规范化 WER 另统一数字与撇号，可与旧版报告 WER 对照。漏词率按标准答案词数加权；游戏命中率是规范化后的整句完全匹配率。耗时只计识别调用，不含模型加载、音频解码、切段或翻译。</p>
 <p>样本来源：{esc(', '.join(metadata.get('sources', [])) or '未标明')}。合成语音仅用于配置比较，不能代表真实口音或玩家环境。</p>
-<p><code>whole</code> 是整段识别；<code>capture_cut</code> 是按当前 AudioConfig 块大小经过 SystemAudioCapture VAD/切段后逐段识别并拼接。后者不模拟 SpeechPipeline 的候选缓冲、异步队列与译文输出；每条音频独立重置噪声校准。仅比较相同数据与设备配置下的结果。</p>
-<h2>汇总</h2><div class="wrap"><table><thead><tr><th>模型</th><th>模式</th><th>Prompt</th><th>路径</th><th>类别</th><th>子集</th><th>SNR</th><th>样本</th><th>WER</th><th>漏词率</th><th>游戏命中率</th><th>平均识别耗时</th><th>P50</th><th>P95</th><th>最终文本重复失败</th><th>原始重复失败</th><th>原始超长输出</th><th>最大原始输出比</th><th>平均片段数</th><th>平均片段时长</th><th>设备</th><th>计算类型</th><th>CPU 线程</th></tr></thead><tbody>{table_rows}</tbody></table></div>
+ <p><code>whole</code> 是整段识别；<code>capture_cut</code> 是 SystemAudioCapture 切段后逐段识别；<code>full_pipeline</code> 按真实时间回放音频块，并通过正式 SpeechPipeline 工作线程执行候选合并、队列准入、ASR 与输出过滤；可观察单条音频内的队列竞争。报告耗时仍只计 ASR 调用，不含等待和端到端显示延迟。每条音频独立重置噪声校准。</p>
+ <h2>汇总</h2><div class="wrap"><table><thead><tr><th>模型</th><th>模式</th><th>Prompt</th><th>路径</th><th>类别</th><th>子集</th><th>SNR</th><th>样本</th><th>说话人</th><th>WER</th><th>规范化 WER</th><th>漏词率</th><th>游戏命中率</th><th>平均识别耗时</th><th>P50</th><th>P95</th><th>最终文本重复失败</th><th>Prompt 泄漏数</th><th>原始重复失败</th><th>原始超长输出</th><th>最大原始输出比</th><th>平均识别片段数</th><th>平均捕获片段数</th><th>平均片段时长</th><th>Pipeline 过滤数</th><th>队列丢弃数</th><th>设备</th><th>计算类型</th><th>CPU 线程</th></tr></thead><tbody>{table_rows}</tbody></table></div>
 <h2>最差案例（按单条 WER）</h2><div class="wrap"><table><thead><tr><th>ID</th><th>模型</th><th>模式</th><th>Prompt</th><th>路径</th><th>类别</th><th>子集</th><th>错词/总词</th><th>最终文本重复失败</th><th>原始重复失败</th><th>原始超长输出</th><th>运行时拦截</th><th>输出词数/参考词数（最终/原始）</th><th>标准答案</th><th>最终识别结果</th><th>原始识别结果</th></tr></thead><tbody>{worst_rows}</tbody></table></div>
 <h2>失败或跳过</h2><ul>{failure_rows or '<li>无</li>'}</ul></html>'''
 
@@ -386,7 +450,7 @@ def _model_fingerprint(recognizer) -> str:
 def run(cases: list, models: list, presets: list, prompts: list, device: str,
         compute_type: str, allow_download: bool, recognizer_class=None,
         config_class=None, beam_sizes=None, existing_records=None,
-        on_progress=None) -> tuple:
+         on_progress=None, paths=("whole", "capture_cut", "full_pipeline")) -> tuple:
     if recognizer_class is None or config_class is None or beam_sizes is None:
         # Keep scoring/report commands usable when the local ASR runtime cannot load.
         from voxgo.asr.whisper_engine import SpeechRecognizer, WhisperConfig
@@ -465,10 +529,12 @@ def run(cases: list, models: list, presets: list, prompts: list, device: str,
                             continue
                         samples = audio[case.id]
                         captured_segments = cuts[(case.id, preset)]
-                        paths = (("whole", [samples.tobytes()], [None]),
-                                 ("capture_cut", [seg.audio_data for seg in captured_segments],
-                                  captured_segments))
-                        for path, chunks, capture_metadata in paths:
+                        direct_paths = (("whole", [samples.tobytes()], [None]),
+                                        ("capture_cut", [seg.audio_data for seg in captured_segments],
+                                         captured_segments))
+                        for path, chunks, capture_metadata in direct_paths:
+                            if path not in paths:
+                                continue
                             key = (case.id, model, preset, prompt, path)
                             if key in completed_rows:
                                 continue
@@ -512,6 +578,45 @@ def run(cases: list, models: list, presets: list, prompts: list, device: str,
                                     on_progress(records, failures)
                             except Exception as exc:
                                 failures.append(f"{model}/{preset}/{prompt}/{case.id}/{path}: {exc}")
+                        if "full_pipeline" in paths:
+                            key = (case.id, model, preset, prompt, "full_pipeline")
+                            if key not in completed_rows:
+                                try:
+                                    from scripts.asr_full_pipeline import run_full_pipeline
+
+                                    outcome = run_full_pipeline(samples, preset, recognizer)
+                                    diagnostics = []
+                                    offset = 0.0
+                                    for index, (chunk, result, call_seconds) in enumerate(outcome["calls"]):
+                                        diagnostic = _segment_diagnostic(
+                                            chunk, result, index, offset, prompt, config,
+                                            inference_seconds=call_seconds, prompt_text=prompt_text,
+                                        )
+                                        diagnostic["timing_basis"] = "pipeline_emitted_audio_cumulative"
+                                        diagnostic["source_offset_available"] = False
+                                        diagnostics.append(diagnostic)
+                                        offset += len(chunk) / (2 * 16000)
+                                    record = score_record(
+                                        case, model, preset, prompt, "full_pipeline",
+                                        outcome["hypothesis"],
+                                        sum(call_seconds for _, _, call_seconds in outcome["calls"]),
+                                        len(outcome["calls"]),
+                                        recognizer.runtime_device, recognizer.runtime_compute_type,
+                                        config.beam_size, model_fingerprint, cpu_threads,
+                                        segment_diagnostics=diagnostics,
+                                        raw_hypothesis=outcome["raw_hypothesis"],
+                                        runaway_guarded=any(bool(getattr(result, "runaway_guarded", False))
+                                                            for _, result, _ in outcome["calls"]),
+                                    )
+                                    record["capture_segment_count"] = len(outcome["captured_segments"])
+                                    record["pipeline_stats"] = outcome["stats"]
+                                    record["pipeline_notices"] = [str(item) for item in outcome["notices"]]
+                                    records.append(record)
+                                    completed_rows[key] = record
+                                    if on_progress:
+                                        on_progress(records, failures)
+                                except Exception as exc:
+                                    failures.append(f"{model}/{preset}/{prompt}/{case.id}/full_pipeline: {exc}")
             except Exception as exc:
                 records = [row for row in records if not (row["model"] == model and row["preset"] == preset)]
                 completed_rows = {record_key(row): row for row in records}
@@ -529,6 +634,8 @@ def main(argv=None) -> int:
     parser.add_argument("--models", nargs="+", default=["base.en", "small.en"])
     parser.add_argument("--presets", nargs="+", choices=PRESETS, default=["fast", "balanced"])
     parser.add_argument("--prompts", nargs="+", choices=PROMPTS, default=list(PROMPTS))
+    parser.add_argument("--paths", nargs="+", choices=("whole", "capture_cut", "full_pipeline"),
+                        default=["whole", "capture_cut", "full_pipeline"])
     parser.add_argument("--device", choices=["cpu", "cuda", "auto"], default="auto")
     parser.add_argument("--compute-type", default="default")
     parser.add_argument("--allow-download", action="store_true", help="Allow missing Whisper models to download")
@@ -546,14 +653,17 @@ def main(argv=None) -> int:
                 "cases": len(cases), "manifest": str(args.manifest.resolve()),
                 "manifest_sha256": hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
                 "sources": sorted({case.source for case in cases}),
-                "models": args.models, "presets": args.presets, "prompts": args.prompts,
+                 "models": args.models, "presets": args.presets, "prompts": args.prompts,
+                 "paths": args.paths,
                 "device_requested": args.device, "compute_type_requested": args.compute_type,
                 "allow_download": args.allow_download,
-                "benchmark_version": 4,
+                 "benchmark_version": 5,
                 "case_ids_sha256": hashlib.sha256("\0".join(case.id for case in cases).encode("utf-8")).hexdigest(),
                 "audio_sha256": _hash_files([case.audio for case in cases]),
                 "implementation_sha256": _hash_files([
                     Path(__file__), Path(__file__).resolve().parents[1] / "voxgo/asr/whisper_engine.py",
+                     Path(__file__).resolve().parents[1] / "scripts/asr_full_pipeline.py",
+                     Path(__file__).resolve().parents[1] / "voxgo/asr/pipeline.py",
                     Path(__file__).resolve().parents[1] / "voxgo/asr/runaway_repetition.py",
                     Path(__file__).resolve().parents[1] / "voxgo/audio/capture.py",
                     Path(__file__).resolve().parents[1] / "voxgo/audio/benchmark.py",
@@ -563,7 +673,7 @@ def main(argv=None) -> int:
     report_path = args.output_dir / "report.json"
     if args.resume and report_path.is_file():
         previous = json.loads(report_path.read_text(encoding="utf-8"))
-        keys = ("manifest_sha256", "models", "presets", "prompts", "device_requested",
+        keys = ("manifest_sha256", "models", "presets", "prompts", "paths", "device_requested",
                 "compute_type_requested", "allow_download", "benchmark_version", "cases",
                 "case_ids_sha256", "audio_sha256", "implementation_sha256")
         if any(previous.get("metadata", {}).get(key) != metadata[key] for key in keys):
@@ -589,7 +699,8 @@ def main(argv=None) -> int:
     try:
         records, failures = run(cases, args.models, args.presets, args.prompts,
                                 args.device, args.compute_type, args.allow_download,
-                                existing_records=existing_records, on_progress=checkpoint)
+                                existing_records=existing_records, on_progress=checkpoint,
+                                paths=args.paths)
     except (ImportError, OSError) as exc:
         records, failures = existing_records, [f"ASR runtime unavailable: {exc}"]
     write_report(records, failures, html_report=True)

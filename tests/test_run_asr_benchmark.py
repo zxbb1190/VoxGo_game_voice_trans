@@ -1,4 +1,5 @@
 import json
+import threading
 import tempfile
 import unittest
 import wave
@@ -41,6 +42,19 @@ class RunAsrBenchmarkTest(unittest.TestCase):
                          {"reference_words": 4, "substitutions": 0,
                           "deletions": 2, "insertions": 0, "errors": 2})
         self.assertEqual(word_errors("[noise] rotate B [disfluency]", "rotate B")["errors"], 0)
+
+    def test_report_separates_literal_and_normalized_wer_and_prompt_leakage(self):
+        case = Case("numbers", "natural", Path("n.wav"), "two on B", "test")
+        row = score_record(case, "base.en", "fast", "off", "whole",
+                           "2 on B", 0.1, 1, "cpu", "int8")
+        self.assertGreater(row["errors"], 0)
+        self.assertEqual(row["normalized_errors"], 0)
+        group = next(item for item in summarize([row]) if item["subset"] == "all")
+        self.assertGreater(group["wer"], group["normalized_wer"])
+        game = Case("game", "game", Path("g.wav"), "rotate B", "test")
+        leaked = score_record(game, "small.en", "balanced", "game_en", "whole",
+                              "rotate B HP GG NT WP mid", 0.1, 1, "cpu", "int8")
+        self.assertTrue(leaked["prompt_leakage"])
 
     def test_manifest_rejects_missing_audio_and_duplicate_id(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -190,7 +204,8 @@ class RunAsrBenchmarkTest(unittest.TestCase):
                 wf.writeframes(pcm.tobytes())
             case = Case("a", "game", wav, "rotate B", "synthetic")
             records, failures = run([case], ["base.en"], ["fast"], ["off", "game_en"],
-                                    "cpu", "int8", False, FakeRecognizer, FakeConfig, {"fast": 1})
+                                    "cpu", "int8", False, FakeRecognizer, FakeConfig, {"fast": 1},
+                                    paths=("whole", "capture_cut"))
         self.assertEqual(failures, [])
         self.assertEqual(len(records), 4)
         self.assertEqual({row["path"] for row in records}, {"whole", "capture_cut"})
@@ -203,6 +218,59 @@ class RunAsrBenchmarkTest(unittest.TestCase):
         capture_cut = next(row for row in records if row["path"] == "capture_cut")
         self.assertGreaterEqual(capture_cut["segments"], 1)
         self.assertEqual(len(capture_cut["segment_diagnostics"]), capture_cut["segments"])
+
+    def test_full_pipeline_uses_real_pipeline_and_records_post_filter_output(self):
+        recognition_threads = []
+
+        class FakeConfig(SimpleNamespace):
+            pass
+
+        class FakeRecognizer:
+            def __init__(self, config):
+                self.config = config
+                self._loaded_model_size = ""
+                self.runtime_device = "cpu"
+                self.runtime_compute_type = "int8"
+
+            def initialize(self):
+                self._loaded_model_size = self.config.model_size
+
+            def transcribe_audio_bytes_with_language(self, chunk, sample_rate, language_override):
+                recognition_threads.append(threading.current_thread().name)
+                return SimpleNamespace(
+                    text="rotate B", raw_text="rotate B", language="en",
+                    language_probability=0.99, avg_logprob=-0.1,
+                    no_speech_prob=0.01, compression_ratio=1.0,
+                    runaway_guarded=False,
+                )
+
+            def cleanup(self):
+                pass
+
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / "clip.wav"
+            pcm = (np.sin(np.arange(16000 * 2) * 2 * np.pi * 330 / 16000) * 12000).astype(np.int16)
+            with wave.open(str(wav), "wb") as wf:
+                wf.setnchannels(1)
+                wf.setsampwidth(2)
+                wf.setframerate(16000)
+                wf.writeframes(pcm.tobytes())
+            case = Case("a", "game", wav, "rotate B", "synthetic")
+            records, failures = run(
+                [case], ["base.en"], ["fast"], ["off"], "cpu", "int8", False,
+                FakeRecognizer, FakeConfig, {"fast": 1},
+                paths=("whole", "capture_cut", "full_pipeline"),
+            )
+        self.assertEqual(failures, [])
+        self.assertEqual({row["path"] for row in records},
+                         {"whole", "capture_cut", "full_pipeline"})
+        full = next(row for row in records if row["path"] == "full_pipeline")
+        self.assertGreaterEqual(full["capture_segment_count"], 1)
+        self.assertEqual(full["pipeline_stats"]["speech_detected"], full["capture_segment_count"])
+        self.assertEqual(full["hypothesis"], "rotate B")
+        self.assertEqual(full["normalized_errors"], 0)
+        self.assertEqual(full["segments"], len(full["segment_diagnostics"]))
+        self.assertIn("speech-worker", recognition_threads)
 
     def test_summary_includes_balanced_corpus_and_four_subsets(self):
         rows = []
@@ -253,7 +321,8 @@ class RunAsrBenchmarkTest(unittest.TestCase):
                                      "rotate B", 0.5, 1, "cpu", "int8", cpu_threads=1)]
             records, failures = run([case], ["base.en"], ["fast"], ["off"],
                                     "cpu", "int8", False, FakeRecognizer, FakeConfig,
-                                    {"fast": 1}, existing_records=existing)
+                                    {"fast": 1}, existing_records=existing,
+                                    paths=("whole", "capture_cut"))
         self.assertEqual(failures, [])
         self.assertEqual(len(records), 2)
         self.assertEqual(len(calls), 1)
@@ -293,7 +362,7 @@ class RunAsrBenchmarkTest(unittest.TestCase):
             case = Case("a", "game", wav, "rotate B", "synthetic")
             records, failures = run([case], ["base.en"], ["fast", "balanced"], ["off"],
                                     "cpu", "int8", False, FakeRecognizer, FakeConfig,
-                                    {"fast": 1, "balanced": 1})
+                                    {"fast": 1, "balanced": 1}, paths=("whole", "capture_cut"))
         self.assertEqual(failures, [])
         self.assertEqual(len(records), 4)
         self.assertEqual(len(calls), 4)
@@ -345,7 +414,8 @@ class RunAsrBenchmarkTest(unittest.TestCase):
             cases = [Case("bad", "game", bad, "rotate B", "test"),
                      Case("good", "game", good, "rotate B", "test")]
             records, failures = run(cases, ["base.en"], ["fast"], ["off"], "cpu", "int8",
-                                    False, FakeRecognizer, FakeConfig, {"fast": 1})
+                                    False, FakeRecognizer, FakeConfig, {"fast": 1},
+                                    paths=("whole", "capture_cut"))
         self.assertEqual({row["id"] for row in records}, {"good"})
         self.assertEqual(len(records), 2)
         self.assertEqual(len(failures), 1)
