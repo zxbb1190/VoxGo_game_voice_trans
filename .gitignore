@@ -58,6 +58,7 @@ release/
 temp/
 diagnostics/audio/
 diagnostics/asr-benchmark/
+diagnostics/asr-chain-ab/
 data/asr_benchmark/
 
 # Generated QR/test images
