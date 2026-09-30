@@ -1,0 +1,294 @@
+{
+  "dataset_url": "https://huggingface.co/datasets/edinburghcstr/ami",
+  "config": "ihm",
+  "split": "test",
+  "license": "CC BY 4.0",
+  "selection_seed": 20260930,
+  "source_api_offsets": [
+    0,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000,
+    8000,
+    9000,
+    10000,
+    11000,
+    12000
+  ],
+  "rows": [
+    {
+      "row_idx": 3009,
+      "id": "AMI_EN2002c_H02_MEE071_0233769_0233929",
+      "reference": "AND UH A THING",
+      "subset": "short",
+      "speaker_id": "MEE071",
+      "meeting_id": "EN2002c",
+      "duration_seconds": 1.60009765625
+    },
+    {
+      "row_idx": 9097,
+      "id": "AMI_IS1009c_H00_FIE088_0004479_0004718",
+      "reference": "UM HOW UH HOW WE DOING",
+      "subset": "short",
+      "speaker_id": "FIE088",
+      "meeting_id": "IS1009c",
+      "duration_seconds": 2.3899993896484375
+    },
+    {
+      "row_idx": 6006,
+      "id": "AMI_ES2004b_H01_FEE013_0228984_0229266",
+      "reference": "YEP AND DIFFERENT FROM WHAT'S OUT THERE",
+      "subset": "short",
+      "speaker_id": "FEE013",
+      "meeting_id": "ES2004b",
+      "duration_seconds": 2.81982421875
+    },
+    {
+      "row_idx": 8008,
+      "id": "AMI_IS1009a_H03_FIO089_0008339_0008533",
+      "reference": "AND I'M A MARKETING PERSON",
+      "subset": "short",
+      "speaker_id": "FIO089",
+      "meeting_id": "IS1009a",
+      "duration_seconds": 1.94000244140625
+    },
+    {
+      "row_idx": 39,
+      "id": "AMI_EN2002a_H02_FEO072_0018003_0018170",
+      "reference": "THAT'S A GOOD POINT",
+      "subset": "short",
+      "speaker_id": "FEO072",
+      "meeting_id": "EN2002a",
+      "duration_seconds": 1.6699981689453125
+    },
+    {
+      "row_idx": 12024,
+      "id": "AMI_TS3003d_H00_MTD009PM_0209665_0209854",
+      "reference": "OR WERE THEY TOO MUCH",
+      "subset": "short",
+      "speaker_id": "MTD009PM",
+      "meeting_id": "TS3003d",
+      "duration_seconds": 1.89013671875
+    },
+    {
+      "row_idx": 11080,
+      "id": "AMI_TS3003c_H03_MTD012ME_0020995_0021224",
+      "reference": "UM WE'VE DONE SOME MARKET RESEARCH",
+      "subset": "short",
+      "speaker_id": "MTD012ME",
+      "meeting_id": "TS3003c",
+      "duration_seconds": 2.290008544921875
+    },
+    {
+      "row_idx": 7035,
+      "id": "AMI_ES2004d_H02_MEE014_0213821_0213994",
+      "reference": "I IT'S TOP SECRET",
+      "subset": "short",
+      "speaker_id": "MEE014",
+      "meeting_id": "ES2004d",
+      "duration_seconds": 1.72998046875
+    },
+    {
+      "row_idx": 8082,
+      "id": "AMI_IS1009b_H01_FIO087_0111519_0111649",
+      "reference": "A HOLDER REMOTE HOLDER",
+      "subset": "short",
+      "speaker_id": "FIO087",
+      "meeting_id": "IS1009b",
+      "duration_seconds": 1.300048828125
+    },
+    {
+      "row_idx": 2091,
+      "id": "AMI_EN2002b_H03_MEE073_0125286_0125531",
+      "reference": "OKAY THEN THAT'S THEN THAT'S NOT YEAH",
+      "subset": "short",
+      "speaker_id": "MEE073",
+      "meeting_id": "EN2002b",
+      "duration_seconds": 2.4500732421875
+    },
+    {
+      "row_idx": 10046,
+      "id": "AMI_TS3003a_H01_MTD011UID_0089086_0089595",
+      "reference": "UM I'M JUST GONNA DRAW ITS UH HEAD BUT MM",
+      "subset": "ordinary",
+      "speaker_id": "MTD011UID",
+      "meeting_id": "TS3003a",
+      "duration_seconds": 5.09002685546875
+    },
+    {
+      "row_idx": 8071,
+      "id": "AMI_IS1009a_H02_FIO084_0063430_0063763",
+      "reference": "YEAH PROBABLY YEAH PROBABLY IT'S A YEAH YEAH",
+      "subset": "ordinary",
+      "speaker_id": "FIO084",
+      "meeting_id": "IS1009a",
+      "duration_seconds": 3.33001708984375
+    },
+    {
+      "row_idx": 6039,
+      "id": "AMI_ES2004b_H03_FEE016_0087633_0088097",
+      "reference": "OUR FINDINGS LOTS OF FINDINGS I'VE JUST SUMMARISED SOME OF THEM HERE",
+      "subset": "ordinary",
+      "speaker_id": "FEE016",
+      "meeting_id": "ES2004b",
+      "duration_seconds": 4.63995361328125
+    },
+    {
+      "row_idx": 35,
+      "id": "AMI_EN2002a_H01_FEO070_0001232_0001522",
+      "reference": "SO WHAT DO WE NEED TO TALK ABOUT",
+      "subset": "ordinary",
+      "speaker_id": "FEO070",
+      "meeting_id": "EN2002a",
+      "duration_seconds": 2.90000057220459
+    },
+    {
+      "row_idx": 11059,
+      "id": "AMI_TS3003c_H02_MTD0010ID_0098719_0099113",
+      "reference": "YOU DON'T WANNA SWING BEFORE YOU CAN WATCH TELEVISION",
+      "subset": "ordinary",
+      "speaker_id": "MTD0010ID",
+      "meeting_id": "TS3003c",
+      "duration_seconds": 3.94000244140625
+    },
+    {
+      "row_idx": 6093,
+      "id": "AMI_ES2004b_H00_MEO015_0144196_0144633",
+      "reference": "YOU'RE DESI UH DIVIDING IT ACCORDING TO THE COUNTRIES ALSO THE MARKET",
+      "subset": "ordinary",
+      "speaker_id": "MEO015",
+      "meeting_id": "ES2004b",
+      "duration_seconds": 4.3699951171875
+    },
+    {
+      "row_idx": 5079,
+      "id": "AMI_EN2002d_H01_FEO072_0012734_0013051",
+      "reference": "UM HAVE YOU CHANGED THE THE FILE YET",
+      "subset": "ordinary",
+      "speaker_id": "FEO072",
+      "meeting_id": "EN2002d",
+      "duration_seconds": 3.1699981689453125
+    },
+    {
+      "row_idx": 10014,
+      "id": "AMI_TS3003a_H00_MTD009PM_0011666_0012227",
+      "reference": "WELL I DON'T KNOW IF YOU'VE NOTICED BUT UH WE'RE WORKING FOR REAL REACTION",
+      "subset": "ordinary",
+      "speaker_id": "MTD009PM",
+      "meeting_id": "TS3003a",
+      "duration_seconds": 5.609992980957031
+    },
+    {
+      "row_idx": 7079,
+      "id": "AMI_ES2004d_H01_FEE013_0155625_0156026",
+      "reference": "THEY LIKE THEIR GADGETS THEY LIKE SOMETHING THAT'S COMPLETELY DIFFERENT",
+      "subset": "ordinary",
+      "speaker_id": "FEE013",
+      "meeting_id": "ES2004d",
+      "duration_seconds": 4.010009765625
+    },
+    {
+      "row_idx": 2071,
+      "id": "AMI_EN2002b_H01_MEE071_0118130_0118569",
+      "reference": "THE REMOVING THE DISFLUENCIES HAVE YOU DONE ANYTHING WITH THAT YET",
+      "subset": "ordinary",
+      "speaker_id": "MEE071",
+      "meeting_id": "EN2002b",
+      "duration_seconds": 4.389892578125
+    },
+    {
+      "row_idx": 9066,
+      "id": "AMI_IS1009c_H02_FIO084_0127306_0127968",
+      "reference": "UM A KINETIC PROVISION OF ENERGY MORE THAN WHAT IS THAT YOU SHAKE CASUALLY TO PROVIDE ENERGY",
+      "subset": "longer",
+      "speaker_id": "FIO084",
+      "meeting_id": "IS1009c",
+      "duration_seconds": 6.6199951171875
+    },
+    {
+      "row_idx": 12035,
+      "id": "AMI_TS3003d_H03_MTD012ME_0082453_0083439",
+      "reference": "INDICATED THAT OLDER PEOPLE SPEND THEIR MONEY EASIER MORE EASY MAYBE IT'S FEASIBLE TO JUST PUT THE PRICE OF THE REMOTE UP A LITTLE",
+      "subset": "longer",
+      "speaker_id": "MTD012ME",
+      "meeting_id": "TS3003d",
+      "duration_seconds": 9.8599853515625
+    },
+    {
+      "row_idx": 8085,
+      "id": "AMI_IS1009b_H03_FIO089_0097752_0098520",
+      "reference": "AND THAT'S AND THAT'S THE KIND OF THING PEOPLE LEARN BY FEEL AND UM YOU DON'T FEEL THE MODE CHANGE",
+      "subset": "longer",
+      "speaker_id": "FIO089",
+      "meeting_id": "IS1009b",
+      "duration_seconds": 7.67999267578125
+    },
+    {
+      "row_idx": 4059,
+      "id": "AMI_EN2002d_H03_MEE073_0021506_0022321",
+      "reference": "'CAUSE I THINK I WAS 'CAUSE I WAS TRYING SOME STUFF UH A COUPLE WEEKS AGO UH SO THAT MAY BE MINE",
+      "subset": "longer",
+      "speaker_id": "MEE073",
+      "meeting_id": "EN2002d",
+      "duration_seconds": 8.150009155273438
+    },
+    {
+      "row_idx": 11090,
+      "id": "AMI_TS3003c_H02_MTD0010ID_0090047_0090706",
+      "reference": "UM FOR THE CASE UH THE SUPPLEMENT AND THE BUTTONS IT REALLY DEPENDS ON THE DESIGNER",
+      "subset": "longer",
+      "speaker_id": "MTD0010ID",
+      "meeting_id": "TS3003c",
+      "duration_seconds": 6.59002685546875
+    },
+    {
+      "row_idx": 8013,
+      "id": "AMI_IS1009a_H00_FIE088_0038740_0039364",
+      "reference": "AND THE PRODUCTION COST SHOULD NOT EXCEED HOPEFULLY SHOULD BE LESS THAN TWELVE FIFTY EURO",
+      "subset": "longer",
+      "speaker_id": "FIE088",
+      "meeting_id": "IS1009a",
+      "duration_seconds": 6.240020751953125
+    },
+    {
+      "row_idx": 2044,
+      "id": "AMI_EN2002b_H00_FEO070_0026675_0027547",
+      "reference": "I'LL UH LOOK AT IT LIKE WHEN MY USUAL WORKING HOURS ARE LIKE FROM TWELVE O'CLOCK TILL THREE O'CLOCK OR SOMETHING",
+      "subset": "longer",
+      "speaker_id": "FEO070",
+      "meeting_id": "EN2002b",
+      "duration_seconds": 8.720001220703125
+    },
+    {
+      "row_idx": 12053,
+      "id": "AMI_TS3003d_H01_MTD011UID_0024492_0025251",
+      "reference": "AND YOU BUT YOU CAN ALSO UH USE THE UM BUTTON TH FOR UH CHANGING THE THE CHANNEL",
+      "subset": "longer",
+      "speaker_id": "MTD011UID",
+      "meeting_id": "TS3003d",
+      "duration_seconds": 7.589996337890625
+    },
+    {
+      "row_idx": 7038,
+      "id": "AMI_ES2004d_H02_MEE014_0173955_0174893",
+      "reference": "I I FEEL THAT EVERYONE WAS LISTENED TO AND ALL THE POINTS THAT WERE RAISED SEEM TO HAVE BEEN SORTED OUT",
+      "subset": "longer",
+      "speaker_id": "MEE014",
+      "meeting_id": "ES2004d",
+      "duration_seconds": 9.3800048828125
+    },
+    {
+      "row_idx": 9040,
+      "id": "AMI_IS1009c_H01_FIO087_0052189_0052811",
+      "reference": "UH TH NOW THE THE UH YEAH THE REMOTE WILL AUTOMATICALLY IT WILL SWITCH TO THE NINTH CHANNEL",
+      "subset": "longer",
+      "speaker_id": "FIO087",
+      "meeting_id": "IS1009c",
+      "duration_seconds": 6.219970703125
+    }
+  ]
+}
