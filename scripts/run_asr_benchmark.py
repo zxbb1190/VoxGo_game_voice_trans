@@ -159,11 +159,15 @@ def prompt_leakage(reference: str, hypothesis: str, prompt: str) -> bool:
 
 
 def capture_segments(samples: np.ndarray, preset: str, on_segment=None,
-                     pace_realtime: bool = False) -> list:
+                     pace_realtime: bool = False, audio_overrides: dict = None) -> list:
     """Replay 16 kHz mono PCM through the live capture VAD, one configured block at a time."""
     config = AudioConfig(latency_mode=preset, sample_rate=16000, channels=1)
     apply_audio_latency_preset(config)
     apply_english_realtime_latency_bias(config, preset)
+    for name, value in (audio_overrides or {}).items():
+        if name not in {"max_speech_seconds", "pre_roll_ms", "speech_idle_timeout_ms"}:
+            raise ValueError(f"unsupported benchmark audio override: {name}")
+        setattr(config, name, value)
     capture = SystemAudioCapture(config)
     segments = []
     replay_seconds = 0.0
@@ -450,7 +454,9 @@ def _model_fingerprint(recognizer) -> str:
 def run(cases: list, models: list, presets: list, prompts: list, device: str,
         compute_type: str, allow_download: bool, recognizer_class=None,
         config_class=None, beam_sizes=None, existing_records=None,
-         on_progress=None, paths=("whole", "capture_cut", "full_pipeline")) -> tuple:
+        on_progress=None, paths=("whole", "capture_cut", "full_pipeline"),
+        diagnostic_trace=False, audio_overrides=None, policy_overrides=None,
+        filter_override=None, budget_override=None, merge_override=None) -> tuple:
     if recognizer_class is None or config_class is None or beam_sizes is None:
         # Keep scoring/report commands usable when the local ASR runtime cannot load.
         from voxgo.asr.whisper_engine import SpeechRecognizer, WhisperConfig
@@ -468,7 +474,8 @@ def run(cases: list, models: list, presets: list, prompts: list, device: str,
                 raise ValueError(f"invalid decoded audio: {case.audio}")
             audio[case.id] = samples
             for preset in presets:
-                cuts[(case.id, preset)] = capture_segments(samples, preset)
+                cuts[(case.id, preset)] = capture_segments(
+                    samples, preset, audio_overrides=audio_overrides)
         except Exception as exc:
             audio.pop(case.id, None)
             failures.append(f"{case.id}: audio preparation failed: {exc}")
@@ -584,7 +591,14 @@ def run(cases: list, models: list, presets: list, prompts: list, device: str,
                                 try:
                                     from scripts.asr_full_pipeline import run_full_pipeline
 
-                                    outcome = run_full_pipeline(samples, preset, recognizer)
+                                    outcome = run_full_pipeline(
+                                        samples, preset, recognizer, trace=diagnostic_trace,
+                                        audio_overrides=audio_overrides,
+                                        policy_overrides=policy_overrides,
+                                        filter_override=filter_override,
+                                        budget_override=budget_override,
+                                        merge_override=merge_override,
+                                    )
                                     diagnostics = []
                                     offset = 0.0
                                     for index, (chunk, result, call_seconds) in enumerate(outcome["calls"]):
@@ -611,6 +625,15 @@ def run(cases: list, models: list, presets: list, prompts: list, device: str,
                                     record["capture_segment_count"] = len(outcome["captured_segments"])
                                     record["pipeline_stats"] = outcome["stats"]
                                     record["pipeline_notices"] = [str(item) for item in outcome["notices"]]
+                                    if diagnostic_trace:
+                                        record["captured_events"] = outcome["captured_events"]
+                                        record["queue_events"] = outcome["queue_events"]
+                                        record["output_events"] = outcome["output_events"]
+                                        record["trace_events"] = outcome["trace_events"]
+                                        record["wall_seconds_total"] = outcome["wall_seconds_total"]
+                                        record["process_cpu_seconds"] = outcome["process_cpu_seconds"]
+                                        record["capture_finished_seconds"] = outcome["capture_finished_seconds"]
+                                        record["filter_rescues"] = outcome["filter_rescues"]
                                     records.append(record)
                                     completed_rows[key] = record
                                     if on_progress:

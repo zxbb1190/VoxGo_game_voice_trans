@@ -82,9 +82,14 @@ class RunAsrBenchmarkTest(unittest.TestCase):
         rate = 16000
         samples = (np.sin(np.arange(rate * 7) * 2 * np.pi * 330 / rate) * 12000).astype(np.int16)
         segments = capture_segments(samples, "fast")
+        longer = capture_segments(samples, "fast", audio_overrides={"max_speech_seconds": 3.0})
         self.assertGreaterEqual(len(segments), 2)
         self.assertTrue(all(seg.sample_rate == rate for seg in segments))
         self.assertTrue(all(seg.duration_seconds <= 3.0 for seg in segments))
+        self.assertGreater(longer[0].duration_seconds, segments[0].duration_seconds)
+        self.assertLessEqual(longer[0].duration_seconds, 3.12)
+        with self.assertRaisesRegex(ValueError, "unsupported benchmark audio override"):
+            capture_segments(samples, "fast", audio_overrides={"chunk_duration_ms": 300})
 
     def test_summary_weights_words_and_html_escapes_transcripts(self):
         case_a = Case("a", "game", Path("a.wav"), "one hp", "test")
@@ -260,6 +265,7 @@ class RunAsrBenchmarkTest(unittest.TestCase):
                 [case], ["base.en"], ["fast"], ["off"], "cpu", "int8", False,
                 FakeRecognizer, FakeConfig, {"fast": 1},
                 paths=("whole", "capture_cut", "full_pipeline"),
+                diagnostic_trace=True,
             )
         self.assertEqual(failures, [])
         self.assertEqual({row["path"] for row in records},
@@ -270,6 +276,15 @@ class RunAsrBenchmarkTest(unittest.TestCase):
         self.assertEqual(full["hypothesis"], "rotate B")
         self.assertEqual(full["normalized_errors"], 0)
         self.assertEqual(full["segments"], len(full["segment_diagnostics"]))
+        self.assertEqual(len(full["captured_events"]), full["capture_segment_count"])
+        self.assertTrue(all(event["source_boundary_exact"] for event in full["captured_events"]))
+        self.assertTrue(full["output_events"])
+        self.assertTrue(full["trace_events"])
+        self.assertTrue(any(event["action"] == "enqueue" and event["audio_sha256"]
+                            for event in full["queue_events"]))
+        self.assertTrue(any(event["action"] == "dequeue" and event["audio_sha256"]
+                            for event in full["queue_events"]))
+        self.assertGreater(full["wall_seconds_total"], 0)
         self.assertIn("speech-worker", recognition_threads)
 
     def test_summary_includes_balanced_corpus_and_four_subsets(self):

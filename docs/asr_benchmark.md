@@ -67,3 +67,22 @@ The benchmark times ASR inference calls only. It excludes model loading, decodin
 The JSON report records model, actual runtime device and compute type, per-case transcript, word error counts, segment count, and failures. Current WER ignores case/punctuation; normalized WER additionally removes apostrophes and expands integer digits below 1,000 into English words. The normalized metric matches the earlier report's WER definition. Compare rows on the same corpus and actual device. Empty output counts as deletions rather than disappearing from the denominator. Use actual player speech and game noise before changing defaults.
 
 Each scored row now keeps both the delivered `hypothesis` and Whisper's `raw_hypothesis`. The runtime guard can blank a segment that contains extreme repeated text; `runaway_guarded` records that action, and the raw text remains local for diagnosis. The report separately counts repeated output in delivered and raw text, plus raw output above `max(reference_words * 4, reference_words + 20)`. The length ratio is recognized words divided by reference words. Summary rows also include P50/P95 inference time and average segment count/duration. Per-segment diagnostics record cumulative emitted-audio timing, RMS, VAD/energy ratios when capture supplied them, Prompt, Whisper settings, text, compression ratio, log probability, no-speech probability, and call latency. `capture_cut` timing is **not** an exact offset in the source file: capture may omit leading unvoiced blocks or use pre-roll. Ordinary application logs do not print these full diagnostic transcripts.
+
+## Replay live-chain regressions
+
+`asr_chain_ab` selects paired natural-speech failures from the completed, zero-failure three-path reports. It picks one large capture regression and one additional Pipeline regression from each corpus × preset × noise stratum. The selection is deliberately biased toward failures; it is for diagnosis, not a population WER estimate. A separate deterministic holdout selector excludes those clips. The local reports and decoded audio remain ignored by Git.
+
+```powershell
+.\.venv-win\Scripts\python.exe -m scripts.asr_chain_ab select --output diagnostics\asr-chain-ab\selection.json
+.\.venv-win\Scripts\python.exe -m scripts.asr_chain_ab run --selection diagnostics\asr-chain-ab\selection.json --variant baseline --output diagnostics\asr-chain-ab\baseline
+.\.venv-win\Scripts\python.exe -m scripts.asr_chain_review --report diagnostics\asr-chain-ab\baseline\report.json --output diagnostics\asr-chain-ab\baseline\failure_review.md
+.\.venv-win\Scripts\python.exe -m scripts.asr_chain_ab select-holdout --failure-selection diagnostics\asr-chain-ab\selection.json --output diagnostics\asr-chain-ab\holdout_selection.json
+```
+
+Run one A/B variant at a time with `--variant capture_plus_0p5`, `pending_plus_0p15`, `weak_cooldown_zero`, `preserve_weak_0p4`, `merge_voice_1p0`, or `filter_confident_short`. These settings apply to the benchmark instance of the real `SystemAudioCapture` and `SpeechPipeline`; they do not alter product defaults. Compare reports only on identical selected case IDs and zero failures:
+
+```powershell
+.\.venv-win\Scripts\python.exe -m scripts.asr_chain_compare --baseline diagnostics\asr-chain-ab\baseline\report.json --variants diagnostics\asr-chain-ab\capture_plus_0p5\report.json --output diagnostics\asr-chain-ab\comparison.json
+```
+
+The diagnostic JSON records exact source-PCM matches for captured segment boundaries, block activity, segment RMS/VAD/energy, Whisper per segment, candidate/merge/filter logs, actual queue enqueue/dequeue events with segment hashes, dropped-candidate reasons, final output times, and replay wall/process-CPU time. The case review assigns an **associated** error category to each positive whole→cut or cut→Pipeline regression; those labels and their word-error weights are not word-level causal proof. The queue event probe and all A/B policy overrides exist only in the benchmark harness. Replay wall time includes audio playback and worker drain, so it is not player-visible subtitle latency; process CPU is a coarse resource proxy. The controlled noise is not a real game session.
