@@ -484,11 +484,14 @@ class SettingsDialog(QDialog):
         diagnostics_button.clicked.connect(self._open_feedback_dialog)
         feedback_form.addRow(diagnostics_button)
         self.feedback_link_buttons = {}
-        for name, url, domains in [
-            ('GitHub Issues', GITHUB_ISSUES_URL, {'github.com'}),
+        community_links = [
             ('KOOK', KOOK_URL, {'kook.vip', 'www.kookapp.cn', 'kook.top'}),
             ('Discord', DISCORD_URL, {'discord.gg', 'discord.com'}),
-        ]:
+            ('GitHub Issues', GITHUB_ISSUES_URL, {'github.com'}),
+        ]
+        preferred_community = 'Discord' if is_english_ui(self._ui_language) else 'KOOK'
+        community_links.sort(key=lambda item: (item[0] != preferred_community, item[0] != 'GitHub Issues'))
+        for name, url, domains in community_links:
             parsed = urlsplit(url)
             if parsed.scheme != 'https' or parsed.hostname not in domains or parsed.username or parsed.password:
                 continue

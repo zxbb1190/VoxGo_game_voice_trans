@@ -409,6 +409,7 @@ class SpeechPipeline:
         latency_traces,
         notify_user,
         language_revision_getter=None,
+        diagnostics_callback=None,
     ):
         self._config_getter = config_getter
         self._recognizer_getter = recognizer_getter
@@ -420,6 +421,7 @@ class SpeechPipeline:
         self._latency_traces = latency_traces
         self._notify_user = notify_user
         self._language_revision_getter = language_revision_getter or (lambda: 0)
+        self._diagnostics_callback = diagnostics_callback
         self._processing_lock = threading.Lock()
         initial_policy = RecognitionModePolicy.from_audio_config(config_getter().audio)
         self._queue_size = max(8, initial_policy.queue_size)
@@ -435,6 +437,19 @@ class SpeechPipeline:
         self._recognition_busy = False
         self._last_transcription_finished_at = 0.0
         self._last_transcription_duration_seconds = 0.0
+
+    def _diagnostic(self, method, *values):
+        # Only fixed metric names and numeric values reach the analytics queue.
+        # Collection failures must never change ASR admission or output.
+        try:
+            if self._diagnostics_callback is not None:
+                self._diagnostics_callback(method, *values)
+        except Exception:
+            pass
+
+    def _record_weak_drop(self, item):
+        if self._is_weak_work_item(item):
+            self._diagnostic('increment', 'asr_weak_candidate_drops')
 
     def remember_transcript(self, text: str):
         self._recent_transcripts.append((time.time(), text))
@@ -516,6 +531,10 @@ class SpeechPipeline:
             self._debug_audio.dump_if_enabled(segment, decision.reason, "save_dropped_audio")
             return
 
+        self._diagnostic(
+            'asr_segment', segment.duration_seconds * 1000,
+            str(segment.reason or '').startswith('达到最长 '), decision.short_segment,
+        )
         now = time.time()
         work_item = SpeechWorkItem(
             segment=segment,
@@ -621,6 +640,7 @@ class SpeechPipeline:
                 return
             weak_pre_drop_reason = self._weak_pre_whisper_drop_reason(item, mode_policy)
             if weak_pre_drop_reason:
+                self._record_weak_drop(item)
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "candidate dropped before whisper: {}, labels={}, voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS, vad={:.2f}",
@@ -683,6 +703,8 @@ class SpeechPipeline:
                 self._debug_audio.dump_if_enabled(segment, "stale_language_flow", "save_dropped_audio")
                 return
             if getattr(result, "runaway_guarded", False):
+                self._diagnostic('increment', 'asr_runaway_repetition_blocks')
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "filtered transcription: global_asr_runaway_repetition, raw_words={}, "
@@ -697,6 +719,7 @@ class SpeechPipeline:
                 )
                 return
             if not text or len(text.strip()) < 2:
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "empty asr: text_len={}, lang={}, prob={:.2f}, voice={:.2f}s, total={:.2f}s, peak={:.1f} dBFS, gate={:.1f} dBFS",
@@ -712,6 +735,7 @@ class SpeechPipeline:
                 return
             vad_drop_reason = self._vad_whisper_drop_reason(segment, result)
             if vad_drop_reason:
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "filtered transcription: {}, text={}, lang={}, prob={:.2f}, avg_logprob={:.2f}, no_speech={:.2f}, compression={:.2f}",
@@ -727,6 +751,7 @@ class SpeechPipeline:
                 return
             weak_drop_reason = self._weak_transcript_filter.drop_reason(item, result)
             if weak_drop_reason:
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "filtered transcription: {}, text={}, labels={}, lang={}, prob={:.2f}, avg_logprob={:.2f}, no_speech={:.2f}, compression={:.2f}",
@@ -748,6 +773,7 @@ class SpeechPipeline:
                 config=config.whisper,
             )
             if drop_reason:
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "filtered transcription: {}, text={}, lang={}, prob={:.2f}, avg_logprob={:.2f}, no_speech={:.2f}, compression={:.2f}",
@@ -763,6 +789,7 @@ class SpeechPipeline:
                 return
             forced_language_drop_reason = self._forced_language_drop_reason(item, result)
             if forced_language_drop_reason:
+                self._diagnostic('increment', 'asr_post_filter_drops')
                 self._stats["filtered_speech"] += 1
                 logger.info(
                     "filtered transcription: {}, text={}, expected={}, lang={}, prob={:.2f}, avg_logprob={:.2f}, no_speech={:.2f}, compression={:.2f}",
@@ -1119,6 +1146,7 @@ class SpeechPipeline:
             if self._recognition_busy or self._queue.qsize() > 0:
                 if stale_seconds and age_seconds > stale_seconds:
                     dropped = self._busy_weak_buffer.clear()
+                    self._record_weak_drop(dropped)
                     self._stats["dropped_speech"] += 1
                     logger.warning(
                         "queue busy weak candidate dropped after stale delay: age={:.0f}ms, labels={}, voice={:.2f}s, total={:.2f}s",
@@ -1153,6 +1181,7 @@ class SpeechPipeline:
         self._ensure_queue_capacity(mode_policy.queue_size)
         work_item.trace.queued_at = time.time()
         if self._should_drop_weak_for_inference_budget(work_item, mode_policy, work_item.trace.queued_at):
+            self._record_weak_drop(work_item)
             self._stats["dropped_speech"] = self._stats.get("dropped_speech", 0) + 1
             logger.info(
                 "weak candidate dropped by asr budget: labels={}, voice={:.2f}s, total={:.2f}s, last_asr={:.0f}ms",
@@ -1180,6 +1209,7 @@ class SpeechPipeline:
 
         dropped = self._drop_one_queued_item_for_realtime(weak_only=self._is_weak_work_item(work_item))
         if not dropped and self._is_weak_work_item(work_item):
+            self._record_weak_drop(work_item)
             self._stats["dropped_speech"] += 1
             logger.warning(
                 "speech queue full: dropped current weak candidate, labels={}, voice={:.2f}s, total={:.2f}s",
@@ -1190,6 +1220,7 @@ class SpeechPipeline:
             self._debug_audio.dump_if_enabled(work_item.segment, "queue_full_current_weak", "save_dropped_audio")
             return
         if dropped:
+            self._record_weak_drop(dropped)
             self._stats["dropped_speech"] += 1
             logger.warning(
                 "speech queue full: dropped queued segment, labels={}, voice={:.2f}s, total={:.2f}s",
@@ -1202,6 +1233,7 @@ class SpeechPipeline:
             work_item.trace.queued_at = time.time()
             self._queue.put_nowait(work_item)
         except queue.Full:
+            self._record_weak_drop(work_item)
             self._stats["dropped_speech"] += 1
             logger.warning(
                 "speech queue full: dropped current segment, labels={}, voice={:.2f}s, total={:.2f}s",
@@ -1343,6 +1375,7 @@ class SpeechPipeline:
                 self._queue.put_nowait(item)
             except queue.Full:
                 if isinstance(item, SpeechWorkItem):
+                    self._record_weak_drop(item)
                     self._stats["dropped_speech"] += 1
                     logger.warning("speech queue restore overflow: dropped segment")
                     self._debug_audio.dump_if_enabled(item.segment, "queue_restore_overflow", "save_dropped_audio")

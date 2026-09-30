@@ -2,6 +2,10 @@
 
 This document records the original Telemetry v2 source acceptance. The client is included in v0.5.1; deployment and release status must be checked separately.
 
+The v0.5.2 ASR extension adds eight numeric fields to new Full snapshots (35
+total), preserving legacy 27-field payloads. See [ASR counter definitions and
+compatibility](asr-diagnostics-v0.5.2.md) and [RC acceptance](release-v0.5.2-rc.md).
+
 ## Basic: daily active installations
 
 Basic is independent of Full consent, epoch, install ID, business counters and

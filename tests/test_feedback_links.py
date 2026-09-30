@@ -3,7 +3,7 @@ os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
 import unittest
 from unittest.mock import patch
 from PyQt5.QtWidgets import QApplication
-from voxgo.ui.config_models import OverlayConfig, HotkeyConfig
+from voxgo.ui.config_models import OverlayConfig, HotkeyConfig, RuntimeConfig
 from voxgo.ui.settings_dialog import SettingsDialog
 from voxgo.ui.dialogs import FeedbackDialog
 
@@ -29,6 +29,13 @@ class FeedbackLinksTest(unittest.TestCase):
             dialog = SettingsDialog(OverlayConfig(), HotkeyConfig())
         try:
             self.assertEqual(len(dialog.feedback_link_buttons), 3)
+            self.assertEqual(list(dialog.feedback_link_buttons), ['KOOK', 'GitHub Issues', 'Discord'])
+        finally:
+            dialog.close()
+        with patch('voxgo.app_info.KOOK_URL', 'https://kook.vip/example'), patch('voxgo.app_info.DISCORD_URL', 'https://discord.gg/example'):
+            dialog = SettingsDialog(OverlayConfig(), HotkeyConfig(), app_config=RuntimeConfig(language='en-US'))
+        try:
+            self.assertEqual(list(dialog.feedback_link_buttons), ['Discord', 'GitHub Issues', 'KOOK'])
         finally:
             dialog.close()
         preview = FeedbackDialog('safe diagnostics')

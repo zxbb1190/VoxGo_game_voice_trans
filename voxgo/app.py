@@ -209,6 +209,7 @@ class VoxGoApp:
             self._latency_traces,
             self._notify_user,
             lambda: self._language_flow_revision,
+            self._analytics_call,
         )
 
     def _load_config(self, config_path: str = None) -> AppConfig:
@@ -1537,8 +1538,17 @@ class VoxGoApp:
         logger.info("Shutdown finished: {}", self._shutdown_state)
 
 
+class _WindowedArgumentParser(argparse.ArgumentParser):
+    def _print_message(self, message, file=None):
+        # PyInstaller's windowed launcher has no stdout/stderr. Python 3.10's
+        # argparse otherwise raises instead of exiting cleanly for --help.
+        if file is None and sys.stderr is None:
+            return
+        super()._print_message(message, file)
+
+
 def _parse_args(argv=None):
-    parser = argparse.ArgumentParser(description=f"{APP_NAME} game voice translator")
+    parser = _WindowedArgumentParser(description=f"{APP_NAME} game voice translator")
     parser.add_argument("--config", default="", help="Path to config.json")
     parser.add_argument("--benchmark-audio", default="", help="Inject a fixed WAV/M4A file instead of capturing a real audio device")
     parser.add_argument("--benchmark-speech-seconds", type=float, default=4.0, help="Speech segment duration per benchmark loop")

@@ -976,9 +976,13 @@ class SpeechRecognizer:
         no_speech_prob = max(no_speech_values) if no_speech_values else 0.0
         compression_ratio = max(compression_values) if compression_values else 0.0
         duration_seconds = len(audio_array) / 16000.0 if len(audio_array) else 0.0
-        runaway_guarded = is_runaway_repetition(
-            full_text, duration_seconds=duration_seconds, compression_ratio=compression_ratio
-        )
+        try:
+            runaway_guarded = is_runaway_repetition(
+                full_text, duration_seconds=duration_seconds, compression_ratio=compression_ratio
+            )
+        except Exception:
+            runaway_guarded = False
+            logger.warning("ASR repetition guard failed; keeping transcription")
         if runaway_guarded:
             logger.warning(
                 "Discarding extreme ASR repetition: words={}, duration={:.2f}s, compression={:.2f}",
@@ -1432,13 +1436,12 @@ def should_drop_transcription_result(
         return "global_asr_runaway_repetition"
     if not text:
         return "识别文本为空"
-    if _is_short_repeated_game_command(text):
-        return ""
+    short_game_callout = _is_short_repeated_game_command(text)
     no_speech_prob = float(getattr(result, "no_speech_prob", 0.0) or 0.0)
     avg_logprob = float(getattr(result, "avg_logprob", 0.0) or 0.0)
     if _is_repeated_noise_transcript(text):
         return "global_asr_repeated_noise"
-    if no_speech_prob >= 0.55 and _is_repeated_phrase_transcript(text, min_repeats=2):
+    if not short_game_callout and no_speech_prob >= 0.55 and _is_repeated_phrase_transcript(text, min_repeats=2):
         return f"global_asr_no_speech_repeated_phrase no_speech={no_speech_prob:.2f}"
     # Keep the older phrase-loop protection for longer multilingual output.
     # The three or four repeated callouts common in games stay valid.
@@ -1452,9 +1455,9 @@ def should_drop_transcription_result(
             "global_asr_noise_token "
             f"no_speech={no_speech_prob:.2f} avg_logprob={avg_logprob:.2f}"
         )
-    if no_speech_prob >= GLOBAL_ASR_NO_SPEECH_SHORT_THRESHOLD and _is_global_short_or_suspicious_transcript(text):
+    if not short_game_callout and no_speech_prob >= GLOBAL_ASR_NO_SPEECH_SHORT_THRESHOLD and _is_global_short_or_suspicious_transcript(text):
         return f"global_asr_no_speech_short no_speech={no_speech_prob:.2f}"
-    if avg_logprob <= GLOBAL_ASR_LOW_LOGPROB_SHORT_THRESHOLD and _is_global_short_or_suspicious_transcript(text):
+    if not short_game_callout and avg_logprob <= GLOBAL_ASR_LOW_LOGPROB_SHORT_THRESHOLD and _is_global_short_or_suspicious_transcript(text):
         return f"global_asr_low_logprob_short avg_logprob={avg_logprob:.2f}"
     if is_likely_asr_hallucination(text):
         return "疑似 ASR 幻觉文本"

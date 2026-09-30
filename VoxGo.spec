@@ -107,6 +107,9 @@ hiddenimports = [
 hiddenimports += collect_submodules("setuptools._vendor.backports")
 
 excludes = [
+    "tests",
+    "diagnostics",
+    "scripts",
     "pytest",
     "matplotlib",
     "IPython",

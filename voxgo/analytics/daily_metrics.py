@@ -9,6 +9,11 @@ COUNTERS = {'app_starts', 'sessions', 'session_seconds', 'offline_sessions',
 V1_COUNTERS = COUNTERS.copy()
 COUNTERS |= {mode + '_translation_' + result for mode in ('api', 'offline')
              for result in ('success', 'failed')}
+ASR_COUNTERS = {'asr_forced_max_duration_splits', 'asr_short_fragment_segments',
+                'asr_weak_candidate_drops', 'asr_post_filter_drops',
+                'asr_runaway_repetition_blocks', 'asr_segments',
+                'asr_segment_duration_sum_ms', 'asr_segment_duration_samples'}
+COUNTERS |= ASR_COUNTERS
 BUCKETS = ('lt_500', '500_1000', '1000_2000', '2000_5000', 'ge_5000')
 LATENCIES = {'asr_latency', 'translation_latency'}
 METRICS = COUNTERS | {n + s for n in LATENCIES for s in ('_sum_ms', '_samples')}
@@ -83,6 +88,24 @@ class DailyMetrics:
         with self._lock:
             self._rollover()
             return self._observe_locked(prefix, elapsed_ms)
+
+    def asr_segment(self, duration_ms, forced=False, short=False):
+        """Record one admitted capture segment atomically, before any merging."""
+        if (not self._valid_elapsed(duration_ms) or type(forced) is not bool
+                or type(short) is not bool):
+            return False
+        with self._lock:
+            self._rollover()
+            metrics = self.snapshot['metrics']
+            amounts = {'asr_segments': 1, 'asr_segment_duration_samples': 1,
+                       'asr_segment_duration_sum_ms': round(duration_ms)}
+            if forced:
+                amounts['asr_forced_max_duration_splits'] = 1
+            if short:
+                amounts['asr_short_fragment_segments'] = 1
+            for key, amount in amounts.items():
+                metrics[key] = min(LIMIT, metrics.get(key, 0) + amount)
+        return True
 
     def translation_result(self, success, elapsed_ms=None, mode=None):
         """Apply one result as a single day/lock transaction, or drop it whole."""

@@ -6,6 +6,7 @@ from pathlib import Path
 import uuid
 
 from voxgo.analytics.aggregation import AggregateStore
+from voxgo.analytics.daily_metrics import ASR_COUNTERS, METRICS
 
 
 class AggregationTests(unittest.TestCase):
@@ -30,7 +31,35 @@ class AggregationTests(unittest.TestCase):
         original = self.store.snapshots()
         restarted = AggregateStore(self.root, '0.4.4', today=lambda: self.day)
         self.assertEqual(original, restarted.snapshots())
-        self.assertEqual(len(original[0]['metrics']), 27)
+        self.assertEqual(len(original[0]['metrics']), len(METRICS))
+
+    def test_v2_pending_hash_and_identity_survive_asr_upgrade(self):
+        import hashlib
+        self.write(3)
+        self.store.snapshots()
+        state = self.store._load()
+        entry = state['days'][self.day.isoformat()]
+        for metrics in [entry['totals'], entry['pending']['metrics'], *entry['seen'].values()]:
+            for key in ASR_COUNTERS:
+                metrics.pop(key, None)
+        unsigned = {k: v for k, v in entry['pending'].items() if k != 'snapshot_id'}
+        entry['pending']['snapshot_id'] = hashlib.sha256(json.dumps(
+            unsigned, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        pending = json.loads(json.dumps(entry['pending']))
+        self.assertEqual(len(pending['metrics']), 27)
+        self.store._save(state)
+        upgraded = AggregateStore(self.root, '0.5.2', today=lambda: self.day)
+        self.assertEqual(upgraded.snapshots(), [pending])
+        self.assertTrue(upgraded.acknowledge(pending))
+        path = self.root / 'shards' / str(uuid.uuid4()) / (self.day.isoformat() + '.json')
+        path.parent.mkdir()
+        path.write_text(json.dumps({'schema_version': 2, 'date': self.day.isoformat(),
+                                   'metrics': {'asr_segments': 1}}))
+        updated = upgraded.snapshots()[0]
+        self.assertEqual(updated['install_id'], pending['install_id'])
+        self.assertEqual(updated['metrics']['translation_success'], 3)
+        self.assertEqual(updated['metrics']['asr_segments'], 1)
+        self.assertEqual(len(updated['metrics']), 35)
 
     def test_old_ack_cannot_erase_new_revision(self):
         self.write(3)
