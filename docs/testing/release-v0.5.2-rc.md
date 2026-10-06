@@ -27,9 +27,11 @@ and the compatible API deployment completed on 2026-09-30, after a production
 backup. Old v1, old 27-field v2 and new 35-field v2 contracts are supported.
 See the API repository's `docs/deployment-asr-2026-09-30.md` for deployment evidence.
 
-As of this pre-release record, client source/tag publication is the next step.
-Website download links and `docs/update.json` still describe published v0.5.1.
-The user authorized the client release flow on 2026-10-06.
+The user authorized the client release flow on 2026-10-06. Client `main` and the
+annotated `v0.5.2` tag are pushed. The tag resolves to
+`7dc4eef6d40f5f70e2c8e25b7dbaaec4388290ab`. All four formal GitHub Release
+assets are published; `docs/update.json` and website downloads now describe
+v0.5.2. Final delivery verification is recorded below.
 
 ## Production behavior
 
@@ -195,9 +197,11 @@ clients remain supported; omitted counters preserve stored values. Verify health
 old/new Full payload ACKs and Dashboard ASR aggregates before client distribution.
 No consent/identity reset is needed. Keep current server telemetry switches.
 
-## Client build and release commands
+## Client build and release commands (historical)
 
-Run in `E:\my\my\game_voice_translator`:
+These document the release flow in `E:\my\my\game_voice_translator`.
+The version is already published; do not recreate its tag or rebuild its assets
+to replace the verified official downloads.
 
 ```powershell
 .\.venv-win\Scripts\python.exe -m unittest discover -s tests -v
@@ -225,9 +229,56 @@ Lite mirror using the verified GitHub artifact; client source is not pushed ther
 
 ## Acceptance boundary
 
-Current source fixes and test/benchmark evidence are present locally. The client
-RC is committed locally. The API is committed, pushed and deployed; D1 migration
-and actual RC telemetry upload plus Dashboard rendering are verified. Client
-publication proceeds after the final release gates.
-v0.5.1 users have not received these source fixes. Real-player validation is not
-claimed, and synthetic/natural corpus findings are not rewritten as live-user results.
+Current source fixes and test/benchmark evidence are committed and pushed. The
+API is committed, pushed and deployed; D1 migration and actual RC telemetry
+upload plus Dashboard rendering are verified. The v0.5.2 client is now published
+and offered through the update manifest. Existing v0.5.1 installations receive
+these client fixes when they upgrade; this record does not imply every user has
+already upgraded. Real-player accuracy validation is not claimed, and
+synthetic/natural corpus findings are not rewritten as live-user WER results.
+
+## Published delivery verification (2026-10-06)
+
+- [Formal GitHub Release](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.2)
+  is stable, non-draft, and was published at `2026-10-06T04:55:16Z`.
+- [Release workflow](https://github.com/zxbb1190/VoxGo_game_voice_trans/actions/runs/37415411674)
+  succeeded. Cloud Windows validation passed 479 tests in 32.985 seconds.
+  Local final validation passed the same 479 tests, compileall, release preflight
+  and diff hygiene. Runtime model, Prompt, preset and CPU defaults are unchanged.
+- All four assets were completely downloaded from their actual public GitHub
+  URLs. Size, SHA256 against both Release notes and GitHub asset digest, ZIP CRC,
+  edition, model/CUDA inclusion and safe package contents passed. No local
+  telemetry, personal settings, audio or benchmark reports are bundled.
+- The formal Lite EXE exits 0 for windowed `--help`. Its embedded archive contains
+  v0.5.2 production capture, Pipeline, repetition guard and daily metrics, with
+  benchmark/test modules excluded. This is a startup/package smoke check, not
+  a new GUI, GPU inference or recognition-accuracy experiment.
+
+| Formal GitHub asset | Bytes | SHA256 |
+| --- | ---: | --- |
+| `VoxGo-v0.5.2-lite.zip` | 137471214 | `3d173c6fa8c5e9287324105a5ede8c8f7bdc0928ef6723c3dd036f09c2e966c4` |
+| `VoxGo-v0.5.2-full.zip` | 717268901 | `9404e1299c98106550528053c37be4073edc9d82ba79df55dcca905b37f4a11f` |
+| `VoxGo-v0.5.2-full-cuda.zip` | 1307985196 | `50fb398241dda712bdceb8e40af7cdf62a0ae9d6890e698cc44e5af942f74ef3` |
+| `VoxGo-v0.5.2-cuda-runtime.zip` | 590591465 | `6ba1c2d5a3896ca27c00318eff87dbeeab306ed791def9644f3aad04779f905f` |
+
+The CI mirror step explicitly skipped synchronization because its
+`GITCODE_TOKEN` Secret was absent. The documented local fallback subsequently
+uploaded the exact formal GitHub Lite ZIP and verified a complete GET from the
+[public domestic download URL](https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip),
+with the same 137471214 bytes and SHA256. GitCode source HEAD remained
+`942a8df83f671e89a0b045a2cdd2b66fa33f4ddb`; no client source was pushed there.
+The local token was ignored and untracked, and its temporary environment variable
+was cleared. This successful fallback does not imply the CI Secret is configured.
+
+Website commit `38e4f8a70b9cf0630f6b149a523e23f08892c635` adds the static
+changelog generated from published bilingual Release notes and advances all four
+Chinese/English domestic entrances. Its
+[Pages deployment](https://github.com/zxbb1190/VoxGo_game_voice_trans/actions/runs/37416312423)
+succeeded. Actual public GETs of `/`, `/en/`, `/update.json`, `/changelog/`,
+`/changelog/v0.5.2/` and `/sitemap.xml` returned 200 and matched accepted source.
+The live manifest's four GitHub URLs and SHA256 values match the formal assets;
+Chinese and English notes are present. No API deploy or D1 change was performed
+during this client release.
+
+Local detailed validation outputs remain ignored under `build/` and
+`release/official-v0.5.2/`; unrelated preexisting untracked files are preserved.
