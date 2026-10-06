@@ -1,39 +1,33 @@
 {
-  "latest": "0.5.1",
+  "latest": "0.5.2",
   "channel": "stable",
-  "title": "VoxGo v0.5.1",
+  "title": "VoxGo v0.5.2",
   "notes": [
-    "Automatic audio recovery: detect USB, Bluetooth, and HDMI output changes, reconnect the original device or fall back to the system default, and show recovery status.",
-    "Overlay position recovery: bring an invisible overlay back after display changes, with a new Reset Overlay Position tray action.",
-    "The overlay now shows the current translation provider: API, Google, or Local, updating immediately after a switch.",
-    "Hover over a completed subtitle to copy its translation with one click.",
-    "First launch follows the system language: Chinese for zh_CN and zh_TW, English for all other locales. Existing language preferences are preserved.",
-    "Updated usage statistics: Basic is always enabled and measures daily active installations using daily identifiers that are not linked across days. Optional detailed usage and stability statistics can be disabled in Settings; neither includes audio, recognition, or translation content. Updates preserve statistics state."
+    "Fixed cases where real-time speech audio could be segmented incorrectly after a pause.",
+    "Strengthened speech recognition safeguards to reduce abnormal repeated captions under heavy noise.",
+    "Improved aggregated diagnostic information for investigating runtime issues; diagnostics do not include audio, recognition, or translation content.",
+    "Added KOOK and Discord community links to Help & Feedback in Settings, while keeping GitHub Issues."
   ],
-  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.1",
-  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-lite.zip",
-  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full.zip",
-  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-full-cuda.zip",
-  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.1/VoxGo-v0.5.1-cuda-runtime.zip",
-  "sha256_lite": "5bade5ef1f90c4eb22e17719bbaadc5edf23d2d65e507b4b9e1ef2660b9468c9",
-  "sha256_full": "6bd9f227d9768c1511e48f0827ff3a0f4e7798bb3a0f46f212c44ddb3f12bf45",
-  "sha256_full_cuda": "c8011965f0925391a9b3af9e6bcb0ae4eb4394bff466bab6015d00ab29506d9a",
-  "sha256_cuda_runtime": "5509a5e80979875b9749f22a733f5ce0eba4e0ccb190cd4a3ff2b8c7a57a7c1d",
+  "release_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/tag/v0.5.2",
+  "download_lite_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+  "download_full_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+  "download_full_cuda_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip",
+  "cuda_runtime_url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-cuda-runtime.zip",
+  "sha256_lite": "3d173c6fa8c5e9287324105a5ede8c8f7bdc0928ef6723c3dd036f09c2e966c4",
+  "sha256_full": "9404e1299c98106550528053c37be4073edc9d82ba79df55dcca905b37f4a11f",
+  "sha256_full_cuda": "50fb398241dda712bdceb8e40af7cdf62a0ae9d6890e698cc44e5af942f74ef3",
+  "sha256_cuda_runtime": "6ba1c2d5a3896ca27c00318eff87dbeeab306ed791def9644f3aad04779f905f",
   "mandatory": false,
   "notes_en": [
-    "Automatic audio recovery: detect USB, Bluetooth, and HDMI output changes, reconnect the original device or fall back to the system default, and show recovery status.",
-    "Overlay position recovery: bring an invisible overlay back after display changes, with a new Reset Overlay Position tray action.",
-    "The overlay now shows the current translation provider: API, Google, or Local, updating immediately after a switch.",
-    "Hover over a completed subtitle to copy its translation with one click.",
-    "First launch follows the system language: Chinese for zh_CN and zh_TW, English for all other locales. Existing language preferences are preserved.",
-    "Updated usage statistics: Basic is always enabled and measures daily active installations using daily identifiers that are not linked across days. Optional detailed usage and stability statistics can be disabled in Settings; neither includes audio, recognition, or translation content. Updates preserve statistics state."
+    "Fixed cases where real-time speech audio could be segmented incorrectly after a pause.",
+    "Strengthened speech recognition safeguards to reduce abnormal repeated captions under heavy noise.",
+    "Improved aggregated diagnostic information for investigating runtime issues; diagnostics do not include audio, recognition, or translation content.",
+    "Added KOOK and Discord community links to Help & Feedback in Settings, while keeping GitHub Issues."
   ],
   "notes_zh": [
-    "音频设备异常后自动恢复：重新检测 USB、蓝牙和 HDMI 输出，优先恢复原设备，必要时回退系统默认输出，并显示恢复状态。",
-    "浮窗位置自动恢复：屏幕配置变化后自动找回不可见浮窗，托盘新增重置浮窗位置。",
-    "浮窗显示当前翻译方式：API、Google 或本地，切换后立即更新。",
-    "字幕支持悬停复制：鼠标移入正常字幕后可一键复制译文。",
-    "首次启动跟随系统语言：zh_CN、zh_TW 使用中文，其他语言使用英文；已有用户设置保持不变。",
-    "更新使用统计：基础统计始终启用，用于每日活跃安装数，使用不跨日关联的每日标识；详细使用与稳定性统计可在设置中关闭，均不包含语音、识别或翻译内容。升级时保留统计状态。"
+    "修复部分实时语音在停顿后可能被错误切分的问题。",
+    "增强语音识别异常保护，减少强噪声下出现异常重复字幕的情况。",
+    "改进聚合诊断信息，便于定位运行问题；诊断信息不包含语音、识别或翻译内容。",
+    "设置中的帮助与反馈新增 KOOK 和 Discord 社区入口，并保留 GitHub Issues。"
   ]
 }
