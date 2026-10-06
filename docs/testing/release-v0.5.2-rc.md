@@ -1,6 +1,7 @@
 # VoxGo v0.5.2 Release Candidate acceptance
 
-Date: 2026-09-30. Client baseline: GitHub `main`
+RC checks: 2026-09-30. Production acceptance update: 2026-10-06.
+Client baseline: GitHub `main`
 `22a608a3b49b1eb6620f5dcbedee2d23fa78762e` (verified with `git ls-remote`).
 Scope: production ASR stability fixes, numeric daily diagnostics and community
 links. No new ASR experiment or model strategy is adopted.
@@ -17,19 +18,18 @@ The five existing local commits are preserved, in order:
 | `d7bf012a` | Failed-case diagnostics and bounded A/B tools/findings. |
 | `6d62b1ab` | Ignore local ASR chain experiment outputs. |
 
-This round adds a separate client RC commit. Its exact hash is returned in the
-completion message and can be read with `git log --oneline origin/main..HEAD`.
+The separate client RC commit is `8adfdeca`.
 The previous ASR fixes and benchmark history have not been rewritten.
 
-The API working tree already contained uncommitted Telemetry v2, Dashboard and
-authentication work before this round. Its ASR extension is tested in that working
-tree and remains **uncommitted**, preserving those existing changes. Do not treat
-the API repository's committed HEAD as containing the extension. Review and commit
-that API working tree before deploying it.
+The API production source is committed and pushed as
+`ab8da2f85b1bfbc6d72a627f730de8fd89810cc7`. Production D1 migration 0005
+and the compatible API deployment completed on 2026-09-30, after a production
+backup. Old v1, old 27-field v2 and new 35-field v2 contracts are supported.
+See the API repository's `docs/deployment-asr-2026-09-30.md` for deployment evidence.
 
-No client source/tag has been pushed, no GitHub Release has been created, and no
-production Worker deployment or D1 mutation has been performed. Website download
-links and `docs/update.json` still describe published v0.5.1.
+As of this pre-release record, client source/tag publication is the next step.
+Website download links and `docs/update.json` still describe published v0.5.1.
+The user authorized the client release flow on 2026-10-06.
 
 ## Production behavior
 
@@ -98,6 +98,37 @@ or real-player accuracy validation. The updater preservation gate is an automate
 real Windows transaction test; package launch gates exercise imports and argument
 parsing without starting telemetry, capture, translation or downloads.
 
+### Production acceptance on 2026-10-06
+
+The final Windows suite was rerun: 479 tests passed in 33.332 seconds.
+`compileall`, release preflight against the published baseline, and
+`git diff --check` passed. The experiment pollution audit again confirmed
+unchanged runtime defaults and no benchmark-only dependencies or package inputs.
+
+The user launched the packaged v0.5.2 Full RC, enabled Full telemetry consent,
+and confirmed that actual audio produced captions. The normal scheduled uploader
+received HTTP 200 and acknowledged revision 32; pending was false and failures
+were zero. The matching production D1 daily row was updated at
+`2026-10-06T03:19:47.309Z`, with app version 0.5.2 and revision 32.
+No forced sync or fabricated counters were used.
+
+| ASR metric | Production value |
+| --- | ---: |
+| `asr_forced_max_duration_splits` | 6 |
+| `asr_short_fragment_segments` | 4 |
+| `asr_weak_candidate_drops` | 2 |
+| `asr_post_filter_drops` | 15 |
+| `asr_runaway_repetition_blocks` | 2 |
+| `asr_segments` | 23 |
+| `asr_segment_duration_sum_ms` | 42000 |
+| `asr_segment_duration_samples` | 23 |
+
+The production seven-day aggregate matched these counters. After the Dashboard
+cache expired, the user confirmed authenticated Dashboard access and nonzero ASR
+values. This verifies the packaged runtime-to-Dashboard telemetry path; it does
+not measure recognition accuracy or validate real-player WER. Private telemetry
+identities and local evidence files are excluded from this record and release.
+
 ### Final local artifacts
 
 These are local RC builds, not GitHub or GitCode release artifacts. Archive
@@ -130,7 +161,7 @@ Client:
   `tests/test_analytics_aggregation.py`, `tests/test_feedback_links.py`.
 - Documentation: `docs/releases/v0.5.2.md`, this record and ASR diagnostics notes.
 
-API extension to its preexisting working tree:
+API extension, subsequently committed and deployed:
 
 - `lib/validation.js`, `lib/d1-store.js`, `lib/admin-stats.js`, `lib/dashboard-page.js`.
 - `migrations/0005_asr_daily_counters.sql` (eight additive integer columns).
@@ -141,12 +172,11 @@ Existing unrelated client untracked files, API authentication/configuration work
 prepared corpora and local reports are preserved. No test audio, report HTML/JSON,
 personal settings or model cache is committed or included as benchmark package data.
 
-## API deployment commands (not executed against production)
+## API deployment commands (completed on 2026-09-30)
 
-Run in `E:\my\my\voxgo-api` only after reviewing/committing its existing working
-tree and confirming the target configuration. The schema ledger must match actual
-columns before applying pending migrations; a partial/manual migration requires
-reconciliation rather than blindly repeating ALTER statements.
+These describe the completed deployment in `E:\my\my\voxgo-api`.
+Do not reapply migration 0005 for the client release. The production ledger and
+all eight columns were verified, and the production backup was retained privately.
 
 ```powershell
 npm test
@@ -165,7 +195,7 @@ clients remain supported; omitted counters preserve stored values. Verify health
 old/new Full payload ACKs and Dashboard ASR aggregates before client distribution.
 No consent/identity reset is needed. Keep current server telemetry switches.
 
-## Client build and later release commands
+## Client build and release commands
 
 Run in `E:\my\my\game_voice_translator`:
 
@@ -188,14 +218,16 @@ git tag v0.5.2
 git push origin v0.5.2
 ```
 
-These commands publish; none was executed for this RC. The workflow builds/uploads
+These commands publish; they follow the user's 2026-10-06 release authorization.
+The workflow builds/uploads
 all editions before advancing manifests/download links. GitCode remains a release-only
 Lite mirror using the verified GitHub artifact; client source is not pushed there.
 
 ## Acceptance boundary
 
 Current source fixes and test/benchmark evidence are present locally. The client
-RC is committed locally, and the API candidate is a tested uncommitted working
-tree extension. Production API deployment and client publication remain pending.
+RC is committed locally. The API is committed, pushed and deployed; D1 migration
+and actual RC telemetry upload plus Dashboard rendering are verified. Client
+publication proceeds after the final release gates.
 v0.5.1 users have not received these source fixes. Real-player validation is not
 claimed, and synthetic/natural corpus findings are not rewritten as live-user results.
