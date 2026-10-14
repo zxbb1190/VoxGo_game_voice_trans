@@ -15,6 +15,7 @@ from .base import (
     short_error_text,
 )
 from .prompt import SYSTEM_PROMPT
+from .failures import classify_api_failure
 
 
 class OpenAICompatibleProvider(TranslatorProvider):
@@ -100,6 +101,7 @@ class OpenAICompatibleProvider(TranslatorProvider):
                         provider=self.name,
                         elapsed_seconds=elapsed,
                         raw=data,
+                        failure_reason='' if translation else 'empty_result',
                     )
 
                 error_text = await response.text()
@@ -109,7 +111,8 @@ class OpenAICompatibleProvider(TranslatorProvider):
                     translated = f"[翻译错误 {response.status}] {detail}"
                 else:
                     translated = f"[翻译错误 {response.status}] API 服务商返回错误"
-                return TranslationResult(translated, request.source_lang, request.target_lang, self.name)
+                return TranslationResult(translated, request.source_lang, request.target_lang, self.name,
+                                         failure_reason=classify_api_failure(status=response.status))
 
         except asyncio.TimeoutError:
             logger.error("翻译 API 超时")
@@ -118,10 +121,12 @@ class OpenAICompatibleProvider(TranslatorProvider):
                 request.source_lang,
                 request.target_lang,
                 self.name,
+                failure_reason='timeout',
             )
         except Exception as e:
             logger.error(f"翻译异常: {e}")
-            return TranslationResult(f"[翻译失败] {str(e)[:180]}", request.source_lang, request.target_lang, self.name)
+            return TranslationResult(f"[翻译失败] {str(e)[:180]}", request.source_lang, request.target_lang, self.name,
+                                     failure_reason=classify_api_failure(e))
 
     def clear_context(self):
         self._context.clear()

@@ -534,6 +534,7 @@ class SpeechPipeline:
         self._diagnostic(
             'asr_segment', segment.duration_seconds * 1000,
             str(segment.reason or '').startswith('达到最长 '), decision.short_segment,
+            segment.latency_mode or normalize_latency_mode(config.audio.latency_mode),
         )
         now = time.time()
         work_item = SpeechWorkItem(

@@ -15,6 +15,7 @@ from voxgo.translation import (
     clean_translation_output,
     should_skip_translation_for_language,
 )
+from voxgo.translation.failures import classify_api_failure
 
 
 class TranslationRuntime:
@@ -33,10 +34,13 @@ class TranslationRuntime:
         self.loop: Optional[asyncio.AbstractEventLoop] = None
         self.thread: Optional[threading.Thread] = None
 
-    def _record_analytics(self, success, elapsed_ms=None, mode=None):
+    def _record_analytics(self, success, elapsed_ms=None, mode=None, failure_reason=None, provider=None):
         try:
             if self.analytics:
-                self.analytics.translation_result(success, elapsed_ms, mode)
+                if not success and mode == 'api':
+                    self.analytics.translation_result(success, elapsed_ms, mode, failure_reason, provider)
+                else:
+                    self.analytics.translation_result(success, elapsed_ms, mode)
         except Exception:
             pass
 
@@ -280,7 +284,13 @@ class TranslationRuntime:
         try:
             result = await self._translate_with_config_snapshot(config, text, detected_language)
         except Exception as exc:
-            self._handle_error(item_id, exc, mode=mode)
+            # Failed requests obey the same discard rule as completed results.
+            if self._is_stale_language_flow(language_revision):
+                self._latency_traces.pop(item_id, None)
+                self._remove_overlay_item(item_id)
+                self._stats['skipped_translations'] = self._stats.get('skipped_translations', 0) + 1
+                return
+            self._handle_error(item_id, exc, mode=mode, provider=provider)
             return
         if getattr(result, 'provider', '') == 'local_cache':
             mode = None
@@ -302,9 +312,11 @@ class TranslationRuntime:
             )
             return
         translated = clean_translation_output("" if result is None else result.translated)
+        failure_reason = getattr(result, 'failure_reason', '')
         if trace:
             trace.translation_finished_at = time.time()
         if not translated or not translated.strip():
+            failure_reason = 'empty_result'
             translated = f"[翻译为空] {text}"
             logger.warning("翻译返回空结果，显示识别文本")
         source_lang = getattr(result, "source_lang", detected_language or "")
@@ -312,7 +324,8 @@ class TranslationRuntime:
 
         elapsed = time.time() - t0
         if not translated.startswith('[未翻译]'):
-            self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000, mode=mode)
+            self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000, mode=mode,
+                                   failure_reason=failure_reason, provider=provider)
         logger.info("translated: {} ({:.1f}s)", translated[:80], elapsed)
         self._event_bus.publish(
             TranslationReady(
@@ -394,13 +407,13 @@ class TranslationRuntime:
             logger.exception("异步翻译任务失败: {}", exc)
             self._handle_error(item_id, exc, already_logged=True)
 
-    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False, mode=None):
+    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False, mode=None, provider=None):
         if self._shutdown_requested.is_set():
             return
         if not already_logged:
             logger.exception("翻译任务失败: {}", exc)
         self._stats["errors"] += 1
-        self._record_analytics(False, mode=mode)
+        self._record_analytics(False, mode=mode, failure_reason=classify_api_failure(exc), provider=provider)
         trace = self._latency_traces.get(item_id)
         if trace and not trace.translation_finished_at:
             trace.translation_finished_at = time.time()

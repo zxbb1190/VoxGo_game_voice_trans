@@ -6,6 +6,11 @@ The v0.5.2 ASR extension adds eight numeric fields to new Full snapshots (35
 total), preserving legacy 27-field payloads. See [ASR counter definitions and
 compatibility](asr-diagnostics-v0.5.2.md) and [RC acceptance](release-v0.5.2-rc.md).
 
+The next locally prepared extension adds 28 fixed classification counters (63
+total), with event-time ASR modes and API failure categories. Existing 11/13-field
+v1 and 27/35-field v2 pending hashes remain exact. See
+[classified diagnostics acceptance and rollout](telemetry-classified-diagnostics.md).
+
 ## Basic: daily active installations
 
 Basic is independent of Full consent, epoch, install ID, business counters and

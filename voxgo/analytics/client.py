@@ -57,11 +57,12 @@ class LocalAnalytics:
     def observe(self, name, elapsed_ms):
         self._submit('observe', name, elapsed_ms)
 
-    def asr_segment(self, duration_ms, forced=False, short=False):
-        self._submit('asr_segment', duration_ms, forced, short)
+    def asr_segment(self, duration_ms, forced=False, short=False, mode=None):
+        self._submit('asr_segment', duration_ms, forced, short, mode)
 
-    def translation_result(self, success, elapsed_ms=None, mode=None):
-        self._submit('translation_result', success, elapsed_ms, mode)
+    def translation_result(self, success, elapsed_ms=None, mode=None,
+                           failure_reason=None, provider=None):
+        self._submit('translation_result', success, elapsed_ms, mode, failure_reason, provider)
 
     def set_active(self, active, mode=None):
         try:
@@ -371,11 +372,12 @@ class AuthorizedAnalytics:
     def observe(self, name, elapsed_ms):
         self._call('observe', name, elapsed_ms)
 
-    def asr_segment(self, duration_ms, forced=False, short=False):
-        self._call('asr_segment', duration_ms, forced, short)
+    def asr_segment(self, duration_ms, forced=False, short=False, mode=None):
+        self._call('asr_segment', duration_ms, forced, short, mode)
 
-    def translation_result(self, success, elapsed_ms=None, mode=None):
-        self._call('translation_result', success, elapsed_ms, mode)
+    def translation_result(self, success, elapsed_ms=None, mode=None,
+                           failure_reason=None, provider=None):
+        self._call('translation_result', success, elapsed_ms, mode, failure_reason, provider)
 
     def set_active(self, active, mode=None):
         self._active = (active, mode)

@@ -48,8 +48,8 @@ class AsrDiagnosticsTests(unittest.TestCase):
         pipeline.on_speech_detected(_segment(reason='达到最长 2.5s'))
         pipeline.on_speech_detected(_segment(reason='private game name'))
         self.assertEqual(callback.call_args_list, [
-            unittest.mock.call('asr_segment', 400.0, True, True),
-            unittest.mock.call('asr_segment', 400.0, False, True),
+            unittest.mock.call('asr_segment', 400.0, True, True, 'fast'),
+            unittest.mock.call('asr_segment', 400.0, False, True, 'fast'),
         ])
         self.assertNotIn('private game name', str(callback.mock_calls))
         self.assertEqual(pipeline._queue.qsize(), 1)
@@ -154,7 +154,7 @@ class AsrDiagnosticsTests(unittest.TestCase):
             analytics.asr_segment(400, False, True)
             analytics.increment('asr_post_filter_drops')
             self.assertEqual(local.call_count, 1)
-            local.return_value.asr_segment.assert_called_once_with(400, False, True)
+            local.return_value.asr_segment.assert_called_once_with(400, False, True, None)
             self.assertIsNone(analytics.remote)
             uploader.assert_not_called()
             analytics.stop()

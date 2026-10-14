@@ -252,6 +252,8 @@ class SpeechSegment:
     energy_voice_blocks: int = 0
     vad_confidence: float = 0.0
     activity_source: str = ""
+    # Fixed at capture emission, before callbacks or analytics queues can lag.
+    latency_mode: str = ""
 
 
 def _device_name(info) -> str:
@@ -1288,6 +1290,7 @@ class SystemAudioCapture:
             energy_voice_blocks=energy_voice_blocks,
             vad_confidence=vad_confidence,
             activity_source=activity_source,
+            latency_mode=normalize_latency_mode(getattr(self.config, 'latency_mode', '')),
         )
         logger.info(
             '检测到语音片段: {} 字节, {:.1f}s/{:.1f}s 语音, {} 块/{} 语音块, peak={:.1f} dBFS, gate={:.1f} dBFS ({})',

@@ -6,7 +6,7 @@ from pathlib import Path
 import uuid
 
 from voxgo.analytics.aggregation import AggregateStore
-from voxgo.analytics.daily_metrics import ASR_COUNTERS, METRICS
+from voxgo.analytics.daily_metrics import ASR_COUNTERS, CLASSIFIED_COUNTERS, METRICS
 
 
 class AggregationTests(unittest.TestCase):
@@ -40,7 +40,7 @@ class AggregationTests(unittest.TestCase):
         state = self.store._load()
         entry = state['days'][self.day.isoformat()]
         for metrics in [entry['totals'], entry['pending']['metrics'], *entry['seen'].values()]:
-            for key in ASR_COUNTERS:
+            for key in ASR_COUNTERS | CLASSIFIED_COUNTERS:
                 metrics.pop(key, None)
         unsigned = {k: v for k, v in entry['pending'].items() if k != 'snapshot_id'}
         entry['pending']['snapshot_id'] = hashlib.sha256(json.dumps(
@@ -59,7 +59,7 @@ class AggregationTests(unittest.TestCase):
         self.assertEqual(updated['install_id'], pending['install_id'])
         self.assertEqual(updated['metrics']['translation_success'], 3)
         self.assertEqual(updated['metrics']['asr_segments'], 1)
-        self.assertEqual(len(updated['metrics']), 35)
+        self.assertEqual(len(updated['metrics']), len(METRICS))
 
     def test_old_ack_cannot_erase_new_revision(self):
         self.write(3)

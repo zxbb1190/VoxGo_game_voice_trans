@@ -46,6 +46,8 @@ class TranslationResult:
     provider: str
     elapsed_seconds: float = 0.0
     raw: Optional[dict] = None
+    # Local structured outcome only; telemetry transmits fixed numeric counters.
+    failure_reason: str = ""
 
 
 @dataclass

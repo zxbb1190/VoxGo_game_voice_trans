@@ -14,6 +14,16 @@ ASR_COUNTERS = {'asr_forced_max_duration_splits', 'asr_short_fragment_segments',
                 'asr_runaway_repetition_blocks', 'asr_segments',
                 'asr_segment_duration_sum_ms', 'asr_segment_duration_samples'}
 COUNTERS |= ASR_COUNTERS
+ASR_MODES = ('fast', 'balanced', 'accurate', 'custom')
+ASR_MODE_SUFFIXES = ('segments', 'forced_max_duration_splits', 'short_fragment_segments',
+                     'segment_duration_sum_ms', 'segment_duration_samples')
+API_FAILURE_REASONS = ('timeout', 'network', 'rate_limit', 'http_error', 'empty_result', 'other')
+API_FAILURE_PROVIDERS = ('google', 'openai_compatible')
+CLASSIFIED_COUNTERS = {f'asr_{mode}_{suffix}' for mode in ASR_MODES
+                       for suffix in ASR_MODE_SUFFIXES}
+CLASSIFIED_COUNTERS |= {f'api_translation_failed_{value}'
+                        for value in (*API_FAILURE_REASONS, *API_FAILURE_PROVIDERS)}
+COUNTERS |= CLASSIFIED_COUNTERS
 BUCKETS = ('lt_500', '500_1000', '1000_2000', '2000_5000', 'ge_5000')
 LATENCIES = {'asr_latency', 'translation_latency'}
 METRICS = COUNTERS | {n + s for n in LATENCIES for s in ('_sum_ms', '_samples')}
@@ -89,7 +99,7 @@ class DailyMetrics:
             self._rollover()
             return self._observe_locked(prefix, elapsed_ms)
 
-    def asr_segment(self, duration_ms, forced=False, short=False):
+    def asr_segment(self, duration_ms, forced=False, short=False, mode=None):
         """Record one admitted capture segment atomically, before any merging."""
         if (not self._valid_elapsed(duration_ms) or type(forced) is not bool
                 or type(short) is not bool):
@@ -103,11 +113,16 @@ class DailyMetrics:
                 amounts['asr_forced_max_duration_splits'] = 1
             if short:
                 amounts['asr_short_fragment_segments'] = 1
+            # An absent/unknown label stays unclassified, including old shards.
+            if mode in ASR_MODES:
+                amounts.update({f'asr_{mode}_{key[4:]}': value
+                                for key, value in tuple(amounts.items())})
             for key, amount in amounts.items():
                 metrics[key] = min(LIMIT, metrics.get(key, 0) + amount)
         return True
 
-    def translation_result(self, success, elapsed_ms=None, mode=None):
+    def translation_result(self, success, elapsed_ms=None, mode=None,
+                           failure_reason=None, provider=None):
         """Apply one result as a single day/lock transaction, or drop it whole."""
         if type(success) is not bool or mode not in (None, 'api', 'offline'):
             return False
@@ -121,6 +136,13 @@ class DailyMetrics:
             if mode is not None:
                 key = mode + '_' + result
                 metrics[key] = min(LIMIT, metrics.get(key, 0) + 1)
+            if not success and mode == 'api':
+                reason = failure_reason if failure_reason in API_FAILURE_REASONS else 'other'
+                keys = ['api_translation_failed_' + reason]
+                if provider in API_FAILURE_PROVIDERS:
+                    keys.append('api_translation_failed_' + provider)
+                for key in keys:
+                    metrics[key] = min(LIMIT, metrics.get(key, 0) + 1)
             if self._valid_elapsed(elapsed_ms):
                 self._observe_locked('translation_latency', elapsed_ms)
         return True

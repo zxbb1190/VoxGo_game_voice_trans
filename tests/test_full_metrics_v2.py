@@ -174,7 +174,7 @@ class FullV2Tests(unittest.TestCase):
         authorized.translation_result(True, 1000, 'api')
         self.assertEqual(len(transitions), 1)
         self.assertTrue(old_epoch._queue.empty())
-        self.assertEqual(new_epoch._queue.get_nowait(), ('translation_result', True, 1000, 'api'))
+        self.assertEqual(new_epoch._queue.get_nowait(), ('translation_result', True, 1000, 'api', None, None))
         authorized.translation_result(False, 1500, 'offline')
         self.assertEqual(len(transitions), 2)
         self.assertTrue(new_epoch._queue.empty())
