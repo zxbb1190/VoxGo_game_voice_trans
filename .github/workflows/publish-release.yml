@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.5.2"
+        description: "Release version, for example 0.5.3"
         required: true
-        default: "0.5.2"
+        default: "0.5.3"
 
 permissions:
   contents: write
@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+        with:
+          # RC compatibility tests load the actual published client baseline.
+          fetch-depth: 0
 
       - name: Resolve version
         shell: powershell
