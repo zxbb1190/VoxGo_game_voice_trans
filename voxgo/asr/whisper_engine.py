@@ -37,6 +37,7 @@ from loguru import logger
 
 from voxgo.app_info import USER_AGENT
 from voxgo.asr.runaway_repetition import is_runaway_repetition
+from voxgo.languages import normalize_language_code, whisper_model_error
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -180,6 +181,10 @@ class _TqdmOutputSink:
         pass
 
 
+class WhisperLanguageCapabilityError(ValueError):
+    """A model/language mismatch cannot be repaired by retrying a device."""
+
+
 @dataclass
 class WhisperConfig:
     model_size: str = "small"
@@ -196,6 +201,8 @@ class WhisperConfig:
     cpu_threads: int = 2
     num_workers: int = 1
     language: str = "auto"
+    # Runtime routing metadata; user-settings serialization remains unchanged.
+    source_language: str = ""
     beam_size: int = 5
     vad_filter: bool = False
     vad_parameters: dict = None
@@ -276,7 +283,11 @@ class SpeechRecognizer:
     def initialize(self):
         """初始化 Whisper 模型"""
         effective_model = self._effective_model_size()
+        error = whisper_model_error(effective_model, self.config.source_language or self.config.language)
+        if error and (self.config.source_language or self.config.language) not in {"", "auto"}:
+            raise WhisperLanguageCapabilityError(error)
         if self._initialized and self._loaded_model_size == effective_model:
+            self._validate_native_model_language(self.config.source_language or self.config.language)
             return
         if self._initialized:
             logger.info(
@@ -315,6 +326,7 @@ class SpeechRecognizer:
                         local_files_only=self.config.local_files_only,
                         **runtime_options,
                     )
+                    self._validate_native_model_language(self.config.source_language or self.config.language)
                     self._runtime_device = device
                     self._runtime_compute_type = compute_type
                     self._loaded_model_size = effective_model
@@ -325,6 +337,9 @@ class SpeechRecognizer:
                         self._notify_pending_cpu_fallback()
                     logger.info("Whisper 模型加载完成")
                     return
+                except WhisperLanguageCapabilityError:
+                    self._release_model_loader_memory()
+                    raise
                 except Exception as e:
                     last_error = e
                     if device == "cuda":
@@ -920,6 +935,10 @@ class SpeechRecognizer:
 
         # 转录
         configured_language = self.config.language if language_override is None else language_override
+        error = whisper_model_error(self._effective_model_size(), self.config.source_language or configured_language)
+        if error and (self.config.source_language or configured_language) not in {"", "auto"}:
+            raise WhisperLanguageCapabilityError(error)
+        self._validate_native_model_language(self.config.source_language or configured_language)
         language = None if configured_language in (None, "", "auto") else configured_language
         initial_prompt = self._initial_prompt()
         try:
@@ -1084,6 +1103,12 @@ class SpeechRecognizer:
         if active:
             return active
         return self._configured_model_size()
+
+    def _validate_native_model_language(self, source: str):
+        # Also catch renamed local English-only models, not just '.en' IDs.
+        native = getattr(getattr(self, "_model", None), "model", None)
+        if source not in {"", "auto", "en"} and getattr(native, "is_multilingual", None) is False:
+            raise WhisperLanguageCapabilityError("[未识别] 此模型仅支持英语。This language requires a multilingual Whisper model.")
 
     def _configured_model_size(self) -> str:
         return str(getattr(self.config, "model_size", "small") or "small").strip() or "small"
@@ -1371,17 +1396,7 @@ def _is_suspicious_noise_token(text: str) -> bool:
 
 
 def _normalize_filter_language(value: str) -> str:
-    value = (value or "").strip().lower()
-    aliases = {
-        "english": "en",
-        "eng": "en",
-        "chinese": "zh",
-        "zh-cn": "zh",
-        "zh-tw": "zh",
-        "cmn": "zh",
-        "yue": "zh",
-    }
-    return aliases.get(value, value if value in {"en", "zh"} else "")
+    return normalize_language_code(value)
 
 
 def _is_short_anomalous_transcript(text: str) -> bool:
@@ -1412,7 +1427,8 @@ def _is_short_anomalous_transcript(text: str) -> bool:
     if len(compact) <= 1:
         return True
 
-    has_cjk = bool(CJK_RE.search(stripped))
+    # Hangul and Cyrillic short callouts are words too. Keep all thresholds.
+    has_cjk = bool(re.search(r"[\u3040-\u30ff\u3400-\u9fff\u1100-\u11ff\u3130-\u318f\uac00-\ud7af\u0400-\u052f]", stripped))
     has_latin = bool(LATIN_RE.search(stripped))
     has_digit = any(char.isdigit() for char in stripped)
     if len(compact) <= 3 and not has_digit:

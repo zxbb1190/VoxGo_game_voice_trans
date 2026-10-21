@@ -21,6 +21,7 @@ from PyQt5.QtWidgets import (
 
 from voxgo.audio.capture import AudioConfig, AudioLevelMonitor, AudioRecoveryInProgress
 from voxgo.i18n import UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.languages import translation_direction_error
 from voxgo.translation import GameTranslator, TranslationConfig
 from voxgo.ui.config_models import _copy_audio_config, _copy_translation_config, _tr
 
@@ -30,10 +31,11 @@ class TranslationTestSignals(QObject):
 
 
 class TranslationTestRunner:
-    def __init__(self, config: TranslationConfig, callback: Callable[[bool, str], None]):
+    def __init__(self, config: TranslationConfig, callback: Callable[[bool, str], None], ui_language=UI_LANGUAGE_ZH):
         self.signals = TranslationTestSignals()
         self.signals.finished.connect(callback)
         self._config = _copy_translation_config(config)
+        self._ui_language = normalize_ui_language(ui_language)
         self._cancelled = threading.Event()
         self._loop = None
         self._task = None
@@ -55,14 +57,25 @@ class TranslationTestRunner:
     def _run(self):
         if self._cancelled.is_set():
             return
+        error = translation_direction_error(self._config.provider, self._config.source_lang, self._config.target_lang)
+        if error:
+            self.signals.finished.emit(False, error)
+            return
         started_at = time.time()
         translator = GameTranslator(self._config)
         loop = asyncio.new_event_loop()
         self._loop = loop
         asyncio.set_event_loop(loop)
         try:
-            source = "zh" if self._config.provider == "local" and self._config.source_lang == "zh" else "en"
-            text = "请在桥边等我。" if source == "zh" else "Hello, can you hear me?"
+            source = self._config.source_lang
+            # Fixed connectivity probes, not quality evaluation or pivot inputs.
+            text = {
+                "en": "Hello, can you hear me?",
+                "zh": "请在桥边等我。",
+                "ja": "こんにちは、聞こえますか？",
+                "ko": "안녕하세요, 제 말 들리세요?",
+                "ru": "Здравствуйте, вы меня слышите?",
+            }[source]
             if self._cancelled.is_set():
                 return
             self._task = loop.create_task(translator.translate(text, source))
@@ -74,15 +87,18 @@ class TranslationTestRunner:
             elapsed_ms = int(round((time.time() - started_at) * 1000))
             translated = (translated or "").strip()
             if not translated:
-                self.signals.finished.emit(False, "翻译接口返回空结果")
+                self.signals.finished.emit(False, _tr(self._ui_language, "翻译接口返回空结果", "The translation endpoint returned an empty result"))
             elif translated.startswith("[翻译") or translated.startswith("[未翻译]"):
                 self.signals.finished.emit(False, translated)
             else:
-                self.signals.finished.emit(True, f"测试成功：{translated}\n耗时：{elapsed_ms} ms")
+                self.signals.finished.emit(True, _tr(self._ui_language,
+                    f"测试成功：{translated}\n耗时：{elapsed_ms} ms",
+                    f"Test succeeded: {translated}\nElapsed: {elapsed_ms} ms"))
         except asyncio.CancelledError:
             pass
         except Exception as e:
-            self.signals.finished.emit(False, f"测试失败：{str(e)[:220]}")
+            self.signals.finished.emit(False, _tr(self._ui_language,
+                f"测试失败：{str(e)[:220]}", f"Test failed: {str(e)[:220]}"))
         finally:
             try:
                 loop.run_until_complete(translator.close())

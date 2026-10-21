@@ -1,0 +1,1035 @@
+{
+  "kind": "authored_text_live",
+  "rows": [
+    {
+      "label": "ja-001",
+      "text": "東の屋根に二人いる。下にはまだ降りてない。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "东边的屋顶上有两个人。他们还没有下来。",
+      "elapsed_ms": 1116.0457999994833,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 265,
+        "completion_tokens": 10,
+        "total_tokens": 275,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 265
+      },
+      "human_review": "pending",
+      "reference_meaning": "东侧屋顶有两人，还没下到下面。",
+      "key_meanings": [
+        "东侧屋顶两人",
+        "尚未下来"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "negation",
+        "completeness"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-002",
+      "text": "あと七秒待って。今は突っ込まないで。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "请再等七秒。现在不要冲进去。",
+      "elapsed_ms": 355.66519999974844,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 262,
+        "completion_tokens": 11,
+        "total_tokens": 273,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 262
+      },
+      "human_review": "pending",
+      "reference_meaning": "再等七秒，现在别冲。",
+      "key_meanings": [
+        "再等七秒",
+        "禁止现在冲锋"
+      ],
+      "categories": [
+        "time",
+        "number",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-003",
+      "text": "相手が橋を渡ったら、後ろの車を狙って。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "当对方过桥后，就瞄准后面的车。",
+      "elapsed_ms": 346.51510000003327,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 11,
+        "total_tokens": 274,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 39
+      },
+      "human_review": "pending",
+      "reference_meaning": "等对方过桥后，瞄准后面的车。",
+      "key_meanings": [
+        "对方过桥是条件",
+        "瞄准后方车辆"
+      ],
+      "categories": [
+        "condition",
+        "direction"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-004",
+      "text": "弾がない。左の階段だけ見てて。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "没有子弹了。只看左边的楼梯。",
+      "elapsed_ms": 298.6158000003343,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 261,
+        "completion_tokens": 10,
+        "total_tokens": 271,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 37
+      },
+      "human_review": "pending",
+      "reference_meaning": "我没子弹了，你只看住左侧楼梯。",
+      "key_meanings": [
+        "没有子弹",
+        "只守左楼梯"
+      ],
+      "categories": [
+        "negation",
+        "direction",
+        "terminology"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-011",
+      "text": "南西の窓にスナイパー。右から顔を出さないで。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "西南边的窗户有个狙击手。从右边不要露出脸来。",
+      "elapsed_ms": 424.3287999997847,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 14,
+        "total_tokens": 281,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 267
+      },
+      "human_review": "pending",
+      "reference_meaning": "西南方向窗口有狙击手，别从右侧露头。",
+      "key_meanings": [
+        "西南窗口狙击手",
+        "禁止右侧探头"
+      ],
+      "categories": [
+        "direction",
+        "negation",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-012",
+      "text": "一人ダウン、もう一人は奥。まだ詰めなくていい。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "一个人倒下了，另一个在后面。还有人没进去呢。",
+      "elapsed_ms": 534.1938000001392,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 14,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 44
+      },
+      "human_review": "pending",
+      "reference_meaning": "打倒一个，另一个在深处，现在不用前压。",
+      "key_meanings": [
+        "一人倒地",
+        "另一人在深处",
+        "不需立即前压"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "negation",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-013",
+      "text": "フラッシュが入ったら、三人で左へ回ろう。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "<target_text>闪光信号出现后，我们三个人就向左转吧。</target_text>",
+      "elapsed_ms": 506.337199999507,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 264,
+        "completion_tokens": 21,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 40
+      },
+      "human_review": "pending",
+      "reference_meaning": "闪光弹生效后，我们三人绕到左边。",
+      "key_meanings": [
+        "闪光生效是条件",
+        "三人左绕"
+      ],
+      "categories": [
+        "condition",
+        "number",
+        "direction",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ja-014",
+      "text": "残り四十五秒。解除にはまだ間に合う。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "还剩四十五秒。还有时间解除它。",
+      "elapsed_ms": 369.7292999995625,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 262,
+        "completion_tokens": 11,
+        "total_tokens": 273,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 38
+      },
+      "human_review": "pending",
+      "reference_meaning": "还剩四十五秒，还来得及拆除。",
+      "key_meanings": [
+        "四十五秒",
+        "仍然来得及拆除"
+      ],
+      "categories": [
+        "time",
+        "number",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-001",
+      "text": "북쪽 다리 밑에 적 두 명 있어. 위에는 없어.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "在北边的桥下有两个敌人。上面没有敌人。",
+      "elapsed_ms": 3080.8133999998972,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 270,
+        "completion_tokens": 12,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 270
+      },
+      "human_review": "pending",
+      "reference_meaning": "北边桥下有两个敌人，桥上没有。",
+      "key_meanings": [
+        "北侧桥下两人",
+        "桥上无敌人"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-002",
+      "text": "오 초만 기다려. 지금 들어가면 안 돼.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "请等五秒钟。现在进去是不行的。",
+      "elapsed_ms": 358.63590000008116,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 10,
+        "total_tokens": 277,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 107
+      },
+      "human_review": "pending",
+      "reference_meaning": "再等五秒，现在不能进去。",
+      "key_meanings": [
+        "等待五秒",
+        "禁止立即进入"
+      ],
+      "categories": [
+        "time",
+        "number",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-003",
+      "text": "상대가 연막을 치면 오른쪽으로 돌아가자.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "如果对方设置了掩护（连幕），就向右边转。",
+      "elapsed_ms": 1188.7108000000808,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 14,
+        "total_tokens": 281,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 43
+      },
+      "human_review": "pending",
+      "reference_meaning": "如果对面放烟，我们就绕右边。",
+      "key_meanings": [
+        "对方放烟是条件",
+        "右绕"
+      ],
+      "categories": [
+        "condition",
+        "direction",
+        "terminology"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-004",
+      "text": "탄이 없어. 재장전하는 동안 계단 좀 봐 줘.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "没有子弹了。重新装弹的时候，请帮我看一下楼梯。",
+      "elapsed_ms": 1361.0601000000315,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 13,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 48
+      },
+      "human_review": "pending",
+      "reference_meaning": "没子弹了，我换弹时帮忙看住楼梯。",
+      "key_meanings": [
+        "没有子弹",
+        "换弹期间队友看楼梯"
+      ],
+      "categories": [
+        "negation",
+        "terminology",
+        "completeness"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-011",
+      "text": "남동쪽 언덕에 세 명. 왼쪽 바위 뒤에는 한 명 더 있어.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "在东南方的山丘上有三个人。在左边的岩石后面还有一个人。",
+      "elapsed_ms": 1746.4692999992621,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 280,
+        "completion_tokens": 17,
+        "total_tokens": 297,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 56
+      },
+      "human_review": "pending",
+      "reference_meaning": "东南山坡有三人，左边岩石后还有一人。",
+      "key_meanings": [
+        "东南山坡三人",
+        "左侧岩后另有一人"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "completeness"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-012",
+      "text": "아직 폭탄 해체하지 마. 내가 먼저 엄호할게.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "请先不要拆弹。我会先进行掩护。",
+      "elapsed_ms": 394.0228000001298,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 12,
+        "total_tokens": 284,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 48
+      },
+      "human_review": "pending",
+      "reference_meaning": "先别拆弹，我先提供掩护。",
+      "key_meanings": [
+        "暂不拆弹",
+        "说话人先掩护"
+      ],
+      "categories": [
+        "negation",
+        "terminology",
+        "completeness"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-013",
+      "text": "섬광 터지면 셋을 세고 진입해.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "“当闪光出现时，数到三，然后进入。”",
+      "elapsed_ms": 1331.3286000002336,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 269,
+        "completion_tokens": 13,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 45
+      },
+      "human_review": "pending",
+      "reference_meaning": "闪光弹爆开后数三下再进。",
+      "key_meanings": [
+        "闪光爆开是起点",
+        "数三下后进入"
+      ],
+      "categories": [
+        "condition",
+        "number",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ko-014",
+      "text": "남은 시간은 일 분 반이야. 급하게 밀 필요 없어.",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "translated": "剩余时间是1分半。不需要急着碾压（或完成某事）。",
+      "elapsed_ms": 499.7960000000603,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 271,
+        "completion_tokens": 17,
+        "total_tokens": 288,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 47
+      },
+      "human_review": "pending",
+      "reference_meaning": "还剩一分半，不必着急前压。",
+      "key_meanings": [
+        "一分半即九十秒",
+        "不需急推"
+      ],
+      "categories": [
+        "time",
+        "number",
+        "negation"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-001",
+      "text": "Под северным мостом двое, наверху никого нет.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "在北边的桥下有两个人，上面没有人。",
+      "elapsed_ms": 475.51710000061576,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 270,
+        "completion_tokens": 11,
+        "total_tokens": 281,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 110
+      },
+      "human_review": "pending",
+      "reference_meaning": "北边桥下有两人，上面没人。",
+      "key_meanings": [
+        "北侧桥下两人",
+        "上方无人"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-002",
+      "text": "Подожди шесть секунд. Сейчас не врывайся.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "请等六秒钟。现在不要冲进去。",
+      "elapsed_ms": 501.4264000001276,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 271,
+        "completion_tokens": 10,
+        "total_tokens": 281,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 111
+      },
+      "human_review": "pending",
+      "reference_meaning": "等六秒，现在别冲进去。",
+      "key_meanings": [
+        "等待六秒",
+        "禁止立即突进"
+      ],
+      "categories": [
+        "number",
+        "time",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-003",
+      "text": "Если они поставят дым, обойдём справа.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "如果他们放出烟雾，我们就从右边绕过去。",
+      "elapsed_ms": 337.25390000017796,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 11,
+        "total_tokens": 278,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 43
+      },
+      "human_review": "pending",
+      "reference_meaning": "如果他们封烟，我们就绕右边。",
+      "key_meanings": [
+        "对方封烟是条件",
+        "右绕"
+      ],
+      "categories": [
+        "condition",
+        "direction",
+        "terminology"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-004",
+      "text": "У меня нет патронов. Прикрой лестницу, пока я перезаряжаюсь.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "我没有子弹了。在我重新装弹的时候，请把楼梯挡住。",
+      "elapsed_ms": 537.2090999999273,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 281,
+        "completion_tokens": 15,
+        "total_tokens": 296,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 57
+      },
+      "human_review": "pending",
+      "reference_meaning": "我没子弹了，我换弹时掩护楼梯。",
+      "key_meanings": [
+        "没有子弹",
+        "换弹期间队友守楼梯"
+      ],
+      "categories": [
+        "negation",
+        "terminology",
+        "completeness"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-011",
+      "text": "На юго-восточном холме трое, ещё один за камнем слева.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "在东南方向的小山上有三个人，左边石头后面还有一个人。",
+      "elapsed_ms": 699.9573000002783,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 277,
+        "completion_tokens": 14,
+        "total_tokens": 291,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 53
+      },
+      "human_review": "pending",
+      "reference_meaning": "东南山坡有三人，左边岩石后还有一人。",
+      "key_meanings": [
+        "东南山坡三人",
+        "左侧岩后另有一人"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "completeness"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-012",
+      "text": "Пока не обезвреживай бомбу. Сначала я прикрою проход.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "请先不要拆除炸弹。我会先掩护通道。",
+      "elapsed_ms": 1021.1256000002322,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 274,
+        "completion_tokens": 12,
+        "total_tokens": 286,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 50
+      },
+      "human_review": "pending",
+      "reference_meaning": "先别拆弹，我先架住通道。",
+      "key_meanings": [
+        "暂不拆弹",
+        "说话人先掩护通道"
+      ],
+      "categories": [
+        "negation",
+        "terminology",
+        "completeness"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-013",
+      "text": "Когда взорвётся световая граната, досчитайте до трёх и заходите.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "当闪光弹爆炸时，数到三然后进入。",
+      "elapsed_ms": 387.8649999996924,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 12,
+        "total_tokens": 291,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 119
+      },
+      "human_review": "pending",
+      "reference_meaning": "闪光弹爆开后数到三再进去。",
+      "key_meanings": [
+        "闪光爆开是起点",
+        "数到三后进入"
+      ],
+      "categories": [
+        "condition",
+        "number",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "ru-014",
+      "text": "Осталось полторы минуты. Не надо спешить с атакой.",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "translated": "还剩一分半钟。不要急于发动攻击。",
+      "elapsed_ms": 434.12350000016886,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 11,
+        "total_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 48
+      },
+      "human_review": "pending",
+      "reference_meaning": "还剩一分半，不必急着进攻。",
+      "key_meanings": [
+        "一分半即九十秒",
+        "不必急攻"
+      ],
+      "categories": [
+        "time",
+        "number",
+        "negation"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zhja-001",
+      "text": "东边桥头有两个人，上面没有人。",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "translated": "東側の橋の頭に二人がいますが、上には誰もいません。",
+      "elapsed_ms": 752.4190000003728,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 256,
+        "completion_tokens": 22,
+        "total_tokens": 278,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 96
+      },
+      "human_review": "pending",
+      "reference_meaning": "東側の橋のたもとに二人いる。上には誰もいない。",
+      "key_meanings": [
+        "东侧桥头两人",
+        "上面无人"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zhja-002",
+      "text": "再等九秒，现在先别进门。",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "translated": "もう9秒待ってください。今はまだドアを開けないでください。",
+      "elapsed_ms": 3311.0200000000987,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 256,
+        "completion_tokens": 21,
+        "total_tokens": 277,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 256
+      },
+      "human_review": "pending",
+      "reference_meaning": "あと九秒待って。今はまだドアから入らないで。",
+      "key_meanings": [
+        "等待九秒",
+        "暂不进门"
+      ],
+      "categories": [
+        "number",
+        "time",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zhja-007",
+      "text": "西南角还有一个，别把后面三个人漏了。",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "translated": "南西の角にももう一つあります。後ろの3人を見落とさないでください。",
+      "elapsed_ms": 705.4505999994944,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 27,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 98
+      },
+      "human_review": "pending",
+      "reference_meaning": "南西の角にまだ一人いる。後ろの三人も見逃さないで。",
+      "key_meanings": [
+        "西南角一人",
+        "后方另三人不可忽略"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "negation"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zhja-008",
+      "text": "等治疗回来再打，不要现在交大招。",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "translated": "治療が終わってから戦いましょう。今は大技を使わないでください。",
+      "elapsed_ms": 2442.3618000000715,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 25,
+        "total_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 34
+      },
+      "human_review": "pending",
+      "reference_meaning": "ヒーラーが戻ってから戦おう。今はウルトを使わないで。",
+      "key_meanings": [
+        "治疗返回后开战",
+        "目前不交大招"
+      ],
+      "categories": [
+        "condition",
+        "negation",
+        "terminology"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "en-001",
+      "text": "Two enemies are below the west balcony, not on the roof.",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "translated": "有两个敌人在西边的阳台上，不在屋顶上。",
+      "elapsed_ms": 380.5080000001908,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 11,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 95
+      },
+      "human_review": "pending",
+      "reference_meaning": "两个敌人在西侧阳台下方，不在屋顶。",
+      "key_meanings": [
+        "两个敌人",
+        "西侧阳台下方",
+        "否定屋顶"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "en-007",
+      "text": "Only one is pushing from the east; the other three are holding back.",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "translated": "只有一个人从东边推进；其他三个人都在拖延。",
+      "elapsed_ms": 405.5503999998109,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 257,
+        "completion_tokens": 13,
+        "total_tokens": 270,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 33
+      },
+      "human_review": "pending",
+      "reference_meaning": "只有一人从东边压过来，另外三人还在后面守着。",
+      "key_meanings": [
+        "一人东侧推进",
+        "另外三人留守"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "completeness"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zh-001",
+      "text": "北边仓库里有三个，别从正门进去。",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "translated": "There are three in the warehouse on the north side; don't enter from the main door.",
+      "elapsed_ms": 697.8523999996469,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 19,
+        "total_tokens": 273,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 94
+      },
+      "human_review": "pending",
+      "reference_meaning": "Three enemies are in the northern warehouse; do not enter through the front door.",
+      "key_meanings": [
+        "三个敌人",
+        "北侧仓库",
+        "禁止正门进入"
+      ],
+      "categories": [
+        "number",
+        "direction",
+        "negation"
+      ],
+      "split": "dev",
+      "scene": "party_callout"
+    },
+    {
+      "label": "zh-007",
+      "text": "左侧二楼只剩一个，右边还有两个没露头。",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "translated": "There's only one left on the second floor on the left side; there are still two on the right side that haven't shown up yet.",
+      "elapsed_ms": 730.8956999995644,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 29,
+        "total_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 30
+      },
+      "human_review": "pending",
+      "reference_meaning": "Only one remains on the second floor to the left; two more on the right have not peeked.",
+      "key_meanings": [
+        "左侧二楼一人",
+        "右侧两人未露头"
+      ],
+      "categories": [
+        "direction",
+        "number",
+        "negation"
+      ],
+      "split": "holdout",
+      "scene": "party_callout"
+    }
+  ],
+  "human_review": "pending"
+}

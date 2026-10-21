@@ -26,6 +26,7 @@ from voxgo.asr.whisper_engine import (
 from voxgo.translation import TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateSettings, normalize_update_channel
 from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
+from voxgo.languages import normalize_language_flow
 
 from voxgo.config.schema import (
     OPPOSITE_LANGUAGE,
@@ -604,16 +605,14 @@ def serialize_user_settings(config: AppConfig) -> dict:
 
 
 def sync_language_flow(config: AppConfig):
-    source = normalize_language_code(config.translation.source_lang, "en")
-    target = normalize_language_code(config.translation.target_lang, OPPOSITE_LANGUAGE[source])
-    if target == source:
-        target = OPPOSITE_LANGUAGE[source]
+    source, target = normalize_language_flow(config.translation.source_lang, config.translation.target_lang)
     config.translation.source_lang = source
     config.translation.target_lang = target
+    config.whisper.source_language = source
     # Keep translation direction separate from Whisper language forcing.  In the
     # normal en->zh flow, auto language detection prevents Chinese speech from
     # being forced into plausible English text and then entering translation.
-    if source == "en" and not bool(getattr(config.whisper, "pure_english_environment", False)):
+    if source in {"ja", "ko", "ru"} or (source == "en" and not bool(getattr(config.whisper, "pure_english_environment", False))):
         config.whisper.language = "auto"
     else:
         config.whisper.language = source if source in OPPOSITE_LANGUAGE else "auto"

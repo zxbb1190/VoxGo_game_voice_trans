@@ -1,6 +1,7 @@
 """Settings dialog for overlay, audio, translation, and update preferences."""
 
 from typing import List, Optional
+from dataclasses import replace
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import (
@@ -31,6 +32,7 @@ from voxgo.audio.capture import (
     normalize_latency_mode,
 )
 from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.languages import translation_direction_error
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.ui.download_panels import LocalModelPanel
 from voxgo.update.checker import UpdateCheckResult, UpdateInfo, UpdateSettings, normalize_update_channel
@@ -51,6 +53,7 @@ from voxgo.ui.config_models import (
     _normalize_whisper_device,
     _start_button_cooldown,
     _tr,
+    _translation_language_notice,
     _update_channel_options,
     _whisper_device_options,
 )
@@ -171,10 +174,10 @@ class SettingsDialog(QDialog):
         self.original_color_btn.color_changed.connect(self._preview)
         appearance_form.addRow(_tr(self._ui_language, "原文颜色", "Original Color"), self.original_color_btn)
 
-        self.show_original_check = QCheckBox(_tr(self._ui_language, "显示英文原文", "Show original speech text"))
+        self.show_original_check = QCheckBox(_tr(self._ui_language, "显示语音原文", "Show original speech text"))
         self.show_original_check.setChecked(self.overlay_config.show_original)
         self.show_original_check.stateChanged.connect(self._preview)
-        appearance_form.addRow(_tr(self._ui_language, "中英对照", "Bilingual Display"), self.show_original_check)
+        appearance_form.addRow(_tr(self._ui_language, "双语对照", "Bilingual Display"), self.show_original_check)
 
         self.compact_mode_check = QCheckBox(_tr(self._ui_language, "启用紧凑浮窗", "Enable compact overlay"))
         self.compact_mode_check.setChecked(bool(getattr(self.overlay_config, "compact_mode", False)))
@@ -306,6 +309,7 @@ class SettingsDialog(QDialog):
             "Off by default: the multilingual model detects the input language, so Chinese audio can be skipped.\nEnable only when the audio is almost entirely English.",
         ))
         self.pure_english_environment_check.stateChanged.connect(self._preview)
+        self._refresh_english_fast_path_ui()
         audio_form.addRow(_tr(self._ui_language, "英文快路径", "English Fast Path"), self.pure_english_environment_check)
 
         self.latency_hint_label = QLabel()
@@ -836,6 +840,30 @@ class SettingsDialog(QDialog):
                     "Enter an OpenAI-compatible endpoint; a full /chat/completions URL or a /v1 base URL both work",
                 )
             )
+        # Evaluate the selected provider without mutating it or choosing an online fallback.
+        notice_config = replace(self.translation_config, provider=provider)
+        notice = _translation_language_notice(notice_config, self._ui_language)
+        if notice and hasattr(self, "provider_hint"):
+            self.provider_hint.setText(notice)
+        if hasattr(self, "translation_test_button"):
+            error = translation_direction_error(provider, notice_config.source_lang, notice_config.target_lang)
+            self.translation_test_button.setEnabled(not error)
+            self.translation_test_button.setToolTip(notice if error else "")
+        self._refresh_english_fast_path_ui()
+
+    def _refresh_english_fast_path_ui(self):
+        if not hasattr(self, "pure_english_environment_check"):
+            return
+        is_english = self.translation_config.source_lang == "en"
+        self.pure_english_environment_check.setEnabled(is_english)
+        if is_english:
+            self.pure_english_environment_check.setToolTip(_tr(self._ui_language,
+                "默认关闭：使用多语言模型检测输入语言，中文声音会被跳过。\n只有音频几乎全是英文时才建议开启。",
+                "Off by default: the multilingual model detects the input language, so Chinese audio can be skipped.\nEnable only when the audio is almost entirely English."))
+        else:
+            self.pure_english_environment_check.setToolTip(_tr(self._ui_language,
+                "仅适用于英语输入。当前语言使用多语言 Whisper 模型；已保存的英文设置会保留，但不生效。",
+                "English input only. This language uses multilingual Whisper; the saved English-only preference is preserved and ignored."))
 
     def set_audio_devices(self, audio_devices: List[dict], audio_config: AudioDeviceConfig):
         self.audio_devices = audio_devices or []
@@ -960,6 +988,10 @@ class SettingsDialog(QDialog):
 
     def _test_translation(self):
         self._collect_values()
+        if translation_direction_error(self.translation_config.provider,
+                self.translation_config.source_lang, self.translation_config.target_lang):
+            self.translation_test_label.setText(_translation_language_notice(self.translation_config, self._ui_language))
+            return
         self.translation_test_button.setEnabled(False)
         self.translation_test_button.setText(_tr(self._ui_language, "测试中...", "Testing..."))
         self.translation_test_label.setText(_tr(
@@ -970,6 +1002,7 @@ class SettingsDialog(QDialog):
         self._translation_test_runner = TranslationTestRunner(
             self.translation_config,
             self._handle_translation_test_result,
+            self._ui_language,
         )
         self._translation_test_runner.start()
 

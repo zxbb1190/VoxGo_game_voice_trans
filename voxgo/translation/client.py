@@ -14,6 +14,7 @@ from .base import (
     local_phrase_cache_lookup,
     normalize_translation_provider,
     target_language,
+    translation_direction_error,
 )
 from .registry import create_provider
 
@@ -80,6 +81,9 @@ class GameTranslator:
 
         source_language = self.detect_language(text, detected_language)
         target = self.get_target_language(source_language)
+        error = translation_direction_error(self._provider_name(), source_language, target)
+        if error:
+            return TranslationResult(error, source_language, target, self._provider_name())
         cached = self._local_cache_result(text, source_language, target, self.config)
         if cached:
             return cached
@@ -89,8 +93,6 @@ class GameTranslator:
             logger.warning("API Key 未配置，返回原文")
             source_language = self.detect_language(text, detected_language)
             target = self.get_target_language(source_language)
-            from .base import TranslationResult
-
             return TranslationResult(provider.missing_api_key_message(), source_language, target, provider.name)
 
         request = TranslationRequest(text=text, source_lang=source_language, target_lang=target, detected_language=detected_language)
@@ -117,13 +119,14 @@ class GameTranslator:
         provider = create_provider(config)
         source_language = detect_language(text, getattr(config, "source_lang", ""), detected_language)
         target = target_language(getattr(config, "target_lang", ""), source_language)
+        error = translation_direction_error(provider.name, source_language, target)
+        if error:
+            return TranslationResult(error, source_language, target, provider.name)
         cached = self._local_cache_result(text, source_language, target, config)
         if cached:
             return cached
         if is_placeholder_api_key(getattr(config, "api_key", "")) and provider.requires_api_key():
-            logger.warning("API Key 鏈厤缃紝杩斿洖鍘熸枃")
-            from .base import TranslationResult
-
+            logger.warning("API Key 未配置，未发出翻译请求")
             return TranslationResult(provider.missing_api_key_message(), source_language, target, provider.name)
 
         request = TranslationRequest(

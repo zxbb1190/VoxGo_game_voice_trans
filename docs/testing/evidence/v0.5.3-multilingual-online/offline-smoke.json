@@ -1,0 +1,14 @@
+[
+  {
+    "source_lang": "en",
+    "target_lang": "zh",
+    "text": "Please wait for me near the bridge.",
+    "translated": "请在桥边等我"
+  },
+  {
+    "source_lang": "zh",
+    "target_lang": "en",
+    "text": "请在桥边等我。",
+    "translated": "Please wait by the bridge."
+  }
+]

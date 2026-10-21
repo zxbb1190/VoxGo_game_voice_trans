@@ -11,3 +11,16 @@ SYSTEM_PROMPT = """你是实时语音字幕翻译器。输入来自语音识别�
 8. 只输出译文，不输出解释、说明、标签或思考过程。
 """
 
+
+def translation_system_prompt(source_lang: str, target_lang: str) -> str:
+    # Keep the existing English/Chinese prompt exactly as shipped.
+    if (source_lang, target_lang) in {("en", "zh"), ("zh", "en")}:
+        return SYSTEM_PROMPT
+    from voxgo.languages import LANGUAGE_NAMES
+    source = LANGUAGE_NAMES[source_lang]
+    target = LANGUAGE_NAMES[target_lang]
+    return SYSTEM_PROMPT.replace(
+        "7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。",
+        f"7. 原文语言是{source}，直接翻译成{target}，不要经英语或其他语言中转。",
+    )
+

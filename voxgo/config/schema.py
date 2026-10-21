@@ -7,23 +7,10 @@ from voxgo.mobile.server import WebSocketConfig
 from voxgo.asr.whisper_engine import WhisperConfig
 from voxgo.translation import TranslationConfig
 from voxgo.update.checker import UpdateSettings
+from voxgo.languages import LANGUAGE_ALIASES, LANGUAGE_NAMES, OPPOSITE_LANGUAGE
+from voxgo.languages import normalize_language_code as _normalize_language_code
 
 
-LANGUAGE_ALIASES = {
-    "en": "en",
-    "eng": "en",
-    "english": "en",
-    "英语": "en",
-    "zh": "zh",
-    "zh-cn": "zh",
-    "zh-tw": "zh",
-    "cmn": "zh",
-    "yue": "zh",
-    "chinese": "zh",
-    "中文": "zh",
-}
-LANGUAGE_NAMES = {"en": "英语", "zh": "中文"}
-OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
 WHISPER_DEVICE_NAMES = {
     "auto": "自动检测（GPU 优先）",
     "cuda": "NVIDIA GPU / CUDA",
@@ -106,9 +93,7 @@ class AppConfig:
 
 
 def normalize_language_code(value: str, default: str = "en") -> str:
-    value = (value or "").strip().lower()
-    normalized = LANGUAGE_ALIASES.get(value, value)
-    return normalized if normalized in LANGUAGE_NAMES else default
+    return _normalize_language_code(value, default)
 
 
 def normalize_whisper_device(value: str) -> str:

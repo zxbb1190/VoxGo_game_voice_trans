@@ -29,6 +29,7 @@ from PyQt5.QtWidgets import (
 
 from voxgo.app_info import APP_NAME, APP_VERSION
 from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
+from voxgo.languages import DEFAULT_TARGET_LANGUAGE, ONLINE_DIRECTIONS, normalize_language_flow
 from voxgo.translation import TranslationConfig
 from voxgo.update.checker import UpdateCheckResult, UpdateInfo, UpdateSettings
 from voxgo.ui.config_models import (
@@ -41,6 +42,7 @@ from voxgo.ui.config_models import (
     WhisperDeviceConfig,
     _normalize_language_code,
     _speech_language_options,
+    _translation_language_notice,
     _tr,
 )
 from voxgo.ui.dialogs import (
@@ -308,6 +310,12 @@ class GameOverlay(QWidget):
         self._lock_slot.setFixedSize(28, 24)
         toolbar_layout.addWidget(self._lock_slot)
         self._layout.addWidget(self._toolbar)
+
+        self._language_notice = QLabel()
+        self._language_notice.setWordWrap(True)
+        self._language_notice.setStyleSheet("color: #EAB86A; font-size: 11px;")
+        self._layout.addWidget(self._language_notice)
+        self._refresh_language_notice()
 
         self._lock_button = OverlayLockButton(self)
 
@@ -595,11 +603,15 @@ class GameOverlay(QWidget):
         self._fit_language_combo_width(combo)
         return combo
 
-    def _refresh_language_combo_items(self, combo: QComboBox, current: str):
+    def _refresh_language_combo_items(self, combo: QComboBox, current: str, allowed=None):
         combo.blockSignals(True)
         combo.clear()
         for code, label in _speech_language_options(self._ui_language()):
-            combo.addItem(label, code)
+            if allowed is None or code in allowed:
+                combo.addItem(label, code)
+        if combo.findData(current) < 0:
+            combo.addItem(_tr(self._ui_language(), f"{current}（不支持）", f"{current} (unsupported)"), current)
+            combo.model().item(combo.count() - 1).setEnabled(False)
         self._set_combo_language(combo, current)
         self._fit_language_combo_width(combo)
         combo.blockSignals(False)
@@ -614,23 +626,34 @@ class GameOverlay(QWidget):
         combo.setFixedWidth(text_width + 18)
 
     def _sync_language_controls(self):
-        source = _normalize_language_code(self.translation_config.source_lang, "en")
-        target = _normalize_language_code(self.translation_config.target_lang, OPPOSITE_LANGUAGE[source])
-        if target == source:
-            target = OPPOSITE_LANGUAGE[source]
+        source, target = normalize_language_flow(self.translation_config.source_lang, self.translation_config.target_lang)
 
         self.translation_config.source_lang = source
         self.translation_config.target_lang = target
         self._syncing_language_controls = True
         try:
             self._refresh_language_combo_items(self._source_lang_combo, source)
-            self._refresh_language_combo_items(self._target_lang_combo, target)
+            self._refresh_language_combo_items(self._target_lang_combo, target,
+                {dest for origin, dest in ONLINE_DIRECTIONS if origin == source})
             self._set_combo_language(self._source_lang_combo, source)
             self._set_combo_language(self._target_lang_combo, target)
             self._fit_language_combo_width(self._source_lang_combo)
             self._fit_language_combo_width(self._target_lang_combo)
         finally:
             self._syncing_language_controls = False
+        self._refresh_language_notice()
+
+    def _refresh_language_notice(self):
+        source, target = self.translation_config.source_lang, self.translation_config.target_lang
+        can_swap = source in OPPOSITE_LANGUAGE and OPPOSITE_LANGUAGE[source] == target
+        self._swap_lang_button.setEnabled(can_swap and not self._is_locked())
+        self._swap_lang_button.setToolTip(_tr(self._ui_language(),
+            "交换识别语言和翻译目标语言" if can_swap else "仅英语 ↔ 中文支持互换；其他方向请使用语言选择框",
+            "Swap recognition and target languages" if can_swap else "Swap is available for English ↔ Chinese only; reverse is unavailable for this selection"))
+        if hasattr(self, "_language_notice"):
+            notice = _translation_language_notice(self.translation_config, self._ui_language())
+            self._language_notice.setText(notice)
+            self._language_notice.setVisible(bool(notice))
 
     def _set_combo_language(self, combo: QComboBox, language: str):
         for index in range(combo.count()):
@@ -641,29 +664,19 @@ class GameOverlay(QWidget):
     def _language_combo_changed(self, *args):
         if self._syncing_language_controls:
             return
-        source = _normalize_language_code(self._source_lang_combo.currentData(), "en")
-        target = _normalize_language_code(self._target_lang_combo.currentData(), "zh")
-        sender = self.sender()
-        if source == target:
-            if sender is self._source_lang_combo:
-                target = OPPOSITE_LANGUAGE[source]
-            else:
-                source = OPPOSITE_LANGUAGE[target]
+        source = self._source_lang_combo.currentData()
+        target = self._target_lang_combo.currentData()
+        if self.sender() is self._source_lang_combo:
+            target = DEFAULT_TARGET_LANGUAGE[source]
         self._apply_language_flow(source, target)
 
     def _swap_language_flow(self):
-        source = _normalize_language_code(self.translation_config.source_lang, "en")
-        target = _normalize_language_code(self.translation_config.target_lang, OPPOSITE_LANGUAGE[source])
-        self._apply_language_flow(target, source)
+        source, target = self.translation_config.source_lang, self.translation_config.target_lang
+        if source in OPPOSITE_LANGUAGE and OPPOSITE_LANGUAGE[source] == target:
+            self._apply_language_flow(target, source)
 
     def _apply_language_flow(self, source: str, target: str):
-        self.translation_config.source_lang = _normalize_language_code(source, "en")
-        self.translation_config.target_lang = _normalize_language_code(
-            target,
-            OPPOSITE_LANGUAGE[self.translation_config.source_lang],
-        )
-        if self.translation_config.source_lang == self.translation_config.target_lang:
-            self.translation_config.target_lang = OPPOSITE_LANGUAGE[self.translation_config.source_lang]
+        self.translation_config.source_lang, self.translation_config.target_lang = normalize_language_flow(source, target)
         self._sync_language_controls()
         if self._on_settings_changed:
             self._on_settings_changed(
@@ -708,8 +721,7 @@ class GameOverlay(QWidget):
             self._qr_button.setToolTip(_tr(ui_language, "手机二维码", "Mobile QR Code"))
         if hasattr(self, "_settings_button"):
             self._settings_button.setToolTip(_tr(ui_language, "浮窗设置", "Overlay Settings"))
-        if hasattr(self, "_swap_lang_button"):
-            self._swap_lang_button.setToolTip(_tr(ui_language, "交换识别语言和翻译目标语言", "Swap recognition and target languages"))
+        self._refresh_language_notice()
         if hasattr(self, "_source_lang_combo"):
             self._source_lang_combo.setToolTip(_tr(ui_language, "识别语言", "Recognition Language"))
         if hasattr(self, "_target_lang_combo"):
@@ -732,6 +744,7 @@ class GameOverlay(QWidget):
         label = labels.get(provider, "API")
         self._provider_label.setText(label)
         self._provider_label.setToolTip(_tr(self._ui_language(), "当前翻译方式", "Current translation provider") + ": " + label)
+        self._refresh_language_notice()
 
     def set_paused(self, paused: bool):
         self._paused = bool(paused)
@@ -1002,6 +1015,7 @@ class GameOverlay(QWidget):
             self._quit_button,
         ):
             widget.setEnabled(not locked)
+        self._refresh_language_notice()
 
         self._lock_button.setChecked(locked)
         self._lock_button.setIcon(_make_icon("unlock" if locked else "lock", self.config.text_color))

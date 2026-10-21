@@ -5,6 +5,10 @@ from typing import Optional
 from urllib.parse import urlparse
 
 import aiohttp
+from voxgo.languages import (
+    LANGUAGE_ALIASES, OPPOSITE_LANGUAGE, DEFAULT_TARGET_LANGUAGE,
+    LOCAL_DIRECTIONS, normalize_language_code, translation_direction_error,
+)
 
 
 @dataclass
@@ -62,22 +66,13 @@ TRANSLATION_PROVIDERS = {
     "google": "Google Cloud Translation",
     "local": "本地离线翻译 / Offline Translation",
 }
-LANGUAGE_ALIASES = {
-    "en": "en",
-    "eng": "en",
-    "english": "en",
-    "英语": "en",
-    "zh": "zh",
-    "zh-cn": "zh",
-    "zh-tw": "zh",
-    "cmn": "zh",
-    "yue": "zh",
-    "chinese": "zh",
-    "中文": "zh",
-}
-OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
 ZH_RE = re.compile(r"[\u4e00-\u9fff]")
 LATIN_RE = re.compile(r"[A-Za-z]")
+SCRIPT_RE = {
+    "ja": re.compile(r"[\u3040-\u30ff]"),
+    "ko": re.compile(r"[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]"),
+    "ru": re.compile(r"[\u0400-\u052f]"),
+}
 PLACEHOLDER_API_KEYS = {
     "",
     "YOUR_API_KEY",
@@ -156,30 +151,22 @@ def normalize_translation_provider(value: str, default: str = "openai_compatible
     return value if value in TRANSLATION_PROVIDERS else default
 
 
-def normalize_language_code(value: str, default: str = "") -> str:
-    value = (value or "").strip().lower()
-    normalized = LANGUAGE_ALIASES.get(value, value)
-    return normalized if normalized in OPPOSITE_LANGUAGE else default
-
-
 def detect_language(text: str, configured_source_lang: str = "", detected_language: str = "") -> str:
-    configured = normalize_language_code(configured_source_lang)
-    if configured:
-        return configured
-    lang = (detected_language or "").lower()
-    if lang in ("zh", "zh-cn", "zh-tw", "chinese", "cmn", "yue"):
-        return "zh"
-    if lang in ("en", "eng", "english"):
-        return "en"
+    if configured_source_lang:
+        return normalize_language_code(configured_source_lang, str(configured_source_lang).strip().lower())
+    if detected_language:
+        return normalize_language_code(detected_language, str(detected_language).strip().lower())
+    for lang, pattern in SCRIPT_RE.items():
+        if pattern.search(text or ""):
+            return lang
     zh_count = len(ZH_RE.findall(text or ""))
-    return "zh" if zh_count >= max(1, len(text.strip()) // 5) else "en"
+    return "zh" if zh_count >= max(1, len((text or "").strip()) // 5) else "en"
 
 
 def target_language(configured_target_lang: str, source_language: str) -> str:
-    configured = normalize_language_code(configured_target_lang)
-    if configured and configured != source_language:
-        return configured
-    return OPPOSITE_LANGUAGE.get(source_language, "zh")
+    if configured_target_lang:
+        return normalize_language_code(configured_target_lang, str(configured_target_lang).strip().lower())
+    return DEFAULT_TARGET_LANGUAGE.get(source_language, "")
 
 
 def local_phrase_cache_lookup(text: str, source_lang: str, target_lang: str, config: TranslationConfig = None) -> str:
@@ -188,7 +175,7 @@ def local_phrase_cache_lookup(text: str, source_lang: str, target_lang: str, con
         return ""
     source = normalize_language_code(source_lang)
     target = normalize_language_code(target_lang)
-    if not source or not target or source == target:
+    if (source, target) not in LOCAL_DIRECTIONS:
         return ""
     cache = _merged_phrase_cache(getattr(config, "local_phrase_cache", None))
     phrases = cache.get(f"{source}:{target}", {})
@@ -243,7 +230,8 @@ def should_skip_translation_for_language(
     if not expected:
         return ""
 
-    detected = normalize_language_code(detected_language)
+    # A confident unsupported Whisper language is a mismatch too, never English.
+    detected = normalize_language_code(detected_language, str(detected_language or "").strip().lower())
     try:
         probability = float(language_probability or 0.0)
     except Exception:
@@ -273,6 +261,16 @@ def should_skip_translation_for_language(
 
     zh_count = len(ZH_RE.findall(text))
     latin_count = len(LATIN_RE.findall(text))
+    script_counts = {lang: len(pattern.findall(text)) for lang, pattern in SCRIPT_RE.items()}
+    scripts = {lang for lang, count in script_counts.items() if count}
+    foreign = scripts - {expected}
+    native_count = {"en": latin_count, "zh": zh_count, **script_counts}.get(expected, 0)
+    if expected == "ja":
+        native_count += zh_count
+    if foreign and sum(script_counts[lang] for lang in foreign) > native_count:
+        return f"text_script_mismatch:{','.join(sorted(foreign))}->{expected}"
+    # Han-only Japanese is ambiguous. ASCII game names/codes in JA/KO/RU are
+    # also ambiguous; rely on the unchanged probability gate for those cases.
     if expected == "en" and zh_count > 0 and (zh_count >= latin_count or zh_count >= 2):
         return f"text_script_mismatch:zh->{expected}:zh={zh_count}:latin={latin_count}"
     if expected == "zh" and zh_count == 0 and latin_count >= 3:

@@ -1,0 +1,11 @@
+{
+  "model": "tencent/Hunyuan-MT-7B",
+  "provider": "openai_compatible",
+  "max_tokens": 80,
+  "temperature": 0,
+  "timeout_seconds": 12,
+  "max_concurrent_requests": 1,
+  "context_messages": 0,
+  "enable_local_phrase_cache": false,
+  "human_review": "pending"
+}

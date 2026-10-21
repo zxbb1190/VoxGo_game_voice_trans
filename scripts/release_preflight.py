@@ -233,6 +233,13 @@ def check_product_defaults(root: Path, base_ref: str) -> list[str]:
         for class_name, fields in classes.items():
             current_defaults = _class_defaults(current_source, class_name, fields)
             base_defaults = _class_defaults(base_source, class_name, fields)
+            # New runtime routing metadata is not an ASR tuning default. Only
+            # this empty, non-persisted field may be added; every old setting
+            # and every other extra field still participates in the check.
+            if class_name == "WhisperConfig" and "source_language" not in base_defaults:
+                if current_defaults.get("source_language", "") != "":
+                    raise PreflightError("Whisper routing metadata must default to empty")
+                current_defaults.pop("source_language", None)
             if current_defaults != base_defaults:
                 raise PreflightError(f"{class_name} product defaults changed from {base_ref}")
 
@@ -254,7 +261,7 @@ def check_product_defaults(root: Path, base_ref: str) -> list[str]:
         raise PreflightError("Expected the existing game prompt condition for .en models")
     return [
         f"config.example.json defaults unchanged from {base_ref}",
-        "Audio/Whisper dataclass defaults unchanged",
+        "Existing Audio/Whisper defaults unchanged; optional empty source-language routing metadata only",
         "Audio latency preset values unchanged",
         "prompt_profile=none; existing game prompt .en conditional present",
     ]

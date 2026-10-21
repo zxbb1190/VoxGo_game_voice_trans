@@ -1,0 +1,153 @@
+{
+  "packages": [
+    {
+      "file": "VoxGo-v0.5.3-lite.zip",
+      "bytes": 140499474,
+      "sha256": "7d5d8d3d1d03ad957cc5364e12e3c170c4982fce512de24b71f31f177edae34e",
+      "zip_crc": "pass"
+    },
+    {
+      "file": "VoxGo-v0.5.3-full.zip",
+      "bytes": 719537249,
+      "sha256": "c71dcf750e5960808df692ed749722bdd00486690b2b6915dc1b4b2fe4b48bfb",
+      "zip_crc": "pass"
+    },
+    {
+      "file": "VoxGo-v0.5.3-full-cuda.zip",
+      "bytes": 1312959958,
+      "sha256": "a0f060c148d5eb599384c3021174691f519c18f4987afacd510ef6813da5c36e",
+      "zip_crc": "pass"
+    },
+    {
+      "file": "VoxGo-v0.5.3-cuda-runtime.zip",
+      "bytes": 593293891,
+      "sha256": "4e7ff6680fa59aa47a1540e86b399de477f9e7cfde5631223be7cd03e0d62e32",
+      "zip_crc": "pass"
+    }
+  ],
+  "editions": [
+    {
+      "edition": "lite",
+      "exe_help": 0,
+      "language_codes": [
+        "en",
+        "zh",
+        "ja",
+        "ko",
+        "ru"
+      ],
+      "online_directions": [
+        [
+          "en",
+          "zh"
+        ],
+        [
+          "ja",
+          "zh"
+        ],
+        [
+          "ko",
+          "zh"
+        ],
+        [
+          "ru",
+          "zh"
+        ],
+        [
+          "zh",
+          "en"
+        ],
+        [
+          "zh",
+          "ja"
+        ]
+      ],
+      "telemetry_fields": 63,
+      "model_files_unchanged": 0,
+      "native_binaries_unchanged": 4,
+      "forbidden_modules": []
+    },
+    {
+      "edition": "full",
+      "exe_help": 0,
+      "language_codes": [
+        "en",
+        "zh",
+        "ja",
+        "ko",
+        "ru"
+      ],
+      "online_directions": [
+        [
+          "en",
+          "zh"
+        ],
+        [
+          "ja",
+          "zh"
+        ],
+        [
+          "ko",
+          "zh"
+        ],
+        [
+          "ru",
+          "zh"
+        ],
+        [
+          "zh",
+          "en"
+        ],
+        [
+          "zh",
+          "ja"
+        ]
+      ],
+      "telemetry_fields": 63,
+      "model_files_unchanged": 8,
+      "native_binaries_unchanged": 4,
+      "forbidden_modules": []
+    },
+    {
+      "edition": "full-cuda",
+      "exe_help": 0,
+      "language_codes": [
+        "en",
+        "zh",
+        "ja",
+        "ko",
+        "ru"
+      ],
+      "online_directions": [
+        [
+          "en",
+          "zh"
+        ],
+        [
+          "ja",
+          "zh"
+        ],
+        [
+          "ko",
+          "zh"
+        ],
+        [
+          "ru",
+          "zh"
+        ],
+        [
+          "zh",
+          "en"
+        ],
+        [
+          "zh",
+          "ja"
+        ]
+      ],
+      "telemetry_fields": 63,
+      "model_files_unchanged": 8,
+      "native_binaries_unchanged": 5,
+      "forbidden_modules": []
+    }
+  ]
+}

@@ -6,10 +6,11 @@ from loguru import logger
 
 from .base import ProviderTestResult, TranslationRequest, TranslationResult, TranslatorProvider, short_error_text
 from .failures import classify_api_failure
+from voxgo.languages import translation_direction_error
 
 
 GOOGLE_TRANSLATE_ENDPOINT = "https://translation.googleapis.com/language/translate/v2"
-GOOGLE_LANGUAGE_CODES = {"en": "en", "zh": "zh-CN"}
+GOOGLE_LANGUAGE_CODES = {"en": "en", "zh": "zh-CN", "ja": "ja", "ko": "ko", "ru": "ru"}
 
 
 class GoogleCloudProvider(TranslatorProvider):
@@ -25,6 +26,9 @@ class GoogleCloudProvider(TranslatorProvider):
         return GOOGLE_LANGUAGE_CODES.get(language, language)
 
     async def translate(self, request: TranslationRequest, session) -> TranslationResult:
+        error = translation_direction_error(self.name, request.source_lang, request.target_lang)
+        if error:
+            return TranslationResult(error, request.source_lang, request.target_lang, self.name)
         params = {
             "key": self.config.api_key.strip(),
             "q": request.text,

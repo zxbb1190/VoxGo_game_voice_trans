@@ -1,0 +1,251 @@
+{
+  "model": "tencent/Hunyuan-MT-7B",
+  "attempts": [
+    {
+      "label": "ja-001",
+      "reserved_at_utc": "2026-10-21T02:28:08Z"
+    },
+    {
+      "label": "ja-002",
+      "reserved_at_utc": "2026-10-21T02:28:09Z"
+    },
+    {
+      "label": "ja-003",
+      "reserved_at_utc": "2026-10-21T02:28:10Z"
+    },
+    {
+      "label": "ja-004",
+      "reserved_at_utc": "2026-10-21T02:28:10Z"
+    },
+    {
+      "label": "ja-011",
+      "reserved_at_utc": "2026-10-21T02:28:10Z"
+    },
+    {
+      "label": "ja-012",
+      "reserved_at_utc": "2026-10-21T02:28:11Z"
+    },
+    {
+      "label": "ja-013",
+      "reserved_at_utc": "2026-10-21T02:28:11Z"
+    },
+    {
+      "label": "ja-014",
+      "reserved_at_utc": "2026-10-21T02:28:12Z"
+    },
+    {
+      "label": "ko-001",
+      "reserved_at_utc": "2026-10-21T02:28:12Z"
+    },
+    {
+      "label": "ko-002",
+      "reserved_at_utc": "2026-10-21T02:28:15Z"
+    },
+    {
+      "label": "ko-003",
+      "reserved_at_utc": "2026-10-21T02:28:16Z"
+    },
+    {
+      "label": "ko-004",
+      "reserved_at_utc": "2026-10-21T02:28:17Z"
+    },
+    {
+      "label": "ko-011",
+      "reserved_at_utc": "2026-10-21T02:28:18Z"
+    },
+    {
+      "label": "ko-012",
+      "reserved_at_utc": "2026-10-21T02:28:20Z"
+    },
+    {
+      "label": "ko-013",
+      "reserved_at_utc": "2026-10-21T02:28:20Z"
+    },
+    {
+      "label": "ko-014",
+      "reserved_at_utc": "2026-10-21T02:28:22Z"
+    },
+    {
+      "label": "ru-001",
+      "reserved_at_utc": "2026-10-21T02:28:22Z"
+    },
+    {
+      "label": "ru-002",
+      "reserved_at_utc": "2026-10-21T02:28:23Z"
+    },
+    {
+      "label": "ru-003",
+      "reserved_at_utc": "2026-10-21T02:28:23Z"
+    },
+    {
+      "label": "ru-004",
+      "reserved_at_utc": "2026-10-21T02:28:23Z"
+    },
+    {
+      "label": "ru-011",
+      "reserved_at_utc": "2026-10-21T02:28:24Z"
+    },
+    {
+      "label": "ru-012",
+      "reserved_at_utc": "2026-10-21T02:28:25Z"
+    },
+    {
+      "label": "ru-013",
+      "reserved_at_utc": "2026-10-21T02:28:26Z"
+    },
+    {
+      "label": "ru-014",
+      "reserved_at_utc": "2026-10-21T02:28:26Z"
+    },
+    {
+      "label": "zhja-001",
+      "reserved_at_utc": "2026-10-21T02:28:27Z"
+    },
+    {
+      "label": "zhja-002",
+      "reserved_at_utc": "2026-10-21T02:28:27Z"
+    },
+    {
+      "label": "zhja-007",
+      "reserved_at_utc": "2026-10-21T02:28:31Z"
+    },
+    {
+      "label": "zhja-008",
+      "reserved_at_utc": "2026-10-21T02:28:31Z"
+    },
+    {
+      "label": "en-001",
+      "reserved_at_utc": "2026-10-21T02:28:34Z"
+    },
+    {
+      "label": "en-007",
+      "reserved_at_utc": "2026-10-21T02:28:34Z"
+    },
+    {
+      "label": "zh-001",
+      "reserved_at_utc": "2026-10-21T02:28:35Z"
+    },
+    {
+      "label": "zh-007",
+      "reserved_at_utc": "2026-10-21T02:28:35Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:24Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:32Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:35Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:38Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:53Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:30:56Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:03Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:06Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:08Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:26Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:28Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:35Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:31:38Z"
+    },
+    {
+      "label": "ja-008",
+      "reserved_at_utc": "2026-10-21T02:33:01Z"
+    },
+    {
+      "label": "ja-019",
+      "reserved_at_utc": "2026-10-21T02:33:01Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:37:58Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:05Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:09Z"
+    },
+    {
+      "label": "ja-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:12Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:27Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:30Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:37Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:40Z"
+    },
+    {
+      "label": "ko-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:42Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:38:59Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:39:02Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:39:09Z"
+    },
+    {
+      "label": "ru-pcm-replay",
+      "reserved_at_utc": "2026-10-21T02:39:12Z"
+    }
+  ],
+  "price_source": "https://www.siliconflow.cn/pricing",
+  "price_checked_date": "2026-10-21",
+  "input_cny_per_million": 0,
+  "output_cny_per_million": 0,
+  "estimated_cost_cny": 0,
+  "cost_basis": "Official input/output prices listed as free; not an invoice."
+}

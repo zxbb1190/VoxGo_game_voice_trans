@@ -14,7 +14,8 @@ from .base import (
     normalized_chat_endpoint,
     short_error_text,
 )
-from .prompt import SYSTEM_PROMPT
+from .prompt import translation_system_prompt
+from voxgo.languages import translation_direction_error
 from .failures import classify_api_failure
 
 
@@ -24,6 +25,8 @@ class OpenAICompatibleProvider(TranslatorProvider):
     def __init__(self, config: TranslationConfig):
         super().__init__(config)
         self._context = []
+        self._contexts = {}
+        self._context_generation = 0
 
     async def test(self) -> ProviderTestResult:
         return ProviderTestResult(ok=True, message="Provider is configured")
@@ -32,9 +35,15 @@ class OpenAICompatibleProvider(TranslatorProvider):
         return endpoint_requires_api_key(self.config.endpoint)
 
     def _language_name(self, language: str) -> str:
-        return "英文" if language == "en" else "中文"
+        return {"en": "英文", "zh": "中文", "ja": "日文", "ko": "韩文", "ru": "俄文"}[language]
 
     async def translate(self, request: TranslationRequest, session) -> TranslationResult:
+        error = translation_direction_error(self.name, request.source_lang, request.target_lang)
+        if error:
+            return TranslationResult(error, request.source_lang, request.target_lang, self.name)
+        pair = (request.source_lang, request.target_lang)
+        generation = self._context_generation
+        context = self._contexts.setdefault(pair, [])
         current_message = {
             "role": "user",
             "content": (
@@ -45,12 +54,12 @@ class OpenAICompatibleProvider(TranslatorProvider):
         }
 
         max_ctx = max(0, self.config.context_messages * 2)
-        if max_ctx and len(self._context) > max_ctx:
-            self._context = self._context[-max_ctx:]
+        if max_ctx and len(context) > max_ctx:
+            del context[:-max_ctx]
 
         messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            *(self._context if max_ctx else []),
+            {"role": "system", "content": translation_system_prompt(*pair)},
+            *(context if max_ctx else []),
             current_message,
         ]
         headers = {"Content-Type": "application/json"}
@@ -88,10 +97,10 @@ class OpenAICompatibleProvider(TranslatorProvider):
                         )
                         if reasoning:
                             logger.debug(f"reasoning_content 预览: {reasoning[:200]}")
-                    elif max_ctx:
-                        self._context.extend([current_message, {"role": "assistant", "content": translation}])
-                        if len(self._context) > max_ctx:
-                            self._context = self._context[-max_ctx:]
+                    elif max_ctx and generation == self._context_generation:
+                        context.extend([current_message, {"role": "assistant", "content": translation}])
+                        if len(context) > max_ctx:
+                            del context[:-max_ctx]
                     direction = f"{request.source_lang}->{request.target_lang}"
                     logger.info(f"翻译({direction}): {request.text[:50]}... → {translation[:50]}... ({elapsed:.2f}s)")
                     return TranslationResult(
@@ -130,4 +139,6 @@ class OpenAICompatibleProvider(TranslatorProvider):
 
     def clear_context(self):
         self._context.clear()
+        self._contexts.clear()
+        self._context_generation += 1
 

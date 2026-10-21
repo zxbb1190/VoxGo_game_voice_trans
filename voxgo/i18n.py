@@ -46,7 +46,7 @@ def ui_text(language: str, zh: str, en: str) -> str:
 
 def language_label(code: str, ui_language: str = UI_LANGUAGE_ZH) -> str:
     labels = {
-        UI_LANGUAGE_ZH: {"en": "英语", "zh": "中文"},
-        UI_LANGUAGE_EN: {"en": "English", "zh": "Chinese"},
+        UI_LANGUAGE_ZH: {"en": "英语", "zh": "中文", "ja": "日语", "ko": "韩语", "ru": "俄语"},
+        UI_LANGUAGE_EN: {"en": "English", "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "ru": "Russian"},
     }
     return labels.get(normalize_ui_language(ui_language), labels[UI_LANGUAGE_ZH]).get(code, code)

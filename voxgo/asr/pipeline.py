@@ -19,6 +19,7 @@ from voxgo.audio.capture import (
     normalize_latency_mode,
 )
 from voxgo.asr.whisper_engine import normalize_transcript_for_repeat, should_drop_transcription_result
+from voxgo.languages import normalize_language_code
 from voxgo.runtime.priority import apply_game_friendly_thread_priority
 from voxgo.runtime.events import TranscriptReady
 from voxgo.runtime.work_items import LatencyTrace, SpeechWorkItem
@@ -1704,17 +1705,7 @@ def _format_metric(value, scale: int = 10) -> str:
 
 
 def _normalize_pipeline_language(value: str) -> str:
-    value = (value or "").strip().lower()
-    aliases = {
-        "english": "en",
-        "eng": "en",
-        "zh-cn": "zh",
-        "zh-tw": "zh",
-        "chinese": "zh",
-        "cmn": "zh",
-        "yue": "zh",
-    }
-    return aliases.get(value, value if value in {"en", "zh"} else "")
+    return normalize_language_code(value)
 
 
 def _debug_reason(work_item: SpeechWorkItem, fallback: str) -> str:

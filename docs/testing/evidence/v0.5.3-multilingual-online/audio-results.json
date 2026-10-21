@@ -1,0 +1,954 @@
+[
+  {
+    "source_lang": "ja",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ja-test-1910-10214476888438240131",
+        "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+        "asr": {
+          "text": "パリジャンは自己中心的な方法へで 失礼の人が多いと言われています",
+          "language": "ja",
+          "language_probability": 0.9797409772872925,
+          "avg_logprob": -0.42380373324117354,
+          "no_speech_prob": 0.049448926001787186,
+          "compression_ratio": 0.9894736842105263,
+          "segment_count": 1,
+          "duration_seconds": 8.88,
+          "raw_text": "パリジャンは自己中心的な方法へで 失礼の人が多いと言われています",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1704.9319999996442
+      },
+      {
+        "id": "fleurs-ja-test-1764-10256418415643044307",
+        "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+        "asr": {
+          "text": "3列車の数を過ぎて、全員が3ペートル広場での装備に参加することは不可能でした。",
+          "language": "ja",
+          "language_probability": 0.9840953946113586,
+          "avg_logprob": -0.3389241635799408,
+          "no_speech_prob": 0.05547063797712326,
+          "compression_ratio": 1.018018018018018,
+          "segment_count": 1,
+          "duration_seconds": 9.48,
+          "raw_text": "3列車の数を過ぎて、全員が3ペートル広場での装備に参加することは不可能でした。",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1723.9300999999614
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "パリジャーは、ジコ",
+        "language": "ja",
+        "probability": 0.4078427851200104,
+        "asr_ms": 1595.3288000000612
+      },
+      {
+        "text": "中心的な大平で失礼の人が多いと言う",
+        "language": "ja",
+        "probability": 0.9367212057113647,
+        "asr_ms": 1656.92080000008
+      },
+      {
+        "text": "were the game is",
+        "language": "en",
+        "probability": 0.7218481302261353,
+        "asr_ms": 1582.3219999992943
+      },
+      {
+        "text": "3列車の風号",
+        "language": "ja",
+        "probability": 0.7201718688011169,
+        "asr_ms": 1585.806699999921
+      },
+      {
+        "text": "すぎて全員が3ペートル広がでの装備",
+        "language": "ja",
+        "probability": 0.9517865777015686,
+        "asr_ms": 1641.6048999999475
+      },
+      {
+        "text": "参加することは不可能でした",
+        "language": "ja",
+        "probability": 0.9671178460121155,
+        "asr_ms": 1589.5396000005348
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "中心的な大平で失礼の人が多いと言う",
+        "translated": "据说在中心的大平地区，有很多不懂礼貌的人。",
+        "speech_onset_to_widget_ms": 2166.576385498047,
+        "capture_emit_to_widget_ms": 2166.576385498047,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1657,
+          "translation_ms": 500,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2760,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "3",
+        "original": "3列車の風号",
+        "translated": "三列车的汽笛声",
+        "speech_onset_to_widget_ms": 2047.1296310424805,
+        "capture_emit_to_widget_ms": 2047.1296310424805,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1586,
+          "translation_ms": 445,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2640,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "4",
+        "original": "すぎて全員が3ペートル広がでの装備",
+        "translated": "太宽了，所有人都需要在3米宽的范围内进行装备准备。",
+        "speech_onset_to_widget_ms": 2128.206968307495,
+        "capture_emit_to_widget_ms": 2128.206968307495,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1642,
+          "translation_ms": 474,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2880,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "5",
+        "original": "参加することは不可能でした",
+        "translated": "无法参加。",
+        "speech_onset_to_widget_ms": 1807.5523376464844,
+        "capture_emit_to_widget_ms": 1807.5523376464844,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1590,
+          "translation_ms": 212,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2880,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      }
+    ],
+    "captures": [
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 0.96
+      }
+    ],
+    "api": [
+      {
+        "label": "ja-pcm-replay",
+        "text": "中心的な大平で失礼の人が多いと言う",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "据说在中心的大平地区，有很多不懂礼貌的人。",
+        "elapsed_ms": 499.8621999993702,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 12,
+          "total_tokens": 274,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 262
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "3列車の風号",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "<target_text>三列车的汽笛声</target_text>",
+        "elapsed_ms": 445.0575000000754,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 253,
+          "completion_tokens": 14,
+          "total_tokens": 267,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 253
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "すぎて全員が3ペートル広がでの装備",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "太宽了，所有人都需要在3米宽的范围内进行装备准备。",
+        "elapsed_ms": 473.22600000006787,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 264,
+          "completion_tokens": 16,
+          "total_tokens": 280,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 40
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "参加することは不可能でした",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "无法参加。",
+        "elapsed_ms": 211.54759999990347,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 255,
+          "completion_tokens": 3,
+          "total_tokens": 258,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 255
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 7,
+      "filtered_speech": 1,
+      "transcriptions": 5,
+      "translations": 4,
+      "skipped_translations": 1,
+      "dropped_speech": 1
+    },
+    "notices": [],
+    "cpu_one_core_percent": 35.56774724705265,
+    "peak_rss_bytes": 403496960,
+    "wall_seconds": 27.412475499999346,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 1,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  },
+  {
+    "source_lang": "ko",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ko-test-1701-10107571163062229727",
+        "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+        "asr": {
+          "text": "염소 사육은 대략 1만 년 전에 1",
+          "language": "ko",
+          "language_probability": 0.9964559674263,
+          "avg_logprob": -0.6388187282963803,
+          "no_speech_prob": 0.03505647927522659,
+          "compression_ratio": 0.7884615384615384,
+          "segment_count": 1,
+          "duration_seconds": 8.94,
+          "raw_text": "염소 사육은 대략 1만 년 전에 1",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1641.711000000214
+      },
+      {
+        "id": "fleurs-ko-test-1662-10115200572671025618",
+        "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+        "asr": {
+          "text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "language": "ko",
+          "language_probability": 0.9978806972503662,
+          "avg_logprob": -0.2813008354931343,
+          "no_speech_prob": 0.028138944879174232,
+          "compression_ratio": 1.0793650793650793,
+          "segment_count": 2,
+          "duration_seconds": 9.9,
+          "raw_text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1766.466400000354
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "염소 사육은 대략 1만 년 전에 일안을 잔",
+        "language": "ko",
+        "probability": 0.9958196878433228,
+        "asr_ms": 1599.3545999999697
+      },
+      {
+        "text": "그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+        "language": "ko",
+        "probability": 0.9863780736923218,
+        "asr_ms": 1627.5205000001733
+      },
+      {
+        "text": "합금은 기본적으로 금속",
+        "language": "ko",
+        "probability": 0.9801652431488037,
+        "asr_ms": 1577.354899999591
+      },
+      {
+        "text": "두 개 이상의 혼합물이다. 주기율 표상의 원식",
+        "language": "ko",
+        "probability": 0.9924807548522949,
+        "asr_ms": 1680.839599999672
+      },
+      {
+        "text": "저가 많이 있다는 것을 잊지 마라",
+        "language": "ko",
+        "probability": 0.9943475127220154,
+        "asr_ms": 1622.7545000001555
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "염소 사육은 대략 1만 년 전에 일안을 잔",
+        "translated": "养山羊的历史可以追溯到大约一万年前。",
+        "speech_onset_to_widget_ms": 2087.0606899261475,
+        "capture_emit_to_widget_ms": 2087.0606899261475,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1599,
+          "translation_ms": 483,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2640,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "2",
+        "original": "그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+        "translated": "看起来是从斯桑山脉那边开始的。",
+        "speech_onset_to_widget_ms": 2045.1741218566895,
+        "capture_emit_to_widget_ms": 2045.1741218566895,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1628,
+          "translation_ms": 412,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1920,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "3",
+        "original": "합금은 기본적으로 금속",
+        "translated": "合金基本上是由金属组成的。",
+        "speech_onset_to_widget_ms": 1864.05348777771,
+        "capture_emit_to_widget_ms": 1864.05348777771,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1577,
+          "translation_ms": 285,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2640,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "4",
+        "original": "두 개 이상의 혼합물이다. 주기율 표상의 원식",
+        "translated": "有两种或更多的混合物。这是周期表中的原始公式。",
+        "speech_onset_to_widget_ms": 2119.450807571411,
+        "capture_emit_to_widget_ms": 2119.450807571411,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1681,
+          "translation_ms": 429,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2400,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "5",
+        "original": "저가 많이 있다는 것을 잊지 마라",
+        "translated": "请记住，价格有很多种。",
+        "speech_onset_to_widget_ms": 1881.0179233551025,
+        "capture_emit_to_widget_ms": 1881.0179233551025,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1623,
+          "translation_ms": 253,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1560,
+          "segment_total_ms": 2520,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      }
+    ],
+    "captures": [
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.72
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.52
+      }
+    ],
+    "api": [
+      {
+        "label": "ko-pcm-replay",
+        "text": "염소 사육은 대략 1만 년 전에 일안을 잔",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "养山羊的历史可以追溯到大约一万年前。",
+        "elapsed_ms": 483.45569999946747,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 271,
+          "completion_tokens": 11,
+          "total_tokens": 282,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 271
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "看起来是从斯桑山脉那边开始的。",
+        "elapsed_ms": 411.9412000000011,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 263,
+          "completion_tokens": 8,
+          "total_tokens": 271,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 263
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "합금은 기본적으로 금속",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "合金基本上是由金属组成的。",
+        "elapsed_ms": 284.91959999973915,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 6,
+          "total_tokens": 268,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 38
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "두 개 이상의 혼합물이다. 주기율 표상의 원식",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "有两种或更多的混合物。这是周期表中的原始公式。",
+        "elapsed_ms": 430.02849999993487,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 274,
+          "completion_tokens": 12,
+          "total_tokens": 286,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 274
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "저가 많이 있다는 것을 잊지 마라",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "请记住，价格有很多种。",
+        "elapsed_ms": 252.58129999929224,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 263,
+          "completion_tokens": 7,
+          "total_tokens": 270,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 39
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 6,
+      "filtered_speech": 1,
+      "transcriptions": 5,
+      "translations": 5
+    },
+    "notices": [],
+    "cpu_one_core_percent": 29.98015527560546,
+    "peak_rss_bytes": 419647488,
+    "wall_seconds": 27.88302769999973,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 1,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  },
+  {
+    "source_lang": "ru",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ru-test-1926-10008070632189747443",
+        "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+        "asr": {
+          "text": "Во всех научных вопросах, включая психологию, были приняты взгляды рестотеля.",
+          "language": "ru",
+          "language_probability": 0.9822351932525635,
+          "avg_logprob": -0.31728611992938177,
+          "no_speech_prob": 0.1403971016407013,
+          "compression_ratio": 1.2792792792792793,
+          "segment_count": 1,
+          "duration_seconds": 8.64,
+          "raw_text": "Во всех научных вопросах, включая психологию, были приняты взгляды рестотеля.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1726.22709999996
+      },
+      {
+        "id": "fleurs-ru-test-1917-10011799110630615565",
+        "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+        "asr": {
+          "text": "В различных местах рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+          "language": "ru",
+          "language_probability": 0.9939788579940796,
+          "avg_logprob": -0.35375150442123415,
+          "no_speech_prob": 0.018659353256225586,
+          "compression_ratio": 1.5231788079470199,
+          "segment_count": 2,
+          "duration_seconds": 7.92,
+          "raw_text": "В различных местах рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1784.6583000000464
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "",
+        "language": "en",
+        "probability": 0.5383106470108032,
+        "asr_ms": 1576.7593000000488
+      },
+      {
+        "text": "Во всех научных вопросах включаю псих.",
+        "language": "ru",
+        "probability": 0.9825975298881531,
+        "asr_ms": 1597.1262000002753
+      },
+      {
+        "text": "в психологию были приняты взгляды арестотеля.",
+        "language": "ru",
+        "probability": 0.939902663230896,
+        "asr_ms": 1628.3414999998058
+      },
+      {
+        "text": "в различных местах рима были установлены большие тели.",
+        "language": "ru",
+        "probability": 0.993314802646637,
+        "asr_ms": 1669.6264000001975
+      },
+      {
+        "text": "и экранные с помощью которых люди могли наблюдать за церемон.",
+        "language": "ru",
+        "probability": 0.9820979237556458,
+        "asr_ms": 1619.5664999995643
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "Во всех научных вопросах включаю псих.",
+        "translated": "在所有科学问题上，我都会考虑心理因素。",
+        "speech_onset_to_widget_ms": 2076.833486557007,
+        "capture_emit_to_widget_ms": 2076.833486557007,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1597,
+          "translation_ms": 476,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1920,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "2",
+        "original": "в психологию были приняты взгляды арестотеля.",
+        "translated": "亚里士多德的观点被纳入了心理学领域。",
+        "speech_onset_to_widget_ms": 2110.2817058563232,
+        "capture_emit_to_widget_ms": 2110.2817058563232,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1629,
+          "translation_ms": 469,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1560,
+          "segment_total_ms": 2880,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "3",
+        "original": "в различных местах рима были установлены большие тели.",
+        "translated": "在罗马的各个地方都安装了大型电视。",
+        "speech_onset_to_widget_ms": 2076.7452716827393,
+        "capture_emit_to_widget_ms": 2076.7452716827393,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1670,
+          "translation_ms": 399,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1920,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      },
+      {
+        "trace_id": "4",
+        "original": "и экранные с помощью которых люди могли наблюдать за церемон.",
+        "translated": "以及人们用来观察仪式的屏幕。",
+        "speech_onset_to_widget_ms": 1905.7047367095947,
+        "capture_emit_to_widget_ms": 1905.7047367095947,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1619,
+          "translation_ms": 281,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2160,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        }
+      }
+    ],
+    "captures": [
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 1.2
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.88
+      },
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.72
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 0.6
+      }
+    ],
+    "api": [
+      {
+        "label": "ru-pcm-replay",
+        "text": "Во всех научных вопросах включаю псих.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "在所有科学问题上，我都会考虑心理因素。",
+        "elapsed_ms": 475.18940000009025,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 266,
+          "completion_tokens": 11,
+          "total_tokens": 277,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 266
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "в психологию были приняты взгляды арестотеля.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "亚里士多德的观点被纳入了心理学领域。",
+        "elapsed_ms": 469.2282999994859,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 273,
+          "completion_tokens": 12,
+          "total_tokens": 285,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 273
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "в различных местах рима были установлены большие тели.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "在罗马的各个地方都安装了大型电视。",
+        "elapsed_ms": 398.75279999978375,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 270,
+          "completion_tokens": 11,
+          "total_tokens": 281,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 46
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "и экранные с помощью которых люди могли наблюдать за церемон.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "以及人们用来观察仪式的屏幕。",
+        "elapsed_ms": 281.6780999992261,
+        "failure_reason": "",
+        "usage": {
+          "prompt_tokens": 275,
+          "completion_tokens": 8,
+          "total_tokens": 283,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 275
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 7,
+      "filtered_speech": 1,
+      "transcriptions": 4,
+      "translations": 4,
+      "dropped_speech": 2
+    },
+    "notices": [],
+    "cpu_one_core_percent": 31.751862861277626,
+    "peak_rss_bytes": 433729536,
+    "wall_seconds": 25.589049799999884,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 1,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

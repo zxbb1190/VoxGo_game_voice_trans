@@ -1,0 +1,71 @@
+{
+  "kind": "authored_text_live",
+  "rows": [
+    {
+      "label": "ja-008",
+      "text": "あの扉は鍵では開かない。紋章を探す必要がある。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "那扇门不能用钥匙打开。需要找到那个纹章。",
+      "elapsed_ms": 503.01569999919593,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 266,
+        "completion_tokens": 13,
+        "total_tokens": 279,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 266
+      },
+      "human_review": "pending",
+      "reference_meaning": "那扇门不能用钥匙打开，需要寻找纹章。",
+      "key_meanings": [
+        "钥匙无法开门",
+        "需要纹章",
+        "两句完整"
+      ],
+      "categories": [
+        "negation",
+        "terminology",
+        "completeness"
+      ],
+      "split": "dev",
+      "scene": "story_dialogue"
+    },
+    {
+      "label": "ja-019",
+      "text": "夜明けまでに薬を届けなければ、村は助からない。",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "translated": "如果在黎明之前无法把药送到，村子就救不回来了。",
+      "elapsed_ms": 415.4800999995132,
+      "failure_reason": "",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 14,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 268
+      },
+      "human_review": "pending",
+      "reference_meaning": "如果无法在黎明前送到药，村子就没救了。",
+      "key_meanings": [
+        "黎明前送药的必要条件",
+        "否则村子无法获救"
+      ],
+      "categories": [
+        "time",
+        "condition",
+        "negation"
+      ],
+      "split": "holdout",
+      "scene": "story_dialogue"
+    }
+  ],
+  "human_review": "pending"
+}

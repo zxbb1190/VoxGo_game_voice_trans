@@ -369,6 +369,12 @@ class VoxGoApp:
         return snapshot
 
     def _handle_language_flow_changed(self, source_lang: str, target_lang: str):
+        from voxgo.languages import translation_direction_error, whisper_model_error
+        capability_error = translation_direction_error(
+            self.config.translation.provider, source_lang, target_lang,
+        ) or whisper_model_error(self._effective_whisper_model_size(), source_lang)
+        if capability_error:
+            self._notify_user("语言能力限制 / Language limitation", capability_error, "状态")
         previous_model = self._current_recognizer_model_size()
         self._language_flow_revision += 1
         self._translation.clear_context()
@@ -1310,8 +1316,8 @@ class VoxGoApp:
         self._notify_user(
             "程序已启动",
             (
-                f"当前方向: {LANGUAGE_NAMES[self.config.translation.source_lang]} "
-                f"→ {LANGUAGE_NAMES[self.config.translation.target_lang]}\n"
+                f"当前方向: {LANGUAGE_NAMES.get(self.config.translation.source_lang, self.config.translation.source_lang)} "
+                f"→ {LANGUAGE_NAMES.get(self.config.translation.target_lang, self.config.translation.target_lang)}\n"
                 f"手机端: {self._mobile.get_mobile_url()}"
             ),
             "状态",

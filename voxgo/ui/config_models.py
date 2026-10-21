@@ -27,12 +27,14 @@ from voxgo.i18n import (
     ui_text,
 )
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
+from voxgo.languages import (
+    LANGUAGE_NAMES, LOCAL_DIRECTIONS, OPPOSITE_LANGUAGE, SPEECH_LANGUAGE_CODES,
+    normalize_language_code, translation_direction_error,
+)
 
 
-SPEECH_LANGUAGE_CODES = ("en", "zh")
-LANGUAGE_OPTIONS = (("en", "英语"), ("zh", "中文"))
+LANGUAGE_OPTIONS = tuple(LANGUAGE_NAMES.items())
 LANGUAGE_LABELS = dict(LANGUAGE_OPTIONS)
-OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}
 WHISPER_DEVICE_OPTIONS = (
     ("auto", "自动检测（GPU 优先）"),
     ("cuda", "NVIDIA GPU / CUDA"),
@@ -145,19 +147,23 @@ def _start_button_cooldown(button: QPushButton, idle_text: str, seconds: int = T
 
 
 def _normalize_language_code(value: str, default: str = "en") -> str:
-    value = (value or "").strip().lower()
-    aliases = {
-        "english": "en",
-        "eng": "en",
-        "英语": "en",
-        "chinese": "zh",
-        "zh-cn": "zh",
-        "zh-tw": "zh",
-        "cmn": "zh",
-        "中文": "zh",
-    }
-    value = aliases.get(value, value)
-    return value if value in LANGUAGE_LABELS else default
+    return normalize_language_code(value, default)
+
+
+def _translation_language_notice(config, ui_language: str) -> str:
+    error = translation_direction_error(config.provider, config.source_lang, config.target_lang)
+    if error:
+        if config.provider == "local":
+            return _tr(ui_language,
+                "离线翻译仅支持英语 ↔ 中文。日/韩/俄 → 中文需自行选择在线服务并配置 API Key；不会自动切换。",
+                "Offline supports English ↔ Chinese only. For Japanese/Korean/Russian → Chinese, select an online provider and configure your API key. No automatic switch.")
+        return _tr(ui_language, "不支持此语言方向，请选择可用的源语言和目标语言。",
+                   "Unsupported direction: select an available source and target language.")
+    if (config.source_lang, config.target_lang) not in LOCAL_DIRECTIONS:
+        return _tr(ui_language,
+            "日/韩/俄相关方向仅支持在线直译，需自配 API Key。当前语言质量尚未完成独立验收。",
+            "Directions involving Japanese/Korean/Russian require direct online translation with your own API key. Language quality acceptance is still pending.")
+    return ""
 
 
 def _normalize_whisper_device(value: str) -> str:

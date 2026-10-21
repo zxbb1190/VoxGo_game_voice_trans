@@ -1,0 +1,153 @@
+{
+  "quantile": "linear interpolation at (n-1)*p",
+  "cer": "micro CER, casefold and Unicode letters/numbers only; whole public read clips, not semantic correctness",
+  "rows": [
+    {
+      "language": "ja",
+      "whole_clip_count": 2,
+      "whole_clip_character_error_rate": 0.2464,
+      "cer_errors": 17,
+      "reference_characters": 69,
+      "capture_segments": 7,
+      "asr_calls": 6,
+      "subtitle_outputs": 4,
+      "cpu_one_core_mean_percent": 36.7,
+      "peak_rss_mib": 384.6,
+      "stats": {
+        "speech_detected": 7,
+        "filtered_speech": 1,
+        "transcriptions": 5,
+        "translations": 4,
+        "skipped_translations": 1,
+        "dropped_speech": 1
+      },
+      "api": {
+        "n": 4,
+        "p50_ms": 462.1,
+        "p95_ms": 644.2
+      },
+      "whole_asr": {
+        "n": 2,
+        "p50_ms": 1736.2,
+        "p95_ms": 1753.3
+      },
+      "stream_asr": {
+        "n": 6,
+        "p50_ms": 1611.7,
+        "p95_ms": 1672.6
+      },
+      "first_pcm_to_widget": {
+        "n": 4,
+        "p50_ms": 5182.9,
+        "p95_ms": 5353.4
+      },
+      "last_pcm_to_widget": {
+        "n": 4,
+        "p50_ms": 2122.9,
+        "p95_ms": 2335.4
+      },
+      "capture_emit_to_widget": {
+        "n": 4,
+        "p50_ms": 2106.8,
+        "p95_ms": 2328.7
+      }
+    },
+    {
+      "language": "ko",
+      "whole_clip_count": 2,
+      "whole_clip_character_error_rate": 0.3425,
+      "cer_errors": 25,
+      "reference_characters": 73,
+      "capture_segments": 6,
+      "asr_calls": 5,
+      "subtitle_outputs": 5,
+      "cpu_one_core_mean_percent": 31.2,
+      "peak_rss_mib": 401.9,
+      "stats": {
+        "speech_detected": 6,
+        "filtered_speech": 1,
+        "transcriptions": 5,
+        "translations": 5
+      },
+      "api": {
+        "n": 5,
+        "p50_ms": 292.2,
+        "p95_ms": 471.1
+      },
+      "whole_asr": {
+        "n": 2,
+        "p50_ms": 1736.4,
+        "p95_ms": 1779.2
+      },
+      "stream_asr": {
+        "n": 5,
+        "p50_ms": 1654.0,
+        "p95_ms": 1682.4
+      },
+      "first_pcm_to_widget": {
+        "n": 5,
+        "p50_ms": 4978.4,
+        "p95_ms": 5255.5
+      },
+      "last_pcm_to_widget": {
+        "n": 5,
+        "p50_ms": 1978.4,
+        "p95_ms": 2159.5
+      },
+      "capture_emit_to_widget": {
+        "n": 5,
+        "p50_ms": 1971.4,
+        "p95_ms": 2136.9
+      }
+    },
+    {
+      "language": "ru",
+      "whole_clip_count": 2,
+      "whole_clip_character_error_rate": 0.0116,
+      "cer_errors": 2,
+      "reference_characters": 172,
+      "capture_segments": 7,
+      "asr_calls": 5,
+      "subtitle_outputs": 4,
+      "cpu_one_core_mean_percent": 32.0,
+      "peak_rss_mib": 414.0,
+      "stats": {
+        "speech_detected": 7,
+        "filtered_speech": 1,
+        "transcriptions": 4,
+        "translations": 4,
+        "dropped_speech": 2
+      },
+      "api": {
+        "n": 4,
+        "p50_ms": 369.8,
+        "p95_ms": 440.6
+      },
+      "whole_asr": {
+        "n": 2,
+        "p50_ms": 1744.4,
+        "p95_ms": 1773.5
+      },
+      "stream_asr": {
+        "n": 5,
+        "p50_ms": 1650.3,
+        "p95_ms": 1655.7
+      },
+      "first_pcm_to_widget": {
+        "n": 4,
+        "p50_ms": 5051.8,
+        "p95_ms": 5079.5
+      },
+      "last_pcm_to_widget": {
+        "n": 4,
+        "p50_ms": 2056.0,
+        "p95_ms": 2080.7
+      },
+      "capture_emit_to_widget": {
+        "n": 4,
+        "p50_ms": 2030.6,
+        "p95_ms": 2059.8
+      }
+    }
+  ]
+}
