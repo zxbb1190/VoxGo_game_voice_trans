@@ -1,5 +1,7 @@
 # VoxGo
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
 Chinese documentation: [README.md](README.md)
 
 VoxGo is an open-source real-time voice translation overlay for PC gamers, designed for overseas servers, guild voice chat, Discord teammates, and live-stream subtitle assistance.

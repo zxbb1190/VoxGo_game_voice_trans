@@ -1,5 +1,7 @@
 # VoxGo
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
 English documentation: [README_EN.md](README_EN.md)
 
 VoxGo 是一个面向 PC 游戏玩家的开源实时语音翻译浮窗工具，适合海外服开黑、公会语音、Discord 队友沟通和直播字幕辅助。
