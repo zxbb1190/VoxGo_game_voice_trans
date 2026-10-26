@@ -1,0 +1,119 @@
+{
+  "http_attempts_this_round": 48,
+  "text": 28,
+  "audio_contended": 10,
+  "audio_idle": 10,
+  "real_game_acceptance": "incomplete",
+  "human_review": "pending",
+  "release_approved": false,
+  "languages": {
+    "ja": {
+      "text_roundtrip_ms": {
+        "p50": 658.46,
+        "p95": 2554.82
+      },
+      "text_calls": 4,
+      "audio_translation_calls": 4,
+      "asr_ms": {
+        "p50": 1000.34,
+        "p95": 1054.49
+      },
+      "translation_invocation_ms_including_client_queue": {
+        "p50": 462.29,
+        "p95": 1744.7
+      },
+      "capture_emit_to_widget_ms": {
+        "p50": 1493.44,
+        "p95": 2748.18
+      },
+      "last_segment_pcm_frame_to_widget_ms": {
+        "p50": 1510.95,
+        "p95": 2775.92
+      },
+      "cpu_one_core_percent": 41.14,
+      "peak_rss_mib": 384.74,
+      "stats": {
+        "speech_detected": 5,
+        "transcriptions": 4,
+        "translations": 4,
+        "filtered_speech": 1
+      },
+      "first_segment_pcm_frame_to_widget_ms": {
+        "p50": 6054.33,
+        "p95": 7335.92
+      }
+    },
+    "ko": {
+      "text_roundtrip_ms": {
+        "p50": 510.36,
+        "p95": 687.88
+      },
+      "text_calls": 4,
+      "audio_translation_calls": 3,
+      "asr_ms": {
+        "p50": 3111.52,
+        "p95": 3241.73
+      },
+      "translation_invocation_ms_including_client_queue": {
+        "p50": 16181.22,
+        "p95": 17916.87
+      },
+      "capture_emit_to_widget_ms": {
+        "p50": 19329.08,
+        "p95": 21559.83
+      },
+      "last_segment_pcm_frame_to_widget_ms": {
+        "p50": 19346.13,
+        "p95": 21583.68
+      },
+      "cpu_one_core_percent": 65.37,
+      "peak_rss_mib": 651.69,
+      "stats": {
+        "speech_detected": 4,
+        "filtered_speech": 1,
+        "transcriptions": 3,
+        "translations": 3
+      },
+      "first_segment_pcm_frame_to_widget_ms": {
+        "p50": 23906.13,
+        "p95": 24307.68
+      }
+    },
+    "ru": {
+      "text_roundtrip_ms": {
+        "p50": 1573.07,
+        "p95": 4935.44
+      },
+      "text_calls": 4,
+      "audio_translation_calls": 3,
+      "asr_ms": {
+        "p50": 1025.3,
+        "p95": 1046.47
+      },
+      "translation_invocation_ms_including_client_queue": {
+        "p50": 421.09,
+        "p95": 660.1
+      },
+      "capture_emit_to_widget_ms": {
+        "p50": 1430.17,
+        "p95": 1712.22
+      },
+      "last_segment_pcm_frame_to_widget_ms": {
+        "p50": 1449.42,
+        "p95": 1739.71
+      },
+      "cpu_one_core_percent": 30.52,
+      "peak_rss_mib": 424.77,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 3,
+        "dropped_speech": 1,
+        "translations": 3
+      },
+      "first_segment_pcm_frame_to_widget_ms": {
+        "p50": 5409.42,
+        "p95": 6455.71
+      }
+    }
+  }
+}

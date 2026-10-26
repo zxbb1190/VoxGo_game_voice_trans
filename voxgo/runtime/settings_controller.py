@@ -21,6 +21,7 @@ from voxgo.translation import (
     TranslationConfig,
     normalize_translation_provider,
 )
+from voxgo.asr.language_profiles import audio_runtime_signature
 
 
 class OverlaySettingsController:
@@ -49,6 +50,8 @@ class OverlaySettingsController:
             getattr(app.config.whisper, "language", "auto"),
             previous_whisper_model,
             bool(getattr(app.config.whisper, "pure_english_environment", False)),
+            (getattr(app, "_last_multilingual_asr_strategy", getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware"))
+             if previous_language_flow[0] in {"ja", "ko", "ru"} else ""),
         )
         previous_model_download_source = app._last_model_download_source
         previous_update = (
@@ -80,6 +83,7 @@ class OverlaySettingsController:
             "enable_english_model",
             "english_model_size",
             "fast_english_model_size",
+            "multilingual_asr_strategy",
         ):
             if hasattr(whisper_config, key):
                 setattr(app.config.whisper, key, getattr(whisper_config, key))
@@ -159,11 +163,17 @@ class OverlaySettingsController:
             getattr(app.config.whisper, "language", "auto"),
             current_whisper_model,
             bool(getattr(app.config.whisper, "pure_english_environment", False)),
+            (getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware")
+             if current_language_flow[0] in {"ja", "ko", "ru"} else ""),
         )
         if app._speech_recognizer:
-            app._speech_recognizer.config = app.config.whisper
+            if hasattr(app, "_queue_recognizer_config"):
+                app._queue_recognizer_config()
+            else:
+                app._speech_recognizer.config = app.config.whisper
+                if previous_whisper_model and current_whisper_model != previous_whisper_model:
+                    app._speech_recognizer.cleanup()
             if previous_whisper_model and current_whisper_model != previous_whisper_model:
-                app._speech_recognizer.cleanup()
                 logger.info(
                     "Whisper model will reload after settings update: {} -> {}",
                     previous_whisper_model,
@@ -216,7 +226,9 @@ class OverlaySettingsController:
             bool(getattr(app.config.update, "enabled", True)),
             normalize_update_channel(getattr(app.config.update, "channel", "stable")),
         )
-        if app._running and current_device != previous_device:
+        speech_signature = audio_runtime_signature(app.config)
+        speech_audio_changed = (getattr(app, "_last_speech_audio_signature", speech_signature) != speech_signature)
+        if app._running and (current_device != previous_device or speech_audio_changed):
             app._restart_audio_capture(reuse_noise_gate=current_device[:3] == previous_device[:3])
         if current_language_runtime != previous_language_runtime:
             app._handle_language_flow_changed(current_language_flow[0], current_language_flow[1])
@@ -299,6 +311,8 @@ class OverlaySettingsController:
                 ui_text(current_ui_language, "状态", "Status"),
             )
         app._last_audio_device = current_device
+        app._last_speech_audio_signature = speech_signature
+        app._last_multilingual_asr_strategy = getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware")
         app._last_translation_settings = current_translation
         app._last_language_flow = current_language_flow
         app._last_whisper_device = current_whisper_device

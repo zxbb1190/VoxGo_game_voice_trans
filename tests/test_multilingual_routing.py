@@ -132,10 +132,10 @@ class MultilingualHTTPTest(unittest.IsolatedAsyncioTestCase):
                 else:
                     self.assertEqual(len(body["messages"]), 2)
                     self.assertEqual(body["messages"][0]["content"], translation_system_prompt(source, target))
-                self.assertEqual(len(self.requests), (12 if provider == "openai_compatible" else 6) - len(ONLINE_DIRECTIONS) + sorted(ONLINE_DIRECTIONS).index((source,target)) + 1)
+                self.assertEqual(len(self.requests), (len(ONLINE_DIRECTIONS) if provider == "openai_compatible" else 0) + sorted(ONLINE_DIRECTIONS).index((source,target)) + 1)
 
     async def test_capability_guard_precedes_cache_and_network(self):
-        for provider, source, target in (("local", "ja", "zh"), ("google", "ru", "en"), ("openai_compatible", "fr", "zh")):
+        for provider, source, target in (("local", "ja", "zh"), ("google", "ru", "ko"), ("openai_compatible", "fr", "zh")):
             config = TranslationConfig(provider=provider, source_lang=source, target_lang=target,
                 endpoint=self.url, api_key="fixture", local_phrase_cache={f"{source}:{target}": {"hello": "bad override"}})
             client = GameTranslator(config)
@@ -151,7 +151,7 @@ class MultilingualHTTPTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.requests, [])
         async with aiohttp.ClientSession() as session:
             for provider in (GoogleCloudProvider(TranslationConfig()), OpenAICompatibleProvider(TranslationConfig())):
-                result = await provider.translate(TranslationRequest("x", "ja", "en"), session)
+                result = await provider.translate(TranslationRequest("x", "ja", "ko"), session)
                 self.assertTrue(result.translated.startswith("[未翻译]"))
 
     async def test_context_is_partitioned_and_clear_drops_all_pairs(self):

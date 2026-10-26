@@ -1,0 +1,2987 @@
+{
+  "profiles": {
+    "legacy": {
+      "model": "base",
+      "threads": 1,
+      "beam": 1,
+      "maximum": 3.0,
+      "pre_roll": 300,
+      "idle": 350
+    },
+    "context": {
+      "model": "base",
+      "threads": 1,
+      "beam": 1,
+      "maximum": 4.5,
+      "pre_roll": 450,
+      "idle": 450
+    },
+    "context_beam": {
+      "model": "base",
+      "threads": 1,
+      "beam": 3,
+      "maximum": 4.5,
+      "pre_roll": 450,
+      "idle": 450
+    },
+    "context_small": {
+      "model": "small",
+      "threads": 2,
+      "beam": 1,
+      "maximum": 4.5,
+      "pre_roll": 450,
+      "idle": 450
+    }
+  },
+  "records": [
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "パリジャンは自己中心的な方法へで 失礼の人が多いと言われています",
+      "segments": [
+        {
+          "asr": {
+            "text": "パリジャンは自己中心的な方法へで 失礼の人が多いと言われています",
+            "language": "ja",
+            "language_probability": 0.9797409772872925,
+            "avg_logprob": -0.42380373324117354,
+            "no_speech_prob": 0.049448926001787186,
+            "compression_ratio": 0.9894736842105263,
+            "segment_count": 1,
+            "duration_seconds": 8.88,
+            "raw_text": "パリジャンは自己中心的な方法へで 失礼の人が多いと言われています",
+            "runaway_guarded": false
+          },
+          "ms": 1763.59,
+          "seconds": 8.88,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 5,
+      "cer": 0.16666666666666666
+    },
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "バリージャーはじっくり落ちる 新的な大平で失礼の人が多いというわ de temas.",
+      "segments": [
+        {
+          "asr": {
+            "text": "バリージャーはじっくり落ちる",
+            "language": "ja",
+            "language_probability": 0.38218727707862854,
+            "avg_logprob": -1.0779926553368568,
+            "no_speech_prob": 0.2544945478439331,
+            "compression_ratio": 0.84,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "バリージャーはじっくり落ちる",
+            "runaway_guarded": false
+          },
+          "ms": 1661.19,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "新的な大平で失礼の人が多いというわ",
+            "language": "ja",
+            "language_probability": 0.9318789839744568,
+            "avg_logprob": -0.5199465563422755,
+            "no_speech_prob": 0.7248803973197937,
+            "compression_ratio": 0.8793103448275862,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "新的な大平で失礼の人が多いというわ",
+            "runaway_guarded": false
+          },
+          "ms": 1645.33,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "de temas.",
+            "language": "es",
+            "language_probability": 0.5773471593856812,
+            "avg_logprob": -1.3330265879631042,
+            "no_speech_prob": 0.31166520714759827,
+            "compression_ratio": 0.5294117647058824,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "de temas.",
+            "runaway_guarded": false
+          },
+          "ms": 1576.97,
+          "seconds": 3.12,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 24,
+      "cer": 0.8
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "3列車の数を過ぎて、全員が3ペートル広場での装備に参加することは不可能でした。",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車の数を過ぎて、全員が3ペートル広場での装備に参加することは不可能でした。",
+            "language": "ja",
+            "language_probability": 0.9840953946113586,
+            "avg_logprob": -0.3389241635799408,
+            "no_speech_prob": 0.05547063797712326,
+            "compression_ratio": 1.018018018018018,
+            "segment_count": 1,
+            "duration_seconds": 9.48,
+            "raw_text": "3列車の数を過ぎて、全員が3ペートル広場での装備に参加することは不可能でした。",
+            "runaway_guarded": false
+          },
+          "ms": 1766.82,
+          "seconds": 9.48,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 12,
+      "cer": 0.3076923076923077
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "3列車の数をすぎ 全員が3ピーターの広場での装備さん それからは、不可能でした。 ",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車の数をすぎ",
+            "language": "ja",
+            "language_probability": 0.8537793755531311,
+            "avg_logprob": -0.7970902052792636,
+            "no_speech_prob": 0.2947680950164795,
+            "compression_ratio": 0.7096774193548387,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "3列車の数をすぎ",
+            "runaway_guarded": false
+          },
+          "ms": 1636.38,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "全員が3ピーターの広場での装備さん",
+            "language": "ja",
+            "language_probability": 0.974539041519165,
+            "avg_logprob": -0.694130077958107,
+            "no_speech_prob": 0.2652178406715393,
+            "compression_ratio": 0.8596491228070176,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "全員が3ピーターの広場での装備さん",
+            "runaway_guarded": false
+          },
+          "ms": 1684.67,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "それからは、不可能でした。",
+            "language": "ja",
+            "language_probability": 0.9654207825660706,
+            "avg_logprob": -1.4419589259407737,
+            "no_speech_prob": 0.11191697418689728,
+            "compression_ratio": 0.78,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "それからは、不可能でした。",
+            "runaway_guarded": false
+          },
+          "ms": 1636.11,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5475553274154663,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.72,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1607.32,
+          "seconds": 0.72,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 20,
+      "cer": 0.5128205128205128
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "本根の最高の景色を見るには、島から出て、クーロンのウォーターフロントに向かいましょう。",
+      "segments": [
+        {
+          "asr": {
+            "text": "本根の最高の景色を見るには、島から出て、クーロンのウォーターフロントに向かいましょう。",
+            "language": "ja",
+            "language_probability": 0.9825419187545776,
+            "avg_logprob": -0.32047407925128935,
+            "no_speech_prob": 0.05477088317275047,
+            "compression_ratio": 1.131578947368421,
+            "segment_count": 1,
+            "duration_seconds": 9.66,
+            "raw_text": "本根の最高の景色を見るには、島から出て、クーロンのウォーターフロントに向かいましょう。",
+            "runaway_guarded": false
+          },
+          "ms": 1788.81,
+          "seconds": 9.66,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 6,
+      "cer": 0.15789473684210525
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "本本の最高の景色を 見るには島から出て クーロンのウォード ダーブロントに向かいましょう  ",
+      "segments": [
+        {
+          "asr": {
+            "text": "本本の最高の景色を",
+            "language": "ja",
+            "language_probability": 0.7902234196662903,
+            "avg_logprob": -0.7829111665487289,
+            "no_speech_prob": 0.43482863903045654,
+            "compression_ratio": 0.7714285714285715,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "本本の最高の景色を",
+            "runaway_guarded": false
+          },
+          "ms": 1646.06,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "見るには島から出て クーロンのウォード",
+            "language": "ja",
+            "language_probability": 0.9812178611755371,
+            "avg_logprob": -0.5830056875944137,
+            "no_speech_prob": 0.33528831601142883,
+            "compression_ratio": 0.8870967741935484,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "見るには島から出て クーロンのウォード",
+            "runaway_guarded": false
+          },
+          "ms": 1685.64,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "ダーブロントに向かいましょう",
+            "language": "ja",
+            "language_probability": 0.9926797151565552,
+            "avg_logprob": -0.36361601719489467,
+            "no_speech_prob": 0.11865066736936569,
+            "compression_ratio": 0.7924528301886793,
+            "segment_count": 1,
+            "duration_seconds": 1.92,
+            "raw_text": "ダーブロントに向かいましょう",
+            "runaway_guarded": false
+          },
+          "ms": 1659.07,
+          "seconds": 1.92,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.44311609864234924,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.72,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1605.52,
+          "seconds": 0.72,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.4064446985721588,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 1.32,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1601.76,
+          "seconds": 1.32,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 9,
+      "cer": 0.23684210526315788
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "염소 사육은 대략 1만 년 전에 1",
+      "segments": [
+        {
+          "asr": {
+            "text": "염소 사육은 대략 1만 년 전에 1",
+            "language": "ko",
+            "language_probability": 0.9964559674263,
+            "avg_logprob": -0.6388187282963803,
+            "no_speech_prob": 0.03505647927522659,
+            "compression_ratio": 0.7884615384615384,
+            "segment_count": 1,
+            "duration_seconds": 8.94,
+            "raw_text": "염소 사육은 대략 1만 년 전에 1",
+            "runaway_guarded": false
+          },
+          "ms": 1682.3,
+          "seconds": 8.94,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 22,
+      "cer": 0.6666666666666666
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": " 염소 사육은 대략 1만 년 전에 일안을 잔 그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6076979041099548,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1603.93,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "염소 사육은 대략 1만 년 전에 일안을 잔",
+            "language": "ko",
+            "language_probability": 0.9958196878433228,
+            "avg_logprob": -0.4439186291261153,
+            "no_speech_prob": 0.06963212043046951,
+            "compression_ratio": 0.828125,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "염소 사육은 대략 1만 년 전에 일안을 잔",
+            "runaway_guarded": false
+          },
+          "ms": 1700.66,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+            "language": "ko",
+            "language_probability": 0.9863780736923218,
+            "avg_logprob": -0.8337231121565166,
+            "no_speech_prob": 0.06529104709625244,
+            "compression_ratio": 0.9117647058823529,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "그쪽으로 스산맥에서 시작한 것으로 보입니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1693.81,
+          "seconds": 3.0,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 7,
+      "cer": 0.21212121212121213
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+      "segments": [
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "language": "ko",
+            "language_probability": 0.9978806972503662,
+            "avg_logprob": -0.2813008354931343,
+            "no_speech_prob": 0.028138944879174232,
+            "compression_ratio": 1.0793650793650793,
+            "segment_count": 2,
+            "duration_seconds": 9.9,
+            "raw_text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "runaway_guarded": false
+          },
+          "ms": 1801.61,
+          "seconds": 9.9,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 3,
+      "cer": 0.075
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "you 합금은 기본적으로 금속 2개 이상의 호나 総合 주기율 표상의 원소가 많이 있다는 것을 잊지 마. Bye.",
+      "segments": [
+        {
+          "asr": {
+            "text": "you",
+            "language": "en",
+            "language_probability": 0.6532211303710938,
+            "avg_logprob": -1.4811780452728271,
+            "no_speech_prob": 0.5494027733802795,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.48,
+            "raw_text": "you",
+            "runaway_guarded": false
+          },
+          "ms": 1617.5,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 2개 이상의 호나",
+            "language": "ko",
+            "language_probability": 0.9864909648895264,
+            "avg_logprob": -0.4351480147417854,
+            "no_speech_prob": 0.08268661051988602,
+            "compression_ratio": 0.8307692307692308,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "합금은 기본적으로 금속 2개 이상의 호나",
+            "runaway_guarded": false
+          },
+          "ms": 1688.7,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "総合",
+            "language": "ja",
+            "language_probability": 0.2686326801776886,
+            "avg_logprob": -1.8178287506103517,
+            "no_speech_prob": 0.5826292634010315,
+            "compression_ratio": 0.42857142857142855,
+            "segment_count": 1,
+            "duration_seconds": 0.84,
+            "raw_text": "総合",
+            "runaway_guarded": false
+          },
+          "ms": 1614.81,
+          "seconds": 0.84,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마.",
+            "language": "ko",
+            "language_probability": 0.9985449314117432,
+            "avg_logprob": -0.3584827288985252,
+            "no_speech_prob": 0.006949757691472769,
+            "compression_ratio": 0.8783783783783784,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마.",
+            "runaway_guarded": false
+          },
+          "ms": 1698.63,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "Bye.",
+            "language": "en",
+            "language_probability": 0.2607572078704834,
+            "avg_logprob": -1.198196029663086,
+            "no_speech_prob": 0.5492206811904907,
+            "compression_ratio": 0.3333333333333333,
+            "segment_count": 1,
+            "duration_seconds": 0.6,
+            "raw_text": "Bye.",
+            "runaway_guarded": false
+          },
+          "ms": 1611.44,
+          "seconds": 0.6,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 13,
+      "cer": 0.325
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "그래도 관계자에 조언을 듣고 모든 표지판을 지키고 안정경구에 세심한 주의를 기울여야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "그래도 관계자에 조언을 듣고 모든 표지판을 지키고 안정경구에 세심한 주의를 기울여야 합니다.",
+            "language": "ko",
+            "language_probability": 0.9797923564910889,
+            "avg_logprob": -0.42708636506607656,
+            "no_speech_prob": 0.05225147679448128,
+            "compression_ratio": 1.032,
+            "segment_count": 1,
+            "duration_seconds": 7.02,
+            "raw_text": "그래도 관계자에 조언을 듣고 모든 표지판을 지키고 안정경구에 세심한 주의를 기울여야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1781.89,
+          "seconds": 7.02,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 3,
+      "cer": 0.07692307692307693
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": " 그래도 관계자에 조언을 듣고 모든 표지판을 지... 기구, 안전경구의 세심한 주의를 기울여야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6176280975341797,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1610.91,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "그래도 관계자에 조언을 듣고 모든 표지판을 지...",
+            "language": "ko",
+            "language_probability": 0.9895199537277222,
+            "avg_logprob": -0.5567419260740281,
+            "no_speech_prob": 0.016397258266806602,
+            "compression_ratio": 0.8571428571428571,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "그래도 관계자에 조언을 듣고 모든 표지판을 지...",
+            "runaway_guarded": false
+          },
+          "ms": 1666.27,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "기구, 안전경구의 세심한 주의를 기울여야 합니다.",
+            "language": "ko",
+            "language_probability": 0.9892783164978027,
+            "avg_logprob": -0.49984250897946564,
+            "no_speech_prob": 0.08863411843776703,
+            "compression_ratio": 0.8589743589743589,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "기구, 안전경구의 세심한 주의를 기울여야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1705.75,
+          "seconds": 3.0,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 5,
+      "cer": 0.1282051282051282
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "Во всех научных вопросах, включая психологию, были приняты взгляды рестотеля.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Во всех научных вопросах, включая психологию, были приняты взгляды рестотеля.",
+            "language": "ru",
+            "language_probability": 0.9822351932525635,
+            "avg_logprob": -0.31728611992938177,
+            "no_speech_prob": 0.1403971016407013,
+            "compression_ratio": 1.2792792792792793,
+            "segment_count": 1,
+            "duration_seconds": 8.64,
+            "raw_text": "Во всех научных вопросах, включая психологию, были приняты взгляды рестотеля.",
+            "runaway_guarded": false
+          },
+          "ms": 1815.17,
+          "seconds": 8.64,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 2,
+      "cer": 0.030303030303030304
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": " Во всех научных вопросах включаю псих. в психологию были приняты взгляды арестотеля. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5422692894935608,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.84,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1607.16,
+          "seconds": 0.84,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Во всех научных вопросах включаю псих.",
+            "language": "ru",
+            "language_probability": 0.9825975298881531,
+            "avg_logprob": -0.5079938264993521,
+            "no_speech_prob": 0.07331940531730652,
+            "compression_ratio": 1.0,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "Во всех научных вопросах включаю псих.",
+            "runaway_guarded": false
+          },
+          "ms": 1630.91,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "в психологию были приняты взгляды арестотеля.",
+            "language": "ru",
+            "language_probability": 0.939902663230896,
+            "avg_logprob": -0.6391664555198268,
+            "no_speech_prob": 0.14861083030700684,
+            "compression_ratio": 1.0909090909090908,
+            "segment_count": 1,
+            "duration_seconds": 2.88,
+            "raw_text": "в психологию были приняты взгляды арестотеля.",
+            "runaway_guarded": false
+          },
+          "ms": 1672.65,
+          "seconds": 2.88,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6395643353462219,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.72,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1609.69,
+          "seconds": 0.72,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 7,
+      "cer": 0.10606060606060606
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "В различных местах рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "segments": [
+        {
+          "asr": {
+            "text": "В различных местах рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+            "language": "ru",
+            "language_probability": 0.9939788579940796,
+            "avg_logprob": -0.35375150442123415,
+            "no_speech_prob": 0.018659353256225586,
+            "compression_ratio": 1.5231788079470199,
+            "segment_count": 2,
+            "duration_seconds": 7.92,
+            "raw_text": "В различных местах рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+            "runaway_guarded": false
+          },
+          "ms": 1809.31,
+          "seconds": 7.92,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 0,
+      "cer": 0.0
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": " в различных местах рима были установлены большейте. и экранные с помощью которых люди могли наблюдать за церемон. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5881989598274231,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1623.76,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "в различных местах рима были установлены большейте.",
+            "language": "ru",
+            "language_probability": 0.9938143491744995,
+            "avg_logprob": -0.34142925551063136,
+            "no_speech_prob": 0.022027846425771713,
+            "compression_ratio": 1.1728395061728396,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "в различных местах рима были установлены большейте.",
+            "runaway_guarded": false
+          },
+          "ms": 1681.29,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "и экранные с помощью которых люди могли наблюдать за церемон.",
+            "language": "ru",
+            "language_probability": 0.9857245087623596,
+            "avg_logprob": -0.7566309935516782,
+            "no_speech_prob": 0.22797629237174988,
+            "compression_ratio": 1.2173913043478262,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "и экранные с помощью которых люди могли наблюдать за церемон.",
+            "runaway_guarded": false
+          },
+          "ms": 1668.22,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.34671276807785034,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.6,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1610.69,
+          "seconds": 0.6,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 17,
+      "cer": 0.16037735849056603
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+      "segments": [
+        {
+          "asr": {
+            "text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+            "language": "ru",
+            "language_probability": 0.9506025314331055,
+            "avg_logprob": -0.3340653198606828,
+            "no_speech_prob": 0.21197453141212463,
+            "compression_ratio": 1.4152542372881356,
+            "segment_count": 1,
+            "duration_seconds": 7.2,
+            "raw_text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+            "runaway_guarded": false
+          },
+          "ms": 1762.2,
+          "seconds": 7.2,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 6,
+      "cer": 0.07894736842105263
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "К согласной ядерному управлению Японии на заводе б... обнаружено радиоактивный цизи и йод.",
+      "segments": [
+        {
+          "asr": {
+            "text": "К согласной ядерному управлению Японии на заводе б...",
+            "language": "ru",
+            "language_probability": 0.94636470079422,
+            "avg_logprob": -0.4628515811193557,
+            "no_speech_prob": 0.08068841695785522,
+            "compression_ratio": 1.170731707317073,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "К согласной ядерному управлению Японии на заводе б...",
+            "runaway_guarded": false
+          },
+          "ms": 1712.18,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "обнаружено радиоактивный цизи и йод.",
+            "language": "ru",
+            "language_probability": 0.9766762852668762,
+            "avg_logprob": -0.48685421663172107,
+            "no_speech_prob": 0.05188679322600365,
+            "compression_ratio": 0.9852941176470589,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "обнаружено радиоактивный цизи и йод.",
+            "runaway_guarded": false
+          },
+          "ms": 1691.41,
+          "seconds": 3.0,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 8,
+      "cer": 0.10526315789473684
+    },
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": "パリジャンは自己中心的な方法へ 失礼の人が多いと言われています",
+      "segments": [
+        {
+          "asr": {
+            "text": "パリジャンは自己中心的な方法へ",
+            "language": "ja",
+            "language_probability": 0.814277172088623,
+            "avg_logprob": -0.678992997854948,
+            "no_speech_prob": 0.3538297712802887,
+            "compression_ratio": 0.8035714285714286,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "パリジャンは自己中心的な方法へ",
+            "runaway_guarded": false
+          },
+          "ms": 1681.91,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "失礼の人が多いと言われています",
+            "language": "ja",
+            "language_probability": 0.9802806973457336,
+            "avg_logprob": -0.32527665607631207,
+            "no_speech_prob": 0.0719180554151535,
+            "compression_ratio": 0.8490566037735849,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "失礼の人が多いと言われています",
+            "runaway_guarded": false
+          },
+          "ms": 1675.61,
+          "seconds": 4.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 5,
+      "cer": 0.16666666666666666
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": "3列車の数号を過ぎて全員が3ピア デートル広場での装備に参加することは不可能でした ",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車の数号を過ぎて全員が3ピア",
+            "language": "ja",
+            "language_probability": 0.9309112429618835,
+            "avg_logprob": -0.7332813865260074,
+            "no_speech_prob": 0.2556811571121216,
+            "compression_ratio": 0.8461538461538461,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "3列車の数号を過ぎて全員が3ピア",
+            "runaway_guarded": false
+          },
+          "ms": 1694.76,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "デートル広場での装備に参加することは不可能でした",
+            "language": "ja",
+            "language_probability": 0.9876800775527954,
+            "avg_logprob": -0.3946274121602376,
+            "no_speech_prob": 0.09314555674791336,
+            "compression_ratio": 0.9113924050632911,
+            "segment_count": 1,
+            "duration_seconds": 3.24,
+            "raw_text": "デートル広場での装備に参加することは不可能でした",
+            "runaway_guarded": false
+          },
+          "ms": 1729.83,
+          "seconds": 3.24,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "nn",
+            "language_probability": 0.3070908188819885,
+            "avg_logprob": -0.22142757203843857,
+            "no_speech_prob": 0.7411877512931824,
+            "compression_ratio": 17.153846153846153,
+            "segment_count": 1,
+            "duration_seconds": 2.04,
+            "raw_text": "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",
+            "runaway_guarded": true
+          },
+          "ms": 2855.66,
+          "seconds": 2.04,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 13,
+      "cer": 0.3333333333333333
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": "本根の最高の景色を見るには、島からで クーロンのウォーターフロントに向かいましょう  ",
+      "segments": [
+        {
+          "asr": {
+            "text": "本根の最高の景色を見るには、島からで",
+            "language": "ja",
+            "language_probability": 0.9811121821403503,
+            "avg_logprob": -0.5472718289023951,
+            "no_speech_prob": 0.14154568314552307,
+            "compression_ratio": 0.8709677419354839,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "本根の最高の景色を見るには、島からで",
+            "runaway_guarded": false
+          },
+          "ms": 1676.33,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "クーロンのウォーターフロントに向かいましょう",
+            "language": "ja",
+            "language_probability": 0.9791289567947388,
+            "avg_logprob": -0.426408847173055,
+            "no_speech_prob": 0.15334373712539673,
+            "compression_ratio": 1.0,
+            "segment_count": 1,
+            "duration_seconds": 3.48,
+            "raw_text": "クーロンのウォーターフロントに向かいましょう",
+            "runaway_guarded": false
+          },
+          "ms": 1703.35,
+          "seconds": 3.48,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.44311609864234924,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.72,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1617.33,
+          "seconds": 0.72,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.4064446985721588,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 1.32,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1616.65,
+          "seconds": 1.32,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 7,
+      "cer": 0.18421052631578946
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": " 염소 사육은 대략 1만년 전에 1 한 것으로 보입니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6076979041099548,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1602.94,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "염소 사육은 대략 1만년 전에 1",
+            "language": "ko",
+            "language_probability": 0.9972233772277832,
+            "avg_logprob": -0.6273405949274699,
+            "no_speech_prob": 0.029367562383413315,
+            "compression_ratio": 0.7843137254901961,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "염소 사육은 대략 1만년 전에 1",
+            "runaway_guarded": false
+          },
+          "ms": 1675.23,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "한 것으로 보입니다.",
+            "language": "ko",
+            "language_probability": 0.977157711982727,
+            "avg_logprob": -0.7093895276387533,
+            "no_speech_prob": 0.12342416495084763,
+            "compression_ratio": 0.7105263157894737,
+            "segment_count": 1,
+            "duration_seconds": 1.68,
+            "raw_text": "한 것으로 보입니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1627.64,
+          "seconds": 1.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 14,
+      "cer": 0.42424242424242425
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": "you 합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+      "segments": [
+        {
+          "asr": {
+            "text": "you",
+            "language": "en",
+            "language_probability": 0.6532211303710938,
+            "avg_logprob": -1.4811780452728271,
+            "no_speech_prob": 0.5494027733802795,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.48,
+            "raw_text": "you",
+            "runaway_guarded": false
+          },
+          "ms": 1611.07,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 두 개 이상의 혼합물이다.",
+            "language": "ko",
+            "language_probability": 0.9961066842079163,
+            "avg_logprob": -0.3300188277897082,
+            "no_speech_prob": 0.0045710960403084755,
+            "compression_ratio": 0.8589743589743589,
+            "segment_count": 1,
+            "duration_seconds": 3.96,
+            "raw_text": "합금은 기본적으로 금속 두 개 이상의 혼합물이다.",
+            "runaway_guarded": false
+          },
+          "ms": 1700.82,
+          "seconds": 3.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "language": "ko",
+            "language_probability": 0.9990140199661255,
+            "avg_logprob": -0.2816892521721976,
+            "no_speech_prob": 0.0017543792491778731,
+            "compression_ratio": 0.8607594936708861,
+            "segment_count": 1,
+            "duration_seconds": 3.72,
+            "raw_text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "runaway_guarded": false
+          },
+          "ms": 1700.92,
+          "seconds": 3.72,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 4,
+      "cer": 0.1
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": " 그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한 주의를 키우려야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6176280975341797,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1615.35,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한",
+            "language": "ko",
+            "language_probability": 0.9927777647972107,
+            "avg_logprob": -0.47213193876989956,
+            "no_speech_prob": 0.02537533827126026,
+            "compression_ratio": 0.9693877551020408,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한",
+            "runaway_guarded": false
+          },
+          "ms": 1733.4,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "주의를 키우려야 합니다.",
+            "language": "ko",
+            "language_probability": 0.9577655792236328,
+            "avg_logprob": -0.9757364590962728,
+            "no_speech_prob": 0.17120864987373352,
+            "compression_ratio": 0.7857142857142857,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "주의를 키우려야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1657.89,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 7,
+      "cer": 0.1794871794871795
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": " Во всех научных вопросах, включая психологию, были приняты. кляда и рестотеля. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5162802934646606,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.96,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1630.92,
+          "seconds": 0.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Во всех научных вопросах, включая психологию, были приняты.",
+            "language": "ru",
+            "language_probability": 0.9723368883132935,
+            "avg_logprob": -0.23516283148810976,
+            "no_speech_prob": 0.16064168512821198,
+            "compression_ratio": 1.1612903225806452,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "Во всех научных вопросах, включая психологию, были приняты.",
+            "runaway_guarded": false
+          },
+          "ms": 1733.57,
+          "seconds": 4.68,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "кляда и рестотеля.",
+            "language": "ru",
+            "language_probability": 0.9920026063919067,
+            "avg_logprob": -0.8053390234708786,
+            "no_speech_prob": 0.02750653214752674,
+            "compression_ratio": 0.8461538461538461,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "кляда и рестотеля.",
+            "runaway_guarded": false
+          },
+          "ms": 1639.51,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6380471587181091,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.84,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1627.58,
+          "seconds": 0.84,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 6,
+      "cer": 0.09090909090909091
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": " в различных местах рима были установлены большие телевизионные экранные с помощью. которых люди могли наблюдать за церемонией.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5881989598274231,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1628.97,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "в различных местах рима были установлены большие телевизионные экранные с помощью.",
+            "language": "ru",
+            "language_probability": 0.9914652705192566,
+            "avg_logprob": -0.322769699273286,
+            "no_speech_prob": 0.01021061185747385,
+            "compression_ratio": 1.4036697247706422,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "в различных местах рима были установлены большие телевизионные экранные с помощью.",
+            "runaway_guarded": false
+          },
+          "ms": 1738.63,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "которых люди могли наблюдать за церемонией.",
+            "language": "ru",
+            "language_probability": 0.9953215718269348,
+            "avg_logprob": -0.33231218584946226,
+            "no_speech_prob": 0.012825582176446915,
+            "compression_ratio": 1.095890410958904,
+            "segment_count": 1,
+            "duration_seconds": 2.4,
+            "raw_text": "которых люди могли наблюдать за церемонией.",
+            "runaway_guarded": false
+          },
+          "ms": 1656.02,
+          "seconds": 2.4,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 2,
+      "cer": 0.018867924528301886
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "context",
+      "path": "capture_cut",
+      "hypothesis": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. het seise ijoud.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+            "language": "ru",
+            "language_probability": 0.9614559412002563,
+            "avg_logprob": -0.39058473603478794,
+            "no_speech_prob": 0.10363772511482239,
+            "compression_ratio": 1.3364485981308412,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+            "runaway_guarded": false
+          },
+          "ms": 1739.1,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "het seise ijoud.",
+            "language": "nl",
+            "language_probability": 0.1918407380580902,
+            "avg_logprob": -1.3332017540931702,
+            "no_speech_prob": 0.41203421354293823,
+            "compression_ratio": 0.6666666666666666,
+            "segment_count": 1,
+            "duration_seconds": 1.56,
+            "raw_text": "het seise ijoud.",
+            "runaway_guarded": false
+          },
+          "ms": 1634.6,
+          "seconds": 1.56,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 15,
+      "cer": 0.19736842105263158
+    },
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": "パリジャンは事故中心的な方法へ 失礼の人が多いと言われています",
+      "segments": [
+        {
+          "asr": {
+            "text": "パリジャンは事故中心的な方法へ",
+            "language": "ja",
+            "language_probability": 0.814277172088623,
+            "avg_logprob": -0.683067097383387,
+            "no_speech_prob": 0.3538297712802887,
+            "compression_ratio": 0.8035714285714286,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "パリジャンは事故中心的な方法へ",
+            "runaway_guarded": false
+          },
+          "ms": 1721.18,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "失礼の人が多いと言われています",
+            "language": "ja",
+            "language_probability": 0.9802806973457336,
+            "avg_logprob": -0.3348830435425043,
+            "no_speech_prob": 0.0719180554151535,
+            "compression_ratio": 0.8490566037735849,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "失礼の人が多いと言われています",
+            "runaway_guarded": false
+          },
+          "ms": 1695.89,
+          "seconds": 4.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 7,
+      "cer": 0.23333333333333334
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": "3列車のカズゴを過ぎて 全員が3ペイ… デートル広場での装備に参加することは不可能でした ",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車のカズゴを過ぎて 全員が3ペイ…",
+            "language": "ja",
+            "language_probability": 0.9309112429618835,
+            "avg_logprob": -0.7640201424558958,
+            "no_speech_prob": 0.2556811571121216,
+            "compression_ratio": 0.847457627118644,
+            "segment_count": 2,
+            "duration_seconds": 4.56,
+            "raw_text": "3列車のカズゴを過ぎて 全員が3ペイ…",
+            "runaway_guarded": false
+          },
+          "ms": 1760.4,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "デートル広場での装備に参加することは不可能でした",
+            "language": "ja",
+            "language_probability": 0.9876800775527954,
+            "avg_logprob": -0.3893888058761756,
+            "no_speech_prob": 0.09314555674791336,
+            "compression_ratio": 0.9113924050632911,
+            "segment_count": 1,
+            "duration_seconds": 3.24,
+            "raw_text": "デートル広場での装備に参加することは不可能でした",
+            "runaway_guarded": false
+          },
+          "ms": 1777.18,
+          "seconds": 3.24,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "nn",
+            "language_probability": 0.3070908188819885,
+            "avg_logprob": -0.080381531185574,
+            "no_speech_prob": 0.7411877512931824,
+            "compression_ratio": 13.117647058823529,
+            "segment_count": 1,
+            "duration_seconds": 2.04,
+            "raw_text": "1-2-3-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4",
+            "runaway_guarded": true
+          },
+          "ms": 3744.35,
+          "seconds": 2.04,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 15,
+      "cer": 0.38461538461538464
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": "ホンコンの最高の景色を見るには、島からで クーロンのウォーターフロントに向かいましょう  . . . .",
+      "segments": [
+        {
+          "asr": {
+            "text": "ホンコンの最高の景色を見るには、島からで",
+            "language": "ja",
+            "language_probability": 0.9811121821403503,
+            "avg_logprob": -0.5418901216416132,
+            "no_speech_prob": 0.14154568314552307,
+            "compression_ratio": 0.9090909090909091,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "ホンコンの最高の景色を見るには、島からで",
+            "runaway_guarded": false
+          },
+          "ms": 1712.05,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "クーロンのウォーターフロントに向かいましょう",
+            "language": "ja",
+            "language_probability": 0.9791289567947388,
+            "avg_logprob": -0.4318183660507202,
+            "no_speech_prob": 0.15334373712539673,
+            "compression_ratio": 1.0,
+            "segment_count": 1,
+            "duration_seconds": 3.48,
+            "raw_text": "クーロンのウォーターフロントに向かいましょう",
+            "runaway_guarded": false
+          },
+          "ms": 1726.16,
+          "seconds": 3.48,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.44311609864234924,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.72,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1673.71,
+          "seconds": 0.72,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": ". . . .",
+            "language": "en",
+            "language_probability": 0.4064446985721588,
+            "avg_logprob": -0.8273732236453465,
+            "no_speech_prob": 0.752453625202179,
+            "compression_ratio": 0.5833333333333334,
+            "segment_count": 4,
+            "duration_seconds": 1.32,
+            "raw_text": ". . . .",
+            "runaway_guarded": false
+          },
+          "ms": 1684.88,
+          "seconds": 1.32,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 9,
+      "cer": 0.23684210526315788
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": " 염소 사육은 대략 1만 년 전에 일안을 자그로 수삼맥해서 시작. 시작한 것으로 보입니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6076979041099548,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1702.65,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "염소 사육은 대략 1만 년 전에 일안을 자그로 수삼맥해서 시작.",
+            "language": "ko",
+            "language_probability": 0.9972233772277832,
+            "avg_logprob": -0.4744869278323266,
+            "no_speech_prob": 0.029367562383413315,
+            "compression_ratio": 0.9222222222222223,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "염소 사육은 대략 1만 년 전에 일안을 자그로 수삼맥해서 시작.",
+            "runaway_guarded": false
+          },
+          "ms": 1810.42,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "시작한 것으로 보입니다.",
+            "language": "ko",
+            "language_probability": 0.977157711982727,
+            "avg_logprob": -0.7077355027198792,
+            "no_speech_prob": 0.12342416495084763,
+            "compression_ratio": 0.75,
+            "segment_count": 1,
+            "duration_seconds": 1.68,
+            "raw_text": "시작한 것으로 보입니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1646.91,
+          "seconds": 1.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 9,
+      "cer": 0.2727272727272727
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": "You 합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+      "segments": [
+        {
+          "asr": {
+            "text": "You",
+            "language": "en",
+            "language_probability": 0.6532211303710938,
+            "avg_logprob": -1.183321863412857,
+            "no_speech_prob": 0.5494027733802795,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.48,
+            "raw_text": "You",
+            "runaway_guarded": false
+          },
+          "ms": 1629.6,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+            "language": "ko",
+            "language_probability": 0.9961066842079163,
+            "avg_logprob": -0.32557214874970286,
+            "no_speech_prob": 0.0045710960403084755,
+            "compression_ratio": 0.8533333333333334,
+            "segment_count": 1,
+            "duration_seconds": 3.96,
+            "raw_text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+            "runaway_guarded": false
+          },
+          "ms": 1739.92,
+          "seconds": 3.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "language": "ko",
+            "language_probability": 0.9990140199661255,
+            "avg_logprob": -0.28385599454243976,
+            "no_speech_prob": 0.0017543792491778731,
+            "compression_ratio": 0.8607594936708861,
+            "segment_count": 1,
+            "duration_seconds": 3.72,
+            "raw_text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "runaway_guarded": false
+          },
+          "ms": 1729.15,
+          "seconds": 3.72,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 5,
+      "cer": 0.125
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": " 그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한 주의를 키우려야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6176280975341797,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1632.97,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한",
+            "language": "ko",
+            "language_probability": 0.9927777647972107,
+            "avg_logprob": -0.4728519382147953,
+            "no_speech_prob": 0.02537533827126026,
+            "compression_ratio": 0.9693877551020408,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "그래도 관계자에 조언을 듣고 모든 휴지판을 지키고 안정경구에 세심한",
+            "runaway_guarded": false
+          },
+          "ms": 1789.63,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "주의를 키우려야 합니다.",
+            "language": "ko",
+            "language_probability": 0.9577655792236328,
+            "avg_logprob": -0.969000518321991,
+            "no_speech_prob": 0.17120864987373352,
+            "compression_ratio": 0.7857142857142857,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "주의를 키우려야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 1664.57,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 7,
+      "cer": 0.1794871794871795
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": " Во всех научных вопросах, включая психологию, были приняты. кляда и ристоселя. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5162802934646606,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.96,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1618.93,
+          "seconds": 0.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Во всех научных вопросах, включая психологию, были приняты.",
+            "language": "ru",
+            "language_probability": 0.9723368883132935,
+            "avg_logprob": -0.21451723007928758,
+            "no_speech_prob": 0.16064168512821198,
+            "compression_ratio": 1.1612903225806452,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "Во всех научных вопросах, включая психологию, были приняты.",
+            "runaway_guarded": false
+          },
+          "ms": 1734.48,
+          "seconds": 4.68,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "кляда и ристоселя.",
+            "language": "ru",
+            "language_probability": 0.9920026063919067,
+            "avg_logprob": -0.6989675485170804,
+            "no_speech_prob": 0.02750653214752674,
+            "compression_ratio": 0.8048780487804879,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "кляда и ристоселя.",
+            "runaway_guarded": false
+          },
+          "ms": 1684.28,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6380471587181091,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.84,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1667.04,
+          "seconds": 0.84,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 6,
+      "cer": 0.09090909090909091
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": " в различных местах рима были установлены большие телевизионные экраны с помощью. которых люди могли наблюдать за церемонией.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5881989598274231,
+            "avg_logprob": -0.10448477533128527,
+            "no_speech_prob": 0.6379742622375488,
+            "compression_ratio": 23.615384615384617,
+            "segment_count": 1,
+            "duration_seconds": 0.48,
+            "raw_text": "I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry, I'm sorry",
+            "runaway_guarded": true
+          },
+          "ms": 3527.82,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "в различных местах рима были установлены большие телевизионные экраны с помощью.",
+            "language": "ru",
+            "language_probability": 0.9914652705192566,
+            "avg_logprob": -0.3221519633575722,
+            "no_speech_prob": 0.01021061185747385,
+            "compression_ratio": 1.3796296296296295,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "в различных местах рима были установлены большие телевизионные экраны с помощью.",
+            "runaway_guarded": false
+          },
+          "ms": 1787.93,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "которых люди могли наблюдать за церемонией.",
+            "language": "ru",
+            "language_probability": 0.9953215718269348,
+            "avg_logprob": -0.33165958736624035,
+            "no_speech_prob": 0.012825582176446915,
+            "compression_ratio": 1.095890410958904,
+            "segment_count": 1,
+            "duration_seconds": 2.4,
+            "raw_text": "которых люди могли наблюдать за церемонией.",
+            "runaway_guarded": false
+          },
+          "ms": 1648.34,
+          "seconds": 2.4,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 0,
+      "cer": 0.0
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "context_beam",
+      "path": "capture_cut",
+      "hypothesis": "Сокласно ядерному управлению Японии, на заводе были обнаружены радиоактивные... en het zes eiot.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Сокласно ядерному управлению Японии, на заводе были обнаружены радиоактивные...",
+            "language": "ru",
+            "language_probability": 0.9614559412002563,
+            "avg_logprob": -0.37827740212281546,
+            "no_speech_prob": 0.10363772511482239,
+            "compression_ratio": 1.3272727272727274,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "Сокласно ядерному управлению Японии, на заводе были обнаружены радиоактивные...",
+            "runaway_guarded": false
+          },
+          "ms": 1799.58,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "en het zes eiot.",
+            "language": "nl",
+            "language_probability": 0.1918407380580902,
+            "avg_logprob": -1.1817434191703797,
+            "no_speech_prob": 0.41203421354293823,
+            "compression_ratio": 0.6666666666666666,
+            "segment_count": 1,
+            "duration_seconds": 1.56,
+            "raw_text": "en het zes eiot.",
+            "runaway_guarded": false
+          },
+          "ms": 1713.89,
+          "seconds": 1.56,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 14,
+      "cer": 0.18421052631578946
+    },
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "パリジャンは自己中心的な大平で失礼の人が多いと言われています",
+      "segments": [
+        {
+          "asr": {
+            "text": "パリジャンは自己中心的な大平で失礼の人が多いと言われています",
+            "language": "ja",
+            "language_probability": 0.9472470879554749,
+            "avg_logprob": -0.2230442289648385,
+            "no_speech_prob": 0.057513896375894547,
+            "compression_ratio": 0.9782608695652174,
+            "segment_count": 1,
+            "duration_seconds": 8.88,
+            "raw_text": "パリジャンは自己中心的な大平で失礼の人が多いと言われています",
+            "runaway_guarded": false
+          },
+          "ms": 3638.0,
+          "seconds": 8.88,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 4,
+      "cer": 0.13333333333333333
+    },
+    {
+      "id": "fleurs-ja-test-1910-10214476888438240131",
+      "language": "ja",
+      "reference": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": "パリジャンは自己中心的な大平で 失礼の人が多いと言われています",
+      "segments": [
+        {
+          "asr": {
+            "text": "パリジャンは自己中心的な大平で",
+            "language": "ja",
+            "language_probability": 0.8488874435424805,
+            "avg_logprob": -0.5688065104186535,
+            "no_speech_prob": 0.489774227142334,
+            "compression_ratio": 0.8035714285714286,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "パリジャンは自己中心的な大平で",
+            "runaway_guarded": false
+          },
+          "ms": 3122.23,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "失礼の人が多いと言われています",
+            "language": "ja",
+            "language_probability": 0.9855337738990784,
+            "avg_logprob": -0.22786413319408894,
+            "no_speech_prob": 0.05030035972595215,
+            "compression_ratio": 0.8490566037735849,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "失礼の人が多いと言われています",
+            "runaway_guarded": false
+          },
+          "ms": 3124.93,
+          "seconds": 4.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 30,
+      "errors": 4,
+      "cer": 0.13333333333333333
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "3列車の数が多すぎて、全員が3ピエトル広場での装備に参加することは不可能でした。",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車の数が多すぎて、全員が3ピエトル広場での装備に参加することは不可能でした。",
+            "language": "ja",
+            "language_probability": 0.9935298562049866,
+            "avg_logprob": -0.2616747414193502,
+            "no_speech_prob": 0.009423000738024712,
+            "compression_ratio": 1.0357142857142858,
+            "segment_count": 1,
+            "duration_seconds": 9.48,
+            "raw_text": "3列車の数が多すぎて、全員が3ピエトル広場での装備に参加することは不可能でした。",
+            "runaway_guarded": false
+          },
+          "ms": 3723.1,
+          "seconds": 9.48,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 7,
+      "cer": 0.1794871794871795
+    },
+    {
+      "id": "fleurs-ja-test-1764-10256418415643044307",
+      "language": "ja",
+      "reference": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": "3列車の数が多すぎて全員が3匹 レイトル広場での装備に参加することは不可能でした。 ",
+      "segments": [
+        {
+          "asr": {
+            "text": "3列車の数が多すぎて全員が3匹",
+            "language": "ja",
+            "language_probability": 0.9734758734703064,
+            "avg_logprob": -0.5323531000237716,
+            "no_speech_prob": 0.40209680795669556,
+            "compression_ratio": 0.7884615384615384,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "3列車の数が多すぎて全員が3匹",
+            "runaway_guarded": false
+          },
+          "ms": 3364.63,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "レイトル広場での装備に参加することは不可能でした。",
+            "language": "ja",
+            "language_probability": 0.9857718348503113,
+            "avg_logprob": -0.39070738622775447,
+            "no_speech_prob": 0.19422084093093872,
+            "compression_ratio": 0.9259259259259259,
+            "segment_count": 1,
+            "duration_seconds": 3.24,
+            "raw_text": "レイトル広場での装備に参加することは不可能でした。",
+            "runaway_guarded": false
+          },
+          "ms": 3939.9,
+          "seconds": 3.24,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.3559900224208832,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 2.04,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 3332.3,
+          "seconds": 2.04,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 9,
+      "cer": 0.23076923076923078
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "香港の最高の景色を見るには島から出て、空論のウォーターフロントに向かいましょう。",
+      "segments": [
+        {
+          "asr": {
+            "text": "香港の最高の景色を見るには島から出て、空論のウォーターフロントに向かいましょう。",
+            "language": "ja",
+            "language_probability": 0.9925381541252136,
+            "avg_logprob": -0.23235818663158933,
+            "no_speech_prob": 0.011948407627642155,
+            "compression_ratio": 1.0810810810810811,
+            "segment_count": 1,
+            "duration_seconds": 9.66,
+            "raw_text": "香港の最高の景色を見るには島から出て、空論のウォーターフロントに向かいましょう。",
+            "runaway_guarded": false
+          },
+          "ms": 3303.86,
+          "seconds": 9.66,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 2,
+      "cer": 0.05263157894736842
+    },
+    {
+      "id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": "香港の最高の景色を見るには島からです クールロンのウォーターフロントに向かいましょう。 you Thank you.",
+      "segments": [
+        {
+          "asr": {
+            "text": "香港の最高の景色を見るには島からです",
+            "language": "ja",
+            "language_probability": 0.9770311713218689,
+            "avg_logprob": -0.2900507590349983,
+            "no_speech_prob": 0.17689378559589386,
+            "compression_ratio": 0.8709677419354839,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "香港の最高の景色を見るには島からです",
+            "runaway_guarded": false
+          },
+          "ms": 3184.62,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "クールロンのウォーターフロントに向かいましょう。",
+            "language": "ja",
+            "language_probability": 0.9962949156761169,
+            "avg_logprob": -0.31603331928667816,
+            "no_speech_prob": 0.0797753855586052,
+            "compression_ratio": 1.0434782608695652,
+            "segment_count": 1,
+            "duration_seconds": 3.48,
+            "raw_text": "クールロンのウォーターフロントに向かいましょう。",
+            "runaway_guarded": false
+          },
+          "ms": 3212.26,
+          "seconds": 3.48,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "you",
+            "language": "en",
+            "language_probability": 0.4890505075454712,
+            "avg_logprob": -0.9662936925888062,
+            "no_speech_prob": 0.8957192897796631,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.72,
+            "raw_text": "you",
+            "runaway_guarded": false
+          },
+          "ms": 3049.19,
+          "seconds": 0.72,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "Thank you.",
+            "language": "en",
+            "language_probability": 0.42212313413619995,
+            "avg_logprob": -0.9836827715237936,
+            "no_speech_prob": 0.803758442401886,
+            "compression_ratio": 0.5555555555555556,
+            "segment_count": 1,
+            "duration_seconds": 1.32,
+            "raw_text": "Thank you.",
+            "runaway_guarded": false
+          },
+          "ms": 3049.78,
+          "seconds": 1.32,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 38,
+      "errors": 18,
+      "cer": 0.47368421052631576
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작한 것으로 보입니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작한 것으로 보입니다.",
+            "language": "ko",
+            "language_probability": 0.9905264377593994,
+            "avg_logprob": -0.21013908295167816,
+            "no_speech_prob": 0.033653609454631805,
+            "compression_ratio": 0.9818181818181818,
+            "segment_count": 1,
+            "duration_seconds": 8.94,
+            "raw_text": "염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작한 것으로 보입니다.",
+            "runaway_guarded": false
+          },
+          "ms": 3377.5,
+          "seconds": 8.94,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 1,
+      "cer": 0.030303030303030304
+    },
+    {
+      "id": "fleurs-ko-test-1701-10107571163062229727",
+      "language": "ko",
+      "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": " 염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작! 밝은 것으로 보입니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5585395097732544,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 3125.19,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작!",
+            "language": "ko",
+            "language_probability": 0.9705216884613037,
+            "avg_logprob": -0.26446047329133554,
+            "no_speech_prob": 0.149589404463768,
+            "compression_ratio": 0.9213483146067416,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "염소사육은 대략 1만 년 전에 이란의 자그로스 산맥에서 시작!",
+            "runaway_guarded": false
+          },
+          "ms": 3257.44,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "밝은 것으로 보입니다.",
+            "language": "ko",
+            "language_probability": 0.978181779384613,
+            "avg_logprob": -0.6583813548088073,
+            "no_speech_prob": 0.3337920606136322,
+            "compression_ratio": 0.7317073170731707,
+            "segment_count": 1,
+            "duration_seconds": 1.68,
+            "raw_text": "밝은 것으로 보입니다.",
+            "runaway_guarded": false
+          },
+          "ms": 3107.47,
+          "seconds": 1.68,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 33,
+      "errors": 3,
+      "cer": 0.09090909090909091
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+      "segments": [
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "language": "ko",
+            "language_probability": 0.9930813908576965,
+            "avg_logprob": -0.2856131883767935,
+            "no_speech_prob": 0.0631253719329834,
+            "compression_ratio": 1.0555555555555556,
+            "segment_count": 2,
+            "duration_seconds": 9.9,
+            "raw_text": "합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "runaway_guarded": false
+          },
+          "ms": 3369.72,
+          "seconds": 9.9,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 2,
+      "cer": 0.05
+    },
+    {
+      "id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": " 합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.5814294219017029,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 3044.18,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+            "language": "ko",
+            "language_probability": 0.9769894480705261,
+            "avg_logprob": -0.2313056447004017,
+            "no_speech_prob": 0.07396277785301208,
+            "compression_ratio": 0.8533333333333334,
+            "segment_count": 1,
+            "duration_seconds": 3.96,
+            "raw_text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+            "runaway_guarded": false
+          },
+          "ms": 3194.36,
+          "seconds": 3.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "language": "ko",
+            "language_probability": 0.9962892532348633,
+            "avg_logprob": -0.2780690079643613,
+            "no_speech_prob": 0.006058013532310724,
+            "compression_ratio": 0.8607594936708861,
+            "segment_count": 1,
+            "duration_seconds": 3.72,
+            "raw_text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+            "runaway_guarded": false
+          },
+          "ms": 3352.77,
+          "seconds": 3.72,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 40,
+      "errors": 2,
+      "cer": 0.05
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안정경고에 세심한 주의를 기울여야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안정경고에 세심한 주의를 기울여야 합니다.",
+            "language": "ko",
+            "language_probability": 0.965295135974884,
+            "avg_logprob": -0.26331182373197454,
+            "no_speech_prob": 0.031124388799071312,
+            "compression_ratio": 1.032,
+            "segment_count": 1,
+            "duration_seconds": 7.02,
+            "raw_text": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안정경고에 세심한 주의를 기울여야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 3358.94,
+          "seconds": 7.02,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 1,
+      "cer": 0.02564102564102564
+    },
+    {
+      "id": "fleurs-ko-test-1959-10162998993480425742",
+      "language": "ko",
+      "reference": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": " 그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안전경고에 세심한.. 주의를 기울여야 합니다.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.4759241044521332,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 3072.67,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안전경고에 세심한..",
+            "language": "ko",
+            "language_probability": 0.9801694750785828,
+            "avg_logprob": -0.2952842573324839,
+            "no_speech_prob": 0.08822493255138397,
+            "compression_ratio": 0.9509803921568627,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안전경고에 세심한..",
+            "runaway_guarded": false
+          },
+          "ms": 3274.27,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "주의를 기울여야 합니다.",
+            "language": "ko",
+            "language_probability": 0.7989612221717834,
+            "avg_logprob": -0.38880156228939694,
+            "no_speech_prob": 0.4640655219554901,
+            "compression_ratio": 0.75,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "주의를 기울여야 합니다.",
+            "runaway_guarded": false
+          },
+          "ms": 3114.69,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 39,
+      "errors": 0,
+      "cer": 0.0
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "Во всех научных вопросах, включая психологию, были приняты взгляды арестутиля.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Во всех научных вопросах, включая психологию, были приняты взгляды арестутиля.",
+            "language": "ru",
+            "language_probability": 0.9918071627616882,
+            "avg_logprob": -0.29181898051294786,
+            "no_speech_prob": 0.04160833731293678,
+            "compression_ratio": 1.309090909090909,
+            "segment_count": 1,
+            "duration_seconds": 8.64,
+            "raw_text": "Во всех научных вопросах, включая психологию, были приняты взгляды арестутиля.",
+            "runaway_guarded": false
+          },
+          "ms": 3316.58,
+          "seconds": 8.64,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 3,
+      "cer": 0.045454545454545456
+    },
+    {
+      "id": "fleurs-ru-test-1926-10008070632189747443",
+      "language": "ru",
+      "reference": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": " Во всех научных вопросах, включая психологию, были приняты гляда арестователя. Thank you.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.4221174716949463,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.96,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 3213.92,
+          "seconds": 0.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Во всех научных вопросах, включая психологию, были приняты",
+            "language": "ru",
+            "language_probability": 0.9869502186775208,
+            "avg_logprob": -0.16257929131388665,
+            "no_speech_prob": 0.1257590502500534,
+            "compression_ratio": 1.1630434782608696,
+            "segment_count": 1,
+            "duration_seconds": 4.68,
+            "raw_text": "Во всех научных вопросах, включая психологию, были приняты",
+            "runaway_guarded": false
+          },
+          "ms": 3140.93,
+          "seconds": 4.68,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "гляда арестователя.",
+            "language": "ru",
+            "language_probability": 0.9805375933647156,
+            "avg_logprob": -0.5993761799552224,
+            "no_speech_prob": 0.06339731812477112,
+            "compression_ratio": 0.8372093023255814,
+            "segment_count": 1,
+            "duration_seconds": 1.44,
+            "raw_text": "гляда арестователя.",
+            "runaway_guarded": false
+          },
+          "ms": 3117.61,
+          "seconds": 1.44,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Thank you.",
+            "language": "en",
+            "language_probability": 0.6617395877838135,
+            "avg_logprob": -0.9672985474268595,
+            "no_speech_prob": 0.8600500226020813,
+            "compression_ratio": 0.5555555555555556,
+            "segment_count": 1,
+            "duration_seconds": 0.84,
+            "raw_text": "Thank you.",
+            "runaway_guarded": false
+          },
+          "ms": 3104.17,
+          "seconds": 0.84,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "reference_characters": 66,
+      "errors": 14,
+      "cer": 0.21212121212121213
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "segments": [
+        {
+          "asr": {
+            "text": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+            "language": "ru",
+            "language_probability": 0.9928978681564331,
+            "avg_logprob": -0.20331983864307404,
+            "no_speech_prob": 0.03747549653053284,
+            "compression_ratio": 1.5032679738562091,
+            "segment_count": 2,
+            "duration_seconds": 7.92,
+            "raw_text": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+            "runaway_guarded": false
+          },
+          "ms": 3337.3,
+          "seconds": 7.92,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 0,
+      "cer": 0.0
+    },
+    {
+      "id": "fleurs-ru-test-1917-10011799110630615565",
+      "language": "ru",
+      "reference": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": "Thank you. В различных местах Рима были установлены большие телевизионные экраны с помощью. которых люди могли наблюдать за церемонией.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Thank you.",
+            "language": "en",
+            "language_probability": 0.703154981136322,
+            "avg_logprob": -0.9763973951339722,
+            "no_speech_prob": 0.7555444836616516,
+            "compression_ratio": 0.5555555555555556,
+            "segment_count": 1,
+            "duration_seconds": 0.48,
+            "raw_text": "Thank you.",
+            "runaway_guarded": false
+          },
+          "ms": 3057.31,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "В различных местах Рима были установлены большие телевизионные экраны с помощью.",
+            "language": "ru",
+            "language_probability": 0.9873847961425781,
+            "avg_logprob": -0.19778118972425107,
+            "no_speech_prob": 0.11139875650405884,
+            "compression_ratio": 1.3185840707964602,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "В различных местах Рима были установлены большие телевизионные экраны с помощью.",
+            "runaway_guarded": false
+          },
+          "ms": 3233.32,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "которых люди могли наблюдать за церемонией.",
+            "language": "ru",
+            "language_probability": 0.9992852807044983,
+            "avg_logprob": -0.15153700964791433,
+            "no_speech_prob": 0.00202210177667439,
+            "compression_ratio": 1.095890410958904,
+            "segment_count": 1,
+            "duration_seconds": 2.4,
+            "raw_text": "которых люди могли наблюдать за церемонией.",
+            "runaway_guarded": false
+          },
+          "ms": 3104.59,
+          "seconds": 2.4,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 106,
+      "errors": 8,
+      "cer": 0.07547169811320754
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "context_small",
+      "path": "whole",
+      "hypothesis": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные цези ИЁД.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные цези ИЁД.",
+            "language": "ru",
+            "language_probability": 0.9891645312309265,
+            "avg_logprob": -0.2911205093065898,
+            "no_speech_prob": 0.01825072057545185,
+            "compression_ratio": 1.347457627118644,
+            "segment_count": 1,
+            "duration_seconds": 7.2,
+            "raw_text": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные цези ИЁД.",
+            "runaway_guarded": false
+          },
+          "ms": 3303.04,
+          "seconds": 7.2,
+          "reason": "whole"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 4,
+      "cer": 0.05263157894736842
+    },
+    {
+      "id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "profile": "context_small",
+      "path": "capture_cut",
+      "hypothesis": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные цези и йод.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные",
+            "language": "ru",
+            "language_probability": 0.977837085723877,
+            "avg_logprob": -0.21034700689571245,
+            "no_speech_prob": 0.11144334077835083,
+            "compression_ratio": 1.3653846153846154,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "Согласно ядерному управлению Японии на заводе были обнаружены радиоактивные",
+            "runaway_guarded": false
+          },
+          "ms": 3345.63,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "цези и йод.",
+            "language": "ru",
+            "language_probability": 0.9068819284439087,
+            "avg_logprob": -0.764168643951416,
+            "no_speech_prob": 0.4456910789012909,
+            "compression_ratio": 0.7307692307692307,
+            "segment_count": 1,
+            "duration_seconds": 1.56,
+            "raw_text": "цези и йод.",
+            "runaway_guarded": false
+          },
+          "ms": 3114.86,
+          "seconds": 1.56,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "reference_characters": 76,
+      "errors": 2,
+      "cer": 0.02631578947368421
+    }
+  ],
+  "scope": "offline production capture segmentation and recognizer, no asynchronous queues or live audio",
+  "api_requests": 0,
+  "human_review": "pending"
+}

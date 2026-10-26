@@ -1,0 +1,623 @@
+{
+  "profiles": {
+    "legacy": {
+      "model": "base",
+      "threads": 1,
+      "beam": 1,
+      "maximum": 3.0,
+      "pre_roll": 300,
+      "idle": 350
+    },
+    "language_aware": {
+      "resolver": "production effective_speech_config"
+    }
+  },
+  "records": [
+    {
+      "id": "fleurs-ru-holdout-1763-10203706952618084109",
+      "language": "ru",
+      "reference": "Так же, как Луна притягивает Землю, при этом вызывая приливы, так и Млечный Путь воздействует на галактику в Стрельце.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "Так же, как Луна притягивать землю, при этом вызывая преливы, так и млечный путь воздействует на галактику стрельцы.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Так же, как Луна притягивать землю, при этом вызывая преливы, так и млечный путь воздействует на галактику стрельцы.",
+            "language": "ru",
+            "language_probability": 0.996117115020752,
+            "avg_logprob": -0.3448030296713114,
+            "no_speech_prob": 0.03757556527853012,
+            "compression_ratio": 1.4652777777777777,
+            "segment_count": 1,
+            "duration_seconds": 8.28,
+            "raw_text": "Так же, как Луна притягивать землю, при этом вызывая преливы, так и млечный путь воздействует на галактику стрельцы.",
+            "runaway_guarded": false
+          },
+          "ms": 1813.09,
+          "cpu_seconds": 1.765625,
+          "seconds": 8.28,
+          "reason": "whole"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 96,
+      "errors": 5,
+      "cer": 0.052083333333333336
+    },
+    {
+      "id": "fleurs-ru-holdout-1763-10203706952618084109",
+      "language": "ru",
+      "reference": "Так же, как Луна притягивает Землю, при этом вызывая приливы, так и Млечный Путь воздействует на галактику в Стрельце.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "Так же, как Луна притягивает землю, при этом выс... и вызываю приливы так и млечит и путь воздействовать на галактику. стрельцы. you",
+      "segments": [
+        {
+          "asr": {
+            "text": "Так же, как Луна притягивает землю, при этом выс...",
+            "language": "ru",
+            "language_probability": 0.9964855909347534,
+            "avg_logprob": -0.584055556492372,
+            "no_speech_prob": 0.0562991239130497,
+            "compression_ratio": 1.0853658536585367,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "Так же, как Луна притягивает землю, при этом выс...",
+            "runaway_guarded": false
+          },
+          "ms": 1679.01,
+          "cpu_seconds": 1.65625,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "и вызываю приливы так и млечит и путь воздействовать на галактику.",
+            "language": "ru",
+            "language_probability": 0.9486751556396484,
+            "avg_logprob": -0.6298289381224533,
+            "no_speech_prob": 0.3792349696159363,
+            "compression_ratio": 1.2474226804123711,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "и вызываю приливы так и млечит и путь воздействовать на галактику.",
+            "runaway_guarded": false
+          },
+          "ms": 1733.74,
+          "cpu_seconds": 1.671875,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "стрельцы.",
+            "language": "ru",
+            "language_probability": 0.848738431930542,
+            "avg_logprob": -0.7019446236746651,
+            "no_speech_prob": 0.32920870184898376,
+            "compression_ratio": 0.6538461538461539,
+            "segment_count": 1,
+            "duration_seconds": 1.2,
+            "raw_text": "стрельцы.",
+            "runaway_guarded": false
+          },
+          "ms": 1618.21,
+          "cpu_seconds": 1.578125,
+          "seconds": 1.2,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "you",
+            "language": "en",
+            "language_probability": 0.6108638644218445,
+            "avg_logprob": -1.4951562881469727,
+            "no_speech_prob": 0.5976424813270569,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.72,
+            "raw_text": "you",
+            "runaway_guarded": false
+          },
+          "ms": 1608.81,
+          "cpu_seconds": 1.59375,
+          "seconds": 0.72,
+          "reason": "静音结束/低于语音门限"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 96,
+      "errors": 17,
+      "cer": 0.17708333333333334
+    },
+    {
+      "id": "fleurs-ru-holdout-1884-10218496378622054093",
+      "language": "ru",
+      "reference": "В частности, утверждается, что можно определить, лжет ли человек, при помощи правильной интерпретации его микровыражений.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "В частности утверждается, что можно определить лужот для человек при помощи правильной терпритации его микроворожений.",
+      "segments": [
+        {
+          "asr": {
+            "text": "В частности утверждается, что можно определить лужот для человек при помощи правильной терпритации его микроворожений.",
+            "language": "ru",
+            "language_probability": 0.9839271903038025,
+            "avg_logprob": -0.4579284198227383,
+            "no_speech_prob": 0.024862118065357208,
+            "compression_ratio": 1.5492957746478873,
+            "segment_count": 3,
+            "duration_seconds": 8.34,
+            "raw_text": "В частности утверждается, что можно определить лужот для человек при помощи правильной терпритации его микроворожений.",
+            "runaway_guarded": false
+          },
+          "ms": 1781.5,
+          "cpu_seconds": 1.71875,
+          "seconds": 8.34,
+          "reason": "whole"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 102,
+      "errors": 9,
+      "cer": 0.08823529411764706
+    },
+    {
+      "id": "fleurs-ru-holdout-1884-10218496378622054093",
+      "language": "ru",
+      "reference": "В частности, утверждается, что можно определить, лжет ли человек, при помощи правильной интерпретации его микровыражений.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": " в частности, кто ждается, что можно определить. для человек при помощи правильной интерпретации его. кроворажений.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6503512859344482,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1628.36,
+          "cpu_seconds": 1.5625,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "в частности, кто ждается, что можно определить.",
+            "language": "ru",
+            "language_probability": 0.9785014986991882,
+            "avg_logprob": -0.5535353533923626,
+            "no_speech_prob": 0.09080802649259567,
+            "compression_ratio": 1.103896103896104,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "в частности, кто ждается, что можно определить.",
+            "runaway_guarded": false
+          },
+          "ms": 1674.33,
+          "cpu_seconds": 1.65625,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "для человек при помощи правильной интерпретации его.",
+            "language": "ru",
+            "language_probability": 0.9258466958999634,
+            "avg_logprob": -0.4750158085542567,
+            "no_speech_prob": 0.2625713646411896,
+            "compression_ratio": 1.1686746987951808,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "для человек при помощи правильной интерпретации его.",
+            "runaway_guarded": false
+          },
+          "ms": 1658.6,
+          "cpu_seconds": 1.578125,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "кроворажений.",
+            "language": "ru",
+            "language_probability": 0.7603088617324829,
+            "avg_logprob": -1.0585530996322632,
+            "no_speech_prob": 0.3018946647644043,
+            "compression_ratio": 0.7352941176470589,
+            "segment_count": 1,
+            "duration_seconds": 1.32,
+            "raw_text": "кроворажений.",
+            "runaway_guarded": false
+          },
+          "ms": 1649.64,
+          "cpu_seconds": 1.5625,
+          "seconds": 1.32,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 102,
+      "errors": 12,
+      "cer": 0.11764705882352941
+    },
+    {
+      "id": "fleurs-ru-holdout-1891-10270509144878549012",
+      "language": "ru",
+      "reference": "Лаккха Сингх исполнил чхаппан бхог бхаджан.  Певец Раджу Кханделвал пел вместе с ним.",
+      "profile": "legacy",
+      "path": "whole",
+      "hypothesis": "Лака Синг исполнил чхап-пан-пхоп-хаджан, бевец раджу. Хандалвал пел вместе с ним.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Лака Синг исполнил чхап-пан-пхоп-хаджан, бевец раджу. Хандалвал пел вместе с ним.",
+            "language": "ru",
+            "language_probability": 0.853849470615387,
+            "avg_logprob": -0.5284534895673711,
+            "no_speech_prob": 0.060522861778736115,
+            "compression_ratio": 1.3272727272727274,
+            "segment_count": 2,
+            "duration_seconds": 8.88,
+            "raw_text": "Лака Синг исполнил чхап-пан-пхоп-хаджан, бевец раджу. Хандалвал пел вместе с ним.",
+            "runaway_guarded": false
+          },
+          "ms": 1839.01,
+          "cpu_seconds": 1.828125,
+          "seconds": 8.88,
+          "reason": "whole"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 70,
+      "errors": 9,
+      "cer": 0.12857142857142856
+    },
+    {
+      "id": "fleurs-ru-holdout-1891-10270509144878549012",
+      "language": "ru",
+      "reference": "Лаккха Сингх исполнил чхаппан бхог бхаджан.  Певец Раджу Кханделвал пел вместе с ним.",
+      "profile": "legacy",
+      "path": "capture_cut",
+      "hypothesis": "Лака Синг исполнил чхап-бан-пхоп. Аджан, привет, раджу! андолвал пил вместе с ним. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "Лака Синг исполнил чхап-бан-пхоп.",
+            "language": "ru",
+            "language_probability": 0.48225489258766174,
+            "avg_logprob": -0.5947775407270952,
+            "no_speech_prob": 0.013752439990639687,
+            "compression_ratio": 0.9230769230769231,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "Лака Синг исполнил чхап-бан-пхоп.",
+            "runaway_guarded": false
+          },
+          "ms": 1714.64,
+          "cpu_seconds": 1.6875,
+          "seconds": 3.12,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "Аджан, привет, раджу!",
+            "language": "ru",
+            "language_probability": 0.8370004892349243,
+            "avg_logprob": -0.8653001051682693,
+            "no_speech_prob": 0.1522337645292282,
+            "compression_ratio": 0.8409090909090909,
+            "segment_count": 1,
+            "duration_seconds": 3.0,
+            "raw_text": "Аджан, привет, раджу!",
+            "runaway_guarded": false
+          },
+          "ms": 1671.44,
+          "cpu_seconds": 1.609375,
+          "seconds": 3.0,
+          "reason": "达到最长 3s"
+        },
+        {
+          "asr": {
+            "text": "андолвал пил вместе с ним.",
+            "language": "ru",
+            "language_probability": 0.5198253393173218,
+            "avg_logprob": -0.6328815519809723,
+            "no_speech_prob": 0.1863335222005844,
+            "compression_ratio": 0.8867924528301887,
+            "segment_count": 1,
+            "duration_seconds": 2.4,
+            "raw_text": "андолвал пил вместе с ним.",
+            "runaway_guarded": false
+          },
+          "ms": 1653.82,
+          "cpu_seconds": 1.609375,
+          "seconds": 2.4,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6365213394165039,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 1606.11,
+          "cpu_seconds": 1.578125,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 1,
+        "language": "auto"
+      },
+      "reference_characters": 70,
+      "errors": 15,
+      "cer": 0.21428571428571427
+    },
+    {
+      "id": "fleurs-ru-holdout-1763-10203706952618084109",
+      "language": "ru",
+      "reference": "Так же, как Луна притягивает Землю, при этом вызывая приливы, так и Млечный Путь воздействует на галактику в Стрельце.",
+      "profile": "language_aware",
+      "path": "capture_cut",
+      "hypothesis": "Так же как Луна притягивает землю, при этом вызывая преливы так и мле. и путь воздействовать на галактику стрельцы. you",
+      "segments": [
+        {
+          "asr": {
+            "text": "Так же как Луна притягивает землю, при этом вызывая преливы так и мле.",
+            "language": "ru",
+            "language_probability": 0.991081178188324,
+            "avg_logprob": -0.4257953395446142,
+            "no_speech_prob": 0.05591945722699165,
+            "compression_ratio": 1.2857142857142858,
+            "segment_count": 1,
+            "duration_seconds": 4.56,
+            "raw_text": "Так же как Луна притягивает землю, при этом вызывая преливы так и мле.",
+            "runaway_guarded": false
+          },
+          "ms": 1028.07,
+          "cpu_seconds": 2.109375,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "и путь воздействовать на галактику стрельцы.",
+            "language": "ru",
+            "language_probability": 0.9933183193206787,
+            "avg_logprob": -0.4974722423051533,
+            "no_speech_prob": 0.11655384302139282,
+            "compression_ratio": 1.0789473684210527,
+            "segment_count": 1,
+            "duration_seconds": 2.88,
+            "raw_text": "и путь воздействовать на галактику стрельцы.",
+            "runaway_guarded": false
+          },
+          "ms": 1025.27,
+          "cpu_seconds": 2.046875,
+          "seconds": 2.88,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "you",
+            "language": "en",
+            "language_probability": 0.6108638644218445,
+            "avg_logprob": -1.4951562881469727,
+            "no_speech_prob": 0.5976424813270569,
+            "compression_ratio": 0.2727272727272727,
+            "segment_count": 1,
+            "duration_seconds": 0.72,
+            "raw_text": "you",
+            "runaway_guarded": false
+          },
+          "ms": 941.61,
+          "cpu_seconds": 1.828125,
+          "seconds": 0.72,
+          "reason": "静音结束/低于语音门限"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 96,
+      "errors": 14,
+      "cer": 0.14583333333333334
+    },
+    {
+      "id": "fleurs-ru-holdout-1884-10218496378622054093",
+      "language": "ru",
+      "reference": "В частности, утверждается, что можно определить, лжет ли человек, при помощи правильной интерпретации его микровыражений.",
+      "profile": "language_aware",
+      "path": "capture_cut",
+      "hypothesis": " В частности, ух ты ожидается, что можно определить лужот для человек при помощи. равенную интерпретацию его микроворажений.",
+      "segments": [
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6503512859344482,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 959.14,
+          "cpu_seconds": 1.890625,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        },
+        {
+          "asr": {
+            "text": "В частности, ух ты ожидается, что можно определить лужот для человек при помощи.",
+            "language": "ru",
+            "language_probability": 0.9765728116035461,
+            "avg_logprob": -0.7243223062583378,
+            "no_speech_prob": 0.05145401135087013,
+            "compression_ratio": 1.3181818181818181,
+            "segment_count": 2,
+            "duration_seconds": 4.56,
+            "raw_text": "В частности, ух ты ожидается, что можно определить лужот для человек при помощи.",
+            "runaway_guarded": false
+          },
+          "ms": 1044.12,
+          "cpu_seconds": 2.0625,
+          "seconds": 4.56,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "равенную интерпретацию его микроворажений.",
+            "language": "ru",
+            "language_probability": 0.9725296497344971,
+            "avg_logprob": -0.6730690002441406,
+            "no_speech_prob": 0.11514990031719208,
+            "compression_ratio": 1.0666666666666667,
+            "segment_count": 1,
+            "duration_seconds": 3.12,
+            "raw_text": "равенную интерпретацию его микроворажений.",
+            "runaway_guarded": false
+          },
+          "ms": 993.68,
+          "cpu_seconds": 1.9375,
+          "seconds": 3.12,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 102,
+      "errors": 17,
+      "cer": 0.16666666666666666
+    },
+    {
+      "id": "fleurs-ru-holdout-1891-10270509144878549012",
+      "language": "ru",
+      "reference": "Лаккха Сингх исполнил чхаппан бхог бхаджан.  Певец Раджу Кханделвал пел вместе с ним.",
+      "profile": "language_aware",
+      "path": "capture_cut",
+      "hypothesis": "Лакосинг исполнил чхап-пан-пхоп-хаджан. Привет! Раджу, хандолвал пел вместе с ним. ",
+      "segments": [
+        {
+          "asr": {
+            "text": "Лакосинг исполнил чхап-пан-пхоп-хаджан. Привет!",
+            "language": "ru",
+            "language_probability": 0.8873835802078247,
+            "avg_logprob": -0.572679715771829,
+            "no_speech_prob": 0.04912624880671501,
+            "compression_ratio": 1.1025641025641026,
+            "segment_count": 2,
+            "duration_seconds": 4.68,
+            "raw_text": "Лакосинг исполнил чхап-пан-пхоп-хаджан. Привет!",
+            "runaway_guarded": false
+          },
+          "ms": 1070.95,
+          "cpu_seconds": 2.09375,
+          "seconds": 4.68,
+          "reason": "达到最长 4.5s"
+        },
+        {
+          "asr": {
+            "text": "Раджу, хандолвал пел вместе с ним.",
+            "language": "ru",
+            "language_probability": 0.9418151378631592,
+            "avg_logprob": -0.5557350416978201,
+            "no_speech_prob": 0.26788896322250366,
+            "compression_ratio": 0.9384615384615385,
+            "segment_count": 1,
+            "duration_seconds": 3.96,
+            "raw_text": "Раджу, хандолвал пел вместе с ним.",
+            "runaway_guarded": false
+          },
+          "ms": 1010.89,
+          "cpu_seconds": 2.0,
+          "seconds": 3.96,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "en",
+            "language_probability": 0.6365213394165039,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 0.48,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 971.22,
+          "cpu_seconds": 1.8125,
+          "seconds": 0.48,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 1,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 70,
+      "errors": 12,
+      "cer": 0.17142857142857143
+    }
+  ],
+  "scope": "offline production capture segmentation and recognizer, no asynchronous queues or live audio",
+  "api_requests": 0,
+  "human_review": "pending"
+}

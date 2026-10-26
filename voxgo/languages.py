@@ -15,7 +15,12 @@ LANGUAGE_ALIASES = {
 OPPOSITE_LANGUAGE = {"en": "zh", "zh": "en"}  # Legacy bidirectional flow only.
 DEFAULT_TARGET_LANGUAGE = {**OPPOSITE_LANGUAGE, "ja": "zh", "ko": "zh", "ru": "zh"}
 LOCAL_DIRECTIONS = frozenset(OPPOSITE_LANGUAGE.items())
-ONLINE_DIRECTIONS = frozenset({*DEFAULT_TARGET_LANGUAGE.items(), ("zh", "ja")})
+NEW_SPEECH_LANGUAGES = ("ja", "ko", "ru")
+ONLINE_DIRECTIONS = frozenset({
+    *LOCAL_DIRECTIONS,
+    *((source, target) for source in NEW_SPEECH_LANGUAGES for target in ("zh", "en")),
+    *((source, target) for source in ("zh", "en") for target in NEW_SPEECH_LANGUAGES),
+})
 
 
 def normalize_language_code(value: str, default: str = "") -> str:
@@ -41,8 +46,8 @@ def translation_direction_error(provider: str, source: str, target: str) -> str:
     directions = LOCAL_DIRECTIONS if provider == "local" else ONLINE_DIRECTIONS
     if provider not in {"local", "google", "openai_compatible"} or (source, target) not in directions:
         if provider == "local":
-            return "[未翻译] 离线翻译仅支持英语 ↔ 中文；日/韩/俄 → 中文需自行选择在线服务并配置 API Key。Offline supports English ↔ Chinese only."
-        return "[未翻译] 不支持此语言方向。Supported: en/ja/ko/ru → zh, zh → en/ja."
+            return "[未翻译] 离线翻译仅支持英语 ↔ 中文；日/韩/俄相关方向需自行选择在线服务并配置 API Key。Offline supports English ↔ Chinese only."
+        return "[未翻译] 不支持此语言方向。Supported: English ↔ Chinese; Japanese/Korean/Russian ↔ English/Chinese."
     return ""
 
 

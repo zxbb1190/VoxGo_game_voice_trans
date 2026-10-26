@@ -4,6 +4,7 @@
 """
 
 import argparse
+import copy
 import os
 import signal
 import sys
@@ -27,6 +28,7 @@ from voxgo.asr.whisper_engine import (
     normalize_model_download_endpoint,
     normalize_model_download_source,
 )
+from voxgo.asr.language_profiles import effective_speech_config, audio_runtime_signature
 from voxgo.translation import (
     TranslationConfig,
     normalize_translation_provider,
@@ -113,7 +115,7 @@ class VoxGoApp:
         self._tray = TrayController(self)
         self._settings_controller = OverlaySettingsController(self)
         self._audio = AudioRuntime(
-            lambda: self.config,
+            self._speech_runtime_config,
             self._on_speech_detected,
             self._notify_user,
             self._write_crash_report,
@@ -171,6 +173,8 @@ class VoxGoApp:
             self.config.translation.source_lang,
             self.config.translation.target_lang,
         )
+        self._last_speech_audio_signature = audio_runtime_signature(self.config)
+        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "language_aware")
         self._language_flow_revision = 1
         self._last_whisper_device = _normalize_whisper_device(self.config.whisper.device)
         self._last_model_download_source = (
@@ -199,7 +203,7 @@ class VoxGoApp:
         )
         self._translation.set_language_revision_getter(lambda: self._language_flow_revision)
         self._speech_pipeline = SpeechPipeline(
-            lambda: self.config,
+            self._speech_runtime_config,
             lambda: self._speech_recognizer,
             self._event_bus,
             self._stats,
@@ -387,15 +391,14 @@ class VoxGoApp:
         cleared_audio_blocks = self._audio.clear_pending_audio()
         current_model = self._effective_whisper_model_size()
         if self._speech_recognizer and previous_model and current_model != previous_model:
-            self._speech_recognizer.config = self.config.whisper
-            self._speech_recognizer.cleanup()
+            self._queue_recognizer_config()
             logger.info(
                 "Whisper model will reload for language direction: {} -> {}",
                 previous_model,
                 current_model,
             )
         elif self._speech_recognizer:
-            self._speech_recognizer.config = self.config.whisper
+            self._queue_recognizer_config()
         logger.info(
             "language flow changed: revision={}, direction={}->{}, cleared_audio_blocks={}",
             self._language_flow_revision,
@@ -404,11 +407,25 @@ class VoxGoApp:
             cleared_audio_blocks,
         )
 
+    def _speech_runtime_config(self):
+        return effective_speech_config(self.config)
+
+    def _queue_recognizer_config(self):
+        if not self._speech_recognizer:
+            return
+        config = self._speech_runtime_config().whisper
+        if hasattr(self._speech_recognizer, "request_config"):
+            self._speech_recognizer.request_config(config)
+        else:
+            # Compatibility with integrations supplying their own recognizer.
+            self._speech_recognizer.config = config
+
     def _effective_whisper_model_size(self) -> str:
-        active = str(getattr(self.config.whisper, "active_model_size", "") or "").strip()
+        whisper = self._speech_runtime_config().whisper
+        active = str(getattr(whisper, "active_model_size", "") or "").strip()
         if active:
             return active
-        return str(getattr(self.config.whisper, "model_size", "small") or "small").strip() or "small"
+        return str(getattr(whisper, "model_size", "small") or "small").strip() or "small"
 
     def _current_recognizer_model_size(self) -> str:
         if self._speech_recognizer:
@@ -420,6 +437,8 @@ class VoxGoApp:
         return self._effective_whisper_model_size()
 
     def _refresh_cached_settings(self):
+        self._last_speech_audio_signature = audio_runtime_signature(self.config)
+        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "language_aware")
         self._last_audio_device = (
             self.config.audio.input_device_id,
             self.config.audio.input_device_index,
@@ -1279,7 +1298,7 @@ class VoxGoApp:
         try:
             self._notify_user("语音识别模型", "正在后台加载 Whisper 模型，首次运行可能需要等待", "状态")
             self._speech_recognizer = SpeechRecognizer(
-                self.config.whisper,
+                copy.deepcopy(self._speech_runtime_config().whisper),
                 self._notify_model_download_progress,
                 self._notify_recognition_device_fallback,
             )
@@ -1289,6 +1308,7 @@ class VoxGoApp:
                 reset_model_cache(self._speech_recognizer._model_dir,
                                   self._speech_recognizer._effective_model_size())
                 self.config.whisper.local_files_only = False
+                self._speech_recognizer.config.local_files_only = False
             self._translation.initialize(self.config.translation)
             self._speech_recognizer.initialize()
             if self._stopping:

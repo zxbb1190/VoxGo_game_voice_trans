@@ -73,3 +73,5 @@ class SpeechWorkItem:
     target_lang: str = ""
     whisper_language: str = ""
     language_revision: int = 0
+    # Local inference settings captured at enqueue; never serialized/uploaded.
+    whisper_config_snapshot: object = None

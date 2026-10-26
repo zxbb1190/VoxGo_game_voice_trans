@@ -1,0 +1,788 @@
+{
+  "started_utc": "2026-10-26T10:25:40.799992+00:00",
+  "status": "complete",
+  "requested_model": "tencent/Hunyuan-MT-7B",
+  "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "parameters": {
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "timeout_seconds": 12,
+    "max_concurrent_requests": 1,
+    "enable_local_phrase_cache": true
+  },
+  "system_prompt_sha256": {
+    "ja": "60d89783abf4c6c9a3502d35fc27e7e3c65106c88e3e898655c319d5735974b2",
+    "ko": "d4516e98eab48adab7633d5e2ab57dc7337dc845365086b49da0bb42af7b7103",
+    "ru": "89126f5b84f0c0e7c5288f9b4a90cb8d742d411d2d6774af6384f36f9f3055e7"
+  },
+  "planned_http_attempts": 28,
+  "http_attempts": 28,
+  "records": [
+    {
+      "case_id": "repair-en-ja-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ja",
+      "input": "Two enemies on the left. Do not push until I reload.",
+      "raw_translation": "左側に敵が2人います。リロードするまで前進しないでください。",
+      "display_translation": "左側に敵が2人います。リロードするまで前進しないでください。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 259,
+        "completion_tokens": 24,
+        "total_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 259
+      },
+      "elapsed_ms": 719.45,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-ja-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ja",
+      "input": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "raw_translation": "もし北のドアが13秒間閉じたままなら、代わりに下のトンネルを使ってください。",
+      "display_translation": "もし北のドアが13秒間閉じたままなら、代わりに下のトンネルを使ってください。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 261,
+        "completion_tokens": 34,
+        "total_tokens": 295,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 37
+      },
+      "elapsed_ms": 797.12,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-ko-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ko",
+      "input": "Two enemies on the left. Do not push until I reload.",
+      "raw_translation": "왼쪽에 적 두 명이 있어요. 제가 재장전할 때까지 전진하지 마세요.",
+      "display_translation": "왼쪽에 적 두 명이 있어요. 제가 재장전할 때까지 전진하지 마세요.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 32,
+        "total_tokens": 292,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 260
+      },
+      "elapsed_ms": 764.99,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-ko-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ko",
+      "input": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "raw_translation": "북쪽 문이 13초 동안 닫혀 있으면, 대신 아래쪽 터널을 사용하세요.",
+      "display_translation": "북쪽 문이 13초 동안 닫혀 있으면, 대신 아래쪽 터널을 사용하세요.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 262,
+        "completion_tokens": 34,
+        "total_tokens": 296,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 262
+      },
+      "elapsed_ms": 1056.11,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-ru-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ru",
+      "input": "Two enemies on the left. Do not push until I reload.",
+      "raw_translation": "Слева два врага. Не начинайте атаку, пока я не перезарядю оружие.",
+      "display_translation": "Слева два врага. Не начинайте атаку, пока я не перезарядю оружие.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 36,
+        "total_tokens": 296,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 100
+      },
+      "elapsed_ms": 1698.69,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-ru-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ru",
+      "input": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "raw_translation": "Если северная дверь останется закрытой в течение тринадцати секунд, используйте нижний туннель вместо нее.",
+      "display_translation": "Если северная дверь останется закрытой в течение тринадцати секунд, используйте нижний туннель вместо нее.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 262,
+        "completion_tokens": 50,
+        "total_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 38
+      },
+      "elapsed_ms": 1675.33,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-zh-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "input": "Two enemies on the left. Do not push until I reload.",
+      "raw_translation": "左边有两个敌人。在我重新装弹之前不要推进。",
+      "display_translation": "左边有两个敌人。在我重新装弹之前不要推进。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 12,
+        "total_tokens": 267,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 95
+      },
+      "elapsed_ms": 428.09,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-en-zh-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "input": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "raw_translation": "如果北门关闭了十三秒，请改走下面的隧道。",
+      "display_translation": "如果北门关闭了十三秒，请改走下面的隧道。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 257,
+        "completion_tokens": 13,
+        "total_tokens": 270,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 97
+      },
+      "elapsed_ms": 418.69,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ja-en-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "input": "左に二人いる。リロードが終わるまで前に出ないで。",
+      "raw_translation": "There are two people on the left. Don't move forward until the reload is complete.",
+      "display_translation": "There are two people on the left. Don't move forward until the reload is complete.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 18,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 107
+      },
+      "elapsed_ms": 583.87,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ja-en-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "input": "北の扉が十三秒間開かなければ、下の通路を通ろう。",
+      "raw_translation": "If the north door doesn't open for thirteen seconds, we'll have to go through the lower passage.",
+      "display_translation": "If the north door doesn't open for thirteen seconds, we'll have to go through the lower passage.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 21,
+        "total_tokens": 289,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 108
+      },
+      "elapsed_ms": 2876.31,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ja-zh-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "左に二人いる。リロードが終わるまで前に出ないで。",
+      "raw_translation": "左边有两个人。在重新加载完成之前，不要往前走。",
+      "display_translation": "左边有两个人。在重新加载完成之前，不要往前走。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 14,
+        "total_tokens": 281,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 107
+      },
+      "elapsed_ms": 733.06,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ja-zh-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "北の扉が十三秒間開かなければ、下の通路を通ろう。",
+      "raw_translation": "如果北边的门在十三秒内没有打开，我们就从下面的通道过去。",
+      "display_translation": "如果北边的门在十三秒内没有打开，我们就从下面的通道过去。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 17,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 44
+      },
+      "elapsed_ms": 556.14,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ko-en-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ko",
+      "target_lang": "en",
+      "input": "오른쪽에 세 명 있어. 내가 연막을 던질 때까지 쏘지 마.",
+      "raw_translation": "There are three people on the right. Don't shoot until I throw the smoke screen.",
+      "display_translation": "There are three people on the right. Don't shoot until I throw the smoke screen.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 18,
+        "total_tokens": 297,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 119
+      },
+      "elapsed_ms": 518.87,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ko-en-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ko",
+      "target_lang": "en",
+      "input": "아군이 아직 부활하지 않았으면, 칠 초가 남아도 순간이동을 시작하지 마.",
+      "raw_translation": "If our teammates haven't revived yet, don't start teleporting, even if there are still seven seconds left.",
+      "display_translation": "If our teammates haven't revived yet, don't start teleporting, even if there are still seven seconds left.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 281,
+        "completion_tokens": 23,
+        "total_tokens": 304,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 121
+      },
+      "elapsed_ms": 717.71,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ko-zh-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "오른쪽에 세 명 있어. 내가 연막을 던질 때까지 쏘지 마.",
+      "raw_translation": "右边有三个人。在我扔出烟幕弹之前，不要开枪。",
+      "display_translation": "右边有三个人。在我扔出烟幕弹之前，不要开枪。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 279,
+        "completion_tokens": 16,
+        "total_tokens": 295,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 119
+      },
+      "elapsed_ms": 457.54,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ko-zh-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "아군이 아직 부활하지 않았으면, 칠 초가 남아도 순간이동을 시작하지 마.",
+      "raw_translation": "如果己方队员还没有复活，即使还剩七秒钟，也不要开始瞬移。",
+      "display_translation": "如果己方队员还没有复活，即使还剩七秒钟，也不要开始瞬移。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 281,
+        "completion_tokens": 18,
+        "total_tokens": 299,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 57
+      },
+      "elapsed_ms": 501.85,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ru-en-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ru",
+      "target_lang": "en",
+      "input": "Слева двое. Не выходи, пока я не перезаряжусь.",
+      "raw_translation": "There are two people on the left. Don't come out until I've recharged.",
+      "display_translation": "There are two people on the left. Don't come out until I've recharged.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 18,
+        "total_tokens": 290,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 112
+      },
+      "elapsed_ms": 574.81,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ru-en-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ru",
+      "target_lang": "en",
+      "input": "Если северная дверь не откроется за тринадцать секунд, идите через нижний туннель.",
+      "raw_translation": "If the north door doesn't open within thirteen seconds, go through the lower tunnel.",
+      "display_translation": "If the north door doesn't open within thirteen seconds, go through the lower tunnel.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 288,
+        "completion_tokens": 17,
+        "total_tokens": 305,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 64
+      },
+      "elapsed_ms": 472.25,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ru-zh-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Слева двое. Не выходи, пока я не перезаряжусь.",
+      "raw_translation": "左边有两个人。在我重新装弹之前，不要出来。",
+      "display_translation": "左边有两个人。在我重新装弹之前，不要出来。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 13,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 112
+      },
+      "elapsed_ms": 5352.64,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-ru-zh-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Если северная дверь не откроется за тринадцать секунд, идите через нижний туннель.",
+      "raw_translation": "如果北门在十三秒内没有打开，就从下面的隧道过去。",
+      "display_translation": "如果北门在十三秒内没有打开，就从下面的隧道过去。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 288,
+        "completion_tokens": 15,
+        "total_tokens": 303,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 64
+      },
+      "elapsed_ms": 2571.33,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-en-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "input": "右边有三个人，别开枪，等我扔烟再走。",
+      "raw_translation": "There are three people on the right. Don't shoot. Wait until I throw the cigarette away before you leave.",
+      "display_translation": "There are three people on the right. Don't shoot. Wait until I throw the cigarette away before you leave.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 256,
+        "completion_tokens": 23,
+        "total_tokens": 279,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 256
+      },
+      "elapsed_ms": 674.01,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-en-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "input": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "raw_translation": "If your teammate hasn't revived yet, don't activate the teleportation when there are seven seconds left in the countdown.",
+      "display_translation": "If your teammate hasn't revived yet, don't activate the teleportation when there are seven seconds left in the countdown.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 24,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 98
+      },
+      "elapsed_ms": 711.79,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ja-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "input": "右边有三个人，别开枪，等我扔烟再走。",
+      "raw_translation": "右側に3人いるから、撃たないでください。タバコを投げたらから出て行きます。",
+      "display_translation": "右側に3人いるから、撃たないでください。タバコを投げたらから出て行きます。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 31,
+        "total_tokens": 291,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 100
+      },
+      "elapsed_ms": 858.95,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ja-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "input": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "raw_translation": "もしチームメイトがまだ復活していない場合は、カウントダウンが7秒残っている時に転送を開始しないでください。",
+      "display_translation": "もしチームメイトがまだ復活していない場合は、カウントダウンが7秒残っている時に転送を開始しないでください。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 262,
+        "completion_tokens": 46,
+        "total_tokens": 308,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 38
+      },
+      "elapsed_ms": 1234.94,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ko-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ko",
+      "input": "右边有三个人，别开枪，等我扔烟再走。",
+      "raw_translation": "오른쪽에 세 명이 있어요, 총을 쏘지 마세요. 제가 담배를 던진 다음에 가겠습니다.",
+      "display_translation": "오른쪽에 세 명이 있어요, 총을 쏘지 마세요. 제가 담배를 던진 다음에 가겠습니다.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 261,
+        "completion_tokens": 43,
+        "total_tokens": 304,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 101
+      },
+      "elapsed_ms": 2814.24,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ko-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ko",
+      "input": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "raw_translation": "만약 팀원이 아직 부활하지 않았다면, 카운트다운이 7초 남았을 때 이동 기능을 사용하지 마세요.",
+      "display_translation": "만약 팀원이 아직 부활하지 않았다면, 카운트다운이 7초 남았을 때 이동 기능을 사용하지 마세요.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 47,
+        "total_tokens": 310,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 39
+      },
+      "elapsed_ms": 1779.21,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ru-dev",
+      "repeat": 1,
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ru",
+      "input": "右边有三个人，别开枪，等我扔烟再走。",
+      "raw_translation": "Справа трое людей, не стреляйте, подождите, пока я брошу сигарету, и тогда уйдем.",
+      "display_translation": "Справа трое людей, не стреляйте, подождите, пока я брошу сигарету, и тогда уйдем.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 261,
+        "completion_tokens": 43,
+        "total_tokens": 304,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 101
+      },
+      "elapsed_ms": 1245.86,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "repair-zh-ru-holdout",
+      "repeat": 1,
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ru",
+      "input": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "raw_translation": "Если товарищ по команде ещё не воскрес, не активируй телепортацию, когда до конца отсчёта остаётся семь секунд.",
+      "display_translation": "Если товарищ по команде ещё не воскрес, не активируй телепортацию, когда до конца отсчёта остаётся семь секунд.",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 58,
+        "total_tokens": 321,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 39
+      },
+      "elapsed_ms": 2253.53,
+      "human_review": "pending"
+    }
+  ],
+  "human_review": "pending",
+  "release_approved": false,
+  "ended_utc": "2026-10-26T10:26:15.910701+00:00",
+  "input_files_unchanged": {
+    "credentials": true,
+    "candidate_settings": true,
+    "candidate_baseline": true,
+    "corpus": true
+  }
+}

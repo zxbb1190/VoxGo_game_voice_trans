@@ -10,7 +10,8 @@ import json
 import os
 import re
 import time
-from dataclasses import dataclass
+import threading
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Callable, Optional
 from urllib.error import HTTPError, URLError
@@ -203,6 +204,7 @@ class WhisperConfig:
     language: str = "auto"
     # Runtime routing metadata; user-settings serialization remains unchanged.
     source_language: str = ""
+    multilingual_asr_strategy: str = "language_aware"
     beam_size: int = 5
     vad_filter: bool = False
     vad_parameters: dict = None
@@ -275,10 +277,38 @@ class SpeechRecognizer:
         self._notified_device_fallbacks = set()
         self._last_cuda_availability_error = ""
         self._initialized = False
+        self._configuration_lock = threading.Lock()
+        self._pending_config = None
         self._model_dir = Path(self.config.model_dir)
         if not self._model_dir.is_absolute():
             self._model_dir = PROJECT_ROOT / self._model_dir
         logger.info(f"Whisper 模型目录: {self._model_dir}")
+
+    def request_config(self, config):
+        """Queue settings; never unload/change a model during native inference."""
+        copied = replace(config, vad_parameters=sanitize_vad_parameters(
+            DEFAULT_VAD_PARAMS.copy() if config.vad_parameters is None else dict(config.vad_parameters)))
+        with self._configuration_lock:
+            self._pending_config = copied
+
+    @staticmethod
+    def _native_config_key(config):
+        return (config.active_model_size or config.model_size, config.device, config.compute_type,
+                config.auto_cpu_threads, config.cpu_threads, config.num_workers)
+
+    def _apply_pending_config(self, config_override=None):
+        # Called by the speech worker between inferences, never by GUI settings.
+        with self._configuration_lock:
+            pending, self._pending_config = self._pending_config, None
+        if config_override is not None:
+            pending = replace(config_override, vad_parameters=sanitize_vad_parameters(
+                DEFAULT_VAD_PARAMS.copy() if config_override.vad_parameters is None else dict(config_override.vad_parameters)))
+        if pending is None:
+            return
+        reload_model = self._native_config_key(pending) != self._native_config_key(self.config)
+        if reload_model and self._initialized:
+            self.cleanup()
+        self.config = pending
 
     def initialize(self):
         """初始化 Whisper 模型"""
@@ -921,8 +951,10 @@ class SpeechRecognizer:
         audio_bytes: bytes,
         sample_rate: int = 44100,
         language_override: str = None,
+        config_override=None,
     ) -> TranscriptionResult:
         """将音频字节转录为文字，并返回 Whisper 检测到的语言。"""
+        self._apply_pending_config(config_override)
         if not self._initialized:
             self.initialize()
 
@@ -1033,6 +1065,7 @@ class SpeechRecognizer:
 
     def transcribe_audio_file(self, audio_file: str) -> str:
         """转录音频文件"""
+        self._apply_pending_config()
         if not self._initialized:
             self.initialize()
 

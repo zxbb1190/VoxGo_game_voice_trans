@@ -1,0 +1,534 @@
+{
+  "model": "tencent/Hunyuan-MT-7B",
+  "arms": [
+    "reference_full",
+    "actual_fragment",
+    "actual_joined"
+  ],
+  "inputs": [
+    {
+      "id": "case-01",
+      "arm": "reference_full",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 1,
+          "segment_index": null
+        },
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 2,
+          "segment_index": null
+        },
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 5,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-02",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本本の最高の景色を",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 1,
+          "segment_index": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-03",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "見るには島から出て",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 1,
+          "segment_index": 2
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-04",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "クーロンのウォータフロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 1,
+          "segment_index": 3
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-05",
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本本の最高の景色を 見るには島から出て クーロンのウォータフロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 1,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-06",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本本の最高の消息を",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 2,
+          "segment_index": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-07",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "見るには島から出て クーロンのウォード",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 2,
+          "segment_index": 2
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-08",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "サーブロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 2,
+          "segment_index": 3
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-09",
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本本の最高の消息を 見るには島から出て クーロンのウォード サーブロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 2,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-10",
+      "arm": "reference_full",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+          "play_index": 3,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-11",
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "합금은 기본적으로 금속 두기",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+          "play_index": 3,
+          "segment_index": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-12",
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "이상의 혼합물이다. 주기율 표상의 원소가",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+          "play_index": 3,
+          "segment_index": 2
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-13",
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "많이 있다는 것을 잊지 마라",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+          "play_index": 3,
+          "segment_index": 3
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-14",
+      "arm": "actual_joined",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "합금은 기본적으로 금속 두기 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+          "play_index": 3,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-15",
+      "arm": "reference_full",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ru-test-1692-10024935581249406669",
+          "play_index": 4,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-16",
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "К согласной ядерному управлению Японии на заводе б...",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ru-test-1692-10024935581249406669",
+          "play_index": 4,
+          "segment_index": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-17",
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "обнаружено радиоактивный цизи и йод.",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ru-test-1692-10024935581249406669",
+          "play_index": 4,
+          "segment_index": 2
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-18",
+      "arm": "actual_joined",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "К согласной ядерному управлению Японии на заводе б... обнаружено радиоактивный цизи и йод.",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ru-test-1692-10024935581249406669",
+          "play_index": 4,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-19",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本根の最高の消息を",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 5,
+          "segment_index": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-20",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "見るには島から出て クーロンの方を",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 5,
+          "segment_index": 2
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-21",
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "フロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 5,
+          "segment_index": 3
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "id": "case-22",
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "本根の最高の消息を 見るには島から出て クーロンの方を フロントに向かいましょう",
+      "provenance": [
+        {
+          "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+          "play_index": 5,
+          "segment_index": null
+        }
+      ],
+      "human_review": "pending"
+    }
+  ],
+  "schedule": [
+    {
+      "case_id": "case-01",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-02",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-03",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-04",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-05",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-06",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-07",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-08",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-09",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-10",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-11",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-12",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-13",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-14",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-15",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-16",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-17",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-18",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-19",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-20",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-21",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-22",
+      "repeat": 1
+    },
+    {
+      "case_id": "case-22",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-21",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-20",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-19",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-18",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-17",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-16",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-15",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-14",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-13",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-12",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-11",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-10",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-09",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-08",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-07",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-06",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-05",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-04",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-03",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-02",
+      "repeat": 2
+    },
+    {
+      "case_id": "case-01",
+      "repeat": 2
+    }
+  ],
+  "human_review": "pending",
+  "limitations": [
+    "Same 3 recordings; not independent language acceptance or game material.",
+    "Two scheduled replicates are not adaptive retries.",
+    "Joined ASR is a context probe, not a proposed production segmentation change."
+  ]
+}

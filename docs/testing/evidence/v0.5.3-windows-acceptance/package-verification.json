@@ -1,0 +1,10 @@
+{
+  "file": "VoxGo-v0.5.3-caed9130-Windows-Acceptance-LOCAL-ONLY.zip",
+  "bytes": 734002020,
+  "sha256": "55465af34fa4341bb79907e2d23c03e1ec1820154fe6a056103fbadfd99ce3b6",
+  "zip_crc": "pass",
+  "contains_runtime_user_identity": false,
+  "contains_real_api_key": false,
+  "contains_runtime_logs": false,
+  "candidate_exe_unchanged": true
+}

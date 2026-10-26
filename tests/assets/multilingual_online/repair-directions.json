@@ -1,0 +1,286 @@
+{
+  "provenance": "newly_authored_nonprivate_game_phrases",
+  "human_review": "pending",
+  "cases": [
+    {
+      "id": "repair-en-ja-dev",
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ja",
+      "text": "Two enemies on the left. Do not push until I reload.",
+      "reference_meaning": "左边两个敌人；装弹完成前不要进攻",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-ja-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ja",
+      "text": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "reference_meaning": "北门持续关闭13秒才改走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-ko-dev",
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ko",
+      "text": "Two enemies on the left. Do not push until I reload.",
+      "reference_meaning": "左边两个敌人；装弹完成前不要进攻",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-ko-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ko",
+      "text": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "reference_meaning": "北门持续关闭13秒才改走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-ru-dev",
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "ru",
+      "text": "Two enemies on the left. Do not push until I reload.",
+      "reference_meaning": "左边两个敌人；装弹完成前不要进攻",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-ru-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "ru",
+      "text": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "reference_meaning": "北门持续关闭13秒才改走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-zh-dev",
+      "arm": "authored_dev",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "text": "Two enemies on the left. Do not push until I reload.",
+      "reference_meaning": "左边两个敌人；装弹完成前不要进攻",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-en-zh-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "en",
+      "target_lang": "zh",
+      "text": "If the north door stays shut for thirteen seconds, take the lower tunnel instead.",
+      "reference_meaning": "北门持续关闭13秒才改走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ja-en-dev",
+      "arm": "authored_dev",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "text": "左に二人いる。リロードが終わるまで前に出ないで。",
+      "reference_meaning": "左边2人；换弹结束前别向前",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ja-en-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "text": "北の扉が十三秒間開かなければ、下の通路を通ろう。",
+      "reference_meaning": "北门13秒未打开才走下方通道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ja-zh-dev",
+      "arm": "authored_dev",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "左に二人いる。リロードが終わるまで前に出ないで。",
+      "reference_meaning": "左边2人；换弹结束前别向前",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ja-zh-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "text": "北の扉が十三秒間開かなければ、下の通路を通ろう。",
+      "reference_meaning": "北门13秒未打开才走下方通道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ko-en-dev",
+      "arm": "authored_dev",
+      "source_lang": "ko",
+      "target_lang": "en",
+      "text": "오른쪽에 세 명 있어. 내가 연막을 던질 때까지 쏘지 마.",
+      "reference_meaning": "右侧3人；扔烟前别开枪",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ko-en-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ko",
+      "target_lang": "en",
+      "text": "아군이 아직 부활하지 않았으면, 칠 초가 남아도 순간이동을 시작하지 마.",
+      "reference_meaning": "友军未复活时即使剩7秒也别启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ko-zh-dev",
+      "arm": "authored_dev",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "오른쪽에 세 명 있어. 내가 연막을 던질 때까지 쏘지 마.",
+      "reference_meaning": "右侧3人；扔烟前别开枪",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ko-zh-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "text": "아군이 아직 부활하지 않았으면, 칠 초가 남아도 순간이동을 시작하지 마.",
+      "reference_meaning": "友军未复活时即使剩7秒也别启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ru-en-dev",
+      "arm": "authored_dev",
+      "source_lang": "ru",
+      "target_lang": "en",
+      "text": "Слева двое. Не выходи, пока я не перезаряжусь.",
+      "reference_meaning": "左边2人；换弹完成前别出去",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ru-en-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ru",
+      "target_lang": "en",
+      "text": "Если северная дверь не откроется за тринадцать секунд, идите через нижний туннель.",
+      "reference_meaning": "北门13秒内不开才走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ru-zh-dev",
+      "arm": "authored_dev",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "Слева двое. Не выходи, пока я не перезаряжусь.",
+      "reference_meaning": "左边2人；换弹完成前别出去",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-ru-zh-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "text": "Если северная дверь не откроется за тринадцать секунд, идите через нижний туннель.",
+      "reference_meaning": "北门13秒内不开才走下方隧道",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-en-dev",
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "text": "右边有三个人，别开枪，等我扔烟再走。",
+      "reference_meaning": "右边三人；禁止开枪；等扔烟后移动",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-en-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "en",
+      "text": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "reference_meaning": "未复活条件下禁止在剩7秒时启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ja-dev",
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "text": "右边有三个人，别开枪，等我扔烟再走。",
+      "reference_meaning": "右边三人；禁止开枪；等扔烟后移动",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ja-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ja",
+      "text": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "reference_meaning": "未复活条件下禁止在剩7秒时启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ko-dev",
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ko",
+      "text": "右边有三个人，别开枪，等我扔烟再走。",
+      "reference_meaning": "右边三人；禁止开枪；等扔烟后移动",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ko-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ko",
+      "text": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "reference_meaning": "未复活条件下禁止在剩7秒时启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ru-dev",
+      "arm": "authored_dev",
+      "source_lang": "zh",
+      "target_lang": "ru",
+      "text": "右边有三个人，别开枪，等我扔烟再走。",
+      "reference_meaning": "右边三人；禁止开枪；等扔烟后移动",
+      "split": "dev",
+      "human_review": "pending"
+    },
+    {
+      "id": "repair-zh-ru-holdout",
+      "arm": "authored_holdout",
+      "source_lang": "zh",
+      "target_lang": "ru",
+      "text": "如果队友还没复活，就不要在倒计时剩七秒时启动传送。",
+      "reference_meaning": "未复活条件下禁止在剩7秒时启动传送",
+      "split": "holdout",
+      "human_review": "pending"
+    }
+  ]
+}

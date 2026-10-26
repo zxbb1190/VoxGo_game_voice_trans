@@ -155,8 +155,8 @@ def _translation_language_notice(config, ui_language: str) -> str:
     if error:
         if config.provider == "local":
             return _tr(ui_language,
-                "离线翻译仅支持英语 ↔ 中文。日/韩/俄 → 中文需自行选择在线服务并配置 API Key；不会自动切换。",
-                "Offline supports English ↔ Chinese only. For Japanese/Korean/Russian → Chinese, select an online provider and configure your API key. No automatic switch.")
+                "离线翻译仅支持英语 ↔ 中文。日/韩/俄与中/英互译需自行选择在线服务并配置 API Key；不会自动切换。",
+                "Offline supports English ↔ Chinese only. For Japanese/Korean/Russian ↔ English/Chinese, select an online provider and configure your API key. No automatic switch.")
         return _tr(ui_language, "不支持此语言方向，请选择可用的源语言和目标语言。",
                    "Unsupported direction: select an available source and target language.")
     if (config.source_lang, config.target_lang) not in LOCAL_DIRECTIONS:
@@ -293,6 +293,7 @@ class WhisperDeviceConfig:
     enable_english_model: bool = False
     english_model_size: str = "small.en"
     fast_english_model_size: str = ""
+    multilingual_asr_strategy: str = "language_aware"
     model_download_source: str = "modelscope"
     model_download_endpoint: str = ""
 

@@ -1,0 +1,514 @@
+{
+  "date": "2026-10-26",
+  "expected_candidate": "caed9130",
+  "candidate_exe_sha256": "cf49af8bd00e257ce11ae3904fa8ec6a7a4d307089e91df35df82020e302aa93",
+  "source": "user_operated_windows_session_and_public_audio_log_windows",
+  "agent_new_api_requests": 0,
+  "user_session_upstream_attempts": 14,
+  "user_session_completion_statuses": {
+    "200": 13,
+    "504": 1
+  },
+  "token_usage_received": {
+    "prompt_tokens": 3409,
+    "completion_tokens": 140,
+    "total_tokens": 3549
+  },
+  "usage_missing_for_timeout": true,
+  "model_requested": "tencent/Hunyuan-MT-7B",
+  "screenshots": [
+    {
+      "language": "ko",
+      "file": "user-ko-2026-10-26.png",
+      "sha256": "a6654f69d351805f4e3dcf4cda3e527b245d857acb3642ebed29d9913816bd4f",
+      "bytes": 22966,
+      "source": "user_supplied",
+      "capture_time": null
+    },
+    {
+      "language": "ru",
+      "file": "user-ru-2026-10-26.png",
+      "sha256": "0ed8976c5d0940c0a19deb7d5b5be50feb6aa8d2c642888d44a5a3e0216142bc",
+      "bytes": 16327,
+      "source": "user_supplied",
+      "capture_time": null
+    },
+    {
+      "language": "ja",
+      "file": "user-ja-2026-10-26.png",
+      "sha256": "a271f6e75cda1cdc7932b31c0180cd660b530d3c04e028d297c42b44489f32bd",
+      "bytes": 20006,
+      "source": "user_supplied",
+      "capture_time": null
+    }
+  ],
+  "languages": {
+    "ja": {
+      "plays": 3,
+      "unique_recordings": 1,
+      "upstream_attempts": 9,
+      "http_200": 8,
+      "relay_http_504": 1,
+      "successful_gateway_ms": [
+        1487,
+        399,
+        452,
+        6725,
+        887,
+        509,
+        464,
+        291
+      ],
+      "gateway_p50_ms": 486.5,
+      "gateway_p95_ms": 4891.7,
+      "enqueue_to_widget_ms": [
+        3167,
+        2043,
+        2185,
+        8405,
+        6252,
+        2186,
+        2199,
+        1971
+      ],
+      "enqueue_to_widget_p50_ms": 2192.5,
+      "enqueue_to_widget_p95_ms": 7651.45,
+      "speech_end_to_visible_subtitle_ms": null,
+      "bilingual_human_quality_review": "pending",
+      "game_scenario_validation": "pending"
+    },
+    "ko": {
+      "plays": 1,
+      "unique_recordings": 1,
+      "upstream_attempts": 3,
+      "http_200": 3,
+      "relay_http_504": 0,
+      "successful_gateway_ms": [
+        3821,
+        2748,
+        2731
+      ],
+      "gateway_p50_ms": 2748.0,
+      "gateway_p95_ms": 3713.7,
+      "enqueue_to_widget_ms": [
+        5512,
+        5218,
+        5890
+      ],
+      "enqueue_to_widget_p50_ms": 5512.0,
+      "enqueue_to_widget_p95_ms": 5852.2,
+      "speech_end_to_visible_subtitle_ms": null,
+      "bilingual_human_quality_review": "pending",
+      "game_scenario_validation": "pending"
+    },
+    "ru": {
+      "plays": 1,
+      "unique_recordings": 1,
+      "upstream_attempts": 2,
+      "http_200": 2,
+      "relay_http_504": 0,
+      "successful_gateway_ms": [
+        516,
+        431
+      ],
+      "gateway_p50_ms": 473.5,
+      "gateway_p95_ms": 511.75,
+      "enqueue_to_widget_ms": [
+        2260,
+        2137
+      ],
+      "enqueue_to_widget_p50_ms": 2198.5,
+      "enqueue_to_widget_p95_ms": 2253.85,
+      "speech_end_to_visible_subtitle_ms": null,
+      "bilingual_human_quality_review": "pending",
+      "game_scenario_validation": "pending"
+    }
+  },
+  "privacy": {
+    "full": "denied",
+    "settings_full": "denied",
+    "candidate_key_empty_after_exit": true,
+    "analytics_remote_exists": false,
+    "original_settings_unchanged": true,
+    "external_proxy_blocks": 1,
+    "blocked_external_body_bytes": 0
+  },
+  "limits": [
+    "Only public manifest playback windows are extracted; no original app.log/settings/keys or installation identifiers included.",
+    "Only 3 distinct read-speech recordings, JA repeated 3 times; not actual game, drama or multiplayer.",
+    "Gateway calls assigned to sample by reservation time; not an exact subtitle-to-request join.",
+    "Success-only tiny-sample percentiles use linear interpolation; timeout excluded from success latency and reported separately.",
+    "Gateway path and enqueue-to-widget timing are not direct-provider or speech-end-to-visible-screen latency.",
+    "8-second post-audio extraction tails can miss slow completion text; timeout identified from complete metadata ledger.",
+    "Quality observations are AI-assisted; no bilingual human signoff or release approval."
+  ],
+  "cases": [
+    {
+      "play_index": 1,
+      "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "play_begin_utc": "2026-10-26T08:37:51.0107169Z",
+      "audio": "materials/ja-10281646305484957883.wav",
+      "source": "google/fleurs ja_jp/test",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "domain": "encyclopedic_read_speech",
+      "real_game_audio": false,
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "asr": [
+        {
+          "time_local": "2026-10-26 16:37:55",
+          "text": "本本の最高の景色を"
+        },
+        {
+          "time_local": "2026-10-26 16:37:57",
+          "text": "見るには島から出て"
+        },
+        {
+          "time_local": "2026-10-26 16:38:00",
+          "text": "クーロンのウォータフロントに向かいましょう"
+        }
+      ],
+      "translated": [
+        {
+          "time_local": "2026-10-26 16:37:57",
+          "text": "请将中的日文翻译成中文：这本书中最美的景色"
+        },
+        {
+          "time_local": "2026-10-26 16:37:58",
+          "text": "要看到，必须离开岛屿。"
+        },
+        {
+          "time_local": "2026-10-26 16:38:01",
+          "text": "让我们前往库伦的水滨区吧。"
+        }
+      ],
+      "enqueue_to_widget_ms": [
+        3167,
+        2043,
+        2185
+      ],
+      "gateway": [
+        {
+          "status": 200,
+          "upstream_ms": 1487,
+          "completed_utc": "2026-10-26T08:37:57.3302106Z",
+          "token_usage": {
+            "prompt_tokens": 254,
+            "completion_tokens": 17,
+            "total_tokens": 271
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 399,
+          "completed_utc": "2026-10-26T08:37:58.3994160Z",
+          "token_usage": {
+            "prompt_tokens": 255,
+            "completion_tokens": 7,
+            "total_tokens": 262
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 452,
+          "completed_utc": "2026-10-26T08:38:01.0537361Z",
+          "token_usage": {
+            "prompt_tokens": 268,
+            "completion_tokens": 9,
+            "total_tokens": 277
+          }
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "play_index": 2,
+      "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "play_begin_utc": "2026-10-26T08:38:18.4037655Z",
+      "audio": "materials/ja-10281646305484957883.wav",
+      "source": "google/fleurs ja_jp/test",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "domain": "encyclopedic_read_speech",
+      "real_game_audio": false,
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "asr": [
+        {
+          "time_local": "2026-10-26 16:38:23",
+          "text": "本本の最高の消息を"
+        },
+        {
+          "time_local": "2026-10-26 16:38:26",
+          "text": "見るには島から出て クーロンのウォード"
+        },
+        {
+          "time_local": "2026-10-26 16:38:27",
+          "text": "サーブロントに向かいましょう"
+        }
+      ],
+      "translated": [
+        {
+          "time_local": "2026-10-26 16:38:29",
+          "text": "这本书中最好的消息"
+        },
+        {
+          "time_local": "2026-10-26 16:38:30",
+          "text": "要看到它，必须离开岛屿，前往克伦的沃德。"
+        }
+      ],
+      "enqueue_to_widget_ms": [
+        8405,
+        6252
+      ],
+      "gateway": [
+        {
+          "status": 200,
+          "upstream_ms": 6725,
+          "completed_utc": "2026-10-26T08:38:29.9904593Z",
+          "token_usage": {
+            "prompt_tokens": 254,
+            "completion_tokens": 12,
+            "total_tokens": 266
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 887,
+          "completed_utc": "2026-10-26T08:38:30.9108924Z",
+          "token_usage": {
+            "prompt_tokens": 265,
+            "completion_tokens": 15,
+            "total_tokens": 280
+          }
+        },
+        {
+          "status": 504,
+          "upstream_ms": 12030,
+          "completed_utc": "2026-10-26T08:38:42.9581171Z",
+          "token_usage": {}
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "play_index": 3,
+      "sample_id": "fleurs-ko-test-1662-10115200572671025618",
+      "language": "ko",
+      "play_begin_utc": "2026-10-26T08:38:51.7355667Z",
+      "audio": "materials/ko-10115200572671025618.wav",
+      "source": "google/fleurs ko_kr/test",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "domain": "encyclopedic_read_speech",
+      "real_game_audio": false,
+      "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "asr": [
+        {
+          "time_local": "2026-10-26 16:38:56",
+          "text": "합금은 기본적으로 금속 두기"
+        },
+        {
+          "time_local": "2026-10-26 16:38:59",
+          "text": "이상의 혼합물이다. 주기율 표상의 원소가"
+        },
+        {
+          "time_local": "2026-10-26 16:39:01",
+          "text": "많이 있다는 것을 잊지 마라"
+        }
+      ],
+      "translated": [
+        {
+          "time_local": "2026-10-26 16:39:00",
+          "text": "合金基本上是由两种或两种以上的金属混合而成的。"
+        },
+        {
+          "time_local": "2026-10-26 16:39:03",
+          "text": "这是一种以上的混合物。周期表中的元素都包含在内。"
+        },
+        {
+          "time_local": "2026-10-26 16:39:05",
+          "text": "请记住，数量很多。"
+        }
+      ],
+      "enqueue_to_widget_ms": [
+        5512,
+        5218,
+        5890
+      ],
+      "gateway": [
+        {
+          "status": 200,
+          "upstream_ms": 3821,
+          "completed_utc": "2026-10-26T08:39:00.3159520Z",
+          "token_usage": {
+            "prompt_tokens": 265,
+            "completion_tokens": 11,
+            "total_tokens": 276
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 2748,
+          "completed_utc": "2026-10-26T08:39:03.0819075Z",
+          "token_usage": {
+            "prompt_tokens": 272,
+            "completion_tokens": 12,
+            "total_tokens": 284
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 2731,
+          "completed_utc": "2026-10-26T08:39:05.8444263Z",
+          "token_usage": {
+            "prompt_tokens": 260,
+            "completion_tokens": 6,
+            "total_tokens": 266
+          }
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "play_index": 4,
+      "sample_id": "fleurs-ru-test-1692-10024935581249406669",
+      "language": "ru",
+      "play_begin_utc": "2026-10-26T08:39:22.0629657Z",
+      "audio": "materials/ru-10024935581249406669.wav",
+      "source": "google/fleurs ru_ru/test",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "domain": "encyclopedic_read_speech",
+      "real_game_audio": false,
+      "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "asr": [
+        {
+          "time_local": "2026-10-26 16:39:27",
+          "text": "К согласной ядерному управлению Японии на заводе б..."
+        },
+        {
+          "time_local": "2026-10-26 16:39:30",
+          "text": "обнаружено радиоактивный цизи и йод."
+        }
+      ],
+      "translated": [
+        {
+          "time_local": "2026-10-26 16:39:27",
+          "text": "根据日本核管理机构的消息，在……工厂里……"
+        },
+        {
+          "time_local": "2026-10-26 16:39:30",
+          "text": "检测到了放射性铯和碘。"
+        }
+      ],
+      "enqueue_to_widget_ms": [
+        2260,
+        2137
+      ],
+      "gateway": [
+        {
+          "status": 200,
+          "upstream_ms": 516,
+          "completed_utc": "2026-10-26T08:39:27.8010940Z",
+          "token_usage": {
+            "prompt_tokens": 274,
+            "completion_tokens": 11,
+            "total_tokens": 285
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 431,
+          "completed_utc": "2026-10-26T08:39:30.5300618Z",
+          "token_usage": {
+            "prompt_tokens": 267,
+            "completion_tokens": 8,
+            "total_tokens": 275
+          }
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "play_index": 5,
+      "sample_id": "fleurs-ja-test-2003-10281646305484957883",
+      "language": "ja",
+      "play_begin_utc": "2026-10-26T08:39:46.1445438Z",
+      "audio": "materials/ja-10281646305484957883.wav",
+      "source": "google/fleurs ja_jp/test",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "domain": "encyclopedic_read_speech",
+      "real_game_audio": false,
+      "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "asr": [
+        {
+          "time_local": "2026-10-26 16:39:50",
+          "text": "本根の最高の消息を"
+        },
+        {
+          "time_local": "2026-10-26 16:39:53",
+          "text": "見るには島から出て クーロンの方を"
+        },
+        {
+          "time_local": "2026-10-26 16:39:55",
+          "text": "フロントに向かいましょう"
+        }
+      ],
+      "translated": [
+        {
+          "time_local": "2026-10-26 16:39:51",
+          "text": "最核心的最高消息"
+        },
+        {
+          "time_local": "2026-10-26 16:39:54",
+          "text": "要看到的话，需要从岛上出来，朝克隆体的方向走。"
+        },
+        {
+          "time_local": "2026-10-26 16:39:56",
+          "text": "让我们前往前线吧。"
+        }
+      ],
+      "enqueue_to_widget_ms": [
+        2186,
+        2199,
+        1971
+      ],
+      "gateway": [
+        {
+          "status": 200,
+          "upstream_ms": 509,
+          "completed_utc": "2026-10-26T08:39:51.4895183Z",
+          "token_usage": {
+            "prompt_tokens": 254,
+            "completion_tokens": 12,
+            "total_tokens": 266
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 464,
+          "completed_utc": "2026-10-26T08:39:54.4616115Z",
+          "token_usage": {
+            "prompt_tokens": 263,
+            "completion_tokens": 15,
+            "total_tokens": 278
+          }
+        },
+        {
+          "status": 200,
+          "upstream_ms": 291,
+          "completed_utc": "2026-10-26T08:39:56.1075113Z",
+          "token_usage": {
+            "prompt_tokens": 258,
+            "completion_tokens": 5,
+            "total_tokens": 263
+          }
+        }
+      ],
+      "human_review": "pending"
+    }
+  ]
+}

@@ -312,6 +312,17 @@ class SettingsDialog(QDialog):
         self._refresh_english_fast_path_ui()
         audio_form.addRow(_tr(self._ui_language, "英文快路径", "English Fast Path"), self.pure_english_environment_check)
 
+        self.multilingual_strategy_check = QCheckBox(_tr(self._ui_language,
+            "日/韩/俄语音完整性策略（候选）", "JA/KO/RU speech completeness strategy (candidate)"))
+        self.multilingual_strategy_check.setChecked(
+            getattr(self.whisper_config, "multilingual_asr_strategy", "language_aware") != "legacy")
+        self.multilingual_strategy_check.setToolTip(_tr(self._ui_language,
+            "仅影响日/韩/俄的极速模式（极低影响除外）：保留更完整语音片段，默认日/俄使用base、韩语使用small，可能增加CPU和字幕等待。关闭恢复兼容策略；中英识别不变。",
+            "Only JA/KO/RU Fast mode, except Ultra Low impact: longer speech units, normally base for Japanese/Russian and small for Korean. CPU and subtitle delay may increase. Disable for compatibility; English/Chinese recognition is unchanged."))
+        self.multilingual_strategy_check.stateChanged.connect(self._preview)
+        audio_form.addRow(self.multilingual_strategy_check)
+        self._refresh_english_fast_path_ui()
+
         self.latency_hint_label = QLabel()
         self.latency_hint_label.setWordWrap(True)
         self.latency_hint_label.setMinimumHeight(42)
@@ -855,6 +866,8 @@ class SettingsDialog(QDialog):
         if not hasattr(self, "pure_english_environment_check"):
             return
         is_english = self.translation_config.source_lang == "en"
+        if hasattr(self, "multilingual_strategy_check"):
+            self.multilingual_strategy_check.setVisible(self.translation_config.source_lang in {"ja", "ko", "ru"})
         self.pure_english_environment_check.setEnabled(is_english)
         if is_english:
             self.pure_english_environment_check.setToolTip(_tr(self._ui_language,
@@ -1086,6 +1099,8 @@ class SettingsDialog(QDialog):
         )
 
     def _collect_values(self):
+        if hasattr(self, "multilingual_strategy_check"):
+            self.whisper_config.multilingual_asr_strategy = "language_aware" if self.multilingual_strategy_check.isChecked() else "legacy"
         self.overlay_config.opacity = self.opacity_slider.value() / 100
         self.overlay_config.bg_opacity = self.bg_opacity_slider.value() / 100
         self.overlay_config.font_size = self.font_slider.value()

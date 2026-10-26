@@ -1,0 +1,32 @@
+{
+  "client_tests": {
+    "run": 548,
+    "passed": 548,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 47.127,
+    "local_joint_worker": true
+  },
+  "api_tests": {
+    "run": 70,
+    "passed": 70,
+    "build": true,
+    "source_ref": "e369e50"
+  },
+  "telemetry_metric_count": 63,
+  "legacy_runtime_cases": 48,
+  "legacy_runtime_equal": true,
+  "production_migration_executed": false,
+  "worker_deploy_executed": false,
+  "push_executed": false,
+  "release_executed": false,
+  "tests_source": "build/multilingual-online/repair-final-joint-full-tests.log",
+  "current_source_baseline": "caed9130",
+  "unchanged:voxgo/translation": true,
+  "unchanged:voxgo/analytics": true,
+  "unchanged:requirements.txt": true,
+  "unchanged:config.example.json": true,
+  "unchanged:docs/update.json": true,
+  "existing_settings_match_before": true,
+  "credential_scan_no_real_key": true
+}

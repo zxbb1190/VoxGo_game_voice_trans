@@ -1,0 +1,849 @@
+[
+  {
+    "source_lang": "ja",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ja-holdout-1908-10595483280529141687",
+        "reference": "これは、一部の動詞と目的語を区別するうえで重要な方法です。",
+        "asr": {
+          "text": "これは一部のどうした目的区を区別する上で重要な方法です",
+          "language": "ja",
+          "language_probability": 0.8934633135795593,
+          "avg_logprob": -0.5135321617126465,
+          "no_speech_prob": 0.10317675769329071,
+          "compression_ratio": 0.9529411764705882,
+          "segment_count": 1,
+          "duration_seconds": 8.4,
+          "raw_text": "これは一部のどうした目的区を区別する上で重要な方法です",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1047.554199998558
+      },
+      {
+        "id": "fleurs-ja-holdout-1664-10728607480570481117",
+        "reference": "乾いた粉を2つ合わせてくるくるとこね回し、清潔な濡れた手でぎゅっと握ります。",
+        "asr": {
+          "text": "かわいた粉を2つ合わせてくるくるとこねまわし 正確なヌータテレーギュッと逃げる",
+          "language": "ja",
+          "language_probability": 0.955549955368042,
+          "avg_logprob": -0.5860513670499935,
+          "no_speech_prob": 0.2767885625362396,
+          "compression_ratio": 1.0761904761904761,
+          "segment_count": 1,
+          "duration_seconds": 9.9,
+          "raw_text": "かわいた粉を2つ合わせてくるくるとこねまわし 正確なヌータテレーギュッと逃げる",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1113.3611999975983
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "これは一部の通した木敵艦",
+        "language": "ja",
+        "probability": 0.9015447497367859,
+        "asr_ms": 1000.3445999973337,
+        "source_start_frame": 42240,
+        "source_end_frame": 115200
+      },
+      {
+        "text": "個別する上で重要な方法です",
+        "language": "ja",
+        "probability": 0.788057267665863,
+        "asr_ms": 984.4095000007655,
+        "source_start_frame": 115200,
+        "source_end_frame": 188160
+      },
+      {
+        "text": "かわいた子なお2つ合わせてくるくると",
+        "language": "ja",
+        "probability": 0.9802868962287903,
+        "asr_ms": 1022.0967999994173,
+        "source_start_frame": 209280,
+        "source_end_frame": 282240
+      },
+      {
+        "text": "猫ねまわし、正確な犬立てでギュッと逃げります。",
+        "language": "ja",
+        "probability": 0.9686406254768372,
+        "asr_ms": 1062.5893999967957,
+        "source_start_frame": 282240,
+        "source_end_frame": 332160
+      },
+      {
+        "text": "",
+        "language": "en",
+        "probability": 0.3504219055175781,
+        "asr_ms": 974.1539000024204,
+        "source_start_frame": 345600,
+        "source_end_frame": 372480
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "これは一部の通した木敵艦",
+        "translated": "这是一部分通过的木制敌舰。",
+        "capture_emit_to_widget_ms": 1460.4942798614502,
+        "trace": {
+          "wait_ms": 1,
+          "recognition_ms": 1000,
+          "translation_ms": 456,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 4080,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 6035.90360000031,
+        "last_segment_pcm_frame_to_widget_ms": 1475.9041000041177,
+        "source_start_frame": 42240,
+        "source_end_frame": 115200
+      },
+      {
+        "trace_id": "2",
+        "original": "個別する上で重要な方法です",
+        "translated": "这是进行个性化处理时非常重要的方法。",
+        "capture_emit_to_widget_ms": 2969.588279724121,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 985,
+          "translation_ms": 1970,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 4200,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 7558.833300002152,
+        "last_segment_pcm_frame_to_widget_ms": 2998.833900006721,
+        "source_start_frame": 115200,
+        "source_end_frame": 188160
+      },
+      {
+        "trace_id": "3",
+        "original": "かわいた子なお2つ合わせてくるくると",
+        "translated": "可爱的孩子，再把这两个放在一起，然后转圈圈。",
+        "capture_emit_to_widget_ms": 1493.5219287872314,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1022,
+          "translation_ms": 469,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3960,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 6072.762800003984,
+        "last_segment_pcm_frame_to_widget_ms": 1512.7633000005148,
+        "source_start_frame": 209280,
+        "source_end_frame": 282240
+      },
+      {
+        "trace_id": "4",
+        "original": "猫ねまわし、正確な犬立てでギュッと逃げります。",
+        "translated": "猫会翻滚，用正确的站立姿势迅速逃跑。",
+        "capture_emit_to_widget_ms": 1493.3497905731201,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1062,
+          "translation_ms": 424,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2520,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 4629.145000005664,
+        "last_segment_pcm_frame_to_widget_ms": 1509.145600002956,
+        "source_start_frame": 282240,
+        "source_end_frame": 332160
+      }
+    ],
+    "captures": [
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 4.56
+      },
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.12
+      },
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 1.68
+      }
+    ],
+    "api": [
+      {
+        "label": "ja-pcm-replay",
+        "text": "これは一部の通した木敵艦",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "这是一部分通过的木制敌舰。",
+        "elapsed_ms": 455.36920000449754,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 258,
+          "completion_tokens": 8,
+          "total_tokens": 266,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 258
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "個別する上で重要な方法です",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "这是进行个性化处理时非常重要的方法。",
+        "elapsed_ms": 1969.7814000028302,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 256,
+          "completion_tokens": 8,
+          "total_tokens": 264,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 256
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "かわいた子なお2つ合わせてくるくると",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "可爱的孩子，再把这两个放在一起，然后转圈圈。",
+        "elapsed_ms": 469.2159999976866,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 265,
+          "completion_tokens": 14,
+          "total_tokens": 279,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 41
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "猫ねまわし、正確な犬立てでギュッと逃げります。",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "猫会翻滚，用正确的站立姿势迅速逃跑。",
+        "elapsed_ms": 423.67709999962244,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 268,
+          "completion_tokens": 12,
+          "total_tokens": 280,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 268
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 5,
+      "transcriptions": 4,
+      "translations": 4,
+      "filtered_speech": 1
+    },
+    "notices": [],
+    "cpu_one_core_percent": 41.13586969551635,
+    "peak_rss_bytes": 403431424,
+    "wall_seconds": 27.31041080000432,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 3,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  },
+  {
+    "source_lang": "ko",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ko-holdout-1907-10231261934313595333",
+        "reference": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+        "asr": {
+          "text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+          "language": "ko",
+          "language_probability": 0.9397470355033875,
+          "avg_logprob": -0.38403565010854174,
+          "no_speech_prob": 0.08408250659704208,
+          "compression_ratio": 0.8829787234042553,
+          "segment_count": 1,
+          "duration_seconds": 4.8,
+          "raw_text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 3235.176499998488
+      },
+      {
+        "id": "fleurs-ko-holdout-1826-10315643998667715978",
+        "reference": "사건 발생 이후, 깁슨(Gibson)은 병원으로 이송되었으나 얼마 후 숨을 거뒀다.",
+        "asr": {
+          "text": "사건 발생 이후 깊스는 병원으로 이송되었으나 얼마 후 숨을 거뒀다.",
+          "language": "ko",
+          "language_probability": 0.9907329082489014,
+          "avg_logprob": -0.2897588590095783,
+          "no_speech_prob": 0.07939141243696213,
+          "compression_ratio": 0.9479166666666666,
+          "segment_count": 1,
+          "duration_seconds": 8.82,
+          "raw_text": "사건 발생 이후 깊스는 병원으로 이송되었으나 얼마 후 숨을 거뒀다.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 3411.2594000034733
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "",
+        "language": "en",
+        "probability": 0.41027557849884033,
+        "asr_ms": 3026.0178000025917,
+        "source_start_frame": 42240,
+        "source_end_frame": 55680
+      },
+      {
+        "text": "교전이 발발 안 짓고 영국은 독일에 대한 해상 몽세를 시작한다.",
+        "language": "ko",
+        "probability": 0.9650031328201294,
+        "asr_ms": 3258.7977000002866,
+        "source_start_frame": 55680,
+        "source_end_frame": 120960
+      },
+      {
+        "text": "사건 발생 이후 깊스는 병원으로 이송되었...",
+        "language": "ko",
+        "probability": 0.9772238731384277,
+        "asr_ms": 3145.013800000015,
+        "source_start_frame": 151680,
+        "source_end_frame": 224640
+      },
+      {
+        "text": "하지만 얼마 후 숨을 걷었다",
+        "language": "ko",
+        "probability": 0.736166775226593,
+        "asr_ms": 3078.0216000057408,
+        "source_start_frame": 224640,
+        "source_end_frame": 264960
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "교전이 발발 안 짓고 영국은 독일에 대한 해상 몽세를 시작한다.",
+        "translated": "请不要发生交火，英国将开始对德国的海上封锁。",
+        "capture_emit_to_widget_ms": 14938.022375106812,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 3258,
+          "translation_ms": 11677,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3240,
+          "segment_total_ms": 4080,
+          "whisper_model_size": "small",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 19047.058300001954,
+        "last_segment_pcm_frame_to_widget_ms": 14967.058699997726,
+        "source_start_frame": 55680,
+        "source_end_frame": 120960
+      },
+      {
+        "trace_id": "2",
+        "original": "사건 발생 이후 깊스는 병원으로 이송되었...",
+        "translated": "事件发生后，金秀被送往医院……",
+        "capture_emit_to_widget_ms": 19329.075813293457,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 3145,
+          "translation_ms": 16182,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3840,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "small",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 23906.13389999955,
+        "last_segment_pcm_frame_to_widget_ms": 19346.134400003357,
+        "source_start_frame": 151680,
+        "source_end_frame": 224640
+      },
+      {
+        "trace_id": "3",
+        "original": "하지만 얼마 후 숨을 걷었다",
+        "translated": "但是不久之后，呼吸就停止了。",
+        "capture_emit_to_widget_ms": 21807.68632888794,
+        "trace": {
+          "wait_ms": 618,
+          "recognition_ms": 3078,
+          "translation_ms": 18111,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1800,
+          "segment_total_ms": 2520,
+          "whisper_model_size": "small",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 24352.30050000333,
+        "last_segment_pcm_frame_to_widget_ms": 21832.301100000623,
+        "source_start_frame": 224640,
+        "source_end_frame": 264960
+      }
+    ],
+    "captures": [
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.84
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 4.08
+      },
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.52
+      }
+    ],
+    "api": [
+      {
+        "label": "ko-pcm-replay",
+        "text": "교전이 발발 안 짓고 영국은 독일에 대한 해상 몽세를 시작한다.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "请不要发生交火，英国将开始对德国的海上封锁。",
+        "elapsed_ms": 11677.210599998944,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 278,
+          "completion_tokens": 15,
+          "total_tokens": 293,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 278
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "사건 발생 이후 깊스는 병원으로 이송되었...",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "事件发生后，金秀被送往医院……",
+        "elapsed_ms": 16181.220800004667,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 271,
+          "completion_tokens": 9,
+          "total_tokens": 280,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 271
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "하지만 얼마 후 숨을 걷었다",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "但是不久之后，呼吸就停止了。",
+        "elapsed_ms": 18109.714699996402,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 261,
+          "completion_tokens": 9,
+          "total_tokens": 270,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 37
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 4,
+      "filtered_speech": 1,
+      "transcriptions": 3,
+      "translations": 3
+    },
+    "notices": [],
+    "cpu_one_core_percent": 65.37454979841327,
+    "peak_rss_bytes": 683347968,
+    "wall_seconds": 39.41231730000436,
+    "whisper": {
+      "active_model_size": "small",
+      "beam_size": 1,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  },
+  {
+    "source_lang": "ru",
+    "domain": "public_read_speech",
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ru-holdout-1791-10042408394614123272",
+        "reference": "Не оскверняйте это место, нанося или выцарапывая граффити на объекты вокруг.",
+        "asr": {
+          "text": "Не оскверняйте это место нася или в цираповой графите на объекты вокруг.",
+          "language": "ru",
+          "language_probability": 0.9972580671310425,
+          "avg_logprob": -0.405214861035347,
+          "no_speech_prob": 0.012477638199925423,
+          "compression_ratio": 1.2452830188679245,
+          "segment_count": 1,
+          "duration_seconds": 5.94,
+          "raw_text": "Не оскверняйте это место нася или в цираповой графите на объекты вокруг.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1031.002299998363
+      },
+      {
+        "id": "fleurs-ru-holdout-1762-10098401296465388159",
+        "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+        "asr": {
+          "text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "language": "ru",
+          "language_probability": 0.9568471312522888,
+          "avg_logprob": -0.4516236675637109,
+          "no_speech_prob": 0.08848711103200912,
+          "compression_ratio": 1.3833333333333333,
+          "segment_count": 1,
+          "duration_seconds": 7.92,
+          "raw_text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1039.4995999959065
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "Не оскверняйте это место, нося или в цираповой графите на объекты вокруг.",
+        "language": "ru",
+        "probability": 0.9972805976867676,
+        "asr_ms": 1048.8179000021773,
+        "source_start_frame": 53760,
+        "source_end_frame": 130560
+      },
+      {
+        "text": "Переносчиками является свиньи.",
+        "language": "ru",
+        "probability": 0.9467936754226685,
+        "asr_ms": 1025.2954999959911,
+        "source_start_frame": 184320,
+        "source_end_frame": 220800
+      },
+      {
+        "text": "От которых через Комаров болезть затем передается человеку.",
+        "language": "ru",
+        "probability": 0.9755597710609436,
+        "asr_ms": 1005.6799999947543,
+        "source_start_frame": 220800,
+        "source_end_frame": 284160
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "Не оскверняйте это место, нося или в цираповой графите на объекты вокруг.",
+        "translated": "请不要用粗糙的石墨在周围的物体上涂抹，亵渎这个地方。",
+        "capture_emit_to_widget_ms": 1743.5622215270996,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1048,
+          "translation_ms": 686,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3120,
+          "segment_total_ms": 4800,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 6571.968400000188,
+        "last_segment_pcm_frame_to_widget_ms": 1771.9689999974796,
+        "source_start_frame": 53760,
+        "source_end_frame": 130560
+      },
+      {
+        "trace_id": "2",
+        "original": "Переносчиками является свиньи.",
+        "translated": "传播者是猪。",
+        "capture_emit_to_widget_ms": 1309.4310760498047,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1025,
+          "translation_ms": 276,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 1080,
+          "segment_total_ms": 2280,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 3716.5659999995846,
+        "last_segment_pcm_frame_to_widget_ms": 1436.5665000033907,
+        "source_start_frame": 184320,
+        "source_end_frame": 220800
+      },
+      {
+        "trace_id": "3",
+        "original": "От которых через Комаров болезть затем передается человеку.",
+        "translated": "通过科马罗夫，这些病原体会传染给人类。",
+        "capture_emit_to_widget_ms": 1430.166244506836,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1005,
+          "translation_ms": 421,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 2160,
+          "segment_total_ms": 3960,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5409.420500003033,
+        "last_segment_pcm_frame_to_widget_ms": 1449.4211000003254,
+        "source_start_frame": 220800,
+        "source_end_frame": 284160
+      }
+    ],
+    "captures": [
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 4.8
+      },
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.72
+      },
+      {
+        "reason": "speech_reentry",
+        "duration": 2.28
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.96
+      }
+    ],
+    "api": [
+      {
+        "label": "ru-pcm-replay",
+        "text": "Не оскверняйте это место, нося или в цираповой графите на объекты вокруг.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "请不要用粗糙的石墨在周围的物体上涂抹，亵渎这个地方。",
+        "elapsed_ms": 686.6515000001527,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 281,
+          "completion_tokens": 17,
+          "total_tokens": 298,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 281
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "Переносчиками является свиньи.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "传播者是猪。",
+        "elapsed_ms": 276.6581000032602,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 5,
+          "total_tokens": 267,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 38
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "От которых через Комаров болезть затем передается человеку.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "通过科马罗夫，这些病原体会传染给人类。",
+        "elapsed_ms": 421.08880000159843,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 271,
+          "completion_tokens": 13,
+          "total_tokens": 284,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 47
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 4,
+      "transcriptions": 3,
+      "dropped_speech": 1,
+      "translations": 3
+    },
+    "notices": [],
+    "cpu_one_core_percent": 30.51804176817781,
+    "peak_rss_bytes": 445399040,
+    "wall_seconds": 22.886052299996663,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

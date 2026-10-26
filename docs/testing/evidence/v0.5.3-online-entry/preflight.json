@@ -1,0 +1,12 @@
+{
+    "mode":  "preflight_only",
+    "candidate":  "caed9130",
+    "exe_sha256":  "cf49af8bd00e257ce11ae3904fa8ec6a7a4d307089e91df35df82020e302aa93",
+    "model":  "tencent/Hunyuan-MT-7B",
+    "credential_present":  true,
+    "credential_copied":  false,
+    "full":  "denied",
+    "real_api_requests":  0,
+    "request_limit":  null,
+    "budget_limit":  null
+}

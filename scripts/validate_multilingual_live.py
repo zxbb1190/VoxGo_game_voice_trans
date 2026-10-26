@@ -172,6 +172,7 @@ def audio_run(config, budget, manifest, output):
     from voxgo.audio.capture import SystemAudioCapture
     from voxgo.asr.pipeline import SpeechPipeline
     from voxgo.asr.whisper_engine import SpeechRecognizer
+    from voxgo.asr.language_profiles import effective_speech_config
     from voxgo.config.loader import default_app_config, migrate_runtime_defaults, sync_language_flow, apply_language_runtime_policy
     from voxgo.runtime.events import EventBus, TranscriptReady, TranslationReady
     from voxgo.translation.runtime import TranslationRuntime
@@ -188,6 +189,7 @@ def audio_run(config, budget, manifest, output):
         migrate_runtime_defaults(app_config)
         sync_language_flow(app_config)
         apply_language_runtime_policy(app_config)
+        app_config = effective_speech_config(app_config)
         app_config.whisper.local_files_only = True
         recognizer = SpeechRecognizer(app_config.whisper)
         recognizer.initialize()
@@ -239,9 +241,9 @@ def audio_run(config, budget, manifest, output):
         class ObservedRecognizer:
             def __getattr__(self, name):
                 return getattr(recognizer, name)
-            def transcribe_audio_bytes_with_language(self, data, sample_rate=16000, language_override=None):
+            def transcribe_audio_bytes_with_language(self, data, sample_rate=16000, language_override=None, config_override=None):
                 started = time.perf_counter()
-                result = recognizer.transcribe_audio_bytes_with_language(data, sample_rate, language_override)
+                result = recognizer.transcribe_audio_bytes_with_language(data, sample_rate, language_override, config_override)
                 offset = data_stream.find(data)
                 unique = offset >= 0 and offset % 2 == 0 and data_stream.find(data, offset+1) < 0
                 asr_rows.append({"text": result.text, "language": result.language,
@@ -304,6 +306,8 @@ def audio_run(config, budget, manifest, output):
                 "cpu_one_core_percent": 100*(cpu_end-cpu_start)/wall,
                 "peak_rss_bytes": max(samples, default=0), "wall_seconds": wall,
                 "whisper": {k: getattr(app_config.whisper, k) for k in ("active_model_size", "beam_size", "cpu_threads", "language", "initial_prompt", "prompt_profile")},
+                "effective_audio": {k: getattr(app_config.audio, k) for k in ("max_speech_seconds", "pre_roll_ms", "speech_idle_timeout_ms")},
+                "effective_diagnostic_mode": getattr(app_config.audio, "diagnostics_latency_mode", app_config.audio.latency_mode),
                 "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"})
             write(output, all_rows)
         finally:

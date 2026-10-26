@@ -3,6 +3,7 @@ import queue
 import re
 import threading
 import time
+import copy
 import wave
 from collections import deque
 from dataclasses import dataclass
@@ -535,7 +536,7 @@ class SpeechPipeline:
         self._diagnostic(
             'asr_segment', segment.duration_seconds * 1000,
             str(segment.reason or '').startswith('达到最长 '), decision.short_segment,
-            segment.latency_mode or normalize_latency_mode(config.audio.latency_mode),
+            segment.latency_mode or getattr(config.audio, "diagnostics_latency_mode", "") or normalize_latency_mode(config.audio.latency_mode),
         )
         now = time.time()
         work_item = SpeechWorkItem(
@@ -680,6 +681,7 @@ class SpeechPipeline:
                     segment.audio_data,
                     segment.sample_rate or config.audio.sample_rate,
                     item.whisper_language,
+                    item.whisper_config_snapshot,
                 )
             self._refresh_trace_recognizer_metadata(trace, recognizer)
             trace.transcription_finished_at = time.time()
@@ -890,6 +892,8 @@ class SpeechPipeline:
     def _apply_language_snapshot(self, item: SpeechWorkItem, config):
         translation = getattr(config, "translation", None)
         whisper = getattr(config, "whisper", None)
+        if item.whisper_config_snapshot is None and whisper is not None:
+            item.whisper_config_snapshot = copy.deepcopy(whisper)
         if not item.source_lang:
             item.source_lang = str(getattr(item.trace, "source_lang", "") or getattr(translation, "source_lang", "") or "")
         if not item.target_lang:
@@ -913,9 +917,9 @@ class SpeechPipeline:
     ):
         trace = item.trace
         segment = item.segment
-        whisper = getattr(config, "whisper", None)
+        whisper = item.whisper_config_snapshot or getattr(config, "whisper", None)
         mode_policy = mode_policy or self._mode_policy(config)
-        trace.latency_mode = mode_policy.mode
+        trace.latency_mode = segment.latency_mode or getattr(config.audio, "diagnostics_latency_mode", "") or mode_policy.mode
         trace.candidate_labels = tuple(item.candidate_labels or ("candidate",))
         trace.segment_voice_seconds = max(0.0, float(getattr(segment, "voice_duration_seconds", 0.0) or 0.0))
         trace.segment_total_seconds = max(0.0, float(getattr(segment, "duration_seconds", 0.0) or 0.0))
@@ -923,7 +927,7 @@ class SpeechPipeline:
         trace.whisper_device = str(getattr(whisper, "device", "") or "")
         trace.whisper_compute_type = str(getattr(whisper, "compute_type", "") or "")
         trace.whisper_cpu_threads = _trace_cpu_threads(whisper)
-        trace.fast_path_allowed = item.source_lang == "en" and item.target_lang == "zh"
+        trace.fast_path_allowed = item.source_lang == "en"
         trace.fast_path_ready = trace.fast_path_allowed and trace.whisper_model_size.endswith(".en")
 
     @staticmethod
@@ -954,14 +958,19 @@ class SpeechPipeline:
         trace.whisper_cpu_threads = _trace_cpu_threads(config)
 
     @staticmethod
-    def _transcribe_with_language_snapshot(recognizer, audio_data: bytes, sample_rate: int, language: str):
+    def _transcribe_with_language_snapshot(recognizer, audio_data: bytes, sample_rate: int, language: str, config_snapshot=None):
         transcribe = recognizer.transcribe_audio_bytes_with_language
         try:
-            return transcribe(audio_data, sample_rate=sample_rate, language_override=language)
+            return transcribe(audio_data, sample_rate=sample_rate, language_override=language, config_override=config_snapshot)
         except TypeError as exc:
-            if "language_override" not in str(exc):
+            if "config_override" not in str(exc) and "language_override" not in str(exc):
                 raise
-            return transcribe(audio_data, sample_rate=sample_rate)
+            try:
+                return transcribe(audio_data, sample_rate=sample_rate, language_override=language)
+            except TypeError as exc:
+                if "language_override" not in str(exc):
+                    raise
+                return transcribe(audio_data, sample_rate=sample_rate)
 
     def _recent_transcript_texts(self, now: float = None) -> list:
         now = now or time.time()
@@ -978,7 +987,7 @@ class SpeechPipeline:
         source_lang = str(getattr(getattr(config, "translation", None), "source_lang", "") or "").strip().lower()
         target_lang = str(getattr(getattr(config, "translation", None), "target_lang", "") or "").strip().lower()
         pure_english = bool(getattr(getattr(config, "whisper", None), "pure_english_environment", False))
-        if source_lang == "en" and target_lang == "zh":
+        if source_lang == "en":
             policy = self._pure_english_mode_policy(policy) if pure_english else self._english_realtime_mode_policy(policy)
         policy = self._impact_mode_policy(policy, getattr(getattr(config, "whisper", None), "asr_impact_mode", "low"))
         self._pending_buffer.timeout_seconds = policy.pending_timeout_seconds
@@ -1632,6 +1641,7 @@ def merge_speech_work_items(left: SpeechWorkItem, right: SpeechWorkItem, reason:
         target_lang=left.target_lang or getattr(left.trace, "target_lang", ""),
         whisper_language=left.whisper_language or getattr(left.trace, "whisper_language", ""),
         language_revision=left.language_revision or getattr(left.trace, "language_revision", 0),
+        whisper_config_snapshot=left.whisper_config_snapshot or right.whisper_config_snapshot,
     )
 
 

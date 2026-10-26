@@ -1,0 +1,35 @@
+[
+  {
+    "edition": "lite",
+    "exe_sha256": "6da9ed78321d936c9b3d95412ee0b6f8fc0ee68be7a606041ced342620ba6df3",
+    "zip_bytes": 140525550,
+    "zip_sha256": "20652e21684698040f03ef13f960171cb92fe0e6806df40002fca643a0c2bc32",
+    "new_speech_profile_bundled": true,
+    "tests_and_scripts_excluded": true,
+    "model_files": 0,
+    "no_real_api_key": true,
+    "models": []
+  },
+  {
+    "edition": "full",
+    "exe_sha256": "a20be81d5dd14deda0edb4d6cdaac8982df3354b6bc003f34cd7899c33939fc5",
+    "zip_bytes": 719564380,
+    "zip_sha256": "6a74d79e45900803d21d1513f0e25a20b47e16754bb5d439467fd1f5c552ddee",
+    "new_speech_profile_bundled": true,
+    "tests_and_scripts_excluded": true,
+    "model_files": 2,
+    "no_real_api_key": true,
+    "models": [
+      {
+        "path": "models--Systran--faster-whisper-base\\snapshots\\ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66\\model.bin",
+        "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+        "matches_existing_cache": true
+      },
+      {
+        "path": "models--Systran--faster-whisper-small\\snapshots\\536b0662742c02347bc0e980a01041f333bce120\\model.bin",
+        "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "matches_existing_cache": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-26",
+  "new_real_api_attempts": 44,
+  "http_200": 43,
+  "timeouts": 1,
+  "unplanned_retries": 0,
+  "inputs": 22,
+  "two_successful_replicates": 21,
+  "identical_raw_in_all_two_success_pairs": true,
+  "all_success_finish_reason_stop": true,
+  "response_models": {
+    "tencent/Hunyuan-MT-7B": 43
+  },
+  "usage_from_43_responses": {
+    "prompt_tokens": 11712,
+    "completion_tokens": 590,
+    "total_tokens": 12302
+  },
+  "timeout_usage_unknown": true,
+  "input_files_unchanged": {
+    "credentials": true,
+    "candidate_settings": true,
+    "candidate_baseline": true,
+    "public_summary": true
+  },
+  "tool_tests": {
+    "total": 4,
+    "passed": 4,
+    "network": "mock only"
+  },
+  "human_quality_review": "pending",
+  "release_approved": false,
+  "arms": {
+    "reference_full": {
+      "inputs": 3,
+      "attempts": 6,
+      "http_200": 6
+    },
+    "actual_fragment": {
+      "inputs": 14,
+      "attempts": 28,
+      "http_200": 28
+    },
+    "actual_joined": {
+      "inputs": 5,
+      "attempts": 10,
+      "http_200": 9
+    }
+  }
+}

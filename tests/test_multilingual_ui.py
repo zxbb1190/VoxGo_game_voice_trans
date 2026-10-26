@@ -13,6 +13,7 @@ from voxgo.ui.config_models import HotkeyConfig, OverlayConfig, RuntimeConfig, W
 from voxgo.ui.overlay_window import GameOverlay
 from voxgo.ui.settings_dialog import SettingsDialog
 from voxgo.ui.widgets import TranslationTestRunner
+from voxgo.languages import ONLINE_DIRECTIONS
 
 
 class MultilingualUiTest(unittest.TestCase):
@@ -34,7 +35,7 @@ class MultilingualUiTest(unittest.TestCase):
         for source, target in (("ja", "zh"), ("ko", "zh"), ("ru", "zh"), ("zh", "en"), ("en", "zh")):
             overlay._source_lang_combo.setCurrentIndex(overlay._source_lang_combo.findData(source))
             self.assertEqual((config.source_lang, config.target_lang), (source, target))
-            self.assertEqual(overlay._target_lang_combo.count(), 2 if source == "zh" else 1)
+            self.assertEqual(overlay._target_lang_combo.count(), 4 if source in {"en", "zh"} else 2)
             self.assertEqual(overlay._target_lang_combo.currentData(), target)
             self.assertEqual(changed[-1], (source, target))
         self.assertEqual(len(changed), 5)
@@ -46,16 +47,47 @@ class MultilingualUiTest(unittest.TestCase):
         overlay._swap_lang_button.click()
         self.assertEqual((overlay.translation_config.source_lang, overlay.translation_config.target_lang), ("en", "zh"))
 
-    def test_chinese_japanese_is_explicit_online_choice_with_no_swap(self):
+    def test_every_online_pair_has_exact_target_choices_and_reversible_swap(self):
+        for provider in ('google', 'openai_compatible'):
+            for source, target in sorted(ONLINE_DIRECTIONS):
+                with self.subTest(provider=provider,source=source,target=target):
+                    config = TranslationConfig(provider=provider,source_lang=source,target_lang=target)
+                    overlay = self.make_overlay(translation_config=config)
+                    targets = {overlay._target_lang_combo.itemData(i) for i in range(overlay._target_lang_combo.count())}
+                    self.assertEqual(targets,{t for s,t in ONLINE_DIRECTIONS if s==source})
+                    self.assertTrue(overlay._swap_lang_button.isEnabled())
+                    overlay._swap_lang_button.click()
+                    self.assertEqual((config.source_lang,config.target_lang,config.provider),(target,source,provider))
+                    overlay.close()
+
+    def test_speech_strategy_checkbox_preserves_legacy_preference_without_network(self):
+        for source in ('en','zh','ja','ko','ru'):
+            whisper = WhisperDeviceConfig(multilingual_asr_strategy='legacy')
+            dialog = SettingsDialog(OverlayConfig(),HotkeyConfig(),
+                translation_config=TranslationConfig(source_lang=source,target_lang='en' if source=='zh' else 'zh'),
+                whisper_config=whisper)
+            self.addCleanup(dialog.close)
+            self.assertEqual(dialog.multilingual_strategy_check.isHidden(),source in {'en','zh'})
+            self.assertFalse(dialog.multilingual_strategy_check.isChecked())
+            dialog._collect_values()
+            self.assertEqual(whisper.multilingual_asr_strategy,'legacy')
+            if source in {'ja','ko','ru'}:
+                dialog.multilingual_strategy_check.setChecked(True)
+                self.assertEqual(whisper.multilingual_asr_strategy,'language_aware')
+            dialog.close()
+
+    def test_chinese_japanese_is_explicit_online_choice_with_reverse_swap(self):
         config = TranslationConfig(provider="google", source_lang="zh", target_lang="en")
         overlay = self.make_overlay(translation_config=config, app_config=RuntimeConfig(language=UI_LANGUAGE_EN))
         overlay._target_lang_combo.setCurrentIndex(overlay._target_lang_combo.findData("ja"))
         self.assertEqual((config.source_lang, config.target_lang, config.provider), ("zh", "ja", "google"))
-        self.assertFalse(overlay._swap_lang_button.isEnabled())
+        self.assertTrue(overlay._swap_lang_button.isEnabled())
         self.assertIn("acceptance is still pending", overlay._language_notice.text())
         overlay._toggle_lock()
         overlay._toggle_lock()
-        self.assertFalse(overlay._swap_lang_button.isEnabled())
+        self.assertTrue(overlay._swap_lang_button.isEnabled())
+        overlay._swap_lang_button.click()
+        self.assertEqual((config.source_lang, config.target_lang, config.provider), ("ja", "zh", "google"))
 
     def test_new_languages_cannot_swap_and_do_not_switch_local_provider(self):
         for source in ("ja", "ko", "ru"):
@@ -63,17 +95,17 @@ class MultilingualUiTest(unittest.TestCase):
                 config = TranslationConfig(provider="local", source_lang=source, target_lang="zh")
                 overlay = self.make_overlay(translation_config=config, app_config=RuntimeConfig(language=UI_LANGUAGE_EN))
                 self.assertFalse(overlay._swap_lang_button.isEnabled())
-                self.assertIn("reverse is unavailable", overlay._swap_lang_button.toolTip())
+                self.assertIn("unavailable", overlay._swap_lang_button.toolTip())
                 overlay._swap_language_flow()
                 self.assertEqual((config.provider, config.source_lang, config.target_lang), ("local", source, "zh"))
                 self.assertIn("Offline supports English", overlay._language_notice.text())
                 self.assertFalse(overlay._language_notice.isHidden())
 
     def test_explicit_invalid_direction_is_preserved_and_explained(self):
-        config = TranslationConfig(provider="google", source_lang="ja", target_lang="en")
+        config = TranslationConfig(provider="google", source_lang="ja", target_lang="ko")
         overlay = self.make_overlay(translation_config=config, app_config=RuntimeConfig(language=UI_LANGUAGE_EN))
-        self.assertEqual(config.target_lang, "en")
-        self.assertEqual(overlay._target_lang_combo.currentData(), "en")
+        self.assertEqual(config.target_lang, "ko")
+        self.assertEqual(overlay._target_lang_combo.currentData(), "ko")
         self.assertIn("unsupported", overlay._target_lang_combo.currentText())
         self.assertIn("Unsupported direction", overlay._language_notice.text())
 
@@ -85,7 +117,8 @@ class MultilingualUiTest(unittest.TestCase):
         overlay.refresh_language()
         self.assertEqual(overlay._source_lang_combo.currentText(), "Korean")
         self.assertIn("acceptance is still pending", overlay._language_notice.text())
-        self.assertIn("reverse is unavailable", overlay._swap_lang_button.toolTip())
+        self.assertTrue(overlay._swap_lang_button.isEnabled())
+        self.assertIn("Swap recognition", overlay._swap_lang_button.toolTip())
 
     def test_settings_block_incompatible_local_test_preserve_english_preference(self):
         config = TranslationConfig(provider="local", source_lang="ja", target_lang="zh")

@@ -1,0 +1,1216 @@
+{
+  "started_utc": "2026-10-26T09:01:53.239056+00:00",
+  "status": "complete",
+  "requested_model": "tencent/Hunyuan-MT-7B",
+  "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "parameters": {
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "timeout_seconds": 12,
+    "max_concurrent_requests": 1,
+    "enable_local_phrase_cache": true
+  },
+  "system_prompt_sha256": {
+    "ja": "60d89783abf4c6c9a3502d35fc27e7e3c65106c88e3e898655c319d5735974b2",
+    "ko": "d4516e98eab48adab7633d5e2ab57dc7337dc845365086b49da0bb42af7b7103",
+    "ru": "89126f5b84f0c0e7c5288f9b4a90cb8d742d411d2d6774af6384f36f9f3055e7"
+  },
+  "planned_http_attempts": 44,
+  "http_attempts": 44,
+  "records": [
+    {
+      "case_id": "case-01",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "raw_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "display_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 282,
+        "completion_tokens": 16,
+        "total_tokens": 298,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 282
+      },
+      "elapsed_ms": 554.84,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-02",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の景色を",
+      "raw_translation": "请将<target_text>中的日文翻译成中文：这本书中最美的景色",
+      "display_translation": "请将中的日文翻译成中文：这本书中最美的景色",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 17,
+        "total_tokens": 271,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 30
+      },
+      "elapsed_ms": 612.45,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-03",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て",
+      "raw_translation": "要看到，必须离开岛屿。",
+      "display_translation": "要看到，必须离开岛屿。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 7,
+        "total_tokens": 262,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 255
+      },
+      "elapsed_ms": 297.12,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-04",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "クーロンのウォータフロントに向かいましょう",
+      "raw_translation": "让我们前往库伦的水滨区吧。",
+      "display_translation": "让我们前往库伦的水滨区吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 9,
+        "total_tokens": 277,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 44
+      },
+      "elapsed_ms": 353.03,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-05",
+      "repeat": 1,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の景色を 見るには島から出て クーロンのウォータフロントに向かいましょう",
+      "raw_translation": "要看到这本书中最好的景色，我们需要离开岛屿，前往克伦的水滨地带。",
+      "display_translation": "要看到这本书中最好的景色，我们需要离开岛屿，前往克伦的水滨地带。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 286,
+        "completion_tokens": 18,
+        "total_tokens": 304,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 286
+      },
+      "elapsed_ms": 463.6,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-06",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の消息を",
+      "raw_translation": "<target_text>这本书中最好的消息</target_text>",
+      "display_translation": "这本书中最好的消息",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 12,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 30
+      },
+      "elapsed_ms": 370.6,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-07",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て クーロンのウォード",
+      "raw_translation": "要看到它，必须离开岛屿，前往克伦的沃德。",
+      "display_translation": "要看到它，必须离开岛屿，前往克伦的沃德。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 265,
+        "completion_tokens": 15,
+        "total_tokens": 280,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 41
+      },
+      "elapsed_ms": 479.76,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-08",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "サーブロントに向かいましょう",
+      "raw_translation": "让我们前往瑟夫隆特吧。",
+      "display_translation": "让我们前往瑟夫隆特吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 8,
+        "total_tokens": 268,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 260
+      },
+      "elapsed_ms": 5826.49,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-09",
+      "repeat": 1,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の消息を 見るには島から出て クーロンのウォード サーブロントに向かいましょう",
+      "raw_translation": "要查看这本书中的最精彩内容，就需要离开岛屿，前往克伦的沃德·萨布隆特。",
+      "display_translation": "要查看这本书中的最精彩内容，就需要离开岛屿，前往克伦的沃德·萨布隆特。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 288,
+        "completion_tokens": 24,
+        "total_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 64
+      },
+      "elapsed_ms": 684.41,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-10",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "raw_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "display_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 21,
+        "total_tokens": 322,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 141
+      },
+      "elapsed_ms": 529.59,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-11",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두기",
+      "raw_translation": "合金基本上是由两种或两种以上的金属混合而成的。",
+      "display_translation": "合金基本上是由两种或两种以上的金属混合而成的。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 265,
+        "completion_tokens": 11,
+        "total_tokens": 276,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 265
+      },
+      "elapsed_ms": 9920.55,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-12",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "이상의 혼합물이다. 주기율 표상의 원소가",
+      "raw_translation": "这是一种以上的混合物。周期表中的元素都包含在内。",
+      "display_translation": "这是一种以上的混合物。周期表中的元素都包含在内。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 12,
+        "total_tokens": 284,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 272
+      },
+      "elapsed_ms": 9682.9,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-13",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "많이 있다는 것을 잊지 마라",
+      "raw_translation": "请记住，数量很多。",
+      "display_translation": "请记住，数量很多。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 6,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 260
+      },
+      "elapsed_ms": 276.17,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-14",
+      "repeat": 1,
+      "arm": "actual_joined",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두기 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라",
+      "raw_translation": "合金基本上是由两种或更多种金属混合而成的物质。请记住，周期表中有很多元素可以用来制造合金。",
+      "display_translation": "合金基本上是由两种或更多种金属混合而成的物质。请记住，周期表中有很多元素可以用来制造合金。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 25,
+        "total_tokens": 326,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 77
+      },
+      "elapsed_ms": 560.57,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-15",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "raw_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "display_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 16,
+        "total_tokens": 310,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 294
+      },
+      "elapsed_ms": 9270.73,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-16",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "К согласной ядерному управлению Японии на заводе б...",
+      "raw_translation": "根据日本核管理机构的消息，在……工厂里……",
+      "display_translation": "根据日本核管理机构的消息，在……工厂里……",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 274,
+        "completion_tokens": 11,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 274
+      },
+      "elapsed_ms": 366.39,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-17",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "обнаружено радиоактивный цизи и йод.",
+      "raw_translation": "检测到了放射性铯和碘。",
+      "display_translation": "检测到了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 8,
+        "total_tokens": 275,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 107
+      },
+      "elapsed_ms": 293.95,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-18",
+      "repeat": 1,
+      "arm": "actual_joined",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "К согласной ядерному управлению Японии на заводе б... обнаружено радиоактивный цизи и йод.",
+      "raw_translation": "根据日本核管理机构的消息，在某工厂内检测到了放射性铯和碘。",
+      "display_translation": "根据日本核管理机构的消息，在某工厂内检测到了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 18,
+        "total_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 294
+      },
+      "elapsed_ms": 516.16,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-19",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本根の最高の消息を",
+      "raw_translation": "<target_text>最核心的最高消息</target_text>",
+      "display_translation": "最核心的最高消息",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 12,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 94
+      },
+      "elapsed_ms": 364.45,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-20",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て クーロンの方を",
+      "raw_translation": "要看到的话，需要从岛上出来，朝克隆体的方向走。",
+      "display_translation": "要看到的话，需要从岛上出来，朝克隆体的方向走。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 15,
+        "total_tokens": 278,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 103
+      },
+      "elapsed_ms": 415.52,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-21",
+      "repeat": 1,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "フロントに向かいましょう",
+      "raw_translation": "让我们前往前线吧。",
+      "display_translation": "让我们前往前线吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 5,
+        "total_tokens": 263,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 34
+      },
+      "elapsed_ms": 216.23,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-22",
+      "repeat": 1,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本根の最高の消息を 見るには島から出て クーロンの方を フロントに向かいましょう",
+      "raw_translation": "要看到本源的最重要信息，就需要离开岛屿，朝着克隆体的方向前进。",
+      "display_translation": "要看到本源的最重要信息，就需要离开岛屿，朝着克隆体的方向前进。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 284,
+        "completion_tokens": 18,
+        "total_tokens": 302,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 60
+      },
+      "elapsed_ms": 451.84,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-22",
+      "repeat": 2,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本根の最高の消息を 見るには島から出て クーロンの方を フロントに向かいましょう",
+      "raw_translation": "要看到本源的最重要信息，就需要离开岛屿，朝着克隆体的方向前进。",
+      "display_translation": "要看到本源的最重要信息，就需要离开岛屿，朝着克隆体的方向前进。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 284,
+        "completion_tokens": 18,
+        "total_tokens": 302,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 60
+      },
+      "elapsed_ms": 486.16,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-21",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "フロントに向かいましょう",
+      "raw_translation": "让我们前往前线吧。",
+      "display_translation": "让我们前往前线吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 5,
+        "total_tokens": 263,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 98
+      },
+      "elapsed_ms": 200.39,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-20",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て クーロンの方を",
+      "raw_translation": "要看到的话，需要从岛上出来，朝克隆体的方向走。",
+      "display_translation": "要看到的话，需要从岛上出来，朝克隆体的方向走。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 15,
+        "total_tokens": 278,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 39
+      },
+      "elapsed_ms": 401.35,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-19",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本根の最高の消息を",
+      "raw_translation": "<target_text>最核心的最高消息</target_text>",
+      "display_translation": "最核心的最高消息",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 12,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 30
+      },
+      "elapsed_ms": 343.94,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-18",
+      "repeat": 2,
+      "arm": "actual_joined",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "К согласной ядерному управлению Японии на заводе б... обнаружено радиоактивный цизи и йод.",
+      "raw_translation": "根据日本核管理机构的消息，在某工厂内检测到了放射性铯和碘。",
+      "display_translation": "根据日本核管理机构的消息，在某工厂内检测到了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 18,
+        "total_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 70
+      },
+      "elapsed_ms": 672.22,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-17",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "обнаружено радиоактивный цизи и йод.",
+      "raw_translation": "检测到了放射性铯和碘。",
+      "display_translation": "检测到了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 8,
+        "total_tokens": 275,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 43
+      },
+      "elapsed_ms": 289.67,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-16",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "К согласной ядерному управлению Японии на заводе б...",
+      "raw_translation": "根据日本核管理机构的消息，在……工厂里……",
+      "display_translation": "根据日本核管理机构的消息，在……工厂里……",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 274,
+        "completion_tokens": 11,
+        "total_tokens": 285,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 18
+      },
+      "elapsed_ms": 339.08,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-15",
+      "repeat": 2,
+      "arm": "reference_full",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "raw_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "display_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 16,
+        "total_tokens": 310,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 294
+      },
+      "elapsed_ms": 580.14,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-14",
+      "repeat": 2,
+      "arm": "actual_joined",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두기 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라",
+      "raw_translation": "合金基本上是由两种或更多种金属混合而成的物质。请记住，周期表中有很多元素可以用来制造合金。",
+      "display_translation": "合金基本上是由两种或更多种金属混合而成的物质。请记住，周期表中有很多元素可以用来制造合金。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 25,
+        "total_tokens": 326,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 141
+      },
+      "elapsed_ms": 597.31,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-13",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "많이 있다는 것을 잊지 마라",
+      "raw_translation": "请记住，数量很多。",
+      "display_translation": "请记住，数量很多。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 6,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 36
+      },
+      "elapsed_ms": 262.02,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-12",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "이상의 혼합물이다. 주기율 표상의 원소가",
+      "raw_translation": "这是一种以上的混合物。周期表中的元素都包含在内。",
+      "display_translation": "这是一种以上的混合物。周期表中的元素都包含在内。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 12,
+        "total_tokens": 284,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 112
+      },
+      "elapsed_ms": 491.14,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-11",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두기",
+      "raw_translation": "合金基本上是由两种或两种以上的金属混合而成的。",
+      "display_translation": "合金基本上是由两种或两种以上的金属混合而成的。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 265,
+        "completion_tokens": 11,
+        "total_tokens": 276,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 105
+      },
+      "elapsed_ms": 360.01,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-10",
+      "repeat": 2,
+      "arm": "reference_full",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "raw_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "display_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 21,
+        "total_tokens": 322,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 45
+      },
+      "elapsed_ms": 629.65,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-09",
+      "repeat": 2,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の消息を 見るには島から出て クーロンのウォード サーブロントに向かいましょう",
+      "raw_translation": "要查看这本书中的最精彩内容，就需要离开岛屿，前往克伦的沃德·萨布隆特。",
+      "display_translation": "要查看这本书中的最精彩内容，就需要离开岛屿，前往克伦的沃德·萨布隆特。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 288,
+        "completion_tokens": 24,
+        "total_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 64
+      },
+      "elapsed_ms": 587.59,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-08",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "サーブロントに向かいましょう",
+      "raw_translation": "让我们前往瑟夫隆特吧。",
+      "display_translation": "让我们前往瑟夫隆特吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 8,
+        "total_tokens": 268,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 36
+      },
+      "elapsed_ms": 405.01,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-07",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て クーロンのウォード",
+      "raw_translation": "要看到它，必须离开岛屿，前往克伦的沃德。",
+      "display_translation": "要看到它，必须离开岛屿，前往克伦的沃德。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 265,
+        "completion_tokens": 15,
+        "total_tokens": 280,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 265
+      },
+      "elapsed_ms": 3723.82,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-06",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の消息を",
+      "raw_translation": "<target_text>这本书中最好的消息</target_text>",
+      "display_translation": "这本书中最好的消息",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 12,
+        "total_tokens": 266,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 254
+      },
+      "elapsed_ms": 6416.37,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-05",
+      "repeat": 2,
+      "arm": "actual_joined",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の景色を 見るには島から出て クーロンのウォータフロントに向かいましょう",
+      "raw_translation": "[翻译超时] API 请求超过 12 秒，请检查网络或服务商状态",
+      "display_translation": "[翻译超时] API 请求超过 12 秒，请检查网络或服务商状态",
+      "http_status": null,
+      "http_attempted": true,
+      "failure_reason": "timeout",
+      "finish_reason": null,
+      "response_model": null,
+      "usage": null,
+      "elapsed_ms": 12675.32,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-04",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "クーロンのウォータフロントに向かいましょう",
+      "raw_translation": "让我们前往库伦的水滨区吧。",
+      "display_translation": "让我们前往库伦的水滨区吧。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 268,
+        "completion_tokens": 9,
+        "total_tokens": 277,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 44
+      },
+      "elapsed_ms": 374.45,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-03",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "見るには島から出て",
+      "raw_translation": "要看到，必须离开岛屿。",
+      "display_translation": "要看到，必须离开岛屿。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 7,
+        "total_tokens": 262,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 255
+      },
+      "elapsed_ms": 315.85,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-02",
+      "repeat": 2,
+      "arm": "actual_fragment",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "本本の最高の景色を",
+      "raw_translation": "请将<target_text>中的日文翻译成中文：这本书中最美的景色",
+      "display_translation": "请将中的日文翻译成中文：这本书中最美的景色",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 17,
+        "total_tokens": 271,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 30
+      },
+      "elapsed_ms": 437.63,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "case-01",
+      "repeat": 2,
+      "arm": "reference_full",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "raw_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "display_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 282,
+        "completion_tokens": 16,
+        "total_tokens": 298,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 282
+      },
+      "elapsed_ms": 509.82,
+      "human_review": "pending"
+    }
+  ],
+  "human_review": "pending",
+  "release_approved": false,
+  "ended_utc": "2026-10-26T09:03:06.956667+00:00",
+  "input_files_unchanged": {
+    "credentials": true,
+    "candidate_settings": true,
+    "candidate_baseline": true,
+    "public_summary": true
+  },
+  "transport_scope": "Direct production GameTranslator / SiliconFlow; text-only, no ASR/GUI/Telemetry instantiated.",
+  "reference_scope": "3 FLEURS recordings, 5 historical playbacks; not a general quality score.",
+  "artifacts_sanitized": "Credential/candidate file hashes and local source paths omitted; only unchanged booleans retained.",
+  "source_summary": "../v0.5.3-online-user-smoke/session-summary.json",
+  "evaluation": "AI-assisted diagnosis only; bilingual human review pending."
+}

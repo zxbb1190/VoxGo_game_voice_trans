@@ -1,0 +1,48 @@
+{
+  "received_date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "source": "user_supplied_screenshots",
+  "expected_candidate": "caed9130",
+  "capture_time": null,
+  "binary_identity_verified_from_screenshots": false,
+  "screenshots": [
+    {
+      "file": "manual-ja-2026-10-26.png",
+      "language": "ja",
+      "bytes": 39144,
+      "sha256": "dbcf1da9e076e713ab31a4009c0ecb9ea4e1821e625b32e821d04ee06fe7b490",
+      "observations": [
+        "日语/中文语言控件及日语→中文方向文字可见",
+        "在线/API Key/质量未独立验收提示可见，右侧文字截断",
+        "本地模拟应答及日语识别文本可见"
+      ]
+    },
+    {
+      "file": "manual-ko-2026-10-26.png",
+      "language": "ko",
+      "bytes": 24301,
+      "sha256": "3cde226b97f537626e1d20e4793c53d0bb2898e84ea2d06a9be336c2aef9a3a1",
+      "observations": [
+        "韩语→中文方向和语言方向已更新提示可见",
+        "本地模拟应答及韩语识别文本可见",
+        "可见 이상의 혼합물이다.，不能仅凭此前日志摘录判定整句丢失"
+      ]
+    },
+    {
+      "file": "manual-ru-2026-10-26.png",
+      "language": "ru",
+      "bytes": 18205,
+      "sha256": "4066c79748d408d65f9dffe9a8d97bac971d95b1effb4bce8c007a120ce9bd75",
+      "observations": [
+        "俄语→中文方向和语言方向已更新提示可见",
+        "本地模拟应答及俄语识别文本可见"
+      ]
+    }
+  ],
+  "limitations": [
+    "截图为用户提供的视觉证据，不是新增自动化运行；未独立核实截图的EXE hash、Full授权或Provider配置",
+    "只证明方向文字、更新提示及静态模拟字幕可见，不能证明同进程连续切换、旧任务丢弃或无串语种",
+    "不是实译质量、时延、真实游戏或FPS证据；没有新增真实API请求",
+    "不替换2026-10-21原始日志和测试结果，也不修改已校验的独立ZIP"
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "profiles": {
+    "context_beam_two": {
+      "model": "base",
+      "threads": 2,
+      "beam": 3,
+      "maximum": 4.5,
+      "pre_roll": 450,
+      "idle": 450
+    }
+  },
+  "records": [
+    {
+      "id": "fleurs-ru-holdout-1791-10042408394614123272",
+      "language": "ru",
+      "reference": "Не оскверняйте это место, нанося или выцарапывая граффити на объекты вокруг.",
+      "profile": "context_beam_two",
+      "path": "capture_cut",
+      "hypothesis": "Не оскверняйте это место нася или в цираповой графите на объекты вокруг. . . . .",
+      "segments": [
+        {
+          "asr": {
+            "text": "Не оскверняйте это место нася или в цираповой графите на объекты вокруг.",
+            "language": "ru",
+            "language_probability": 0.9972805976867676,
+            "avg_logprob": -0.41989728276218685,
+            "no_speech_prob": 0.007428244687616825,
+            "compression_ratio": 1.2452830188679245,
+            "segment_count": 1,
+            "duration_seconds": 4.8,
+            "raw_text": "Не оскверняйте это место нася или в цираповой графите на объекты вокруг.",
+            "runaway_guarded": false
+          },
+          "ms": 1060.35,
+          "cpu_seconds": 2.21875,
+          "seconds": 4.8,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": ". . . .",
+            "language": "en",
+            "language_probability": 0.598169207572937,
+            "avg_logprob": -0.7815614853586469,
+            "no_speech_prob": 0.6905604600906372,
+            "compression_ratio": 0.5833333333333334,
+            "segment_count": 4,
+            "duration_seconds": 0.72,
+            "raw_text": ". . . .",
+            "runaway_guarded": false
+          },
+          "ms": 977.24,
+          "cpu_seconds": 1.9375,
+          "seconds": 0.72,
+          "reason": "candidate_short_segment/silence_end/低于语音门限"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 3,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 64,
+      "errors": 9,
+      "cer": 0.140625
+    },
+    {
+      "id": "fleurs-ru-holdout-1762-10098401296465388159",
+      "language": "ru",
+      "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+      "profile": "context_beam_two",
+      "path": "capture_cut",
+      "hypothesis": "Переносчиками является свиньи.  миров болезь затем передаяться человеку.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Переносчиками является свиньи.",
+            "language": "ru",
+            "language_probability": 0.9579004049301147,
+            "avg_logprob": -0.44489275770527975,
+            "no_speech_prob": 0.06085062026977539,
+            "compression_ratio": 0.8636363636363636,
+            "segment_count": 1,
+            "duration_seconds": 2.4,
+            "raw_text": "Переносчиками является свиньи.",
+            "runaway_guarded": false
+          },
+          "ms": 995.67,
+          "cpu_seconds": 1.90625,
+          "seconds": 2.4,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "",
+            "language": "ru",
+            "language_probability": 0.15914899110794067,
+            "avg_logprob": 0.0,
+            "no_speech_prob": 0.0,
+            "compression_ratio": 0.0,
+            "segment_count": 0,
+            "duration_seconds": 1.2,
+            "raw_text": "",
+            "runaway_guarded": false
+          },
+          "ms": 981.86,
+          "cpu_seconds": 1.953125,
+          "seconds": 1.2,
+          "reason": "speech_reentry"
+        },
+        {
+          "asr": {
+            "text": "миров болезь затем передаяться человеку.",
+            "language": "ru",
+            "language_probability": 0.917067289352417,
+            "avg_logprob": -0.788327678044637,
+            "no_speech_prob": 0.2646244764328003,
+            "compression_ratio": 1.0135135135135136,
+            "segment_count": 1,
+            "duration_seconds": 2.64,
+            "raw_text": "миров болезь затем передаяться человеку.",
+            "runaway_guarded": false
+          },
+          "ms": 1012.68,
+          "cpu_seconds": 2.015625,
+          "seconds": 2.64,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 3,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 78,
+      "errors": 21,
+      "cer": 0.2692307692307692
+    },
+    {
+      "id": "fleurs-ru-holdout-1668-10128565049419377161",
+      "language": "ru",
+      "reference": "Также может быть выгодно купить Wild Card, которая позволяет посещать национальные парки ЮАР либо выборочно, либо все.",
+      "profile": "context_beam_two",
+      "path": "capture_cut",
+      "hypothesis": "Также может быть выгодно купить Wildcard. которая позволяет посещать национальные парки UR либо выброшено, либо все. Thank you very much.",
+      "segments": [
+        {
+          "asr": {
+            "text": "Также может быть выгодно купить Wildcard.",
+            "language": "ru",
+            "language_probability": 0.8611935377120972,
+            "avg_logprob": -0.5717980350766864,
+            "no_speech_prob": 0.024219270795583725,
+            "compression_ratio": 0.918918918918919,
+            "segment_count": 1,
+            "duration_seconds": 2.76,
+            "raw_text": "Также может быть выгодно купить Wildcard.",
+            "runaway_guarded": false
+          },
+          "ms": 1006.5,
+          "cpu_seconds": 1.953125,
+          "seconds": 2.76,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "которая позволяет посещать национальные парки UR",
+            "language": "ru",
+            "language_probability": 0.9378951191902161,
+            "avg_logprob": -0.3623062279075384,
+            "no_speech_prob": 0.20552751421928406,
+            "compression_ratio": 1.0987654320987654,
+            "segment_count": 1,
+            "duration_seconds": 3.48,
+            "raw_text": "которая позволяет посещать национальные парки UR",
+            "runaway_guarded": false
+          },
+          "ms": 1002.57,
+          "cpu_seconds": 1.9375,
+          "seconds": 3.48,
+          "reason": "静音结束/接近噪声门限"
+        },
+        {
+          "asr": {
+            "text": "либо выброшено, либо все.",
+            "language": "ru",
+            "language_probability": 0.9812038540840149,
+            "avg_logprob": -0.6210703601439794,
+            "no_speech_prob": 0.0954216942191124,
+            "compression_ratio": 0.9574468085106383,
+            "segment_count": 1,
+            "duration_seconds": 1.92,
+            "raw_text": "либо выброшено, либо все.",
+            "runaway_guarded": false
+          },
+          "ms": 998.3,
+          "cpu_seconds": 1.890625,
+          "seconds": 1.92,
+          "reason": "静音结束/尾音下降"
+        },
+        {
+          "asr": {
+            "text": "Thank you very much.",
+            "language": "en",
+            "language_probability": 0.6879374980926514,
+            "avg_logprob": -1.2141022831201553,
+            "no_speech_prob": 0.5841538906097412,
+            "compression_ratio": 0.7142857142857143,
+            "segment_count": 1,
+            "duration_seconds": 0.6,
+            "raw_text": "Thank you very much.",
+            "runaway_guarded": false
+          },
+          "ms": 1043.79,
+          "cpu_seconds": 2.078125,
+          "seconds": 0.6,
+          "reason": "静音结束/尾音下降"
+        }
+      ],
+      "effective_whisper": {
+        "active_model_size": "base",
+        "beam_size": 3,
+        "cpu_threads": 2,
+        "language": "auto"
+      },
+      "reference_characters": 99,
+      "errors": 22,
+      "cer": 0.2222222222222222
+    }
+  ],
+  "scope": "offline production capture segmentation and recognizer, no asynchronous queues or live audio",
+  "api_requests": 0,
+  "human_review": "pending"
+}

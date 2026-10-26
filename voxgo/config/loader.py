@@ -181,7 +181,7 @@ def apply_game_performance_policy(config: AppConfig) -> bool:
 def apply_language_runtime_policy(config: AppConfig):
     """Apply language-direction runtime choices after source/target are normalized."""
     latency_mode = normalize_latency_mode(getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED))
-    is_english_to_chinese = config.translation.source_lang == "en" and config.translation.target_lang == "zh"
+    is_english_to_chinese = config.translation.source_lang == "en"
     if is_english_to_chinese:
         apply_english_realtime_latency_bias(config.audio, latency_mode)
     config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
@@ -350,10 +350,7 @@ def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: 
             getattr(config.audio, "latency_mode", LATENCY_MODE_BALANCED)
         )
     latency_mode = apply_audio_latency_preset(config.audio)
-    is_english_to_chinese = (
-        str(getattr(config.translation, "source_lang", "") or "").strip().lower() == "en"
-        and str(getattr(config.translation, "target_lang", "") or "").strip().lower() == "zh"
-    )
+    is_english_to_chinese = str(getattr(config.translation, "source_lang", "") or "").strip().lower() == "en"
     if is_english_to_chinese:
         apply_english_realtime_latency_bias(config.audio, latency_mode)
     config.whisper.active_model_size = _active_whisper_model_size(config, latency_mode, is_english_to_chinese)
@@ -532,6 +529,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "toggle_compact": config.hotkeys.toggle_compact,
         },
         "whisper": {
+            **({"multilingual_asr_strategy": "legacy"} if getattr(config.whisper, "multilingual_asr_strategy", "language_aware") == "legacy" else {}),
             "model_size": str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small",
             "fast_model_size": str(getattr(config.whisper, "fast_model_size", "") or "").strip(),
             "asr_impact_mode": normalize_asr_impact_mode(

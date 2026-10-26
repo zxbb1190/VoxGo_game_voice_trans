@@ -645,11 +645,12 @@ class GameOverlay(QWidget):
 
     def _refresh_language_notice(self):
         source, target = self.translation_config.source_lang, self.translation_config.target_lang
-        can_swap = source in OPPOSITE_LANGUAGE and OPPOSITE_LANGUAGE[source] == target
+        can_swap = ((target, source) in ONLINE_DIRECTIONS and
+                    (self.translation_config.provider != "local" or (target, source) in OPPOSITE_LANGUAGE.items()))
         self._swap_lang_button.setEnabled(can_swap and not self._is_locked())
         self._swap_lang_button.setToolTip(_tr(self._ui_language(),
-            "交换识别语言和翻译目标语言" if can_swap else "仅英语 ↔ 中文支持互换；其他方向请使用语言选择框",
-            "Swap recognition and target languages" if can_swap else "Swap is available for English ↔ Chinese only; reverse is unavailable for this selection"))
+            "交换识别语言和翻译目标语言" if can_swap else "此方向不支持互换，请选择可用的语言方向",
+            "Swap recognition and target languages" if can_swap else "The reverse direction is unavailable for this selection"))
         if hasattr(self, "_language_notice"):
             notice = _translation_language_notice(self.translation_config, self._ui_language())
             self._language_notice.setText(notice)
@@ -672,7 +673,8 @@ class GameOverlay(QWidget):
 
     def _swap_language_flow(self):
         source, target = self.translation_config.source_lang, self.translation_config.target_lang
-        if source in OPPOSITE_LANGUAGE and OPPOSITE_LANGUAGE[source] == target:
+        if ((target, source) in ONLINE_DIRECTIONS and
+                (self.translation_config.provider != "local" or (target, source) in OPPOSITE_LANGUAGE.items())):
             self._apply_language_flow(target, source)
 
     def _apply_language_flow(self, source: str, target: str):

@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-26",
+  "fix": "explicit_clr_null_for_atomic_replace",
+  "real_directory_write_and_restore": "pass",
+  "stale_test_temporary_files_removed": 4,
+  "original_settings_unchanged": true,
+  "full": "denied",
+  "local_key_empty": true,
+  "client_launched": false,
+  "real_api_requests": 0
+}

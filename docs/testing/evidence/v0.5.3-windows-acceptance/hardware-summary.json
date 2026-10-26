@@ -1,0 +1,74 @@
+[
+  {
+    "language": "ja",
+    "audio_id": "fleurs-ja-test-2003-10281646305484957883",
+    "asr_fragments": [
+      "本本の最高の景色を",
+      "見るには島から出て",
+      "クーロンのウォータフロントに向かいましょう"
+    ],
+    "latency_scope": "capture enqueue to Qt widget update; local stub only, excludes capture buffering and physical display",
+    "latencies_ms": [
+      1744,
+      1600,
+      1675
+    ],
+    "pipeline_drops": [],
+    "cpu_one_core_mean_percent": 29.84,
+    "peak_rss_mib": 392.57,
+    "process_responding": true,
+    "game_running": false,
+    "fps": null,
+    "online_translation_api_requests": 0,
+    "human_quality_acceptance": "pending",
+    "termination": "planned supervisor restart; clean exit not tested"
+  },
+  {
+    "language": "ko",
+    "audio_id": "fleurs-ko-test-1662-10115200572671025618",
+    "asr_fragments": [
+      "합금은 기본적으로 금속 2개 이상",
+      "중위율 표상의 원소가 많이...",
+      "있다는 것을 잊지 마라."
+    ],
+    "latency_scope": "capture enqueue to Qt widget update; local stub only, excludes capture buffering and physical display",
+    "latencies_ms": [
+      1681,
+      1657,
+      1644
+    ],
+    "pipeline_drops": [
+      "empty asr: text_len=0, lang=en, prob=0.68, voice=0.96s, total=1.92s, peak=-19.7 dBFS, gate=-45.0 dBFS"
+    ],
+    "cpu_one_core_mean_percent": 39.54,
+    "peak_rss_mib": 319.56,
+    "process_responding": true,
+    "game_running": false,
+    "fps": null,
+    "online_translation_api_requests": 0,
+    "human_quality_acceptance": "pending",
+    "termination": "planned supervisor restart; clean exit not tested"
+  },
+  {
+    "language": "ru",
+    "audio_id": "fleurs-ru-test-1692-10024935581249406669",
+    "asr_fragments": [
+      "К согласной ядерному управлению Японии на заводе",
+      "обнаружено радиоактивный цизи и йод."
+    ],
+    "latency_scope": "capture enqueue to Qt widget update; local stub only, excludes capture buffering and physical display",
+    "latencies_ms": [
+      1704,
+      1661
+    ],
+    "pipeline_drops": [],
+    "cpu_one_core_mean_percent": 24.02,
+    "peak_rss_mib": 269.61,
+    "process_responding": true,
+    "game_running": false,
+    "fps": null,
+    "online_translation_api_requests": 0,
+    "human_quality_acceptance": "pending",
+    "termination": "planned supervisor restart; clean exit not tested"
+  }
+]

@@ -1,0 +1,149 @@
+[
+  {
+    "source": "google/fleurs ja_jp/test",
+    "human_review": "pending",
+    "id": "fleurs-ja-test-1910-10214476888438240131",
+    "pipeline_drops": [
+      "translation skipped: text_script_mismatch:ko->ja, detected=ko, expected=ja, prob=0.46",
+      "filtered transcription: global_asr_no_speech_short no_speech=0.67",
+      "filtered transcription: global_asr_low_logprob_short avg_logprob=-1.31"
+    ],
+    "standard_transcript": "パリジャンは、自己中心的で横柄で失礼な人が多いと言われています。",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [
+      "바리지 않아 찍어 찍어"
+    ],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ja",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ja_jp/test",
+    "human_review": "pending",
+    "id": "fleurs-ja-test-1764-10256418415643044307",
+    "pipeline_drops": [],
+    "standard_transcript": "参列者の数が多すぎて、全員がサンピエトロ広場での葬儀に参加することは不可能でした。",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ja",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ja_jp/test",
+    "human_review": "pending",
+    "id": "fleurs-ja-test-2003-10281646305484957883",
+    "pipeline_drops": [],
+    "standard_transcript": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [
+      "本本の最高の景色を",
+      "見るには島から出て",
+      "クーロンのウォータフロントに向かいましょう"
+    ],
+    "capture_enqueue_to_widget_ms": [
+      1744,
+      1600,
+      1675
+    ],
+    "real_translation_api_requests": 0,
+    "language": "ja",
+    "translation": "【本地模拟，非真实翻译】字幕链路已收到识别文本。"
+  },
+  {
+    "source": "google/fleurs ko_kr/test",
+    "human_review": "pending",
+    "id": "fleurs-ko-test-1701-10107571163062229727",
+    "pipeline_drops": [],
+    "standard_transcript": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ko",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ko_kr/test",
+    "human_review": "pending",
+    "id": "fleurs-ko-test-1662-10115200572671025618",
+    "pipeline_drops": [
+      "empty asr: text_len=0, lang=en, prob=0.68, voice=0.96s, total=1.92s, peak=-19.7 dBFS, gate=-45.0 dBFS"
+    ],
+    "standard_transcript": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [
+      "합금은 기본적으로 금속 2개 이상",
+      "중위율 표상의 원소가 많이...",
+      "있다는 것을 잊지 마라."
+    ],
+    "capture_enqueue_to_widget_ms": [
+      1681,
+      1657,
+      1644
+    ],
+    "real_translation_api_requests": 0,
+    "language": "ko",
+    "translation": "【本地模拟，非真实翻译】字幕链路已收到识别文本。"
+  },
+  {
+    "source": "google/fleurs ko_kr/test",
+    "human_review": "pending",
+    "id": "fleurs-ko-test-1959-10162998993480425742",
+    "pipeline_drops": [],
+    "standard_transcript": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고, 안전 경고에 세심한 주의를 기울여야 합니다.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ko",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ru_ru/test",
+    "human_review": "pending",
+    "id": "fleurs-ru-test-1926-10008070632189747443",
+    "pipeline_drops": [],
+    "standard_transcript": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ru",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ru_ru/test",
+    "human_review": "pending",
+    "id": "fleurs-ru-test-1917-10011799110630615565",
+    "pipeline_drops": [],
+    "standard_transcript": "В различных местах Рима были установлены большие телевизионные экраны, с помощью которых люди могли наблюдать за церемонией.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [],
+    "capture_enqueue_to_widget_ms": [],
+    "real_translation_api_requests": 0,
+    "language": "ru",
+    "translation": ""
+  },
+  {
+    "source": "google/fleurs ru_ru/test",
+    "human_review": "pending",
+    "id": "fleurs-ru-test-1692-10024935581249406669",
+    "pipeline_drops": [],
+    "standard_transcript": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+    "domain": "public_encyclopedic_read_speech",
+    "recognized_fragments": [
+      "К согласной ядерному управлению Японии на заводе",
+      "обнаружено радиоактивный цизи и йод."
+    ],
+    "capture_enqueue_to_widget_ms": [
+      1704,
+      1661
+    ],
+    "real_translation_api_requests": 0,
+    "language": "ru",
+    "translation": "【本地模拟，非真实翻译】字幕链路已收到识别文本。"
+  }
+]

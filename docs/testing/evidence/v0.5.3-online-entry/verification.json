@@ -1,0 +1,73 @@
+{
+  "candidate": "caed9130",
+  "exe_sha256": "cf49af8bd00e257ce11ae3904fa8ec6a7a4d307089e91df35df82020e302aa93",
+  "formal_model_files_unchanged": [
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66/config.json",
+      "bytes": 2309,
+      "sha256": "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66/model.bin",
+      "bytes": 145217532,
+      "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66/tokenizer.json",
+      "bytes": 2203239,
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66/vocabulary.txt",
+      "bytes": 459861,
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-small/snapshots/536b0662742c02347bc0e980a01041f333bce120/config.json",
+      "bytes": 2370,
+      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-small/snapshots/536b0662742c02347bc0e980a01041f333bce120/model.bin",
+      "bytes": 483546902,
+      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-small/snapshots/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json",
+      "bytes": 2203239,
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-small/snapshots/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt",
+      "bytes": 459861,
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ],
+  "model_cache_metadata_unchanged": [
+    {
+      "path": "candidate/_internal/.models/CACHEDIR.TAG",
+      "bytes": 195,
+      "sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-base/refs/main",
+      "bytes": 40,
+      "sha256": "a071211ff6001a1e7b512994cb14383d454762c634b7ea03651a2c7de41b5117"
+    },
+    {
+      "path": "candidate/_internal/.models/models--Systran--faster-whisper-small/refs/main",
+      "bytes": 40,
+      "sha256": "8d5d066ac370fbf2b2921929949086f12e8466dacb5269c2d4bef92de48844c9"
+    }
+  ],
+  "reparse_points": 0,
+  "original_settings_unchanged": true,
+  "real_credential_absent_from_test_artifact": true,
+  "original_local_only_zip_unchanged": true,
+  "real_api_requests": 0,
+  "full": "denied",
+  "request_limit": null,
+  "budget_limit": null,
+  "live_quality_validated": false,
+  "live_key_process_smoke": "not_run_automatic_approval_rejected"
+}
