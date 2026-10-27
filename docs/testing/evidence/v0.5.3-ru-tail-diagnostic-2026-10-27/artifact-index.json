@@ -1,0 +1,102 @@
+[
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/plan.json",
+    "bytes": 1049,
+    "sha256": "56ea4d7c4a829ac5382e189d1e5409955ba7ac75d612698accce6dd37bfcf920"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-A/events.jsonl",
+    "bytes": 11217,
+    "sha256": "fbbc35b18253ce2639594433299a2657d6acf164a8b1014bc650cea57c62393f"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-A/result.json",
+    "bytes": 21727,
+    "sha256": "6012e79d514ed47fc04651bff9b0c4529622bab7fcec422b8f211e4e2cb5cae5"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-A/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-A.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-B/events.jsonl",
+    "bytes": 12698,
+    "sha256": "c88b9816515ef04760e5e7d476a117b16f334c42b4655b1ce85b6e574533d7bb"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-B/result.json",
+    "bytes": 21782,
+    "sha256": "c82fd9246aaec8f0f6859458afa9e4d04c23c14eb11877ce6fed86de08ebe0f1"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-B/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r1-B.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-A/events.jsonl",
+    "bytes": 11217,
+    "sha256": "8bf8505753f558c2feed14199229ac00e28e9b22683c49c1734e35401bc15ae9"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-A/result.json",
+    "bytes": 21728,
+    "sha256": "65a50b211df53ae973c3ff001279c94e8e4bd4c63d7d2e4ff92957e13dbbc45c"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-A/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-A.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-B/events.jsonl",
+    "bytes": 12697,
+    "sha256": "e3937e4f2b37e1c04bffb1f9218a7f6e59297714a97ed56194be844190532dc7"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-B/result.json",
+    "bytes": 21785,
+    "sha256": "25e651861948f4dd3c1b0171236c4c457e0ce6d7aef094a12610c060478562a0"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-B/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/r2-B.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/status.json",
+    "bytes": 338,
+    "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-diagnostic-20261027/summary.json",
+    "bytes": 94648,
+    "sha256": "5c9175ea75ed32a05644dea71d0d1b31a84b76d32949fe722f6f2f54efbbe1e3"
+  }
+]

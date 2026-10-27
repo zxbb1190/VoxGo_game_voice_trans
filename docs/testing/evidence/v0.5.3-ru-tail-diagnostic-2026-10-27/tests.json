@@ -1,0 +1,14 @@
+{
+  "command": "python -B -X utf8 -m unittest tests.test_diagnose_russian_tail tests.test_offline_russian_capture_ab tests.test_multilingual_speech_profiles tests.test_asr_output_filter -q",
+  "tests": 45,
+  "passed": 45,
+  "new_tool_tests": 8,
+  "previous_tool_tests": 15,
+  "seconds": 0.835,
+  "log": "build\\ru-tail-tool-regression-final-20261027.txt",
+  "log_sha256": "ffb699e3b16c549669d01e7744a1d1758f79cb27d36cd1994b275d71ba5364fc",
+  "english_chinese_config_cases": 48,
+  "full_client_suite_this_round": false,
+  "full_matrix_rerun": false,
+  "production_runtime_diff": []
+}

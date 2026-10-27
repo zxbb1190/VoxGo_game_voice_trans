@@ -1,0 +1,16 @@
+{
+  "actual_inferences": 4,
+  "unique_recordings": 1,
+  "all_same_pcm": true,
+  "all_configs_identical": true,
+  "all_actual_inference_snapshots_match": true,
+  "all_cpu_int8": true,
+  "all_finished": true,
+  "existing_sources_still_match": true,
+  "new_tool_hash_matches": true,
+  "all_safety_attempts_zero": true,
+  "all_actual_first_rejection_same": true,
+  "no_translation_input": true,
+  "all_raw_recipient_suspected": true,
+  "no_non_russian_or_runaway": true
+}

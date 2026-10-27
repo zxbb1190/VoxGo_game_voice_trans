@@ -1,0 +1,38 @@
+[
+  {
+    "run": "r1-A",
+    "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+    "global_filter_checked_separately": "global_asr_low_logprob_short avg_logprob=-1.20",
+    "translation_language_gate_checked_separately": "",
+    "note": "Read-only checks on saved ASR, not extra inference or an altered Pipeline path. Actual Pipeline short-circuits at weak transcript filter.",
+    "actual_translation_input": "",
+    "raw_recipient": true
+  },
+  {
+    "run": "r1-B",
+    "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+    "global_filter_checked_separately": "global_asr_low_logprob_short avg_logprob=-1.20",
+    "translation_language_gate_checked_separately": "",
+    "note": "Read-only checks on saved ASR, not extra inference or an altered Pipeline path. Actual Pipeline short-circuits at weak transcript filter.",
+    "actual_translation_input": "",
+    "raw_recipient": true
+  },
+  {
+    "run": "r2-B",
+    "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+    "global_filter_checked_separately": "global_asr_low_logprob_short avg_logprob=-1.20",
+    "translation_language_gate_checked_separately": "",
+    "note": "Read-only checks on saved ASR, not extra inference or an altered Pipeline path. Actual Pipeline short-circuits at weak transcript filter.",
+    "actual_translation_input": "",
+    "raw_recipient": true
+  },
+  {
+    "run": "r2-A",
+    "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+    "global_filter_checked_separately": "global_asr_low_logprob_short avg_logprob=-1.20",
+    "translation_language_gate_checked_separately": "",
+    "note": "Read-only checks on saved ASR, not extra inference or an altered Pipeline path. Actual Pipeline short-circuits at weak transcript filter.",
+    "actual_translation_input": "",
+    "raw_recipient": true
+  }
+]
