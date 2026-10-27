@@ -1,0 +1,12 @@
+{
+  "command": "python -B -X utf8 -m unittest tests.test_diagnose_russian_tail tests.test_offline_russian_capture_ab tests.test_multilingual_speech_profiles tests.test_asr_output_filter -q",
+  "tests": 51,
+  "passed": 51,
+  "seconds": 0.841,
+  "new_tests_this_round": 6,
+  "english_chinese_config_cases": 48,
+  "log": "build\\ru-context-regression-20261027.txt",
+  "log_sha256": "8a6f7b06d4eb6d0bba4550543ae3c4098535b5c807e30843151dcbcb6eb8132c",
+  "full_client_suite_this_round": false,
+  "original_matrix_rerun": false
+}

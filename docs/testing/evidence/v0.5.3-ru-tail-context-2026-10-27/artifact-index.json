@@ -1,0 +1,222 @@
+[
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/plan.json",
+    "bytes": 1056,
+    "sha256": "fc08834d4cc2e52db5c5856bc422e3b671fb450ee36e26aeb1e249c026033514"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/events.jsonl",
+    "bytes": 116807,
+    "sha256": "1af104e8c1a8bad2b27ddb04d45a3104524f90bda8b5339653cf580d2330561b"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/capture-metadata/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/events.jsonl",
+    "bytes": 12698,
+    "sha256": "fca4574864c99d59549b91e5292b7c293b94db567bf13e68d0ba32b5e14a88dd"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/result.json",
+    "bytes": 27217,
+    "sha256": "9d97284da1b5b30504afe85a4866bd69b39818c2e4bb40335c693543121cad50"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-A.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/events.jsonl",
+    "bytes": 116900,
+    "sha256": "e1d47060a64de8cd08921359d0105b5b06d7e7e1ef9bda94b6169c15532c5087"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/capture-metadata/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/events.jsonl",
+    "bytes": 12719,
+    "sha256": "5579e7e7ea3a2de96560e3b3dbcb4aaeb1c04908d3c01f5746cac7c4ab2708fc"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/result.json",
+    "bytes": 29578,
+    "sha256": "c087416ecd2ce68d18aa2c28da5dbde05f07227c17f48ddb6540a6686131129a"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B/s001.wav",
+    "bytes": 42284,
+    "sha256": "ca0174bcf285f6e2e00bfc9ff00ef9890f02c02c8c4bb4e13a21ab16947e0bd1"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r1-B.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/events.jsonl",
+    "bytes": 116885,
+    "sha256": "a86bf1cc6a815c81b9ad67ab85b47351ac4e1665660090c2c4741c9493a7ebe4"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/capture-metadata/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/events.jsonl",
+    "bytes": 12702,
+    "sha256": "9fa149d61eafa6e237d8aba01fe540873cf8efbe51485ae7f89585fc171bdf7e"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/result.json",
+    "bytes": 27217,
+    "sha256": "58ea9b4046b6c5cd30818127e790ccfc98d0ba7926a58209be4362044def19a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A/s001.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-A.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/events.jsonl",
+    "bytes": 116883,
+    "sha256": "02fac46571f77510b1c3dcb5400b9cf0b69b3bcade2e3284717354aac8f1c5f1"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/capture-metadata/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/events.jsonl",
+    "bytes": 12715,
+    "sha256": "7e440e77e3e8e185b400bed6a415fa5e7664f73dc43cc375355e79272ca27ff4"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/result.json",
+    "bytes": 29576,
+    "sha256": "e81aad74aacb666483349aac2176fc7ba3d8be8f0f33f86f8f97b49dfc98571f"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B/s001.wav",
+    "bytes": 42284,
+    "sha256": "ca0174bcf285f6e2e00bfc9ff00ef9890f02c02c8c4bb4e13a21ab16947e0bd1"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/r2-B.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/status.json",
+    "bytes": 338,
+    "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+  },
+  {
+    "path": "build/multilingual-online/ru-tail-context-20261027/summary.json",
+    "bytes": 124543,
+    "sha256": "9a19df57cf6e0974e7c4adc72fd17dfa064a8d8404964d33040dec60d6ddfed3"
+  }
+]

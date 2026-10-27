@@ -166,5 +166,85 @@ class TailExecutionTests(unittest.TestCase):
         self.assertEqual(flags["human_semantic_review"],"pending")
 
 
+class AcousticContextTests(unittest.TestCase):
+    def test_only_fixed_prefix_changes_pcm_and_saved_tail_is_identical(self):
+        tail=b"\1\0"*13440
+        prefix=b"\2\0"*7680
+        original=b"\0\0"*90880+prefix+tail
+        stream=b"\0\0"*286080+prefix+tail
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/"original.wav";write_wav(path,original)
+            a,span_a,wav_a=tool.context_pcm(tail,path,stream,"A")
+            b,span_b,wav_b=tool.context_pcm(tail,path,stream,"B")
+            self.assertIs(a,tail)
+            self.assertEqual(b[7680*2:],tail)
+            self.assertEqual(b,prefix+tail)
+            self.assertEqual((span_b,wav_b),([286080,307200],[90880,112000]))
+            self.assertEqual((span_a,wav_a),(tool.STREAM_SPAN,tool.WAV_SPAN))
+            self.assertNotEqual(digest(a),digest(b))
+            with self.assertRaisesRegex(ValueError,"fixed A/B"):
+                tool.context_pcm(tail,path,stream,"other")
+
+    def test_prefix_cannot_hide_a_modified_tail(self):
+        tail=b"\1\0"*13440
+        original=b"\0\0"*98560+b"\3\0"*13440
+        stream=b"\0\0"*293760+tail
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/"original.wav";write_wav(path,original)
+            with self.assertRaisesRegex(ValueError,"changed the saved tail"):
+                tool.context_pcm(tail,path,stream,"B")
+
+    def windows(self, count, voice):
+        return [dict(spans=[[i*1920,(i+1)*1920]],accepted_activity=i<voice,vad_speech=i<voice,
+            energy_activity=False,energy_threshold_dbfs=-45.,rms_dbfs=-52. if i<voice else -50.) for i in range(count)]
+
+    def test_metadata_is_derived_from_counted_activity_not_inherited_or_forced_strong(self):
+        a=tool.metadata_from_windows(b"\1\0"*13440,self.windows(7,3),"A",-200.,"custom")
+        b=tool.metadata_from_windows(b"\1\0"*21120,self.windows(11,7),"B",-200.,"custom")
+        self.assertEqual((a.duration_seconds,a.voice_duration_seconds,a.block_count),(.84,.36,7))
+        self.assertEqual((b.duration_seconds,b.voice_duration_seconds,b.block_count),(1.32,.84,11))
+        self.assertEqual(b.vad_confidence,7/11)
+        self.assertEqual(b.peak_rms_dbfs,-52.)  # inactive louder window is NOT a speech peak
+        from voxgo.asr.pipeline import CandidatePolicy
+        self.assertTrue(CandidatePolicy().classify(a).short_segment)
+        decision=CandidatePolicy().classify(b)
+        self.assertFalse(decision.short_segment)
+        self.assertTrue(decision.low_confidence)
+
+    def test_metadata_requires_exact_pcm_window_coverage_and_stable_gate(self):
+        with self.assertRaisesRegex(ValueError,"exactly cover"):
+            tool.metadata_from_windows(b"\1\0"*100,self.windows(7,3),"B",-200.,"custom")
+        windows=self.windows(7,3);windows[-1]["energy_threshold_dbfs"]=-44.
+        with self.assertRaisesRegex(ValueError,"changing gate"):
+            tool.metadata_from_windows(b"\1\0"*13440,windows,"B",-200.,"custom")
+
+    def test_alignment_flags_changed_verb_without_repair_or_deduplication(self):
+        previous="от которых через комаров болезть затем передаяться"
+        current="передается человеку."
+        review=tool.overlap_review(previous,current)
+        self.assertEqual(review["unaltered_concatenation"],previous+" "+current)
+        self.assertTrue(any(p["previous_token"]=="передаяться" and p["current_token"]=="передается" for p in review["fuzzy_boundary_pairs"]))
+        self.assertFalse(review["text_modified"])
+        self.assertEqual(review["exact_suffix_prefix_tokens"],0)
+
+    def test_actual_context_candidate_remains_weak_despite_improved_scores(self):
+        from voxgo.asr.pipeline import CandidatePolicy, WeakCandidateTranscriptFilter
+        config=make_config(Path(".models"),3.,450,450)
+        speech=tool.metadata_from_windows(b"\1\0"*21120,self.windows(11,6),"diagnostic_context_prefix_0.48s",-200.,"custom")
+        decision=CandidatePolicy().classify(speech)
+        self.assertEqual(speech.voice_duration_seconds,.72)
+        self.assertTrue(decision.short_segment)
+        self.assertTrue(decision.low_confidence)
+        from voxgo.runtime.work_items import LatencyTrace
+        item=SpeechWorkItem(speech,LatencyTrace("test",1.,1.),candidate_labels=decision.labels,
+                           low_confidence=decision.low_confidence,short_segment=decision.short_segment)
+        result=TranscriptionResult(text="человеку.",raw_text="человеку.",language="ru",
+            language_probability=.8775906562805176,avg_logprob=-1.0070051749547322,
+            no_speech_prob=.20643901824951172,compression_ratio=.68)
+        self.assertTrue(WeakCandidateTranscriptFilter().drop_reason(item,result).startswith("weak_candidate_low_asr_confidence"))
+        # Separate downstream check, not a claim that production reached it.
+        self.assertEqual(should_drop_transcription_result(result,"auto",[],config.whisper),"")
+
+
 if __name__=="__main__":
     unittest.main()

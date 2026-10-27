@@ -6,6 +6,7 @@ import argparse
 from collections import defaultdict
 import copy
 from dataclasses import asdict, fields
+import difflib
 import json
 from pathlib import Path
 import re
@@ -130,6 +131,108 @@ def run_idle(pipeline, segment, journal, timeout=12.):
     return dict(initial_state=before, completed=False)
 
 
+def metadata_from_windows(pcm, windows, reason, noise_floor, latency_mode):
+    """Aggregate official capture decisions, not a second activity classifier."""
+    from voxgo.audio.capture import SpeechSegment
+    if not windows or sum(b-a for w in windows for a,b in w["spans"])*2 != len(pcm):
+        raise ValueError("Activity windows do not exactly cover the diagnostic PCM")
+    voice = [w for w in windows if w["accepted_activity"] and w["vad_speech"]]
+    energy = [w for w in windows if w["accepted_activity"] and not w["vad_speech"] and w["energy_activity"]]
+    active = [w for w in windows if w["accepted_activity"]]
+    if not active or len({w["energy_threshold_dbfs"] for w in windows}) != 1:
+        raise ValueError("Cannot faithfully aggregate active windows / changing gate")
+    return SpeechSegment(audio_data=pcm, sample_rate=RATE, duration_seconds=len(pcm)/(RATE*2),
+        voice_duration_seconds=sum(b-a for w in voice for a,b in w["spans"])/RATE,
+        block_count=len(windows), voice_blocks=len(voice), peak_rms_dbfs=max(w["rms_dbfs"] for w in active),
+        energy_threshold_dbfs=windows[-1]["energy_threshold_dbfs"], noise_floor_dbfs=noise_floor, reason=reason,
+        vad_voice_blocks=len(voice), energy_voice_blocks=len(energy), vad_confidence=len(voice)/len(windows),
+        activity_source="vad" if voice else "energy", latency_mode=latency_mode)
+
+
+def context_pcm(tail, original_path, stream, arm):
+    if arm not in {"A","B"}:
+        raise ValueError("Only the fixed A/B context inputs are allowed")
+    prefix=7680 if arm=="B" else 0
+    start,wav_start=STREAM_SPAN[0]-prefix,WAV_SPAN[0]-prefix
+    with wave.open(str(original_path),"rb") as audio:
+        if (audio.getnchannels(),audio.getsampwidth(),audio.getframerate())!=(1,2,RATE):
+            raise ValueError("Context source must be original mono PCM16 16kHz")
+        audio.setpos(wav_start)
+        data=audio.readframes(WAV_SPAN[1]-wav_start)
+    if len(data)!=(13440+prefix)*2 or data[-len(tail):]!=tail or data!=stream[start*2:STREAM_SPAN[1]*2]:
+        raise ValueError("Context input changed the saved tail / stream mapping")
+    return tail if arm=="A" else data,[start,STREAM_SPAN[1]],[wav_start,WAV_SPAN[1]]
+
+
+def context_input(tail, row, previous, clips, stream, config, arm, output):
+    """Exact 0/.48s input plus metadata witnessed in a production capture replay.
+
+    Full original stream is used only to restore capture/VAD state, never ASR.
+    B is a diagnostic prefix union, NOT a segment emitted by current capture.
+    """
+    from scripts.offline_asr_observer import Journal, ObservedCapture
+    from voxgo.audio.capture import SpeechSegment
+    output.mkdir(exist_ok=False)
+    class ActivityCapture(ObservedCapture):
+        def _should_force_split(self):
+            self.journal.windows[-1]["accepted_activity"] = True
+            return super()._should_force_split()
+    with Journal(output, stream, clips) as journal:
+        capture = ActivityCapture(copy.deepcopy(config.audio), journal)
+        capture.set_speech_callback(capture.observe_segment)
+        try:
+            for offset in range(0,len(stream),1920*2):
+                capture.feed(stream[offset:offset+1920*2],offset//2,(offset+1920*2)//2,time.perf_counter())
+                capture.process_audio()
+            for w in journal.windows:
+                w.setdefault("accepted_activity",False)
+            # Strict reproduction prevents silently substituting a new VAD state.
+            def signature(rows):
+                names=[f.name for f in fields(SpeechSegment) if f.name!="audio_data"]
+                return [(s["spans"],s["pcm_sha256"],{k:s[k] for k in names}) for s in rows]
+            if signature(list(journal.segments.values())) != signature([s for s in previous["segments"] if s["captured"]]):
+                raise ValueError("Capture replay differs from source; no Pipeline success claim permitted")
+            windows=copy.deepcopy(journal.windows)
+        finally:
+            capture._audio.terminate()
+    def select(start,end):
+        chosen=[w for w in windows if w["spans"][0][0]>=start and w["spans"][-1][1]<=end]
+        spans=[span for w in chosen for span in w["spans"]]
+        if not spans or spans[0][0]!=start or spans[-1][1]!=end or any(a[1]!=b[0] for a,b in zip(spans,spans[1:])):
+            raise ValueError("Missing / overlapping capture windows")
+        return chosen
+    original=metadata_from_windows(tail,select(*STREAM_SPAN),row["reason"],row["noise_floor_dbfs"],row["latency_mode"])
+    if any(getattr(original,f.name)!=row[f.name] for f in fields(original) if f.name!="audio_data"):
+        raise ValueError("Derived A metadata does not match original tail")
+    clip=next(c for c in clips if c["id"]==MOSQUITO)
+    data,span,wav_span=context_pcm(tail,clip["audio"],stream,arm)
+    selected=select(*span)
+    segment=metadata_from_windows(data,selected,row["reason"] if arm=="A" else "diagnostic_context_prefix_0.48s",
+                                 row["noise_floor_dbfs"],row["latency_mode"])
+    return segment, span, dict(arm=arm, pcm_sha256=digest(data), frames=len(data)//2,
+        wav_span=wav_span,stream_span=span,prefix_frames=7680 if arm=="B" else 0,
+        tail_unchanged=True,source_capture_exactly_reproduced=True,actual_windows=selected,
+        metadata_scope="Original capture decisions aggregated for exact PCM. B prefix union is diagnostic, not emitted by current capture.",
+        previous_raw=next(s["asr"]["raw_text"] for s in previous["segments"] if s["spans"]==[[245760,293760]]))
+
+
+def overlap_review(previous, current):
+    """Evaluation-only text alignment; never repair or deduplicate ASR output."""
+    tokenize=lambda text: re.findall(r"[а-яё]+",text.casefold())
+    left,right=tokenize(previous),tokenize(current)
+    exact=0
+    for n in range(1,min(len(left),len(right))+1):
+        if left[-n:]==right[:n]:
+            exact=n
+    pairs=[dict(previous_index=i,current_index=j,previous_token=left[i],current_token=right[j],
+                similarity=difflib.SequenceMatcher(None,left[i],right[j]).ratio())
+           for i in range(max(0,len(left)-4),len(left)) for j in range(min(4,len(right)))
+           if min(len(left[i]),len(right[j]))>=4 and difflib.SequenceMatcher(None,left[i],right[j]).ratio()>=.70]
+    return dict(previous_raw=previous,current_raw=current,unaltered_concatenation=previous+" "+current,
+                exact_suffix_prefix_tokens=exact,fuzzy_boundary_pairs=pairs,
+                verdict="auxiliary alignment only; semantic conflict/repetition requires review",text_modified=False)
+
+
 def run_child(args, safety):
     from loguru import logger
     logger.remove()
@@ -145,9 +248,16 @@ def run_child(args, safety):
     initial = dict(audio=asdict(config.audio), whisper=asdict(config.whisper))
     if initial != previous["initial_effective_config"]:
         raise ValueError("Configuration differs from the actual 3.0s source run")
-    segment = SpeechSegment(audio_data=pcm, **{f.name: row[f.name] for f in fields(SpeechSegment) if f.name != "audio_data"})
+    context_mode=getattr(args,"context_ab",False)
+    if context_mode:
+        segment, spans, context = context_input(pcm,row,previous,clips,stream,config,args.child,output/"capture-metadata")
+        provenance=dict(source_tail=provenance,context_input=context,pcm_sha256=context["pcm_sha256"],
+            inference_input="original saved tail A" if args.child=="A" else "NEW 0.48s original-WAV acoustic prefix plus unchanged saved tail; diagnostic context B")
+    else:
+        segment = SpeechSegment(audio_data=pcm, **{f.name: row[f.name] for f in fields(SpeechSegment) if f.name != "audio_data"})
+        spans=STREAM_SPAN
     journal = Journal(output, stream, clips)
-    journal.segment(segment, [STREAM_SPAN])
+    journal.segment(segment, [spans])
     sink = logger.add(journal.log, level="DEBUG", enqueue=False)
     recognizer = ObservedRecognizer(copy.deepcopy(config.whisper), journal)
     recognizer._model_path = str(snapshot)
@@ -182,7 +292,7 @@ def run_child(args, safety):
         result["model_loaded_rss_bytes"] = memory()
         decision = pipeline._candidate_policy.classify(segment, config.audio)
         result["candidate"] = asdict(decision)
-        if args.child == "A":
+        if args.child == "A" and not context_mode:
             now = time.time()
             item = SpeechWorkItem(segment, pipeline._make_latency_trace(now, config), candidate_labels=decision.labels,
                                   candidate_reason=decision.reason, low_confidence=decision.low_confidence,
@@ -209,6 +319,9 @@ def run_child(args, safety):
                       sampler_stopped=not sampler.is_alive(), safety={k:v for k,v in safety.items() if k!="active"},
                       config_unchanged=initial == dict(audio=asdict(config.audio), whisper=asdict(config.whisper)))
         result["flags"] = recipient_flags(observed.get("asr",{}), observed.get("retained_text",""), observed.get("translation_input",""))
+        if context_mode:
+            result["context_mode"] = True
+            result["overlap_review"] = overlap_review(context["previous_raw"],observed.get("asr",{}).get("raw_text",""))
         journal.event("shutdown", worker_stopped=result["worker_stopped"], queue_empty=result["queue_empty"], pending_empty=result["pending_empty"])
         write(output/"result.json", result)
         logger.remove(sink)
@@ -228,6 +341,7 @@ def main():
     parser.add_argument("--source-run", type=Path, required=True)
     parser.add_argument("--models-directory", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--context-ab",action="store_true",help="Fixed 0/.48s acoustic prefix experiment; both arms use idle Pipeline")
     parser.add_argument("--child", choices=["A","B"], help=argparse.SUPPRESS)
     args = parser.parse_args()
     protected = [args.source_run.parent, args.models_directory, INDEX.parent, MANIFEST.parent, ROOT/"voxgo"]
@@ -240,18 +354,25 @@ def main():
         load_tail(args.source_run)
         _, model_files = local_base(args.models_directory)
         before, source = protected_hashes(args.source_run), fingerprint()
+        if args.context_ab:
+            previous_diagnostic=ROOT/"docs/testing/evidence/v0.5.3-ru-tail-diagnostic-2026-10-27"
+            before.update({str(p):digest(p.read_bytes()) for p in previous_diagnostic.rglob("*") if p.is_file()})
         output = create_output(args.output)
         schedule = [("r1-A","A"),("r1-B","B"),("r2-B","B"),("r2-A","A")]
         status = dict(status="running", completed=[], api_requests=0)
         write(output/"plan.json",dict(schedule=schedule, unique_recordings=1, model_files=model_files,
-                                      source_run=str(args.source_run.resolve()), scope="Exact saved PCM only, no warmup/context/decoder changes"))
+                                      source_run=str(args.source_run.resolve()),
+                                      scope="Fixed 0/.48s context, idle Pipeline; no decoder/filter changes" if args.context_ab else "Exact saved PCM only, no warmup/context/decoder changes"))
         try:
             for name, arm in schedule:
                 print("Starting "+name, flush=True)
                 with (output/(name+".log")).open("x",encoding="utf-8") as log:
-                    child = subprocess.run([sys.executable,"-B","-X","utf8",str(Path(__file__).resolve()),
+                    command=[sys.executable,"-B","-X","utf8",str(Path(__file__).resolve()),
                         "--source-run",str(args.source_run.resolve()),"--models-directory",str(args.models_directory.resolve()),
-                        "--output",str((output/name).resolve()),"--child",arm],cwd=ROOT,stdout=log,stderr=log,timeout=60)
+                        "--output",str((output/name).resolve()),"--child",arm]
+                    if args.context_ab:
+                        command.append("--context-ab")
+                    child = subprocess.run(command,cwd=ROOT,stdout=log,stderr=log,timeout=60)
                 if child.returncode:
                     raise RuntimeError("Diagnostic child failed; stop without selective retries: "+name)
                 status["completed"].append(name)
@@ -263,7 +384,7 @@ def main():
                 rows=[dict(run=name,**r) for (name,_),r in zip(schedule,rows)],release_approved=False))
             status["status"] = "complete"
         finally:
-            status.update(original_evidence_unchanged=before == protected_hashes(args.source_run),
+            status.update(original_evidence_unchanged=all(Path(p).is_file() and digest(Path(p).read_bytes())==h for p,h in before.items()),
                           runtime_and_existing_tools_unchanged=source["files"] == fingerprint()["files"],
                           models_unchanged=model_files == local_base(args.models_directory)[1],
                           safety={k:v for k,v in safety.items() if k!="active"})

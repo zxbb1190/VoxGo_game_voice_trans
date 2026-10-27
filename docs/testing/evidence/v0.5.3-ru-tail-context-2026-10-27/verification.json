@@ -1,0 +1,13 @@
+{
+  "all_complete": true,
+  "models_match_all_runs": true,
+  "all_capture_reproductions_exact": true,
+  "all_actual_whisper_snapshots_match": true,
+  "shared_actual_config": true,
+  "all_configs_unchanged": true,
+  "all_capture_pre_roll_450": true,
+  "actual_cpu_int8": true,
+  "all_collector_hashes_match": true,
+  "runtime_and_prior_tools_match": true,
+  "zero_network_analytics_attempts": true
+}

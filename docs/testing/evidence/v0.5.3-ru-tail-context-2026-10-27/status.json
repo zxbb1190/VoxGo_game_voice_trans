@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "completed": [
+    "r1-A",
+    "r1-B",
+    "r2-B",
+    "r2-A"
+  ],
+  "api_requests": 0,
+  "original_evidence_unchanged": true,
+  "runtime_and_existing_tools_unchanged": true,
+  "models_unchanged": true,
+  "safety": {
+    "blocked_network_attempts": 0,
+    "blocked_analytics_imports": 0
+  }
+}

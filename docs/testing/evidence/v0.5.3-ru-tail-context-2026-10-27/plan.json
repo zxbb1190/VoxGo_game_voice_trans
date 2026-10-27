@@ -1,0 +1,41 @@
+{
+  "schedule": [
+    [
+      "r1-A",
+      "A"
+    ],
+    [
+      "r1-B",
+      "B"
+    ],
+    [
+      "r2-B",
+      "B"
+    ],
+    [
+      "r2-A",
+      "A"
+    ]
+  ],
+  "unique_recordings": 1,
+  "model_files": {
+    "config.json": {
+      "bytes": 2309,
+      "sha256": "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a"
+    },
+    "model.bin": {
+      "bytes": 145217532,
+      "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9"
+    },
+    "tokenizer.json": {
+      "bytes": 2203239,
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    "vocabulary.txt": {
+      "bytes": 459861,
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  },
+  "source_run": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3",
+  "scope": "Fixed 0/.48s context, idle Pipeline; no decoder/filter changes"
+}

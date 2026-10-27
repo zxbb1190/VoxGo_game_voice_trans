@@ -1,0 +1,85 @@
+{
+  "api_requests": 0,
+  "actual_asr_calls": 4,
+  "unique_asr_recordings": 1,
+  "context_lengths_tested_seconds": [
+    0,
+    0.48
+  ],
+  "within_arm": {
+    "A": true,
+    "B": true
+  },
+  "raw_text_identical_between_arms": true,
+  "all_translation_inputs_empty": true,
+  "concatenations_identical": true,
+  "current_sample_delivered_improvement": false,
+  "semantic_recovery_mechanism_proven": false,
+  "new_independent_validation": false,
+  "release_approved": false,
+  "summary_note": "Original summary.all_outputs_filters_identical compares ALL runs including intentionally different arms; False reflects differing scores, not unstable repeats.",
+  "extra_global_checks": [
+    {
+      "run": "r1-A",
+      "raw": "человеку.",
+      "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+      "separate_global_filter": "global_asr_low_logprob_short avg_logprob=-1.20",
+      "separate_translation_gate": "",
+      "note": "Separate read-only calls on saved ASR. Actual Pipeline short-circuited at weak transcript filter; no extra inference."
+    },
+    {
+      "run": "r1-B",
+      "raw": "человеку.",
+      "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.01, no_speech=0.21, compression=0.68)",
+      "separate_global_filter": "",
+      "separate_translation_gate": "",
+      "note": "Separate read-only calls on saved ASR. Actual Pipeline short-circuited at weak transcript filter; no extra inference."
+    },
+    {
+      "run": "r2-B",
+      "raw": "человеку.",
+      "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.01, no_speech=0.21, compression=0.68)",
+      "separate_global_filter": "",
+      "separate_translation_gate": "",
+      "note": "Separate read-only calls on saved ASR. Actual Pipeline short-circuited at weak transcript filter; no extra inference."
+    },
+    {
+      "run": "r2-A",
+      "raw": "человеку.",
+      "actual_first_rejection": "weak_candidate_low_asr_confidence (text=человеку, avg_logprob=-1.20, no_speech=0.50, compression=0.68)",
+      "separate_global_filter": "global_asr_low_logprob_short avg_logprob=-1.20",
+      "separate_translation_gate": "",
+      "note": "Separate read-only calls on saved ASR. Actual Pipeline short-circuited at weak transcript filter; no extra inference."
+    }
+  ],
+  "A": {
+    "mean_asr_ms": 956.0411999991629,
+    "mean_inference_process_cpu_seconds": 1.8515625,
+    "maximum_sampled_rss_mib": 341.88671875,
+    "pcm_sha256": "5eae1b016d16a547fd91129fd379f44613f493c1a2d980f829bcdfb4b6ac5459",
+    "metadata": {
+      "duration_seconds": 0.84,
+      "voice_duration_seconds": 0.36,
+      "block_count": 7,
+      "voice_blocks": 3,
+      "peak_rms_dbfs": -52.27957152650901,
+      "energy_threshold_dbfs": -45.0,
+      "vad_confidence": 0.42857142857142855
+    }
+  },
+  "B": {
+    "mean_asr_ms": 964.9260500009404,
+    "mean_inference_process_cpu_seconds": 1.921875,
+    "maximum_sampled_rss_mib": 343.86328125,
+    "pcm_sha256": "4af960758c23c1ec93ef73cde01cdbdaf326c2fd0e9b4872ba625b7f19e237ed",
+    "metadata": {
+      "duration_seconds": 1.32,
+      "voice_duration_seconds": 0.72,
+      "block_count": 11,
+      "voice_blocks": 6,
+      "peak_rms_dbfs": -51.58271143402081,
+      "energy_threshold_dbfs": -45.0,
+      "vad_confidence": 0.5454545454545454
+    }
+  }
+}
