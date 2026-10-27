@@ -1,0 +1,1702 @@
+{
+  "hashes": [
+    "002955b628c129155c443a17006acae3ff291acf38cdfcf9c671bf628b1962ba",
+    "02d2acefe90e8f61cab7df5a026af6cb62b08ffabdd3e9b290ce0d09165dacb3",
+    "02fac46571f77510b1c3dcb5400b9cf0b69b3bcade2e3284717354aac8f1c5f1",
+    "08a7f22e72fe84fea5e7f563ede5b8a06b453cd5b6974e4dcaaa1ecd7918248d",
+    "096abafd5c12fc3b32b64ccd20f0ae872b6675b3087a707ee825efb40be8678f",
+    "09ea506678d8cba021cfda2947dac219a901935692f8b4f57c395cfc5d6e87ea",
+    "09eb40d91e88cad20e7d3c5df099f261334af2ed0ca8ac945e6386454846f909",
+    "0bdceb100af037f18e673f0702cd79c30ba203272919b537f1a9eb5524968c95",
+    "0d40e72be40e6a2a5709f4cad0c279d8a4cb47e46652e2887a3583a1ae83ba40",
+    "0e14be795c9d870a6a7e4b7552243704e36d9f526bc418a4faba14f72663fa89",
+    "0ed8976c5d0940c0a19deb7d5b5be50feb6aa8d2c642888d44a5a3e0216142bc",
+    "10edfbbf5214cdebb3ca2b544e560e8a1a8d93114d508dc8efc30830ce5a2a05",
+    "120520df29ffc55bcae202fc2441bc5e374e5defb8ce03609aae5c82ba014ed0",
+    "125df05d51e1f71057fe0d85e2abd738ab11d2d76ced65a94a44e0ed77775f19",
+    "15708ed41c9c09ccd9062a885012bfa41945c9f4ef2de79a9b92901a144a03f7",
+    "16ef0eddb329e5fddd2628c21ef3d1c5dad592104f975be07d4c82fcfaf7165c",
+    "1786db16b105e09bc68453366dfe2f42d833d2eb21ca3d1cd4c421c036d2c3e1",
+    "1896bd66c3af0528d949bd9d30a11eb49e7cde80c81199691a155995a7ca7006",
+    "18e97c4ed12d11ddf10d57e0efbf5645ae511d278cfbf8527da97ecad4db98d1",
+    "1a1cdbd21cf2c41cc7bc500bd7d8b93fad990b9c11fc87c9d5462014c0ed70e2",
+    "1a315112edb7519af11fa593581bd53d0139282c3fa2f74634900d6e727658e7",
+    "1a6e4ad8728c06fc62c313e0637b178a916cd85168264485a09683bbb0db5d5a",
+    "1af104e8c1a8bad2b27ddb04d45a3104524f90bda8b5339653cf580d2330561b",
+    "1c4da01851ecb0d68584b430effd31f48ee9f67b60d936492a1f189c0e3ed057",
+    "1da005702a16f75f6aa1e6a9058e1b8f6460ba09b04cc6631c698deeba91b804",
+    "1f1050181da60a7810ca4f0d3f9b2ffbbc65e350835fc0910671b167139e7a75",
+    "1f2530eb487d8b696d2479f553f2529ceeba86fccc2363999fde47d2e1044d5f",
+    "20652e21684698040f03ef13f960171cb92fe0e6806df40002fca643a0c2bc32",
+    "20b3c906de94d16d3db97743a89d7dfb0be91955764076b68dadba20a12b051b",
+    "20bb6c8c2cae8c4c65dec0a6eba4ce685968b9dcbd550cda6e4d1cec7a8c6e45",
+    "22f5da790bf69008b2446dfef3f243318d3019682ad6a2057051ca1ee42e514e",
+    "23c9033f5ac828230033c2abd990c25f4679db01638731905f792294fafe43d0",
+    "25e651861948f4dd3c1b0171236c4c457e0ce6d7aef094a12610c060478562a0",
+    "26ab9f2fc64d329bfce18fd51c9adbf03c33ed48a65e829f86b59cf6273a3c52",
+    "26d3fca5d36ff46a1b2cc9834eafa7efbfa12fb708dc7e2f33e5a28b97922567",
+    "270667f5044df005f1dc9c244ddec18c871a89f95a133dbb65e1aa2d178ecd0b",
+    "2720542e792f677c11ad27cc7cbe2f49a17a1c2a3d31c2896669a756b0a476ab",
+    "2866329aac3f03a28dde4826d910a06c191df3c7921155b3431ec5b3d0b77e8a",
+    "29011c6f1b673bbdbfadedc22454e7db4d93cab84d81301a3deb430ecf5a9a48",
+    "2975bced7c2c0aa2e5dfd4e494e7e08098a36997681e5326a5fc2a2a4aa45ba0",
+    "2a3150c838d8a510f8b753c1f743f3b46c9f019ae78f3f46b9071522143e6e5d",
+    "2db41ae26bf3292a88254ec412fe4cd6ad9710bd31714861e4628a989cb06634",
+    "2e9c014b3d4e55ec9ce96c87a4936f4880f6b30fde22d4d658ad982df0a161aa",
+    "2f1718d6199239d479e197941bf152e2f470231dd83cc72a2c13eb57ef4db58e",
+    "30e1bc1ccf3e32bd57af6570b32b424ca8267a0a15b6877e5b2c0d22d2f6dec0",
+    "31caaa854b7614474ceb4ebf06622e9a2b418882f726013fa59949a1e6bbc08f",
+    "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+    "3550d00afc2f3243781c4fa6789453050b641389eef50e5d0a72e7d7c79db5db",
+    "3562ad74d0632ff82c8ca4c57ff36afa0137a13486792783c9a5812add677b22",
+    "35a02195aa03b2096a9347e6cf5f875ba4def6f4dbe8bff869bc899ac66512d4",
+    "37aa5bd53a8333a6e5ff9bdf613d270087c5f02fcfa22ae342f2fb790273087c",
+    "381c4907b62cf563afd7c2c1ff810e8bef8469772836d1e28d816c5aca79a89c",
+    "392a753c2c4653221b5535f913e9946821b6c2569223bf1895f0729e29bfc216",
+    "399267593130e064ff7909cdff88b67ce5a20571795dfb83ba3f045dbcb40e7c",
+    "3a73837e98f3b89ca89992939dbacb9fa64d29f6896f315b4db6e5c148f645e7",
+    "3cae5637b6406e6bdaaada5b7bbb75272b2e50f8f178dfdfc0c3760442e582a1",
+    "3cde226b97f537626e1d20e4793c53d0bb2898e84ea2d06a9be336c2aef9a3a1",
+    "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "3f610bae46f8ffd4448b4ad899159835d3e0503223a49b38ebeb0cfd28b8d361",
+    "3f676db54b49e7c451a9eb19aeb22571e557ca28bdbb383983d4cca0e0ac7e4e",
+    "4066c79748d408d65f9dffe9a8d97bac971d95b1effb4bce8c007a120ce9bd75",
+    "415bb24acdeaa90ccc3814abf36e8b7beeba74badbbb1eb7950cffde6c5640ad",
+    "47ad4c73562a700d36f8e63aa337e84625b48803ef9c9f7467ae3ff64612e952",
+    "48c863909acc78ad40720e0350eec94e6d256f5ced9bcf4e90d488de908c765e",
+    "4a55a2d7b80864d4ff85666395889de986dce512b660c821d120655b139139b3",
+    "4af960758c23c1ec93ef73cde01cdbdaf326c2fd0e9b4872ba625b7f19e237ed",
+    "4b061678509d6f52f3d30d954ddb5b7077f55bad65b184d50a56c53fe6373c34",
+    "4b1d16a5d4387674828ab5e49cdccc2a9efc59d4bb9bee7d8d2aa8d602dd40c3",
+    "4c0c7c0ac83e7017def8dd12396491a77ccc235a677de26d9260ad518da90b75",
+    "4c8d9c2c5d0ae1bd89af689d71e808337e99a1914f5bc647b7e869ce6857222a",
+    "4c967e58f88c0e97735d5cd2e2ffe1c7648e092ce54de50b995a4af46a266044",
+    "4cca4b848643dbb316662444f4eeb03e20ac84a27d8a57f0c6b8d191809f9b1d",
+    "4e424f41f102a2fef14ee82bf37bfa93e3c5ffac170007ae079c1657a36a3761",
+    "4e7ff6680fa59aa47a1540e86b399de477f9e7cfde5631223be7cd03e0d62e32",
+    "5146ac74c10fe5c78c7a453b29a67c367a9e8d4aea8ab29c4995ff12baeb8e7d",
+    "52c2ecfeb89a426b0c0abcb79d5d86a9b98391229b18e81b17cfdd3b89dd55a6",
+    "5412cc10fe3d098cfb4735b67dd97ef0e76b534b0b9a127ecc7dc2c4397feeb5",
+    "54ef80245c87b37850480d8b47d8365b193405e10d9c93c31fd07f23f237266f",
+    "55465af34fa4341bb79907e2d23c03e1ec1820154fe6a056103fbadfd99ce3b6",
+    "5579e7e7ea3a2de96560e3b3dbcb4aaeb1c04908d3c01f5746cac7c4ab2708fc",
+    "56322acc2a79964edc3ab5be17d661ac42b6b4f6d4ffdce80d22204df3168fe9",
+    "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058",
+    "569d9a7032b10f65a5d78d01c8207c5a42a22bb08ac0aa16f59f8b84b8ee46a7",
+    "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a",
+    "56ea4d7c4a829ac5382e189d1e5409955ba7ac75d612698accce6dd37bfcf920",
+    "57d4b6b98c34f4777f3ad5f6247ad984e1774df4c645c0f069381aba14a497c1",
+    "58ea9b4046b6c5cd30818127e790ccfc98d0ba7926a58209be4362044def19a2",
+    "595c3b1d31f41aa4dcc66c484a8168ad60960d200f1d9403c48ebdf94d2ae9cd",
+    "5a109d314afe05fe9f4d6c3843cd9a40bcee4ff19f6ad775e20077189b15a889",
+    "5c3d61b6eb1fcb65c003838e9a54fbb0293afc83ecce620af2df14044a5fa87a",
+    "5c5763b4a3be678c520adcd5f466f8c4c9a2c899c227aa132046726b50aedbf3",
+    "5c9175ea75ed32a05644dea71d0d1b31a84b76d32949fe722f6f2f54efbbe1e3",
+    "5dd9643511437414681ad3f23508596c621cdf78978724a09f1f06fefe9d300b",
+    "5e8e05be4c52366b6123e68769f79ab901d9bd5cde6fc19f0dd0153085c455a6",
+    "5eae1b016d16a547fd91129fd379f44613f493c1a2d980f829bcdfb4b6ac5459",
+    "5f25f0d4ac828162e04fcbaff770ef6df1979bfa8718a5f9cdb038ef6f2d082e",
+    "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3",
+    "5f9fe5d5a75aeccd7ed4f69ce5d9bbf38a5105a87b2840d77da1a110405bd9d5",
+    "6012e79d514ed47fc04651bff9b0c4529622bab7fcec422b8f211e4e2cb5cae5",
+    "603723f3d67258613baf8a3d427cd423c8c3c50cdbba81ef7f6aa09ebd0d6a9d",
+    "6058b5bfbc7ea6bad7318b7df713b5bf4d4185540ef44892aa42214658666235",
+    "60d89783abf4c6c9a3502d35fc27e7e3c65106c88e3e898655c319d5735974b2",
+    "616861f23aca268e2f9dd9ab6b07abdd3ca65f5a828fc15607e04a573ceac019",
+    "61eaa97f7fe10699a609a338f4563bac6d0eed8316dd1b8dc5070364435a22ae",
+    "61ed57382352c83a8a0f1799854237e00204df6c3e1c37f93d8231d0a07738d4",
+    "62024402ec16f9f09b1059cc88af7ee494758ac131889f390581846d90fedf1f",
+    "624278d4482f72b2f927950e7e85bdbe357ed646d43dea29b6875f9908cbf3d2",
+    "628fe3b82a7df2221c482de4276c624684b5f42d7b67ad1e31414e474a613308",
+    "6385b54219688adc1bf9f16ba5956f514d236b8a580c9a58b8a584bf87b176cb",
+    "63de783fd5103f3480baf91deaa3e2138d95898d665b132bee182d3c63a0ec45",
+    "6467073c4296656939e28eb8953e324cd37962367420db52ef8a2b201c4c8899",
+    "648e1abb1ba68d3a9bdbbf978305825d0cb09a62de0a18b12fa37d36cebdc7f7",
+    "655ab9065526cdd878b346709e13ecf5ad2987efb93d1bf6409793e71b2df786",
+    "65a50b211df53ae973c3ff001279c94e8e4bd4c63d7d2e4ff92957e13dbbc45c",
+    "6644f9144e4e72ee1639d74f57b55dd455bf6981b3970d68e82d59aeb7b8ab47",
+    "66b7616640973418c6663934e6d81cc1751e5ede6ba0565686bed9268aa756ff",
+    "66f92239cc8eb44c9c163edb68ca2c9629550b6572c421246ec69405cdcb1ff0",
+    "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643",
+    "69377df00b0e8dbe86a712cdcf9c0cdf04012e10735de8196c5971c7df189b47",
+    "6a0bbd9fbb01a56dcf3ad1dd7e1378b3c4bc03b190c80f58194b83e91ff119eb",
+    "6a74d79e45900803d21d1513f0e25a20b47e16754bb5d439467fd1f5c552ddee",
+    "6afc143f6fbda2237db0732395618cf1b6eeb0463c4bc79031631881d0cf2426",
+    "6c92bd8e8838c8470859fdde53a99bdffcb276e48ef9d85d1e8b4c0292a76cfd",
+    "6cae4131104cff5b0126adf0bd6361199d02048bfe3a466bcc6bee3797f051e6",
+    "6cc9c1cb9637a448663ac2979a8541cfb255a9da99cb951c25717d33a02b8b9e",
+    "6da9ed78321d936c9b3d95412ee0b6f8fc0ee68be7a606041ced342620ba6df3",
+    "6dc91e8f5e7a7a3d1509e0d98c80877f2d1de5588dc9f5774ca0770666d039b7",
+    "6ea2ab94659f5bf289679b2e1ea091ef20275b7c2181f18d71bb1e54e3e75e90",
+    "6faa027926bc84685f5c6078d4f16de393579f4e0b6f0c79b72bf886f1e97b83",
+    "710572d65e1671e917612e592f4e542d318d1639447a279fa1d8a74d5a961a53",
+    "71a52a0f33d6314ac7a68ff5dd7a1f839c4a60c31e084402f80b68e0e65b9f88",
+    "71f7c734f9ac8971546f7be1e361cee8ba5a41c6d3bfb22fbe5cda1981e115d3",
+    "737717352600beea1a2840c5662e2f69d685dbf46630c617b54b87a0f00c5e34",
+    "73998e93571efc9e58e591cf008efcffac74c8140491f066b217f13cbaf39ab4",
+    "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2",
+    "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+    "75698c45a0d404a732ce56d99e7139cc6124c0f7c1dc973c587c14109842e5b0",
+    "75d71c5a6e1190d9a48367f3338543145bbb6077d1c8260e9add5f8fa7d3a71a",
+    "766f81c8abf756cdf4d9a09fcf4667669ccb97ea9abca6c551a2abb07e880e70",
+    "78205345260ae7a57fbd1a9d47e6eae25df4d52198cb940e1206676f75f8eb21",
+    "7832c1bbcedcc4bdca16fedf8a4c95443c57dd7b6528c1712020cf471dcb2a04",
+    "78e9c886fbfc247dc7743f9dc7473006b7a50b9401f1db9af16926cf9dae0d04",
+    "7aef8e1117cf63124c02e279bfa5601b7517956560fafb1710d2338e12aaa470",
+    "7c15b0974940cc71e24f7da1c894731bf83bb7b0ee55aed589d3a3b62193f81b",
+    "7c881a55a07b1f4292403617655c92a57213f7b09c9a5a78ff3dc8182d4d4999",
+    "7d4c4cc8d13550bffdcfb1f9eb28613ce6f99eb2ebcce62e7d9ad6a6a0cd6482",
+    "7d5d8d3d1d03ad957cc5364e12e3c170c4982fce512de24b71f31f177edae34e",
+    "7e09116b1faa1df0ab06009ece4087852abaec05641792c0bd4e28dc0ff51393",
+    "7e440e77e3e8e185b400bed6a415fa5e7664f73dc43cc375355e79272ca27ff4",
+    "805949aeeabfec111b2a3c5e6a7e924c8ad310975c2c99993ce6d7b62780ac14",
+    "809d6fd184e27545b9acf0c817b988db89389aa5a5ceb275636525839b0793ae",
+    "855493f463f75a9947dd18483b3567d500dcf5c28bc315cb46d62702b1a3ad83",
+    "85a5f4f80af84ff45a03047d0b819f1da666645a35690916b85e7ca71aaf3303",
+    "8661bda417865724ec816e1e319f7831adbf3dd4179b99113a64df27c097d6c8",
+    "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b",
+    "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04",
+    "880068dd5d076caf79be28d16994be94d17964f75d4f4bc5d38e596188c8ca9c",
+    "89126f5b84f0c0e7c5288f9b4a90cb8d742d411d2d6774af6384f36f9f3055e7",
+    "8a6f7b06d4eb6d0bba4550543ae3c4098535b5c807e30843151dcbcb6eb8132c",
+    "8b38ce13e012edd64450971dbb53419a41cdb188370986099624b3b35c6e0d05",
+    "8b3d2ff8ccc69513ee1964676fb360e6a46cfc792207499e573a886294d237da",
+    "8b5f89df373ccbe19cb390515ecbfa15c6b408ded3ce6ecdc138a1972eeb823a",
+    "8bf8505753f558c2feed14199229ac00e28e9b22683c49c1734e35401bc15ae9",
+    "8ca4c07284659e83f661e5a6cc2f5f8c861a94070b37df78c006034c8276e253",
+    "8d5d066ac370fbf2b2921929949086f12e8466dacb5269c2d4bef92de48844c9",
+    "8fd9b271d1ccfebf733f5ecf6c3623ae957e4aee168ac3f6c0d0847e54b3f284",
+    "947ba2eb91096083ea65c2328e077c2c709d8608142ca04f51dd7fba6f0a44b6",
+    "9542005c8570d4ef7f40668790b6a2652e942dd22cd95e73623e9999c52ea741",
+    "964028ac71012115eed0cb582277a1bcada0aa912f4067371bdb427f82e304b0",
+    "9693919a7d4b322b5475ec3cc289d0eced97629893e4744a3a0a60842c00956c",
+    "969ec03821362969e3e956ce4a6b0b1146cb0683c4402e31f93fa5a634cb611e",
+    "989020dedbda7fa529b0b4e876f236e79b25a2915d093e23de94c8456e72b7b4",
+    "9a19df57cf6e0974e7c4adc72fd17dfa064a8d8404964d33040dec60d6ddfed3",
+    "9a31fd802bb3015acf69d2830589f558a8b0f85a1c223a9cff276d6bd433546f",
+    "9a4b4bba28bc946ee0656719915b2852e23e807437e3c6d454b3a694993ad694",
+    "9a5bded89fd1c9b6348015ee3c45ba241e70010a2c2fdbbcadef3f3a28a45b13",
+    "9a94a7ca5a3bf713aaabf8acb11ce7a3473a5c8c5ab9eddd0dcbbe188321ec66",
+    "9ac255f18f677dd140963369b137a77a41c3e2f2a33cb66ba4017fb068bc50ff",
+    "9cc4a563bc4adbabfaa7fc9f8f3530ef9aa12e8578d113a32195f27868f11412",
+    "9ce3c4fd1ab951ad7a867dec7015514dcb366ef65b540cb1107350196efb5fdf",
+    "9d307c34e5ecb59bb4031b793dbc86a15398220b45e76f0ed846ba59134bf49f",
+    "9d97284da1b5b30504afe85a4866bd69b39818c2e4bb40335c693543121cad50",
+    "9dd76b8835aaba0d7a1145a24266455c8daaf068d3a54ef5f49a148177cd5707",
+    "9e31d8095234ff3b8651281d1ed239ab926fde08e9ce205aed9961e7fa0637ca",
+    "9f2709a3c3db1aba3c11654366c820a92028e75b14787d87fb0f5d1fc219e8d4",
+    "9f5180a61f59ed1920989ad53f9482376323adacc49c1ae72ecfa25d84276a8a",
+    "9fa149d61eafa6e237d8aba01fe540873cf8efbe51485ae7f89585fc171bdf7e",
+    "a071211ff6001a1e7b512994cb14383d454762c634b7ea03651a2c7de41b5117",
+    "a0f060c148d5eb599384c3021174691f519c18f4987afacd510ef6813da5c36e",
+    "a20be81d5dd14deda0edb4d6cdaac8982df3354b6bc003f34cd7899c33939fc5",
+    "a271f6e75cda1cdc7932b31c0180cd660b530d3c04e028d297c42b44489f32bd",
+    "a3501f90a0360cea4cee532939873c0ab0bbf61590bf16070c46d4e374fb5442",
+    "a39310f4ff4114b063e1505ae7e51c3b8dbd57c5b3716019b10e9542d2efd633",
+    "a53fc49f2c01eb920b9ad02fcf01833aef46288bec323b938b62226784fc8cb0",
+    "a6654f69d351805f4e3dcf4cda3e527b245d857acb3642ebed29d9913816bd4f",
+    "a69d6477d5154fabe0e68ce7b427bcfa253969e588b089367c971271c8a4ba84",
+    "a73ec268354c56dbb96992daed73c41183f46ad3272cb016f489d7bddb5246f6",
+    "a7adccf1b5d187f2dcd0a51c6f33d07b45bb041d210bb399460db85843823ddd",
+    "a86bf1cc6a815c81b9ad67ab85b47351ac4e1665660090c2c4741c9493a7ebe4",
+    "a877b49e404277143c1e4a364121712208e36a860c86dbc3e927228c705aaa00",
+    "a8fa7f62dfccc0ff1ca0d0faed274cc400d3c3e7f337c058079442e45aea8e87",
+    "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5",
+    "ab38eddf29befe2ef2fc09c1ecb87dd08b51e3c483d9421dad693d02ebbe9b63",
+    "ab49aeaf57344c9b78ff9f6f22c26df9649181c02a5731da5cf4a9d4fa53e2ee",
+    "ab929676664ed795056ad8aaaece2a4d0f0a45afc182d8f0abed9ab81bfc7bde",
+    "ad7026fb4e4323246ce2130de8e73a126158afe444db9b7c56d79fe78c52208a",
+    "ae20a95909cbd84c26e2b1b228eebeb59047dac4c7c1ae2397b2b729afd0bc1f",
+    "aeab9afdd1ca59e6ed1d0b16ae9f185cfa74c102b58afda678f33cdfb55b2b97",
+    "af2a14495f334f046717862360f7d01ee5bebc255fccf07b2f67d901cdfe8a86",
+    "af86b3d84f539ac31aeee9c2e6e33246349e50460467707fdd0aa83e16298585",
+    "b05da93d6e6d5ec9c31efa53754f9dcf19a3e98b7c7b3720d362aa7c085268f4",
+    "b07c6f1abb17c75cf5c7672229cc49bc5c863ca22fae898cd91d52fb98144790",
+    "b0e8d44fc23ce734ed1e26e7c67c1c245c3d0d708946cebecf475c36051eb938",
+    "b2a0da96e9e20dbba378b57020af68b2da7ac63491e7b7135690d398b6eec200",
+    "b2cf1e9a846bda261bdf33824d60f664f8c1b18a619aa784a44d01f8cd8bcb78",
+    "b3a7354da86e5e8bab1eda3a5956b7ebd21b759ce141e37127557dcd9a10e857",
+    "b48f42e6dae7f124e48f2205195a4cf9fb8ec4cf20d3b0a93d7f1b26506f725b",
+    "b4c00d1ecb8f65d4ef25cf6b21ac58c5002602cb880a965a2f410398f1ef4af5",
+    "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+    "b904c9d38e61dac3ae08c5705a837ba18e4f4d880306e6e5ebd09a7457ee27c2",
+    "b949d65e34393f5419eda66f096b959d21c507cbb2b334f39196fb12987de05d",
+    "bc1ebfc3914110508d4505e60831e2cd306b245a2b5c5cae437a787911ae2b07",
+    "bf1861125e44802172c1651f318f5326c9bcd3caeac801451b5f1267386b1d6a",
+    "bfaa181ff6b4d8792ca1b474e24e09d65024074a1e64d034fd894780cf59f5b6",
+    "bffce2d8ad08bcd3a51e5f4f2954cd500a9062999920d5fdf56ce2added83cf6",
+    "c087416ecd2ce68d18aa2c28da5dbde05f07227c17f48ddb6540a6686131129a",
+    "c0d0a32116750e0b27e6cb4aec3b0800d2e8ff42b67a23415d1f04e78d737547",
+    "c304ea9ceb469fca48fb6f0bda565fda68004573b7cbdda3096524873fd79844",
+    "c45b8aa581e6dff94e2a1430b61c777e91f6d951ef8971559b9c0e6bcea4ce2a",
+    "c472f7ed1955bb6e22c9637ff25075651f0923212a490a91ebf59e2bf688aaba",
+    "c4f002932c93846f220e2b189aa897b555267ecc2457791ba3ce7a615c26c8fa",
+    "c6706a9c1e2f4846ff77b29ad40721e3c0d9d7d40b34fa3b52cbbd58fa3d2599",
+    "c71dcf750e5960808df692ed749722bdd00486690b2b6915dc1b4b2fe4b48bfb",
+    "c82fd9246aaec8f0f6859458afa9e4d04c23c14eb11877ce6fed86de08ebe0f1",
+    "c88b9816515ef04760e5e7d476a117b16f334c42b4655b1ce85b6e574533d7bb",
+    "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300",
+    "ca0174bcf285f6e2e00bfc9ff00ef9890f02c02c8c4bb4e13a21ab16947e0bd1",
+    "cb7c53ddcfab7aed4bf27f1416edd43edf3875d8eabd3a82e345399bf3592047",
+    "ccd9b478c6dd7093a1f9393b64dee85e2c1a7fa16a0be36b9c3bf37b4595bb16",
+    "cd54f261220f49afbb4c128633a737eca4a22f6c0a8233d3cc891478d06676e6",
+    "cd65b437d63e592adaa06513a2a264573c203b300998463d3563e2a0b75cc10a",
+    "cf1b1d843546b7accdff99eb4ab1c2c080ca6cbfd70dca20a74ee25783043a24",
+    "cf2f7c8765f6203e3c46ef620d5e936d3f331b6e8865455557777dd1347517f5",
+    "cf49af8bd00e257ce11ae3904fa8ec6a7a4d307089e91df35df82020e302aa93",
+    "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+    "d1c60cec33d9217a91c9fd338160ee059cfbcbe17ef1db575ccb5be91db1fb60",
+    "d327393251ecdea82bf7b09be85715b068b4ab1fabd2709be698ede923646a72",
+    "d36c3925453e333703ae78fb4725f733ddc76b65703314cef8b73141d8da6b78",
+    "d4516e98eab48adab7633d5e2ab57dc7337dc845365086b49da0bb42af7b7103",
+    "d5421c5c30edce863106207e248c4b39ea57b7a9e47218ce8c17afff1162c059",
+    "d54cded3138fbc91a31fe9c49ac047ebacda07d15fa671ef517a441939489092",
+    "d564337cebd8dea69f5eeedb235361d479f2d31881ae1c36de0cf5ed34d6f9f8",
+    "d7c93a6c998951d5e7a6c175cc09f3aa58bf78ba001e84c9266532c34f2a0bb4",
+    "d9d93c74976325f6e15be854aec7df044922418a6a79967901de59be8d86283b",
+    "dafabd76624540340e5945d760fdbc21692596a233ad6cc7a1800ea6d341e47f",
+    "db29c176a2c6c7b8973d30e123e6bb25dbfba3b274d204ebf2bdad182683ba3d",
+    "dbcf1da9e076e713ab31a4009c0ecb9ea4e1821e625b32e821d04ee06fe7b490",
+    "dda7d465b139875d673139cbaeed06a41c3f07f1622553e84395ef651b50775f",
+    "de31a2ee9dc789cf9ba65231f54b31820ac7a576d32b2541b4105c59a12b6744",
+    "de5c12b2fe44a595c4f26cb7a75aa813fd10b576176d7bd4d5649cd825a55d65",
+    "de6fca2ccd6ce004f10845241e6a582dab86bccba960db50c010c9533974f45f",
+    "e0368080645cf5a08ffae544b5f6223da6165c9789e3a4aa1c94d8c281ff9ff6",
+    "e13ff91ed2f9c83dd96cec85b58eb926d0e1647cdd50b29d9149513f6065c58f",
+    "e19cbe95771fa8d69afd9601cf2d543685b152f88b7e66fe50c56638e63fdeb2",
+    "e1d47060a64de8cd08921359d0105b5b06d7e7e1ef9bda94b6169c15532c5087",
+    "e2899eb4850f6d9beeab1d95171b6faaa95358284585fa3482c8b0dd8590ee5b",
+    "e28e21a7fe155a3efd5c84331d0083139f6f063eb1b8aeaff5d3ee9166c56308",
+    "e3937e4f2b37e1c04bffb1f9218a7f6e59297714a97ed56194be844190532dc7",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "e49efee019acb635a2660db14b6b3140fa21d8b7b90cc2ddb85f224843ca501a",
+    "e5b37591b4004d6d11515f68d1643db957033348a9b0ec938fba02a4c7f37efb",
+    "e80b3d345fe02b5a26ea4ff886777404f7b057eb0249165253e342d66f9df5e3",
+    "e81aad74aacb666483349aac2176fc7ba3d8be8f0f33f86f8f97b49dfc98571f",
+    "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+    "e9a35b72f05be4a05323fad3e0faf5369192fdd18f4c22fcfa965d09b17c32ed",
+    "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87",
+    "ecc97b449d1501591ec8bb25f53f662fea3b2f1c7a062f7b2b0cd7ad3538d73e",
+    "ee2a2d4730856faf6cba455565bb21877066a5552bf5d307c7aaee1a47ebcb01",
+    "ee8aa22f6f3cfaa4434493908ecea78fa869a5e7b65c5f06997b3885cff662c0",
+    "f037da0ebdb89caa797a9777fe0f483f8317474b95495213c38c539289a3462c",
+    "f0c065025542b11aa2721e2657cb1d0170017ab4b4c36713a0db9d745cad1915",
+    "f23f60c73dccb0cb779cec7145cda9d3f38498b207e88dff654d5b2f0f973735",
+    "f3ddd9fc40b2711bc4af10f0010fc4309e57185009d5189ad6519e013f7263a7",
+    "f3efbfb0b27feb8b6c2a37c8b4db3aa589268a86559cea30a2cd11280a4f27f7",
+    "f7998610744aaec2808a1b48a57baec23b6628c76c742b32541caf51b0017d2a",
+    "fa263cb0a85f1b2cd5d520b436c175c6b1ebd1bafd45fb658bee2777d927cb51",
+    "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+    "fbbc35b18253ce2639594433299a2657d6acf164a8b1014bc650cea57c62393f",
+    "fc08834d4cc2e52db5c5856bc422e3b671fb450ee36e26aeb1e249c026033514",
+    "fca4574864c99d59549b91e5292b7c293b94db567bf13e68d0ba32b5e14a88dd",
+    "fd73a27c8ba0363da9b83641c1b9ecf388d81d456fc2c2270710a867e97441a4",
+    "fd920741c3494e2752f04a599037255a791aecc43c0935df0dcf66a960688938",
+    "fe2a9802163cef1ef4cbb6a766d5f9a46c0f50b0081010dd9d2091f584edf2e1",
+    "feef9ff3da7bca400a4f66ed53a0b24bf6e03d36ec94310c351e3a94e7399b6e",
+    "ff1b5c2a0fea4f358f4e010f2d816faac026b98fa935e13a485ff72a551ddafd",
+    "ff54af633b12642606fb1dc4d2e596ccfa2e27395d6dc17af0bc713e03c57b9f",
+    "ffb699e3b16c549669d01e7744a1d1758f79cb27d36cd1994b275d71ba5364fc"
+  ],
+  "ids": [
+    "authored-001",
+    "authored-002",
+    "authored-003",
+    "authored-004",
+    "authored-005",
+    "authored-006",
+    "authored-007",
+    "authored-008",
+    "authored-009",
+    "authored-010",
+    "authored-011",
+    "authored-012",
+    "authored-013",
+    "authored-014",
+    "authored-015",
+    "authored-016",
+    "authored-017",
+    "authored-018",
+    "authored-019",
+    "authored-020",
+    "authored-021",
+    "authored-022",
+    "authored-023",
+    "authored-024",
+    "authored-025",
+    "authored-026",
+    "authored-027",
+    "authored-028",
+    "authored-029",
+    "authored-030",
+    "authored-031",
+    "authored-032",
+    "authored-033",
+    "authored-034",
+    "authored-035",
+    "authored-036",
+    "authored-037",
+    "authored-038",
+    "authored-039",
+    "authored-040",
+    "authored-041",
+    "authored-042",
+    "authored-043",
+    "authored-044",
+    "authored-045",
+    "authored-046",
+    "authored-047",
+    "authored-048",
+    "authored-049",
+    "authored-050",
+    "authored-051",
+    "authored-052",
+    "case-01",
+    "case-02",
+    "case-03",
+    "case-04",
+    "case-05",
+    "case-06",
+    "case-07",
+    "case-08",
+    "case-09",
+    "case-10",
+    "case-11",
+    "case-12",
+    "case-13",
+    "case-14",
+    "case-15",
+    "case-16",
+    "case-17",
+    "case-18",
+    "case-19",
+    "case-20",
+    "case-21",
+    "case-22",
+    "en-001",
+    "en-002",
+    "en-003",
+    "en-004",
+    "en-005",
+    "en-006",
+    "en-007",
+    "en-008",
+    "en-009",
+    "en-010",
+    "en-011",
+    "en-012",
+    "fleurs-ja-holdout-1664-10728607480570481117",
+    "fleurs-ja-holdout-1827-10746508960655553792",
+    "fleurs-ja-holdout-1908-10595483280529141687",
+    "fleurs-ja-test-1764-10256418415643044307",
+    "fleurs-ja-test-1910-10214476888438240131",
+    "fleurs-ja-test-2003-10281646305484957883",
+    "fleurs-ko-holdout-1709-10621726497080042953",
+    "fleurs-ko-holdout-1826-10315643998667715978",
+    "fleurs-ko-holdout-1907-10231261934313595333",
+    "fleurs-ko-test-1662-10115200572671025618",
+    "fleurs-ko-test-1701-10107571163062229727",
+    "fleurs-ko-test-1959-10162998993480425742",
+    "fleurs-ru-holdout-1668-10128565049419377161",
+    "fleurs-ru-holdout-1762-10098401296465388159",
+    "fleurs-ru-holdout-1763-10203706952618084109",
+    "fleurs-ru-holdout-1791-10042408394614123272",
+    "fleurs-ru-holdout-1884-10218496378622054093",
+    "fleurs-ru-holdout-1891-10270509144878549012",
+    "fleurs-ru-test-1692-10024935581249406669",
+    "fleurs-ru-test-1917-10011799110630615565",
+    "fleurs-ru-test-1926-10008070632189747443",
+    "ja-001",
+    "ja-002",
+    "ja-003",
+    "ja-004",
+    "ja-005",
+    "ja-006",
+    "ja-007",
+    "ja-008",
+    "ja-009",
+    "ja-010",
+    "ja-011",
+    "ja-012",
+    "ja-013",
+    "ja-014",
+    "ja-015",
+    "ja-016",
+    "ja-017",
+    "ja-018",
+    "ja-019",
+    "ja-020",
+    "ko-001",
+    "ko-002",
+    "ko-003",
+    "ko-004",
+    "ko-005",
+    "ko-006",
+    "ko-007",
+    "ko-008",
+    "ko-009",
+    "ko-010",
+    "ko-011",
+    "ko-012",
+    "ko-013",
+    "ko-014",
+    "ko-015",
+    "ko-016",
+    "ko-017",
+    "ko-018",
+    "ko-019",
+    "ko-020",
+    "r1-ja-language_aware",
+    "r1-ja-legacy",
+    "r1-ko-language_aware",
+    "r1-ko-legacy",
+    "r1-ru-language_aware",
+    "r1-ru-legacy",
+    "r1-tick100-max3",
+    "r1-tick100-max3.5",
+    "r1-tick100-max4",
+    "r1-tick100-max4.5",
+    "r1-tick5-max3",
+    "r1-tick5-max3.5",
+    "r1-tick5-max4",
+    "r1-tick5-max4.5",
+    "r2-ja-language_aware",
+    "r2-ja-legacy",
+    "r2-ko-language_aware",
+    "r2-ko-legacy",
+    "r2-ru-language_aware",
+    "r2-ru-legacy",
+    "r2-tick100-max3",
+    "r2-tick100-max3.5",
+    "r2-tick100-max4",
+    "r2-tick100-max4.5",
+    "r2-tick5-max3",
+    "r2-tick5-max3.5",
+    "r2-tick5-max4",
+    "r2-tick5-max4.5",
+    "repair-en-ja-dev",
+    "repair-en-ja-holdout",
+    "repair-en-ko-dev",
+    "repair-en-ko-holdout",
+    "repair-en-ru-dev",
+    "repair-en-ru-holdout",
+    "repair-en-zh-dev",
+    "repair-en-zh-holdout",
+    "repair-ja-en-dev",
+    "repair-ja-en-holdout",
+    "repair-ja-zh-dev",
+    "repair-ja-zh-holdout",
+    "repair-ko-en-dev",
+    "repair-ko-en-holdout",
+    "repair-ko-zh-dev",
+    "repair-ko-zh-holdout",
+    "repair-ru-en-dev",
+    "repair-ru-en-holdout",
+    "repair-ru-zh-dev",
+    "repair-ru-zh-holdout",
+    "repair-zh-en-dev",
+    "repair-zh-en-holdout",
+    "repair-zh-ja-dev",
+    "repair-zh-ja-holdout",
+    "repair-zh-ko-dev",
+    "repair-zh-ko-holdout",
+    "repair-zh-ru-dev",
+    "repair-zh-ru-holdout",
+    "ru-001",
+    "ru-002",
+    "ru-003",
+    "ru-004",
+    "ru-005",
+    "ru-006",
+    "ru-007",
+    "ru-008",
+    "ru-009",
+    "ru-010",
+    "ru-011",
+    "ru-012",
+    "ru-013",
+    "ru-014",
+    "ru-015",
+    "ru-016",
+    "ru-017",
+    "ru-018",
+    "ru-019",
+    "ru-020",
+    "test/10008070632189747443.wav",
+    "test/10011799110630615565.wav",
+    "test/10024935581249406669.wav",
+    "test/10042408394614123272.wav",
+    "test/10098401296465388159.wav",
+    "test/10107571163062229727.wav",
+    "test/10115200572671025618.wav",
+    "test/10128565049419377161.wav",
+    "test/10162998993480425742.wav",
+    "test/10203706952618084109.wav",
+    "test/10214476888438240131.wav",
+    "test/10218496378622054093.wav",
+    "test/10231261934313595333.wav",
+    "test/10256418415643044307.wav",
+    "test/10270509144878549012.wav",
+    "test/10281646305484957883.wav",
+    "test/10315643998667715978.wav",
+    "test/10595483280529141687.wav",
+    "test/10621726497080042953.wav",
+    "test/10728607480570481117.wav",
+    "test/10746508960655553792.wav",
+    "zh-001",
+    "zh-002",
+    "zh-003",
+    "zh-004",
+    "zh-005",
+    "zh-006",
+    "zh-007",
+    "zh-008",
+    "zh-009",
+    "zh-010",
+    "zh-011",
+    "zh-012",
+    "zhja-001",
+    "zhja-002",
+    "zhja-003",
+    "zhja-004",
+    "zhja-005",
+    "zhja-006",
+    "zhja-007",
+    "zhja-008",
+    "zhja-009",
+    "zhja-010",
+    "zhja-011",
+    "zhja-012"
+  ],
+  "evidence_files": [
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-asr-translation-comparison\\plan.json",
+      "sha256": "f197e6fa323a44956adca916410d6340b4ad3985854380c39ce877a89409f46f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-asr-translation-comparison\\results.json",
+      "sha256": "f10f8d000aa58b22788bc341ecc15a800f3cad4ac197924e803cb9ad43f8faff"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-asr-translation-comparison\\summary.json",
+      "sha256": "6ac17f4a59ec37603e8af532077c3a7cb20ea1d5bef4f7a7a98c6ccc7a9e249d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\audio-config.json",
+      "sha256": "20d60cb118e805630882aeecd806fbf3b14ba709bc254bcc239f709281a9ef49"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\audio-provenance.json",
+      "sha256": "2b5fd5eee0af1cf071fc2459376d948f5c8a2ecee79f491eadfd92bbcd3ac62f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\audio-results-final.json",
+      "sha256": "fe6b36151f8353b8f198eaba8229c5420d6f4ffce62f2a24ddb61bdbde389b3e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\audio-results.json",
+      "sha256": "e474590e5abffd6b0070413aeef99d89fe2e31ffb876e900fff9f2feefc8765c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\budget.json",
+      "sha256": "3373188538e69bef937a60c2efd96ff359b61d9b2977041c03c8b6676e73c015"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\offline-smoke.json",
+      "sha256": "97eb2b113577213bf96b443b5b90beb49e62aa94d9bad72c0e673022d3f82bc1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\package-verification.json",
+      "sha256": "15343b8ec477c3e39e21486d26aed3078f5b8adb96b32c9a20f051b78144c09c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\performance-summary.json",
+      "sha256": "f2ae954bbd622cf2c62956ef89dcdf4b7bf5fec19d5cf6d389d14ed0fd93ca36"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\text-extra.json",
+      "sha256": "74a878754b98a30f5f0b4edbe58517056639497b46afae05c957c41324982e16"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\text-results.json",
+      "sha256": "5498817f386ea56a830ab39f914cd867330dfe64e2447295b0a592e66621546b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-multilingual-online\\text-review.json",
+      "sha256": "e27cdf9461d1253c28a050d7bdf8b35e3870bba602aa74be41b40186ef4d44c4"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-online-entry\\preflight.json",
+      "sha256": "6ebfc7290147585252c8e9d6db7a763cfbd87695ecfea4631ff0be0de022f78a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-online-entry\\tests.json",
+      "sha256": "b302e917a7d715f40d86cee1353bd38e4c459da8ab3312bbfccda1366233cb2a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-online-entry\\token-write-fix.json",
+      "sha256": "15b03835033d82f7ef57425512ab073fef15a9faec7ac96b4b84837b21c8e9d4"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-online-entry\\verification.json",
+      "sha256": "bc230d0e81ac98e4e245212bc98376d644f4653254d28dcd64447b8fba14dcf6"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-online-user-smoke\\session-summary.json",
+      "sha256": "b3a7354da86e5e8bab1eda3a5956b7ebd21b759ce141e37127557dcd9a10e857"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\legacy-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\manifest.json",
+      "sha256": "2cbf66944282e026fc2afbe50e22262e99353e63abac1708374785453da8d694"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\plan.json",
+      "sha256": "5d1353699c095e2084905e38a9022f20e1482cd62b88b1b9756a25b40bfaab50"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ja-language_aware\\audio.json",
+      "sha256": "70d4ed9144bdf19f1526a173b78ded6ed20122680cf317bd6f671ee81c73ca43"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ja-language_aware\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ja-legacy\\audio.json",
+      "sha256": "a15021028bfd00527586f2a3ed10d597be9f9c0802e0dfd24cec6bcf24725014"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ja-legacy\\integrity.json",
+      "sha256": "6de60cb9b75e215b1e08f5cec54886bcb4c9a95dc94b0e43129c553bdfe5efe5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ko-language_aware\\audio.json",
+      "sha256": "8a411ee8c34468566db8a49399faa9d691016d7742c83f3b4ce520ffa7393e6e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ko-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ko-legacy\\audio.json",
+      "sha256": "72c6edae480246f6787bac5b11878cbd939c7c945a050bd484fad8a8c188db41"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ko-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ru-language_aware\\audio.json",
+      "sha256": "bf1cf3ab2424359e1d9fb19da35f9dc56afee377e8dad6ff456dcf99aa02f141"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ru-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ru-legacy\\audio.json",
+      "sha256": "c7bfe93841c7fab3ef60b8f5f087f244b2bb40a7e95d77f7a41579b5ff503866"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r1-ru-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ja-language_aware\\audio.json",
+      "sha256": "70476a7ccb71164a46e5aea9b1c12f1ada3b4613bbf9a1e24406b82f2225080e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ja-language_aware\\integrity.json",
+      "sha256": "fe8346a1e1b9e660a4ee801ea21cfb5a5ed270f33a815952b7c8d70b69bba3c1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ja-legacy\\audio.json",
+      "sha256": "5a16982adc686d03cab34c3a092fe3e9bf2f6b92372005d7ecc3a3e553440aa3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ja-legacy\\integrity.json",
+      "sha256": "3da6bf35e74dbf695ce338fb3196a32bb38d102e8e08330b385f01d34be26e43"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ko-language_aware\\audio.json",
+      "sha256": "2754e3a1e64732546ca50a344dd5461029c56619a4b3ec6de31a912cf286473d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ko-language_aware\\integrity.json",
+      "sha256": "7f4bf917ef3571fea0e4f7f9d5cb0ef949853c30c3fa2c1317b7c34464868d45"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ko-legacy\\audio.json",
+      "sha256": "e230443b8268f2a4a487ba402bc952b112c507ee2ae91d591a677bd8957ec1af"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ko-legacy\\integrity.json",
+      "sha256": "c7b59972706a79218121e904a46c62a5e1f141328b52360a96e7f647c3ce2ae0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ru-language_aware\\audio.json",
+      "sha256": "b05c411144c0c89be0df4a5ebcc6c5c9a61ced2f246ef6926188e4d9ea2f70db"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ru-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ru-legacy\\audio.json",
+      "sha256": "d53b9198d99607e93fd54153aa0bd0642f8a850765e0ff4580f2d5d7c55cf920"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\r2-ru-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\reference\\results.json",
+      "sha256": "2dc671db610d166fc2b3eccd2e01095d43ce669298ecf1692c05e2a2a4db3887"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\russian-cross-replay.json",
+      "sha256": "49830b3e208e48904dc2124ad61c9a8a7143251beb7f6653e6f975c9f70dcfcd"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\status.json",
+      "sha256": "27a6ca4938ca303b0b49223850d29c42acd49fcdeecf8317c95e18c46a756cce"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\summary.json",
+      "sha256": "000fe18312875263a5d5a61f12fc4322604a7f759c1d668d1f2cc6d0c79a6146"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-paired-speech-2026-10-27\\verification.json",
+      "sha256": "27864914e334f49e8923d7146c6f6126fe670625b6ef6fdf9a426564c936bd34"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\artifact-index.json",
+      "sha256": "a70769935a112d79a7dd24da22b941dafdbe173b6acc84cded0c161b26177859"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\plan.json",
+      "sha256": "4cca4b848643dbb316662444f4eeb03e20ac84a27d8a57f0c6b8d191809f9b1d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max3\\result.json",
+      "sha256": "c472f7ed1955bb6e22c9637ff25075651f0923212a490a91ebf59e2bf688aaba"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max3.5\\result.json",
+      "sha256": "fa263cb0a85f1b2cd5d520b436c175c6b1ebd1bafd45fb658bee2777d927cb51"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max4\\result.json",
+      "sha256": "1786db16b105e09bc68453366dfe2f42d833d2eb21ca3d1cd4c421c036d2c3e1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max4.5\\result.json",
+      "sha256": "3550d00afc2f3243781c4fa6789453050b641389eef50e5d0a72e7d7c79db5db"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick100-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max3\\result.json",
+      "sha256": "4b1d16a5d4387674828ab5e49cdccc2a9efc59d4bb9bee7d8d2aa8d602dd40c3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max3.5\\result.json",
+      "sha256": "8ca4c07284659e83f661e5a6cc2f5f8c861a94070b37df78c006034c8276e253"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max4\\result.json",
+      "sha256": "ff54af633b12642606fb1dc4d2e596ccfa2e27395d6dc17af0bc713e03c57b9f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max4.5\\result.json",
+      "sha256": "5f9fe5d5a75aeccd7ed4f69ce5d9bbf38a5105a87b2840d77da1a110405bd9d5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r1-tick5-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max3\\result.json",
+      "sha256": "75698c45a0d404a732ce56d99e7139cc6124c0f7c1dc973c587c14109842e5b0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max3.5\\result.json",
+      "sha256": "595c3b1d31f41aa4dcc66c484a8168ad60960d200f1d9403c48ebdf94d2ae9cd"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max4\\result.json",
+      "sha256": "f0c065025542b11aa2721e2657cb1d0170017ab4b4c36713a0db9d745cad1915"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max4.5\\result.json",
+      "sha256": "6afc143f6fbda2237db0732395618cf1b6eeb0463c4bc79031631881d0cf2426"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick100-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max3\\result.json",
+      "sha256": "ccd9b478c6dd7093a1f9393b64dee85e2c1a7fa16a0be36b9c3bf37b4595bb16"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max3.5\\result.json",
+      "sha256": "31caaa854b7614474ceb4ebf06622e9a2b418882f726013fa59949a1e6bbc08f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max4\\result.json",
+      "sha256": "de31a2ee9dc789cf9ba65231f54b31820ac7a576d32b2541b4105c59a12b6744"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max4.5\\result.json",
+      "sha256": "002955b628c129155c443a17006acae3ff291acf38cdfcf9c671bf628b1962ba"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\r2-tick5-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\status.json",
+      "sha256": "6385b54219688adc1bf9f16ba5956f514d236b8a580c9a58b8a584bf87b176cb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\summary.json",
+      "sha256": "de5c12b2fe44a595c4f26cb7a75aa813fd10b576176d7bd4d5649cd825a55d65"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\test-results.json",
+      "sha256": "a7b0001d18acb2c1a5c529d3b90ccb99ced7a7697ea2d93834637a76483c2177"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-capture-ab-2026-10-27\\verification.json",
+      "sha256": "1a46e26af385d91a9158b090dbf32efe9b48decbaba9240f6a5c860b3edd3355"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\artifact-index.json",
+      "sha256": "228fcffce1b06658c608e6325d40e0dd97e3731af55d8b424fcf536dda09f3b3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\context-analysis.json",
+      "sha256": "55eb6a29878f8cc4af3793a82165d88e1791629e1ba44d0780fa7c898cb425ac"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\plan.json",
+      "sha256": "fc08834d4cc2e52db5c5856bc422e3b671fb450ee36e26aeb1e249c026033514"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\r1-A\\result.json",
+      "sha256": "9d97284da1b5b30504afe85a4866bd69b39818c2e4bb40335c693543121cad50"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\r1-B\\result.json",
+      "sha256": "c087416ecd2ce68d18aa2c28da5dbde05f07227c17f48ddb6540a6686131129a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\r2-A\\result.json",
+      "sha256": "58ea9b4046b6c5cd30818127e790ccfc98d0ba7926a58209be4362044def19a2"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\r2-B\\result.json",
+      "sha256": "e81aad74aacb666483349aac2176fc7ba3d8be8f0f33f86f8f97b49dfc98571f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\status.json",
+      "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\summary.json",
+      "sha256": "9a19df57cf6e0974e7c4adc72fd17dfa064a8d8404964d33040dec60d6ddfed3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\tests.json",
+      "sha256": "2e4a9b84d700eef1440fe070abee38cbe6480dfcd4da89686b1f2142b5645450"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-context-2026-10-27\\verification.json",
+      "sha256": "8532c6af68a28369f58fef890bc51f779a7fa053f39ab62efa1e9119b454c0e9"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\artifact-index.json",
+      "sha256": "7da6b28dd5eed6a9fb28ddbea5aa4f0373a0fe06f08e2c07931f9c4c085bb834"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\plan.json",
+      "sha256": "56ea4d7c4a829ac5382e189d1e5409955ba7ac75d612698accce6dd37bfcf920"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\r1-A\\result.json",
+      "sha256": "6012e79d514ed47fc04651bff9b0c4529622bab7fcec422b8f211e4e2cb5cae5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\r1-B\\result.json",
+      "sha256": "c82fd9246aaec8f0f6859458afa9e4d04c23c14eb11877ce6fed86de08ebe0f1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\r2-A\\result.json",
+      "sha256": "65a50b211df53ae973c3ff001279c94e8e4bd4c63d7d2e4ff92957e13dbbc45c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\r2-B\\result.json",
+      "sha256": "25e651861948f4dd3c1b0171236c4c457e0ce6d7aef094a12610c060478562a0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\separate-filter-checks.json",
+      "sha256": "84b448b5b33708f66604a7f3c56f5e31eb08437ececdc6fcf63aa93efdd0c21e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\status.json",
+      "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\summary.json",
+      "sha256": "5c9175ea75ed32a05644dea71d0d1b31a84b76d32949fe722f6f2f54efbbe1e3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\tests.json",
+      "sha256": "47022cca6708795c36fd11f7cf128fbb63013c7f91710b4c1d92f822741b46c9"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-ru-tail-diagnostic-2026-10-27\\verification.json",
+      "sha256": "c7e0f7b89fc9d11363c282b602303244b6ad9423562c776f4e8b351d7ca24da0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\acceptance.json",
+      "sha256": "aadda2112ca766ad9cf5d81d78311bdf2206dafab34451d8b721dd3a8e5673f9"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\audio-contended.json",
+      "sha256": "3b70e987374f3421731d5617f88d07b7ba58ca444ab186079a58bd10300c002e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\audio-idle.json",
+      "sha256": "4d3e28273a4bcdc57ec737e4a99f9c0150feb0c6083dbe74a9da966bcd937c27"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\development-profiles.json",
+      "sha256": "242abb010ccf8a70919f63df8caa89da0f216a7307f4a7326c79d338cc247e2a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\final-asr.json",
+      "sha256": "76dab7b72a0ff871e2d7cc32fdcb42dadbc5dccc9389f0c9799cc817d1f2a166"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\final-ru-independent.json",
+      "sha256": "8700f636808398aa5a357095c637409ecfbef969dbd585452b959fe9c8772eeb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\final-ru-provenance.json",
+      "sha256": "89c72c59349b31daa7f446074097b6ff253ee58b25862d37144cf218a7b0cd8d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\holdout-provenance.json",
+      "sha256": "fefc6b3580772ce56b3614cec4eba7ba661c3f43d547d7775ed058b58a5a6125"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\initial-holdout-asr.json",
+      "sha256": "a1b05bb0311467c9f945d4d1713e44517cd70183233b3093d4f39a346d93d277"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\legacy-runtime-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\metrics.json",
+      "sha256": "b08dfb94cb11c28b113bcb73d1de4a72776e53d446dbc3c5e08f8ba76237ad3e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\packaging.json",
+      "sha256": "2cd9676d3d5d9b302d64d2d8c51bfb82b96996b9a4ae3fa2c5e93dda4191b25e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\ru-beam-check.json",
+      "sha256": "400a76c853ad8a52a5319c566798e058552c06035af0946facd1e34e1ac5c763"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-speech-repair\\text-results.json",
+      "sha256": "34466ec851775afe3d9e095c37fc4fe541dcf02e41acbb8fbabb7813d8541bee"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-windows-acceptance\\hardware-summary.json",
+      "sha256": "fa54255d558001c81ca1039f64869cf23b3e54ce1cb1edba8b292f0cbd5bf6d3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-windows-acceptance\\manual-gui-evidence-2026-10-26.json",
+      "sha256": "f6bd66ecb6043784dad41b96d6078ebad4b848a121169c243d0a368769273e10"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-windows-acceptance\\manual-gui-signoff-2026-10-26.json",
+      "sha256": "71cc88c9d139ae07353776e6e240007cabe0bdb06b06f1153d035ede10587665"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-windows-acceptance\\package-verification.json",
+      "sha256": "6574d559384cbc94e55ba259f415ec58f40a50015c21f2c61ad25cb5dc69ffb6"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\docs\\testing\\evidence\\v0.5.3-windows-acceptance\\public-audio-diagnostics.json",
+      "sha256": "db0f3464cf1c7556881056560808ae4c382510198f8ba546ef57b9c2f45751a6"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\asr-profile-probe-2026-10-26.json",
+      "sha256": "242abb010ccf8a70919f63df8caa89da0f216a7307f4a7326c79d338cc247e2a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\asr-translation-comparison-2026-10-26\\plan.json",
+      "sha256": "f197e6fa323a44956adca916410d6340b4ad3985854380c39ce877a89409f46f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\asr-translation-comparison-2026-10-26\\results.json",
+      "sha256": "d429bd67fc574086ed0648931fece3877c02f76adfec1aa731376c38961baacb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\audio\\ja-manifest.json",
+      "sha256": "0f70820a63e9adf0766e917ba8ef0fb523cf0d47ba9cd2ac6d229b942e572584"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\audio\\ko-manifest.json",
+      "sha256": "e9d94323e3758face5793d39c0d30b2c48f542431a86cb5e4b30f0e3d4f75291"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\audio\\manifest.json",
+      "sha256": "15cef477a2d3843a184cf20d10b17fa898d74f18c8a0dc16b0b19f65d442087e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\audio\\ru-manifest.json",
+      "sha256": "775540283a97788cf93acb655277a7b4beff469368e3a0e59adb0f07eeaeb37a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\audio-config.json",
+      "sha256": "20d60cb118e805630882aeecd806fbf3b14ba709bc254bcc239f709281a9ef49"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\audio-results-final.json",
+      "sha256": "fe6b36151f8353b8f198eaba8229c5420d6f4ffce62f2a24ddb61bdbde389b3e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\audio-results.json",
+      "sha256": "e474590e5abffd6b0070413aeef99d89fe2e31ffb876e900fff9f2feefc8765c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\budget.json",
+      "sha256": "3373188538e69bef937a60c2efd96ff359b61d9b2977041c03c8b6676e73c015"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\text-extra.json",
+      "sha256": "74a878754b98a30f5f0b4edbe58517056639497b46afae05c957c41324982e16"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\live\\text-results.json",
+      "sha256": "5498817f386ea56a830ab39f914cd867330dfe64e2447295b0a592e66621546b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\mock-google\\summary.json",
+      "sha256": "afc92fab04c2ddd110f342755e1faa370d3bb78918623dfc8fec82bf710c490a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\mock-openai\\summary.json",
+      "sha256": "584f96e14740a964ead2a89b994d874c6d35a94e92534695745314275fb49ef9"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\offline-smoke.json",
+      "sha256": "97eb2b113577213bf96b443b5b90beb49e62aa94d9bad72c0e673022d3f82bc1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\package-verification.json",
+      "sha256": "15343b8ec477c3e39e21486d26aed3078f5b8adb96b32c9a20f051b78144c09c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-legacy-compatibility-2026-10-27.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\manifest.json",
+      "sha256": "2cbf66944282e026fc2afbe50e22262e99353e63abac1708374785453da8d694"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\plan.json",
+      "sha256": "5d1353699c095e2084905e38a9022f20e1482cd62b88b1b9756a25b40bfaab50"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ja-language_aware\\audio.json",
+      "sha256": "70d4ed9144bdf19f1526a173b78ded6ed20122680cf317bd6f671ee81c73ca43"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ja-language_aware\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ja-legacy\\audio.json",
+      "sha256": "a15021028bfd00527586f2a3ed10d597be9f9c0802e0dfd24cec6bcf24725014"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ja-legacy\\integrity.json",
+      "sha256": "6de60cb9b75e215b1e08f5cec54886bcb4c9a95dc94b0e43129c553bdfe5efe5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ko-language_aware\\audio.json",
+      "sha256": "8a411ee8c34468566db8a49399faa9d691016d7742c83f3b4ce520ffa7393e6e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ko-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ko-legacy\\audio.json",
+      "sha256": "72c6edae480246f6787bac5b11878cbd939c7c945a050bd484fad8a8c188db41"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ko-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ru-language_aware\\audio.json",
+      "sha256": "bf1cf3ab2424359e1d9fb19da35f9dc56afee377e8dad6ff456dcf99aa02f141"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ru-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ru-legacy\\audio.json",
+      "sha256": "c7bfe93841c7fab3ef60b8f5f087f244b2bb40a7e95d77f7a41579b5ff503866"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r1-ru-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ja-language_aware\\audio.json",
+      "sha256": "70476a7ccb71164a46e5aea9b1c12f1ada3b4613bbf9a1e24406b82f2225080e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ja-language_aware\\integrity.json",
+      "sha256": "fe8346a1e1b9e660a4ee801ea21cfb5a5ed270f33a815952b7c8d70b69bba3c1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ja-legacy\\audio.json",
+      "sha256": "5a16982adc686d03cab34c3a092fe3e9bf2f6b92372005d7ecc3a3e553440aa3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ja-legacy\\integrity.json",
+      "sha256": "3da6bf35e74dbf695ce338fb3196a32bb38d102e8e08330b385f01d34be26e43"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ko-language_aware\\audio.json",
+      "sha256": "2754e3a1e64732546ca50a344dd5461029c56619a4b3ec6de31a912cf286473d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ko-language_aware\\integrity.json",
+      "sha256": "7f4bf917ef3571fea0e4f7f9d5cb0ef949853c30c3fa2c1317b7c34464868d45"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ko-legacy\\audio.json",
+      "sha256": "e230443b8268f2a4a487ba402bc952b112c507ee2ae91d591a677bd8957ec1af"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ko-legacy\\integrity.json",
+      "sha256": "c7b59972706a79218121e904a46c62a5e1f141328b52360a96e7f647c3ce2ae0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ru-language_aware\\audio.json",
+      "sha256": "b05c411144c0c89be0df4a5ebcc6c5c9a61ced2f246ef6926188e4d9ea2f70db"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ru-language_aware\\integrity.json",
+      "sha256": "5672af870fecb8206dbe7021c8431f6a2d39a67adefaec7ca097fa67c583ac8f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ru-legacy\\audio.json",
+      "sha256": "d53b9198d99607e93fd54153aa0bd0642f8a850765e0ff4580f2d5d7c55cf920"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\r2-ru-legacy\\integrity.json",
+      "sha256": "76ed419a51382436132a698de10290da0c0eae06804068880f6644083e75cef7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\reference\\results.json",
+      "sha256": "2dc671db610d166fc2b3eccd2e01095d43ce669298ecf1692c05e2a2a4db3887"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\russian-cross-replay.json",
+      "sha256": "49830b3e208e48904dc2124ad61c9a8a7143251beb7f6653e6f975c9f70dcfcd"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\status.json",
+      "sha256": "27a6ca4938ca303b0b49223850d29c42acd49fcdeecf8317c95e18c46a756cce"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-live-2026-10-27\\summary.json",
+      "sha256": "000fe18312875263a5d5a61f12fc4322604a7f759c1d668d1f2cc6d0c79a6146"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-plan-2026-10-27\\manifest.json",
+      "sha256": "2cbf66944282e026fc2afbe50e22262e99353e63abac1708374785453da8d694"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\paired-plan-2026-10-27\\plan.json",
+      "sha256": "5d1353699c095e2084905e38a9022f20e1482cd62b88b1b9756a25b40bfaab50"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-idle-2026-10-26\\audio-results.json",
+      "sha256": "2000d3d90f5efeaac8d56994195ad2cf8cf0e05e4d1e7f060536781aad7d0eea"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-idle-2026-10-26\\integrity.json",
+      "sha256": "748e48fdb7ad6df37eb9bd9c9d33a359486222669d8058c11af649598f86621b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-idle-2026-10-26\\plan.json",
+      "sha256": "2efdd469e41b993442c0b32a0187c3b20d5fc16c99d23384b08183d0c9942a2e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-live-2026-10-26\\audio-results.json",
+      "sha256": "76efd1d828ad607885be91b9f502d977a73907c93697baaffb4f8b0e6d275889"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-live-2026-10-26\\integrity.json",
+      "sha256": "748e48fdb7ad6df37eb9bd9c9d33a359486222669d8058c11af649598f86621b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-audio-live-2026-10-26\\plan.json",
+      "sha256": "2efdd469e41b993442c0b32a0187c3b20d5fc16c99d23384b08183d0c9942a2e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-final-asr-manifest.json",
+      "sha256": "db900a1befbd936b79156eda8107f7b4b13a7e26dea2e11f2ceb4def6fafb0bc"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-final-asr.json",
+      "sha256": "76dab7b72a0ff871e2d7cc32fdcb42dadbc5dccc9389f0c9799cc817d1f2a166"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-final-ru-holdout-audio\\manifest.json",
+      "sha256": "89c72c59349b31daa7f446074097b6ff253ee58b25862d37144cf218a7b0cd8d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-final-ru-independent.json",
+      "sha256": "8700f636808398aa5a357095c637409ecfbef969dbd585452b959fe9c8772eeb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-holdout-asr-2026-10-26.json",
+      "sha256": "a1b05bb0311467c9f945d4d1713e44517cd70183233b3093d4f39a346d93d277"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-holdout-audio-2026-10-26\\manifest.json",
+      "sha256": "fefc6b3580772ce56b3614cec4eba7ba661c3f43d547d7775ed058b58a5a6125"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-holdout-audio-2026-10-26\\ru-manifest.json",
+      "sha256": "f59f15ed67d5bb53a83c4ce2f1f40df4a006cc2da485b51dbca5dd8c38aa89d4"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-legacy-runtime-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-ru-lightweight-check.json",
+      "sha256": "400a76c853ad8a52a5319c566798e058552c06035af0946facd1e34e1ac5c763"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-text-live-2026-10-26\\plan.json",
+      "sha256": "2efdd469e41b993442c0b32a0187c3b20d5fc16c99d23384b08183d0c9942a2e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\repair-text-live-2026-10-26\\results.json",
+      "sha256": "edeaa64ae2d8c00232f5c0e555de9b84c537f38bd1b98c5a400c5209f8ad4b59"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\review\\summary.json",
+      "sha256": "1cc202f4f70dcef89086110bbe23fa676d2feadd92cee6dda7a416283d8090bb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke-20261027\\plan.json",
+      "sha256": "51a1bc2b2bd7d1dd5f651c313a6f9a38056b12e70a4056df43d5e1ebc6e759b6"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke-20261027\\r1-tick5-max4.5.json",
+      "sha256": "1a315112edb7519af11fa593581bd53d0139282c3fa2f74634900d6e727658e7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke-20261027\\status.json",
+      "sha256": "3c47490f8c73d60aa95095572411162180adb34fabefed629d4f500ef03f3432"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\plan.json",
+      "sha256": "c7193bf024ac9051ae3d0cecd8a2744008ccb729a82a075a8d673d6fd8dce29d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\r1-tick5-max4.5\\result.json",
+      "sha256": "5ac76472c020f4c92ffdca1524a4f3c1337e4031170c17352a81fa8971040a0e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\r1-tick5-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\r1-tick5-max4.5.json",
+      "sha256": "1a315112edb7519af11fa593581bd53d0139282c3fa2f74634900d6e727658e7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\status.json",
+      "sha256": "646885739e5fca6bc6a7a11ccf0191de4434fc41edf77b5d80ef800e698a780d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-capture-tool-smoke2-20261027\\summary.json",
+      "sha256": "c19fdbd309d6b5c44c4a37d721867a656c150590855d1e5382c32b04052fb9ed"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-context-metadata-preflight-20261027\\metadata.json",
+      "sha256": "a41ff207d78161b1289aca8519ece6aef3ffb8defedb7819858166849f461e03"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\plan.json",
+      "sha256": "4cca4b848643dbb316662444f4eeb03e20ac84a27d8a57f0c6b8d191809f9b1d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3\\result.json",
+      "sha256": "c472f7ed1955bb6e22c9637ff25075651f0923212a490a91ebf59e2bf688aaba"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3.5\\result.json",
+      "sha256": "fa263cb0a85f1b2cd5d520b436c175c6b1ebd1bafd45fb658bee2777d927cb51"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3.5.json",
+      "sha256": "4c0c7c0ac83e7017def8dd12396491a77ccc235a677de26d9260ad518da90b75"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max3.json",
+      "sha256": "603723f3d67258613baf8a3d427cd423c8c3c50cdbba81ef7f6aa09ebd0d6a9d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4\\result.json",
+      "sha256": "1786db16b105e09bc68453366dfe2f42d833d2eb21ca3d1cd4c421c036d2c3e1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4.5\\result.json",
+      "sha256": "3550d00afc2f3243781c4fa6789453050b641389eef50e5d0a72e7d7c79db5db"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4.5.json",
+      "sha256": "6c92bd8e8838c8470859fdde53a99bdffcb276e48ef9d85d1e8b4c0292a76cfd"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick100-max4.json",
+      "sha256": "16ef0eddb329e5fddd2628c21ef3d1c5dad592104f975be07d4c82fcfaf7165c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3\\result.json",
+      "sha256": "4b1d16a5d4387674828ab5e49cdccc2a9efc59d4bb9bee7d8d2aa8d602dd40c3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3.5\\result.json",
+      "sha256": "8ca4c07284659e83f661e5a6cc2f5f8c861a94070b37df78c006034c8276e253"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3.5.json",
+      "sha256": "bf1861125e44802172c1651f318f5326c9bcd3caeac801451b5f1267386b1d6a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max3.json",
+      "sha256": "af86b3d84f539ac31aeee9c2e6e33246349e50460467707fdd0aa83e16298585"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4\\result.json",
+      "sha256": "ff54af633b12642606fb1dc4d2e596ccfa2e27395d6dc17af0bc713e03c57b9f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4.5\\result.json",
+      "sha256": "5f9fe5d5a75aeccd7ed4f69ce5d9bbf38a5105a87b2840d77da1a110405bd9d5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4.5.json",
+      "sha256": "1a315112edb7519af11fa593581bd53d0139282c3fa2f74634900d6e727658e7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r1-tick5-max4.json",
+      "sha256": "ae20a95909cbd84c26e2b1b228eebeb59047dac4c7c1ae2397b2b729afd0bc1f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3\\result.json",
+      "sha256": "75698c45a0d404a732ce56d99e7139cc6124c0f7c1dc973c587c14109842e5b0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3.5\\result.json",
+      "sha256": "595c3b1d31f41aa4dcc66c484a8168ad60960d200f1d9403c48ebdf94d2ae9cd"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3.5.json",
+      "sha256": "415bb24acdeaa90ccc3814abf36e8b7beeba74badbbb1eb7950cffde6c5640ad"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max3.json",
+      "sha256": "ee2a2d4730856faf6cba455565bb21877066a5552bf5d307c7aaee1a47ebcb01"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4\\result.json",
+      "sha256": "f0c065025542b11aa2721e2657cb1d0170017ab4b4c36713a0db9d745cad1915"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4.5\\result.json",
+      "sha256": "6afc143f6fbda2237db0732395618cf1b6eeb0463c4bc79031631881d0cf2426"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4.5.json",
+      "sha256": "71f7c734f9ac8971546f7be1e361cee8ba5a41c6d3bfb22fbe5cda1981e115d3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick100-max4.json",
+      "sha256": "4a55a2d7b80864d4ff85666395889de986dce512b660c821d120655b139139b3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3\\result.json",
+      "sha256": "ccd9b478c6dd7093a1f9393b64dee85e2c1a7fa16a0be36b9c3bf37b4595bb16"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3.5\\result.json",
+      "sha256": "31caaa854b7614474ceb4ebf06622e9a2b418882f726013fa59949a1e6bbc08f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3.5.json",
+      "sha256": "02d2acefe90e8f61cab7df5a026af6cb62b08ffabdd3e9b290ce0d09165dacb3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max3.json",
+      "sha256": "a3501f90a0360cea4cee532939873c0ab0bbf61590bf16070c46d4e374fb5442"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4\\result.json",
+      "sha256": "de31a2ee9dc789cf9ba65231f54b31820ac7a576d32b2541b4105c59a12b6744"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4.5\\result.json",
+      "sha256": "002955b628c129155c443a17006acae3ff291acf38cdfcf9c671bf628b1962ba"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4.5\\safety.json",
+      "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4.5.json",
+      "sha256": "a877b49e404277143c1e4a364121712208e36a860c86dbc3e927228c705aaa00"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\r2-tick5-max4.json",
+      "sha256": "9a5bded89fd1c9b6348015ee3c45ba241e70010a2c2fdbbcadef3f3a28a45b13"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\status.json",
+      "sha256": "6385b54219688adc1bf9f16ba5956f514d236b8a580c9a58b8a584bf87b176cb"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027\\summary.json",
+      "sha256": "de5c12b2fe44a595c4f26cb7a75aa813fd10b576176d7bd4d5649cd825a55d65"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-max-only-20261027-validation\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\plan.json",
+      "sha256": "fc08834d4cc2e52db5c5856bc422e3b671fb450ee36e26aeb1e249c026033514"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\r1-A\\result.json",
+      "sha256": "9d97284da1b5b30504afe85a4866bd69b39818c2e4bb40335c693543121cad50"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\r1-B\\result.json",
+      "sha256": "c087416ecd2ce68d18aa2c28da5dbde05f07227c17f48ddb6540a6686131129a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\r2-A\\result.json",
+      "sha256": "58ea9b4046b6c5cd30818127e790ccfc98d0ba7926a58209be4362044def19a2"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\r2-B\\result.json",
+      "sha256": "e81aad74aacb666483349aac2176fc7ba3d8be8f0f33f86f8f97b49dfc98571f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\status.json",
+      "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-context-20261027\\summary.json",
+      "sha256": "9a19df57cf6e0974e7c4adc72fd17dfa064a8d8404964d33040dec60d6ddfed3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\en-zh-compatibility.json",
+      "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\plan.json",
+      "sha256": "56ea4d7c4a829ac5382e189d1e5409955ba7ac75d612698accce6dd37bfcf920"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\r1-A\\result.json",
+      "sha256": "6012e79d514ed47fc04651bff9b0c4529622bab7fcec422b8f211e4e2cb5cae5"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\r1-B\\result.json",
+      "sha256": "c82fd9246aaec8f0f6859458afa9e4d04c23c14eb11877ce6fed86de08ebe0f1"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\r2-A\\result.json",
+      "sha256": "65a50b211df53ae973c3ff001279c94e8e4bd4c63d7d2e4ff92957e13dbbc45c"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\r2-B\\result.json",
+      "sha256": "25e651861948f4dd3c1b0171236c4c457e0ce6d7aef094a12610c060478562a0"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\status.json",
+      "sha256": "682c551b3a7b47b7bf9c565b648804412de42fcccca076de4f98a4affc806643"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-tail-diagnostic-20261027\\summary.json",
+      "sha256": "5c9175ea75ed32a05644dea71d0d1b31a84b76d32949fe722f6f2f54efbbe1e3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\tests\\assets\\game_translation_cases.json",
+      "sha256": "47fd3e60b4707b50d79f79a9f450c89c9ecc763178c83db1a19b6116b3822ed4"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\tests\\assets\\multilingual_online\\cases.json",
+      "sha256": "c45b8aa581e6dff94e2a1430b61c777e91f6d951ef8971559b9c0e6bcea4ce2a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\tests\\assets\\multilingual_online\\repair-directions.json",
+      "sha256": "2720542e792f677c11ad27cc7cbe2f49a17a1c2a3d31c2896669a756b0a476ab"
+    }
+  ],
+  "scope": "Prior manifests/results, not user/private audio directories; conservative hash exclusion, not a claim of verified speaker novelty"
+}

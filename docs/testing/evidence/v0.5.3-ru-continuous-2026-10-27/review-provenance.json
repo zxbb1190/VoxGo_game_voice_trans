@@ -1,0 +1,9 @@
+{
+  "analysis_version": 2,
+  "no_inference": true,
+  "raw_results": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-baseline-20261027",
+  "raw_plan_sha256": "465bc64a996e13580127d7df4b5837ce4a2f0812fd77c41e3b25e2b33cf37e2f",
+  "review_code_sha256": "9a861899654784443837f79c7277036b5f58b021bf217c6e4f908f52e81e12e8",
+  "human_labels_all_pending": true,
+  "note": "Raw collector results/initial assessments are retained unchanged. Version 2 uses actual event order and separately counts app language-gate rejections."
+}

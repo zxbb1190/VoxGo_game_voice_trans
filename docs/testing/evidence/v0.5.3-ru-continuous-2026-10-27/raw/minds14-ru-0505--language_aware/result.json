@@ -1,0 +1,4392 @@
+{
+  "status": "complete",
+  "spec": {
+    "id": "minds14-ru-0505--language_aware",
+    "record_id": "minds14-ru-0505",
+    "strategy": "language_aware",
+    "cadence_ms": 100
+  },
+  "scope": "single full-source public recording; production Capture/Pipeline/Whisper/filter; no GUI/game/API; pending references",
+  "clips": [
+    {
+      "id": "minds14-ru-0505",
+      "language": "ru",
+      "split": "dev",
+      "intended_split": "dev",
+      "lock_eligible": false,
+      "speaker_id": null,
+      "speaker_group": "minds14:unknown-all",
+      "source_recording_id": "minds14:ru-RU~ABROAD/6030083cbb1e6d0fbce93a32.wav",
+      "source_group": "minds14:unknown-session-all",
+      "speaker_isolation_status": "unavailable; quarantine cannot be accepted as locked holdout",
+      "source_dataset": "PolyAI/minds14",
+      "source_revision": "40ce77cb32a384e4d50a568e1ec39ac804019d33",
+      "source_member": "ru-RU~ABROAD/6030083cbb1e6d0fbce93a32.wav",
+      "source_row": 505,
+      "source_url": "https://huggingface.co/datasets/PolyAI/minds14/tree/40ce77cb32a384e4d50a568e1ec39ac804019d33",
+      "license": "CC-BY-4.0",
+      "license_source": "https://huggingface.co/datasets/PolyAI/minds14/blob/40ce77cb32a384e4d50a568e1ec39ac804019d33/README.md",
+      "attribution": "Daniela Gerz et al.; PolyAI; MInDS-14 (2021), source contributors",
+      "reference_text": "Здравствуйте Через несколько дней я уезжаю в швецию на целый месяц я хотел бы узнать Могу ли я платить моей карты Спасибо",
+      "reference_status": "pending_human_review",
+      "reference_origin": "publisher supplied; mixed expert/crowd/machine annotation per dataset card",
+      "reference_audio_coverage": "unverified",
+      "reference_alignment": "whole_source_file_only",
+      "semantic_annotation_status": "pending",
+      "semantic_labels": {
+        "entities": [],
+        "numbers": [],
+        "negation": [],
+        "relations": [],
+        "tail": []
+      },
+      "scene": [
+        "crowdsourced_e_banking_query",
+        "continuous_single_source_file",
+        "narrowband_8khz",
+        "not_game"
+      ],
+      "multi_sentence_status": "pending",
+      "human_quality_review": "pending",
+      "wav_sha256": "ccbefda0dde5fdb229e0f364a4b81a96b71da38d988d5727ff840429033a0b99",
+      "pcm_sha256": "e31036cd0380902fbf45413c6ea14e86e92d4461b1495771dd36c858681e6fb0",
+      "sample_rate": 16000,
+      "frames": 203434,
+      "seconds": 12.714625,
+      "original_sample_rate": 8000,
+      "original_frames": 101717,
+      "selected_original_frames": [
+        0,
+        101717
+      ],
+      "conversion": "mono mean; soxr HQ resample if needed; PCM16 round/clip; no gain or denoise; never concatenate recordings",
+      "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\audio\\minds14-ru-0505.wav",
+      "original_file": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0505.audio",
+      "original_sha256": "63a279dd9a9ce8455d2cdd2e8779c943fbda176e4e6cf040839d563b42462eef",
+      "historical_match": false,
+      "sha256": "ccbefda0dde5fdb229e0f364a4b81a96b71da38d988d5727ff840429033a0b99",
+      "stream_start_frame": 48000,
+      "stream_end_frame": 251434
+    }
+  ],
+  "unique_recordings": 1,
+  "api_requests": 0,
+  "initial_effective_config": {
+    "audio": {
+      "latency_mode": "fast",
+      "sample_rate": 16000,
+      "channels": 1,
+      "chunk_duration_ms": 120,
+      "vad_aggressiveness": 2,
+      "silence_threshold": -40.0,
+      "speech_threshold_blocks": 2,
+      "silence_limit_blocks": 3,
+      "max_buffer_blocks": 100,
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450,
+      "soft_silence_margin_db": 10.0,
+      "soft_silence_gate_margin_db": 5.0,
+      "noise_calibration_seconds": 2.0,
+      "noise_margin_db": 7.0,
+      "min_speech_threshold": -45.0,
+      "max_speech_threshold": -30.0,
+      "min_segment_seconds": 0.3,
+      "min_segment_peak_margin_db": 1.0,
+      "input_device_index": null,
+      "input_device_name": "",
+      "input_device_id": "",
+      "audio_queue_max_blocks": 5,
+      "format": 8,
+      "initial_noise_floor_dbfs": null,
+      "initial_energy_threshold_dbfs": null,
+      "diagnostics_latency_mode": "custom",
+      "speech_strategy": "ru_speech_v1"
+    },
+    "whisper": {
+      "model_size": "small",
+      "fast_model_size": "base",
+      "asr_impact_mode": "low",
+      "pure_english_environment": false,
+      "enable_english_model": false,
+      "english_model_size": "small.en",
+      "fast_english_model_size": "",
+      "active_model_size": "base",
+      "device": "cpu",
+      "compute_type": "int8",
+      "auto_cpu_threads": false,
+      "cpu_threads": 2,
+      "num_workers": 1,
+      "language": "auto",
+      "source_language": "ru",
+      "multilingual_asr_strategy": "language_aware",
+      "beam_size": 1,
+      "vad_filter": false,
+      "vad_parameters": {
+        "threshold": 0.5,
+        "min_speech_duration_ms": 250,
+        "max_speech_duration_s": 4.5,
+        "min_silence_duration_ms": 2000,
+        "speech_pad_ms": 400
+      },
+      "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+      "model_download_source": "",
+      "model_download_endpoint": "",
+      "local_files_only": true,
+      "prompt_profile": "none",
+      "initial_prompt": "",
+      "condition_on_previous_text": false,
+      "temperature": 0.0,
+      "no_speech_threshold": 0.6,
+      "log_prob_threshold": -1.0,
+      "compression_ratio_threshold": 2.4,
+      "min_language_probability": 0.35,
+      "normalize_audio": true,
+      "target_rms_dbfs": -20.0,
+      "max_gain_db": 12.0,
+      "min_gain_rms_dbfs": -50.0
+    }
+  },
+  "model_snapshot": "E:\\my\\my\\game_voice_translator\\.models\\models--Systran--faster-whisper-base\\snapshots\\ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+  "model_files": {
+    "config.json": {
+      "bytes": 2309,
+      "sha256": "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a"
+    },
+    "model.bin": {
+      "bytes": 145217532,
+      "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9"
+    },
+    "tokenizer.json": {
+      "bytes": 2203239,
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    "vocabulary.txt": {
+      "bytes": 459861,
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  },
+  "fingerprint": {
+    "head": "26e646bcf15411c6b30d58ea6118a4d5625bb7a9",
+    "files": {
+      "scripts/offline_asr_observer.py": "ab49aeaf57344c9b78ff9f6f22c26df9649181c02a5731da5cf4a9d4fa53e2ee",
+      "scripts/offline_russian_capture_ab.py": "0a20b36310a3fe14383914af84c11ed5990c1e04042f2c0ca9505b40b5beebc3",
+      "voxgo/__init__.py": "0bdceb100af037f18e673f0702cd79c30ba203272919b537f1a9eb5524968c95",
+      "voxgo/analytics/__init__.py": "30e1bc1ccf3e32bd57af6570b32b424ca8267a0a15b6877e5b2c0d22d2f6dec0",
+      "voxgo/analytics/aggregation.py": "d1c60cec33d9217a91c9fd338160ee059cfbcbe17ef1db575ccb5be91db1fb60",
+      "voxgo/analytics/basic.py": "c304ea9ceb469fca48fb6f0bda565fda68004573b7cbdda3096524873fd79844",
+      "voxgo/analytics/client.py": "0e14be795c9d870a6a7e4b7552243704e36d9f526bc418a4faba14f72663fa89",
+      "voxgo/analytics/consent.py": "de6fca2ccd6ce004f10845241e6a582dab86bccba960db50c010c9533974f45f",
+      "voxgo/analytics/daily_metrics.py": "20bb6c8c2cae8c4c65dec0a6eba4ce685968b9dcbd550cda6e4d1cec7a8c6e45",
+      "voxgo/analytics/debug.py": "2db41ae26bf3292a88254ec412fe4cd6ad9710bd31714861e4628a989cb06634",
+      "voxgo/analytics/lifecycle.py": "9a4b4bba28bc946ee0656719915b2852e23e807437e3c6d454b3a694993ad694",
+      "voxgo/analytics/migration.py": "6cae4131104cff5b0126adf0bd6361199d02048bfe3a466bcc6bee3797f051e6",
+      "voxgo/analytics/retention.py": "63de783fd5103f3480baf91deaa3e2138d95898d665b132bee182d3c63a0ec45",
+      "voxgo/analytics/storage.py": "1c4da01851ecb0d68584b430effd31f48ee9f67b60d936492a1f189c0e3ed057",
+      "voxgo/analytics/uploader.py": "270667f5044df005f1dc9c244ddec18c871a89f95a133dbb65e1aa2d178ecd0b",
+      "voxgo/app.py": "1896bd66c3af0528d949bd9d30a11eb49e7cde80c81199691a155995a7ca7006",
+      "voxgo/app_info.py": "f7998610744aaec2808a1b48a57baec23b6628c76c742b32541caf51b0017d2a",
+      "voxgo/asr/__init__.py": "1a6e4ad8728c06fc62c313e0637b178a916cd85168264485a09683bbb0db5d5a",
+      "voxgo/asr/language_profiles.py": "dda7d465b139875d673139cbaeed06a41c3f07f1622553e84395ef651b50775f",
+      "voxgo/asr/model_download.py": "9ce3c4fd1ab951ad7a867dec7015514dcb366ef65b540cb1107350196efb5fdf",
+      "voxgo/asr/model_download_notice.py": "4c967e58f88c0e97735d5cd2e2ffe1c7648e092ce54de50b995a4af46a266044",
+      "voxgo/asr/model_recovery.py": "d564337cebd8dea69f5eeedb235361d479f2d31881ae1c36de0cf5ed34d6f9f8",
+      "voxgo/asr/pipeline.py": "69377df00b0e8dbe86a712cdcf9c0cdf04012e10735de8196c5971c7df189b47",
+      "voxgo/asr/runaway_repetition.py": "5146ac74c10fe5c78c7a453b29a67c367a9e8d4aea8ab29c4995ff12baeb8e7d",
+      "voxgo/asr/whisper_engine.py": "8b5f89df373ccbe19cb390515ecbfa15c6b408ded3ce6ecdc138a1972eeb823a",
+      "voxgo/audio/__init__.py": "fd73a27c8ba0363da9b83641c1b9ecf388d81d456fc2c2270710a867e97441a4",
+      "voxgo/audio/benchmark.py": "624278d4482f72b2f927950e7e85bdbe357ed646d43dea29b6875f9908cbf3d2",
+      "voxgo/audio/capture.py": "e19cbe95771fa8d69afd9601cf2d543685b152f88b7e66fe50c56638e63fdeb2",
+      "voxgo/audio/devices.py": "b48f42e6dae7f124e48f2205195a4cf9fb8ec4cf20d3b0a93d7f1b26506f725b",
+      "voxgo/audio/runtime.py": "b2cf1e9a846bda261bdf33824d60f664f8c1b18a619aa784a44d01f8cd8bcb78",
+      "voxgo/audio/segmenter.py": "66b7616640973418c6663934e6d81cc1751e5ede6ba0565686bed9268aa756ff",
+      "voxgo/audio/windows_endpoints.py": "a73ec268354c56dbb96992daed73c41183f46ad3272cb016f489d7bddb5246f6",
+      "voxgo/config/__init__.py": "6058b5bfbc7ea6bad7318b7df713b5bf4d4185540ef44892aa42214658666235",
+      "voxgo/config/loader.py": "f3ddd9fc40b2711bc4af10f0010fc4309e57185009d5189ad6519e013f7263a7",
+      "voxgo/config/migration.py": "766f81c8abf756cdf4d9a09fcf4667669ccb97ea9abca6c551a2abb07e880e70",
+      "voxgo/config/presets.py": "dafabd76624540340e5945d760fdbc21692596a233ad6cc7a1800ea6d341e47f",
+      "voxgo/config/schema.py": "d5421c5c30edce863106207e248c4b39ea57b7a9e47218ce8c17afff1162c059",
+      "voxgo/diagnostics/__init__.py": "52c2ecfeb89a426b0c0abcb79d5d86a9b98391229b18e81b17cfdd3b89dd55a6",
+      "voxgo/diagnostics/reporter.py": "1da005702a16f75f6aa1e6a9058e1b8f6460ba09b04cc6631c698deeba91b804",
+      "voxgo/i18n.py": "880068dd5d076caf79be28d16994be94d17964f75d4f4bc5d38e596188c8ca9c",
+      "voxgo/languages.py": "4c8d9c2c5d0ae1bd89af689d71e808337e99a1914f5bc647b7e869ce6857222a",
+      "voxgo/mobile/__init__.py": "09eb40d91e88cad20e7d3c5df099f261334af2ed0ca8ac945e6386454846f909",
+      "voxgo/mobile/runtime.py": "3a73837e98f3b89ca89992939dbacb9fa64d29f6896f315b4db6e5c148f645e7",
+      "voxgo/mobile/server.py": "a7adccf1b5d187f2dcd0a51c6f33d07b45bb041d210bb399460db85843823ddd",
+      "voxgo/mobile/static/app.js": "4e424f41f102a2fef14ee82bf37bfa93e3c5ffac170007ae079c1657a36a3761",
+      "voxgo/mobile/static/index.html": "0d40e72be40e6a2a5709f4cad0c279d8a4cb47e46652e2887a3583a1ae83ba40",
+      "voxgo/mobile/static/styles.css": "b0e8d44fc23ce734ed1e26e7c67c1c245c3d0d708946cebecf475c36051eb938",
+      "voxgo/package_info.py": "73998e93571efc9e58e591cf008efcffac74c8140491f066b217f13cbaf39ab4",
+      "voxgo/runtime/__init__.py": "8b3d2ff8ccc69513ee1964676fb360e6a46cfc792207499e573a886294d237da",
+      "voxgo/runtime/banner.py": "29011c6f1b673bbdbfadedc22454e7db4d93cab84d81301a3deb430ecf5a9a48",
+      "voxgo/runtime/cuda_runtime.py": "a53fc49f2c01eb920b9ad02fcf01833aef46288bec323b938b62226784fc8cb0",
+      "voxgo/runtime/dll_paths.py": "2975bced7c2c0aa2e5dfd4e494e7e08098a36997681e5326a5fc2a2a4aa45ba0",
+      "voxgo/runtime/events.py": "ecc97b449d1501591ec8bb25f53f662fea3b2f1c7a062f7b2b0cd7ad3538d73e",
+      "voxgo/runtime/hotkeys.py": "7d4c4cc8d13550bffdcfb1f9eb28613ce6f99eb2ebcce62e7d9ad6a6a0cd6482",
+      "voxgo/runtime/priority.py": "6faa027926bc84685f5c6078d4f16de393579f4e0b6f0c79b72bf886f1e97b83",
+      "voxgo/runtime/settings_controller.py": "3f676db54b49e7c451a9eb19aeb22571e557ca28bdbb383983d4cca0e0ac7e4e",
+      "voxgo/runtime/work_items.py": "5e8e05be4c52366b6123e68769f79ab901d9bd5cde6fc19f0dd0153085c455a6",
+      "voxgo/translation/__init__.py": "b904c9d38e61dac3ae08c5705a837ba18e4f4d880306e6e5ebd09a7457ee27c2",
+      "voxgo/translation/base.py": "6a0bbd9fbb01a56dcf3ad1dd7e1378b3c4bc03b190c80f58194b83e91ff119eb",
+      "voxgo/translation/client.py": "c6706a9c1e2f4846ff77b29ad40721e3c0d9d7d40b34fa3b52cbbd58fa3d2599",
+      "voxgo/translation/failures.py": "54ef80245c87b37850480d8b47d8365b193405e10d9c93c31fd07f23f237266f",
+      "voxgo/translation/glossary.py": "a39310f4ff4114b063e1505ae7e51c3b8dbd57c5b3716019b10e9542d2efd633",
+      "voxgo/translation/google.py": "b949d65e34393f5419eda66f096b959d21c507cbb2b334f39196fb12987de05d",
+      "voxgo/translation/local.py": "7aef8e1117cf63124c02e279bfa5601b7517956560fafb1710d2338e12aaa470",
+      "voxgo/translation/local_models.py": "5c5763b4a3be678c520adcd5f466f8c4c9a2c899c227aa132046726b50aedbf3",
+      "voxgo/translation/openai_compatible.py": "569d9a7032b10f65a5d78d01c8207c5a42a22bb08ac0aa16f59f8b84b8ee46a7",
+      "voxgo/translation/prompt.py": "5412cc10fe3d098cfb4735b67dd97ef0e76b534b0b9a127ecc7dc2c4397feeb5",
+      "voxgo/translation/registry.py": "d7c93a6c998951d5e7a6c175cc09f3aa58bf78ba001e84c9266532c34f2a0bb4",
+      "voxgo/translation/runtime.py": "9e31d8095234ff3b8651281d1ed239ab926fde08e9ce205aed9961e7fa0637ca",
+      "voxgo/ui/__init__.py": "b2a0da96e9e20dbba378b57020af68b2da7ac63491e7b7135690d398b6eec200",
+      "voxgo/ui/config_models.py": "57d4b6b98c34f4777f3ad5f6247ad984e1774df4c645c0f069381aba14a497c1",
+      "voxgo/ui/dialogs.py": "e9a35b72f05be4a05323fad3e0faf5369192fdd18f4c22fcfa965d09b17c32ed",
+      "voxgo/ui/download_panels.py": "737717352600beea1a2840c5662e2f69d685dbf46630c617b54b87a0f00c5e34",
+      "voxgo/ui/icons.py": "26d3fca5d36ff46a1b2cc9834eafa7efbfa12fb708dc7e2f33e5a28b97922567",
+      "voxgo/ui/overlay.py": "e0368080645cf5a08ffae544b5f6223da6165c9789e3a4aa1c94d8c281ff9ff6",
+      "voxgo/ui/overlay_window.py": "655ab9065526cdd878b346709e13ecf5ad2987efb93d1bf6409793e71b2df786",
+      "voxgo/ui/qr_widget.py": "e5b37591b4004d6d11515f68d1643db957033348a9b0ec938fba02a4c7f37efb",
+      "voxgo/ui/settings.py": "d9d93c74976325f6e15be854aec7df044922418a6a79967901de59be8d86283b",
+      "voxgo/ui/settings_dialog.py": "096abafd5c12fc3b32b64ccd20f0ae872b6675b3087a707ee825efb40be8678f",
+      "voxgo/ui/telemetry_consent.py": "22f5da790bf69008b2446dfef3f243318d3019682ad6a2057051ca1ee42e514e",
+      "voxgo/ui/tray.py": "e13ff91ed2f9c83dd96cec85b58eb926d0e1647cdd50b29d9149513f6065c58f",
+      "voxgo/ui/tray_controller.py": "7832c1bbcedcc4bdca16fedf8a4c95443c57dd7b6528c1712020cf471dcb2a04",
+      "voxgo/ui/widgets.py": "b4c00d1ecb8f65d4ef25cf6b21ac58c5002602cb880a965a2f410398f1ef4af5",
+      "voxgo/update/__init__.py": "1f2530eb487d8b696d2479f553f2529ceeba86fccc2363999fde47d2e1044d5f",
+      "voxgo/update/checker.py": "392a753c2c4653221b5535f913e9946821b6c2569223bf1895f0729e29bfc216",
+      "voxgo/update/installer.py": "7c881a55a07b1f4292403617655c92a57213f7b09c9a5a78ff3dc8182d4d4999",
+      "voxgo/update/runtime.py": "cf1b1d843546b7accdff99eb4ab1c2c080ca6cbfd70dca20a74ee25783043a24"
+    },
+    "python": "3.10.20 (main, Mar  3 2026, 14:57:27) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "faster-whisper": "1.2.1",
+      "ctranslate2": "4.7.2",
+      "numpy": "1.24.3",
+      "webrtcvad-wheels": "2.0.14"
+    }
+  },
+  "human_review": "pending",
+  "whole_clip_warmup": [],
+  "queue_policy": {
+    "mode": "fast",
+    "queue_size": 3,
+    "pending_timeout_seconds": 0.3,
+    "allow_fast_output": true,
+    "busy_weak_delay_seconds": 0.5,
+    "busy_weak_stale_seconds": 1.6,
+    "weak_cooldown_seconds": 0.35,
+    "weak_stale_drop_seconds": 1.6
+  },
+  "actual_asr_queue_capacity": 8,
+  "actual_raw_audio_queue_capacity": 5,
+  "drain_complete": true,
+  "replay_wall_seconds": 19.889298599999165,
+  "replay_cpu_seconds": 8.5625,
+  "actual_process_tick_intervals_ms": [
+    108.62810000253376,
+    109.25739999220241,
+    107.64670000935439,
+    109.08099998778198,
+    108.10860000492539,
+    107.60839999420568,
+    110.23550000390969,
+    108.02660000626929,
+    109.75049999251496,
+    109.59980000916403,
+    108.75269999087323,
+    110.40150000189897,
+    110.81939999712631,
+    107.70290000073146,
+    108.80339999857824,
+    108.44970001198817,
+    107.9666999867186,
+    110.44590000528842,
+    107.22990000795107,
+    108.80479999468662,
+    108.61409999779426,
+    108.8681999972323,
+    107.84690000582486,
+    108.9707999926759,
+    108.19710000941996,
+    109.74709999572951,
+    106.98199999751523,
+    108.21990000840742,
+    109.03339998912998,
+    109.72400000900961,
+    109.38149999128655,
+    108.54870000912342,
+    109.15150000073481,
+    107.80479999084491,
+    109.16639999777544,
+    110.9071000100812,
+    106.52729999856092,
+    109.87960000056773,
+    108.23589999927208,
+    109.09879999235272,
+    109.6156000130577,
+    109.02699999860488,
+    107.44269999850076,
+    109.89399999380112,
+    107.33739999704994,
+    109.03760000655893,
+    107.54149999411311,
+    110.86090000753757,
+    109.46469999908004,
+    108.12150000128895,
+    108.57769999711309,
+    109.85730000538751,
+    107.73219999100547,
+    110.38990000088234,
+    108.16089999570977,
+    109.68829999910668,
+    106.895800010534,
+    107.3266000021249,
+    109.19469999498688,
+    109.23699999693781,
+    109.76960000698455,
+    110.74119999830145,
+    106.96520000055898,
+    108.82759999367408,
+    110.33229999884497,
+    108.03820000728592,
+    110.60960000031628,
+    109.77949999505654,
+    108.35310000402387,
+    108.8809999928344,
+    109.93190000590403,
+    110.31570000341162,
+    108.07740000018384,
+    109.25459999998566,
+    110.14429999340791,
+    109.17389999667648,
+    109.19070000818465,
+    108.34179999073967,
+    107.68620000453666,
+    108.99890000291634,
+    109.39779999898747,
+    110.24009999528062,
+    110.36380000587087,
+    110.59589999786112,
+    110.53020000690594,
+    112.36249998910353,
+    110.0849000067683,
+    109.89680000056978,
+    109.59239999647252,
+    110.17749999882653,
+    109.14470000716392,
+    110.87379998934921,
+    108.38309999962803,
+    109.0913000080036,
+    109.19529999955557,
+    110.94169999705628,
+    107.45830000087153,
+    108.62410000117961,
+    107.94729999906849,
+    110.80049999873154,
+    108.45119999430608,
+    107.5903000019025,
+    109.11070001020562,
+    108.05499998969026,
+    110.36390000663232,
+    108.16319999867119,
+    109.2655999964336,
+    109.16430001088884,
+    108.36639998888131,
+    109.22430000209715,
+    108.96530000900384,
+    109.37099999864586,
+    111.02659998869058,
+    107.7242000028491,
+    109.15260000911076,
+    107.96239999763202,
+    108.79079998994712,
+    110.48270000901539,
+    109.59959999308921,
+    110.26739999942947,
+    109.36240000592079,
+    110.89339999307413,
+    109.88150000048336,
+    110.31790000561159,
+    109.20160000387114,
+    110.28749999240972,
+    111.08850000891834,
+    110.94439998851158,
+    108.36890000791755,
+    110.60939999879338,
+    110.3272000036668,
+    111.15029999928083,
+    109.97959999076556,
+    109.79850000876468,
+    110.85219999949913,
+    111.01189999317285,
+    109.43490000499878,
+    109.69789999944624,
+    111.54709999391343,
+    110.81860000558663,
+    111.57799999637064,
+    109.41260000981856,
+    109.06519999844022,
+    106.96629999438301,
+    108.8097000028938,
+    110.38019999978133,
+    109.48379999899771,
+    109.1558000043733,
+    109.72100000071805,
+    108.05339999205898,
+    109.63740000443067,
+    109.35899999458343,
+    108.01300000457559,
+    111.12420000426937,
+    110.87189998943359,
+    110.97310000332072,
+    110.51100000622682,
+    110.72319999220781,
+    111.2511999963317,
+    108.89990000578109,
+    108.73849999916274,
+    109.35169999720529,
+    108.64950000541285,
+    109.1766000026837,
+    110.31769998953678,
+    109.85780000919476,
+    108.46419999143109,
+    107.55240000435151,
+    109.35280000558123,
+    109.97569999017287,
+    110.41820001264568,
+    108.65650000050664,
+    108.04529998858925,
+    108.75769999984186,
+    108.37590000301134,
+    109.25360000692308,
+    110.06449999695178,
+    110.26299999502953,
+    108.34390000673011,
+    109.36789998959284,
+    108.92950001289137,
+    109.33429999568034
+  ],
+  "replay_stream_sha256": "0fe7ab3d86b0a11af47fc883598b3891fab9195280c700387afa6eb16ca78d7b",
+  "unpadded_stream_frames": 299434,
+  "padded_stream_frames": 299520,
+  "stats": {
+    "speech_detected": 7,
+    "filtered_speech": 4,
+    "transcriptions": 2,
+    "dropped_speech": 1
+  },
+  "worker_stopped": true,
+  "capture_buffer_frames_at_shutdown": 0,
+  "feeder_stopped": true,
+  "sampler_stopped": true,
+  "peak_sampled_rss_bytes": 358526976,
+  "total_process_cpu_seconds": 9.046875,
+  "total_wall_seconds": 20.205062799999723,
+  "segments": [
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 0.96,
+      "voice_duration_seconds": 0.12,
+      "block_count": 7,
+      "voice_blocks": 1,
+      "peak_rms_dbfs": -54.99237800708009,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "candidate_short_segment/silence_end/低于语音门限",
+      "vad_voice_blocks": 1,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.14285714285714285,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s001",
+      "spans": [
+        [
+          42240,
+          57600
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 0,
+          "wav_end_frame": 9600,
+          "stream_start_frame": 48000,
+          "stream_end_frame": 57600
+        }
+      ],
+      "pcm_sha256": "e5cee17fe5f0d5604360059f073c711bae5ff6bd69dd8baba81b6e35e97ef504",
+      "parents": [],
+      "captured": true,
+      "status": "dropped",
+      "pre_roll_spans": [
+        [
+          42240,
+          48000
+        ]
+      ],
+      "pre_roll_actual_frames": 5760,
+      "filter_reason": "weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-10.0dB)"
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 0.48,
+      "voice_duration_seconds": 0.12,
+      "block_count": 4,
+      "voice_blocks": 1,
+      "peak_rms_dbfs": -64.48506221329023,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "candidate_short_segment/silence_end/低于语音门限",
+      "vad_voice_blocks": 1,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.25,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s002",
+      "spans": [
+        [
+          57600,
+          65280
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 9600,
+          "wav_end_frame": 17280,
+          "stream_start_frame": 57600,
+          "stream_end_frame": 65280
+        }
+      ],
+      "pcm_sha256": "a96e6fed044a7b972de3fdf8b4b9408a6653cf4ebf300c7b9d38be4b5e29c77a",
+      "parents": [],
+      "captured": true,
+      "status": "dropped",
+      "pre_roll_spans": [],
+      "pre_roll_actual_frames": 0,
+      "filter_reason": "weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-19.5dB)"
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 4.56,
+      "voice_duration_seconds": 3.36,
+      "block_count": 38,
+      "voice_blocks": 28,
+      "peak_rms_dbfs": -11.667983083129485,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "达到最长 4.5s",
+      "vad_voice_blocks": 28,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.7368421052631579,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s003",
+      "spans": [
+        [
+          65280,
+          138240
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 17280,
+          "wav_end_frame": 90240,
+          "stream_start_frame": 65280,
+          "stream_end_frame": 138240
+        }
+      ],
+      "pcm_sha256": "99c715f8e1cedc86f61fe3624a6fa183a342b51145f7b90e0aeb882a79740c05",
+      "parents": [],
+      "captured": true,
+      "status": "translation_ready",
+      "pre_roll_spans": [
+        [
+          65280,
+          71040
+        ]
+      ],
+      "pre_roll_actual_frames": 5760,
+      "normalization": {
+        "input_rms_dbfs": -17.461519911388315,
+        "output_rms_dbfs": -17.461519911388315,
+        "gain_db": 0.0,
+        "normalized_float32_sha256": "9b62fb0dafcb3f6199fa69d145b79906dbfb787093d03708eec3d83fc34c3687"
+      },
+      "peak_sampled_rss_bytes": 357048320,
+      "asr": {
+        "text": "Продолжение в шеец на целомение.",
+        "language": "ru",
+        "language_probability": 0.8513357043266296,
+        "avg_logprob": -1.7744291201233864,
+        "no_speech_prob": 0.12495985627174377,
+        "compression_ratio": 1.0172413793103448,
+        "segment_count": 1,
+        "duration_seconds": 4.56,
+        "raw_text": "Продолжение в шеец на целомение.",
+        "runaway_guarded": false
+      },
+      "asr_ms": 1003.7778000114486,
+      "asr_process_cpu_seconds": 2.0,
+      "effective_whisper": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "runtime_device": "cpu",
+      "runtime_compute_type": "int8",
+      "retained_text": "Продолжение в шеец на целомение.",
+      "translation_input": "Продолжение в шеец на целомение.",
+      "language_gate_reason": ""
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 4.2,
+      "voice_duration_seconds": 2.76,
+      "block_count": 35,
+      "voice_blocks": 23,
+      "peak_rms_dbfs": -8.294380820621386,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "静音结束/尾音下降",
+      "vad_voice_blocks": 23,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.6571428571428571,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s004",
+      "spans": [
+        [
+          138240,
+          205440
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 90240,
+          "wav_end_frame": 157440,
+          "stream_start_frame": 138240,
+          "stream_end_frame": 205440
+        }
+      ],
+      "pcm_sha256": "72759a928a0eece0429d11edcfda80e21e91a4f401983ec34486e412e23f83cf",
+      "parents": [],
+      "captured": true,
+      "status": "translation_ready",
+      "pre_roll_spans": [],
+      "pre_roll_actual_frames": 0,
+      "normalization": {
+        "input_rms_dbfs": -17.762707907958692,
+        "output_rms_dbfs": -17.762707907958692,
+        "gain_db": 0.0,
+        "normalized_float32_sha256": "d809dcedc27d84eac7b349c3cdf9c7104aeec6d97c674d0f2c6ce42b4fa5a235"
+      },
+      "peak_sampled_rss_bytes": 358113280,
+      "asr": {
+        "text": "Я хотел бы знать, могу я платить мои карт",
+        "language": "ru",
+        "language_probability": 0.9602108001708984,
+        "avg_logprob": -0.846063756942749,
+        "no_speech_prob": 0.05283569172024727,
+        "compression_ratio": 1.0579710144927537,
+        "segment_count": 1,
+        "duration_seconds": 4.2,
+        "raw_text": "Я хотел бы знать, могу я платить мои карт",
+        "runaway_guarded": false
+      },
+      "asr_ms": 966.6387000033865,
+      "asr_process_cpu_seconds": 1.90625,
+      "effective_whisper": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "runtime_device": "cpu",
+      "runtime_compute_type": "int8",
+      "retained_text": "Я хотел бы знать, могу я платить мои карт",
+      "translation_input": "Я хотел бы знать, могу я платить мои карт",
+      "language_gate_reason": ""
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 0.96,
+      "voice_duration_seconds": 0.6,
+      "block_count": 8,
+      "voice_blocks": 5,
+      "peak_rms_dbfs": -10.832069684875902,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "speech_reentry",
+      "vad_voice_blocks": 5,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.625,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s005",
+      "spans": [
+        [
+          205440,
+          220800
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 157440,
+          "wav_end_frame": 172800,
+          "stream_start_frame": 205440,
+          "stream_end_frame": 220800
+        }
+      ],
+      "pcm_sha256": "aeed5370f1b8f691f75488c5df9eb7c938f5732728c06be028760b7e0fab0654",
+      "parents": [],
+      "captured": true,
+      "status": "dropped",
+      "pre_roll_spans": [],
+      "pre_roll_actual_frames": 0,
+      "normalization": {
+        "input_rms_dbfs": -17.547376015376525,
+        "output_rms_dbfs": -17.547376015376525,
+        "gain_db": 0.0,
+        "normalized_float32_sha256": "742530da986605b22086b512efee474106d4bd4974b02db1e7261980cdda1dfb"
+      },
+      "peak_sampled_rss_bytes": 357908480,
+      "asr": {
+        "text": "Merci Bonne",
+        "language": "fr",
+        "language_probability": 0.4160284399986267,
+        "avg_logprob": -1.0773874322573345,
+        "no_speech_prob": 0.1264062523841858,
+        "compression_ratio": 0.5789473684210527,
+        "segment_count": 1,
+        "duration_seconds": 0.96,
+        "raw_text": "Merci Bonne",
+        "runaway_guarded": false
+      },
+      "asr_ms": 941.6832999995677,
+      "asr_process_cpu_seconds": 1.859375,
+      "effective_whisper": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "runtime_device": "cpu",
+      "runtime_compute_type": "int8",
+      "filter_reason": "weak_candidate_low_asr_confidence (text=mercibonne, avg_logprob=-1.08, no_speech=0.13, compression=0.58)"
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 0.6,
+      "voice_duration_seconds": 0.24,
+      "block_count": 5,
+      "voice_blocks": 2,
+      "peak_rms_dbfs": -38.848012294998256,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "静音结束/尾音下降",
+      "vad_voice_blocks": 2,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.4,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s006",
+      "spans": [
+        [
+          220800,
+          230400
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 172800,
+          "wav_end_frame": 182400,
+          "stream_start_frame": 220800,
+          "stream_end_frame": 230400
+        }
+      ],
+      "pcm_sha256": "183b6f27a0228a7c8b02ff4cd3656f3b987d54235562535c8b9a8d305884ec87",
+      "parents": [],
+      "captured": true,
+      "status": "dropped",
+      "pre_roll_spans": [],
+      "pre_roll_actual_frames": 0,
+      "filter_reason": "asr_budget_weak_drop"
+    },
+    {
+      "sample_rate": 16000,
+      "duration_seconds": 0.96,
+      "voice_duration_seconds": 0.24,
+      "block_count": 8,
+      "voice_blocks": 2,
+      "peak_rms_dbfs": -38.09787858385457,
+      "energy_threshold_dbfs": -45.0,
+      "noise_floor_dbfs": -200.0,
+      "reason": "静音结束/尾音下降",
+      "vad_voice_blocks": 2,
+      "energy_voice_blocks": 0,
+      "vad_confidence": 0.25,
+      "activity_source": "vad",
+      "latency_mode": "custom",
+      "segment_id": "s007",
+      "spans": [
+        [
+          243840,
+          259200
+        ]
+      ],
+      "sources": [
+        {
+          "id": "minds14-ru-0505",
+          "wav_start_frame": 195840,
+          "wav_end_frame": 203434,
+          "stream_start_frame": 243840,
+          "stream_end_frame": 251434
+        }
+      ],
+      "pcm_sha256": "5601957fbb9628e5831dea4ce4d8d7ed6ddbbf8d66a0c16d683bada3700c244f",
+      "parents": [],
+      "captured": true,
+      "status": "dropped",
+      "pre_roll_spans": [
+        [
+          243840,
+          249600
+        ]
+      ],
+      "pre_roll_actual_frames": 5760,
+      "normalization": {
+        "input_rms_dbfs": -47.11230583932556,
+        "output_rms_dbfs": -35.1123057619218,
+        "gain_db": 12.0,
+        "normalized_float32_sha256": "861eb26bde04c50c1f11d04452d5790cb57ff88fb187e92ea18a690dd39ee4f3"
+      },
+      "peak_sampled_rss_bytes": 358526976,
+      "asr": {
+        "text": "",
+        "language": "en",
+        "language_probability": 0.6217937469482422,
+        "avg_logprob": 0.0,
+        "no_speech_prob": 0.0,
+        "compression_ratio": 0.0,
+        "segment_count": 0,
+        "duration_seconds": 0.96,
+        "raw_text": "",
+        "runaway_guarded": false
+      },
+      "asr_ms": 958.332900001551,
+      "asr_process_cpu_seconds": 1.890625,
+      "effective_whisper": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "runtime_device": "cpu",
+      "runtime_compute_type": "int8",
+      "filter_reason": "empty_asr"
+    }
+  ],
+  "work_items": [
+    {
+      "item_id": "w001",
+      "segment_id": "s001",
+      "status": "dropped",
+      "candidate_labels": [
+        "candidate",
+        "short_segment",
+        "low_confidence"
+      ],
+      "candidate_reason": "peak_margin=-10.0dB",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-10.0dB)",
+      "trace": {
+        "item_id": "",
+        "speech_detected_at": 1793084620.8272505,
+        "queued_at": 1793084621.2148776,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate",
+          "short_segment",
+          "low_confidence"
+        ],
+        "segment_voice_seconds": 0.12,
+        "segment_total_seconds": 0.96,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 0.0,
+        "transcription_started_at": 0.0,
+        "transcription_finished_at": 0.0,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": null
+    },
+    {
+      "item_id": "w002",
+      "segment_id": "s002",
+      "status": "dropped",
+      "candidate_labels": [
+        "candidate",
+        "short_segment",
+        "low_confidence"
+      ],
+      "candidate_reason": "peak_margin=-19.5dB",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-19.5dB)",
+      "trace": {
+        "item_id": "",
+        "speech_detected_at": 1793084621.2636118,
+        "queued_at": 1793084621.6661162,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate",
+          "short_segment",
+          "low_confidence"
+        ],
+        "segment_voice_seconds": 0.12,
+        "segment_total_seconds": 0.48,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 0.0,
+        "transcription_started_at": 0.0,
+        "transcription_finished_at": 0.0,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": null
+    },
+    {
+      "item_id": "w003",
+      "segment_id": "s003",
+      "status": "translation_ready",
+      "candidate_labels": [
+        "candidate"
+      ],
+      "candidate_reason": "accepted",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "",
+      "trace": {
+        "item_id": "1",
+        "speech_detected_at": 1793084625.839192,
+        "queued_at": 1793084625.839192,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate"
+        ],
+        "segment_voice_seconds": 3.36,
+        "segment_total_seconds": 4.56,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 1793084625.8401995,
+        "transcription_started_at": 1793084625.8401995,
+        "transcription_finished_at": 1793084626.8438857,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": 1.0075569152832031
+    },
+    {
+      "item_id": "w004",
+      "segment_id": "s004",
+      "status": "translation_ready",
+      "candidate_labels": [
+        "candidate"
+      ],
+      "candidate_reason": "accepted",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "",
+      "trace": {
+        "item_id": "2",
+        "speech_detected_at": 1793084629.99663,
+        "queued_at": 1793084629.99663,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate"
+        ],
+        "segment_voice_seconds": 2.76,
+        "segment_total_seconds": 4.2,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 1793084629.99763,
+        "transcription_started_at": 1793084629.99763,
+        "transcription_finished_at": 1793084630.9636674,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": 0.9999275207519531
+    },
+    {
+      "item_id": "w005",
+      "segment_id": "s005",
+      "status": "dropped",
+      "candidate_labels": [
+        "candidate",
+        "short_segment"
+      ],
+      "candidate_reason": "voice_duration=0.60s",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "weak_candidate_low_asr_confidence (text=mercibonne, avg_logprob=-1.08, no_speech=0.13, compression=0.58)",
+      "trace": {
+        "item_id": "",
+        "speech_detected_at": 1793084631.0976672,
+        "queued_at": 1793084631.4098818,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate",
+          "short_segment"
+        ],
+        "segment_voice_seconds": 0.6,
+        "segment_total_seconds": 0.96,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 1793084631.4098818,
+        "transcription_started_at": 1793084631.4098818,
+        "transcription_finished_at": 1793084632.3514328,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": 0
+    },
+    {
+      "item_id": "w006",
+      "segment_id": "s006",
+      "status": "dropped",
+      "candidate_labels": [
+        "candidate",
+        "short_segment"
+      ],
+      "candidate_reason": "voice_duration=0.24s",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      }
+    },
+    {
+      "item_id": "w007",
+      "segment_id": "s007",
+      "status": "dropped",
+      "candidate_labels": [
+        "candidate",
+        "short_segment"
+      ],
+      "candidate_reason": "voice_duration=0.24s",
+      "config_snapshot": {
+        "model_size": "small",
+        "fast_model_size": "base",
+        "asr_impact_mode": "low",
+        "pure_english_environment": false,
+        "enable_english_model": false,
+        "english_model_size": "small.en",
+        "fast_english_model_size": "",
+        "active_model_size": "base",
+        "device": "cpu",
+        "compute_type": "int8",
+        "auto_cpu_threads": false,
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "language": "auto",
+        "source_language": "ru",
+        "multilingual_asr_strategy": "language_aware",
+        "beam_size": 1,
+        "vad_filter": false,
+        "vad_parameters": {
+          "threshold": 0.5,
+          "min_speech_duration_ms": 250,
+          "max_speech_duration_s": 4.5,
+          "min_silence_duration_ms": 2000,
+          "speech_pad_ms": 400
+        },
+        "model_dir": "E:\\my\\my\\game_voice_translator\\.models",
+        "model_download_source": "",
+        "model_download_endpoint": "",
+        "local_files_only": true,
+        "prompt_profile": "none",
+        "initial_prompt": "",
+        "condition_on_previous_text": false,
+        "temperature": 0.0,
+        "no_speech_threshold": 0.6,
+        "log_prob_threshold": -1.0,
+        "compression_ratio_threshold": 2.4,
+        "min_language_probability": 0.35,
+        "normalize_audio": true,
+        "target_rms_dbfs": -20.0,
+        "max_gain_db": 12.0,
+        "min_gain_rms_dbfs": -50.0
+      },
+      "filter_reason": "empty_asr",
+      "trace": {
+        "item_id": "",
+        "speech_detected_at": 1793084633.405848,
+        "queued_at": 1793084633.7783887,
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "whisper_language": "auto",
+        "language_revision": 1,
+        "latency_mode": "custom",
+        "candidate_labels": [
+          "candidate",
+          "short_segment"
+        ],
+        "segment_voice_seconds": 0.24,
+        "segment_total_seconds": 0.96,
+        "whisper_model_size": "base",
+        "whisper_device": "cpu",
+        "whisper_compute_type": "int8",
+        "whisper_cpu_threads": 2,
+        "fast_path_allowed": false,
+        "fast_path_ready": false,
+        "dequeued_at": 1793084633.7783887,
+        "transcription_started_at": 1793084633.7783887,
+        "transcription_finished_at": 1793084634.737644,
+        "translation_started_at": 0.0,
+        "translation_finished_at": 0.0,
+        "overlay_updated_at": 0.0
+      },
+      "queue_wait_ms": 0
+    }
+  ],
+  "activity_windows": [
+    {
+      "spans": [
+        [
+          0,
+          1920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          1920,
+          3840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          3840,
+          5760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          5760,
+          7680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          7680,
+          9600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          9600,
+          11520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          11520,
+          13440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          13440,
+          15360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          15360,
+          17280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          17280,
+          19200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          19200,
+          21120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          21120,
+          23040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          23040,
+          24960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          24960,
+          26880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          26880,
+          28800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          28800,
+          30720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -40.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          30720,
+          32640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          32640,
+          34560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          34560,
+          36480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          36480,
+          38400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          38400,
+          40320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          40320,
+          42240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          42240,
+          44160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          44160,
+          46080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          46080,
+          48000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          48000,
+          49920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.6666666666666666,
+      "rms_dbfs": -54.99237800708009,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          49920,
+          51840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -66.1401501235403,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -54.99237800708009,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          51840,
+          55680
+        ]
+      ],
+      "joined_blocks": 2,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -66.49181367982837,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -54.99237800708009,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          55680,
+          57600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.16666666666666666,
+      "rms_dbfs": -55.31606711751248,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -54.99237800708009,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          57600,
+          59520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.6666666666666666,
+      "rms_dbfs": -64.48506221329023,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          59520,
+          61440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -73.15815361084367,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -64.48506221329023,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          61440,
+          63360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -73.9801568211409,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -64.48506221329023,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          63360,
+          65280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -73.75106337440567,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -64.48506221329023,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          65280,
+          67200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -64.14295304960316,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          67200,
+          69120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -67.6119969240934,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          69120,
+          71040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -73.91527531960641,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          71040,
+          72960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.5,
+      "rms_dbfs": -42.82910532025973,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          72960,
+          74880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.55310108045787,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -42.82910532025973,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          74880,
+          76800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -11.893475964886438,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -15.55310108045787,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          76800,
+          78720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.101138815732764,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          78720,
+          80640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -14.130703151384658,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          80640,
+          82560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -25.517279944462746,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          82560,
+          84480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -22.775919156735235,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          84480,
+          86400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -23.572379308269543,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          86400,
+          88320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -22.323938845806033,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          88320,
+          90240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -19.980867283097094,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          90240,
+          92160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -28.474449098947208,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          92160,
+          94080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -27.406344990850798,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          94080,
+          96000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.450699801819713,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          96000,
+          97920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -12.97301339609682,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          97920,
+          99840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.27782281159866,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          99840,
+          101760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.667243134362487,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          101760,
+          103680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -13.964604497711386,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          103680,
+          105600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -11.667983083129485,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.893475964886438,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          105600,
+          107520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -21.170846856815547,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          107520,
+          109440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -13.170380639837493,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          109440,
+          111360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -21.184036944412966,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          111360,
+          113280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -28.220490230461316,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          113280,
+          115200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -14.610042917874246,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          115200,
+          117120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -26.66711921493617,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          117120,
+          119040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -29.507719828734906,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          119040,
+          120960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -18.207972861261446,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          120960,
+          122880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -12.185025049975557,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          122880,
+          124800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.31830412361073,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          124800,
+          126720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.181892706315498,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          126720,
+          128640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -24.72451473853063,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          128640,
+          130560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -50.39344909293761,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          130560,
+          132480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -20.40813526102682,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          132480,
+          134400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -19.152411902217526,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          134400,
+          136320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -22.257632360374245,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          136320,
+          138240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -38.20284976092414,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -11.667983083129485,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          138240,
+          140160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.8333333333333334,
+      "rms_dbfs": -61.85728171975271,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          140160,
+          142080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.3333333333333333,
+      "rms_dbfs": -57.62377132700876,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -61.85728171975271,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          142080,
+          144000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -40.72269586751278,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -61.85728171975271,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          144000,
+          145920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -42.74822222804858,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -40.72269586751278,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          145920,
+          147840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -27.5813828303032,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -40.72269586751278,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          147840,
+          149760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -12.09287095077319,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -27.5813828303032,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          149760,
+          151680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.880962783354434,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          151680,
+          153600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.542855576134587,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          153600,
+          155520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.258613429301466,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          155520,
+          157440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -20.98536343726673,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          157440,
+          159360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -16.1442864820353,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          159360,
+          161280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -34.256303931771285,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          161280,
+          163200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -13.313287167465218,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          163200,
+          165120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -13.300659124632405,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          165120,
+          167040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -8.294380820621386,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -12.09287095077319,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          167040,
+          168960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -14.920231848821343,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          168960,
+          170880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -21.287033926587668,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          170880,
+          172800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.71923754768543,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          172800,
+          174720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -30.64649919038071,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          174720,
+          176640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -23.726920133036415,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          176640,
+          178560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -18.984710409128233,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          178560,
+          180480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -31.99116028113788,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          180480,
+          182400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -35.26986714631525,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          182400,
+          184320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -19.344064438227015,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          184320,
+          186240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -19.687407383866585,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          186240,
+          188160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -30.311564447979357,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          188160,
+          190080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -19.23896019141133,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          190080,
+          192000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -33.18814470387456,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          192000,
+          193920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -45.469675185344116,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          193920,
+          195840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -20.606745691685976,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          195840,
+          197760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.620143933239369,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          197760,
+          199680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -17.209707134003693,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          199680,
+          201600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -44.55817351365609,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          201600,
+          203520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.16666666666666666,
+      "rms_dbfs": -64.10530594034189,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          203520,
+          205440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -63.880516705417214,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -8.294380820621386,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          205440,
+          207360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.6666666666666666,
+      "rms_dbfs": -18.65563868709016,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          207360,
+          209280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -15.866137486326213,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -18.65563868709016,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          209280,
+          211200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -10.832069684875902,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -15.866137486326213,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          211200,
+          213120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -17.30612412808671,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          213120,
+          215040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -46.06894702818563,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          215040,
+          216960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.6666666666666666,
+      "rms_dbfs": -65.80573783325332,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          216960,
+          218880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.59793813278615,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          218880,
+          220800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.16666666666666666,
+      "rms_dbfs": -58.598852102802155,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          220800,
+          222720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 1.0,
+      "rms_dbfs": -38.848012294998256,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": -10.832069684875902,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          222720,
+          224640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.8333333333333334,
+      "rms_dbfs": -62.78324072628685,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.848012294998256,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          224640,
+          226560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -63.33207899855921,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.848012294998256,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          226560,
+          228480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.74939462647876,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.848012294998256,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          228480,
+          230400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.11468190593006,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.848012294998256,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          230400,
+          232320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -62.11839824863803,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          232320,
+          234240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.68358819156575,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          234240,
+          236160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.04267748282619,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          236160,
+          238080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -66.92695545736707,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          238080,
+          240000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -69.21208857474954,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          240000,
+          241920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -67.26020197545257,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          241920,
+          243840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -69.2170640166188,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          243840,
+          245760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -68.55478639720707,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          245760,
+          247680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -67.0825853113106,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          247680,
+          249600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -65.95796544114383,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          249600,
+          251520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.5,
+      "rms_dbfs": -38.09787858385457,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": true,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": false
+    },
+    {
+      "spans": [
+        [
+          251520,
+          253440
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": true,
+      "vad_ratio": 0.6666666666666666,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.09787858385457,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          253440,
+          255360
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.09787858385457,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          255360,
+          257280
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.09787858385457,
+      "silence_counter_before": 1,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          257280,
+          259200
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": -38.09787858385457,
+      "silence_counter_before": 2,
+      "relative_tail_candidate": true,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          259200,
+          261120
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          261120,
+          263040
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          263040,
+          264960
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          264960,
+          266880
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          266880,
+          268800
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          268800,
+          270720
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          270720,
+          272640
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          272640,
+          274560
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          274560,
+          276480
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          276480,
+          278400
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          278400,
+          280320
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          280320,
+          282240
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          282240,
+          284160
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          284160,
+          286080
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          286080,
+          288000
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          288000,
+          289920
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          289920,
+          291840
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          291840,
+          293760
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          293760,
+          295680
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          295680,
+          297600
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    },
+    {
+      "spans": [
+        [
+          297600,
+          299520
+        ]
+      ],
+      "joined_blocks": 1,
+      "vad_speech": false,
+      "vad_ratio": 0.0,
+      "rms_dbfs": -200.0,
+      "energy_threshold_dbfs": -45.0,
+      "energy_activity": false,
+      "previous_peak_rms_dbfs": null,
+      "silence_counter_before": 0,
+      "relative_tail_candidate": false,
+      "near_gate_candidate": true
+    }
+  ],
+  "config_unchanged": true,
+  "per_clip": []
+}

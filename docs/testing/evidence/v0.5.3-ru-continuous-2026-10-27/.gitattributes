@@ -1,0 +1,4 @@
+# Preserve captured byte fingerprints across Windows checkout.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# This downloaded upstream document is an exact license/source archive.
+minds14-source-card.md -whitespace

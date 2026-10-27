@@ -1,0 +1,582 @@
+{
+  "limit": 100000000,
+  "bytes": 11810041,
+  "requests": [
+    {
+      "label": "mailabs-search",
+      "url": "https://huggingface.co/api/datasets",
+      "request_url_sha256": "c42f4d31cb997916c352eff3499e50e456f8c603b28a82946646a21786632929",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\mailabs-search.json",
+      "bytes": 4576,
+      "status": "complete",
+      "sha256": "b6edeccdfed44b0753f70fdd4d55d5349c2d0c8663a8dd4c70034a2fa53a0576"
+    },
+    {
+      "label": "mailabs2-search",
+      "url": "https://huggingface.co/api/datasets",
+      "request_url_sha256": "59e8fd7498284616d7f57265a01531e0ca16f03fbf2374e7b2f1487fd6d578ac",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\mailabs2-search.json",
+      "bytes": 4576,
+      "status": "complete",
+      "sha256": "b6edeccdfed44b0753f70fdd4d55d5349c2d0c8663a8dd4c70034a2fa53a0576"
+    },
+    {
+      "label": "minds-ru-first",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "09b21503aed828f887068408ce8daca12d9c6db26997d1c3f65a9fd48d6edada",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-ru-first.json",
+      "bytes": 3174,
+      "status": "complete",
+      "sha256": "37a271a6c0f589f09c6371580cf8013b007d20a66a97b6f726d386c8e007888a"
+    },
+    {
+      "label": "musan-noise-first",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "ec0bcd719561c7013fd81252e37e5792f8904974fc68cfa7167a6702adda444d",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\musan-noise-first.json",
+      "bytes": 1814,
+      "status": "complete",
+      "sha256": "34688687ff41d8eb15840b4c514031e8eeedb8f5d5fbeff978bcc4dc908f82ef"
+    },
+    {
+      "label": "mailabs-ru-api",
+      "url": "https://huggingface.co/api/datasets/teshtvele/m_ailabs_ru",
+      "request_url_sha256": "a239e8d916fc413790b826671873bfbe55d4cda8978609e4d01ad128f351bb1e",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\mailabs-ru-api.json",
+      "bytes": 367,
+      "status": "complete",
+      "sha256": "14d47e8d2cc1c37f69f30eec9d9b1c2b6e93ab008cf3ad6b297c1dbeca9c74ee"
+    },
+    {
+      "label": "mailabs-ru-card",
+      "url": "https://huggingface.co/datasets/teshtvele/m_ailabs_ru/raw/main/README.md",
+      "request_url_sha256": "03ea9977ea5b13d74a3d1d092ee230262dad8b083513ab0fc7cc078b7a47e377",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\mailabs-ru-card.txt",
+      "bytes": 0,
+      "status": "failed",
+      "error_type": "HTTPError"
+    },
+    {
+      "label": "mailabs-ru-splits",
+      "url": "https://datasets-server.huggingface.co/splits",
+      "request_url_sha256": "c5e841dcb1e1530f6fe83ed67ca4e6590a1b14cbf93d7c9fc5d07098252e6592",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\mailabs-ru-splits.json",
+      "bytes": 0,
+      "status": "failed",
+      "error_type": "HTTPError"
+    },
+    {
+      "label": "voxforge-search",
+      "url": "https://huggingface.co/api/datasets",
+      "request_url_sha256": "5f98a43ec1db5696715a5d02ea0704a4a511596f0b8c40a9f4868b3257feb909",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\voxforge-search.json",
+      "bytes": 4686,
+      "status": "complete",
+      "sha256": "94abba11474d7f1890e984fcc347a83c4794eea31639e4512474838f5a1beaf3"
+    },
+    {
+      "label": "musan-api",
+      "url": "https://huggingface.co/api/datasets/corypaik/musan",
+      "request_url_sha256": "e98eddd058068194ff66ff4f8b420bfe9643a88d46ca8e696baf672ac28ece15",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\musan-api.json",
+      "bytes": 4475,
+      "status": "complete",
+      "sha256": "56e9110dd4b74bee1d8981779781836945a23f8cdd528bdef556a1c2634203c5"
+    },
+    {
+      "label": "musan-license",
+      "url": "https://huggingface.co/datasets/corypaik/musan/raw/main/licenses/noise/LICENSE",
+      "request_url_sha256": "cd414e01423646c0d4b9eff988b0ac5763807ad666d5774cce6cb6b64e905764",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\musan-license.txt",
+      "bytes": 0,
+      "status": "failed",
+      "error_type": "HTTPError"
+    },
+    {
+      "label": "voxforge-api",
+      "url": "https://huggingface.co/api/datasets/dangrebenkin/voxforge-ru-dataset",
+      "request_url_sha256": "277e38dfd1636ca17e022bc3d63e02e9ad08dbf272813659537d30c6983fe0e8",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\voxforge-api.txt",
+      "bytes": 2057,
+      "status": "complete",
+      "sha256": "e1a20475b68a13a72ecbe7782ef3b615099906f2b2b2f82d7dbc9dcaaa9aac31"
+    },
+    {
+      "label": "voxforge-card",
+      "url": "https://huggingface.co/datasets/dangrebenkin/voxforge-ru-dataset/raw/main/README.md",
+      "request_url_sha256": "52c75c88da1158878d31682ccf188685385b00a75c838cc3ee7d06655ad6540c",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\voxforge-card.txt",
+      "bytes": 916,
+      "status": "complete",
+      "sha256": "9bf0ce301540c2233d92c1917587593fb963d36ce850b1b52b52b34411e4cead"
+    },
+    {
+      "label": "voxforge-splits",
+      "url": "https://datasets-server.huggingface.co/splits",
+      "request_url_sha256": "1ff41e9d71dbc975f135af58f39620c51400d4063ec009a72a361f4e5fda39ed",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\voxforge-splits.txt",
+      "bytes": 200,
+      "status": "complete",
+      "sha256": "43b017a0ea1d0f2f032c9e7bfb91680c47c3f6b54da8f3a87eca3316faff16b9"
+    },
+    {
+      "label": "musan-free-license",
+      "url": "https://huggingface.co/datasets/corypaik/musan/raw/76f9882cfa4475efe11508ac9aa32722f84ca5b7/licenses/noise/free-sound/LICENSE",
+      "request_url_sha256": "8d4fef86abf2fab58c61bc23b4fc9a7120a9265a251f7548e3bbf662328a30a4",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\musan-free-license.txt",
+      "bytes": 109,
+      "status": "complete",
+      "sha256": "2976652933421a46f0d2099811529973adc385113b21802cc7b5c764829a672d"
+    },
+    {
+      "label": "musan-noise-rows",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "ba67a58cf58653e4a2adce5bab6db7ee05cfd0ce104ef60c2ca6a8b7c3dc22c2",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\musan-noise-rows.txt",
+      "bytes": 8938,
+      "status": "complete",
+      "sha256": "c7f86ee9ef5e24a409215a8a8fcb679e87e8d29eb124751c127be85202830248"
+    },
+    {
+      "label": "minds-api",
+      "url": "https://huggingface.co/api/datasets/PolyAI/minds14",
+      "request_url_sha256": "222c45b9d2852a299d52b003380e2e8784601007f332be283d6b6e83929841bb",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-api.txt",
+      "bytes": 17458,
+      "status": "complete",
+      "sha256": "d2d4411ccfa4fec8a587c1d4cf273e9583779414048faa360b8986dc60b64947"
+    },
+    {
+      "label": "minds-card",
+      "url": "https://huggingface.co/datasets/PolyAI/minds14/raw/main/README.md",
+      "request_url_sha256": "ba22445f07a8f371715809eab9ec36bfd724c39c39653e32c67e94934476d6c5",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-card.txt",
+      "bytes": 23537,
+      "status": "complete",
+      "sha256": "3dd23ca4c7834f66ca043847996dbd7c9ca34c846749d86431a9fa19898f4f88"
+    },
+    {
+      "label": "minds-ru-rows",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "1700d72058bc4f6fe29bac9c78527253f6019e5231c349bcbec3d2bff036a4ad",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-ru-rows.txt",
+      "bytes": 40686,
+      "status": "complete",
+      "sha256": "1663d46424a620f408ba1273e55e6b4f3f7b29e41980823c501a0c34ee55fc4a"
+    },
+    {
+      "label": "minds-card-pinned",
+      "url": "https://huggingface.co/datasets/PolyAI/minds14/raw/40ce77cb32a384e4d50a568e1ec39ac804019d33/README.md",
+      "request_url_sha256": "4f34eca1680d2e684d4d08c55e94d1393cab3c3a9043cafb27508ea958cf3e1c",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-pinned-card.md",
+      "bytes": 23537,
+      "status": "complete",
+      "sha256": "3dd23ca4c7834f66ca043847996dbd7c9ca34c846749d86431a9fa19898f4f88"
+    },
+    {
+      "label": "noise-license-pinned",
+      "url": "https://huggingface.co/datasets/corypaik/musan/raw/76f9882cfa4475efe11508ac9aa32722f84ca5b7/licenses/noise/free-sound/LICENSE",
+      "request_url_sha256": "8d4fef86abf2fab58c61bc23b4fc9a7120a9265a251f7548e3bbf662328a30a4",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\noise-pinned-license.txt",
+      "bytes": 109,
+      "status": "complete",
+      "sha256": "2976652933421a46f0d2099811529973adc385113b21802cc7b5c764829a672d"
+    },
+    {
+      "label": "minds-page-0",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "4eddf17e53aad3b5a4927bd31592a8b64cead37d9fb2f7d11bf252126bca2344",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-0.json",
+      "bytes": 102210,
+      "status": "complete",
+      "sha256": "f04b1d13ef6b39b6d7ac28e99e09dfd074ac7c2222c23ab4437c47f4dba1e138"
+    },
+    {
+      "label": "minds-page-100",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "5579fb0627a56e9dc59fb988ec59d682a73b421ead62997b3007564ad1d7b31f",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-100.json",
+      "bytes": 102729,
+      "status": "complete",
+      "sha256": "98bd4d391ad386f44bf30d18d283068a50826cf11153aa55da63945d2e4182c7"
+    },
+    {
+      "label": "minds-page-200",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "27f5565b132c4c50a45db7055f0dc75e32b784178ea9d041d7d4fb5a8cc3cb1b",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-200.json",
+      "bytes": 100090,
+      "status": "complete",
+      "sha256": "beb8ba5c98510f7f0f57c995573919e1d69bb5698cd50a823c6668fa3c78eef4"
+    },
+    {
+      "label": "minds-page-300",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "f0dcf0d718501ef0df521679e77a9b4a3872b7cf1c4ba58e5cb2083aab91d239",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-300.json",
+      "bytes": 99908,
+      "status": "complete",
+      "sha256": "984266b81182352a2fc2262459382692cf3136fba9e36d3a2d6a9386d028847f"
+    },
+    {
+      "label": "minds-page-400",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "33dba14c8bb7d6cfc59e8732cc40bbbfb230dbc91d4269ecd8a9bc53cf424971",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-400.json",
+      "bytes": 98336,
+      "status": "complete",
+      "sha256": "c84b92de2f644dc4ff57de1fc5e432f2606d6f23d19614e310675fc9ff966a32"
+    },
+    {
+      "label": "minds-page-500",
+      "url": "https://datasets-server.huggingface.co/rows",
+      "request_url_sha256": "c86c98c2328d57b4b8c9443ede494afbc9caefe6dcfaba53ff4095f844f7b8c8",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\minds-page-500.json",
+      "bytes": 42246,
+      "status": "complete",
+      "sha256": "55c6a5e0a3b0efd3edb31b90f61ecc0b00b6cc59890bcecbfa4b08f1464b435c"
+    },
+    {
+      "label": "minds14-ru-0503",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/503/audio/audio.wav",
+      "request_url_sha256": "6b03c36d1f09ee6497036eeda8d2e57bb7e320f4a8fd6ea8920442c3858a7c6b",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0503.audio",
+      "bytes": 93682,
+      "status": "complete",
+      "sha256": "277905f13d3c93e1d6325701c8fda825950543e67c906518741daa786d47af0d"
+    },
+    {
+      "label": "minds14-ru-0467",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/467/audio/audio.wav",
+      "request_url_sha256": "ace29781261341cd2e71efe0f0bf1a977a29c2e413d436d7ad524066427bed06",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0467.audio",
+      "bytes": 77200,
+      "status": "complete",
+      "sha256": "becf60b2fec8130bb606ffd80aef23a15408136b87bff169def28074a16c2fb5"
+    },
+    {
+      "label": "minds14-ru-0354",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/354/audio/audio.wav",
+      "request_url_sha256": "e13f8b212f00b3925e395b9dbb07e181f49835d2c4294f9cb5c620b98788d754",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0354.audio",
+      "bytes": 150246,
+      "status": "complete",
+      "sha256": "6f955bdfcf40da54c4fefcbb01712fdd2a7289daeb6214f1406e039a1e0d5c5c"
+    },
+    {
+      "label": "minds14-ru-0428",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/428/audio/audio.wav",
+      "request_url_sha256": "4345b8d0913dc7ef46c1a5c5de0620a2afabba764ed22f4741667c51fd462072",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0428.audio",
+      "bytes": 65446,
+      "status": "complete",
+      "sha256": "ab68ef5c53d25848530ddf5e84e689de306b26f94fa4f95475263655a89b9b86"
+    },
+    {
+      "label": "minds14-ru-0283",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/283/audio/audio.wav",
+      "request_url_sha256": "b6cd3ef5e6538a77db445e46971df1140917975db1613b3b4ad19280b3018e75",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0283.audio",
+      "bytes": 102458,
+      "status": "complete",
+      "sha256": "2ebe7caa1beb19ed9bc0e48d2c7046459e127535da72ba56dd8b86faddd9e354"
+    },
+    {
+      "label": "minds14-ru-0193",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/193/audio/audio.wav",
+      "request_url_sha256": "da1489214566287de97cdccc3f3dac5ebfc620ae21d31b6447e21552f04fbb60",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0193.audio",
+      "bytes": 148666,
+      "status": "complete",
+      "sha256": "9940148be388cad12ba85d2af56e6a24b6509011c7f1b4c9bb2c98f3a49ef496"
+    },
+    {
+      "label": "minds14-ru-0152",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/152/audio/audio.wav",
+      "request_url_sha256": "e4ab00713106f5d991ca4ebafd90e995f9ebb98121ad69eef85f30b3b7349189",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0152.audio",
+      "bytes": 87440,
+      "status": "complete",
+      "sha256": "fa7d63f1f95547daead36ee6bc4045208191504403d97bed755fd7f1a803313d"
+    },
+    {
+      "label": "minds14-ru-0110",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/110/audio/audio.wav",
+      "request_url_sha256": "e1c93364b5cde3ed6640e01f1ac35394dcc1bbdae6f6b613833c9e06a18d617c",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0110.audio",
+      "bytes": 100368,
+      "status": "complete",
+      "sha256": "d671bb1ed0a9821a76a87204d1df9dd381b7b23ff131c69f7eb0324d7d63d0f1"
+    },
+    {
+      "label": "minds14-ru-0037",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/37/audio/audio.wav",
+      "request_url_sha256": "7db0653548138ef54b663249e10b66d41ce4f9e106452671760de3460bade66f",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0037.audio",
+      "bytes": 73104,
+      "status": "complete",
+      "sha256": "ab52404842721db9dbe5573f6c0beab3ff34b037b493f8709bbbcc853c0d97a5"
+    },
+    {
+      "label": "minds14-ru-0414",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/414/audio/audio.wav",
+      "request_url_sha256": "c86000e293e12c228023c33725db6d897f82fee5b7058c86839645c0a463e7e0",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0414.audio",
+      "bytes": 141236,
+      "status": "complete",
+      "sha256": "9580ac8c704390721d45a985abc4215a94e3bfadce517a2a73696ffef71671ba"
+    },
+    {
+      "label": "minds14-ru-0072",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/72/audio/audio.wav",
+      "request_url_sha256": "1ac2b328059279b42e48758defa13343466701d9055c1ad100d026dd33571d44",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0072.audio",
+      "bytes": 128604,
+      "status": "complete",
+      "sha256": "403aa890b4a7d23c169d8cb7d54611c564a8343b84721cd0013f4a1f285ffa4a"
+    },
+    {
+      "label": "minds14-ru-0233",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/233/audio/audio.wav",
+      "request_url_sha256": "88f3786bdf81f2c4cae2a76ba168d3d0f13d5a0cc67905c5ed40fb41f59cc499",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0233.audio",
+      "bytes": 152294,
+      "status": "complete",
+      "sha256": "75f54daa5dcca39dbf65982b4a38c578533e353466da06ea0da2149592a9d6e2"
+    },
+    {
+      "label": "minds14-ru-0000",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/0/audio/audio.wav",
+      "request_url_sha256": "ee72a1ea66d9fcd68fe71899138ecffd6d6acc1f5899a9759f7a07a73c2f9649",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0000.audio",
+      "bytes": 159802,
+      "status": "complete",
+      "sha256": "c33244e6bdbee99bd157b015f225e1e797a7ef7f4f6d0f29c961de7ce86bd156"
+    },
+    {
+      "label": "minds14-ru-0317",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/317/audio/audio.wav",
+      "request_url_sha256": "f82fbdd329c54146d99f3431cf5ca3f861ee009020ebf0f7603ed9d2f47e235d",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0317.audio",
+      "bytes": 85508,
+      "status": "complete",
+      "sha256": "05e8335ae58bd1ba6b810124629c2bd12c235c0ae246fa8cc50449cb38b37515"
+    },
+    {
+      "label": "minds14-ru-0505",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/505/audio/audio.wav",
+      "request_url_sha256": "8dc8a9c085ae3bbe4f10b8b407bc4ab054bee035f926a2e0db2de00a00a0bf53",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0505.audio",
+      "bytes": 101776,
+      "status": "complete",
+      "sha256": "63a279dd9a9ce8455d2cdd2e8779c943fbda176e4e6cf040839d563b42462eef"
+    },
+    {
+      "label": "minds14-ru-0469",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/469/audio/audio.wav",
+      "request_url_sha256": "0a6913564a1caf25876e9d3ce0c536c551da897977d005646ca7ce9b3e70d08c",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0469.audio",
+      "bytes": 147514,
+      "status": "complete",
+      "sha256": "475d8b23719b60bdf21330aadc2a49ae3d88860902b218149c970499a5849856"
+    },
+    {
+      "label": "minds14-ru-0360",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/360/audio/audio.wav",
+      "request_url_sha256": "d6f5c0a14ecd3be1d89ae63825d77efd9e2ee43e91da195fe0d3945790dc27b0",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0360.audio",
+      "bytes": 84710,
+      "status": "complete",
+      "sha256": "bef69eaa3ca19f915b2eb02cbf1d1809976c122b30bc0258910edcb9c19b5ad5"
+    },
+    {
+      "label": "minds14-ru-0435",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/435/audio/audio.wav",
+      "request_url_sha256": "69c3e70089b15232f5e0c966ee74714a2892de69b521fc72b1e4b503d8db8341",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0435.audio",
+      "bytes": 79564,
+      "status": "complete",
+      "sha256": "44161e9e91cebab3861ef5a54a3095875520c86ad8c70135017601d642d7ffd4"
+    },
+    {
+      "label": "minds14-ru-0314",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/314/audio/audio.wav",
+      "request_url_sha256": "9d86f29ed23c5eb97d514f71da1abf5ecc55a299cce212afe2c8bfba5977e756",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0314.audio",
+      "bytes": 108602,
+      "status": "complete",
+      "sha256": "4279c72b2ba7626c9437d0d03c0998f0724cef42f79aa3c3579be1dc9e8e8bda"
+    },
+    {
+      "label": "minds14-ru-0194",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/194/audio/audio.wav",
+      "request_url_sha256": "0b75b603986642a13056d1b756dac22084575c06c9cb756c12d3716b0e4892bd",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0194.audio",
+      "bytes": 90710,
+      "status": "complete",
+      "sha256": "41425a7a3647526fec01f6bc8372f9c2c30be3ae2143520cacc3e5bbf82135c0"
+    },
+    {
+      "label": "minds14-ru-0158",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/158/audio/audio.wav",
+      "request_url_sha256": "18a95a94fa6f9ba70a458c18ddc168878a666456a8abda6aebc6b84ce9bd1160",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0158.audio",
+      "bytes": 56720,
+      "status": "complete",
+      "sha256": "0c469b9df79019e1d5dc2f0cd76fc69ff748e2503dec6e0f283c5d9c778f3163"
+    },
+    {
+      "label": "minds14-ru-0115",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/115/audio/audio.wav",
+      "request_url_sha256": "a49c84d2e551d8193f96515fbe92f3b898d49c56a751957238dce965d3c93cde",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0115.audio",
+      "bytes": 98362,
+      "status": "complete",
+      "sha256": "304ea7677754cce8b2379cad92661f5587b3ba369a32570e6f043f8d00ca2b4c"
+    },
+    {
+      "label": "minds14-ru-0042",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/42/audio/audio.wav",
+      "request_url_sha256": "16baab4ab83b54fe4ba7271d8a8b5f17c1cf5c45a8f0b27dd0a5bbccd438fb5c",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0042.audio",
+      "bytes": 112698,
+      "status": "complete",
+      "sha256": "0e745f55b5596b97ace1eb883b8e27e0f611cd8cb3e67797b5b7978b3b5d306f"
+    },
+    {
+      "label": "minds14-ru-0415",
+      "url": "https://datasets-server.huggingface.co/cached-assets/PolyAI/minds14/--/40ce77cb32a384e4d50a568e1ec39ac804019d33/--/ru-RU/train/415/audio/audio.wav",
+      "request_url_sha256": "c93f0ac24a7978aa5475f1a251bce9b62b9449e5328ab042ceb33ed51fe833bb",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\minds14-ru-0415.audio",
+      "bytes": 190522,
+      "status": "complete",
+      "sha256": "7b19c6afbee7967ac6f96128a39155516472932845f381dbbf9608f5fde81973"
+    },
+    {
+      "label": "noise-free-sound-0000",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/0/audio/audio.wav",
+      "request_url_sha256": "06c57328d1238bc462e9403a29e4059ab59cfc561d224211703806d2e73d6e4a",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0000.audio",
+      "bytes": 565124,
+      "status": "complete",
+      "sha256": "38624671753649af38f97b5872463017badcb3e29411787a95f6f2beb9edbfec"
+    },
+    {
+      "label": "noise-free-sound-0001",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/1/audio/audio.wav",
+      "request_url_sha256": "778e3846bcb6da5a699b7efb66fa620f41388a92ea135288abb362cf9b9ad5f4",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0001.audio",
+      "bytes": 1297212,
+      "status": "complete",
+      "sha256": "757966dde40b87b2862013eaf0808e47a560e1d3bc9e75167df292313328ab56"
+    },
+    {
+      "label": "noise-free-sound-0002",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/2/audio/audio.wav",
+      "request_url_sha256": "d9636556f1b30737e418ea23ab0ad1d5d060f0a866806512b03cac0fdc2f9f30",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0002.audio",
+      "bytes": 2279004,
+      "status": "complete",
+      "sha256": "a4c955e6b759de071e7b71b71d2a2a1dc5392408ef386f3d713f83f71bbf5928"
+    },
+    {
+      "label": "noise-free-sound-0003",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/3/audio/audio.wav",
+      "request_url_sha256": "7083a0817e119986d0ff6450d93bbffe53499b9d33ee484779a738fc6b34970b",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0003.audio",
+      "bytes": 455590,
+      "status": "complete",
+      "sha256": "d0d6eb43054994b91263d8cc5caf277c9622d2903144347e7f7736b3c228711f"
+    },
+    {
+      "label": "noise-free-sound-0004",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/4/audio/audio.wav",
+      "request_url_sha256": "05a1372c77646a87f0cab495833d56d37e289786f232a162a2bf0b8fda8816fb",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0004.audio",
+      "bytes": 95612,
+      "status": "complete",
+      "sha256": "d30cf3f64630d7fe1f3628253ee3e012d2296ea813b0e3f70d4a8b4d402d0d54"
+    },
+    {
+      "label": "noise-free-sound-0005",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/5/audio/audio.wav",
+      "request_url_sha256": "b449c62d64b2e0ea6abfe88ace96548eff770eca7d09c60fab041194565d43fc",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0005.audio",
+      "bytes": 677974,
+      "status": "complete",
+      "sha256": "71a5ca36940fc9ee6ba1571c7f36b30bf192ddf1783bd31d1205acfb9fea5bf6"
+    },
+    {
+      "label": "noise-free-sound-0006",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/6/audio/audio.wav",
+      "request_url_sha256": "5e108977dd98d681caa7b6f2160d053d85398fc938d5c24290edc6dab8c16e7f",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0006.audio",
+      "bytes": 248690,
+      "status": "complete",
+      "sha256": "2c3547ef659c6984a03c848c243812b820e79a3b69c9f7709ca0827cffd6f19d"
+    },
+    {
+      "label": "noise-free-sound-0007",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/7/audio/audio.wav",
+      "request_url_sha256": "0d7977b9653fbc8cc584dad185520eeac2fc22eb1fa3528b12b694a305ad5977",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0007.audio",
+      "bytes": 531688,
+      "status": "complete",
+      "sha256": "5f307d511e6c17c64180a8c6c12f228a55784fc2620ea38da886edccd7a0566b"
+    },
+    {
+      "label": "noise-free-sound-0008",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/8/audio/audio.wav",
+      "request_url_sha256": "837dc51d467987b2a1453a27ee412b50d91591caae5514351cae8cb7ae816c52",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0008.audio",
+      "bytes": 665806,
+      "status": "complete",
+      "sha256": "d4d6a6768a438d523ef3cda26ba234e435be743dab96cecf7952464798fbcd2f"
+    },
+    {
+      "label": "noise-free-sound-0009",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/9/audio/audio.wav",
+      "request_url_sha256": "fa8ceeb3c5ea2f6a2ca9a5e49123d512d1c577532cf887e8850b5e0083fe5bdf",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0009.audio",
+      "bytes": 268418,
+      "status": "complete",
+      "sha256": "63983018eadff4e040a3b7cf65e7f5c473777f5a78b7a1728ea197c7ecd2e47a"
+    },
+    {
+      "label": "noise-free-sound-0010",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/10/audio/audio.wav",
+      "request_url_sha256": "aaef292f73597d614bc067eac28ec2a0a3781b09ef7dc36c6fec9b6a79fc88a0",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0010.audio",
+      "bytes": 263774,
+      "status": "complete",
+      "sha256": "4c2ca7af1f2ef51a6435281bbdb94b70bbd68433fb086f6cd7fd9884dde817c4"
+    },
+    {
+      "label": "noise-free-sound-0011",
+      "url": "https://datasets-server.huggingface.co/cached-assets/corypaik/musan/--/76f9882cfa4475efe11508ac9aa32722f84ca5b7/--/noise/train/11/audio/audio.wav",
+      "request_url_sha256": "97118f6b394bc602d5d1fb32208eeeab89e667d26a436a6ac01d5771712d0391",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\original\\noise-free-sound-0011.audio",
+      "bytes": 1115250,
+      "status": "complete",
+      "sha256": "18a0c10866e2bf17fbe358ce8427d7b8c24ee1f3571abe481c1e07c51a7f97e1"
+    },
+    {
+      "label": "revision-check",
+      "url": "https://huggingface.co/api/datasets/PolyAI/minds14",
+      "request_url_sha256": "222c45b9d2852a299d52b003380e2e8784601007f332be283d6b6e83929841bb",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\final-PolyAI-minds14.json",
+      "bytes": 17458,
+      "status": "complete",
+      "sha256": "d2d4411ccfa4fec8a587c1d4cf273e9583779414048faa360b8986dc60b64947"
+    },
+    {
+      "label": "revision-check",
+      "url": "https://huggingface.co/api/datasets/corypaik/musan",
+      "request_url_sha256": "e98eddd058068194ff66ff4f8b420bfe9643a88d46ca8e696baf672ac28ece15",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\multilingual-online\\ru-continuous-corpus-20261027\\sources\\final-corypaik-musan.json",
+      "bytes": 4475,
+      "status": "complete",
+      "sha256": "56e9110dd4b74bee1d8981779781836945a23f8cdd528bdef556a1c2634203c5"
+    }
+  ]
+}

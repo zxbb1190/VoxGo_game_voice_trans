@@ -215,7 +215,8 @@ def fingerprint():
                 packages={p: importlib.metadata.version(p) for p in ("faster-whisper", "ctranslate2", "numpy", "webrtcvad-wheels")})
 
 
-def run_child(args):
+def run_child(args, *, replay_input=None, app_config=None, summarize_recordings=None,
+              whole_clip_warmup=True, measurement_scope=None):
     from loguru import logger
     logger.remove()
     import voxgo.asr.pipeline as production_pipeline
@@ -224,9 +225,9 @@ def run_child(args):
     from voxgo.translation.base import should_skip_translation_for_language
     spec = json.loads(args.child.read_text(encoding="utf-8"))
     output = create_output(args.output)
-    clips, stream, unpadded_frames = load_pcm(args.manifest)
+    clips, stream, unpadded_frames = load_pcm(args.manifest) if replay_input is None else replay_input
     snapshot, model_files = local_base(args.models_directory)
-    config = make_config(args.models_directory, spec["max_speech_seconds"], spec["pre_roll_ms"], spec["idle_ms"])
+    config = app_config if app_config is not None else make_config(args.models_directory, spec["max_speech_seconds"], spec["pre_roll_ms"], spec["idle_ms"])
     initial = dict(audio=asdict(config.audio), whisper=asdict(config.whisper))
     journal = Journal(output, stream, clips)
     sink = logger.add(journal.log, level="DEBUG", enqueue=False)
@@ -245,15 +246,15 @@ def run_child(args):
     recognizer._model_path = str(snapshot)
     pipeline = capture = feeder = None
     cancel_feed, done = threading.Event(), threading.Event()
-    result = dict(status="running", spec=spec, scope="paced public read PCM, production Capture/Pipeline/filter; no GUI/game/API",
-                  clips=clips, unique_recordings=2, api_requests=0, initial_effective_config=initial,
+    result = dict(status="running", spec=spec, scope=measurement_scope or "paced public read PCM, production Capture/Pipeline/filter; no GUI/game/API",
+                  clips=clips, unique_recordings=len(clips), api_requests=0, initial_effective_config=initial,
                   model_snapshot=str(snapshot), model_files=model_files, fingerprint=fingerprint(), human_review="pending")
     cpu_start, run_start = time.process_time(), time.perf_counter()
     try:
         recognizer.initialize()
         # Same whole-clip warmup/order as paired; never forwarded to Pipeline/API.
         warmup = []
-        for clip in clips:
+        for clip in clips if whole_clip_warmup else []:
             a, b = clip["stream_start_frame"], clip["stream_end_frame"]
             start = time.perf_counter()
             from voxgo.asr.whisper_engine import SpeechRecognizer
@@ -266,6 +267,7 @@ def run_child(args):
                                     lambda: str(next(counter)), traces, lambda *a: journal.event("notice", value=str(a)),
                                     lambda: 1, journal=journal)
         result["queue_policy"] = asdict(pipeline._mode_policy(config))
+        result["actual_asr_queue_capacity"] = pipeline._queue.maxsize
         def accepted(event):
             # Same remember + language gate as app._handle_transcript_ready.
             pipeline.remember_transcript(event.text)
@@ -279,6 +281,7 @@ def run_child(args):
             stats["transcriptions"] += 1
         bus.subscribe(TranscriptReady, accepted)
         capture = ObservedCapture(config.audio, journal)
+        result["actual_raw_audio_queue_capacity"] = capture._audio_queue.maxsize
         def on_segment(segment):
             capture.observe_segment(segment)
             pipeline.on_speech_detected(segment)
@@ -352,7 +355,7 @@ def run_child(args):
                       total_process_cpu_seconds=time.process_time()-cpu_start, total_wall_seconds=time.perf_counter()-run_start,
                       segments=list(journal.segments.values()), work_items=list(journal.items.values()), activity_windows=journal.windows,
                       config_unchanged=initial == dict(audio=asdict(config.audio), whisper=asdict(config.whisper)))
-        result["per_clip"] = per_clip(result)
+        result["per_clip"] = (summarize_recordings or per_clip)(result)
         write(output/"result.json", result)
         journal.event("shutdown", status=result["status"], worker_stopped=result.get("worker_stopped"),
                       feeder_stopped=result["feeder_stopped"], sampler_stopped=result["sampler_stopped"])

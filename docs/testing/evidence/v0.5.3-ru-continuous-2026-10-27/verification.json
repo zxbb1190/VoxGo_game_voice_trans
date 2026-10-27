@@ -1,0 +1,781 @@
+{
+  "verified_before_local_commit": true,
+  "source_head": "26e646bcf15411c6b30d58ea6118a4d5625bb7a9",
+  "runtime_baseline": "645c6ace",
+  "runtime_git_diff_empty": true,
+  "manifest_sha256": "847f94d2abedf1a37c9b17159b39be709ad8e64ee65ec0e43736af029184a286",
+  "validated_audio_files": 36,
+  "validated_source_files": 36,
+  "validated_exact_fragments": 290,
+  "collector_archive_matches_original_plan": true,
+  "model_and_runtime_fingerprints_match": true,
+  "current_effective_configs_equal_collected": true,
+  "zero_inference_review_reproduced_cases": 56,
+  "quarantine_inference_count": 0,
+  "locked_inference_count": 0,
+  "model_revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+  "download_bytes": 11810041,
+  "api_requests": 0,
+  "tests": {
+    "discovered": 598,
+    "skipped": 1,
+    "status": "OK"
+  },
+  "english_chinese_compatibility": {
+    "baseline": "afc33a67",
+    "cases": 48,
+    "equal": true,
+    "differences": [],
+    "source": "actual baseline/current config loader and SpeechPipeline; no network, telemetry or user settings",
+    "compared": [
+      "audio settings",
+      "decoding settings",
+      "model selection",
+      "pipeline scheduling policy"
+    ]
+  },
+  "processes": [
+    {
+      "id": "minds14-ru-0503--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "c95d2fa2bd58919e41e520d3e3d98ed84fd3f5f43daf7356446dadd913c54816",
+      "events_uncompressed_sha256": "19be4866574c429f46e619f4fd16c38cb8f57ab34e3d9e5e757b779bc0076504"
+    },
+    {
+      "id": "minds14-ru-0503--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "fd03b72b3776291a6707d0c451e74351eb4a2a9ca64f8e365474f7c601bd5490",
+      "events_uncompressed_sha256": "879029d0c32016e2378367d9f04309ef0975490147b146135ef7aa2dce68647c"
+    },
+    {
+      "id": "minds14-ru-0467--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "c6e8c1ff91bb9d4960ff7ad066896f983198d7876438750e94925496df3c080d",
+      "events_uncompressed_sha256": "a28c094d36c2b674da6fd0cef007777119cbf970ee50f6644a7635110f6fbf64"
+    },
+    {
+      "id": "minds14-ru-0467--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "5baca2f981a96d5a4863645b9f85642a7b02e475e133e039d65545f08f8f8c0d",
+      "events_uncompressed_sha256": "1c2004d7f8ec2a0c1124a4c37bf21128bd822ecbc562c908bc453325006086cc"
+    },
+    {
+      "id": "minds14-ru-0354--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "05d75c7de1ed2d297eb1030373aa15d6ba0d0da53f09cf43dcb8f01d954abf76",
+      "events_uncompressed_sha256": "7072029975489044fafc03056c3f1e22261d975f889626ce6670497f28eec5a4"
+    },
+    {
+      "id": "minds14-ru-0354--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "f2ce5e7124e8e04b2636967e6e51d7dd99f865b57aaef157b4394bc7fda2acb4",
+      "events_uncompressed_sha256": "ab013f211b089f63dd13b00fe9c29bf388c61357503a8bb9fad53a5be720511e"
+    },
+    {
+      "id": "minds14-ru-0428--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "03289f0314180e23b77b3aa06476a81461806feb44c59f7b5ab6d0251dc69e2a",
+      "events_uncompressed_sha256": "008503137d457617a900758a01ea44f4ddd1ef721fc1d7e0dff1aeaecf58d41a"
+    },
+    {
+      "id": "minds14-ru-0428--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "079294fbe03dde5207259b43d7592102f2279451e4ee581cfac4dca7be87a205",
+      "events_uncompressed_sha256": "312d4d5d404e1041e1693c721ae293efa0c25b420770f2c83de91c900047d44b"
+    },
+    {
+      "id": "minds14-ru-0283--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "47b54770c61ff75bab543e5504b6b22c0a9b6c89841abea2042a6aef39b3ab85",
+      "events_uncompressed_sha256": "81c7289ac1effa23146f45adb17c6fbd962c9925194235d6a44b81f9e2bd038e"
+    },
+    {
+      "id": "minds14-ru-0283--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "2a2e8d5c5231a04004bd3edb8f430d4f8ccb5234f662224db8863cbce957fa38",
+      "events_uncompressed_sha256": "7be07e7ee3fda08e8faa3595ad1897ece2f4328ab7f3a44d6eaf93b93f14e702"
+    },
+    {
+      "id": "minds14-ru-0193--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "e8f0910e2f2c1a16818a52f2e8b00764a6d44a94a9708737cd13eca696a2fd44",
+      "events_uncompressed_sha256": "9e781ea84a8dab20f21669c280ae48fd1743ff5f739f9b9b3b1a2f5ca846d86d"
+    },
+    {
+      "id": "minds14-ru-0193--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "8c35635704f9c42656edb7d93d893c77b488fbed214433dbdac6c0a43e6aa69b",
+      "events_uncompressed_sha256": "3e04df7d3f27070b910e075f6380d907814c0bc26061f3b28c7c8d65433e7466"
+    },
+    {
+      "id": "minds14-ru-0152--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "6be442bd43331644b952c3e52f6957404f31350083be60e76f3a1781a66627cf",
+      "events_uncompressed_sha256": "968bbd3661c5c55a9d9dff05ca65a70ddf2569803d51003177199acb5f9a8f5f"
+    },
+    {
+      "id": "minds14-ru-0152--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "90d7d79b757262bd32be97ad84e3bc815fbb9542401e10191b26112b5d88096d",
+      "events_uncompressed_sha256": "fca7d81af4d4edb8f8908426951d47272dacf0cc14ed1769cd00a54953037407"
+    },
+    {
+      "id": "minds14-ru-0110--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "dbb12fcef3967b6e904c30f005a97b0c17a34ae048f577f111624b1e135f654a",
+      "events_uncompressed_sha256": "b582b8a4328135b1a6f2cafc285e857f739d994df94ec3217e011137cd9e94e7"
+    },
+    {
+      "id": "minds14-ru-0110--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "49bd094c9aa15b6d1959de814e627218d1e54d3fe547e5fd116fac16fe20613b",
+      "events_uncompressed_sha256": "0346103091fdbe6480d1d69d5c8e533833555547132d820e79a172bac09c3517"
+    },
+    {
+      "id": "minds14-ru-0037--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "41a8d3c3fc24e714d46b28d99420cd6852575c515d0dd0c7dae1c12a3306e249",
+      "events_uncompressed_sha256": "77caea1efed177288579a4a964d1a05f0517514ee5491512a1e0f46c231a4d8b"
+    },
+    {
+      "id": "minds14-ru-0037--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "06451c03ce9ca43453df72296acebc89c7beb15cd8355a0bf755f2bcf0a3837f",
+      "events_uncompressed_sha256": "348188ae028abfd290a6a8d62fabbba1856be3aa64c35636a624d88d1cd257af"
+    },
+    {
+      "id": "minds14-ru-0414--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "5d2f6ced80ba7ffee61e0d615de4b1127bd9494308202d86dc8a41b272074241",
+      "events_uncompressed_sha256": "e962057ec3c21bd3746a7dbac8e73fd58aae36ed7c128967433cfcd5b75d9042"
+    },
+    {
+      "id": "minds14-ru-0414--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "500dd4cd18656d07de927b4d1a2dd8b4a7978a479ed6584795cd9e86cc871b3f",
+      "events_uncompressed_sha256": "773a27169cab1bfacb9bb50d43aa8c9d4ad183fb8824d6ee64d23bd1df469326"
+    },
+    {
+      "id": "minds14-ru-0072--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "02ab97c45c59af0e854ad2cc7974790ebd76f74605f84011cae7a877fb255622",
+      "events_uncompressed_sha256": "ffa3e1e757187566a04907944d26eb84585ffff914d88715b7d1ee3f57c8bc8b"
+    },
+    {
+      "id": "minds14-ru-0072--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "e019f9d637a302583493dc468644b4796efeef851e7903a19573239bc801d7af",
+      "events_uncompressed_sha256": "625dc2c3fca037bec5e8344cc11a15ba9dac94c89ebfc5d92865ac50d182a647"
+    },
+    {
+      "id": "minds14-ru-0233--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "39b321b3519dac74463d6ca8f69cac80cf8cadd40bd5f51cddf98150021c9969",
+      "events_uncompressed_sha256": "6999ee1fe54ed917fb63dc669f0547fa9ce2d06949861bd853b584ae2960438b"
+    },
+    {
+      "id": "minds14-ru-0233--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "1d4ad264b4f5c16d002f3451e85e335158092a85b7a56c1b849baebac1dd0387",
+      "events_uncompressed_sha256": "bfe61c77b75a2c66a4ed42801e46a173e2cd32cbbfce30fc0fe3326486803e34"
+    },
+    {
+      "id": "minds14-ru-0000--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "9e47cd02b75ebb06f982ccb4690fadf2e94fd4a69636e890a5e22d4243ccdd07",
+      "events_uncompressed_sha256": "564f37fe9c351c4ba07f48e9a03cb69ba56039c7eb172e9243ffa7e18389ac85"
+    },
+    {
+      "id": "minds14-ru-0000--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "d6e4bbec9f9ece478b1984cddf507ea96f90aa5cb0ae9b905c2220800b3d4299",
+      "events_uncompressed_sha256": "56057bf0aae6683501e2c9c4306f3767fd2a76f11f98c4d2efc25e76718fabd4"
+    },
+    {
+      "id": "minds14-ru-0317--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "20114161e0c7ca30258a2a286d7ba4bda83f68db0939aecb608305d69777e0f2",
+      "events_uncompressed_sha256": "de0726b980ef7a77761fe4cfd61fdd6a1f1daafa72a333e4de8298e4a977d638"
+    },
+    {
+      "id": "minds14-ru-0317--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "a249655badeaffdb20197f36840e7aeaac716f8cf76bd0eee2c04dcc626ec0aa",
+      "events_uncompressed_sha256": "37ebe651a63ea2307df18e27ba737383117dcf3d10d416b1e0056f446af91e72"
+    },
+    {
+      "id": "minds14-ru-0505--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "f1409ba59e2f6ea44e1247be575a15172e837f2e075ca6e4fd47c6b384000b6f",
+      "events_uncompressed_sha256": "30d0ea9a281cc7f36891a4c12b8fdfceaafdc696c3e752546f95d4848030b142"
+    },
+    {
+      "id": "minds14-ru-0505--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "99429a0b85d922dac6e884465e67e231cb24f245ad126d6027d480ee452a26d5",
+      "events_uncompressed_sha256": "17c86d658cf158ec2d45d5c124425c6c653ab71ab140911ed0372d4699650c88"
+    },
+    {
+      "id": "minds14-ru-0469--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "66b46b7f0a79d3082c288041285ffb8e9df69bb0826b4091adaf6e5db0a1b340",
+      "events_uncompressed_sha256": "a564d3f043416e4894450b2170740203c914fc3c8b53aa83a82fae62a3ac5bbc"
+    },
+    {
+      "id": "minds14-ru-0469--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "8802ad3ca559835fed99e700569636b5df1807bded25a30e386897713fd233b6",
+      "events_uncompressed_sha256": "944a0f3d7faa5299379e98c600c456d07e1e60633191e37c8d7e3bad3be37128"
+    },
+    {
+      "id": "noise-free-sound-0000--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "09c399d8620b1910d24715d19bb6cd4f17aefef5ed1fca628e90be55b2970441",
+      "events_uncompressed_sha256": "2122857c1b6c92ae2cf215b0aff2f3a88cb9a39bd3c885c4cca2f524ed4a94b6"
+    },
+    {
+      "id": "noise-free-sound-0000--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "08d1740f11619935c50a4d6c286b72a775ede9aaaac897a7db1b5ac62b339d96",
+      "events_uncompressed_sha256": "3cf8ec47605ed85aec2344ad7f0a76c7f1915771ec649525bd69befd6d2122ea"
+    },
+    {
+      "id": "noise-free-sound-0001--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "9a71338423e73f4f18c849c9ca5aee8d461b6833551eae99b63ddf52e599f078",
+      "events_uncompressed_sha256": "aefa114a711cd0c24bf8acfb0267aa231f902ae100c8769ab1957d9c2fd53462"
+    },
+    {
+      "id": "noise-free-sound-0001--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "881088a864c4c07162639bb5bf78cbbc9266e6a93087b681b711e938b13669a7",
+      "events_uncompressed_sha256": "3bdc45a37214479b9d15029521156871639f04d8a8fae4139652bc692f0a9a20"
+    },
+    {
+      "id": "noise-free-sound-0002--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "3342953e5b5b2ccc42931155025ee849836b92f2f7f5f2f20c813c44f9746b34",
+      "events_uncompressed_sha256": "e56c7c88f37260650775ccbe7bc8d1e0fec9a0299ecb9f2f927cb6280356228b"
+    },
+    {
+      "id": "noise-free-sound-0002--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "ad842ee00c1c872452ed61070ebf35764099f457343ac0e0f50ff03cb19e432d",
+      "events_uncompressed_sha256": "f522266366be573fc9af842ca4629e0d577c39e5bf3177f0622b5210d6c5edd2"
+    },
+    {
+      "id": "noise-free-sound-0003--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "3637b022ace67f5f15f2d349776e597d4f3bbc9274c1bb9107889dfaa9349322",
+      "events_uncompressed_sha256": "db4c213d7357f5e6686e2b736590565736430b6fadba75d548585513e8592157"
+    },
+    {
+      "id": "noise-free-sound-0003--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "6b522f10416d31eeb54cda3c714af4fa89668c4068d03a2cb872a3ac6f5ae775",
+      "events_uncompressed_sha256": "e5c6c3d0414f11c8615347dccd5bdc4a34a19c870a7c8eacaeb34536a2c830a3"
+    },
+    {
+      "id": "noise-free-sound-0004--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "e625ca025663eb140e89a620dd703df51e8fccadfa334a978428543d860047cb",
+      "events_uncompressed_sha256": "8138fb7f8eecf00f18fb11bb9768cf9fc24136dc37fc69d16d5f05b21a765c03"
+    },
+    {
+      "id": "noise-free-sound-0004--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "5d7dada6553478aada4e451a374af57c79682809cc9ee20fbb4b1676f73628cb",
+      "events_uncompressed_sha256": "98857a52c1fb647a1b3d2eae0d341177f9a6de05cdcc328357c97eed62dd2660"
+    },
+    {
+      "id": "noise-free-sound-0005--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "f49e12e9aed1d6400d446db8f65cffb911a269e772e56c934e40f99063f08aff",
+      "events_uncompressed_sha256": "62970b132e226791bcbfc22443d3e9ea9c9b2e67d26234a70ce05bd26c7b979b"
+    },
+    {
+      "id": "noise-free-sound-0005--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "525322dacb96a0ea3ac0e9c05e9acfc75ee11060a90cce91c61b36433f0f29d4",
+      "events_uncompressed_sha256": "29c4ac6ec7c6c7837da9405950c3b0a970b28fbf7887a91b69b5a0c42fe03498"
+    },
+    {
+      "id": "noise-free-sound-0006--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "0fb9dd0afe87fc67bf17f8e4cabd65cd6848b85aac2eedee6c223aa2e19c91a1",
+      "events_uncompressed_sha256": "3af86cd7eba1e36546534ccaf715cec322d35b2d8686ba83c50721bb2cd652c7"
+    },
+    {
+      "id": "noise-free-sound-0006--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "c3026b24dc202857b7dcae3bd3cb61186ee867cf7bf603fe69c9232c8c9b7e1d",
+      "events_uncompressed_sha256": "179e343dbc7a55795c11e582c6c1a32aa10bd8bfd15d5e0e9c61f238a51d2ebd"
+    },
+    {
+      "id": "noise-free-sound-0007--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "2b586e1b98039d337ce8ee2a78a9373cd53d8b319a4c4d4671385df8eed32c6d",
+      "events_uncompressed_sha256": "f052b3723abc60f23077796be09dafb41fcec73d6597fb1bf87e0222e8df73c2"
+    },
+    {
+      "id": "noise-free-sound-0007--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "b14a5a1444bfaca0f00d66035c986cc2331991a327d1c5753b270d08dc4dbd67",
+      "events_uncompressed_sha256": "77d766737102db63a8568438960bc88102f0ddfc03df8af3ad1f7e31e81326a1"
+    },
+    {
+      "id": "noise-free-sound-0008--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "78ca23287e61805c08aa3a917a4514a8cfb8da86a978ab52d5301c1bdf695a6b",
+      "events_uncompressed_sha256": "121ab2e1d571d1f9f6e0e0a3c89af0083601782650e65438f2eb2273c5d5eef1"
+    },
+    {
+      "id": "noise-free-sound-0008--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "fb3cd2471c3daac0e40e2da0151338668fada5028feded29c6205da6b99390a2",
+      "events_uncompressed_sha256": "6a971775ffdf8069849a1e7af9ed5af591e2b11b260699ab922b20f881f9ae43"
+    },
+    {
+      "id": "noise-free-sound-0009--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "06a1863619cc82878e16744f6d4da6595a3f2b9657bce04a63d2f82a309d73b2",
+      "events_uncompressed_sha256": "94af221169cf944843b1e7a345333b95ef0cdff7f78f1a0c0c9b188cc1658b66"
+    },
+    {
+      "id": "noise-free-sound-0009--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "a91d78bb07fe5fa2e27bc4acc520b02acacd1493895a43c1c3ad3b0632151627",
+      "events_uncompressed_sha256": "8d1b278495f38ae394cdcefb9e38f840f402e47fcc33236f350b634569c3ca20"
+    },
+    {
+      "id": "noise-free-sound-0010--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "0a030bcabb0fa87840538547bed6fa388d1e9df1b4b18ff125f931bba2652338",
+      "events_uncompressed_sha256": "7b563d64a9a95e41a5633780a466340b4e62a4ef923e599e47cb6ff6d338d026"
+    },
+    {
+      "id": "noise-free-sound-0010--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "70d29d072a988a5aabe71227a9c3c988f646c908d3c0013dc8c3da19268e03a3",
+      "events_uncompressed_sha256": "24b5237f703c311d801091c0e07b3b1531ca014fad58c25d62dffa4712bc1fed"
+    },
+    {
+      "id": "noise-free-sound-0011--language_aware",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "9f8dd843a2ad7816519cfd801c93cdd1476f1a84e88212a70fdc46bbb25d4cbd",
+      "events_uncompressed_sha256": "6a08ca40b9bf3b196e225f8f4165edb2b2cabd1470f46f328a7000d764aa3024"
+    },
+    {
+      "id": "noise-free-sound-0011--legacy",
+      "status": "complete",
+      "drained": true,
+      "api_requests": 0,
+      "offline_safety": {
+        "api_requests": 0,
+        "blocked_network_attempts": 0,
+        "blocked_analytics_imports": 0
+      },
+      "raw_result_sha256": "8cd58d85742e7f2b1ce2cd83bf825476ead9d269887d0ef783be69389481b1db",
+      "events_uncompressed_sha256": "a640e39e8cdd95a5ff14c21fec7d05b0c53cfe15aa667d95b15c35a23682bd8e"
+    }
+  ],
+  "collector_archive_files": {
+    "offline_asr_observer.py.txt": "ab49aeaf57344c9b78ff9f6f22c26df9649181c02a5731da5cf4a9d4fa53e2ee",
+    "offline_russian_capture_ab.py.txt": "0a20b36310a3fe14383914af84c11ed5990c1e04042f2c0ca9505b40b5beebc3",
+    "ru_benchmark_metrics.py.txt": "c048a0ef92e2e8441a6a611decff2597b9a376b0e4f04ee2443f9d688a230332",
+    "run_ru_continuous_baseline.py.txt": "15155084a75e04afaa6c1b37e456a00bde4ab32880ac0065ad7a7c530ccf3af1"
+  },
+  "hardware_recorded_after_runs": {
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13700",
+    "physical_cores": 16,
+    "logical_processors": 24,
+    "physical_ram_bytes": 34088464384,
+    "game_running_test": false,
+    "low_end_hardware_test": false
+  }
+}
