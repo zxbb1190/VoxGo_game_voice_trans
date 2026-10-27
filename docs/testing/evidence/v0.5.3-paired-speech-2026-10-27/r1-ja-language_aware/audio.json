@@ -1,0 +1,368 @@
+[
+  {
+    "source_lang": "ja",
+    "domain": "public_read_speech",
+    "speech_strategy": "language_aware",
+    "drain_complete": true,
+    "clip_ids": [
+      "fleurs-ja-test-2003-10281646305484957883",
+      "fleurs-ja-holdout-1827-10746508960655553792"
+    ],
+    "diagnostics": [
+      "翻译事件循环已启动",
+      "speech processing queue started",
+      "candidate accepted: labels=candidate, reason=accepted, voice=3.48s, total=4.56s, peak=-13.4 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ja->zh, revision=1, whisper_language=auto, voice=3.48s, total=4.56s, peak=-13.4 dBFS, gate=-45.0 dBFS, cut=达到最长 4.5s",
+      "[recognition] ホンコンの最高の景色を見るには、 しま (lang=ja, prob=0.97, expected=ja, direction=ja->zh, revision=1, avg_logprob=-0.53, no_speech=0.27, 1.0s)",
+      "translated: 要欣赏香港最美的景色，就去…… (0.4s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.52s, total=3.84s, peak=-13.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ja->zh, revision=1, whisper_language=auto, voice=2.52s, total=3.84s, peak=-13.9 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] ここから出て、クーロンのウォーターフロントに向かいましょう。 (lang=ja, prob=0.99, expected=ja, direction=ja->zh, revision=1, avg_logprob=-0.43, no_speech=0.15, 1.0s)",
+      "translated: 从这里出发，前往库伦的水域吧。 (0.4s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=0.84s, total=2.04s, peak=-31.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ja->zh, revision=1, whisper_language=auto, voice=0.84s, total=2.04s, peak=-31.9 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "filtered transcription: global_asr_runaway_repetition, raw_words=1, voice=0.84s, total=2.04s, compression=13.12",
+      "candidate accepted: labels=candidate, reason=accepted, voice=3.72s, total=4.56s, peak=-12.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ja->zh, revision=1, whisper_language=auto, voice=3.72s, total=4.56s, peak=-12.9 dBFS, gate=-45.0 dBFS, cut=达到最长 4.5s",
+      "[recognition] 近くの厚さは手前側が約70km (lang=ja, prob=0.95, expected=ja, direction=ja->zh, revision=1, avg_logprob=-0.50, no_speech=0.33, 1.0s)",
+      "translated: 附近的厚度，靠近我们的这一侧大约是70公里。 (0.4s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=1.68s, total=2.40s, peak=-13.8 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ja->zh, revision=1, whisper_language=auto, voice=1.68s, total=2.40s, peak=-13.8 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] オクガーが約100kmです (lang=ja, prob=0.98, expected=ja, direction=ja->zh, revision=1, avg_logprob=-0.66, no_speech=0.12, 1.0s)",
+      "translated: 奥克加距离大约100公里。 (0.3s)",
+      "candidate accepted: labels=candidate,short_segment, reason=voice_duration=0.12s, voice=0.12s, total=0.96s, peak=-42.0 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.12s, total=0.96s, labels=candidate,short_segment",
+      "segment pending timeout: voice=0.12s, total=0.96s, labels=candidate,short_segment",
+      "candidate dropped before whisper: weak_fast_pre_asr_low_vad_short (voice=0.12s, vad=0.12, ratio=0.12, peak_margin=3.0dB, energy_blocks=1), labels=candidate,short_segment, voice=0.12s, total=0.96s, peak=-42.0 dBFS, gate=-45.0 dBFS, vad=0.12"
+    ],
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ja-test-2003-10281646305484957883",
+        "reference": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+        "asr": {
+          "text": "香港の最高の景色を見るには、島から出て、クーロンのウォーターフロントに向かいましょう。",
+          "language": "ja",
+          "language_probability": 0.9825419187545776,
+          "avg_logprob": -0.3087946711442409,
+          "no_speech_prob": 0.05477088317275047,
+          "compression_ratio": 1.1517857142857142,
+          "segment_count": 1,
+          "duration_seconds": 9.66,
+          "raw_text": "香港の最高の景色を見るには、島から出て、クーロンのウォーターフロントに向かいましょう。",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1100.933999987319
+      },
+      {
+        "id": "fleurs-ja-holdout-1827-10746508960655553792",
+        "reference": "地殻の厚さは、手前側が約70 km、奥側が約100 kmです。",
+        "asr": {
+          "text": "近くの厚さは手前側約70キロメートルを置く側側約100キロメートルです",
+          "language": "ja",
+          "language_probability": 0.9863138198852539,
+          "avg_logprob": -0.41794369204176796,
+          "no_speech_prob": 0.04212772846221924,
+          "compression_ratio": 1.1585365853658536,
+          "segment_count": 1,
+          "duration_seconds": 8.1,
+          "raw_text": "近くの厚さは手前側約70キロメートルを置く側側約100キロメートルです",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1072.004499990726
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "ホンコンの最高の景色を見るには、 しま",
+        "language": "ja",
+        "probability": 0.9676675200462341,
+        "asr_ms": 1008.2102000014856,
+        "source_start_frame": 42240,
+        "source_end_frame": 115200
+      },
+      {
+        "text": "ここから出て、クーロンのウォーターフロントに向かいましょう。",
+        "language": "ja",
+        "probability": 0.985826313495636,
+        "asr_ms": 1035.6541000073776,
+        "source_start_frame": 115200,
+        "source_end_frame": 176640
+      },
+      {
+        "text": "",
+        "language": "nn",
+        "probability": 0.42664799094200134,
+        "asr_ms": 2170.5159999983152,
+        "source_start_frame": 176640,
+        "source_end_frame": 209280
+      },
+      {
+        "text": "近くの厚さは手前側が約70km",
+        "language": "ja",
+        "probability": 0.950307309627533,
+        "asr_ms": 1001.9903000065824,
+        "source_start_frame": 228480,
+        "source_end_frame": 301440
+      },
+      {
+        "text": "オクガーが約100kmです",
+        "language": "ja",
+        "probability": 0.9840728640556335,
+        "asr_ms": 985.4906999971718,
+        "source_start_frame": 301440,
+        "source_end_frame": 339840
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "ホンコンの最高の景色を見るには、 しま",
+        "translated": "要欣赏香港最美的景色，就去……",
+        "capture_emit_to_widget_ms": 1412.7225875854492,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1008,
+          "translation_ms": 394,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3480,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5993.714099996722,
+        "last_segment_pcm_frame_to_widget_ms": 1433.7146000005303,
+        "source_start_frame": 42240,
+        "source_end_frame": 115200
+      },
+      {
+        "trace_id": "2",
+        "original": "ここから出て、クーロンのウォーターフロントに向かいましょう。",
+        "translated": "从这里出发，前往库伦的水域吧。",
+        "capture_emit_to_widget_ms": 1487.070083618164,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1036,
+          "translation_ms": 441,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2520,
+          "segment_total_ms": 3840,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5344.374299992342,
+        "last_segment_pcm_frame_to_widget_ms": 1504.3747999961497,
+        "source_start_frame": 115200,
+        "source_end_frame": 176640
+      },
+      {
+        "trace_id": "3",
+        "original": "近くの厚さは手前側が約70km",
+        "translated": "附近的厚度，靠近我们的这一侧大约是70公里。",
+        "capture_emit_to_widget_ms": 1444.4050788879395,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1002,
+          "translation_ms": 433,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3720,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 6028.697499989649,
+        "last_segment_pcm_frame_to_widget_ms": 1468.697799991933,
+        "source_start_frame": 228480,
+        "source_end_frame": 301440
+      },
+      {
+        "trace_id": "4",
+        "original": "オクガーが約100kmです",
+        "translated": "奥克加距离大约100公里。",
+        "capture_emit_to_widget_ms": 1310.0481033325195,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 986,
+          "translation_ms": 320,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 1680,
+          "segment_total_ms": 2400,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 3731.389199991245,
+        "last_segment_pcm_frame_to_widget_ms": 1331.3896999950537,
+        "source_start_frame": 301440,
+        "source_end_frame": 339840
+      }
+    ],
+    "captures": [
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.84
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.04
+      },
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.4
+      },
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.96
+      }
+    ],
+    "api": [
+      {
+        "label": "ja-pcm-replay",
+        "text": "ホンコンの最高の景色を見るには、 しま",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "要欣赏香港最美的景色，就去……",
+        "elapsed_ms": 394.2875000066124,
+        "provider_elapsed_ms": 394.46067810058594,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 265,
+          "completion_tokens": 8,
+          "total_tokens": 273,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 41
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "ここから出て、クーロンのウォーターフロントに向かいましょう。",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "从这里出发，前往库伦的水域吧。",
+        "elapsed_ms": 441.4053999935277,
+        "provider_elapsed_ms": 441.26224517822266,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 275,
+          "completion_tokens": 11,
+          "total_tokens": 286,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 51
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "近くの厚さは手前側が約70km",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "附近的厚度，靠近我们的这一侧大约是70公里。",
+        "elapsed_ms": 433.1517999962671,
+        "provider_elapsed_ms": 433.38918685913086,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 261,
+          "completion_tokens": 13,
+          "total_tokens": 274,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 37
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ja-pcm-replay",
+        "text": "オクガーが約100kmです",
+        "source_lang": "ja",
+        "target_lang": "zh",
+        "translated": "奥克加距离大约100公里。",
+        "elapsed_ms": 320.2363000018522,
+        "provider_elapsed_ms": 319.3333148956299,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 258,
+          "completion_tokens": 10,
+          "total_tokens": 268,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 258
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 6,
+      "transcriptions": 4,
+      "translations": 4,
+      "filtered_speech": 2
+    },
+    "notices": [],
+    "cpu_one_core_percent": 50.82687774333832,
+    "peak_rss_bytes": 407044096,
+    "wall_seconds": 26.77594139998837,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 3,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

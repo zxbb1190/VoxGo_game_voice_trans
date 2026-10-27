@@ -1,0 +1,97 @@
+{
+  "api_requests": 0,
+  "sample": "fleurs-ru-test-1692-10024935581249406669",
+  "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+  "scope": "exact observed capture inputs with crossed recognizer configs; neither formal parameter changes nor language forcing",
+  "records": [
+    {
+      "capture_strategy": "legacy",
+      "recognizer_strategy": "language_aware",
+      "cpu_threads": 2,
+      "beam_size": 1,
+      "source_start_frame": 53760,
+      "source_end_frame": 101760,
+      "pcm_sha256": "f3efbfb0b27feb8b6c2a37c8b4db3aa589268a86559cea30a2cd11280a4f27f7",
+      "asr": {
+        "text": "К согласной ядерному управлению Японии на заводе б...",
+        "language": "ru",
+        "language_probability": 0.94636470079422,
+        "avg_logprob": -0.4628515811193557,
+        "no_speech_prob": 0.08068841695785522,
+        "compression_ratio": 1.170731707317073,
+        "segment_count": 1,
+        "duration_seconds": 3.0,
+        "raw_text": "К согласной ядерному управлению Японии на заводе б...",
+        "runaway_guarded": false
+      },
+      "filter_reason": ""
+    },
+    {
+      "capture_strategy": "legacy",
+      "recognizer_strategy": "language_aware",
+      "cpu_threads": 2,
+      "beam_size": 1,
+      "source_start_frame": 101760,
+      "source_end_frame": 149760,
+      "pcm_sha256": "e28e21a7fe155a3efd5c84331d0083139f6f063eb1b8aeaff5d3ee9166c56308",
+      "asr": {
+        "text": "обнаружено радиоактивный цизи и йод.",
+        "language": "ru",
+        "language_probability": 0.9766762852668762,
+        "avg_logprob": -0.48685421663172107,
+        "no_speech_prob": 0.05188679322600365,
+        "compression_ratio": 0.9852941176470589,
+        "segment_count": 1,
+        "duration_seconds": 3.0,
+        "raw_text": "обнаружено радиоактивный цизи и йод.",
+        "runaway_guarded": false
+      },
+      "filter_reason": ""
+    },
+    {
+      "capture_strategy": "language_aware",
+      "recognizer_strategy": "legacy",
+      "cpu_threads": 1,
+      "beam_size": 1,
+      "source_start_frame": 51840,
+      "source_end_frame": 124800,
+      "pcm_sha256": "7e09116b1faa1df0ab06009ece4087852abaec05641792c0bd4e28dc0ff51393",
+      "asr": {
+        "text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+        "language": "ru",
+        "language_probability": 0.9614559412002563,
+        "avg_logprob": -0.39058473603478794,
+        "no_speech_prob": 0.10363772511482239,
+        "compression_ratio": 1.3364485981308412,
+        "segment_count": 1,
+        "duration_seconds": 4.56,
+        "raw_text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+        "runaway_guarded": false
+      },
+      "filter_reason": ""
+    },
+    {
+      "capture_strategy": "language_aware",
+      "recognizer_strategy": "legacy",
+      "cpu_threads": 1,
+      "beam_size": 1,
+      "source_start_frame": 124800,
+      "source_end_frame": 149760,
+      "pcm_sha256": "8fd9b271d1ccfebf733f5ecf6c3623ae957e4aee168ac3f6c0d0847e54b3f284",
+      "asr": {
+        "text": "het seise ijoud.",
+        "language": "nl",
+        "language_probability": 0.1918407380580902,
+        "avg_logprob": -1.3332017540931702,
+        "no_speech_prob": 0.41203421354293823,
+        "compression_ratio": 0.6666666666666666,
+        "segment_count": 1,
+        "duration_seconds": 1.56,
+        "raw_text": "het seise ijoud.",
+        "runaway_guarded": false
+      },
+      "filter_reason": "语言置信度 0.19 < 0.35"
+    }
+  ],
+  "human_review": "pending"
+}

@@ -1,0 +1,84 @@
+{
+  "schedule": [
+    {
+      "id": "r1-ja-legacy",
+      "repeat": 1,
+      "language": "ja",
+      "strategy": "legacy"
+    },
+    {
+      "id": "r1-ja-language_aware",
+      "repeat": 1,
+      "language": "ja",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r1-ko-legacy",
+      "repeat": 1,
+      "language": "ko",
+      "strategy": "legacy"
+    },
+    {
+      "id": "r1-ko-language_aware",
+      "repeat": 1,
+      "language": "ko",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r1-ru-legacy",
+      "repeat": 1,
+      "language": "ru",
+      "strategy": "legacy"
+    },
+    {
+      "id": "r1-ru-language_aware",
+      "repeat": 1,
+      "language": "ru",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r2-ru-language_aware",
+      "repeat": 2,
+      "language": "ru",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r2-ru-legacy",
+      "repeat": 2,
+      "language": "ru",
+      "strategy": "legacy"
+    },
+    {
+      "id": "r2-ko-language_aware",
+      "repeat": 2,
+      "language": "ko",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r2-ko-legacy",
+      "repeat": 2,
+      "language": "ko",
+      "strategy": "legacy"
+    },
+    {
+      "id": "r2-ja-language_aware",
+      "repeat": 2,
+      "language": "ja",
+      "strategy": "language_aware"
+    },
+    {
+      "id": "r2-ja-legacy",
+      "repeat": 2,
+      "language": "ja",
+      "strategy": "legacy"
+    }
+  ],
+  "baseline": "current code compatibility strategy, not a 0.5.2 binary",
+  "unique_clips": 6,
+  "clip_replays": 24,
+  "order": "AB then BA, fresh subprocess per language/strategy",
+  "domain": "public human read speech; known regression samples, not new holdout or game speech",
+  "model": "tencent/Hunyuan-MT-7B",
+  "human_review": "pending",
+  "release_approved": false
+}

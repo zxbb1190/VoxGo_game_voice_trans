@@ -1,0 +1,262 @@
+[
+  {
+    "source_lang": "ko",
+    "domain": "public_read_speech",
+    "speech_strategy": "language_aware",
+    "drain_complete": true,
+    "clip_ids": [
+      "fleurs-ko-test-1662-10115200572671025618",
+      "fleurs-ko-holdout-1907-10231261934313595333"
+    ],
+    "diagnostics": [
+      "翻译事件循环已启动",
+      "speech processing queue started",
+      "candidate low confidence: labels=candidate,short_segment,low_confidence, reason=peak_margin=-20.1dB, voice=0.12s, total=0.84s, peak=-65.1 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.12s, total=0.84s, labels=candidate,short_segment,low_confidence",
+      "segment pending timeout: voice=0.12s, total=0.84s, labels=candidate,short_segment,low_confidence",
+      "candidate dropped before whisper: weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-20.1dB), labels=candidate,short_segment,low_confidence, voice=0.12s, total=0.84s, peak=-65.1 dBFS, gate=-45.0 dBFS, vad=0.14",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.88s, total=3.96s, peak=-25.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=2.88s, total=3.96s, peak=-25.9 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] 합금은 기본적으로 금속 2개 이상의 혼합물이다. (lang=ko, prob=0.98, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.23, no_speech=0.07, 3.1s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.52s, total=3.72s, peak=-26.0 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=2.52s, total=3.72s, peak=-26.0 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "translated: 合金基本上是由两种或两种以上的金属混合而成的。 (0.7s)",
+      "[recognition] 주기율 표상의 원소가 많이 있다는 것을 잊지 마라. (lang=ko, prob=1.00, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.28, no_speech=0.01, 3.1s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=3.48s, total=4.56s, peak=-30.6 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=3.48s, total=4.56s, peak=-30.6 dBFS, gate=-45.0 dBFS, cut=达到最长 4.5s",
+      "candidate accepted: labels=candidate,short_segment, reason=voice_duration=0.24s, voice=0.24s, total=0.60s, peak=-43.9 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.24s, total=0.60s, labels=candidate,short_segment",
+      "[recognition] 교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다. (lang=ko, prob=0.83, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.36, no_speech=0.33, 3.2s)",
+      "segment pending timeout: voice=0.24s, total=0.60s, labels=candidate,short_segment",
+      "weak candidate dropped by asr budget: labels=candidate,short_segment, voice=0.24s, total=0.60s, last_asr=3186ms",
+      "translated: [翻译超时] API 请求超过 12 秒，请检查网络或服务商状态 (12.9s)",
+      "translated: 交战爆发后，英国开始对德国征收海上关税。 (8.3s)"
+    ],
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ko-test-1662-10115200572671025618",
+        "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+        "asr": {
+          "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "language": "ko",
+          "language_probability": 0.9930813908576965,
+          "avg_logprob": -0.2856131883767935,
+          "no_speech_prob": 0.0631253719329834,
+          "compression_ratio": 1.0555555555555556,
+          "segment_count": 2,
+          "duration_seconds": 9.9,
+          "raw_text": "합금은 기본적으로 금속 2개 이상의 혼합물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 3322.4685000022873
+      },
+      {
+        "id": "fleurs-ko-holdout-1907-10231261934313595333",
+        "reference": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+        "asr": {
+          "text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+          "language": "ko",
+          "language_probability": 0.9397470355033875,
+          "avg_logprob": -0.38403565010854174,
+          "no_speech_prob": 0.08408250659704208,
+          "compression_ratio": 0.8829787234042553,
+          "segment_count": 1,
+          "duration_seconds": 4.8,
+          "raw_text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 3233.323599997675
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+        "language": "ko",
+        "probability": 0.9769894480705261,
+        "asr_ms": 3112.513100000797,
+        "source_start_frame": 55680,
+        "source_end_frame": 119040
+      },
+      {
+        "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+        "language": "ko",
+        "probability": 0.9962892532348633,
+        "asr_ms": 3125.2007000002777,
+        "source_start_frame": 119040,
+        "source_end_frame": 178560
+      },
+      {
+        "text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+        "language": "ko",
+        "probability": 0.8275907635688782,
+        "asr_ms": 3186.0672000038903,
+        "source_start_frame": 232320,
+        "source_end_frame": 305280
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+        "translated": "合金基本上是由两种或两种以上的金属混合而成的。",
+        "capture_emit_to_widget_ms": 3818.997859954834,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 3113,
+          "translation_ms": 686,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2880,
+          "segment_total_ms": 3960,
+          "whisper_model_size": "small",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 7803.540499993251,
+        "last_segment_pcm_frame_to_widget_ms": 3843.5411999985804,
+        "source_start_frame": 55680,
+        "source_end_frame": 119040
+      },
+      {
+        "trace_id": "3",
+        "original": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+        "translated": "交战爆发后，英国开始对德国征收海上关税。",
+        "capture_emit_to_widget_ms": 11518.772602081299,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 3186,
+          "translation_ms": 8318,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 3480,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "small",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 16107.679600002011,
+        "last_segment_pcm_frame_to_widget_ms": 11547.68019999203,
+        "source_start_frame": 232320,
+        "source_end_frame": 305280
+      }
+    ],
+    "captures": [
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.84
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.96
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.72
+      },
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/接近噪声门限",
+        "duration": 0.6
+      }
+    ],
+    "api": [
+      {
+        "label": "ko-pcm-replay",
+        "text": "합금은 기본적으로 금속 2개 이상의 혼합물이다.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "合金基本上是由两种或两种以上的金属混合而成的。",
+        "elapsed_ms": 686.160800003563,
+        "provider_elapsed_ms": 686.3405704498291,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 276,
+          "completion_tokens": 11,
+          "total_tokens": 287,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 276
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "[翻译超时] API 请求超过 12 秒，请检查网络或服务商状态",
+        "elapsed_ms": 12851.524800003972,
+        "provider_elapsed_ms": null,
+        "failure_reason": "timeout",
+        "finish_reason": null,
+        "usage": null,
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "교전이 발발한 짓고 영국은 독일에 대한 해상봉세를 시작한다.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "交战爆发后，英国开始对德国征收海上关税。",
+        "elapsed_ms": 8318.331699992996,
+        "provider_elapsed_ms": 3446.3324546813965,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 279,
+          "completion_tokens": 13,
+          "total_tokens": 292,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 55
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 5,
+      "filtered_speech": 1,
+      "transcriptions": 3,
+      "translations": 2,
+      "dropped_speech": 1,
+      "errors": 1
+    },
+    "notices": [],
+    "cpu_one_core_percent": 62.077197492098854,
+    "peak_rss_bytes": 665063424,
+    "wall_seconds": 31.639032999999472,
+    "whisper": {
+      "active_model_size": "small",
+      "beam_size": 1,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

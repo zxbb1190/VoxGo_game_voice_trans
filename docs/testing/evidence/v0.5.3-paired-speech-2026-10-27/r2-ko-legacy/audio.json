@@ -1,0 +1,299 @@
+[
+  {
+    "source_lang": "ko",
+    "domain": "public_read_speech",
+    "speech_strategy": "legacy",
+    "drain_complete": true,
+    "clip_ids": [
+      "fleurs-ko-test-1662-10115200572671025618",
+      "fleurs-ko-holdout-1907-10231261934313595333"
+    ],
+    "diagnostics": [
+      "翻译事件循环已启动",
+      "speech processing queue started",
+      "candidate low confidence: labels=candidate,short_segment,low_confidence, reason=peak_margin=-20.1dB, voice=0.12s, total=0.72s, peak=-65.1 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.12s, total=0.72s, labels=candidate,short_segment,low_confidence",
+      "segment pending timeout: voice=0.12s, total=0.72s, labels=candidate,short_segment,low_confidence",
+      "candidate dropped before whisper: weak_fast_pre_asr_low_confidence_tiny_voice (voice=0.12s, peak_margin=-20.1dB), labels=candidate,short_segment,low_confidence, voice=0.12s, total=0.72s, peak=-65.1 dBFS, gate=-45.0 dBFS, vad=0.17",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.52s, total=3.12s, peak=-25.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=2.52s, total=3.12s, peak=-25.9 dBFS, gate=-45.0 dBFS, cut=达到最长 3s",
+      "candidate accepted: labels=candidate,short_segment, reason=voice_duration=0.36s, voice=0.36s, total=0.84s, peak=-34.0 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.36s, total=0.84s, labels=candidate,short_segment",
+      "[recognition] 합금은 기본적으로 금속 2개 이상의 호나 (lang=ko, prob=0.99, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.44, no_speech=0.08, 1.7s)",
+      "segment pending timeout: voice=0.36s, total=0.84s, labels=candidate,short_segment",
+      "weak candidate dropped by asr budget: labels=candidate,short_segment, voice=0.36s, total=0.84s, last_asr=1667ms",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.40s, total=3.12s, peak=-26.0 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=2.40s, total=3.12s, peak=-26.0 dBFS, gate=-45.0 dBFS, cut=达到最长 3s",
+      "candidate accepted: labels=candidate,short_segment, reason=voice_duration=0.24s, voice=0.24s, total=0.60s, peak=-36.8 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.24s, total=0.60s, labels=candidate,short_segment",
+      "[recognition] 주기율 표상의 원소가 많이 있다는 것을 잊지 마. (lang=ko, prob=1.00, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.36, no_speech=0.01, 1.7s)",
+      "segment pending timeout: voice=0.24s, total=0.60s, labels=candidate,short_segment",
+      "weak candidate dropped by asr budget: labels=candidate,short_segment, voice=0.24s, total=0.60s, last_asr=1694ms",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.16s, total=3.00s, peak=-30.6 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=2.16s, total=3.00s, peak=-30.6 dBFS, gate=-45.0 dBFS, cut=达到最长 3s",
+      "translated: 合金基本上是由两种或两种以上的金属混合而成的。 (10.5s)",
+      "[recognition] 교전이 발빼란 짓고 영국은 독일에 대... (lang=ko, prob=0.97, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.64, no_speech=0.40, 1.7s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=1.44s, total=2.04s, peak=-31.1 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ko->zh, revision=1, whisper_language=auto, voice=1.44s, total=2.04s, peak=-31.1 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] 해상몽셀이 시작한다 (lang=ko, prob=0.98, expected=ko, direction=ko->zh, revision=1, avg_logprob=-0.86, no_speech=0.13, 1.6s)",
+      "translated: 请记住，周期表中有很多元素。 (18.7s)",
+      "translated: [翻译超时] API 请求超过 12 秒，请检查网络或服务商状态 (24.2s)",
+      "translated: [翻译超时] API 请求超过 12 秒，请检查网络或服务商状态 (35.2s)"
+    ],
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ko-test-1662-10115200572671025618",
+        "reference": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+        "asr": {
+          "text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "language": "ko",
+          "language_probability": 0.9978806972503662,
+          "avg_logprob": -0.2813008354931343,
+          "no_speech_prob": 0.028138944879174232,
+          "compression_ratio": 1.0793650793650793,
+          "segment_count": 2,
+          "duration_seconds": 9.9,
+          "raw_text": "합금은 기본적으로 금속 두 개 이상의 호남물이다. 주기율 표상의 원소가 많이 있다는 것을 잊지 마라.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1803.3762999984901
+      },
+      {
+        "id": "fleurs-ko-holdout-1907-10231261934313595333",
+        "reference": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+        "asr": {
+          "text": "교전이 발빨한 직후 영국은 독일에 대한 해상몽세를 시작한다.",
+          "language": "ko",
+          "language_probability": 0.9931197166442871,
+          "avg_logprob": -0.5147441689457212,
+          "no_speech_prob": 0.020546164363622665,
+          "compression_ratio": 0.8829787234042553,
+          "segment_count": 1,
+          "duration_seconds": 4.8,
+          "raw_text": "교전이 발빨한 직후 영국은 독일에 대한 해상몽세를 시작한다.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1712.779400011641
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "합금은 기본적으로 금속 2개 이상의 호나",
+        "language": "ko",
+        "probability": 0.9864909648895264,
+        "asr_ms": 1666.9523000018671,
+        "source_start_frame": 55680,
+        "source_end_frame": 105600
+      },
+      {
+        "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마.",
+        "language": "ko",
+        "probability": 0.9985449314117432,
+        "asr_ms": 1694.5175000000745,
+        "source_start_frame": 119040,
+        "source_end_frame": 168960
+      },
+      {
+        "text": "교전이 발빼란 짓고 영국은 독일에 대...",
+        "language": "ko",
+        "probability": 0.974125325679779,
+        "asr_ms": 1697.4862999923062,
+        "source_start_frame": 234240,
+        "source_end_frame": 282240
+      },
+      {
+        "text": "해상몽셀이 시작한다",
+        "language": "ko",
+        "probability": 0.979971170425415,
+        "asr_ms": 1625.1075000036508,
+        "source_start_frame": 282240,
+        "source_end_frame": 314880
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "합금은 기본적으로 금속 2개 이상의 호나",
+        "translated": "合金基本上是由两种或两种以上的金属混合而成的。",
+        "capture_emit_to_widget_ms": 12165.836572647095,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1667,
+          "translation_ms": 10492,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2520,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 15306.123400001088,
+        "last_segment_pcm_frame_to_widget_ms": 12186.123799989582,
+        "source_start_frame": 55680,
+        "source_end_frame": 105600
+      },
+      {
+        "trace_id": "2",
+        "original": "주기율 표상의 원소가 많이 있다는 것을 잊지 마.",
+        "translated": "请记住，周期表中有很多元素。",
+        "capture_emit_to_widget_ms": 20371.9801902771,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1694,
+          "translation_ms": 18663,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2400,
+          "segment_total_ms": 3120,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 23514.017299998668,
+        "last_segment_pcm_frame_to_widget_ms": 20394.018099990204,
+        "source_start_frame": 119040,
+        "source_end_frame": 168960
+      }
+    ],
+    "captures": [
+      {
+        "reason": "candidate_short_segment/silence_end/低于语音门限",
+        "duration": 0.72
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 0.84
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.12
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 0.6
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 2.04
+      }
+    ],
+    "api": [
+      {
+        "label": "ko-pcm-replay",
+        "text": "합금은 기본적으로 금속 2개 이상의 호나",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "合金基本上是由两种或两种以上的金属混合而成的。",
+        "elapsed_ms": 10491.797299997415,
+        "provider_elapsed_ms": 10491.370916366577,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 270,
+          "completion_tokens": 11,
+          "total_tokens": 281,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 270
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "주기율 표상의 원소가 많이 있다는 것을 잊지 마.",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "请记住，周期表中有很多元素。",
+        "elapsed_ms": 18663.632099996903,
+        "provider_elapsed_ms": 12158.16617012024,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 271,
+          "completion_tokens": 9,
+          "total_tokens": 280,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 271
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "교전이 발빼란 짓고 영국은 독일에 대...",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "[翻译超时] API 请求超过 12 秒，请检查网络或服务商状态",
+        "elapsed_ms": 24159.789199999068,
+        "provider_elapsed_ms": null,
+        "failure_reason": "timeout",
+        "finish_reason": null,
+        "usage": null,
+        "human_review": "pending"
+      },
+      {
+        "label": "ko-pcm-replay",
+        "text": "해상몽셀이 시작한다",
+        "source_lang": "ko",
+        "target_lang": "zh",
+        "translated": "[翻译超时] API 请求超过 12 秒，请检查网络或服务商状态",
+        "elapsed_ms": 35180.219900008524,
+        "provider_elapsed_ms": null,
+        "failure_reason": "timeout",
+        "finish_reason": null,
+        "usage": null,
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 7,
+      "filtered_speech": 1,
+      "transcriptions": 4,
+      "dropped_speech": 2,
+      "translations": 2,
+      "errors": 2
+    },
+    "notices": [],
+    "cpu_one_core_percent": 12.329987891348269,
+    "peak_rss_bytes": 402354176,
+    "wall_seconds": 57.5324976999982,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 1,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 3.0,
+      "pre_roll_ms": 300,
+      "speech_idle_timeout_ms": 350
+    },
+    "effective_diagnostic_mode": "fast",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

@@ -84,6 +84,7 @@ class BudgetClient(GameTranslator):
                 "source_lang": result.source_lang, "target_lang": result.target_lang,
                 "translated": result.translated.replace(self.config.api_key, "[REDACTED]"),
                 "elapsed_ms": (time.perf_counter() - start) * 1000,
+                "provider_elapsed_ms": result.elapsed_seconds * 1000 if not result.failure_reason else None,
                 "failure_reason": result.failure_reason,
                 "finish_reason": ((result.raw or {}).get("choices") or [{}])[0].get("finish_reason"),
                 "usage": (result.raw or {}).get("usage"), "human_review": "pending"})
@@ -160,7 +161,8 @@ def rss_bytes():
     return counters.WorkingSetSize
 
 
-def audio_run(config, budget, manifest, output):
+def audio_run(config, budget, manifest, output, *, sources=("ja", "ko", "ru"),
+              speech_strategy="language_aware", clips_per_source=2, client_factory=BudgetClient):
     """Actual capture segmentation -> SpeechPipeline -> online -> Qt widget.
 
     PCM replay replaces a physical loopback device; offscreen Qt callback is
@@ -182,10 +184,11 @@ def audio_run(config, budget, manifest, output):
     if isinstance(workload, dict):
         workload = workload["clips"]
     all_rows = []
-    for source in ("ja", "ko", "ru"):
+    for source in sources:
         app_config = default_app_config()
         app_config.translation = config
         config.source_lang, config.target_lang = source, "zh"
+        app_config.whisper.multilingual_asr_strategy = speech_strategy
         migrate_runtime_defaults(app_config)
         sync_language_flow(app_config)
         apply_language_runtime_policy(app_config)
@@ -193,7 +196,7 @@ def audio_run(config, budget, manifest, output):
         app_config.whisper.local_files_only = True
         recognizer = SpeechRecognizer(app_config.whisper)
         recognizer.initialize()
-        clips = [r for r in workload if r.get("source_lang", r.get("language")) == source][:2]
+        clips = [r for r in workload if r.get("source_lang", r.get("language")) == source][:clips_per_source]
         if not clips:
             raise ValueError("no licensed audio for " + source)
         # Independent whole-clip ASR baseline; no additional API calls.
@@ -208,7 +211,9 @@ def audio_run(config, budget, manifest, output):
         owner.config, owner._stopping, owner._stats = app_config, False, stats
         owner._latency_traces, owner._language_flow_revision = traces, 1
         owner._mobile, owner._analytics = SimpleNamespace(server=None), None
-        notices, subtitles, asr_rows, captures = [], [], [], []
+        notices, subtitles, asr_rows, captures, diagnostics = [], [], [], [], []
+        diagnostic_sink = logger.add(lambda message: diagnostics.append(str(message.record['message'])),
+            filter=lambda record: record['name'] in {'voxgo.asr.pipeline', 'voxgo.translation.runtime'}, level='INFO')
         source_by_trace = {}
         owner._notify_user = lambda *args: notices.append(str(args))
         start_clock = time.perf_counter()
@@ -230,7 +235,7 @@ def audio_run(config, budget, manifest, output):
             whisper_config=app_config.whisper, audio_config=app_config.audio, on_overlay_updated=updated)
         owner._overlay = overlay
         overlay.show()
-        client = BudgetClient(config, budget)
+        client = client_factory(config, budget)
         client.label = source + "-pcm-replay"
         runtime = TranslationRuntime(bus, stats, traces, lambda: overlay)
         runtime.client = client
@@ -301,6 +306,8 @@ def audio_run(config, budget, manifest, output):
             wall = time.perf_counter()-start_clock
             cpu_end = time.process_time()
             all_rows.append({"source_lang": source, "domain": "public_read_speech",
+                "speech_strategy": speech_strategy, "drain_complete": not pending,
+                "clip_ids": [row['id'] for row in clips], "diagnostics": diagnostics,
                 "whole_clip_asr": whole, "stream_asr": asr_rows, "subtitles": subtitles,
                 "captures": captures, "api": client.rows, "stats": dict(stats), "notices": notices,
                 "cpu_one_core_percent": 100*(cpu_end-cpu_start)/wall,
@@ -320,6 +327,7 @@ def audio_run(config, budget, manifest, output):
             overlay.close()
             qt.processEvents()
             recognizer.cleanup()
+            logger.remove(diagnostic_sink)
 
 
 def main():

@@ -1,0 +1,190 @@
+{
+  "started_utc": "2026-10-27T01:26:00.483721+00:00",
+  "status": "complete",
+  "requested_model": "tencent/Hunyuan-MT-7B",
+  "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "input_hashes": {},
+  "parameters": {
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "timeout_seconds": 12,
+    "max_concurrent_requests": 1,
+    "enable_local_phrase_cache": false
+  },
+  "system_prompt_sha256": {
+    "ja": "60d89783abf4c6c9a3502d35fc27e7e3c65106c88e3e898655c319d5735974b2",
+    "ko": "d4516e98eab48adab7633d5e2ab57dc7337dc845365086b49da0bb42af7b7103",
+    "ru": "89126f5b84f0c0e7c5288f9b4a90cb8d742d411d2d6774af6384f36f9f3055e7"
+  },
+  "planned_http_attempts": 6,
+  "http_attempts": 6,
+  "records": [
+    {
+      "case_id": "fleurs-ja-test-2003-10281646305484957883",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "香港の最高の景色を見るには、島から出て九龍のウォーターフロントに向かいましょう。",
+      "raw_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "display_translation": "要欣赏香港最美的景色，请从岛上出发，前往九龙的水滨地带。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 282,
+        "completion_tokens": 16,
+        "total_tokens": 298,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 282
+      },
+      "elapsed_ms": 690.1,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "fleurs-ja-holdout-1827-10746508960655553792",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ja",
+      "target_lang": "zh",
+      "input": "地殻の厚さは、手前側が約70 km、奥側が約100 kmです。",
+      "raw_translation": "地壳的厚度，靠近前方的部分约为70公里，靠近后方的部分约为100公里。",
+      "display_translation": "地壳的厚度，靠近前方的部分约为70公里，靠近后方的部分约为100公里。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 273,
+        "completion_tokens": 24,
+        "total_tokens": 297,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 273
+      },
+      "elapsed_ms": 588.47,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "fleurs-ko-test-1662-10115200572671025618",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "합금은 기본적으로 금속 두 개 이상의 혼합물이다. 주기율표 상에 원소가 많이 있다는 것을 잊지 마라.",
+      "raw_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "display_translation": "合金基本上是由两种或两种以上的金属混合而成的。别忘了，元素周期表上有很多元素。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 21,
+        "total_tokens": 322,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 141
+      },
+      "elapsed_ms": 488.06,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "fleurs-ko-holdout-1907-10231261934313595333",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ko",
+      "target_lang": "zh",
+      "input": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+      "raw_translation": "交火爆发后不久，英国就开始对德国实施海上封锁。",
+      "display_translation": "交火爆发后不久，英国就开始对德国实施海上封锁。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 281,
+        "completion_tokens": 14,
+        "total_tokens": 295,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 121
+      },
+      "elapsed_ms": 402.81,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "fleurs-ru-test-1692-10024935581249406669",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+      "raw_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "display_translation": "根据日本原子能管理局的说法，在该工厂发现了放射性铯和碘。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 16,
+        "total_tokens": 310,
+        "prompt_tokens_details": {
+          "cached_tokens": 160
+        },
+        "prompt_cache_hit_tokens": 160,
+        "prompt_cache_miss_tokens": 134
+      },
+      "elapsed_ms": 508.46,
+      "human_review": "pending"
+    },
+    {
+      "case_id": "fleurs-ru-holdout-1762-10098401296465388159",
+      "repeat": 1,
+      "arm": "reference_full",
+      "source_lang": "ru",
+      "target_lang": "zh",
+      "input": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+      "raw_translation": "传播媒介是猪，疾病通过蚊子从猪传播给人类。",
+      "display_translation": "传播媒介是猪，疾病通过蚊子从猪传播给人类。",
+      "http_status": 200,
+      "http_attempted": true,
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "response_model": "tencent/Hunyuan-MT-7B",
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 15,
+        "total_tokens": 305,
+        "prompt_tokens_details": {
+          "cached_tokens": 224
+        },
+        "prompt_cache_hit_tokens": 224,
+        "prompt_cache_miss_tokens": 66
+      },
+      "elapsed_ms": 430.83,
+      "human_review": "pending"
+    }
+  ],
+  "human_review": "pending",
+  "release_approved": false,
+  "ended_utc": "2026-10-27T01:26:03.605588+00:00",
+  "input_files_unchanged": {}
+}

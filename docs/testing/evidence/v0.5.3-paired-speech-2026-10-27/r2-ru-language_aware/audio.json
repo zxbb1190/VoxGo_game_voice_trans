@@ -1,0 +1,295 @@
+[
+  {
+    "source_lang": "ru",
+    "domain": "public_read_speech",
+    "speech_strategy": "language_aware",
+    "drain_complete": true,
+    "clip_ids": [
+      "fleurs-ru-test-1692-10024935581249406669",
+      "fleurs-ru-holdout-1762-10098401296465388159"
+    ],
+    "diagnostics": [
+      "翻译事件循环已启动",
+      "speech processing queue started",
+      "candidate accepted: labels=candidate, reason=accepted, voice=4.08s, total=4.56s, peak=-23.1 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ru->zh, revision=1, whisper_language=auto, voice=4.08s, total=4.56s, peak=-23.1 dBFS, gate=-45.0 dBFS, cut=达到最长 4.5s",
+      "[recognition] Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. (lang=ru, prob=0.96, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.39, no_speech=0.10, 1.0s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=0.96s, total=1.56s, peak=-25.9 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ru->zh, revision=1, whisper_language=auto, voice=0.96s, total=1.56s, peak=-25.9 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "translated: 根据日本原子能管理局的说法，在该工厂发现了放射性物质。 (0.6s)",
+      "filtered transcription: 语言置信度 0.19 < 0.35, text=het seise ijoud., lang=nl, prob=0.19, avg_logprob=-1.33, no_speech=0.41, compression=0.67",
+      "candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=0.9dB, voice=1.44s, total=3.00s, peak=-44.1 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate,low_confidence, direction=ru->zh, revision=1, whisper_language=auto, voice=1.44s, total=3.00s, peak=-44.1 dBFS, gate=-45.0 dBFS, cut=speech_reentry",
+      "[recognition] Переносчиками является свиньи. (lang=ru, prob=0.93, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.50, no_speech=0.08, 1.0s)",
+      "translated: 传播者是猪。 (0.2s)",
+      "candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-3.6dB, voice=2.40s, total=3.72s, peak=-48.6 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate,low_confidence, direction=ru->zh, revision=1, whisper_language=auto, voice=2.40s, total=3.72s, peak=-48.6 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] от которых через Комаров болезть затем передается человеку. (lang=ru, prob=0.96, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.67, no_speech=0.04, 1.0s)",
+      "translated: 通过科马罗夫，这些病原体会传染给人类，使人患病。 (0.4s)"
+    ],
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ru-test-1692-10024935581249406669",
+        "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+        "asr": {
+          "text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+          "language": "ru",
+          "language_probability": 0.9506025314331055,
+          "avg_logprob": -0.3340653198606828,
+          "no_speech_prob": 0.21197453141212463,
+          "compression_ratio": 1.4152542372881356,
+          "segment_count": 1,
+          "duration_seconds": 7.2,
+          "raw_text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1040.6051000027219
+      },
+      {
+        "id": "fleurs-ru-holdout-1762-10098401296465388159",
+        "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+        "asr": {
+          "text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "language": "ru",
+          "language_probability": 0.9568471312522888,
+          "avg_logprob": -0.4516236675637109,
+          "no_speech_prob": 0.08848711103200912,
+          "compression_ratio": 1.3833333333333333,
+          "segment_count": 1,
+          "duration_seconds": 7.92,
+          "raw_text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1029.889400000684
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+        "language": "ru",
+        "probability": 0.9614559412002563,
+        "asr_ms": 1020.7386999973096,
+        "source_start_frame": 51840,
+        "source_end_frame": 124800
+      },
+      {
+        "text": "het seise ijoud.",
+        "language": "nl",
+        "probability": 0.1918407380580902,
+        "asr_ms": 962.0692000025883,
+        "source_start_frame": 124800,
+        "source_end_frame": 149760
+      },
+      {
+        "text": "Переносчиками является свиньи.",
+        "language": "ru",
+        "probability": 0.9281493425369263,
+        "asr_ms": 974.8323000094388,
+        "source_start_frame": 197760,
+        "source_end_frame": 245760
+      },
+      {
+        "text": "от которых через Комаров болезть затем передается человеку.",
+        "language": "ru",
+        "probability": 0.9602046608924866,
+        "asr_ms": 985.1707000052556,
+        "source_start_frame": 245760,
+        "source_end_frame": 305280
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+        "translated": "根据日本原子能管理局的说法，在该工厂发现了放射性物质。",
+        "capture_emit_to_widget_ms": 1580.0001621246338,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1021,
+          "translation_ms": 552,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 4080,
+          "segment_total_ms": 4560,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 6160.52850000211,
+        "last_segment_pcm_frame_to_widget_ms": 1600.5290000059179,
+        "source_start_frame": 51840,
+        "source_end_frame": 124800
+      },
+      {
+        "trace_id": "2",
+        "original": "Переносчиками является свиньи.",
+        "translated": "传播者是猪。",
+        "capture_emit_to_widget_ms": 1196.2165832519531,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 975,
+          "translation_ms": 205,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 1440,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 4335.482600000106,
+        "last_segment_pcm_frame_to_widget_ms": 1335.4830000031511,
+        "source_start_frame": 197760,
+        "source_end_frame": 245760
+      },
+      {
+        "trace_id": "3",
+        "original": "от которых через Комаров болезть затем передается человеку.",
+        "translated": "通过科马罗夫，这些病原体会传染给人类，使人患病。",
+        "capture_emit_to_widget_ms": 1419.1348552703857,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 985,
+          "translation_ms": 423,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "custom",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 2400,
+          "segment_total_ms": 3720,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 2,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5167.712499999326,
+        "last_segment_pcm_frame_to_widget_ms": 1447.7131000038953,
+        "source_start_frame": 245760,
+        "source_end_frame": 305280
+      }
+    ],
+    "captures": [
+      {
+        "reason": "达到最长 4.5s",
+        "duration": 4.56
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 1.56
+      },
+      {
+        "reason": "speech_reentry",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.72
+      }
+    ],
+    "api": [
+      {
+        "label": "ru-pcm-replay",
+        "text": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "根据日本原子能管理局的说法，在该工厂发现了放射性物质。",
+        "elapsed_ms": 551.8191999872215,
+        "provider_elapsed_ms": 552.0596504211426,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 286,
+          "completion_tokens": 13,
+          "total_tokens": 299,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 286
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "Переносчиками является свиньи.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "传播者是猪。",
+        "elapsed_ms": 205.2239000040572,
+        "provider_elapsed_ms": 204.52094078063965,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 5,
+          "total_tokens": 267,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 38
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "от которых через Комаров болезть затем передается человеку.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "通过科马罗夫，这些病原体会传染给人类，使人患病。",
+        "elapsed_ms": 423.25089999940246,
+        "provider_elapsed_ms": 423.17724227905273,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 271,
+          "completion_tokens": 16,
+          "total_tokens": 287,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 47
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 4,
+      "transcriptions": 3,
+      "translations": 3,
+      "filtered_speech": 1
+    },
+    "notices": [],
+    "cpu_one_core_percent": 37.57907102237505,
+    "peak_rss_bytes": 402407424,
+    "wall_seconds": 24.157396000009612,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 2,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 4.5,
+      "pre_roll_ms": 450,
+      "speech_idle_timeout_ms": 450
+    },
+    "effective_diagnostic_mode": "custom",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]

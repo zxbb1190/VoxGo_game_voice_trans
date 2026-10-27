@@ -1,0 +1,8 @@
+{"kind": "reserved_before_http", "attempt": 1, "stage": "ru-pcm-replay", "utc": "2026-10-27T01:28:22.574384+00:00", "model": "tencent/Hunyuan-MT-7B"}
+{"kind": "http_response", "status": 200, "utc": "2026-10-27T01:28:24.957938+00:00"}
+{"kind": "reserved_before_http", "attempt": 2, "stage": "ru-pcm-replay", "utc": "2026-10-27T01:28:25.590890+00:00", "model": "tencent/Hunyuan-MT-7B"}
+{"kind": "http_response", "status": 200, "utc": "2026-10-27T01:28:26.079193+00:00"}
+{"kind": "reserved_before_http", "attempt": 3, "stage": "ru-pcm-replay", "utc": "2026-10-27T01:28:31.703100+00:00", "model": "tencent/Hunyuan-MT-7B"}
+{"kind": "http_response", "status": 200, "utc": "2026-10-27T01:28:31.930777+00:00"}
+{"kind": "reserved_before_http", "attempt": 4, "stage": "ru-pcm-replay", "utc": "2026-10-27T01:28:34.573207+00:00", "model": "tencent/Hunyuan-MT-7B"}
+{"kind": "http_response", "status": 200, "utc": "2026-10-27T01:28:34.890590+00:00"}

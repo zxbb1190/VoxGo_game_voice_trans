@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "completed": [
+    "r1-ja-legacy",
+    "r1-ja-language_aware",
+    "r1-ko-legacy",
+    "r1-ko-language_aware",
+    "r1-ru-legacy",
+    "r1-ru-language_aware",
+    "r2-ru-language_aware",
+    "r2-ru-legacy",
+    "r2-ko-language_aware",
+    "r2-ko-legacy",
+    "r2-ja-language_aware",
+    "r2-ja-legacy"
+  ],
+  "http_attempts": 52,
+  "started_utc": "2026-10-27T01:26:00.483721+00:00",
+  "protected_files_unchanged": true,
+  "ended_utc": "2026-10-27T01:34:02.769614+00:00"
+}

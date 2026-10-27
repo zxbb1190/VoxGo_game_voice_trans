@@ -1,0 +1,12 @@
+{
+  "http_attempts": 5,
+  "statuses": [
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "service_blocked": false,
+  "protected_files_unchanged": true
+}

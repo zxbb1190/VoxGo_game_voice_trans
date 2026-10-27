@@ -1,0 +1,353 @@
+[
+  {
+    "source_lang": "ru",
+    "domain": "public_read_speech",
+    "speech_strategy": "legacy",
+    "drain_complete": true,
+    "clip_ids": [
+      "fleurs-ru-test-1692-10024935581249406669",
+      "fleurs-ru-holdout-1762-10098401296465388159"
+    ],
+    "diagnostics": [
+      "翻译事件循环已启动",
+      "speech processing queue started",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.76s, total=3.00s, peak=-23.1 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ru->zh, revision=1, whisper_language=auto, voice=2.76s, total=3.00s, peak=-23.1 dBFS, gate=-45.0 dBFS, cut=达到最长 3s",
+      "[recognition] К согласной ядерному управлению Японии на заводе б... (lang=ru, prob=0.95, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.46, no_speech=0.08, 1.7s)",
+      "translated: 根据日本核管理机构的消息，在……工厂里…… (0.5s)",
+      "candidate accepted: labels=candidate, reason=accepted, voice=2.16s, total=3.00s, peak=-24.0 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate, direction=ru->zh, revision=1, whisper_language=auto, voice=2.16s, total=3.00s, peak=-24.0 dBFS, gate=-45.0 dBFS, cut=静音结束/尾音下降",
+      "[recognition] обнаружено радиоактивный цизи и йод. (lang=ru, prob=0.98, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.49, no_speech=0.05, 1.7s)",
+      "translated: 检测到了放射性铯和碘。 (0.3s)",
+      "candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=0.9dB, voice=1.44s, total=2.88s, peak=-44.1 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate,low_confidence, direction=ru->zh, revision=1, whisper_language=auto, voice=1.44s, total=2.88s, peak=-44.1 dBFS, gate=-45.0 dBFS, cut=speech_reentry",
+      "[recognition] Переносчиками является свиньи. (lang=ru, prob=0.94, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.49, no_speech=0.16, 1.6s)",
+      "translated: 传播者是猪。 (0.3s)",
+      "candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-3.6dB, voice=2.16s, total=3.00s, peak=-48.6 dBFS, gate=-45.0 dBFS",
+      "sent to whisper: labels=candidate,low_confidence, direction=ru->zh, revision=1, whisper_language=auto, voice=2.16s, total=3.00s, peak=-48.6 dBFS, gate=-45.0 dBFS, cut=达到最长 3s",
+      "candidate low confidence: labels=candidate,short_segment,low_confidence, reason=peak_margin=-7.3dB, voice=0.36s, total=0.84s, peak=-52.3 dBFS, gate=-45.0 dBFS",
+      "segment pending: wait=300ms, voice=0.36s, total=0.84s, labels=candidate,short_segment,low_confidence",
+      "[recognition] от которых через комаров болезть затем передаяться (lang=ru, prob=0.90, expected=ru, direction=ru->zh, revision=1, avg_logprob=-0.60, no_speech=0.14, 1.7s)",
+      "segment pending timeout: voice=0.36s, total=0.84s, labels=candidate,short_segment,low_confidence",
+      "weak candidate dropped by asr budget: labels=candidate,short_segment,low_confidence, voice=0.36s, total=0.84s, last_asr=1655ms",
+      "translated: 通过蚊子传播，然后导致人们生病。 (0.3s)"
+    ],
+    "whole_clip_asr": [
+      {
+        "id": "fleurs-ru-test-1692-10024935581249406669",
+        "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+        "asr": {
+          "text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+          "language": "ru",
+          "language_probability": 0.9506025314331055,
+          "avg_logprob": -0.3340653198606828,
+          "no_speech_prob": 0.21197453141212463,
+          "compression_ratio": 1.4152542372881356,
+          "segment_count": 1,
+          "duration_seconds": 7.2,
+          "raw_text": "К согласной ядерному управлению Японии на заводе были обнаружены радиоактивный цизи и йут.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1772.5224000023445
+      },
+      {
+        "id": "fleurs-ru-holdout-1762-10098401296465388159",
+        "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+        "asr": {
+          "text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "language": "ru",
+          "language_probability": 0.9568471312522888,
+          "avg_logprob": -0.4516236675637109,
+          "no_speech_prob": 0.08848711103200912,
+          "compression_ratio": 1.3833333333333333,
+          "segment_count": 1,
+          "duration_seconds": 7.92,
+          "raw_text": "Переносчиками является свиньи, от которых через комаров болезь затем передается человеку.",
+          "runaway_guarded": false
+        },
+        "asr_ms": 1722.8576999914367
+      }
+    ],
+    "stream_asr": [
+      {
+        "text": "К согласной ядерному управлению Японии на заводе б...",
+        "language": "ru",
+        "probability": 0.94636470079422,
+        "asr_ms": 1684.343799992348,
+        "source_start_frame": 53760,
+        "source_end_frame": 101760
+      },
+      {
+        "text": "обнаружено радиоактивный цизи и йод.",
+        "language": "ru",
+        "probability": 0.9766762852668762,
+        "asr_ms": 1702.6649000035832,
+        "source_start_frame": 101760,
+        "source_end_frame": 149760
+      },
+      {
+        "text": "Переносчиками является свиньи.",
+        "language": "ru",
+        "probability": 0.9424105882644653,
+        "asr_ms": 1645.824300008826,
+        "source_start_frame": 199680,
+        "source_end_frame": 245760
+      },
+      {
+        "text": "от которых через комаров болезть затем передаяться",
+        "language": "ru",
+        "probability": 0.9012372493743896,
+        "asr_ms": 1655.1075999886962,
+        "source_start_frame": 245760,
+        "source_end_frame": 293760
+      }
+    ],
+    "subtitles": [
+      {
+        "trace_id": "1",
+        "original": "К согласной ядерному управлению Японии на заводе б...",
+        "translated": "根据日本核管理机构的消息，在……工厂里……",
+        "capture_emit_to_widget_ms": 2177.0875453948975,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1684,
+          "translation_ms": 489,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2760,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5199.703599996284,
+        "last_segment_pcm_frame_to_widget_ms": 2199.703999999328,
+        "source_start_frame": 53760,
+        "source_end_frame": 101760
+      },
+      {
+        "trace_id": "2",
+        "original": "обнаружено радиоактивный цизи и йод.",
+        "translated": "检测到了放射性铯和碘。",
+        "capture_emit_to_widget_ms": 2007.4348449707031,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1703,
+          "translation_ms": 303,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate",
+          "segment_voice_ms": 2160,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5034.371300004423,
+        "last_segment_pcm_frame_to_widget_ms": 2034.371700007469,
+        "source_start_frame": 101760,
+        "source_end_frame": 149760
+      },
+      {
+        "trace_id": "3",
+        "original": "Переносчиками является свиньи.",
+        "translated": "传播者是猪。",
+        "capture_emit_to_widget_ms": 1941.66898727417,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1647,
+          "translation_ms": 287,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 1440,
+          "segment_total_ms": 2880,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 4950.319499995676,
+        "last_segment_pcm_frame_to_widget_ms": 2070.319899998722,
+        "source_start_frame": 199680,
+        "source_end_frame": 245760
+      },
+      {
+        "trace_id": "4",
+        "original": "от которых через комаров болезть затем передаяться",
+        "translated": "通过蚊子传播，然后导致人们生病。",
+        "capture_emit_to_widget_ms": 1993.5026168823242,
+        "trace": {
+          "wait_ms": 0,
+          "recognition_ms": 1655,
+          "translation_ms": 337,
+          "overlay_ms": 0,
+          "total_ms": 0,
+          "latency_mode": "fast",
+          "candidate_labels": "candidate,low_confidence",
+          "segment_voice_ms": 2160,
+          "segment_total_ms": 3000,
+          "whisper_model_size": "base",
+          "whisper_device": "cpu",
+          "whisper_compute_type": "int8",
+          "whisper_cpu_threads": 1,
+          "fast_path_allowed": false,
+          "fast_path_ready": false
+        },
+        "first_segment_pcm_frame_to_widget_ms": 5012.820999997203,
+        "last_segment_pcm_frame_to_widget_ms": 2012.82150000101,
+        "source_start_frame": 245760,
+        "source_end_frame": 293760
+      }
+    ],
+    "captures": [
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 3.0
+      },
+      {
+        "reason": "speech_reentry",
+        "duration": 2.88
+      },
+      {
+        "reason": "达到最长 3s",
+        "duration": 3.0
+      },
+      {
+        "reason": "静音结束/尾音下降",
+        "duration": 0.84
+      }
+    ],
+    "api": [
+      {
+        "label": "ru-pcm-replay",
+        "text": "К согласной ядерному управлению Японии на заводе б...",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "根据日本核管理机构的消息，在……工厂里……",
+        "elapsed_ms": 487.97339999873657,
+        "provider_elapsed_ms": 487.684965133667,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 274,
+          "completion_tokens": 11,
+          "total_tokens": 285,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 274
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "обнаружено радиоактивный цизи и йод.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "检测到了放射性铯和碘。",
+        "elapsed_ms": 303.4596000070451,
+        "provider_elapsed_ms": 303.3161163330078,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 267,
+          "completion_tokens": 8,
+          "total_tokens": 275,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 43
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "Переносчиками является свиньи.",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "传播者是猪。",
+        "elapsed_ms": 286.80490000988357,
+        "provider_elapsed_ms": 286.84401512145996,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 262,
+          "completion_tokens": 5,
+          "total_tokens": 267,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 262
+        },
+        "human_review": "pending"
+      },
+      {
+        "label": "ru-pcm-replay",
+        "text": "от которых через комаров болезть затем передаяться",
+        "source_lang": "ru",
+        "target_lang": "zh",
+        "translated": "通过蚊子传播，然后导致人们生病。",
+        "elapsed_ms": 337.0597000030102,
+        "provider_elapsed_ms": 336.67993545532227,
+        "failure_reason": "",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 267,
+          "completion_tokens": 10,
+          "total_tokens": 277,
+          "prompt_tokens_details": {
+            "cached_tokens": 224
+          },
+          "prompt_cache_hit_tokens": 224,
+          "prompt_cache_miss_tokens": 43
+        },
+        "human_review": "pending"
+      }
+    ],
+    "stats": {
+      "speech_detected": 5,
+      "transcriptions": 4,
+      "translations": 4,
+      "dropped_speech": 1
+    },
+    "notices": [],
+    "cpu_one_core_percent": 27.675874002658514,
+    "peak_rss_bytes": 401313792,
+    "wall_seconds": 24.16364519999479,
+    "whisper": {
+      "active_model_size": "base",
+      "beam_size": 1,
+      "cpu_threads": 1,
+      "language": "auto",
+      "initial_prompt": "",
+      "prompt_profile": "none"
+    },
+    "effective_audio": {
+      "max_speech_seconds": 3.0,
+      "pre_roll_ms": 300,
+      "speech_idle_timeout_ms": 350
+    },
+    "effective_diagnostic_mode": "fast",
+    "measurement": "paced PCM replay, production capture/ASR/runtime/offscreen Qt; no physical loopback/display/game"
+  }
+]
