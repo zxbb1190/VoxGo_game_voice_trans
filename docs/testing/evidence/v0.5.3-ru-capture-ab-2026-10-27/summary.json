@@ -1,0 +1,1996 @@
+{
+  "api_requests": 0,
+  "unique_recordings": 2,
+  "recording_replays": 32,
+  "independent_validation": false,
+  "human_review": "pending",
+  "release_approved": false,
+  "repeats": [
+    {
+      "cadence_ms": 5,
+      "maximum": 4.5,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 5,
+      "maximum": 3.0,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 5,
+      "maximum": 3.5,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 5,
+      "maximum": 4.0,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 100,
+      "maximum": 4.5,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 100,
+      "maximum": 3.0,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 100,
+      "maximum": 3.5,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    },
+    {
+      "cadence_ms": 100,
+      "maximum": 4.0,
+      "repetitions": 2,
+      "identical_boundaries_text_filters": true
+    }
+  ],
+  "rows": [
+    {
+      "spec": {
+        "id": "r1-tick5-max4.5",
+        "repeat": 1,
+        "cadence_ms": 5,
+        "max_speech_seconds": 4.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. het seise ijoud.",
+          "retained": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "translation_input": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [
+              "nl"
+            ],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [
+            "s002"
+          ],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1031.7898000066634,
+            962.0716999925207
+          ],
+          "asr_cpu_seconds": 3.953125
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            977.8287999943132,
+            991.7799999966519
+          ],
+          "asr_cpu_seconds": 3.875
+        }
+      ],
+      "replay_cpu_seconds": 8.8125,
+      "peak_rss_mib": 343.984375,
+      "replay_wall_seconds": 24.142093000002205,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 3,
+        "filtered_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick5-max3",
+        "repeat": 1,
+        "cadence_ms": 5,
+        "max_speech_seconds": 3.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "retained": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            981.231800004025,
+            1006.2782000022708
+          ],
+          "asr_cpu_seconds": 3.984375
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "retained": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "translation_input": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "segment_ids": [
+            "s003",
+            "s004",
+            "s005"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 3,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0,
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            975.5930999963311,
+            969.05610000249
+          ],
+          "asr_cpu_seconds": 3.8125
+        }
+      ],
+      "replay_cpu_seconds": 8.796875,
+      "peak_rss_mib": 343.203125,
+      "replay_wall_seconds": 24.1450085999968,
+      "stats": {
+        "speech_detected": 5,
+        "transcriptions": 4,
+        "dropped_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick5-max3.5",
+        "repeat": 1,
+        "cadence_ms": 5,
+        "max_speech_seconds": 3.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "retained": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "translation_input": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1019.4264000019757,
+            1026.5521000110311
+          ],
+          "asr_cpu_seconds": 4.1875
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            971.7765999957919,
+            987.4830000044312
+          ],
+          "asr_cpu_seconds": 3.875
+        }
+      ],
+      "replay_cpu_seconds": 9.25,
+      "peak_rss_mib": 344.1328125,
+      "replay_wall_seconds": 24.160478400008287,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick5-max4",
+        "repeat": 1,
+        "cadence_ms": 5,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "retained": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1009.5625999965705,
+            973.3798999950523
+          ],
+          "asr_cpu_seconds": 3.96875
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            966.7484000092372,
+            990.4252999986056
+          ],
+          "asr_cpu_seconds": 3.875
+        }
+      ],
+      "replay_cpu_seconds": 8.9375,
+      "peak_rss_mib": 344.60546875,
+      "replay_wall_seconds": 24.15522250000504,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick100-max4.5",
+        "repeat": 1,
+        "cadence_ms": 100,
+        "max_speech_seconds": 4.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. het seise ijoud.",
+          "retained": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "translation_input": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [
+              "nl"
+            ],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [
+            "s002"
+          ],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1013.260599997011,
+            966.8165000039153
+          ],
+          "asr_cpu_seconds": 3.96875
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            971.0859999904642,
+            983.886199988774
+          ],
+          "asr_cpu_seconds": 3.875
+        }
+      ],
+      "replay_cpu_seconds": 8.890625,
+      "peak_rss_mib": 344.6328125,
+      "replay_wall_seconds": 24.287712899997132,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 3,
+        "filtered_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick100-max3",
+        "repeat": 1,
+        "cadence_ms": 100,
+        "max_speech_seconds": 3.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "retained": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            992.9885000019567,
+            1008.7440999923274
+          ],
+          "asr_cpu_seconds": 4.0
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "retained": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "translation_input": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "segment_ids": [
+            "s003",
+            "s004",
+            "s005"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 3,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0,
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            975.9441000060178,
+            984.9938999977894
+          ],
+          "asr_cpu_seconds": 3.859375
+        }
+      ],
+      "replay_cpu_seconds": 9.046875,
+      "peak_rss_mib": 343.70703125,
+      "replay_wall_seconds": 24.297085900005186,
+      "stats": {
+        "speech_detected": 5,
+        "transcriptions": 4,
+        "dropped_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick100-max3.5",
+        "repeat": 1,
+        "cadence_ms": 100,
+        "max_speech_seconds": 3.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "retained": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "translation_input": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1013.560299994424,
+            973.3450000057928
+          ],
+          "asr_cpu_seconds": 3.96875
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            966.0738999955356,
+            990.23739999393
+          ],
+          "asr_cpu_seconds": 3.84375
+        }
+      ],
+      "replay_cpu_seconds": 8.953125,
+      "peak_rss_mib": 343.71875,
+      "replay_wall_seconds": 24.280703199998243,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r1-tick100-max4",
+        "repeat": 1,
+        "cadence_ms": 100,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "retained": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1026.0532999964198,
+            962.7789999940433
+          ],
+          "asr_cpu_seconds": 3.9375
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            977.7242999989539,
+            997.584700002335
+          ],
+          "asr_cpu_seconds": 3.9375
+        }
+      ],
+      "replay_cpu_seconds": 8.84375,
+      "peak_rss_mib": 344.39453125,
+      "replay_wall_seconds": 24.278420800008462,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick100-max4",
+        "repeat": 2,
+        "cadence_ms": 100,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "retained": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            989.3220000085421,
+            957.2549000004074
+          ],
+          "asr_cpu_seconds": 3.84375
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            974.1839999915101,
+            1000.2470000035828
+          ],
+          "asr_cpu_seconds": 3.859375
+        }
+      ],
+      "replay_cpu_seconds": 8.71875,
+      "peak_rss_mib": 343.8671875,
+      "replay_wall_seconds": 24.276006899992353,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick100-max3.5",
+        "repeat": 2,
+        "cadence_ms": 100,
+        "max_speech_seconds": 3.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "retained": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "translation_input": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1024.774500008789,
+            969.3563000037102
+          ],
+          "asr_cpu_seconds": 3.984375
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            983.09349999181,
+            987.6167000038549
+          ],
+          "asr_cpu_seconds": 3.953125
+        }
+      ],
+      "replay_cpu_seconds": 8.90625,
+      "peak_rss_mib": 345.0703125,
+      "replay_wall_seconds": 24.248581499996362,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick100-max3",
+        "repeat": 2,
+        "cadence_ms": 100,
+        "max_speech_seconds": 3.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "retained": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            982.6508999976795,
+            990.9628000023076
+          ],
+          "asr_cpu_seconds": 3.859375
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "retained": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "translation_input": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "segment_ids": [
+            "s003",
+            "s004",
+            "s005"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 3,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0,
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            960.0686999910977,
+            965.7442000025185
+          ],
+          "asr_cpu_seconds": 3.84375
+        }
+      ],
+      "replay_cpu_seconds": 8.6875,
+      "peak_rss_mib": 343.22265625,
+      "replay_wall_seconds": 24.30087249999633,
+      "stats": {
+        "speech_detected": 5,
+        "transcriptions": 4,
+        "dropped_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick100-max4.5",
+        "repeat": 2,
+        "cadence_ms": 100,
+        "max_speech_seconds": 4.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. het seise ijoud.",
+          "retained": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "translation_input": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [
+              "nl"
+            ],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [
+            "s002"
+          ],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1019.0155000018422,
+            969.1764000017429
+          ],
+          "asr_cpu_seconds": 4.03125
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            969.0147999936016,
+            984.1007999930298
+          ],
+          "asr_cpu_seconds": 3.90625
+        }
+      ],
+      "replay_cpu_seconds": 8.9375,
+      "peak_rss_mib": 344.0390625,
+      "replay_wall_seconds": 24.326366599998437,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 3,
+        "filtered_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick5-max4",
+        "repeat": 2,
+        "cadence_ms": 5,
+        "max_speech_seconds": 4.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "retained": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе были обнаружены радио активной цези иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": false,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1008.0513000139035,
+            958.9309000002686
+          ],
+          "asr_cpu_seconds": 3.890625
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            980.8007999963593,
+            984.1745999874547
+          ],
+          "asr_cpu_seconds": 3.90625
+        }
+      ],
+      "replay_cpu_seconds": 8.796875,
+      "peak_rss_mib": 344.109375,
+      "replay_wall_seconds": 24.156274100008886,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick5-max3.5",
+        "repeat": 2,
+        "cadence_ms": 5,
+        "max_speech_seconds": 3.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "retained": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "translation_input": "Соклассный ядерному управлению Японии, на заводе были обнаружены. на радиоактивной цизи иет.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1013.2047999941278,
+            987.869500007946
+          ],
+          "asr_cpu_seconds": 3.953125
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            971.0024999949383,
+            994.6534000046086
+          ],
+          "asr_cpu_seconds": 3.921875
+        }
+      ],
+      "replay_cpu_seconds": 9.078125,
+      "peak_rss_mib": 343.140625,
+      "replay_wall_seconds": 24.15142609999748,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 4
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick5-max3",
+        "repeat": 2,
+        "cadence_ms": 5,
+        "max_speech_seconds": 3.0,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "retained": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "translation_input": "К согласной ядерному управлению Японии на заводе. и полябно ружина радиоактивной цези и йод.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": true,
+              "iodine_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            991.0891000035917,
+            992.4392999964766
+          ],
+          "asr_cpu_seconds": 3.78125
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "retained": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "translation_input": "Переносчиками является свиньи. от которых через комаров болезть затем передаяться",
+          "segment_ids": [
+            "s003",
+            "s004",
+            "s005"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": false,
+              "transmission_relation_suspected": false,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": false
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 3,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0,
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            983.5902000049828,
+            990.7971999928122
+          ],
+          "asr_cpu_seconds": 3.9375
+        }
+      ],
+      "replay_cpu_seconds": 8.703125,
+      "peak_rss_mib": 343.96875,
+      "replay_wall_seconds": 24.15350309999485,
+      "stats": {
+        "speech_detected": 5,
+        "transcriptions": 4,
+        "dropped_speech": 1
+      },
+      "drain_complete": true
+    },
+    {
+      "spec": {
+        "id": "r2-tick5-max4.5",
+        "repeat": 2,
+        "cadence_ms": 5,
+        "max_speech_seconds": 4.5,
+        "pre_roll_ms": 450,
+        "idle_ms": 450
+      },
+      "per_clip": [
+        {
+          "id": "fleurs-ru-test-1692-10024935581249406669",
+          "reference": "Согласно ядерному управлению Японии, на заводе были обнаружены радиоактивный цезий и йод.",
+          "raw": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные. het seise ijoud.",
+          "retained": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "translation_input": "Сокласно ядерному управлению Японии на заводе были обнаружены радиоактивные.",
+          "segment_ids": [
+            "s001",
+            "s002"
+          ],
+          "flags": {
+            "raw": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "retained": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "translation_input": {
+              "radioactivity": true,
+              "cesium_suspected": false,
+              "iodine_suspected": false
+            },
+            "non_russian_detected": [
+              "nl"
+            ],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [
+            "s002"
+          ],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 17280,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            1015.7250000047497,
+            961.7550999973901
+          ],
+          "asr_cpu_seconds": 4.046875
+        },
+        {
+          "id": "fleurs-ru-holdout-1762-10098401296465388159",
+          "reference": "Переносчиками являются свиньи, от которых через комаров болезнь затем передаётся человеку.",
+          "raw": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "retained": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "translation_input": "Переносчиками является свиньи. от которых через Комаров болезть затем передается человеку.",
+          "segment_ids": [
+            "s003",
+            "s004"
+          ],
+          "flags": {
+            "raw": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "retained": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "translation_input": {
+              "pigs": true,
+              "mosquito_word_suspected": true,
+              "person_capitalization_suspected": true,
+              "transmission_relation_suspected": true,
+              "disease_word_suspected": true,
+              "human_recipient_suspected": true
+            },
+            "non_russian_detected": [],
+            "semantic_correctness": "pending_bilingual_review",
+            "word_timestamps": "missing; inspect segment WAVs; no inferred word boundaries"
+          },
+          "captured_segments": 2,
+          "whisper_calls": 2,
+          "language_filter_drops": [],
+          "boundary_deltas_frames": [
+            0
+          ],
+          "duplicate_capture_frames": 0,
+          "not_captured_frames": 19200,
+          "missing_frame_note": "Uncaptured leading/trailing silence is not automatically a semantic omission; see activity windows/WAVs",
+          "asr_ms": [
+            972.8663999994751,
+            1008.4959999949206
+          ],
+          "asr_cpu_seconds": 3.875
+        }
+      ],
+      "replay_cpu_seconds": 8.96875,
+      "peak_rss_mib": 344.0703125,
+      "replay_wall_seconds": 24.159891100003733,
+      "stats": {
+        "speech_detected": 4,
+        "transcriptions": 3,
+        "filtered_speech": 1
+      },
+      "drain_complete": true
+    }
+  ]
+}

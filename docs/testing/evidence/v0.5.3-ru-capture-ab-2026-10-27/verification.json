@@ -1,0 +1,18 @@
+{
+  "runs": 16,
+  "captured_segments": 68,
+  "stream_whisper_calls": 64,
+  "translation_boundary_segments": 60,
+  "all_complete_and_workers_feeders_samplers_stopped": true,
+  "all_configs_unchanged": true,
+  "one_whisper_config": true,
+  "all_work_snapshots_match": true,
+  "actual_inference_cpu_int8": true,
+  "all_pcm_spans_reconstruct_exactly": true,
+  "no_capture_frame_overlap_or_internal_gaps": true,
+  "all_work_items_terminal": true,
+  "source_hashes_still_match_after_full_suite": true,
+  "model_files_unchanged": true,
+  "local_artifact_inventory_matches": true,
+  "offline_safety_attempts_zero": true
+}

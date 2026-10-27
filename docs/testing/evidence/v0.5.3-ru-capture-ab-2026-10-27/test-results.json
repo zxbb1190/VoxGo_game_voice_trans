@@ -1,0 +1,17 @@
+{
+  "client_unittest": {
+    "command": "python -B -X utf8 -m unittest discover -s tests -q",
+    "run": 567,
+    "passed": 566,
+    "skipped": 1,
+    "seconds": 47.471,
+    "skip": "VOXGO_API_ROOT not set: optional local joint telemetry Worker acceptance",
+    "log": "build\\multilingual-online\\ru-max-only-20261027-validation\\client-unittest.txt",
+    "sha256": "120520df29ffc55bcae202fc2441bc5e374e5defb8ce03609aae5c82ba014ed0"
+  },
+  "new_tool_tests": 15,
+  "english_chinese_config_cases": 48,
+  "runtime_diff_vs_a67a6563": [],
+  "runtime_diff_vs_645c6ace": [],
+  "api_requests": 0
+}

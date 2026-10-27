@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "completed": [
+    "r1-tick5-max4.5",
+    "r1-tick5-max3",
+    "r1-tick5-max3.5",
+    "r1-tick5-max4",
+    "r1-tick100-max4.5",
+    "r1-tick100-max3",
+    "r1-tick100-max3.5",
+    "r1-tick100-max4",
+    "r2-tick100-max4",
+    "r2-tick100-max3.5",
+    "r2-tick100-max3",
+    "r2-tick100-max4.5",
+    "r2-tick5-max4",
+    "r2-tick5-max3.5",
+    "r2-tick5-max3",
+    "r2-tick5-max4.5"
+  ],
+  "api_requests": 0,
+  "original_evidence_and_settings_unchanged": true,
+  "source_files_unchanged": true,
+  "safety": {
+    "blocked_network_attempts": 0,
+    "blocked_analytics_imports": 0
+  }
+}

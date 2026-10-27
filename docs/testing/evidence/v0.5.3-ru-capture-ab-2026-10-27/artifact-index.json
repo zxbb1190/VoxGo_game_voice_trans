@@ -1,0 +1,757 @@
+[
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/plan.json",
+    "bytes": 17355,
+    "sha256": "4cca4b848643dbb316662444f4eeb03e20ac84a27d8a57f0c6b8d191809f9b1d"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/events.jsonl",
+    "bytes": 269635,
+    "sha256": "6644f9144e4e72ee1639d74f57b55dd455bf6981b3970d68e82d59aeb7b8ab47"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/result.json",
+    "bytes": 145369,
+    "sha256": "c472f7ed1955bb6e22c9637ff25075651f0923212a490a91ebf59e2bf688aaba"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/events.jsonl",
+    "bytes": 262657,
+    "sha256": "5c3d61b6eb1fcb65c003838e9a54fbb0293afc83ecce620af2df14044a5fa87a"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/result.json",
+    "bytes": 141161,
+    "sha256": "fa263cb0a85f1b2cd5d520b436c175c6b1ebd1bafd45fb658bee2777d927cb51"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/s001.wav",
+    "bytes": 115244,
+    "sha256": "18e97c4ed12d11ddf10d57e0efbf5645ae511d278cfbf8527da97ecad4db98d1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/s002.wav",
+    "bytes": 80684,
+    "sha256": "6467073c4296656939e28eb8953e324cd37962367420db52ef8a2b201c4c8899"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5.json",
+    "bytes": 145,
+    "sha256": "4c0c7c0ac83e7017def8dd12396491a77ccc235a677de26d9260ad518da90b75"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.json",
+    "bytes": 143,
+    "sha256": "603723f3d67258613baf8a3d427cd423c8c3c50cdbba81ef7f6aa09ebd0d6a9d"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max3.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/events.jsonl",
+    "bytes": 258708,
+    "sha256": "10edfbbf5214cdebb3ca2b544e560e8a1a8d93114d508dc8efc30830ce5a2a05"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/result.json",
+    "bytes": 139345,
+    "sha256": "1786db16b105e09bc68453366dfe2f42d833d2eb21ca3d1cd4c421c036d2c3e1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/s001.wav",
+    "bytes": 130604,
+    "sha256": "fe2a9802163cef1ef4cbb6a766d5f9a46c0f50b0081010dd9d2091f584edf2e1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/s002.wav",
+    "bytes": 65324,
+    "sha256": "ff1b5c2a0fea4f358f4e010f2d816faac026b98fa935e13a485ff72a551ddafd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/events.jsonl",
+    "bytes": 262892,
+    "sha256": "bc1ebfc3914110508d4505e60831e2cd306b245a2b5c5cae437a787911ae2b07"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/result.json",
+    "bytes": 141514,
+    "sha256": "3550d00afc2f3243781c4fa6789453050b641389eef50e5d0a72e7d7c79db5db"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/s001.wav",
+    "bytes": 145964,
+    "sha256": "bffce2d8ad08bcd3a51e5f4f2954cd500a9062999920d5fdf56ce2added83cf6"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/s002.wav",
+    "bytes": 49964,
+    "sha256": "09ea506678d8cba021cfda2947dac219a901935692f8b4f57c395cfc5d6e87ea"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5.json",
+    "bytes": 145,
+    "sha256": "6c92bd8e8838c8470859fdde53a99bdffcb276e48ef9d85d1e8b4c0292a76cfd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.json",
+    "bytes": 143,
+    "sha256": "16ef0eddb329e5fddd2628c21ef3d1c5dad592104f975be07d4c82fcfaf7165c"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick100-max4.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/events.jsonl",
+    "bytes": 270678,
+    "sha256": "e49efee019acb635a2660db14b6b3140fa21d8b7b90cc2ddb85f224843ca501a"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/result.json",
+    "bytes": 178531,
+    "sha256": "4b1d16a5d4387674828ab5e49cdccc2a9efc59d4bb9bee7d8d2aa8d602dd40c3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/events.jsonl",
+    "bytes": 266276,
+    "sha256": "bfaa181ff6b4d8792ca1b474e24e09d65024074a1e64d034fd894780cf59f5b6"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/result.json",
+    "bytes": 175722,
+    "sha256": "8ca4c07284659e83f661e5a6cc2f5f8c861a94070b37df78c006034c8276e253"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/s001.wav",
+    "bytes": 115244,
+    "sha256": "18e97c4ed12d11ddf10d57e0efbf5645ae511d278cfbf8527da97ecad4db98d1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/s002.wav",
+    "bytes": 80684,
+    "sha256": "6467073c4296656939e28eb8953e324cd37962367420db52ef8a2b201c4c8899"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5.json",
+    "bytes": 141,
+    "sha256": "bf1861125e44802172c1651f318f5326c9bcd3caeac801451b5f1267386b1d6a"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.json",
+    "bytes": 139,
+    "sha256": "af86b3d84f539ac31aeee9c2e6e33246349e50460467707fdd0aa83e16298585"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max3.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/events.jsonl",
+    "bytes": 266256,
+    "sha256": "3f610bae46f8ffd4448b4ad899159835d3e0503223a49b38ebeb0cfd28b8d361"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/result.json",
+    "bytes": 175742,
+    "sha256": "ff54af633b12642606fb1dc4d2e596ccfa2e27395d6dc17af0bc713e03c57b9f"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/s001.wav",
+    "bytes": 130604,
+    "sha256": "fe2a9802163cef1ef4cbb6a766d5f9a46c0f50b0081010dd9d2091f584edf2e1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/s002.wav",
+    "bytes": 65324,
+    "sha256": "ff1b5c2a0fea4f358f4e010f2d816faac026b98fa935e13a485ff72a551ddafd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/events.jsonl",
+    "bytes": 266024,
+    "sha256": "9ac255f18f677dd140963369b137a77a41c3e2f2a33cb66ba4017fb068bc50ff"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/result.json",
+    "bytes": 175613,
+    "sha256": "5f9fe5d5a75aeccd7ed4f69ce5d9bbf38a5105a87b2840d77da1a110405bd9d5"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/s001.wav",
+    "bytes": 145964,
+    "sha256": "bffce2d8ad08bcd3a51e5f4f2954cd500a9062999920d5fdf56ce2added83cf6"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/s002.wav",
+    "bytes": 49964,
+    "sha256": "09ea506678d8cba021cfda2947dac219a901935692f8b4f57c395cfc5d6e87ea"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5.json",
+    "bytes": 141,
+    "sha256": "1a315112edb7519af11fa593581bd53d0139282c3fa2f74634900d6e727658e7"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.json",
+    "bytes": 139,
+    "sha256": "ae20a95909cbd84c26e2b1b228eebeb59047dac4c7c1ae2397b2b729afd0bc1f"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r1-tick5-max4.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/events.jsonl",
+    "bytes": 268799,
+    "sha256": "ad7026fb4e4323246ce2130de8e73a126158afe444db9b7c56d79fe78c52208a"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/result.json",
+    "bytes": 144938,
+    "sha256": "75698c45a0d404a732ce56d99e7139cc6124c0f7c1dc973c587c14109842e5b0"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/events.jsonl",
+    "bytes": 259981,
+    "sha256": "5f25f0d4ac828162e04fcbaff770ef6df1979bfa8718a5f9cdb038ef6f2d082e"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/result.json",
+    "bytes": 139855,
+    "sha256": "595c3b1d31f41aa4dcc66c484a8168ad60960d200f1d9403c48ebdf94d2ae9cd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/s001.wav",
+    "bytes": 115244,
+    "sha256": "18e97c4ed12d11ddf10d57e0efbf5645ae511d278cfbf8527da97ecad4db98d1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/s002.wav",
+    "bytes": 80684,
+    "sha256": "6467073c4296656939e28eb8953e324cd37962367420db52ef8a2b201c4c8899"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5.json",
+    "bytes": 145,
+    "sha256": "415bb24acdeaa90ccc3814abf36e8b7beeba74badbbb1eb7950cffde6c5640ad"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.json",
+    "bytes": 143,
+    "sha256": "ee2a2d4730856faf6cba455565bb21877066a5552bf5d307c7aaee1a47ebcb01"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max3.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/events.jsonl",
+    "bytes": 259769,
+    "sha256": "9dd76b8835aaba0d7a1145a24266455c8daaf068d3a54ef5f49a148177cd5707"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/result.json",
+    "bytes": 139783,
+    "sha256": "f0c065025542b11aa2721e2657cb1d0170017ab4b4c36713a0db9d745cad1915"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/s001.wav",
+    "bytes": 130604,
+    "sha256": "fe2a9802163cef1ef4cbb6a766d5f9a46c0f50b0081010dd9d2091f584edf2e1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/s002.wav",
+    "bytes": 65324,
+    "sha256": "ff1b5c2a0fea4f358f4e010f2d816faac026b98fa935e13a485ff72a551ddafd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/events.jsonl",
+    "bytes": 260404,
+    "sha256": "399267593130e064ff7909cdff88b67ce5a20571795dfb83ba3f045dbcb40e7c"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/result.json",
+    "bytes": 140251,
+    "sha256": "6afc143f6fbda2237db0732395618cf1b6eeb0463c4bc79031631881d0cf2426"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/s001.wav",
+    "bytes": 145964,
+    "sha256": "bffce2d8ad08bcd3a51e5f4f2954cd500a9062999920d5fdf56ce2added83cf6"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/s002.wav",
+    "bytes": 49964,
+    "sha256": "09ea506678d8cba021cfda2947dac219a901935692f8b4f57c395cfc5d6e87ea"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5.json",
+    "bytes": 145,
+    "sha256": "71f7c734f9ac8971546f7be1e361cee8ba5a41c6d3bfb22fbe5cda1981e115d3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.json",
+    "bytes": 143,
+    "sha256": "4a55a2d7b80864d4ff85666395889de986dce512b660c821d120655b139139b3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick100-max4.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/events.jsonl",
+    "bytes": 270671,
+    "sha256": "78205345260ae7a57fbd1a9d47e6eae25df4d52198cb940e1206676f75f8eb21"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/result.json",
+    "bytes": 178560,
+    "sha256": "ccd9b478c6dd7093a1f9393b64dee85e2c1a7fa16a0be36b9c3bf37b4595bb16"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/s001.wav",
+    "bytes": 96044,
+    "sha256": "a9f8163687798c624edd9adeca6e5ea3cf7f717334ca0e540990ec51f76f3bf5"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/s002.wav",
+    "bytes": 99884,
+    "sha256": "868c1bc7bed988adca8a520327f6c8e55cd8f2c04e32ed8250998a13ef7ac03b"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/s004.wav",
+    "bytes": 96044,
+    "sha256": "73b9032bcdfc8b9dfb0f0813fd82e6bea95533ef03c36d3883315ad03a5336a2"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/s005.wav",
+    "bytes": 26924,
+    "sha256": "5f900bafe383ca2d01d5b048a1dd24aaa722d4e1095b109041a9af1aeafd32e3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/events.jsonl",
+    "bytes": 266258,
+    "sha256": "9d307c34e5ecb59bb4031b793dbc86a15398220b45e76f0ed846ba59134bf49f"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/result.json",
+    "bytes": 175741,
+    "sha256": "31caaa854b7614474ceb4ebf06622e9a2b418882f726013fa59949a1e6bbc08f"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/s001.wav",
+    "bytes": 115244,
+    "sha256": "18e97c4ed12d11ddf10d57e0efbf5645ae511d278cfbf8527da97ecad4db98d1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/s002.wav",
+    "bytes": 80684,
+    "sha256": "6467073c4296656939e28eb8953e324cd37962367420db52ef8a2b201c4c8899"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5.json",
+    "bytes": 141,
+    "sha256": "02d2acefe90e8f61cab7df5a026af6cb62b08ffabdd3e9b290ce0d09165dacb3"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.json",
+    "bytes": 139,
+    "sha256": "a3501f90a0360cea4cee532939873c0ab0bbf61590bf16070c46d4e374fb5442"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max3.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/events.jsonl",
+    "bytes": 266235,
+    "sha256": "9f5180a61f59ed1920989ad53f9482376323adacc49c1ae72ecfa25d84276a8a"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/result.json",
+    "bytes": 175703,
+    "sha256": "de31a2ee9dc789cf9ba65231f54b31820ac7a576d32b2541b4105c59a12b6744"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/s001.wav",
+    "bytes": 130604,
+    "sha256": "fe2a9802163cef1ef4cbb6a766d5f9a46c0f50b0081010dd9d2091f584edf2e1"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/s002.wav",
+    "bytes": 65324,
+    "sha256": "ff1b5c2a0fea4f358f4e010f2d816faac026b98fa935e13a485ff72a551ddafd"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/events.jsonl",
+    "bytes": 265975,
+    "sha256": "ab38eddf29befe2ef2fc09c1ecb87dd08b51e3c483d9421dad693d02ebbe9b63"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/result.json",
+    "bytes": 175647,
+    "sha256": "002955b628c129155c443a17006acae3ff291acf38cdfcf9c671bf628b1962ba"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/s001.wav",
+    "bytes": 145964,
+    "sha256": "bffce2d8ad08bcd3a51e5f4f2954cd500a9062999920d5fdf56ce2added83cf6"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/s002.wav",
+    "bytes": 49964,
+    "sha256": "09ea506678d8cba021cfda2947dac219a901935692f8b4f57c395cfc5d6e87ea"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/s003.wav",
+    "bytes": 96044,
+    "sha256": "ec39cd0b1e0fde8652e73bb07070bd81a253335ddb53964f2082cf2932530a87"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/s004.wav",
+    "bytes": 119084,
+    "sha256": "c8f959bf86b8c2ff6c0ac3037a09f825cd7bd4f350d49636ac076ba39b7ca300"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5/safety.json",
+    "bytes": 74,
+    "sha256": "870fa450b2d44567f987ed8e962800c5c54d052a28f5f40a65af727feedb2b04"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5.json",
+    "bytes": 141,
+    "sha256": "a877b49e404277143c1e4a364121712208e36a860c86dbc3e927228c705aaa00"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.5.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.json",
+    "bytes": 139,
+    "sha256": "9a5bded89fd1c9b6348015ee3c45ba241e70010a2c2fdbbcadef3f3a28a45b13"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/r2-tick5-max4.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/status.json",
+    "bytes": 640,
+    "sha256": "6385b54219688adc1bf9f16ba5956f514d236b8a580c9a58b8a584bf87b176cb"
+  },
+  {
+    "path": "build/multilingual-online/ru-max-only-20261027/summary.json",
+    "bytes": 88154,
+    "sha256": "de5c12b2fe44a595c4f26cb7a75aa813fd10b576176d7bd4d5649cd825a55d65"
+  }
+]
