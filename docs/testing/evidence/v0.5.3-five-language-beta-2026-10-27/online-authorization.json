@@ -1,0 +1,14 @@
+{
+  "authorized": true,
+  "model": "tencent/Hunyuan-MT-7B",
+  "plan_sha256": "c61a31ba506498bac1f3396a9ad3187c81a6310a23bfae5b1066480cafc5f5c0",
+  "call_limit": 300,
+  "confirmed_free_price_date_utc": "2026-10-27",
+  "authorized_at_utc": "2026-10-27T09:16:32.097695+00:00",
+  "user_authorization": "授权完整计划，上限 300 次",
+  "price_source": "https://siliconflow.cn/pricing",
+  "estimated_cost_cny": 0,
+  "no_retry": true,
+  "no_provider_fallback": true,
+  "private_settings_read_only": true
+}

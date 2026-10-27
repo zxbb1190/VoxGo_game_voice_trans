@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ru-en-beta-ru-1781-10002861505982796062",
+    "source": "ru",
+    "target": "en",
+    "record_id": "beta-ru-1781-10002861505982796062",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+    "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-en-beta-ru-1781-10002861505982796062",
+      "trace_id": "1",
+      "source": "ru",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "Мадагаскар намного больше других, и является самобытным кончен...",
+      "input_sha256": "23ff71fe4940caaa1de7e50c792af4ceef135149aa8a7759ba87cb63edf432ce",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 208,
+      "queue_wait_ms": 0.0023000029614195228,
+      "translated": "Madagascar is much larger than the others, and it is a unique and complete...",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 275,
+        "completion_tokens": 17,
+        "total_tokens": 292
+      },
+      "elapsed_ms": 702.6027999963844,
+      "provider_elapsed_ms": 698.3096599578857,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-en-beta-ru-1781-10002861505982796062",
+      "trace_id": "2",
+      "source": "ru",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "инентом в том, что касается дикой природы.",
+      "input_sha256": "e1495c822fe659abbc7e6c3b792655b41a6526be63ac7cd05d044de8af34561b",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 209,
+      "queue_wait_ms": 0.0031999952625483274,
+      "translated": "The feature lies in what concerns the wild nature.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 266,
+        "completion_tokens": 10,
+        "total_tokens": 276
+      },
+      "elapsed_ms": 311.8166999920504,
+      "provider_elapsed_ms": 306.52379989624023,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "Мадагаскар намного больше других, и является самобытным кончен...",
+      "translated": "Madagascar is much larger than the others, and it is a unique and complete...",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118180.0171339,
+      "source_pcm_spans": [
+        [
+          78720,
+          151680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1770.990999993519,
+      "source_wav_end_to_widget_ms": -3269.009000006481,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "инентом в том, что касается дикой природы.",
+      "translated": "The feature lies in what concerns the wild nature.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118182.8663285,
+      "source_pcm_spans": [
+        [
+          151680,
+          203520
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1380.185599992983,
+      "source_wav_end_to_widget_ms": -419.81440000701696,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.34375,
+  "outer_wall_seconds": 19.212259500010987,
+  "api_requests_total_ledger": 209,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

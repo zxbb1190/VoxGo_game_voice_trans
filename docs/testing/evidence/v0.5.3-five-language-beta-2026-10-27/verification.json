@@ -1,0 +1,42 @@
+{
+  "source_start_head": "1d187daa679bcbc053c6ec102753175a646a12e2",
+  "branch": "codex/multilingual-online-053",
+  "baseline_runtime": "645c6ace",
+  "source_recordings_verified": 85,
+  "original_files_verified": 85,
+  "exact_fragments_verified": 727,
+  "process_results_verified": 196,
+  "offline_processes": 136,
+  "live_native_voice_processes": 60,
+  "api_attempts": 255,
+  "cap": 300,
+  "retries": 0,
+  "settings_unchanged": true,
+  "model_hashes_match": true,
+  "postcollection_runtime_change": "Chinese offline-only notice text; ASR engine/parameters unchanged",
+  "telemetry_diff_empty": true,
+  "translation_model_prompt_rules_diff_empty": true,
+  "tests": {
+    "client": 619,
+    "client_skipped": 0,
+    "api": 70,
+    "api_build": "pass",
+    "en_zh_compatibility_cases": 48
+  },
+  "native_qt": "windows",
+  "actual_voice_end_latency": "pending manual acoustic boundaries",
+  "human_semantic_acceptance": "pending",
+  "real_game_fps": "not_tested_user_unavailable",
+  "release_approved": false,
+  "collector_sources": {
+    "scripts__offline_asr_observer.py.txt": "ab49aeaf57344c9b78ff9f6f22c26df9649181c02a5731da5cf4a9d4fa53e2ee",
+    "scripts__offline_russian_capture_ab.py.txt": "8a68a6f976dc69349f4e5ec9d90a538fbdf540ebe95a92d119951a0a8a6b7131",
+    "scripts__run_five_language_asr.py.txt": "8cb31718ca987ba3f6934aeb4b2fac7fab215e8b14d1807c0a420515b8ba704b",
+    "scripts__run_five_language_online.py.txt": "fe23d5955c34cf0cc44922a28f8e530b71d01b5977e9e1ae9f4b5f455885ad10",
+    "scripts__summarize_five_language_online.py.txt": "1dc9de80e89dc559c78e5f21f738c60a610ec7a98e238a0bcc70bc51015bca01",
+    "voxgo__asr__language_profiles.py.txt": "1be7e01dc8148ce2ee9cdedc8b52e5ac21cde03da8aa3248148fad46efec13eb",
+    "voxgo__languages.py.txt": "f38c1ec93f9d68d0ef860c490e5ce43d73fdd0bad0e2350f2ba7ed629b06ae9f",
+    "voxgo__ui__config_models.py.txt": "0e353273845b09b6aa0474346a4345ac351f736c7adde3db74d61b8f944ca784"
+  },
+  "postcollection_tool_hardening": "One-use authorization/output scope and replay guard, tested locally; no additional real API calls"
+}

@@ -1,0 +1,7 @@
+# Preserve captured bytes/fingerprints on Windows.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Exact upstream source/license archives retain original whitespace.
+fleurs-source-card.md -whitespace
+noise-source-license.txt -whitespace
+# Preserve the captured build log's final empty line.
+api-build.txt -whitespace

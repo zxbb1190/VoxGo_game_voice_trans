@@ -1,0 +1,2398 @@
+[
+  {
+    "id": "beta-zh-1906-10026684690566417990",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+    "raw": "這並不是告別 這是一個偏章的結束,也是新偏章的。",
+    "retained": "這並不是告別 這是一個偏章的結束,也是新偏章的。",
+    "translation_input": "這並不是告別 這是一個偏章的結束,也是新偏章的。",
+    "cues": {
+      "reference_negation_cues": [
+        "不是",
+        "别"
+      ],
+      "hypothesis_negation_cues": [
+        "不是"
+      ],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-2006-10040380210557600780",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+    "raw": "蓋夹等元素屬於金屬 銀河金的元素 當然也是金屬",
+    "retained": "蓋夹等元素屬於金屬 銀河金的元素 當然也是金屬",
+    "translation_input": "蓋夹等元素屬於金屬 銀河金的元素 當然也是金屬",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1805-10112798408996336578",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+    "raw": "Scotter 4035公尖其出 定期发出前往新特兰在螺卡角停止扣",
+    "retained": "Scotter 4035公尖其出 定期发出前往新特兰在螺卡角停止扣",
+    "translation_input": "Scotter 4035公尖其出 定期发出前往新特兰在螺卡角停止扣",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "403"
+      ],
+      "hypothesis_digits": [
+        "4035"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1965-10134195680525011353",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "这里几乎都是沙滩，游泳很安全，大部分地方都有新西兰圣诞树的树荫。",
+    "raw": "这里几乎都是沙灘游泳很安全,大部分 地方都有信息来生难受的树音",
+    "retained": "这里几乎都是沙灘游泳很安全,大部分 地方都有信息来生难受的树音",
+    "translation_input": "这里几乎都是沙灘游泳很安全,大部分 地方都有信息来生难受的树音",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1903-10142207404499844309",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+    "raw": "當所有可用的資源在一個組織的質能部門 得到有效利用時創造力和毒创性就會發生",
+    "retained": "當所有可用的資源在一個組織的質能部門 得到有效利用時創造力和毒创性就會發生",
+    "translation_input": "當所有可用的資源在一個組織的質能部門 得到有效利用時創造力和毒创性就會發生",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1953-10144930991730701959",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "他随后被转送到剑桥的阿登布鲁克医院。",
+    "raw": "它隨後被傳轉送到劍橋的阿登 不如可以呀",
+    "retained": "它隨後被傳轉送到劍橋的阿登",
+    "translation_input": "它隨後被傳轉送到劍橋的阿登",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1830-10147383166642115307",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+    "raw": "執政黨西南非洲人民組織也在議會上 現在就中保速了多數席位",
+    "retained": "執政黨西南非洲人民組織也在議會上 現在就中保速了多數席位",
+    "translation_input": "執政黨西南非洲人民組織也在議會上 現在就中保速了多數席位",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1910-10154699825088384418",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "巴黎人是出了名的以自我中心、粗鲁和傲慢。",
+    "raw": "大利人是出了名字以自我為中心出路",
+    "retained": "大利人是出了名字以自我為中心出路",
+    "translation_input": "大利人是出了名字以自我為中心出路",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1902-1015891181557233386",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+    "raw": "解出他被送往位於大雅毛市。 的站姆斯配积特醫院進行救治",
+    "retained": "解出他被送往位於大雅毛市。 的站姆斯配积特醫院進行救治",
+    "translation_input": "解出他被送往位於大雅毛市。 的站姆斯配积特醫院進行救治",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1905-10279011772105822622",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "摩尔多瓦的首都是基希讷乌。当地语言是罗马尼亚语，但俄语也被广泛使用。",
+    "raw": "摩爾多瓦的首都是新金納物當地的 是羅馬年阿宇,但鵝魚也被廣泛使用",
+    "retained": "摩爾多瓦的首都是新金納物當地的",
+    "translation_input": "摩爾多瓦的首都是新金納物當地的",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1772-10325486695909573217",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "因此，很可能这个符号只是作为一个标签添加的。",
+    "raw": "因此 很可能这个符号只是作为一个标签添加的",
+    "retained": "很可能这个符号只是作为一个标签添加的",
+    "translation_input": "很可能这个符号只是作为一个标签添加的",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-zh-1792-10343405611041314630",
+    "language": "zh",
+    "strategy": "formal",
+    "reference": "这被称为化学物质的 pH 值。你可以使用红甘蓝汁制作指示剂。",
+    "raw": "这被称为化学物质的TH 你可以用紅干蘭去製作 只设计",
+    "retained": "这被称为化学物质的TH 你可以用紅干蘭去製作",
+    "translation_input": "这被称为化学物质的TH 你可以用紅干蘭去製作",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1904-1003119935936341070",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+    "raw": "However, Due to the slow communication. styles in the West. could lag behind by 25 to 30.",
+    "retained": "However, Due to the slow communication. styles in the West. could lag behind by 25 to 30.",
+    "translation_input": "However, Due to the slow communication. styles in the West. could lag behind by 25 to 30.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "25",
+        "30"
+      ],
+      "hypothesis_digits": [
+        "25",
+        "30"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1675-10052240106321793346",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+    "raw": "All Niles are more sighted worlds. always begin with a capital letter. in the middle of a sentence.",
+    "retained": "All Niles are more sighted worlds. always begin with a capital letter. in the middle of a sentence.",
+    "translation_input": "All Niles are more sighted worlds. always begin with a capital letter. in the middle of a sentence.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1950-10167324587744183095",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+    "raw": "to the north and within easy is a romantic and fast and fast. Made famous. to foreigners after a glowing account of its-",
+    "retained": "to the north and within easy is a romantic and fast and fast. Made famous. to foreigners after a glowing account of its-",
+    "translation_input": "to the north and within easy is a romantic and fast and fast. Made famous. to foreigners after a glowing account of its-",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1728-10197164397713068203",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+    "raw": "change the color to pink. basic alkaline the chemical is.",
+    "retained": "change the color to pink. basic alkaline the chemical is.",
+    "translation_input": "change the color to pink. basic alkaline the chemical is.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1972-10233995782544396174",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+    "raw": "",
+    "retained": "",
+    "translation_input": "",
+    "cues": {
+      "reference_negation_cues": [
+        "n't"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1938-10235738076911595987",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "The hospital has followed protocol for infection control, including separating the patient from others to prevent possible infection of others.",
+    "raw": "The hospital has followed protocol. for infection control. separating the patient from others. to prevent possible infection of others. I'm sorry.",
+    "retained": "The hospital has followed protocol. for infection control. separating the patient from others. to prevent possible infection of others.",
+    "translation_input": "The hospital has followed protocol. for infection control. separating the patient from others. to prevent possible infection of others.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1876-10323357556845456822",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "The Northern Marianas emergency management office said that there were no damages reported in the nation.",
+    "raw": "The Northern... office.",
+    "retained": "The Northern...",
+    "translation_input": "The Northern...",
+    "cues": {
+      "reference_negation_cues": [
+        "no"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1914-10335587906469246566",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+    "raw": "20th century.",
+    "retained": "20th century.",
+    "translation_input": "20th century.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "20"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1846-10344335557154974057",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "The aspect ratio of this format (dividing by twelve to obtain the simplest whole-number ratio) is therefore said to be 3:2.",
+    "raw": "The aspect ratio of this form. dividing by 12 to obtain the simplest home number ratio. Is there for said to be free to too.",
+    "retained": "The aspect ratio of this form. dividing by 12 to obtain the simplest home number ratio. Is there for said to be free to too.",
+    "translation_input": "The aspect ratio of this form. dividing by 12 to obtain the simplest home number ratio. Is there for said to be free to too.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "3",
+        "2"
+      ],
+      "hypothesis_digits": [
+        "12"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1806-1036771894648013441",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+    "raw": "As my pollution is... The cities are at campuses. those built in modern times.",
+    "retained": "As my pollution is... The cities are at campuses. those built in modern times.",
+    "translation_input": "As my pollution is... The cities are at campuses. those built in modern times.",
+    "cues": {
+      "reference_negation_cues": [
+        "not"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1776-1038214857203833067",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+    "raw": "in that broad side.",
+    "retained": "in that broad side.",
+    "translation_input": "in that broad side.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "150",
+        "200"
+      ],
+      "hypothesis_digits": [],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-en-1729-10383288285905292158",
+    "language": "en",
+    "strategy": "formal",
+    "reference": "For example, each year students from Bennet School in North Carolina design a website about their trip to the State Capital, each year the website gets remodeled, but old versions are kept online to serve as a scrapbook.",
+    "raw": "For example, each... in North Carolina. It's a...  that all the versions are kept online to services.",
+    "retained": "For example, each... in North Carolina. It's a... that all the versions are kept online to services.",
+    "translation_input": "For example, each... in North Carolina. It's a... that all the versions are kept online to services.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1828-10020345318418093976",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+    "raw": "インターネットで 適体的環境交通について検索すると おそらく原地規量の純粛が出てくるでしょう",
+    "retained": "インターネットで 適体的環境交通について検索すると おそらく原地規量の純粛が出てくるでしょう",
+    "translation_input": "インターネットで 適体的環境交通について検索すると おそらく原地規量の純粛が出てくるでしょう",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1828-10020345318418093976",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+    "raw": "インターネットで適体的環境を について検索すると、おそらく原地企業の住所が出てくるでしょう。 1-2-3-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4",
+    "retained": "インターネットで適体的環境を について検索すると、おそらく原地企業の住所が出てくるでしょう。",
+    "translation_input": "インターネットで適体的環境を について検索すると、おそらく原地企業の住所が出てくるでしょう。",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1731-10203675650837159328",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "群島や湖では、必ずしもヨットは必要ありません。",
+    "raw": "군떡이 아님  アリマッセン",
+    "retained": "",
+    "translation_input": "",
+    "cues": {
+      "reference_negation_cues": [
+        "ません"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1731-10203675650837159328",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "群島や湖では、必ずしもヨットは必要ありません。",
+    "raw": "그는 또야, 미...  お疲れ様でした。",
+    "retained": "",
+    "translation_input": "",
+    "cues": {
+      "reference_negation_cues": [
+        "ません"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1980-10300959819649327821",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+    "raw": "残念ながら 本転市の行動100%の確率で予測 することはできないので、構図の流れを研究 することは困難です",
+    "retained": "残念ながら 本転市の行動100%の確率で予測 することはできないので、構図の流れを研究 することは困難です",
+    "translation_input": "残念ながら 本転市の行動100%の確率で予測 することはできないので、構図の流れを研究 することは困難です",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "100"
+      ],
+      "hypothesis_digits": [
+        "100"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1980-10300959819649327821",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+    "raw": "残念ながら運転しの行動を100% マンセントの確率で予測することはできないので、構図の流れを研究する 彼らは今なんです",
+    "retained": "残念ながら運転しの行動を100% マンセントの確率で予測することはできないので、構図の流れを研究する",
+    "translation_input": "残念ながら運転しの行動を100% マンセントの確率で予測することはできないので、構図の流れを研究する",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "100"
+      ],
+      "hypothesis_digits": [
+        "100"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1736-1036356791308610933",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "ロランド・メンドーサはM16ライフルで観光客に発砲しました。",
+    "raw": "ロランド面倒さはm16くらい それで観光客に発泡しました。",
+    "retained": "ロランド面倒さはm16くらい それで観光客に発泡しました。",
+    "translation_input": "ロランド面倒さはm16くらい それで観光客に発泡しました。",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "16"
+      ],
+      "hypothesis_digits": [
+        "16"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1736-1036356791308610933",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "ロランド・メンドーサはM16ライフルで観光客に発砲しました。",
+    "raw": "No random in 動作はM16ライフルで観光客に発防します。",
+    "retained": "動作はM16ライフルで観光客に発防します。",
+    "translation_input": "動作はM16ライフルで観光客に発防します。",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "16"
+      ],
+      "hypothesis_digits": [
+        "16"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1980-10401481013809636276",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+    "raw": "残念ながら、うん 電子の行動100 セントの確率を屋足することはできないので 研究することは困難です",
+    "retained": "残念ながら、うん 電子の行動100 セントの確率を屋足することはできないので 研究することは困難です",
+    "translation_input": "残念ながら、うん 電子の行動100 セントの確率を屋足することはできないので 研究することは困難です",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "100"
+      ],
+      "hypothesis_digits": [
+        "100"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1980-10401481013809636276",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+    "raw": "残念ながらう 電子の行動100 セントの隠れて居そくすることはできないので コーツの中でを 研究することは困難です",
+    "retained": "残念ながらう 電子の行動100 セントの隠れて居そくすることはできないので コーツの中でを 研究することは困難です",
+    "translation_input": "残念ながらう 電子の行動100 セントの隠れて居そくすることはできないので コーツの中でを 研究することは困難です",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "100"
+      ],
+      "hypothesis_digits": [
+        "100"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1701-10457758295680448532",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "ヤギの家畜化は、約1万年前に始まり、その中心はイランのザグロス山脈西部であったとされています。",
+    "raw": "夜の価値区が約1年間 名前に始まりその中心はイランのザグロス300制御であったと de primas.",
+    "retained": "夜の価値区が約1年間 名前に始まりその中心はイランのザグロス300制御であったと",
+    "translation_input": "夜の価値区が約1年間 名前に始まりその中心はイランのザグロス300制御であったと",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1"
+      ],
+      "hypothesis_digits": [
+        "1",
+        "300"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1701-10457758295680448532",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "ヤギの家畜化は、約1万年前に始まり、その中心はイランのザグロス山脈西部であったとされています。",
+    "raw": "やぎのかちか 薬の形がある 約1年前に始まりその中心 イランのザグロス300制御であったとして de primas.",
+    "retained": "やぎのかちか 薬の形がある 約1年前に始まりその中心 イランのザグロス300制御であったとして",
+    "translation_input": "やぎのかちか 薬の形がある 約1年前に始まりその中心 イランのザグロス300制御であったとして",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1"
+      ],
+      "hypothesis_digits": [
+        "1",
+        "300"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1775-10476284249516566719",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "ビデオ録画の利用は、数ミリ秒程度続く微表情、つまり顔の動きを解釈するうえで重要な発見につながっています。",
+    "raw": "ビデオのクアのリオ は、すみに両手を続く表情、つまり、 この動きを開射する上で重要な発見につながら、 de la Tema.",
+    "retained": "ビデオのクアのリオ は、すみに両手を続く表情、つまり、 この動きを開射する上で重要な発見につながら、",
+    "translation_input": "ビデオのクアのリオ は、すみに両手を続く表情、つまり、 この動きを開射する上で重要な発見につながら、",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1775-10476284249516566719",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "ビデオ録画の利用は、数ミリ秒程度続く微表情、つまり顔の動きを解釈するうえで重要な発見につながっています。",
+    "raw": "ビデオロックがの利用はすいみに両手です。 続く微表情、つまり顔の動きを解釈する上で、重要な発見につながら、 Tejas",
+    "retained": "ビデオロックがの利用はすいみに両手です。 続く微表情、つまり顔の動きを解釈する上で、重要な発見につながら、",
+    "translation_input": "ビデオロックがの利用はすいみに両手です。 続く微表情、つまり顔の動きを解釈する上で、重要な発見につながら、",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1972-10683203810610128933",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "羽を持ち、空を飛べるので、恐竜だと思っていない人も大勢います。",
+    "raw": "羽根を持ちをそらうと 恐竜だと思う",
+    "retained": "羽根を持ちをそらうと 恐竜だと思う",
+    "translation_input": "羽根を持ちをそらうと 恐竜だと思う",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1972-10683203810610128933",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "羽を持ち、空を飛べるので、恐竜だと思っていない人も大勢います。",
+    "raw": "羽根を持ちを空を飛べるので 持っていない人も",
+    "retained": "羽根を持ちを空を飛べるので 持っていない人も",
+    "translation_input": "羽根を持ちを空を飛べるので 持っていない人も",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1672-10770212904668726521",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "生地の温度が上がりすぎないように気を付けてください（縮みの原因になったり、極端な場合は焦げ付きの原因になります）。",
+    "raw": "キッチの音が あが ありすぎないように気をつけてください 地地身の原因 になったり、極端の場合は、5月下の原因になった。 あります",
+    "retained": "キッチの音が あが ありすぎないように気をつけてください 地地身の原因 になったり、極端の場合は、5月下の原因になった。 あります",
+    "translation_input": "キッチの音が あが ありすぎないように気をつけてください 地地身の原因 になったり、極端の場合は、5月下の原因になった。 あります",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "5"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1672-10770212904668726521",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "生地の温度が上がりすぎないように気を付けてください（縮みの原因になったり、極端な場合は焦げ付きの原因になります）。",
+    "raw": "キッチンの温度が上がりすぎないに気をつけてください。 知事味の原因になったり、極端の場合は5月下の原因になり、 いきます",
+    "retained": "キッチンの温度が上がりすぎないに気をつけてください。 知事味の原因になったり、極端の場合は5月下の原因になり、 いきます",
+    "translation_input": "キッチンの温度が上がりすぎないに気をつけてください。 知事味の原因になったり、極端の場合は5月下の原因になり、 いきます",
+    "cues": {
+      "reference_negation_cues": [
+        "ない"
+      ],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "5"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1861-10772833950120547925",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "結果として、舞台上で出演者が大麻を吸い、劇場側も観客に参加を呼びかけています。",
+    "raw": "ケッカティし 大丈夫です 全車がタイマを3 激情がも関係 逆に参考を呼びかけています",
+    "retained": "全車がタイマを3 逆に参考を呼びかけています",
+    "translation_input": "全車がタイマを3 逆に参考を呼びかけています",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "3"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1861-10772833950120547925",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "結果として、舞台上で出演者が大麻を吸い、劇場側も観客に参加を呼びかけています。",
+    "raw": "Kek katış. 部体上で 劇場側も関係 約に参考を呼びかけています",
+    "retained": "劇場側も関係 約に参考を呼びかけています",
+    "translation_input": "劇場側も関係 約に参考を呼びかけています",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1843-10778761596814084242",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "ダンディー大学のパメラ・ファーガソン教授は、「容疑者の写真などを公開する報道記者は危い橋を渡っている」と指摘しています。",
+    "raw": "男性大学のパメラファーガソン教授は よおびしゃの写真などを公開する報道記者は危ない 補正を渡っているとして消しています",
+    "retained": "男性大学のパメラファーガソン教授は よおびしゃの写真などを公開する報道記者は危ない 補正を渡っているとして消しています",
+    "translation_input": "男性大学のパメラファーガソン教授は よおびしゃの写真などを公開する報道記者は危ない 補正を渡っているとして消しています",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1843-10778761596814084242",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "ダンディー大学のパメラ・ファーガソン教授は、「容疑者の写真などを公開する報道記者は危い橋を渡っている」と指摘しています。",
+    "raw": "男女大学のパメラファーガソン教授は、容疑者の写真などを行こう。 おかえする報道記者は危ない場所を渡っているとして消しています 1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5",
+    "retained": "男女大学のパメラファーガソン教授は、容疑者の写真などを行こう。 おかえする報道記者は危ない場所を渡っているとして消しています",
+    "translation_input": "男女大学のパメラファーガソン教授は、容疑者の写真などを行こう。 おかえする報道記者は危ない場所を渡っているとして消しています",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [
+        "ない"
+      ],
+      "negation_cue_difference": true,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1958-10930212786007012251",
+    "language": "ja",
+    "strategy": "language_aware",
+    "reference": "この都市は、アフリカの都市というよりもアラビア色が強く、国内の他の都市とは対照的な雰囲気です。",
+    "raw": "この年はアフリカの年と言うよりもあら ビア食が強く 国内の他の都市とは対象的な雰囲気です。 . . . .",
+    "retained": "この年はアフリカの年と言うよりもあら ビア食が強く 国内の他の都市とは対象的な雰囲気です。",
+    "translation_input": "この年はアフリカの年と言うよりもあら ビア食が強く 国内の他の都市とは対象的な雰囲気です。",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ja-1958-10930212786007012251",
+    "language": "ja",
+    "strategy": "legacy",
+    "reference": "この都市は、アフリカの都市というよりもアラビア色が強く、国内の他の都市とは対照的な雰囲気です。",
+    "raw": "この年はあぶりか としては、アラビア食が強く 国内の他のとしては対象的な雰囲気。 2機です",
+    "retained": "この年はあぶりか としては、アラビア食が強く 国内の他のとしては対象的な雰囲気。 2機です",
+    "translation_input": "この年はあぶりか としては、アラビア食が強く 国内の他のとしては対象的な雰囲気。 2機です",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "2"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1929-1007237877117014760",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+    "raw": "델 포트로가 이 세트에서 먼저 어두워 티질을 얻었지만 육대 요기된 후 다시 타입 브레이크가 필요했다.",
+    "retained": "델 포트로가 이 세트에서 먼저 어두워 티질을 얻었지만 육대 요기된 후 다시 타입 브레이크가 필요했다.",
+    "translation_input": "델 포트로가 이 세트에서 먼저 어두워 티질을 얻었지만 육대 요기된 후 다시 타입 브레이크가 필요했다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "2",
+        "6",
+        "6"
+      ],
+      "hypothesis_digits": [],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1929-1007237877117014760",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+    "raw": "델포트로가 2세트에서 먼저 어드베티지를 얻었지만 6대6이 된 후 다시 타이브레이크가 필요했다.",
+    "retained": "델포트로가 2세트에서 먼저 어드베티지를 얻었지만 6대6이 된 후 다시 타이브레이크가 필요했다.",
+    "translation_input": "델포트로가 2세트에서 먼저 어드베티지를 얻었지만 6대6이 된 후 다시 타이브레이크가 필요했다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "2",
+        "6",
+        "6"
+      ],
+      "hypothesis_digits": [
+        "2",
+        "6",
+        "6"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1829-10449970185079774245",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+    "raw": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아끼실 수 있다 특히 주류나 담배를 살 때 그렇다",
+    "retained": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아끼실 수 있다 특히 주류나 담배를 살 때 그렇다",
+    "translation_input": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아끼실 수 있다 특히 주류나 담배를 살 때 그렇다",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1829-10449970185079774245",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+    "raw": "무거운 세금을 물리는 국가의 여행객들은 그대로 상당한 금액을 아킬 수 있다. 특히 줄이나 담배를 살 때 그렇다",
+    "retained": "무거운 세금을 물리는 국가의 여행객들은 그대로 상당한 금액을 아킬 수 있다. 특히 줄이나 담배를 살 때 그렇다",
+    "translation_input": "무거운 세금을 물리는 국가의 여행객들은 그대로 상당한 금액을 아킬 수 있다. 특히 줄이나 담배를 살 때 그렇다",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1742-10505940208824594418",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+    "raw": "홍콩사는 홍콩 영토의 홍콩이라는 이름을 부위한 곳 시작 많은 관광객들이 추워한 점으로",
+    "retained": "홍콩사는 홍콩 영토의 홍콩이라는 이름을 부위한 곳 시작 많은 관광객들이 추워한 점으로",
+    "translation_input": "홍콩사는 홍콩 영토의 홍콩이라는 이름을 부위한 곳 시작 많은 관광객들이 추워한 점으로",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1742-10505940208824594418",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+    "raw": "홍콩섬은 홍콩영토의 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주한점으로 여기는 곳이다.",
+    "retained": "홍콩섬은 홍콩영토의 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주한점으로 여기는 곳이다.",
+    "translation_input": "홍콩섬은 홍콩영토의 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주한점으로 여기는 곳이다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1907-1053553381405565115",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+    "raw": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시...",
+    "retained": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시...",
+    "translation_input": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시...",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1907-1053553381405565115",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "교전이 발발한 직후 영국은 독일에 대한 해상 봉쇄를 시작한다.",
+    "raw": "교전이 발발한 직구 영국은 보기를 해상 봉세를 시작한다.",
+    "retained": "교전이 발발한 직구 영국은 보기를",
+    "translation_input": "교전이 발발한 직구 영국은 보기를",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1674-10667839008527105971",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "일부 지역에서는 1분간 물을 끓이는 것으로 충분하다. 다른 지역에서는 수 분 동안 물을 끓일 필요가 있다.",
+    "raw": "일부 지역에서는 1분간 물을 끓이는 충전. 다른 지역에서는 수분통한 물을 끓이 필요가 있네요",
+    "retained": "일부 지역에서는 1분간 물을 끓이는 다른 지역에서는 수분통한 물을 끓이 필요가 있네요",
+    "translation_input": "일부 지역에서는 1분간 물을 끓이는 다른 지역에서는 수분통한 물을 끓이 필요가 있네요",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1"
+      ],
+      "hypothesis_digits": [
+        "1"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1674-10667839008527105971",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "일부 지역에서는 1분간 물을 끓이는 것으로 충분하다. 다른 지역에서는 수 분 동안 물을 끓일 필요가 있다.",
+    "raw": "일부 지육에서는 1분간 물을 끓이는 것으로 충분하다. 다른 지역에서는 수분동안 물을 끓이 필요가 있.",
+    "retained": "일부 지육에서는 1분간 물을 끓이는 것으로 충분하다. 다른 지역에서는 수분동안 물을 끓이 필요가 있.",
+    "translation_input": "일부 지육에서는 1분간 물을 끓이는 것으로 충분하다. 다른 지역에서는 수분동안 물을 끓이 필요가 있.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1"
+      ],
+      "hypothesis_digits": [
+        "1"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1677-10745666594192256552",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "오늘날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다.",
+    "raw": "Okay. 어느 날 날개를 접을 수 없는 곤층은 잠자리와 팔이 밖에 없습니다.",
+    "retained": "어느 날 날개를 접을 수 없는 곤층은 잠자리와 팔이 밖에 없습니다.",
+    "translation_input": "어느 날 날개를 접을 수 없는 곤층은 잠자리와 팔이 밖에 없습니다.",
+    "cues": {
+      "reference_negation_cues": [
+        "없",
+        "없"
+      ],
+      "hypothesis_negation_cues": [
+        "없",
+        "없"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1677-10745666594192256552",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "오늘날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다.",
+    "raw": "Thank you. 어느 날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다.",
+    "retained": "어느 날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다.",
+    "translation_input": "어느 날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다.",
+    "cues": {
+      "reference_negation_cues": [
+        "없",
+        "없"
+      ],
+      "hypothesis_negation_cues": [
+        "없",
+        "없"
+      ],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1910-11135324899979291899",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "파리 사람들은 자기중심적이고, 무례하고, 오만하다는 평판이 있습니다.",
+    "raw": "파리 사람들은 자기 중심적이고 물에 하고 오만하다는 평판이 있습니다.",
+    "retained": "파리 사람들은 자기 중심적이고 물에 하고 오만하다는 평판이 있습니다.",
+    "translation_input": "파리 사람들은 자기 중심적이고 물에 하고 오만하다는 평판이 있습니다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1910-11135324899979291899",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "파리 사람들은 자기중심적이고, 무례하고, 오만하다는 평판이 있습니다.",
+    "raw": "파리 사람들은 자기중심적이고 무례하고 오만하다는 평판이",
+    "retained": "파리 사람들은 자기중심적이고 무례하고 오만하다는 평판이",
+    "translation_input": "파리 사람들은 자기중심적이고 무례하고 오만하다는 평판이",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1894-11320272182475458144",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "커리는 약용 식물과 향신료를 기본으로 하여 고기나 채소를 곁들이는 요리입니다.",
+    "raw": "컬이는 야경식물과 향신료를 기보드로 하여",
+    "retained": "컬이는 야경식물과 향신료를 기보드로 하여",
+    "translation_input": "컬이는 야경식물과 향신료를 기보드로 하여",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1894-11320272182475458144",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "커리는 약용 식물과 향신료를 기본으로 하여 고기나 채소를 곁들이는 요리입니다.",
+    "raw": "털이는 야경식물과 향신료를 기부 고기나 채소를 적..",
+    "retained": "털이는 야경식물과 향신료를 기부 고기나 채소를 적..",
+    "translation_input": "털이는 야경식물과 향신료를 기부 고기나 채소를 적..",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1666-11356572884265750080",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "자신의 의견이 아닌 정부의 의견을 듣고 싶을 수도 있지만, 각국 정부의 조언들은 자국민에 맞춰져 있다.",
+    "raw": "자신의 의견이 아닌 정보의 의견을 듣고 싶을 수도 있지. 각국 정부의 조원들은 자국민에 맞춰주",
+    "retained": "자신의 의견이 아닌 정보의 의견을 듣고 싶을 수도 있지. 각국 정부의 조원들은 자국민에 맞춰주",
+    "translation_input": "자신의 의견이 아닌 정보의 의견을 듣고 싶을 수도 있지. 각국 정부의 조원들은 자국민에 맞춰주",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1666-11356572884265750080",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "자신의 의견이 아닌 정부의 의견을 듣고 싶을 수도 있지만, 각국 정부의 조언들은 자국민에 맞춰져 있다.",
+    "raw": "자신의 의견이 아닌 정부의 의견을 듣고 싶을 수도 있지만 각국 정보의 의견을 정부의 조원들은 자국민에 맞춰져 있다.",
+    "retained": "자신의 의견이 아닌 정부의 의견을 듣고 싶을 수도 있지만 각국 정보의 의견을 정부의 조원들은 자국민에 맞춰져 있다.",
+    "translation_input": "자신의 의견이 아닌 정부의 의견을 듣고 싶을 수도 있지만 각국 정보의 의견을 정부의 조원들은 자국민에 맞춰져 있다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1701-11362321481706159971",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+    "raw": "염소사육은 대략 1만 년 전에 이란의 자그로슴 3매... 시작한 것으로 보입니다.",
+    "retained": "염소사육은 대략 1만 년 전에 이란의 자그로슴 3매... 시작한 것으로 보입니다.",
+    "translation_input": "염소사육은 대략 1만 년 전에 이란의 자그로슴 3매... 시작한 것으로 보입니다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "1",
+        "3"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1701-11362321481706159971",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "염소 사육은 대략 일만 년 전에 이란의 자그로스산맥에서 시작한 것으로 보입니다.",
+    "raw": "염소사육은 대략 1만 년 전에 1한 자그로슴 선맥에서 시작한 것으로 보입니다.",
+    "retained": "염소사육은 대략 1만 년 전에 1한 자그로슴 선맥에서 시작한 것으로 보입니다.",
+    "translation_input": "염소사육은 대략 1만 년 전에 1한 자그로슴 선맥에서 시작한 것으로 보입니다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [
+        "1",
+        "1"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-2005-11368863851088641817",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "하지만 여전히 새에는 공룡처럼 보이게 하는 것들이 많습니다.",
+    "raw": "하지만 여전히 새에는 공용처럼 보인다. 여기 하는 것들이 많습니다.",
+    "retained": "하지만 여전히 새에는 공용처럼 보인다. 여기 하는 것들이 많습니다.",
+    "translation_input": "하지만 여전히 새에는 공용처럼 보인다. 여기 하는 것들이 많습니다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-2005-11368863851088641817",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "하지만 여전히 새에는 공룡처럼 보이게 하는 것들이 많습니다.",
+    "raw": "하지만 여전히 새해는 공룡처럼 보이게 하는 것들이 많습니다.",
+    "retained": "하지만 여전히 새해는 공룡처럼 보이게 하는 것들이 많습니다.",
+    "translation_input": "하지만 여전히 새해는 공룡처럼 보이게 하는 것들이 많습니다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1776-11394748796925515761",
+    "language": "ko",
+    "strategy": "language_aware",
+    "reference": "그날 밤 동안 지금은 '던랩 브로드사이드'라고 불리는 인쇄물이 150에서 200장 만들어졌다.",
+    "raw": "그날 밤 동안 지금은 덜랩 브로드 사이드라고 불리는 인쇄물이 150에서 200장 만들어졌다.",
+    "retained": "그날 밤 동안 지금은 덜랩 브로드 사이드라고 불리는 인쇄물이 150에서 200장 만들어졌다.",
+    "translation_input": "그날 밤 동안 지금은 덜랩 브로드 사이드라고 불리는 인쇄물이 150에서 200장 만들어졌다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "150",
+        "200"
+      ],
+      "hypothesis_digits": [
+        "150",
+        "200"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ko-1776-11394748796925515761",
+    "language": "ko",
+    "strategy": "legacy",
+    "reference": "그날 밤 동안 지금은 '던랩 브로드사이드'라고 불리는 인쇄물이 150에서 200장 만들어졌다.",
+    "raw": "그날 밤 동안 지금은 덜렷프로 사이드 라고 불리는 인새물이 100 50에서 200장 만들어졌다.",
+    "retained": "그날 밤 동안 지금은 덜렷프로 사이드 라고 불리는 인새물이 100 50에서 200장 만들어졌다.",
+    "translation_input": "그날 밤 동안 지금은 덜렷프로 사이드 라고 불리는 인새물이 100 50에서 200장 만들어졌다.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "150",
+        "200"
+      ],
+      "hypothesis_digits": [
+        "100",
+        "50",
+        "200"
+      ],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1781-10002861505982796062",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+    "raw": "Мадагаскар намного больше других. самобытным континентом в том, что касается...",
+    "retained": "Мадагаскар намного больше других. самобытным континентом в том, что касается...",
+    "translation_input": "Мадагаскар намного больше других. самобытным континентом в том, что касается...",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1781-10002861505982796062",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+    "raw": "Мадагаскар намного больше других, и является самобытным кончен... инентом в том, что касается дикой природы.",
+    "retained": "Мадагаскар намного больше других, и является самобытным кончен... инентом в том, что касается дикой природы.",
+    "translation_input": "Мадагаскар намного больше других, и является самобытным кончен... инентом в том, что касается дикой природы.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1704-10021068571959461962",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+    "raw": "1990 году он был добавлен в списк в Семерного наследия. находящуюся по догрозе із опасності со стороны пізков впустині.",
+    "retained": "1990 году он был добавлен в списк в Семерного наследия. находящуюся по догрозе із опасності со стороны пізков впустині.",
+    "translation_input": "1990 году он был добавлен в списк в Семерного наследия.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1990"
+      ],
+      "hypothesis_digits": [
+        "1990"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1704-10021068571959461962",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+    "raw": "1990 году он был добавлен в списку в Семир. Находящуюся по догрозе із опасності со стороны",
+    "retained": "1990 году он был добавлен в списку в Семир. Находящуюся по догрозе із опасності со стороны",
+    "translation_input": "1990 году он был добавлен в списку в Семир.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "1990"
+      ],
+      "hypothesis_digits": [
+        "1990"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1757-10040813106556859083",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+    "raw": "Только мутации в клетках зарода шеволений могут трёхать. до вас и далее. то время как мутаться где-то еще могут привести гиблик. и раку.",
+    "retained": "Только мутации в клетках зарода шеволений могут трёхать. то время как мутаться где-то еще могут привести гиблик. и раку.",
+    "translation_input": "Только мутации в клетках зарода шеволений могут трёхать. то время как мутаться где-то еще могут привести гиблик. и раку.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1757-10040813106556859083",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+    "raw": "Только мутации в клетках зародышевой линии могут передаваться далее детям. то время как мутация где-то еще могут привести гибликлеток или раку.",
+    "retained": "Только мутации в клетках зародышевой линии могут передаваться далее детям. то время как мутация где-то еще могут привести гибликлеток или раку.",
+    "translation_input": "Только мутации в клетках зародышевой линии могут передаваться далее детям. то время как мутация где-то еще могут привести гибликлеток или раку.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1757-10132536326476504073",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+    "raw": "только мутации в клетках зародышевой линии могут передаваться. далее детям. В то время к мутациях где-то еще могут привести гибели клеток или раку.",
+    "retained": "только мутации в клетках зародышевой линии могут передаваться. далее детям. В то время к мутациях где-то еще могут привести гибели клеток или раку.",
+    "translation_input": "только мутации в клетках зародышевой линии могут передаваться. далее детям. В то время к мутациях где-то еще могут привести гибели клеток или раку.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1757-10132536326476504073",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+    "raw": "только мутации в клетках зародышевой линии. и могут передаваться далее детям. то время к мотоцикде те еще могут провести гибели крит.",
+    "retained": "только мутации в клетках зародышевой линии. и могут передаваться далее детям. то время к мотоцикде те еще могут провести гибели крит.",
+    "translation_input": "только мутации в клетках зародышевой линии. и могут передаваться далее детям. то время к мотоцикде те еще могут провести гибели крит.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1780-10171517466248249697",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Энергия кундалини (энергия просветления) в кундалини-йоге пробуждается через позы йоги, дыхательные упражнения, мантры и визуализации.",
+    "raw": "энергия кунда линии. в кунтолине Йоги, пробуждается через позиё. дыхательные упражнения, мантр и визуализов.",
+    "retained": "энергия кунда линии. в кунтолине Йоги, пробуждается через позиё. дыхательные упражнения, мантр и визуализов.",
+    "translation_input": "энергия кунда линии. в кунтолине Йоги, пробуждается через позиё. дыхательные упражнения, мантр и визуализов.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1780-10171517466248249697",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Энергия кундалини (энергия просветления) в кундалини-йоге пробуждается через позы йоги, дыхательные упражнения, мантры и визуализации.",
+    "raw": "энергия кунда линии энергия просветления. в кунт-долине йоги пробуждаются через пози йоги дыхательные упражнения. мантр и визуализации.",
+    "retained": "энергия кунда линии энергия просветления. в кунт-долине йоги пробуждаются через пози йоги дыхательные упражнения. мантр и визуализации.",
+    "translation_input": "энергия кунда линии энергия просветления. в кунт-долине йоги пробуждаются через пози йоги дыхательные упражнения. мантр и визуализации.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1822-10188941853627582181",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Султан Марокко перестроил город под названием Эд-Дар-эль-Бейда, а испанские торговцы, создавшие тут торговые базы, назвали его Касабланка.",
+    "raw": "Султан Морока перестраил город под названием Eddar-Лбейт. испанский торговцы, создавший торговый база. назвали его к собланку.",
+    "retained": "Султан Морока перестраил город под названием Eddar-Лбейт. испанский торговцы, создавший торговый база. назвали его к собланку.",
+    "translation_input": "Султан Морока перестраил город под названием Eddar-Лбейт. испанский торговцы, создавший торговый база. назвали его к собланку.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1822-10188941853627582181",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Султан Марокко перестроил город под названием Эд-Дар-эль-Бейда, а испанские торговцы, создавшие тут торговые базы, назвали его Касабланка.",
+    "raw": "Султан Морока перестроил город под названием Eddard El-Bate. и спанские торговцы, создавшие тут торговые базы. назвали его «Косабланка».",
+    "retained": "Султан Морока перестроил город под названием Eddard El-Bate. и спанские торговцы, создавшие тут торговые базы. назвали его «Косабланка».",
+    "translation_input": "Султан Морока перестроил город под названием Eddard El-Bate. и спанские торговцы, создавшие тут торговые базы. назвали его «Косабланка».",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1722-10235885686555015984",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "53-летний Куомо начал свою деятельность на посту губернатора в начале этого года и подписал законопроект о легализации однополых браков в прошлом месяце.",
+    "raw": "53-летни Кома начал свою деятельность. посту губернатора. в начале этого года и подписал законопроект о легализации. Прошло месяц.",
+    "retained": "53-летни Кома начал свою деятельность. посту губернатора. в начале этого года и подписал законопроект о легализации. Прошло месяц.",
+    "translation_input": "53-летни Кома начал свою деятельность. посту губернатора. в начале этого года и подписал законопроект о легализации. Прошло месяц.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "53"
+      ],
+      "hypothesis_digits": [
+        "53"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1722-10235885686555015984",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "53-летний Куомо начал свою деятельность на посту губернатора в начале этого года и подписал законопроект о легализации однополых браков в прошлом месяце.",
+    "raw": "53-летни Кома начал свою деятельность на посту губернатора. В начале этого года и подписан законопроект о легализации однополых браков.",
+    "retained": "53-летни Кома начал свою деятельность на посту губернатора. В начале этого года и подписан законопроект о легализации однополых браков.",
+    "translation_input": "53-летни Кома начал свою деятельность на посту губернатора. В начале этого года и подписан законопроект о легализации однополых браков.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "53"
+      ],
+      "hypothesis_digits": [
+        "53"
+      ],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1768-10236500060910266583",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Большинство зданий по краям комплекса было перестроено, чтобы дать туристам более точное представление о том, как они выглядели изначально.",
+    "raw": "большинство зданий по краям комплекса было перестроено. туристам более точное представление о том как они. выхидели изначально.",
+    "retained": "большинство зданий по краям комплекса было перестроено. туристам более точное представление о том как они. выхидели изначально.",
+    "translation_input": "большинство зданий по краям комплекса было перестроено. туристам более точное представление о том как они. выхидели изначально.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1768-10236500060910266583",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Большинство зданий по краям комплекса было перестроено, чтобы дать туристам более точное представление о том, как они выглядели изначально.",
+    "raw": "большинство зданий по краям комплекса было перестро... туристам более точное представление о том, как они. выхдели изначально.",
+    "retained": "большинство зданий по краям комплекса было перестро... туристам более точное представление о том, как они. выхдели изначально.",
+    "translation_input": "большинство зданий по краям комплекса было перестро... туристам более точное представление о том, как они. выхдели изначально.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1962-1027147027471254370",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Показатель pH определяется степенью насыщенности ионами водорода (H в pH) исследуемого химического соединения.",
+    "raw": "показатель пиаш определяется с типами нюносы и онами водорода. Аж пяж. исследуемо в ахимического соединения.",
+    "retained": "показатель пиаш определяется с типами нюносы и онами водорода. Аж пяж. исследуемо в ахимического соединения.",
+    "translation_input": "показатель пиаш определяется с типами нюносы и онами водорода. Аж пяж. исследуемо в ахимического соединения.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1962-1027147027471254370",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Показатель pH определяется степенью насыщенности ионами водорода (H в pH) исследуемого химического соединения.",
+    "raw": "Пьаж определяется с тепенью насыщенности и онами вода. Аш пяж, исследуемо в ахимического соединения.",
+    "retained": "Пьаж определяется с тепенью насыщенности и онами вода. Аш пяж, исследуемо в ахимического соединения.",
+    "translation_input": "Пьаж определяется с тепенью насыщенности и онами вода. Аш пяж, исследуемо в ахимического соединения.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1861-10276863687632229120",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "В результате актёры курят косяки с марихуаной на сцене, и сам театр поощряет публику присоединиться.",
+    "raw": "В результаті актіори курят касікі смерехуани на сцені і сам театр. ваше реак публику присоединится.",
+    "retained": "В результаті актіори курят касікі смерехуани на сцені і сам театр. ваше реак публику присоединится.",
+    "translation_input": "В результаті актіори курят касікі смерехуани на сцені і сам театр. ваше реак публику присоединится.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1861-10276863687632229120",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "В результате актёры курят косяки с марихуаной на сцене, и сам театр поощряет публику присоединиться.",
+    "raw": "В результате актёры курят кассики с мариханами. на сцене и сам театр пащает публику присоединения.",
+    "retained": "В результате актёры курят кассики с мариханами. на сцене и сам театр пащает публику присоединения.",
+    "translation_input": "В результате актёры курят кассики с мариханами. на сцене и сам театр пащает публику присоединения.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1882-1030565507112045178",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Учёные надеются понять, как образуются планеты, особенно то, как образовалась Земля, поскольку кометы сталкивались  с Землёй очень давно.",
+    "raw": "Ученые надеются понять, как образуется планетас. как образовала земля, поскольку коммент сталкивая землей.",
+    "retained": "Ученые надеются понять, как образуется планетас. как образовала земля, поскольку коммент сталкивая землей.",
+    "translation_input": "Ученые надеются понять, как образуется планетас. как образовала земля, поскольку коммент сталкивая землей.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1882-1030565507112045178",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Учёные надеются понять, как образуются планеты, особенно то, как образовалась Земля, поскольку кометы сталкивались  с Землёй очень давно.",
+    "raw": "Ученые надеются понять, как образуются планеты, особенно ток. как образовала земля, поскольку коммент сталкивали землей очень давно.",
+    "retained": "Ученые надеются понять, как образуются планеты, особенно ток. как образовала земля, поскольку коммент сталкивали землей очень давно.",
+    "translation_input": "Ученые надеются понять, как образуются планеты, особенно ток. как образовала земля, поскольку коммент сталкивали землей очень давно.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [],
+      "hypothesis_digits": [],
+      "digit_surface_difference": false,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1885-10312175978910673333",
+    "language": "ru",
+    "strategy": "language_aware",
+    "reference": "Между 10:00 и 11:00 вечера по горному времени заключенные устроили пожар во дворе.",
+    "raw": "Между десятью и одиннадцати вечера по горному времени заключённый строили пожар во дворе.",
+    "retained": "Между десятью и одиннадцати вечера по горному времени заключённый строили пожар во дворе.",
+    "translation_input": "Между десятью и одиннадцати вечера по горному времени заключённый строили пожар во дворе.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "10",
+        "00",
+        "11",
+        "00"
+      ],
+      "hypothesis_digits": [],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  },
+  {
+    "id": "beta-ru-1885-10312175978910673333",
+    "language": "ru",
+    "strategy": "legacy",
+    "reference": "Между 10:00 и 11:00 вечера по горному времени заключенные устроили пожар во дворе.",
+    "raw": "Между десятью и одиннадцати вечера по гарному. Время заключенные устроили пожар в адвари.",
+    "retained": "Между десятью и одиннадцати вечера по гарному. Время заключенные устроили пожар в адвари.",
+    "translation_input": "Между десятью и одиннадцати вечера по гарному. Время заключенные устроили пожар в адвари.",
+    "cues": {
+      "reference_negation_cues": [],
+      "hypothesis_negation_cues": [],
+      "negation_cue_difference": false,
+      "reference_digits": [
+        "10",
+        "00",
+        "11",
+        "00"
+      ],
+      "hypothesis_digits": [],
+      "digit_surface_difference": true,
+      "human_semantic_accuracy": null,
+      "entity_retention": null,
+      "tail_complete": null,
+      "status": "suspicions only; morphology, homophones, spoken numbers and publisher errors may produce false flags"
+    },
+    "reference_status": "pending_human_review",
+    "human_review": "pending"
+  }
+]

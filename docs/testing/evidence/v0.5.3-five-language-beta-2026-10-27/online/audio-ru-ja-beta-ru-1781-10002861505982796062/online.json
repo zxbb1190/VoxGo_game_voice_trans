@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ru-ja-beta-ru-1781-10002861505982796062",
+    "source": "ru",
+    "target": "ja",
+    "record_id": "beta-ru-1781-10002861505982796062",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+    "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-ja-beta-ru-1781-10002861505982796062",
+      "trace_id": "1",
+      "source": "ru",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "Мадагаскар намного больше других, и является самобытным кончен...",
+      "input_sha256": "23ff71fe4940caaa1de7e50c792af4ceef135149aa8a7759ba87cb63edf432ce",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 213,
+      "queue_wait_ms": 0.0026999914553016424,
+      "translated": "マダガスカルは他の国々よりもはるかに大きく、独自の個性を持っています…",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 276,
+        "completion_tokens": 31,
+        "total_tokens": 307
+      },
+      "elapsed_ms": 752.314799989108,
+      "provider_elapsed_ms": 747.1215724945068,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-ja-beta-ru-1781-10002861505982796062",
+      "trace_id": "2",
+      "source": "ru",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "инентом в том, что касается дикой природы.",
+      "input_sha256": "e1495c822fe659abbc7e6c3b792655b41a6526be63ac7cd05d044de8af34561b",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 214,
+      "queue_wait_ms": 0.0030999945010989904,
+      "translated": "野生動物に関する内容です。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 267,
+        "completion_tokens": 9,
+        "total_tokens": 276
+      },
+      "elapsed_ms": 399.56560000428,
+      "provider_elapsed_ms": 392.92216300964355,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "Мадагаскар намного больше других, и является самобытным кончен...",
+      "translated": "マダガスカルは他の国々よりもはるかに大きく、独自の個性を持っています…",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118240.5333089,
+      "source_pcm_spans": [
+        [
+          78720,
+          151680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1895.0243000104092,
+      "source_wav_end_to_widget_ms": -3144.975699989591,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "инентом в том, что касается дикой природы.",
+      "translated": "野生動物に関する内容です。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118243.5037308,
+      "source_pcm_spans": [
+        [
+          151680,
+          205440
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1505.4462000081548,
+      "source_wav_end_to_widget_ms": -174.55379999184515,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.203125,
+  "outer_wall_seconds": 19.228186399996048,
+  "api_requests_total_ledger": 214,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "audio-en-zh-beta-en-1675-10052240106321793346",
+    "source": "en",
+    "target": "zh",
+    "record_id": "beta-en-1675-10052240106321793346",
+    "strategy": "formal",
+    "offline_translation_boundaries": 3,
+    "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+    "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1675-10052240106321793346",
+      "trace_id": "1",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "All Niles are more sighted worlds.",
+      "input_sha256": "9cf0863dd69d0e2b4d6560dfb04dbbb12ab5b7ab3530d0768790b20df1c49417",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 157,
+      "queue_wait_ms": 0.002700006007216871,
+      "translated": "所有尼尔斯（Niles）都是更显眼的世界。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 250,
+        "completion_tokens": 13,
+        "total_tokens": 263
+      },
+      "elapsed_ms": 1052.8625000006286,
+      "provider_elapsed_ms": 1048.3675003051758,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1675-10052240106321793346",
+      "trace_id": "2",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "always begin with a capital letter.",
+      "input_sha256": "35a8e52a8e964965ff2650ca93e08426de71263c44afdcbe5bee6bd3de65567f",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 158,
+      "queue_wait_ms": 0.003100009053014219,
+      "translated": "总是以大写字母开头。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 249,
+        "completion_tokens": 7,
+        "total_tokens": 256
+      },
+      "elapsed_ms": 2013.482299997122,
+      "provider_elapsed_ms": 2008.0668926239014,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1675-10052240106321793346",
+      "trace_id": "3",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "in the middle of a sentence.",
+      "input_sha256": "d7f46d81ee3151d41b79fab3c4e1df322a0bc7e814fd135e6ef50d79fc25a346",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 159,
+      "queue_wait_ms": 0.0027999922167509794,
+      "translated": "在句子中间。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 249,
+        "completion_tokens": 4,
+        "total_tokens": 253
+      },
+      "elapsed_ms": 3127.337300000363,
+      "provider_elapsed_ms": 3122.842311859131,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "All Niles are more sighted worlds.",
+      "translated": "所有尼尔斯（Niles）都是更显眼的世界。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117616.1359245,
+      "source_pcm_spans": [
+        [
+          46080,
+          88320
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2791.766200014972,
+      "source_wav_end_to_widget_ms": -3448.233799985028,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "always begin with a capital letter.",
+      "translated": "总是以大写字母开头。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117620.8867221,
+      "source_pcm_spans": [
+        [
+          105600,
+          147840
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 3822.5638000055915,
+      "source_wav_end_to_widget_ms": 1302.5638000055915,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "in the middle of a sentence.",
+      "translated": "在句子中间。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117624.450397,
+      "source_pcm_spans": [
+        [
+          147840,
+          188160
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 4866.238700002432,
+      "source_wav_end_to_widget_ms": 4866.238700002432,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 5.484375,
+  "outer_wall_seconds": 17.170981599992956,
+  "api_requests_total_ledger": 159,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

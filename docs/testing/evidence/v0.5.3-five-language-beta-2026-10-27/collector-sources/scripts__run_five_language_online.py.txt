@@ -1,0 +1,283 @@
+"""Explicitly approved, bounded SiliconFlow five-language acceptance.
+
+Reuses the observed production Capture/Pipeline/Whisper chain and real native
+Qt/TranslationRuntime. Public/authored inputs only. Never writes user settings.
+"""
+import argparse
+import asyncio
+from collections import defaultdict
+import contextvars
+import copy
+from dataclasses import fields
+from datetime import datetime,timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import threading
+import time
+from types import SimpleNamespace
+from unittest.mock import patch
+from urllib.parse import urlparse
+
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from scripts import offline_russian_capture_ab as replay
+from scripts.run_five_language_asr import resolved_config
+from scripts.run_ru_continuous_baseline import input_stream
+from voxgo.translation import GameTranslator,TranslationConfig
+from voxgo.translation.prompt import translation_system_prompt
+
+TRACE=contextvars.ContextVar('acceptance_trace_id',default='')
+CURRENT=contextvars.ContextVar('acceptance_http_context',default=None)
+MODEL='tencent/Hunyuan-MT-7B'
+
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def load(path):return json.loads(Path(path).read_text('utf-8-sig'))
+
+
+def atomic(path,value):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True);temporary=path.with_suffix('.tmp')
+    with temporary.open('w',encoding='utf-8',newline='\n') as f:
+        json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+    for attempt in range(6):
+        try:temporary.replace(path);return
+        except PermissionError:
+            if attempt==5:raise
+            time.sleep(.02*(attempt+1))
+
+
+class BudgetStop(RuntimeError):pass
+
+
+class AttemptBudget:
+    """One sequential parent/child owner; durable reservation before every POST."""
+    def __init__(self,path,approval,plan_hash):
+        if (approval.get('authorized') is not True or approval.get('plan_sha256')!=plan_hash
+                or approval.get('model')!=MODEL or not 1<=approval.get('call_limit',0)<=300):
+            raise ValueError('Explicit matching authorization, fixed model and cap <=300 required')
+        self.path=Path(path);self.lock=threading.RLock();self.limit=approval['call_limit']
+        self.data=load(path) if self.path.exists() else dict(plan_sha256=plan_hash,limit=self.limit,model=MODEL,attempts=[],stop_reason=None)
+        if self.data['plan_sha256']!=plan_hash or self.data['limit']!=self.limit:raise ValueError('Ledger scope changed')
+    def reserve(self,context):
+        with self.lock:
+            if self.data['stop_reason']:raise BudgetStop(self.data['stop_reason'])
+            if len(self.data['attempts'])>=self.limit:raise BudgetStop('authorized_cap_reached')
+            id=len(self.data['attempts'])+1
+            self.data['attempts'].append(dict(id=id,**context,http_status=None,state='reserved_before_http',reserved_at_utc=datetime.now(timezone.utc).isoformat()))
+            atomic(self.path,self.data);return id
+    def mark(self,id,**values):
+        if id is None:return
+        with self.lock:
+            row=self.data['attempts'][id-1];row.update(values)
+            if values.get('http_status') in {400,401,402,403,404,429}:
+                self.data['stop_reason']='http_'+str(values['http_status'])
+            atomic(self.path,self.data)
+
+
+class RequestContext:
+    def __init__(self,original,budget,id):self.original,self.budget,self.id=original,budget,id
+    async def __aenter__(self):
+        self.budget.mark(self.id,http_started_monotonic=time.perf_counter())
+        try:
+            response=await self.original.__aenter__()
+            self.budget.mark(self.id,http_status=response.status,state='headers_received')
+            return response
+        except BaseException as exc:
+            self.budget.mark(self.id,state='transport_exception',exception_type=type(exc).__name__);raise
+    async def __aexit__(self,*args):
+        try:return await self.original.__aexit__(*args)
+        finally:self.budget.mark(self.id,http_finished_monotonic=time.perf_counter(),http_context_exception=type(args[1]).__name__ if args[1] else None)
+
+
+class MeasuredSlot:
+    def __init__(self,semaphore):self.semaphore=semaphore
+    async def __aenter__(self):
+        start=time.perf_counter();await self.semaphore.acquire()
+        context=CURRENT.get()
+        if context is not None:context['queue_wait_ms']=(time.perf_counter()-start)*1000
+    async def __aexit__(self,*args):self.semaphore.release()
+
+
+class MeasuredClient(GameTranslator):
+    def __init__(self,config,budget,phase,case_id='',*,allow_loopback_fixture=False):
+        super().__init__(config);self.budget=budget;self.phase=phase;self.case_id=case_id;self.rows=[];self.fixture=allow_loopback_fixture
+    def _translation_semaphore(self):return MeasuredSlot(super()._translation_semaphore())
+    async def _get_session(self):
+        session=await super()._get_session()
+        if not getattr(session,'_acceptance_counted',False):
+            original=session.post
+            def post(url,*args,**kwargs):
+                parsed=urlparse(str(url))
+                allowed=parsed.scheme=='https' and parsed.hostname=='api.siliconflow.cn' and parsed.path=='/v1/chat/completions'
+                if not allowed and not (self.fixture and parsed.hostname in {'127.0.0.1','localhost'}):raise ValueError('Transport outside fixed provider forbidden')
+                context=CURRENT.get()
+                if context is None:raise ValueError('Unlabelled request forbidden')
+                id=self.budget.reserve({k:v for k,v in context.items() if k!='attempt_id'});context['attempt_id']=id
+                kwargs['allow_redirects']=False  # Exactly one bounded HTTP attempt; no redirect/fallback.
+                return RequestContext(original(url,*args,**kwargs),self.budget,id)
+            session.post=post;session._acceptance_counted=True
+        return session
+    async def translate_result_with_config(self,text,detected_language='',config=None):
+        config=config or self.config
+        context=dict(phase=self.phase,case_id=self.case_id,trace_id=TRACE.get(),source=config.source_lang,target=config.target_lang,
+            transport_kind='loopback_fixture' if self.fixture else 'siliconflow_live',
+            input=text,input_sha256=hashlib.sha256(text.encode()).hexdigest(),prompt=translation_system_prompt(config.source_lang,config.target_lang),attempt_id=None,queue_wait_ms=None)
+        token=CURRENT.set(context);started=time.perf_counter();result=None
+        try:
+            result=await super().translate_result_with_config(text,detected_language,config)
+            if result is not None and self.config.api_key:
+                for secret in {self.config.api_key,self.config.api_key.strip()}:
+                    if secret:result.translated=result.translated.replace(secret,'[REDACTED]')
+            raw=(getattr(result,'raw',None) or {});choice=(raw.get('choices') or [{}])[0]
+            row=dict(**context,translated=getattr(result,'translated',''),failure_reason=getattr(result,'failure_reason',''),
+                finish_reason=choice.get('finish_reason'),usage={k:v for k,v in (raw.get('usage') or {}).items() if k in {'prompt_tokens','completion_tokens','total_tokens'} and isinstance(v,(int,float))},elapsed_ms=(time.perf_counter()-started)*1000,
+                provider_elapsed_ms=getattr(result,'elapsed_seconds',0)*1000,
+                http_status=self.budget.data['attempts'][context['attempt_id']-1]['http_status'] if context['attempt_id'] else None,
+                complete_json_response=bool(raw),human_review='pending',target_language_human_confirmed=None)
+            row['truncated']=row['finish_reason']=='length'
+            row['api_nonempty_success']=row['http_status']==200 and row['complete_json_response'] and bool(row['translated']) and not row['failure_reason']
+            self.rows.append(row);self.budget.mark(context['attempt_id'],state='result_returned',failure_reason=row['failure_reason'],finish_reason=row['finish_reason'],elapsed_ms=row['elapsed_ms'])
+            return result
+        except BaseException as exc:
+            self.rows.append(dict(**context,translated='',state='unfinished_or_exception',exception_type=type(exc).__name__,elapsed_ms=(time.perf_counter()-started)*1000,human_review='pending'))
+            self.budget.mark(context['attempt_id'],state='unfinished_or_exception',exception_type=type(exc).__name__);raise
+        finally:CURRENT.reset(token)
+
+
+def credentials(path):
+    # Reuse the already-tested strict fixed-provider loader; no settings writes.
+    from scripts.validate_multilingual_live import load_config
+    config=load_config(path)
+    config.context_messages=0;config.max_concurrent_requests=1;config.enable_local_phrase_cache=False
+    return config
+
+
+async def text_stage(plan,config,budget,output):
+    client=MeasuredClient(config,budget,'text');rows=[]
+    try:
+        for phase,cases in [('authored_text',plan['text_cases']),('standard_reference',plan['standard_reference_calls'])]:
+            client.phase=phase
+            for case in cases:
+                if budget.data['stop_reason']:return rows
+                if len(budget.data['attempts'])>=budget.limit:return rows
+                snapshot=copy.deepcopy(config);snapshot.source_lang,snapshot.target_lang=case['source'],case['target'];client.case_id=case['id']
+                await client.translate_result_with_config(case['text'],case['source'],snapshot)
+                rows=list(client.rows);atomic(output/'text-results.json',rows)
+                print(f"HTTP {len(budget.data['attempts'])}/{budget.limit} {case['id']} status={rows[-1].get('http_status')} failure={rows[-1].get('failure_reason') or '-'}",flush=True)
+    finally:await client.close()
+    return rows
+
+
+def audio_child(args,plan,approval,budget,config):
+    from scripts import offline_asr_observer as observer
+    os.environ['QT_QPA_PLATFORM']='windows'
+    from PyQt5.QtWidgets import QApplication
+    from voxgo.app import VoxGoApp
+    from voxgo.runtime.events import EventBus,TranslationReady
+    from voxgo.translation.runtime import TranslationRuntime
+    from voxgo.ui.overlay_window import GameOverlay
+    from voxgo.ui.config_models import OverlayConfig
+    manifest=load(args.manifest);case=load(args.audio_child);record=next(r for r in manifest['records'] if r['id']==case['record_id'])
+    if sha(record['audio'])!=case['wav_sha256']:raise ValueError('Selected WAV changed')
+    config=copy.deepcopy(config);config.source_lang,config.target_lang=case['source'],case['target']
+    app_config=resolved_config(case['source'],case['strategy'],args.models_directory);app_config.translation=config
+    qt=QApplication.instance() or QApplication([])
+    if qt.platformName()!='windows':raise ValueError('Native Windows Qt required')
+    shared_traces,stats={},defaultdict(int);subtitles=[];source_by_trace={};clock={};journals=[]
+    overlay=None
+    def updated(id):
+        item=next((x for x in overlay._translations if x.item_id==id),None)
+        if not item or item.translated.startswith('...'):return
+        now=time.perf_counter();source=source_by_trace.get(id,{})
+        subtitles.append(dict(trace_id=id,original=item.original,translated=item.translated,copyable=item.copyable,
+            widget_updated_at_monotonic=now,source_pcm_spans=source.get('spans'),
+            last_pcm_frame_to_widget_ms=((now-clock['origin'])*1000-source['spans'][-1][1]/16) if 'origin' in clock and source.get('spans') else None,
+            source_wav_end_to_widget_ms=((now-clock['origin'])*1000-(48000+record['frames'])/16) if 'origin' in clock else None,
+            human_voice_end_to_subtitle_ms=None,latency_scope='native Qt item update, not display scanout or manually verified voice end'))
+    overlay=GameOverlay(config=OverlayConfig(mobile_url='http://127.0.0.1:18765'),translation_config=config,audio_config=app_config.audio,whisper_config=app_config.whisper,on_overlay_updated=updated)
+    overlay.show();qt.processEvents()
+    owner=VoxGoApp.__new__(VoxGoApp);owner._stopping=False;owner._language_flow_revision=1;owner._stats=stats;owner._latency_traces=shared_traces;owner._overlay=overlay;owner._analytics=None;owner._mobile=SimpleNamespace(server=None)
+    bus=EventBus();runtime=TranslationRuntime(bus,stats,shared_traces,lambda:overlay);runtime.set_language_revision_getter(lambda:1)
+    client=MeasuredClient(config,budget,'streaming_asr',case['id']);runtime.client=client;bus.subscribe(TranslationReady,owner._handle_translation_ready)
+    original_event=observer.Journal.event;original_process=observer.ObservedCapture.process_audio
+    def event(journal,kind,**data):
+        result=original_event(journal,kind,**data)
+        if not journals:journals.append(journal)
+        if kind=='injected' and 'origin' not in clock:
+            clock['origin']=journal.started+(result['elapsed_ms']-data['spans'][-1][1]/16-data['scheduling_lateness_ms'])/1000
+        if kind=='translation_boundary' and not data.get('skip_reason'):
+            e=data['event'];item=journal.current();source_by_trace[e['trace_id']]=copy.deepcopy(journal.segment(item.segment));shared_traces[e['trace_id']]=item.trace
+            if budget.data['stop_reason'] or len(budget.data['attempts'])>=budget.limit:return result
+            overlay.add_translation_with_id(e['trace_id'],e['text'],'...正在翻译')
+            token=TRACE.set(e['trace_id'])
+            try:runtime.translate_async(e['trace_id'],e['text'],e['language'],e['language_probability'],e['source_lang'],e['target_lang'],e['language_revision'],item.trace)
+            finally:TRACE.reset(token)
+        return result
+    def process(capture):
+        result=original_process(capture);qt.processEvents();return result
+    spec=dict(id=case['id'],record_id=record['id'],strategy=case['strategy'],source_language=case['source'],cadence_ms=100)
+    spec_path=args.output/(case['id']+'.json');atomic(spec_path,spec)
+    raw=args.output/case['id'];started=time.perf_counter();cpu=time.process_time()
+    drained=False
+    try:
+        runtime.start_loop()
+        with patch.object(observer.Journal,'event',event),patch.object(observer.ObservedCapture,'process_audio',process):
+            replay.run_child(SimpleNamespace(child=spec_path,output=raw,manifest=args.manifest,models_directory=args.models_directory,drain_seconds=30),
+                replay_input=input_stream(record),app_config=app_config,whole_clip_warmup=False,summarize_recordings=lambda r:[],measurement_scope='approved public PCM -> production observed Capture/Pipeline/Whisper/language gate -> real online TranslationRuntime -> native Qt; no game/physical loopback')
+        deadline=time.monotonic()+60
+        while runtime._pending and time.monotonic()<deadline:
+            qt.processEvents();time.sleep(.01)
+        drained=not runtime._pending
+        if not drained:runtime.begin_shutdown()
+        qt.processEvents();overlay.grab().save(str(args.output/(case['id']+'-native.png')))
+    finally:
+        runtime.close();qt.processEvents();overlay._allow_close=True;overlay.close();qt.processEvents()
+        atomic(args.output/(case['id']+'-online.json'),dict(case=case,api=client.rows,subtitles=subtitles,translation_drain_complete=drained,platform=qt.platformName(),
+            outer_cpu_seconds=time.process_time()-cpu,outer_wall_seconds=time.perf_counter()-started,api_requests_total_ledger=len(budget.data['attempts']),
+            runtime_thread_stopped=not runtime.thread or not runtime.thread.is_alive(),human_review='pending',real_game=False,physical_loopback=False))
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for n in ['plan','approval','settings','manifest','models-directory','output']:p.add_argument('--'+n,type=Path,required=True)
+    p.add_argument('--run-live',action='store_true');p.add_argument('--audio-child',type=Path)
+    a=p.parse_args()
+    if not a.run_live:p.error('Explicit --run-live and matching authorization required')
+    plan,approval=load(a.plan),load(a.approval)
+    if approval.get('confirmed_free_price_date_utc')!=datetime.now(timezone.utc).date().isoformat():raise ValueError('Current free price confirmation required; stop')
+    if sha(a.manifest)!=plan['input_sha256']['manifest']:raise ValueError('Frozen input manifest changed')
+    config=credentials(a.settings)
+    if (config.timeout_seconds,config.max_tokens)!=(plan['provider']['timeout_seconds'],plan['provider']['max_tokens']):raise ValueError('Provider configuration changed; stop')
+    if a.audio_child:
+        budget=AttemptBudget(a.output/'attempt-ledger.json',approval,sha(a.plan));audio_child(a,plan,approval,budget,config);return
+    output=replay.create_output(a.output);initial_settings_sha=sha(a.settings)
+    budget=AttemptBudget(output/'attempt-ledger.json',approval,sha(a.plan));atomic(output/'authorization.json',approval)
+    status=dict(status='running',completed_audio_cases=[],initial_settings_sha256=initial_settings_sha,plan_sha256=sha(a.plan))
+    try:
+        asyncio.run(text_stage(plan,config,budget,output));atomic(output/'status.json',status)
+        for index,case in enumerate(plan['audio_cases']):
+            current=load(output/'attempt-ledger.json')
+            if current['stop_reason'] or len(current['attempts'])>=approval['call_limit']:break
+            case_path=output/('case-'+str(index+1)+'.json');atomic(case_path,case)
+            print(f"Native voice {index+1}/{len(plan['audio_cases'])} {case['id']}",flush=True)
+            with (output/('voice-'+str(index+1)+'.log')).open('x',encoding='utf-8') as log:
+                command=[sys.executable,'-B','-X','utf8',str(Path(__file__).resolve()),'--run-live']
+                for name in ['plan','approval','settings','manifest','models_directory','output']:
+                    command += ['--'+name.replace('_','-'),str(getattr(a,name).resolve())]
+                command += ['--audio-child',str(case_path.resolve())]
+                done=subprocess.run(command,cwd=ROOT,stdout=log,stderr=log,timeout=240,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+            if done.returncode:raise RuntimeError('Native child failed; no selective retry: '+case['id'])
+            status['completed_audio_cases'].append(case['id']);atomic(output/'status.json',status)
+        current=load(output/'attempt-ledger.json');status['status']='complete' if len(status['completed_audio_cases'])==len(plan['audio_cases']) and len(current['attempts'])<approval['call_limit'] and not current['stop_reason'] else 'stopped_incomplete'
+        status.update(attempts=len(current['attempts']),stop_reason=current['stop_reason'])
+    finally:
+        status['settings_unchanged']=sha(a.settings)==initial_settings_sha
+        if status['status']=='running':status['status']='stopped_incomplete'
+        atomic(output/'status.json',status)
+
+
+if __name__=='__main__':main()

@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "audio-zh-ja-beta-zh-2006-10040380210557600780",
+    "source": "zh",
+    "target": "ja",
+    "record_id": "beta-zh-2006-10040380210557600780",
+    "strategy": "formal",
+    "offline_translation_boundaries": 3,
+    "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+    "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ja-beta-zh-2006-10040380210557600780",
+      "trace_id": "1",
+      "source": "zh",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "蓋夹等元素屬於金屬",
+      "input_sha256": "962fe6a0558afdca6a1967524624dad0cc71fae31f1973b037de3bb59a811379",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 237,
+      "queue_wait_ms": 0.0026000052457675338,
+      "translated": "蓋やクリップなどの部品は金属製です。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 16,
+        "total_tokens": 271
+      },
+      "elapsed_ms": 507.83159999991767,
+      "provider_elapsed_ms": 501.8606185913086,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ja-beta-zh-2006-10040380210557600780",
+      "trace_id": "2",
+      "source": "zh",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "迎合精等元素",
+      "input_sha256": "b1084d25d3475e3aece6e1c0451fe64a0787f8c0584b210656763bf43e48682f",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 238,
+      "queue_wait_ms": 0.002900007530115545,
+      "translated": "「迎合精等元素」",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 251,
+        "completion_tokens": 6,
+        "total_tokens": 257
+      },
+      "elapsed_ms": 209.17390000249725,
+      "provider_elapsed_ms": 203.57275009155273,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ja-beta-zh-2006-10040380210557600780",
+      "trace_id": "3",
+      "source": "zh",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "當然也是金屬",
+      "input_sha256": "72603097d799e9dca9aad1470f66f2c7c3c716d13329a626b77d8a36c6e1f642",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 239,
+      "queue_wait_ms": 0.0037999998312443495,
+      "translated": "もちろん、それも金属です。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 10,
+        "total_tokens": 262
+      },
+      "elapsed_ms": 334.4440999935614,
+      "provider_elapsed_ms": 327.7006149291992,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "蓋夹等元素屬於金屬",
+      "translated": "蓋やクリップなどの部品は金属製です。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118490.9967921,
+      "source_pcm_spans": [
+        [
+          63360,
+          103680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1521.723100009258,
+      "source_wav_end_to_widget_ms": -3278.276899990742,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "迎合精等元素",
+      "translated": "「迎合精等元素」",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118492.7548546,
+      "source_pcm_spans": [
+        [
+          105600,
+          132480
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1479.7856000065804,
+      "source_wav_end_to_widget_ms": -1520.2143999934196,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "當然也是金屬",
+      "translated": "もちろん、それも金属です。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118494.5110852,
+      "source_pcm_spans": [
+        [
+          132480,
+          157440
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1676.016200010199,
+      "source_wav_end_to_widget_ms": 236.0162000101991,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 3.015625,
+  "outer_wall_seconds": 15.998530500000925,
+  "api_requests_total_ledger": 239,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

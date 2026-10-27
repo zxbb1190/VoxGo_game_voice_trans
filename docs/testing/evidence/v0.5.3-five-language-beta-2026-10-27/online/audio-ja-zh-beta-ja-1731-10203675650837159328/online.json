@@ -1,0 +1,24 @@
+{
+  "case": {
+    "id": "audio-ja-zh-beta-ja-1731-10203675650837159328",
+    "source": "ja",
+    "target": "zh",
+    "record_id": "beta-ja-1731-10203675650837159328",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 0,
+    "wav_sha256": "86036e977fa04d9c156cfcd83b751164953e9b56201e8d64eff18a20ab83103e",
+    "pcm_sha256": "340bc1f56485f7531c29c67f1f777dc10cf6f3743abc6b0667e5a9e9f3bd074e",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [],
+  "subtitles": [],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.1875,
+  "outer_wall_seconds": 14.58309790000203,
+  "api_requests_total_ledger": 177,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

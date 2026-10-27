@@ -1,0 +1,16 @@
+Release preflight passed for v0.5.3 (baseline afc33a67)
+  PASS  APP_VERSION: 0.5.3
+  PASS  build default: 0.5.3
+  PASS  installer version: 0.5.3
+  PASS  workflow_dispatch: 0.5.3
+  PASS  Bilingual release notes and build/publish commands: docs/releases/v0.5.3.md
+  PASS  KOOK_URL: https://kook.vip/hr0hMS
+  PASS  DISCORD_URL: https://discord.gg/mtnFmUJJ4y
+  PASS  config.example.json defaults unchanged from afc33a67
+  PASS  Existing EN/ZH Audio/Whisper defaults unchanged; isolated new-language strategy preference allowed
+  PASS  Audio latency preset values unchanged
+  PASS  prompt_profile=none; existing game prompt .en conditional present
+  PASS  No new requirements; no benchmark-only requirement
+  PASS  PyInstaller excludes tests, diagnostics, and scripts; no benchmark data/report inputs
+  PASS  Portable archives contain only the staged dist/VoxGo output
+  PASS  docs/update.json matches afc33a67 at published version 0.5.2

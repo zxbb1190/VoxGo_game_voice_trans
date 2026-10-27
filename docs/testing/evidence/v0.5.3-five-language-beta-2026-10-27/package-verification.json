@@ -1,0 +1,19 @@
+{
+  "package_path": "E:\\my\\my\\VoxGo053Beta-20261027-20dir\\dist\\VoxGo",
+  "package_type": "full",
+  "exe_sha256": "9ee06cf9e204e452e8a203c6423bdaa8626eceb6dbc87f02fad37f8106098f91",
+  "package_bytes": 992209210,
+  "bundled_models": [
+    "models--Systran--faster-whisper-base",
+    "models--Systran--faster-whisper-small"
+  ],
+  "cached_model_hashes_match": {
+    "base": true,
+    "small": true
+  },
+  "real_key_not_in_config": true,
+  "no_user_settings_file": true,
+  "help_exit_code": 0,
+  "native_full_binary_manual_gui": "pending",
+  "external_api_requests": 0
+}

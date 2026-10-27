@@ -35,7 +35,7 @@ class MultilingualUiTest(unittest.TestCase):
         for source, target in (("ja", "zh"), ("ko", "zh"), ("ru", "zh"), ("zh", "en"), ("en", "zh")):
             overlay._source_lang_combo.setCurrentIndex(overlay._source_lang_combo.findData(source))
             self.assertEqual((config.source_lang, config.target_lang), (source, target))
-            self.assertEqual(overlay._target_lang_combo.count(), 4 if source in {"en", "zh"} else 2)
+            self.assertEqual(overlay._target_lang_combo.count(), 4)
             self.assertEqual(overlay._target_lang_combo.currentData(), target)
             self.assertEqual(changed[-1], (source, target))
         self.assertEqual(len(changed), 5)
@@ -102,10 +102,10 @@ class MultilingualUiTest(unittest.TestCase):
                 self.assertFalse(overlay._language_notice.isHidden())
 
     def test_explicit_invalid_direction_is_preserved_and_explained(self):
-        config = TranslationConfig(provider="google", source_lang="ja", target_lang="ko")
+        config = TranslationConfig(provider="google", source_lang="ja", target_lang="fr")
         overlay = self.make_overlay(translation_config=config, app_config=RuntimeConfig(language=UI_LANGUAGE_EN))
-        self.assertEqual(config.target_lang, "ko")
-        self.assertEqual(overlay._target_lang_combo.currentData(), "ko")
+        self.assertEqual(config.target_lang, "fr")
+        self.assertEqual(overlay._target_lang_combo.currentData(), "fr")
         self.assertIn("unsupported", overlay._target_lang_combo.currentText())
         self.assertIn("Unsupported direction", overlay._language_notice.text())
 

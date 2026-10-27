@@ -1,0 +1,210 @@
+{
+  "case": {
+    "id": "audio-en-zh-beta-en-1950-10167324587744183095",
+    "source": "en",
+    "target": "zh",
+    "record_id": "beta-en-1950-10167324587744183095",
+    "strategy": "formal",
+    "offline_translation_boundaries": 4,
+    "wav_sha256": "b4aea90be63667ffe68bd0c67fcc11b6a5bc334a4566df8153c074b37e2760d6",
+    "pcm_sha256": "ac952716a273beb237600afe266fe9708c39007f2ba884f55915bfaa135e4f23",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1950-10167324587744183095",
+      "trace_id": "1",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "to the north and within easy",
+      "input_sha256": "50b8db8f0823f7a85e3fa73b470396f68a5eb7c7e9e8a0bb023e9f7a7426eef5",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 160,
+      "queue_wait_ms": 0.0026000052457675338,
+      "translated": "向北，且在容易到达的范围内",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 249,
+        "completion_tokens": 8,
+        "total_tokens": 257
+      },
+      "elapsed_ms": 11126.036199988448,
+      "provider_elapsed_ms": 11122.451305389404,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1950-10167324587744183095",
+      "trace_id": "2",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "is a romantic and fast and fast.",
+      "input_sha256": "3d8d68f6680b2f0e6802cca9743c0accf1d3b49d41a2fa2a4f17aa93702303a6",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 161,
+      "queue_wait_ms": 9063.603899994632,
+      "translated": "这是一个浪漫且快速的东西。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 250,
+        "completion_tokens": 6,
+        "total_tokens": 256
+      },
+      "elapsed_ms": 9670.070600011968,
+      "provider_elapsed_ms": 602.0786762237549,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1950-10167324587744183095",
+      "trace_id": "3",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "Made famous.",
+      "input_sha256": "5b2c427a6b9954e27e58d27b68ee8be6c21e039ab336485a1593d6827073a5e2",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 162,
+      "queue_wait_ms": 7094.409600002109,
+      "translated": "成名了。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 245,
+        "completion_tokens": 3,
+        "total_tokens": 248
+      },
+      "elapsed_ms": 7337.914100004127,
+      "provider_elapsed_ms": 238.0518913269043,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1950-10167324587744183095",
+      "trace_id": "4",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "to foreigners after a glowing account of its spl-",
+      "input_sha256": "667d8e85ff9c3a2e30027fb3046da01b7ad77dd750826febafe88cf1132bb8a4",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 163,
+      "queue_wait_ms": 4949.832600002992,
+      "translated": "在对其辉煌成就进行了高度评价之后，向外国人介绍了……",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 13,
+        "total_tokens": 265
+      },
+      "elapsed_ms": 10671.440000005532,
+      "provider_elapsed_ms": 5717.3216342926025,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "to the north and within easy",
+      "translated": "向北，且在容易到达的范围内",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117644.1000243,
+      "source_pcm_spans": [
+        [
+          49920,
+          76800
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 13050.346599996556,
+      "source_wav_end_to_widget_ms": 3390.3465999965556,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "is a romantic and fast and fast.",
+      "translated": "这是一个浪漫且快速的东西。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117644.7512432,
+      "source_pcm_spans": [
+        [
+          76800,
+          101760
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 12141.565499987919,
+      "source_wav_end_to_widget_ms": 4041.565499987919,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "Made famous.",
+      "translated": "成名了。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117644.9054308,
+      "source_pcm_spans": [
+        [
+          130560,
+          149760
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 9295.753099999856,
+      "source_wav_end_to_widget_ms": 4195.753099999856,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "4",
+      "original": "to foreigners after a glowing account of its spl-",
+      "translated": "在对其辉煌成就进行了高度评价之后，向外国人介绍了……",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117650.630731,
+      "source_pcm_spans": [
+        [
+          149760,
+          192000
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 12381.053299992345,
+      "source_wav_end_to_widget_ms": 9921.053299992345,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.140625,
+  "outer_wall_seconds": 24.92542620000313,
+  "api_requests_total_ledger": 163,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

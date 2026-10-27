@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<stdin>", line 25, in <module>
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\scripts\run_five_language_online.py", line 205, in audio_child
+    original_event=replay.Journal.event;original_process=replay.ObservedCapture.process_audio
+AttributeError: module 'scripts.offline_russian_capture_ab' has no attribute 'Journal'

@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ja-en-beta-ja-1980-10300959819649327821",
+    "source": "ja",
+    "target": "en",
+    "record_id": "beta-ja-1980-10300959819649327821",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "b1bbabf762f9f7dffbd85d07e5a979b5c7bd3ad291311f14e3a9a5ff3949da85",
+    "pcm_sha256": "e594b71b308acc9cc85094a31f8a0b8853e59795cbaba072171b7573735e2ad8",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ja-en-beta-ja-1980-10300959819649327821",
+      "trace_id": "1",
+      "source": "ja",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "残念ながら運転しの行動を100%",
+      "input_sha256": "8e9dee0295a516f1d0d8135c4f6db43c52661b01d65a4b34e424a4ce13ba6c59",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是日语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 166,
+      "queue_wait_ms": 0.0036999990697950125,
+      "translated": "Unfortunately, the driving behavior was 100% incorrect.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 263,
+        "completion_tokens": 13,
+        "total_tokens": 276
+      },
+      "elapsed_ms": 10295.51260000153,
+      "provider_elapsed_ms": 10290.486335754395,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ja-en-beta-ja-1980-10300959819649327821",
+      "trace_id": "2",
+      "source": "ja",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "マンセントの確率で予測することはできないので、構図の流れを研究する",
+      "input_sha256": "a204ac74737f2045632c7f4d40c2df7b278f7b85c9b337217adb928a9cf3f0f7",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是日语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 167,
+      "queue_wait_ms": 5569.663200003561,
+      "translated": "We cannot predict it with the probability of a Mansent, so we will study the flow of the overall situation.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 276,
+        "completion_tokens": 23,
+        "total_tokens": 299
+      },
+      "elapsed_ms": 17457.901399990078,
+      "provider_elapsed_ms": 11883.881092071533,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "残念ながら運転しの行動を100%",
+      "translated": "Unfortunately, the driving behavior was 100% incorrect.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117706.8071028,
+      "source_pcm_spans": [
+        [
+          42240,
+          117120
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 11458.093500004616,
+      "source_wav_end_to_widget_ms": 3838.0935000046156,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "マンセントの確率で予測することはできないので、構図の流れを研究する",
+      "translated": "We cannot predict it with the probability of a Mansent, so we will study the flow of the overall situation.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117718.6605319,
+      "source_pcm_spans": [
+        [
+          117120,
+          192000
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 18631.522600000608,
+      "source_wav_end_to_widget_ms": 15691.522600000608,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.625,
+  "outer_wall_seconds": 31.148744000005536,
+  "api_requests_total_ledger": 167,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

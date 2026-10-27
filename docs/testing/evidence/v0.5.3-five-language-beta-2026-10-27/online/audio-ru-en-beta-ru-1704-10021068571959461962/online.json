@@ -1,0 +1,72 @@
+{
+  "case": {
+    "id": "audio-ru-en-beta-ru-1704-10021068571959461962",
+    "source": "ru",
+    "target": "en",
+    "record_id": "beta-ru-1704-10021068571959461962",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 1,
+    "wav_sha256": "ad65e1b5b8a7ad293229e7158f6e58846a892e941d7e05832c75ee37e8e2a4c8",
+    "pcm_sha256": "648fdb8f99b118870311d5733c5acadaa43e1f006a78816d1676464b2b987c55",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-en-beta-ru-1704-10021068571959461962",
+      "trace_id": "1",
+      "source": "ru",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "1990 году он был добавлен в списк в Семерного наследия.",
+      "input_sha256": "ad825512dd906c610c69ac3e2ab7d7d71585e74a017fea8d619a16859b36e3dc",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 210,
+      "queue_wait_ms": 0.0022999884095042944,
+      "translated": "In 1990, it was added to the list of the Seven Wonders of the World.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 272,
+        "completion_tokens": 22,
+        "total_tokens": 294
+      },
+      "elapsed_ms": 719.7880000021541,
+      "provider_elapsed_ms": 714.5814895629883,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "1990 году он был добавлен в списк в Семерного наследия.",
+      "translated": "In 1990, it was added to the list of the Seven Wonders of the World.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118199.4152727,
+      "source_pcm_spans": [
+        [
+          65280,
+          132480
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1913.1558000069344,
+      "source_wav_end_to_widget_ms": -3246.8441999930656,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 5.09375,
+  "outer_wall_seconds": 18.124001100004534,
+  "api_requests_total_ledger": 210,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

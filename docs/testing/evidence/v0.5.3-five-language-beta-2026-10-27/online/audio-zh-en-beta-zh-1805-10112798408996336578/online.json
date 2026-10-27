@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-zh-en-beta-zh-1805-10112798408996336578",
+    "source": "zh",
+    "target": "en",
+    "record_id": "beta-zh-1805-10112798408996336578",
+    "strategy": "formal",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+    "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-en-beta-zh-1805-10112798408996336578",
+      "trace_id": "1",
+      "source": "zh",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "Scotter 4035公尖其出",
+      "input_sha256": "d2a2dd67c73e4eabccb9f7725a6552784d8f1208fda68283174a8ee5fbf03db2",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 233,
+      "queue_wait_ms": 0.0032999960239976645,
+      "translated": "Scotter 4035 is out.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 11,
+        "total_tokens": 266
+      },
+      "elapsed_ms": 453.1652000005124,
+      "provider_elapsed_ms": 447.6497173309326,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-en-beta-zh-1805-10112798408996336578",
+      "trace_id": "2",
+      "source": "zh",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "定期发出前往新特兰在螺卡角停止扣",
+      "input_sha256": "e2d85280261f9eee2fd4f199db5cc3486de4deb7aaf281dc5c7dd1eb7aa00439",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 234,
+      "queue_wait_ms": 0.0032999960239976645,
+      "translated": "Regularly send out to Newtran, stop at Spoka Corner to unload the cargo.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 18,
+        "total_tokens": 273
+      },
+      "elapsed_ms": 361.3666000019293,
+      "provider_elapsed_ms": 356.8251132965088,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "Scotter 4035公尖其出",
+      "translated": "Scotter 4035 is out.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118455.2238965,
+      "source_pcm_spans": [
+        [
+          55680,
+          105600
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1489.071199996397,
+      "source_wav_end_to_widget_ms": -2530.928800003603,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "定期发出前往新特兰在螺卡角停止扣",
+      "translated": "Regularly send out to Newtran, stop at Spoka Corner to unload the cargo.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118458.2821303,
+      "source_pcm_spans": [
+        [
+          105600,
+          155520
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1427.30499999132,
+      "source_wav_end_to_widget_ms": 527.3049999913201,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 2.453125,
+  "outer_wall_seconds": 15.29236619999574,
+  "api_requests_total_ledger": 234,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

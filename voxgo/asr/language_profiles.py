@@ -3,6 +3,7 @@ from dataclasses import dataclass, fields, replace
 
 from voxgo.audio.capture import AudioConfig, normalize_latency_mode
 from voxgo.asr.whisper_engine import DEFAULT_VAD_PARAMS
+from voxgo.languages import ONLINE_DIRECTIONS
 
 LANGUAGE_AWARE = "language_aware"
 LEGACY = "legacy"
@@ -27,7 +28,7 @@ def effective_speech_config(config):
     tuning, other modes and the compatibility switch keep the selected policy.
     """
     source = config.translation.source_lang
-    if (source not in {"ja", "ko", "ru"} or config.translation.target_lang not in {"en", "zh"}
+    if (source not in {"ja", "ko", "ru"} or (source, config.translation.target_lang) not in ONLINE_DIRECTIONS
             or config.translation.provider not in {"google", "openai_compatible"}
             or normalize_latency_mode(config.audio.latency_mode) != "fast"
             or getattr(config.whisper, "asr_impact_mode", "low") == "ultra_low"

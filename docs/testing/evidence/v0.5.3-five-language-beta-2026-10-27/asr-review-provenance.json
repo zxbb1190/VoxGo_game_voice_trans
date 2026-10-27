@@ -1,0 +1,8 @@
+{
+  "no_inference": true,
+  "manual_labels_all_pending": true,
+  "api_requests": 0,
+  "manifest_sha256": "c4b306cacd7611f2611003b9ccdb975cfe486d38c28007dd412454ec828524f1",
+  "code_sha256": "8a35b62cdc076931d8d1afbca40c130a281d97c8b34e1b5fb474a37a31c0ed01",
+  "raw_plan_sha256": "697af131ca2eecf90ba8277830741c29452dbe68fbc010cff0eb19af0e349b91"
+}

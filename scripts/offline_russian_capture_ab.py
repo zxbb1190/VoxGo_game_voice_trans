@@ -110,7 +110,13 @@ def load_pcm(manifest):
 
 
 def local_base(models):
-    base = models / "models--Systran--faster-whisper-base"
+    return local_model(models, "base")
+
+
+def local_model(models, model_size):
+    if model_size not in {"tiny", "base", "small", "base.en", "small.en"}:
+        raise ValueError("Only existing cached model families; no download allowed")
+    base = models / ("models--Systran--faster-whisper-" + model_size)
     ref = base / "refs/main"
     if not ref.is_file():
         raise FileNotFoundError("Local base model ref missing; no download allowed")
@@ -226,8 +232,8 @@ def run_child(args, *, replay_input=None, app_config=None, summarize_recordings=
     spec = json.loads(args.child.read_text(encoding="utf-8"))
     output = create_output(args.output)
     clips, stream, unpadded_frames = load_pcm(args.manifest) if replay_input is None else replay_input
-    snapshot, model_files = local_base(args.models_directory)
     config = app_config if app_config is not None else make_config(args.models_directory, spec["max_speech_seconds"], spec["pre_roll_ms"], spec["idle_ms"])
+    snapshot, model_files = local_model(args.models_directory, config.whisper.active_model_size)
     initial = dict(audio=asdict(config.audio), whisper=asdict(config.whisper))
     journal = Journal(output, stream, clips)
     sink = logger.add(journal.log, level="DEBUG", enqueue=False)

@@ -1,0 +1,177 @@
+{
+  "platform": "windows",
+  "win32_visible_checked": true,
+  "rows": [
+    {
+      "source": "en",
+      "target": "ja",
+      "widget_text": "[本地协议测试，非真实翻译] en -> ja",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "en",
+      "target": "ko",
+      "widget_text": "[本地协议测试，非真实翻译] en -> ko",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "en",
+      "target": "ru",
+      "widget_text": "[本地协议测试，非真实翻译] en -> ru",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "en",
+      "target": "zh",
+      "widget_text": "[本地协议测试，非真实翻译] en -> zh",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ja",
+      "target": "en",
+      "widget_text": "[本地协议测试，非真实翻译] ja -> en",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ja",
+      "target": "ko",
+      "widget_text": "[本地协议测试，非真实翻译] ja -> ko",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ja",
+      "target": "ru",
+      "widget_text": "[本地协议测试，非真实翻译] ja -> ru",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ja",
+      "target": "zh",
+      "widget_text": "[本地协议测试，非真实翻译] ja -> zh",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ko",
+      "target": "en",
+      "widget_text": "[本地协议测试，非真实翻译] ko -> en",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ko",
+      "target": "ja",
+      "widget_text": "[本地协议测试，非真实翻译] ko -> ja",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ko",
+      "target": "ru",
+      "widget_text": "[本地协议测试，非真实翻译] ko -> ru",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ko",
+      "target": "zh",
+      "widget_text": "[本地协议测试，非真实翻译] ko -> zh",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ru",
+      "target": "en",
+      "widget_text": "[本地协议测试，非真实翻译] ru -> en",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ru",
+      "target": "ja",
+      "widget_text": "[本地协议测试，非真实翻译] ru -> ja",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ru",
+      "target": "ko",
+      "widget_text": "[本地协议测试，非真实翻译] ru -> ko",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "ru",
+      "target": "zh",
+      "widget_text": "[本地协议测试，非真实翻译] ru -> zh",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "zh",
+      "target": "en",
+      "widget_text": "[本地协议测试，非真实翻译] zh -> en",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "zh",
+      "target": "ja",
+      "widget_text": "[本地协议测试，非真实翻译] zh -> ja",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "zh",
+      "target": "ko",
+      "widget_text": "[本地协议测试，非真实翻译] zh -> ko",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    },
+    {
+      "source": "zh",
+      "target": "ru",
+      "widget_text": "[本地协议测试，非真实翻译] zh -> ru",
+      "native_visible": true,
+      "window_handle": 52496736,
+      "translation_quality": null
+    }
+  ],
+  "loopback_http_requests": 20,
+  "real_api_requests": 0,
+  "stale_event_rejected": true,
+  "worker_stopped": true,
+  "runtime_thread_stopped": true,
+  "source": "source-level GameOverlay + TranslationRuntime + actual app TranslationReady handler; fixture responses",
+  "speech_quality": null,
+  "translation_quality": null,
+  "physical_loopback": false,
+  "game_fps": null,
+  "human_acceptance": "pending"
+}

@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-zh-ru-beta-zh-1805-10112798408996336578",
+    "source": "zh",
+    "target": "ru",
+    "record_id": "beta-zh-1805-10112798408996336578",
+    "strategy": "formal",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+    "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ru-beta-zh-1805-10112798408996336578",
+      "trace_id": "1",
+      "source": "zh",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "Scotter 4035公尖其出",
+      "input_sha256": "d2a2dd67c73e4eabccb9f7725a6552784d8f1208fda68283174a8ee5fbf03db2",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 254,
+      "queue_wait_ms": 0.0025000044843181968,
+      "translated": "Scotter 4035 вышел на рынок.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 260,
+        "completion_tokens": 17,
+        "total_tokens": 277
+      },
+      "elapsed_ms": 659.8541999992449,
+      "provider_elapsed_ms": 654.3426513671875,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ru-beta-zh-1805-10112798408996336578",
+      "trace_id": "2",
+      "source": "zh",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "定期发出前往新特兰在罗卡角停止",
+      "input_sha256": "9bc06165eef45d5ff1ce844d15ff82fbc1276e235803273719e625cff663e70a",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 255,
+      "queue_wait_ms": 0.0030999945010989904,
+      "translated": "Регулярно отправляются рейсы в Нью-Тран, с остановкой в Рока-Корнер.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 259,
+        "completion_tokens": 35,
+        "total_tokens": 294
+      },
+      "elapsed_ms": 716.1999000090873,
+      "provider_elapsed_ms": 711.1108303070068,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "Scotter 4035公尖其出",
+      "translated": "Scotter 4035 вышел на рынок.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118615.0351618,
+      "source_pcm_spans": [
+        [
+          55680,
+          105600
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1697.8039999870816,
+      "source_wav_end_to_widget_ms": -2322.1960000129184,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "定期发出前往新特兰在罗卡角停止",
+      "translated": "Регулярно отправляются рейсы в Нью-Тран, с остановкой в Рока-Корнер.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118617.9935979,
+      "source_pcm_spans": [
+        [
+          105600,
+          153600
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1656.240099988645,
+      "source_wav_end_to_widget_ms": 636.2400999886449,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 2.4375,
+  "outer_wall_seconds": 15.278037399999448,
+  "api_requests_total_ledger": 255,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

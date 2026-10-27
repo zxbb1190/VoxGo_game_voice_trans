@@ -1,0 +1,1733 @@
+{
+  "schema_version": 1,
+  "authorized": false,
+  "real_api_requests_so_far": 0,
+  "provider": {
+    "name": "SiliconFlow",
+    "model": "tencent/Hunyuan-MT-7B",
+    "endpoint_host": "api.siliconflow.cn",
+    "timeout_seconds": 12,
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "max_concurrent_requests": 1
+  },
+  "text_cases": [
+    {
+      "id": "text-en-ja-1",
+      "source": "en",
+      "target": "ja",
+      "text": "Two on the left. Do not shoot.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ja-2",
+      "source": "en",
+      "target": "ja",
+      "text": "Hold the north gate. When I count to three, fall back together. If the captain has not returned, do not start the lift.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ja-3",
+      "source": "en",
+      "target": "ja",
+      "text": "The healer is not on the second floor; he is on basement level one. We have fifteen seconds, not fifty.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ko-1",
+      "source": "en",
+      "target": "ko",
+      "text": "Two on the left. Do not shoot.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ko-2",
+      "source": "en",
+      "target": "ko",
+      "text": "Hold the north gate. When I count to three, fall back together. If the captain has not returned, do not start the lift.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ko-3",
+      "source": "en",
+      "target": "ko",
+      "text": "The healer is not on the second floor; he is on basement level one. We have fifteen seconds, not fifty.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ru-1",
+      "source": "en",
+      "target": "ru",
+      "text": "Two on the left. Do not shoot.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ru-2",
+      "source": "en",
+      "target": "ru",
+      "text": "Hold the north gate. When I count to three, fall back together. If the captain has not returned, do not start the lift.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-ru-3",
+      "source": "en",
+      "target": "ru",
+      "text": "The healer is not on the second floor; he is on basement level one. We have fifteen seconds, not fifty.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-zh-1",
+      "source": "en",
+      "target": "zh",
+      "text": "Two on the left. Do not shoot.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-zh-2",
+      "source": "en",
+      "target": "zh",
+      "text": "Hold the north gate. When I count to three, fall back together. If the captain has not returned, do not start the lift.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-en-zh-3",
+      "source": "en",
+      "target": "zh",
+      "text": "The healer is not on the second floor; he is on basement level one. We have fifteen seconds, not fifty.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-en-1",
+      "source": "ja",
+      "target": "en",
+      "text": "左に二人。まだ撃たないで。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-en-2",
+      "source": "ja",
+      "target": "en",
+      "text": "北門を守って。三つ数えたら一緒に撤退しよう。隊長が戻っていなければ、エレベーターを動かさないで。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-en-3",
+      "source": "ja",
+      "target": "en",
+      "text": "回復役は二階ではなく、地下一階にいる。残りは五十秒ではなく十五秒だ。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ko-1",
+      "source": "ja",
+      "target": "ko",
+      "text": "左に二人。まだ撃たないで。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ko-2",
+      "source": "ja",
+      "target": "ko",
+      "text": "北門を守って。三つ数えたら一緒に撤退しよう。隊長が戻っていなければ、エレベーターを動かさないで。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ko-3",
+      "source": "ja",
+      "target": "ko",
+      "text": "回復役は二階ではなく、地下一階にいる。残りは五十秒ではなく十五秒だ。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ru-1",
+      "source": "ja",
+      "target": "ru",
+      "text": "左に二人。まだ撃たないで。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ru-2",
+      "source": "ja",
+      "target": "ru",
+      "text": "北門を守って。三つ数えたら一緒に撤退しよう。隊長が戻っていなければ、エレベーターを動かさないで。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-ru-3",
+      "source": "ja",
+      "target": "ru",
+      "text": "回復役は二階ではなく、地下一階にいる。残りは五十秒ではなく十五秒だ。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-zh-1",
+      "source": "ja",
+      "target": "zh",
+      "text": "左に二人。まだ撃たないで。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-zh-2",
+      "source": "ja",
+      "target": "zh",
+      "text": "北門を守って。三つ数えたら一緒に撤退しよう。隊長が戻っていなければ、エレベーターを動かさないで。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ja-zh-3",
+      "source": "ja",
+      "target": "zh",
+      "text": "回復役は二階ではなく、地下一階にいる。残りは五十秒ではなく十五秒だ。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-en-1",
+      "source": "ko",
+      "target": "en",
+      "text": "왼쪽에 두 명이야. 아직 쏘지 마.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-en-2",
+      "source": "ko",
+      "target": "en",
+      "text": "북문을 지켜. 내가 셋을 세면 같이 후퇴하자. 대장이 아직 돌아오지 않았으면 엘리베이터를 작동시키지 마.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-en-3",
+      "source": "ko",
+      "target": "en",
+      "text": "힐러는 2층이 아니라 지하 1층에 있어. 남은 시간은 50초가 아니라 15초야.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ja-1",
+      "source": "ko",
+      "target": "ja",
+      "text": "왼쪽에 두 명이야. 아직 쏘지 마.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ja-2",
+      "source": "ko",
+      "target": "ja",
+      "text": "북문을 지켜. 내가 셋을 세면 같이 후퇴하자. 대장이 아직 돌아오지 않았으면 엘리베이터를 작동시키지 마.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ja-3",
+      "source": "ko",
+      "target": "ja",
+      "text": "힐러는 2층이 아니라 지하 1층에 있어. 남은 시간은 50초가 아니라 15초야.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ru-1",
+      "source": "ko",
+      "target": "ru",
+      "text": "왼쪽에 두 명이야. 아직 쏘지 마.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ru-2",
+      "source": "ko",
+      "target": "ru",
+      "text": "북문을 지켜. 내가 셋을 세면 같이 후퇴하자. 대장이 아직 돌아오지 않았으면 엘리베이터를 작동시키지 마.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-ru-3",
+      "source": "ko",
+      "target": "ru",
+      "text": "힐러는 2층이 아니라 지하 1층에 있어. 남은 시간은 50초가 아니라 15초야.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-zh-1",
+      "source": "ko",
+      "target": "zh",
+      "text": "왼쪽에 두 명이야. 아직 쏘지 마.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-zh-2",
+      "source": "ko",
+      "target": "zh",
+      "text": "북문을 지켜. 내가 셋을 세면 같이 후퇴하자. 대장이 아직 돌아오지 않았으면 엘리베이터를 작동시키지 마.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ko-zh-3",
+      "source": "ko",
+      "target": "zh",
+      "text": "힐러는 2층이 아니라 지하 1층에 있어. 남은 시간은 50초가 아니라 15초야.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-en-1",
+      "source": "ru",
+      "target": "en",
+      "text": "Слева двое. Пока не стреляй.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-en-2",
+      "source": "ru",
+      "target": "en",
+      "text": "Держите северные ворота. Когда я досчитаю до трёх, отступаем вместе. Если командир ещё не вернулся, не включайте лифт.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-en-3",
+      "source": "ru",
+      "target": "en",
+      "text": "Целитель не на втором этаже, а на первом подземном. Осталось пятнадцать секунд, а не пятьдесят.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ja-1",
+      "source": "ru",
+      "target": "ja",
+      "text": "Слева двое. Пока не стреляй.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ja-2",
+      "source": "ru",
+      "target": "ja",
+      "text": "Держите северные ворота. Когда я досчитаю до трёх, отступаем вместе. Если командир ещё не вернулся, не включайте лифт.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ja-3",
+      "source": "ru",
+      "target": "ja",
+      "text": "Целитель не на втором этаже, а на первом подземном. Осталось пятнадцать секунд, а не пятьдесят.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ko-1",
+      "source": "ru",
+      "target": "ko",
+      "text": "Слева двое. Пока не стреляй.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ko-2",
+      "source": "ru",
+      "target": "ko",
+      "text": "Держите северные ворота. Когда я досчитаю до трёх, отступаем вместе. Если командир ещё не вернулся, не включайте лифт.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-ko-3",
+      "source": "ru",
+      "target": "ko",
+      "text": "Целитель не на втором этаже, а на первом подземном. Осталось пятнадцать секунд, а не пятьдесят.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-zh-1",
+      "source": "ru",
+      "target": "zh",
+      "text": "Слева двое. Пока не стреляй.",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-zh-2",
+      "source": "ru",
+      "target": "zh",
+      "text": "Держите северные ворота. Когда я досчитаю до трёх, отступаем вместе. Если командир ещё не вернулся, не включайте лифт.",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-ru-zh-3",
+      "source": "ru",
+      "target": "zh",
+      "text": "Целитель не на втором этаже, а на первом подземном. Осталось пятнадцать секунд, а не пятьдесят.",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-en-1",
+      "source": "zh",
+      "target": "en",
+      "text": "左边两个人，别开枪。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-en-2",
+      "source": "zh",
+      "target": "en",
+      "text": "先守住北门，等我数到三再一起撤退。如果队长还没回来，就不要启动电梯。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-en-3",
+      "source": "zh",
+      "target": "en",
+      "text": "治疗师不在二楼，他在地下一层。我们还有十五秒，不是五十秒。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ja-1",
+      "source": "zh",
+      "target": "ja",
+      "text": "左边两个人，别开枪。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ja-2",
+      "source": "zh",
+      "target": "ja",
+      "text": "先守住北门，等我数到三再一起撤退。如果队长还没回来，就不要启动电梯。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ja-3",
+      "source": "zh",
+      "target": "ja",
+      "text": "治疗师不在二楼，他在地下一层。我们还有十五秒，不是五十秒。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ko-1",
+      "source": "zh",
+      "target": "ko",
+      "text": "左边两个人，别开枪。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ko-2",
+      "source": "zh",
+      "target": "ko",
+      "text": "先守住北门，等我数到三再一起撤退。如果队长还没回来，就不要启动电梯。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ko-3",
+      "source": "zh",
+      "target": "ko",
+      "text": "治疗师不在二楼，他在地下一层。我们还有十五秒，不是五十秒。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ru-1",
+      "source": "zh",
+      "target": "ru",
+      "text": "左边两个人，别开枪。",
+      "category": "short_callout",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ru-2",
+      "source": "zh",
+      "target": "ru",
+      "text": "先守住北门，等我数到三再一起撤退。如果队长还没回来，就不要启动电梯。",
+      "category": "continuous_conditional",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    },
+    {
+      "id": "text-zh-ru-3",
+      "source": "zh",
+      "target": "ru",
+      "text": "治疗师不在二楼，他在地下一层。我们还有十五秒，不是五十秒。",
+      "category": "critical_numbers_negation",
+      "human_review": "pending",
+      "origin": "new AI-assisted authored material; not human gold"
+    }
+  ],
+  "standard_reference_calls": [
+    {
+      "id": "reference-en-ja-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ja-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ja-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ko-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ko-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ko-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ru-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ru-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-ru-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-zh-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-zh-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-en-zh-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-en-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "text": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-en-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "text": "群島や湖では、必ずしもヨットは必要ありません。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-en-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "text": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ko-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "text": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ko-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "text": "群島や湖では、必ずしもヨットは必要ありません。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ko-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "text": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ru-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "text": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ru-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "text": "群島や湖では、必ずしもヨットは必要ありません。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-ru-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "text": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-zh-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "text": "インターネットで「敵対的環境コース」について検索すると、おそらく現地企業の住所が出てくるでしょう。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-zh-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "text": "群島や湖では、必ずしもヨットは必要ありません。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ja-zh-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "text": "残念ながら、運転手の行動を100%の確率で予測することはできないので、交通の流れを研究することは困難です。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-en-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "text": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-en-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "text": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-en-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "text": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ja-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "text": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ja-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "text": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ja-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "text": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ru-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "text": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ru-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "text": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-ru-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "text": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-zh-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "text": "델 포트로가 2세트에서 먼저 어드밴티지를 얻었지만 6 대 6이 된 후 다시 타이 브레이크가 필요했다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-zh-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "text": "무거운 세금을 물리는 국가의 여행객들은 때때로 상당한 금액을 아낄 수 있다. 특히 주류나 담배를 살 때 그렇다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ko-zh-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "text": "홍콩 섬은 홍콩 영토에 홍콩이라는 이름을 부여한 곳이자 많은 관광객들이 주안점으로 여기는 곳이다.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-en-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-en-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "text": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-en-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "text": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ja-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ja-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "text": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ja-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "text": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ko-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ko-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "text": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-ko-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "text": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-zh-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-zh-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "text": "В 1990 году он был добавлен в список всемирного наследия, находящегося под угрозой из-за опасности со стороны песков пустыни.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-ru-zh-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "text": "Только мутации в клетках зародышевой линии могут передаваться далее детям, в то время как мутации где-то ещё могут привести к гибели клеток или раку.",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-en-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "text": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-en-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-en-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "text": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ja-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "text": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ja-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ja-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "text": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ko-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "text": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ko-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ko-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "text": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ru-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "text": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ru-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "reference_status": "pending_human_review"
+    },
+    {
+      "id": "reference-zh-ru-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "text": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "reference_status": "pending_human_review"
+    }
+  ],
+  "audio_cases": [
+    {
+      "id": "audio-en-ja-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+      "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ja-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+      "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ja-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ja",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b4aea90be63667ffe68bd0c67fcc11b6a5bc334a4566df8153c074b37e2760d6",
+      "pcm_sha256": "ac952716a273beb237600afe266fe9708c39007f2ba884f55915bfaa135e4f23",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ko-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+      "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ko-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+      "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ko-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ko",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b4aea90be63667ffe68bd0c67fcc11b6a5bc334a4566df8153c074b37e2760d6",
+      "pcm_sha256": "ac952716a273beb237600afe266fe9708c39007f2ba884f55915bfaa135e4f23",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ru-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+      "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ru-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+      "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-ru-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "ru",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b4aea90be63667ffe68bd0c67fcc11b6a5bc334a4566df8153c074b37e2760d6",
+      "pcm_sha256": "ac952716a273beb237600afe266fe9708c39007f2ba884f55915bfaa135e4f23",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-zh-beta-en-1904-1003119935936341070",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1904-1003119935936341070",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+      "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-zh-beta-en-1675-10052240106321793346",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1675-10052240106321793346",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+      "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-en-zh-beta-en-1950-10167324587744183095",
+      "source": "en",
+      "target": "zh",
+      "record_id": "beta-en-1950-10167324587744183095",
+      "strategy": "formal",
+      "offline_translation_boundaries": 4,
+      "wav_sha256": "b4aea90be63667ffe68bd0c67fcc11b6a5bc334a4566df8153c074b37e2760d6",
+      "pcm_sha256": "ac952716a273beb237600afe266fe9708c39007f2ba884f55915bfaa135e4f23",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-en-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "a4975b9fe15f9340f06e0acdf3b0cc810f522700bdec1b267f85d901987fa29a",
+      "pcm_sha256": "6d5a89e266641fefe5fa9d9b2aa0fa186bccf60417a636898d2fe3911bd85c17",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-en-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 0,
+      "wav_sha256": "86036e977fa04d9c156cfcd83b751164953e9b56201e8d64eff18a20ab83103e",
+      "pcm_sha256": "340bc1f56485f7531c29c67f1f777dc10cf6f3743abc6b0667e5a9e9f3bd074e",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-en-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "en",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "b1bbabf762f9f7dffbd85d07e5a979b5c7bd3ad291311f14e3a9a5ff3949da85",
+      "pcm_sha256": "e594b71b308acc9cc85094a31f8a0b8853e59795cbaba072171b7573735e2ad8",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ko-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "a4975b9fe15f9340f06e0acdf3b0cc810f522700bdec1b267f85d901987fa29a",
+      "pcm_sha256": "6d5a89e266641fefe5fa9d9b2aa0fa186bccf60417a636898d2fe3911bd85c17",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ko-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 0,
+      "wav_sha256": "86036e977fa04d9c156cfcd83b751164953e9b56201e8d64eff18a20ab83103e",
+      "pcm_sha256": "340bc1f56485f7531c29c67f1f777dc10cf6f3743abc6b0667e5a9e9f3bd074e",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ko-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "ko",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "b1bbabf762f9f7dffbd85d07e5a979b5c7bd3ad291311f14e3a9a5ff3949da85",
+      "pcm_sha256": "e594b71b308acc9cc85094a31f8a0b8853e59795cbaba072171b7573735e2ad8",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ru-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "a4975b9fe15f9340f06e0acdf3b0cc810f522700bdec1b267f85d901987fa29a",
+      "pcm_sha256": "6d5a89e266641fefe5fa9d9b2aa0fa186bccf60417a636898d2fe3911bd85c17",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ru-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 0,
+      "wav_sha256": "86036e977fa04d9c156cfcd83b751164953e9b56201e8d64eff18a20ab83103e",
+      "pcm_sha256": "340bc1f56485f7531c29c67f1f777dc10cf6f3743abc6b0667e5a9e9f3bd074e",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-ru-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "ru",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "b1bbabf762f9f7dffbd85d07e5a979b5c7bd3ad291311f14e3a9a5ff3949da85",
+      "pcm_sha256": "e594b71b308acc9cc85094a31f8a0b8853e59795cbaba072171b7573735e2ad8",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-zh-beta-ja-1828-10020345318418093976",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1828-10020345318418093976",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "a4975b9fe15f9340f06e0acdf3b0cc810f522700bdec1b267f85d901987fa29a",
+      "pcm_sha256": "6d5a89e266641fefe5fa9d9b2aa0fa186bccf60417a636898d2fe3911bd85c17",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-zh-beta-ja-1731-10203675650837159328",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1731-10203675650837159328",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 0,
+      "wav_sha256": "86036e977fa04d9c156cfcd83b751164953e9b56201e8d64eff18a20ab83103e",
+      "pcm_sha256": "340bc1f56485f7531c29c67f1f777dc10cf6f3743abc6b0667e5a9e9f3bd074e",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ja-zh-beta-ja-1980-10300959819649327821",
+      "source": "ja",
+      "target": "zh",
+      "record_id": "beta-ja-1980-10300959819649327821",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "b1bbabf762f9f7dffbd85d07e5a979b5c7bd3ad291311f14e3a9a5ff3949da85",
+      "pcm_sha256": "e594b71b308acc9cc85094a31f8a0b8853e59795cbaba072171b7573735e2ad8",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-en-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "88f4a71c38db41d29663d73297b75fc83a7aced82ee88c202c4be9d1518cb4bf",
+      "pcm_sha256": "19ec2945112b2dca942caa666fe1596d0dc0d910867a38297d3853426b88b130",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-en-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d4a6aa0620dfb52cff24186593b3d9b115ca06b3b68d29ed6a47c37aa7a57979",
+      "pcm_sha256": "42e6c550317c280fc62cd7981e8bfee24af2947323b4ed38eea5a8fe1f1d0d14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-en-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "en",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "ca9b18bc71b9f26089893fbd595367e00971f1d75140520829c06259a65579dc",
+      "pcm_sha256": "f9fd7c9db96b23d15f88498d9254a047f3f2bef0eba0bd952251f97c2dd5f23a",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ja-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "88f4a71c38db41d29663d73297b75fc83a7aced82ee88c202c4be9d1518cb4bf",
+      "pcm_sha256": "19ec2945112b2dca942caa666fe1596d0dc0d910867a38297d3853426b88b130",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ja-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d4a6aa0620dfb52cff24186593b3d9b115ca06b3b68d29ed6a47c37aa7a57979",
+      "pcm_sha256": "42e6c550317c280fc62cd7981e8bfee24af2947323b4ed38eea5a8fe1f1d0d14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ja-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "ja",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "ca9b18bc71b9f26089893fbd595367e00971f1d75140520829c06259a65579dc",
+      "pcm_sha256": "f9fd7c9db96b23d15f88498d9254a047f3f2bef0eba0bd952251f97c2dd5f23a",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ru-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "88f4a71c38db41d29663d73297b75fc83a7aced82ee88c202c4be9d1518cb4bf",
+      "pcm_sha256": "19ec2945112b2dca942caa666fe1596d0dc0d910867a38297d3853426b88b130",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ru-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d4a6aa0620dfb52cff24186593b3d9b115ca06b3b68d29ed6a47c37aa7a57979",
+      "pcm_sha256": "42e6c550317c280fc62cd7981e8bfee24af2947323b4ed38eea5a8fe1f1d0d14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-ru-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "ru",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "ca9b18bc71b9f26089893fbd595367e00971f1d75140520829c06259a65579dc",
+      "pcm_sha256": "f9fd7c9db96b23d15f88498d9254a047f3f2bef0eba0bd952251f97c2dd5f23a",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-zh-beta-ko-1929-1007237877117014760",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1929-1007237877117014760",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "88f4a71c38db41d29663d73297b75fc83a7aced82ee88c202c4be9d1518cb4bf",
+      "pcm_sha256": "19ec2945112b2dca942caa666fe1596d0dc0d910867a38297d3853426b88b130",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-zh-beta-ko-1829-10449970185079774245",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1829-10449970185079774245",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d4a6aa0620dfb52cff24186593b3d9b115ca06b3b68d29ed6a47c37aa7a57979",
+      "pcm_sha256": "42e6c550317c280fc62cd7981e8bfee24af2947323b4ed38eea5a8fe1f1d0d14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ko-zh-beta-ko-1742-10505940208824594418",
+      "source": "ko",
+      "target": "zh",
+      "record_id": "beta-ko-1742-10505940208824594418",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "ca9b18bc71b9f26089893fbd595367e00971f1d75140520829c06259a65579dc",
+      "pcm_sha256": "f9fd7c9db96b23d15f88498d9254a047f3f2bef0eba0bd952251f97c2dd5f23a",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-en-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+      "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-en-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 1,
+      "wav_sha256": "ad65e1b5b8a7ad293229e7158f6e58846a892e941d7e05832c75ee37e8e2a4c8",
+      "pcm_sha256": "648fdb8f99b118870311d5733c5acadaa43e1f006a78816d1676464b2b987c55",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-en-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "en",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "0e6671664365b0400c894b24133acaea72262f6d30dab571d7a9694dde21d588",
+      "pcm_sha256": "c368313f3d7b08d63621ead86c3e921dadffe945b08f67c2fb31ca8f1b701f14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ja-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+      "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ja-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 1,
+      "wav_sha256": "ad65e1b5b8a7ad293229e7158f6e58846a892e941d7e05832c75ee37e8e2a4c8",
+      "pcm_sha256": "648fdb8f99b118870311d5733c5acadaa43e1f006a78816d1676464b2b987c55",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ja-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "ja",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "0e6671664365b0400c894b24133acaea72262f6d30dab571d7a9694dde21d588",
+      "pcm_sha256": "c368313f3d7b08d63621ead86c3e921dadffe945b08f67c2fb31ca8f1b701f14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ko-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+      "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ko-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 1,
+      "wav_sha256": "ad65e1b5b8a7ad293229e7158f6e58846a892e941d7e05832c75ee37e8e2a4c8",
+      "pcm_sha256": "648fdb8f99b118870311d5733c5acadaa43e1f006a78816d1676464b2b987c55",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-ko-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "ko",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "0e6671664365b0400c894b24133acaea72262f6d30dab571d7a9694dde21d588",
+      "pcm_sha256": "c368313f3d7b08d63621ead86c3e921dadffe945b08f67c2fb31ca8f1b701f14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-zh-beta-ru-1781-10002861505982796062",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1781-10002861505982796062",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "63642d843d0843a568c26d78c4bfa96dbcb63f30089cb8d0731cc5da1fcd1b97",
+      "pcm_sha256": "a9b5151ac4614607e863b55f99414dd0b30f1569573a79dc22ef41b71600709d",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-zh-beta-ru-1704-10021068571959461962",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1704-10021068571959461962",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 1,
+      "wav_sha256": "ad65e1b5b8a7ad293229e7158f6e58846a892e941d7e05832c75ee37e8e2a4c8",
+      "pcm_sha256": "648fdb8f99b118870311d5733c5acadaa43e1f006a78816d1676464b2b987c55",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-ru-zh-beta-ru-1757-10040813106556859083",
+      "source": "ru",
+      "target": "zh",
+      "record_id": "beta-ru-1757-10040813106556859083",
+      "strategy": "language_aware",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "0e6671664365b0400c894b24133acaea72262f6d30dab571d7a9694dde21d588",
+      "pcm_sha256": "c368313f3d7b08d63621ead86c3e921dadffe945b08f67c2fb31ca8f1b701f14",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-en-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+      "pcm_sha256": "f9889e70a671612d4da013d67b5cec6faab2e995db9e936f050e97d3a2dce464",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-en-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+      "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-en-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "en",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+      "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ja-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+      "pcm_sha256": "f9889e70a671612d4da013d67b5cec6faab2e995db9e936f050e97d3a2dce464",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ja-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+      "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ja-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ja",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+      "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ko-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+      "pcm_sha256": "f9889e70a671612d4da013d67b5cec6faab2e995db9e936f050e97d3a2dce464",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ko-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+      "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ko-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ko",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+      "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ru-beta-zh-1906-10026684690566417990",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-1906-10026684690566417990",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+      "pcm_sha256": "f9889e70a671612d4da013d67b5cec6faab2e995db9e936f050e97d3a2dce464",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ru-beta-zh-2006-10040380210557600780",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-2006-10040380210557600780",
+      "strategy": "formal",
+      "offline_translation_boundaries": 3,
+      "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+      "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    },
+    {
+      "id": "audio-zh-ru-beta-zh-1805-10112798408996336578",
+      "source": "zh",
+      "target": "ru",
+      "record_id": "beta-zh-1805-10112798408996336578",
+      "strategy": "formal",
+      "offline_translation_boundaries": 2,
+      "wav_sha256": "728d79a55b838514cb7c736827004ac702d69894fcd0a84ced336cb879d9c5ce",
+      "pcm_sha256": "e5aa3231d45fce3d382e67b7d4db3da367f201c9724fde7c442890405f4effb3",
+      "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+    }
+  ],
+  "expected_calls": {
+    "authored_text": 60,
+    "standard_reference": 60,
+    "streaming_asr": 136,
+    "total": 256
+  },
+  "proposed_hard_call_limit": 300,
+  "planned_voice_direction_attempts": 60,
+  "unique_voice_recordings": 15,
+  "cost": {
+    "estimated_cny": 0,
+    "input_cny_per_million": 0,
+    "output_cny_per_million": 0,
+    "source": "https://siliconflow.cn/pricing",
+    "basis": "Official current price lists input/output free; recheck before execution, not a billing invoice"
+  },
+  "execution_rules": [
+    "Explicit user authorization required; this file is not authorization",
+    "No retry or selective rerun; reserve and persist each HTTP attempt before sending",
+    "Only existing key in memory; never copy settings/key into artifacts or change user provider",
+    "Stop at authorized cap; mark uncompleted cases, do not merge segments to fit budget",
+    "Stop whole batch on pricing change, authentication/payment error or rate limit; no provider fallback",
+    "Per-request timeout uses existing config; per-record drain at most 60s then cancel and report unfinished",
+    "Source reference and semantic checks remain pending human review; automatic script cues are not human target-language accuracy",
+    "Native Qt paint/widget clocks are distinct from physical display and manually labelled voice-end latency"
+  ],
+  "input_sha256": {
+    "manifest": "c4b306cacd7611f2611003b9ccdb975cfe486d38c28007dd412454ec828524f1",
+    "asr_summary": "b713f3946403802002399a4b51408aedb4ea21c48e2530fd78a60b7ed8b75940",
+    "selections": "439d4b66fbf5c4a7ee894c7e73024eafb855563c4c3f4ea454d34cb208f510d3",
+    "provider_metadata": "4f3686fd8cac4a0bc571a8a79decc8c9d32d4a4a3b4ad857ebbef21f57f54f98"
+  }
+}

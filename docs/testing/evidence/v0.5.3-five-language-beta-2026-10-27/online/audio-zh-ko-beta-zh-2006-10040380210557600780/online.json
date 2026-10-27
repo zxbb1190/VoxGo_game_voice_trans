@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "audio-zh-ko-beta-zh-2006-10040380210557600780",
+    "source": "zh",
+    "target": "ko",
+    "record_id": "beta-zh-2006-10040380210557600780",
+    "strategy": "formal",
+    "offline_translation_boundaries": 3,
+    "wav_sha256": "d15ddc6cf1c0eaac6277cd7c57d061d06c71fb2e1ecdfb68fea9484a6eb35db8",
+    "pcm_sha256": "592ae7580525209d848444859de4b4aa77fbcd1dd86a21405bbf328d7f2ceb39",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ko-beta-zh-2006-10040380210557600780",
+      "trace_id": "1",
+      "source": "zh",
+      "target": "ko",
+      "transport_kind": "siliconflow_live",
+      "input": "蓋夹等元素屬於金屬",
+      "input_sha256": "962fe6a0558afdca6a1967524624dad0cc71fae31f1973b037de3bb59a811379",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成韩语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 244,
+      "queue_wait_ms": 0.0024999899324029684,
+      "translated": "커버 클립 등의 부품들은 금속으로 만들어져 있습니다.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 256,
+        "completion_tokens": 27,
+        "total_tokens": 283
+      },
+      "elapsed_ms": 758.349099996849,
+      "provider_elapsed_ms": 752.936840057373,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ko-beta-zh-2006-10040380210557600780",
+      "trace_id": "2",
+      "source": "zh",
+      "target": "ko",
+      "transport_kind": "siliconflow_live",
+      "input": "銀河金的元素",
+      "input_sha256": "e5f619163714c450cfeb94c725b20833bcb198bf7e8f94c8d9e56c38f93d7e76",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成韩语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 245,
+      "queue_wait_ms": 0.0025000044843181968,
+      "translated": "은하금의 원소",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 8,
+        "total_tokens": 260
+      },
+      "elapsed_ms": 320.96070000261534,
+      "provider_elapsed_ms": 313.63797187805176,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ko-beta-zh-2006-10040380210557600780",
+      "trace_id": "3",
+      "source": "zh",
+      "target": "ko",
+      "transport_kind": "siliconflow_live",
+      "input": "當然也是金屬",
+      "input_sha256": "72603097d799e9dca9aad1470f66f2c7c3c716d13329a626b77d8a36c6e1f642",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成韩语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 246,
+      "queue_wait_ms": 0.0034999975468963385,
+      "translated": "물론 금속이기도 합니다.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 253,
+        "completion_tokens": 14,
+        "total_tokens": 267
+      },
+      "elapsed_ms": 370.28170000121463,
+      "provider_elapsed_ms": 364.58301544189453,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "蓋夹等元素屬於金屬",
+      "translated": "커버 클립 등의 부품들은 금속으로 만들어져 있습니다.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118544.4885843,
+      "source_pcm_spans": [
+        [
+          63360,
+          103680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1714.3939999764552,
+      "source_wav_end_to_widget_ms": -3085.6060000235448,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "銀河金的元素",
+      "translated": "은하금의 원소",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118545.927039,
+      "source_pcm_spans": [
+        [
+          105600,
+          134400
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1232.8486999846064,
+      "source_wav_end_to_widget_ms": -1647.1513000153936,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "當然也是金屬",
+      "translated": "물론 금속이기도 합니다.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118547.7937706,
+      "source_pcm_spans": [
+        [
+          134400,
+          157440
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1659.5802999765147,
+      "source_wav_end_to_widget_ms": 219.58029997651465,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 3.140625,
+  "outer_wall_seconds": 15.977531799988355,
+  "api_requests_total_ledger": 246,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

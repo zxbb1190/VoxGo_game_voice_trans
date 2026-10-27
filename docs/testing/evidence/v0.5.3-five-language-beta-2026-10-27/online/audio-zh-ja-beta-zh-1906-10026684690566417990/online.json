@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-zh-ja-beta-zh-1906-10026684690566417990",
+    "source": "zh",
+    "target": "ja",
+    "record_id": "beta-zh-1906-10026684690566417990",
+    "strategy": "formal",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "407400c0a228817cfe9cc95feffe48261e005aaaea828412d6bcbb36915d8f7b",
+    "pcm_sha256": "f9889e70a671612d4da013d67b5cec6faab2e995db9e936f050e97d3a2dce464",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ja-beta-zh-1906-10026684690566417990",
+      "trace_id": "1",
+      "source": "zh",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "這並不是告別",
+      "input_sha256": "698629703daa82e96cc7d3582241878b9b14376ecc9fdd29b8a23f02bb0fcbd5",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 235,
+      "queue_wait_ms": 0.002800006768666208,
+      "translated": "これは別れではありません。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 10,
+        "total_tokens": 262
+      },
+      "elapsed_ms": 574.929800000973,
+      "provider_elapsed_ms": 567.40403175354,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-zh-ja-beta-zh-1906-10026684690566417990",
+      "trace_id": "2",
+      "source": "zh",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "這是一個偏章的結束,也是新偏章的。",
+      "input_sha256": "e2012c22a84782c3f030acdb53818e7edd2252774a417049a7960f13456a9a78",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是中文，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 236,
+      "queue_wait_ms": 0.0026999914553016424,
+      "translated": "これは一つの章の終わりであり、また新しい章の始まりでもあります。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 261,
+        "completion_tokens": 26,
+        "total_tokens": 287
+      },
+      "elapsed_ms": 528.4447000012733,
+      "provider_elapsed_ms": 523.7665176391602,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "這並不是告別",
+      "translated": "これは別れではありません。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118472.1079965,
+      "source_pcm_spans": [
+        [
+          74880,
+          103680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1930.0923000078183,
+      "source_wav_end_to_widget_ms": -4969.907699992182,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "這是一個偏章的結束,也是新偏章的。",
+      "translated": "これは一つの章の終わりであり、また新しい章の始まりでもあります。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118474.8533311,
+      "source_pcm_spans": [
+        [
+          107520,
+          155520
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1435.4269000189379,
+      "source_wav_end_to_widget_ms": -2224.573099981062,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 3.09375,
+  "outer_wall_seconds": 18.030998300004285,
+  "api_requests_total_ledger": 236,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "audio-en-ru-beta-en-1675-10052240106321793346",
+    "source": "en",
+    "target": "ru",
+    "record_id": "beta-en-1675-10052240106321793346",
+    "strategy": "formal",
+    "offline_translation_boundaries": 3,
+    "wav_sha256": "fd99727983733f9771077fe1a030fcc44ea7e16be1e9396cff525db2886a8f0f",
+    "pcm_sha256": "2946f3dc16c1db94e4ad64e5929ae9775cf809d05450c80f79267b1dccf1d0db",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1675-10052240106321793346",
+      "trace_id": "1",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "All Niles are more sighted worlds.",
+      "input_sha256": "9cf0863dd69d0e2b4d6560dfb04dbbb12ab5b7ab3530d0768790b20df1c49417",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 146,
+      "queue_wait_ms": 0.002700006007216871,
+      "translated": "Все реки Найлс являются более заметными и видимыми объектами в окружающем мире.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 41,
+        "total_tokens": 296
+      },
+      "elapsed_ms": 1213.6658999952488,
+      "provider_elapsed_ms": 1208.7430953979492,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1675-10052240106321793346",
+      "trace_id": "2",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "always begin with a capital letter.",
+      "input_sha256": "35a8e52a8e964965ff2650ca93e08426de71263c44afdcbe5bee6bd3de65567f",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 147,
+      "queue_wait_ms": 0.006999995093792677,
+      "translated": "Всегда начинайте с заглавной буквы.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 17,
+        "total_tokens": 271
+      },
+      "elapsed_ms": 837.7127999992808,
+      "provider_elapsed_ms": 834.2103958129883,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1675-10052240106321793346",
+      "trace_id": "3",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "in the middle of a sentence.",
+      "input_sha256": "d7f46d81ee3151d41b79fab3c4e1df322a0bc7e814fd135e6ef50d79fc25a346",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 148,
+      "queue_wait_ms": 0.0034999975468963385,
+      "translated": "посреди предложения.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 8,
+        "total_tokens": 262
+      },
+      "elapsed_ms": 331.040099990787,
+      "provider_elapsed_ms": 325.9556293487549,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "All Niles are more sighted worlds.",
+      "translated": "Все реки Найлс являются более заметными и видимыми объектами в окружающем мире.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117558.6247125,
+      "source_pcm_spans": [
+        [
+          46080,
+          88320
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 3009.740199999651,
+      "source_wav_end_to_widget_ms": -3230.259800000349,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "always begin with a capital letter.",
+      "translated": "Всегда начинайте с заглавной буквы.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117561.9039442,
+      "source_pcm_spans": [
+        [
+          105600,
+          147840
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2568.9719000126934,
+      "source_wav_end_to_widget_ms": 48.97190001269337,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "in the middle of a sentence.",
+      "translated": "посреди предложения.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117563.8697759,
+      "source_pcm_spans": [
+        [
+          147840,
+          188160
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2014.803600012092,
+      "source_wav_end_to_widget_ms": 2014.803600012092,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 5.53125,
+  "outer_wall_seconds": 16.504532800012385,
+  "api_requests_total_ledger": 148,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

@@ -1,0 +1,210 @@
+{
+  "case": {
+    "id": "audio-en-ru-beta-en-1904-1003119935936341070",
+    "source": "en",
+    "target": "ru",
+    "record_id": "beta-en-1904-1003119935936341070",
+    "strategy": "formal",
+    "offline_translation_boundaries": 4,
+    "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+    "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1904-1003119935936341070",
+      "trace_id": "1",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "However,",
+      "input_sha256": "f525be826182c25b1c5be8cd2204b70532b091ff3b1371d15affaa6c6cd948ca",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 142,
+      "queue_wait_ms": 0.0022000021999701858,
+      "translated": "Однако,",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 249,
+        "completion_tokens": 6,
+        "total_tokens": 255
+      },
+      "elapsed_ms": 365.80899999535177,
+      "provider_elapsed_ms": 362.24889755249023,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1904-1003119935936341070",
+      "trace_id": "2",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "Due to the slow communication.",
+      "input_sha256": "4cd6f7ac5431a2a173d3a22c9ddecb9e4402d90ca65150e4c2b9a47a86286720",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 143,
+      "queue_wait_ms": 0.0045000051613897085,
+      "translated": "Из-за медленной связи.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 253,
+        "completion_tokens": 13,
+        "total_tokens": 266
+      },
+      "elapsed_ms": 546.3782000006177,
+      "provider_elapsed_ms": 543.0927276611328,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1904-1003119935936341070",
+      "trace_id": "3",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "styles in the West.",
+      "input_sha256": "e259b06e3a84176293173c69471ced2bca1da86eab267c529ba60b3e1fa79ea3",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 144,
+      "queue_wait_ms": 0.0034999975468963385,
+      "translated": "Стили на Западе.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 9,
+        "total_tokens": 261
+      },
+      "elapsed_ms": 331.33810000435915,
+      "provider_elapsed_ms": 327.9228210449219,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-ru-beta-en-1904-1003119935936341070",
+      "trace_id": "4",
+      "source": "en",
+      "target": "ru",
+      "transport_kind": "siliconflow_live",
+      "input": "could lag behind by 25 to 30.",
+      "input_sha256": "62e929c64ddc3358c7af445db95f67cdc707a7e517a0a12e242af7a1ac0b244f",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是英语，直接翻译成俄语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 145,
+      "queue_wait_ms": 0.0032999960239976645,
+      "translated": "Может отставать на 25 до 30 единиц.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 259,
+        "completion_tokens": 19,
+        "total_tokens": 278
+      },
+      "elapsed_ms": 597.4520999880042,
+      "provider_elapsed_ms": 592.4186706542969,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "However,",
+      "translated": "Однако,",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117537.5786223,
+      "source_pcm_spans": [
+        [
+          61440,
+          74880
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2357.6157999999123,
+      "source_wav_end_to_widget_ms": -6522.384200000088,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "Due to the slow communication.",
+      "translated": "Из-за медленной связи.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117539.4440626,
+      "source_pcm_spans": [
+        [
+          76800,
+          103680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2423.05609999632,
+      "source_wav_end_to_widget_ms": -4656.94390000368,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "styles in the West.",
+      "translated": "Стили на Западе.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117541.7477274,
+      "source_pcm_spans": [
+        [
+          115200,
+          140160
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2446.7208999942522,
+      "source_wav_end_to_widget_ms": -2353.2791000057478,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "4",
+      "original": "could lag behind by 25 to 30.",
+      "translated": "Может отставать на 25 до 30 единиц.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117544.1500063,
+      "source_pcm_spans": [
+        [
+          140160,
+          180480
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2328.9997999952175,
+      "source_wav_end_to_widget_ms": 48.99979999521747,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.15625,
+  "outer_wall_seconds": 18.31297280000581,
+  "api_requests_total_ledger": 145,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

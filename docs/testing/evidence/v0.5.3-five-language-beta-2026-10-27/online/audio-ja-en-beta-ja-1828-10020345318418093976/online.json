@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ja-en-beta-ja-1828-10020345318418093976",
+    "source": "ja",
+    "target": "en",
+    "record_id": "beta-ja-1828-10020345318418093976",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "a4975b9fe15f9340f06e0acdf3b0cc810f522700bdec1b267f85d901987fa29a",
+    "pcm_sha256": "6d5a89e266641fefe5fa9d9b2aa0fa186bccf60417a636898d2fe3911bd85c17",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ja-en-beta-ja-1828-10020345318418093976",
+      "trace_id": "1",
+      "source": "ja",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "インターネットで適体的環境を",
+      "input_sha256": "17187074246997767d9ebf6106d191dcce83d7baf014660878810bc9e5131a41",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是日语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 164,
+      "queue_wait_ms": 0.0022999884095042944,
+      "translated": "Create a suitable environment on the internet.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 258,
+        "completion_tokens": 8,
+        "total_tokens": 266
+      },
+      "elapsed_ms": 9069.322099996498,
+      "provider_elapsed_ms": 9065.407037734985,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ja-en-beta-ja-1828-10020345318418093976",
+      "trace_id": "2",
+      "source": "ja",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "検索すると、おそらく原地企業の住所が出てくるでしょう。",
+      "input_sha256": "d79fd9040a2a0e32b5b26145c3ac76712b75d596e27cf6de3d342927c3706e53",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是日语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 165,
+      "queue_wait_ms": 4454.041599994525,
+      "translated": "If you search, you will probably find the address of the local company.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 271,
+        "completion_tokens": 15,
+        "total_tokens": 286
+      },
+      "elapsed_ms": 4978.3558000053745,
+      "provider_elapsed_ms": 519.6857452392578,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "インターネットで適体的環境を",
+      "translated": "Create a suitable environment on the internet.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117669.8882688,
+      "source_pcm_spans": [
+        [
+          42240,
+          115200
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 10266.74930001609,
+      "source_wav_end_to_widget_ms": 4026.7493000160903,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "検索すると、おそらく原地企業の住所が出てくるでしょう。",
+      "translated": "If you search, you will probably find the address of the local company.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117670.3678021,
+      "source_pcm_spans": [
+        [
+          115200,
+          190080
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 6066.282600008999,
+      "source_wav_end_to_widget_ms": 4506.282600008999,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.5,
+  "outer_wall_seconds": 18.463342200004263,
+  "api_requests_total_ledger": 165,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

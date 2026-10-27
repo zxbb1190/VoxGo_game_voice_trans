@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ru-ja-beta-ru-1757-10040813106556859083",
+    "source": "ru",
+    "target": "ja",
+    "record_id": "beta-ru-1757-10040813106556859083",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "0e6671664365b0400c894b24133acaea72262f6d30dab571d7a9694dde21d588",
+    "pcm_sha256": "c368313f3d7b08d63621ead86c3e921dadffe945b08f67c2fb31ca8f1b701f14",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-ja-beta-ru-1757-10040813106556859083",
+      "trace_id": "1",
+      "source": "ru",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "Только мутации в клетках зародышевой линии могут передаваться далее детям.",
+      "input_sha256": "f9cde237803f4d3cd45b4a356fee839d764194060ab2cb229b46faaa04e52860",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 216,
+      "queue_wait_ms": 0.0036999990697950125,
+      "translated": "胚性細胞系の変異のみが、子供たちに引き継がれることができる。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 282,
+        "completion_tokens": 31,
+        "total_tokens": 313
+      },
+      "elapsed_ms": 817.2402999916812,
+      "provider_elapsed_ms": 811.7790222167969,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ru-ja-beta-ru-1757-10040813106556859083",
+      "trace_id": "2",
+      "source": "ru",
+      "target": "ja",
+      "transport_kind": "siliconflow_live",
+      "input": "то время как мутация где-то еще могут привести гибликлеток или раку.",
+      "input_sha256": "b20263b41a7b055008d150a565f8d0ec140cd304cd9561cba99ee144822e089b",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是俄语，直接翻译成日语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 217,
+      "queue_wait_ms": 0.0041000021155923605,
+      "translated": "一方で、他の場所での突然変異が細胞の死や癌を引き起こす可能性があります。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 280,
+        "completion_tokens": 30,
+        "total_tokens": 310
+      },
+      "elapsed_ms": 607.5720000080764,
+      "provider_elapsed_ms": 601.546049118042,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "Только мутации в клетках зародышевой линии могут передаваться далее детям.",
+      "translated": "胚性細胞系の変異のみが、子供たちに引き継がれることができる。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118280.3527401,
+      "source_pcm_spans": [
+        [
+          71040,
+          145920
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2028.1721000018297,
+      "source_wav_end_to_widget_ms": -3371.8278999981703,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "то время как мутация где-то еще могут привести гибликлеток или раку.",
+      "translated": "一方で、他の場所での突然変異が細胞の死や癌を引き起こす可能性があります。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118284.5003442,
+      "source_pcm_spans": [
+        [
+          145920,
+          216960
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 1735.776200000546,
+      "source_wav_end_to_widget_ms": 775.7762000005459,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 5.21875,
+  "outer_wall_seconds": 19.21317740000086,
+  "api_requests_total_ledger": 217,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

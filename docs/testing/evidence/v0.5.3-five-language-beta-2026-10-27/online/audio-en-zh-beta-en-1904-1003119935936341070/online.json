@@ -1,0 +1,210 @@
+{
+  "case": {
+    "id": "audio-en-zh-beta-en-1904-1003119935936341070",
+    "source": "en",
+    "target": "zh",
+    "record_id": "beta-en-1904-1003119935936341070",
+    "strategy": "formal",
+    "offline_translation_boundaries": 4,
+    "wav_sha256": "b438b60eb4e9fddbcaa303e27070c2458c3daac42f0b08d5d8622c47335d24f7",
+    "pcm_sha256": "0529d921fe2b0e39200728e68b214e57d76ebd08f39ae06e4caafe642c897388",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1904-1003119935936341070",
+      "trace_id": "1",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "However,",
+      "input_sha256": "f525be826182c25b1c5be8cd2204b70532b091ff3b1371d15affaa6c6cd948ca",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 153,
+      "queue_wait_ms": 0.0025999906938523054,
+      "translated": "然而，",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 244,
+        "completion_tokens": 2,
+        "total_tokens": 246
+      },
+      "elapsed_ms": 338.3840999886161,
+      "provider_elapsed_ms": 334.4085216522217,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1904-1003119935936341070",
+      "trace_id": "2",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "Due to the slow communication.",
+      "input_sha256": "4cd6f7ac5431a2a173d3a22c9ddecb9e4402d90ca65150e4c2b9a47a86286720",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 154,
+      "queue_wait_ms": 0.0032999960239976645,
+      "translated": "由于沟通不畅。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 248,
+        "completion_tokens": 4,
+        "total_tokens": 252
+      },
+      "elapsed_ms": 246.83730000106152,
+      "provider_elapsed_ms": 242.96188354492188,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1904-1003119935936341070",
+      "trace_id": "3",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "Styles in the West could lag behind.",
+      "input_sha256": "a4a95d1b048fe6d330586eb8509c666a104f27dc50a0fd472dc14028eff3aa4f",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 155,
+      "queue_wait_ms": 0.0028999929782003164,
+      "translated": "西方的时尚可能会落后。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 250,
+        "completion_tokens": 6,
+        "total_tokens": 256
+      },
+      "elapsed_ms": 283.0152999958955,
+      "provider_elapsed_ms": 278.8548469543457,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-en-zh-beta-en-1904-1003119935936341070",
+      "trace_id": "4",
+      "source": "en",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "by 25 to 30 years.",
+      "input_sha256": "a0643d17b1cbb1d510efdcc122a9b7255da6d85ad0a4d5045aca037f43d567e6",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 如果原文是中文，翻译成英文；如果原文是英文，翻译成中文。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 156,
+      "queue_wait_ms": 0.0034999975468963385,
+      "translated": "提前25到30年。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 252,
+        "completion_tokens": 8,
+        "total_tokens": 260
+      },
+      "elapsed_ms": 370.60399999609217,
+      "provider_elapsed_ms": 365.067720413208,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "However,",
+      "translated": "然而，",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117595.3519421,
+      "source_pcm_spans": [
+        [
+          61440,
+          74880
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2426.6379000112647,
+      "source_wav_end_to_widget_ms": -6453.362099988735,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "Due to the slow communication.",
+      "translated": "由于沟通不畅。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117596.892274,
+      "source_pcm_spans": [
+        [
+          76800,
+          103680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2166.969800014631,
+      "source_wav_end_to_widget_ms": -4913.030199985369,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "Styles in the West could lag behind.",
+      "translated": "西方的时尚可能会落后。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117600.1755985,
+      "source_pcm_spans": [
+        [
+          115200,
+          157440
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2090.2943000220694,
+      "source_wav_end_to_widget_ms": -1629.7056999779306,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "4",
+      "original": "by 25 to 30 years.",
+      "translated": "提前25到30年。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117602.4804967,
+      "source_pcm_spans": [
+        [
+          157440,
+          193920
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 2115.1925000111805,
+      "source_wav_end_to_widget_ms": 675.1925000111805,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 7.046875,
+  "outer_wall_seconds": 18.279201500001363,
+  "api_requests_total_ledger": 156,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

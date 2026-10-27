@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "audio-ko-zh-beta-ko-1742-10505940208824594418",
+    "source": "ko",
+    "target": "zh",
+    "record_id": "beta-ko-1742-10505940208824594418",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 2,
+    "wav_sha256": "ca9b18bc71b9f26089893fbd595367e00971f1d75140520829c06259a65579dc",
+    "pcm_sha256": "f9fd7c9db96b23d15f88498d9254a047f3f2bef0eba0bd952251f97c2dd5f23a",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ko-zh-beta-ko-1742-10505940208824594418",
+      "trace_id": "1",
+      "source": "ko",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "홍콩섬은 홍콩영토의 홍콩이라는 이름을 부여한 곳이자 많은",
+      "input_sha256": "b987e90f0c8e16bb72ff8e67c180bbe98443a47e7948985358da7491330d821d",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是韩语，直接翻译成中文，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 206,
+      "queue_wait_ms": 0.0024000037228688598,
+      "translated": "香港岛是赋予香港领土“香港”这一名称的地方，同时也是许多……（原文不完整）",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 287,
+        "completion_tokens": 21,
+        "total_tokens": 308
+      },
+      "elapsed_ms": 914.9716999963857,
+      "provider_elapsed_ms": 910.2156162261963,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ko-zh-beta-ko-1742-10505940208824594418",
+      "trace_id": "2",
+      "source": "ko",
+      "target": "zh",
+      "transport_kind": "siliconflow_live",
+      "input": "관광객들이 주한점으로 여기는 곳이다.",
+      "input_sha256": "82f3e8eb9c8b776949509f003b8dd2e093cb721cbc189cf41ee4450ab323b0c3",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是韩语，直接翻译成中文，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 207,
+      "queue_wait_ms": 0.003100009053014219,
+      "translated": "这里是游客们认为很棒的地方。",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 269,
+        "completion_tokens": 8,
+        "total_tokens": 277
+      },
+      "elapsed_ms": 441.223900008481,
+      "provider_elapsed_ms": 436.3110065460205,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "홍콩섬은 홍콩영토의 홍콩이라는 이름을 부여한 곳이자 많은",
+      "translated": "香港岛是赋予香港领土“香港”这一名称的地方，同时也是许多……（原文不完整）",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118162.3553774,
+      "source_pcm_spans": [
+        [
+          63360,
+          136320
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 4322.649500016705,
+      "source_wav_end_to_widget_ms": -477.35049998329487,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "관광객들이 주한점으로 여기는 곳이다.",
+      "translated": "这里是游客们认为很棒的地方。",
+      "copyable": true,
+      "widget_updated_at_monotonic": 118164.8892461,
+      "source_pcm_spans": [
+        [
+          136320,
+          182400
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 3976.518200020655,
+      "source_wav_end_to_widget_ms": 2056.518200020655,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 14.265625,
+  "outer_wall_seconds": 18.616774099995382,
+  "api_requests_total_ledger": 207,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

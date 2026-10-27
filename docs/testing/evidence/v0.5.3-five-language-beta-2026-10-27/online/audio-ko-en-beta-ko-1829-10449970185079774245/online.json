@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "audio-ko-en-beta-ko-1829-10449970185079774245",
+    "source": "ko",
+    "target": "en",
+    "record_id": "beta-ko-1829-10449970185079774245",
+    "strategy": "language_aware",
+    "offline_translation_boundaries": 3,
+    "wav_sha256": "d4a6aa0620dfb52cff24186593b3d9b115ca06b3b68d29ed6a47c37aa7a57979",
+    "pcm_sha256": "42e6c550317c280fc62cd7981e8bfee24af2947323b4ed38eea5a8fe1f1d0d14",
+    "note": "Current candidate configuration for testing, not a chosen release winner; zero boundaries is a planned failed subtitle case"
+  },
+  "api": [
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ko-en-beta-ko-1829-10449970185079774245",
+      "trace_id": "1",
+      "source": "ko",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "무거운 세금을 물리는 국가의 여행객들은",
+      "input_sha256": "e04bfb9f43ee471261c91f00a5e9c59526fbb742c92fe7b15b6503448f30ce93",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是韩语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 182,
+      "queue_wait_ms": 0.0022999884095042944,
+      "translated": "Travelers from countries with heavy taxes...",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 273,
+        "completion_tokens": 8,
+        "total_tokens": 281
+      },
+      "elapsed_ms": 570.6537999940338,
+      "provider_elapsed_ms": 565.4449462890625,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ko-en-beta-ko-1829-10449970185079774245",
+      "trace_id": "2",
+      "source": "ko",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "때때로 상당한 금액을 아끼실 수 있다",
+      "input_sha256": "879a3c0c52de1ec10e486c22a4f1b87756ab8e764676001a15f5b697a78b1c4c",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是韩语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 183,
+      "queue_wait_ms": 0.005399997462518513,
+      "translated": "You can sometimes save a considerable amount of money.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 269,
+        "completion_tokens": 10,
+        "total_tokens": 279
+      },
+      "elapsed_ms": 473.8523999985773,
+      "provider_elapsed_ms": 468.5394763946533,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    },
+    {
+      "phase": "streaming_asr",
+      "case_id": "audio-ko-en-beta-ko-1829-10449970185079774245",
+      "trace_id": "3",
+      "source": "ko",
+      "target": "en",
+      "transport_kind": "siliconflow_live",
+      "input": "특히 주류나 담배를 살 때 그렇다",
+      "input_sha256": "499490616577c8ef8ce71074766c72b683551ddfd0408ca2fee9e5739c4463f1",
+      "prompt": "你是实时语音字幕翻译器。输入来自语音识别，可能有错字、断句和不完整内容。\n\n翻译规则：\n1. 只翻译用户消息中 <source_text> 和 </source_text> 之间的文本，不要翻译标签本身。\n2. 只做忠实翻译，不补全没听到的内容。\n3. 不要扩写，不要解释，不要润色成完整句。\n4. 如果原文明显不完整，保留不完整感。\n5. 如果某个词无法确定，用“（听不清）”或保留原词。\n6. 术语、地图点位、技能名、人名、枪械名、品牌名、产品名、应用名、文件格式和缩写优先保留英文，例如 Speechify、Discord、Steam、PDFs、Google Docs、OpenAI、GG、FPS。\n7. 原文语言是韩语，直接翻译成英语，不要经英语或其他语言中转。\n8. 只输出译文，不输出解释、说明、标签或思考过程。\n",
+      "attempt_id": 184,
+      "queue_wait_ms": 0.0029999937396496534,
+      "translated": "Especially when buying alcohol or cigarettes.",
+      "failure_reason": "",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 269,
+        "completion_tokens": 8,
+        "total_tokens": 277
+      },
+      "elapsed_ms": 327.4683999916306,
+      "provider_elapsed_ms": 322.40772247314453,
+      "http_status": 200,
+      "complete_json_response": true,
+      "human_review": "pending",
+      "target_language_human_confirmed": null,
+      "truncated": false,
+      "api_nonempty_success": true
+    }
+  ],
+  "subtitles": [
+    {
+      "trace_id": "1",
+      "original": "무거운 세금을 물리는 국가의 여행객들은",
+      "translated": "Travelers from countries with heavy taxes...",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117953.2202243,
+      "source_pcm_spans": [
+        [
+          59520,
+          113280
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 3811.4149000047473,
+      "source_wav_end_to_widget_ms": -3328.5850999952527,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "2",
+      "original": "때때로 상당한 금액을 아끼실 수 있다",
+      "translated": "You can sometimes save a considerable amount of money.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117956.17078,
+      "source_pcm_spans": [
+        [
+          113280,
+          155520
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 4121.970599998604,
+      "source_wav_end_to_widget_ms": -378.0294000013964,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    },
+    {
+      "trace_id": "3",
+      "original": "특히 주류나 담배를 살 때 그렇다",
+      "translated": "Especially when buying alcohol or cigarettes.",
+      "copyable": true,
+      "widget_updated_at_monotonic": 117959.0208846,
+      "source_pcm_spans": [
+        [
+          155520,
+          199680
+        ]
+      ],
+      "last_pcm_frame_to_widget_ms": 4212.075200000545,
+      "source_wav_end_to_widget_ms": 2472.075200000545,
+      "human_voice_end_to_subtitle_ms": null,
+      "latency_scope": "native Qt item update, not display scanout or manually verified voice end"
+    }
+  ],
+  "translation_drain_complete": true,
+  "platform": "windows",
+  "outer_cpu_seconds": 20.03125,
+  "outer_wall_seconds": 19.66428640000231,
+  "api_requests_total_ledger": 184,
+  "runtime_thread_stopped": true,
+  "human_review": "pending",
+  "real_game": false,
+  "physical_loopback": false
+}

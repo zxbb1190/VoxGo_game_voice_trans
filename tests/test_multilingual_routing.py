@@ -8,7 +8,7 @@ from unittest.mock import patch
 import aiohttp
 from aiohttp import web
 
-from voxgo.languages import ONLINE_DIRECTIONS, normalize_language_flow, whisper_model_error
+from voxgo.languages import ONLINE_DIRECTIONS, SPEECH_LANGUAGE_CODES, normalize_language_code, normalize_language_flow, whisper_model_error
 from voxgo.config.loader import default_app_config, sync_language_flow, apply_language_runtime_policy, serialize_user_settings
 from voxgo.translation import GameTranslator, TranslationConfig
 from voxgo.translation.base import TranslationRequest, detect_language, should_skip_translation_for_language
@@ -19,6 +19,20 @@ from voxgo.asr.whisper_engine import WhisperConfig, SpeechRecognizer, Transcript
 
 
 class MultilingualCapabilitiesTest(unittest.TestCase):
+    def test_local_remains_only_two_directions_with_no_online_switch(self):
+        from voxgo.languages import translation_direction_error,LOCAL_DIRECTIONS
+        unsupported=ONLINE_DIRECTIONS-LOCAL_DIRECTIONS
+        self.assertEqual(len(unsupported),18)
+        for source,target in unsupported:
+            self.assertIn('Offline supports English',translation_direction_error('local',source,target))
+
+    def test_all_twenty_distinct_directions_and_mandarin_alias(self):
+        self.assertEqual(ONLINE_DIRECTIONS, frozenset((s,t) for s in SPEECH_LANGUAGE_CODES for t in SPEECH_LANGUAGE_CODES if s!=t))
+        self.assertEqual(len(ONLINE_DIRECTIONS),20)
+        for code in ('zh','zh_CN','zh-CN'):
+            self.assertEqual(normalize_language_code(code),'zh')
+        self.assertEqual(normalize_language_flow('zh_CN','ru'),('zh','ru'))
+
     def test_config_preserves_pair_settings_and_formal_tuning(self):
         for source, target in ONLINE_DIRECTIONS:
             with self.subTest(source=source, target=target):
@@ -135,7 +149,7 @@ class MultilingualHTTPTest(unittest.IsolatedAsyncioTestCase):
                 self.assertEqual(len(self.requests), (len(ONLINE_DIRECTIONS) if provider == "openai_compatible" else 0) + sorted(ONLINE_DIRECTIONS).index((source,target)) + 1)
 
     async def test_capability_guard_precedes_cache_and_network(self):
-        for provider, source, target in (("local", "ja", "zh"), ("google", "ru", "ko"), ("openai_compatible", "fr", "zh")):
+        for provider, source, target in (("local", "ja", "zh"), ("google", "ru", "ru"), ("openai_compatible", "fr", "zh")):
             config = TranslationConfig(provider=provider, source_lang=source, target_lang=target,
                 endpoint=self.url, api_key="fixture", local_phrase_cache={f"{source}:{target}": {"hello": "bad override"}})
             client = GameTranslator(config)
@@ -151,7 +165,7 @@ class MultilingualHTTPTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.requests, [])
         async with aiohttp.ClientSession() as session:
             for provider in (GoogleCloudProvider(TranslationConfig()), OpenAICompatibleProvider(TranslationConfig())):
-                result = await provider.translate(TranslationRequest("x", "ja", "ko"), session)
+                result = await provider.translate(TranslationRequest("x", "ja", "ja"), session)
                 self.assertTrue(result.translated.startswith("[未翻译]"))
 
     async def test_context_is_partitioned_and_clear_drops_all_pairs(self):

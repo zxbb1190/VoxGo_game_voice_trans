@@ -26,10 +26,8 @@ def configured(source='en',target='zh',pure=False):
 
 
 class SpeechLanguageProfilesTest(unittest.TestCase):
-    def test_exact_fourteen_requested_directions_and_no_new_offline_pairs(self):
-        expected={('en','zh'),('zh','en')}
-        expected.update((s,t) for s in ('ja','ko','ru') for t in ('en','zh'))
-        expected.update((s,t) for s in ('en','zh') for t in ('ja','ko','ru'))
+    def test_exact_twenty_requested_directions_and_no_new_offline_pairs(self):
+        expected={(s,t) for s in ('en','zh','ja','ko','ru') for t in ('en','zh','ja','ko','ru') if s!=t}
         self.assertEqual(ONLINE_DIRECTIONS,expected)
         self.assertEqual(LOCAL_DIRECTIONS,{('en','zh'),('zh','en')})
 
@@ -51,7 +49,8 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         legacy=configured('en','zh',True)
         original_audio=asdict(legacy.audio);original_whisper=asdict(legacy.whisper)
         for source in ('ja','ko','ru'):
-            for target in ('en','zh'):
+            for target in ('en','zh','ja','ko','ru'):
+                if source==target:continue
                 config=configured(source,target)
                 before=serialize_user_settings(config)
                 effective=effective_speech_config(config)
