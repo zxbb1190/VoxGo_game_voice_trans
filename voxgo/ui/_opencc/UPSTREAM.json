@@ -1,0 +1,52 @@
+{
+  "project": "opencc-python-reimplemented",
+  "version": "0.1.7",
+  "license": "Apache-2.0",
+  "source_url": "https://github.com/yichen0831/opencc-python",
+  "wheel_sha256": "41b3b92943c7bed291f448e9c7fad4b577c8c2eae30fcfe5a74edf8818493aa6",
+  "purpose": "UI recognition source display only; only the t2s conversion and its dictionaries are bundled",
+  "files": [
+    {
+      "wheel_member": "opencc/__init__.py",
+      "path": "__init__.py",
+      "bytes": 255,
+      "sha256": "9ee2882ab0156a817c928fa4800b38def0b7cbf5ff33b2c4c42294c3c0648f23"
+    },
+    {
+      "wheel_member": "opencc/opencc.py",
+      "path": "opencc.py",
+      "bytes": 12385,
+      "sha256": "dfba0adb8ca2d07e9fc90aab9de38cc3830ed338fa51c6a1e408c71a916e65f9"
+    },
+    {
+      "wheel_member": "opencc/config/t2s.json",
+      "path": "config/t2s.json",
+      "bytes": 422,
+      "sha256": "3848b420a86a7c5f79a796321029db6f9aaa534bc3a7a67b90fc66744d3030d0"
+    },
+    {
+      "wheel_member": "opencc/dictionary/TSCharacters.txt",
+      "path": "dictionary/TSCharacters.txt",
+      "bytes": 34627,
+      "sha256": "6b5a0a799bea2bb22c001f635eaa3fc2904310f0c08addbff275477a80ecf09a"
+    },
+    {
+      "wheel_member": "opencc/dictionary/TSPhrases.txt",
+      "path": "dictionary/TSPhrases.txt",
+      "bytes": 5161,
+      "sha256": "b2ef895dd4953b4bb77fc8ef8d26a2a9ca6d43a760ed9a1d767672cfafa6324f"
+    },
+    {
+      "wheel_member": "opencc/NOTICE.txt",
+      "path": "NOTICE.txt",
+      "bytes": 149,
+      "sha256": "afcbc6ee2d4fa9c2e9d5944b53ca05d3cc06bab6d082817c689bdfa33c38fcb0"
+    },
+    {
+      "wheel_member": "opencc_python_reimplemented-0.1.7.dist-info/LICENSE.txt",
+      "path": "LICENSE.txt",
+      "bytes": 10354,
+      "sha256": "18f3fedf9eac72e6054260489c764c1e54f63cf2b16055523f561ffeec7bc908"
+    }
+  ]
+}

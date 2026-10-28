@@ -561,7 +561,9 @@ class VoxGoApp:
             )
             return
         if self._overlay:
-            self._overlay.add_translation_with_id(event.trace_id, event.text, "...正在翻译")
+            from voxgo.ui.chinese_text import recognition_display_text
+            self._overlay.add_translation_with_id(
+                event.trace_id, recognition_display_text(event.text, source_lang), "...正在翻译")
         logger.info(
             "language gate accepted: detected={}, expected={}, prob={:.2f}, snapshot={}->{}, revision={}",
             event.language or "unknown",
@@ -620,7 +622,8 @@ class VoxGoApp:
                 self._overlay.update_translation(event.trace_id, translated, copyable=True)
 
         if self._mobile.server:
-            self._broadcast_to_mobile(event.original, translated)
+            from voxgo.ui.chinese_text import recognition_display_text
+            self._broadcast_to_mobile(recognition_display_text(event.original, event.source_lang), translated)
 
     def _notify_model_download_progress(self, progress: ModelDownloadProgress):
         self._model_download_notice_formatter.record_progress(progress)

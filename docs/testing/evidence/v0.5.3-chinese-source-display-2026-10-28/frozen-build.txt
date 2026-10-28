@@ -1,0 +1,24 @@
+174 INFO: PyInstaller: 6.11.1, contrib hooks: 2026.5
+174 INFO: Python: 3.10.20
+184 INFO: Platform: Windows-10-10.0.26300-SP0
+184 INFO: Python environment: C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 321, in <module>
+    run()
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 212, in run
+    spec_file = run_makespec(**vars(args))
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 63, in run_makespec
+    spec_file = PyInstaller.building.makespec.main(filenames, **opts)
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\makespec.py", line 789, in main
+    scripts = [make_path_spec_relative(x, specpath) for x in scripts]
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\makespec.py", line 789, in <listcomp>
+    scripts = [make_path_spec_relative(x, specpath) for x in scripts]
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\makespec.py", line 48, in make_path_spec_relative
+    filename = os.path.relpath(filename, start=spec_dir)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\ntpath.py", line 714, in relpath
+    raise ValueError("path is on mount %r, start on mount %r" % (
+ValueError: path is on mount 'C:', start on mount 'E:'

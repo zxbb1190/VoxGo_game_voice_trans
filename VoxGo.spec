@@ -27,6 +27,11 @@ datas = [
     (str(safe_config), "."),
     (str(root / "assets" / "voxgo.ico"), "assets"),
     (str(root / "voxgo" / "mobile" / "static"), "voxgo/mobile/static"),
+    (str(root / "voxgo/ui/_opencc/config"), "voxgo/ui/_opencc/config"),
+    (str(root / "voxgo/ui/_opencc/dictionary"), "voxgo/ui/_opencc/dictionary"),
+    (str(root / "voxgo/ui/_opencc/LICENSE.txt"), "voxgo/ui/_opencc"),
+    (str(root / "voxgo/ui/_opencc/NOTICE.txt"), "voxgo/ui/_opencc"),
+    (str(root / "voxgo/ui/_opencc/UPSTREAM.json"), "voxgo/ui/_opencc"),
     (str(root / ".venv-win" / "Lib" / "site-packages" / "faster_whisper" / "assets"), "faster_whisper/assets"),
 ]
 

@@ -1,0 +1,20 @@
+{
+  "base": "6bb4a98c",
+  "protected_paths": [
+    "voxgo/translation",
+    "voxgo/asr/whisper_engine.py",
+    "voxgo/asr/pipeline.py",
+    "voxgo/asr/language_profiles.py",
+    "voxgo/audio/capture.py",
+    "voxgo/analytics",
+    "config.example.json",
+    "requirements.txt"
+  ],
+  "protected_paths_unchanged": true,
+  "historical_request_ledgers_unchanged": true,
+  "original_settings_sha256": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "original_settings_unchanged": true,
+  "original_secret_values_absent_from_intended_artifacts": true,
+  "real_translation_api_requests": 0,
+  "full_exe_rebuilt": false
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 20,
+    "sha256": "e97602ab9cac70102245345c5ab0fc9830df8b17f1072b188265a662a3a547ae"
+  },
+  {
+    "path": "ChineseDisplaySmoke.spec",
+    "bytes": 1772,
+    "sha256": "7db2e389cdbaafcef517f4fe200d022748730ccbdecb06115b027b9a1915d4ee"
+  },
+  {
+    "path": "client-tests.txt",
+    "bytes": 17661,
+    "sha256": "1af2a0bd7e0d3810cb77aa6de8df9302e350093bc64cecb1f99199c57021d924"
+  },
+  {
+    "path": "dependency.json",
+    "bytes": 494,
+    "sha256": "c48c75732ad7f2108d2ecbec62289ba6fcb65b6ba3392448f2e4be04ba98251a"
+  },
+  {
+    "path": "en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "focused-tests-final.txt",
+    "bytes": 7836,
+    "sha256": "6452d81d93fcd4ade6088ea7446e7edd8fca4ccd15b6b643dda15397871b240d"
+  },
+  {
+    "path": "frozen-build-v2.txt",
+    "bytes": 7023,
+    "sha256": "6931911716630f301a35a2f21f915c830beced5ed3a50d81154bbd36205519d4"
+  },
+  {
+    "path": "frozen-build-v3.txt",
+    "bytes": 7026,
+    "sha256": "9eda1b9e9336e6c9ea1c8337a0a544588f66bd7ed93e7f172e815569be99ca1d"
+  },
+  {
+    "path": "frozen-build.txt",
+    "bytes": 2284,
+    "sha256": "67d3e172c7ee606a8911c936a8a64b0c548dc5eeb2be44f37a845a3852ef958e"
+  },
+  {
+    "path": "frozen-result-v3.json",
+    "bytes": 352,
+    "sha256": "82aa09f8455f6a8ecb3c748d9c3a03cabdc154d868db3e4eb8c51f37d7ac1376"
+  },
+  {
+    "path": "frozen-result.json",
+    "bytes": 283,
+    "sha256": "e4f4350993a0b704c78c0c62d6987c898d37f28768b1481a791f9e9613c20968"
+  },
+  {
+    "path": "frozen_smoke.py",
+    "bytes": 1076,
+    "sha256": "2f5a704e3769d377a97374e213eaedc86474c048fcfe507f63463e0f667a6ac6"
+  },
+  {
+    "path": "native-simplified-source.png",
+    "bytes": 16929,
+    "sha256": "b1cd5763090b827ca7fad87c646542bbc0c040465392ec537f66a130713f2816"
+  },
+  {
+    "path": "native-verification.json",
+    "bytes": 565,
+    "sha256": "d6fcf9680e5d0cbffbcfe20b7fbb020d625ec9f1345b5a3cdef01b625158d929"
+  },
+  {
+    "path": "release-preflight.txt",
+    "bytes": 949,
+    "sha256": "a86527f1c506f4b6f45bd5300e64bd7d1f841f502533f34ea397e2a55e8e1078"
+  },
+  {
+    "path": "safety-check.json",
+    "bytes": 657,
+    "sha256": "99f6a0758c2d07a87bda35f36bacb5ba16e036a4e0d980afe589df919e620856"
+  }
+]

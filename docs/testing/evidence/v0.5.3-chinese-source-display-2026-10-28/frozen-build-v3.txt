@@ -1,0 +1,73 @@
+129 INFO: PyInstaller: 6.11.1, contrib hooks: 2026.5
+129 INFO: Python: 3.10.20
+138 INFO: Platform: Windows-10-10.0.26300-SP0
+138 INFO: Python environment: C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win
+139 INFO: wrote C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator/build/chinese-display-20261028/smoke-spec-v3\ChineseDisplaySmoke.spec
+146 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\python310.zip',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\DLLs',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\lib',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\win32',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\win32\\lib',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\Pythonwin',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\chinese-display-20261028',
+ 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator']
+474 INFO: Appending 'datas' from .spec
+474 INFO: checking Analysis
+474 INFO: Building Analysis because Analysis-00.toc is non existent
+474 INFO: Running Analysis Analysis-00.toc
+475 INFO: Target bytecode optimization level: 0
+475 INFO: Initializing module dependency graph...
+476 INFO: Initializing module graph hook caches...
+487 INFO: Analyzing base_library.zip ...
+1018 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+1051 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+1768 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2312 INFO: Caching module dependency graph...
+2377 INFO: Looking for Python shared library...
+2381 INFO: Using Python shared library: C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\python310.dll
+2382 INFO: Analyzing C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\build\chinese-display-20261028\frozen_smoke.py
+2432 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2500 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2804 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2817 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+2818 INFO: SetuptoolsInfo: initializing cached setuptools info...
+5066 INFO: Processing module hooks (post-graph stage)...
+5171 INFO: Performing binary vs. data reclassification (8 entries)
+5182 INFO: Looking for ctypes DLLs
+5184 INFO: Analyzing run-time hooks ...
+5185 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+5186 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+5188 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+5192 INFO: Looking for dynamic libraries
+5409 INFO: Extra DLL search directories (AddDllDirectory): []
+5409 INFO: Extra DLL search directories (PATH): []
+5627 INFO: Warnings written to E:\my\my\VoxGo053ChineseDisplay-Smoke-20261028-v3\work\ChineseDisplaySmoke\warn-ChineseDisplaySmoke.txt
+5645 INFO: Graph cross-reference written to E:\my\my\VoxGo053ChineseDisplay-Smoke-20261028-v3\work\ChineseDisplaySmoke\xref-ChineseDisplaySmoke.html
+5658 INFO: checking PYZ
+5659 INFO: Building PYZ because PYZ-00.toc is non existent
+5659 INFO: Building PYZ (ZlibArchive) E:\my\my\VoxGo053ChineseDisplay-Smoke-20261028-v3\work\ChineseDisplaySmoke\PYZ-00.pyz
+5941 INFO: Building PYZ (ZlibArchive) E:\my\my\VoxGo053ChineseDisplay-Smoke-20261028-v3\work\ChineseDisplaySmoke\PYZ-00.pyz completed successfully.
+5950 INFO: checking PKG
+5950 INFO: Building PKG because PKG-00.toc is non existent
+5950 INFO: Building PKG (CArchive) ChineseDisplaySmoke.pkg
+5960 INFO: Building PKG (CArchive) ChineseDisplaySmoke.pkg completed successfully.
+5961 INFO: Bootloader C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\run.exe
+5961 INFO: checking EXE
+5961 INFO: Building EXE because EXE-00.toc is non existent
+5961 INFO: Building EXE from EXE-00.toc
+5961 INFO: Copying bootloader EXE to E:\my\my\VoxGo053ChineseDisplay-Smoke-20261028-v3\work\ChineseDisplaySmoke\ChineseDisplaySmoke.exe
+5988 INFO: Copying icon to EXE
+6025 INFO: Copying 0 resources to EXE
+6026 INFO: Embedding manifest in EXE
+6056 INFO: Appending PKG archive to EXE
+6126 INFO: Fixing EXE headers
+6415 INFO: Building EXE from EXE-00.toc completed successfully.
+6416 INFO: checking COLLECT
+6416 INFO: Building COLLECT because COLLECT-00.toc is non existent
+6417 INFO: Building COLLECT COLLECT-00.toc
+6581 INFO: Building COLLECT COLLECT-00.toc completed successfully.

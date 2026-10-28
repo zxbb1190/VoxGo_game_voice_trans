@@ -1,0 +1,17 @@
+{
+  "qt_platform": "windows",
+  "samples": [
+    {
+      "raw_asr": "這並不是告別。",
+      "translation_input": "這並不是告別。",
+      "display_original": "这并不是告别。"
+    },
+    {
+      "raw_asr": "後衛在後門，還有15秒，不要開槍。",
+      "translation_input": "後衛在後門，還有15秒，不要開槍。",
+      "display_original": "后卫在后门，还有15秒，不要开枪。"
+    }
+  ],
+  "scope": "native source Qt display fixture, not Full EXE or ASR quality run",
+  "real_api_requests": 0
+}

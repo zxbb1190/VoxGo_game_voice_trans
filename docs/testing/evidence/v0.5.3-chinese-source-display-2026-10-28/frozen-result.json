@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "frozen_smoke.py", line 18, in <module>
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f642' in position 42: illegal multibyte sequence
+[PYI-35748:ERROR] Failed to execute script 'frozen_smoke' due to unhandled exception!
