@@ -1,0 +1,371 @@
+2026-10-28 17:51:04.169 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.169 | ERROR    | voxgo.app:_finish_backend_startup:1369 - 后端已启动，启动提示显示失败
+Traceback (most recent call last):
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+           │         └ <code object <module> at 0x000002971FECA810, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+           └ <function _run_code at 0x000002971FB0AA70>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+         └ <code object <module> at 0x000002971FECA810, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\__main__.py", line 18, in <module>
+    main(module=None)
+    └ <class 'unittest.main.TestProgram'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 101, in __init__
+    self.runTests()
+    │    └ <function TestProgram.runTests at 0x000002971FF1DCF0>
+    └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 271, in runTests
+    self.result = testRunner.run(self.test)
+    │             │          │   │    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_backend_startup.Back...
+    │             │          │   └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+    │             │          └ <function TextTestRunner.run at 0x000002971FF1D630>
+    │             └ <unittest.runner.TextTestRunner object at 0x000002971FAEB790>
+    └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\runner.py", line 184, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=1 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_backend_startup.Back...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=1 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_backend_startup.Back...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=1 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_backend_startup.BackendStartupTests testMethod=test_c...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=1 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_backend_startup.BackendStartupTests testMethod=test_c...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=1 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disa...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=1 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[<test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disa...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=1 errors=0 failures=0>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 650, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=1 errors=0 failures=0>,)
+           │    └ <function TestCase.run at 0x000002971FEBF640>
+           └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+    │    │               └ <bound method BackendStartupTests.test_console_banner_failure_cannot_disable_audio_consumption of <test_backend_startup.Backe...
+    │    └ <function TestCase._callTestMethod at 0x000002971FEBF490>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+    └ <bound method BackendStartupTests.test_console_banner_failure_cannot_disable_audio_consumption of <test_backend_startup.Backe...
+
+  File "E:\my\my\game_voice_translator\tests\test_backend_startup.py", line 72, in test_console_banner_failure_cannot_disable_audio_consumption
+    self.start(owner);self.assertTrue(owner._audio_timer.isActive());self.tick(owner)
+    │    │     │      │    │          │     │            │           │    │    └ <voxgo.app.VoxGoApp object at 0x000002975A7C4970>
+    │    │     │      │    │          │     │            │           │    └ <function BackendStartupTests.tick at 0x000002975A78C5E0>
+    │    │     │      │    │          │     │            │           └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+    │    │     │      │    │          │     │            └ <built-in method isActive>
+    │    │     │      │    │          │     └ <PyQt5.QtCore.QTimer object at 0x000002975A78CB80>
+    │    │     │      │    │          └ <voxgo.app.VoxGoApp object at 0x000002975A7C4970>
+    │    │     │      │    └ <function TestCase.assertTrue at 0x000002971FEBFAC0>
+    │    │     │      └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+    │    │     └ <voxgo.app.VoxGoApp object at 0x000002975A7C4970>
+    │    └ <function BackendStartupTests.start at 0x000002975A78C550>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_console_banner_failure_cannot_disable_audio_consumption>
+
+  File "E:\my\my\game_voice_translator\tests\test_backend_startup.py", line 42, in start
+    owner._finish_backend_startup()
+    │     └ <function VoxGoApp._finish_backend_startup at 0x000002975A79F760>
+    └ <voxgo.app.VoxGoApp object at 0x000002975A7C4970>
+
+> File "E:\my\my\game_voice_translator\voxgo\app.py", line 1359, in _finish_backend_startup
+    self._print_banner()
+    │    └ <Mock id='2849081413248'>
+    └ <voxgo.app.VoxGoApp object at 0x000002975A7C4970>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1114, in __call__
+    return self._mock_call(*args, **kwargs)
+           │    │           │       └ {}
+           │    │           └ ()
+           │    └ <function CallableMixin._mock_call at 0x0000029721C47490>
+           └ <Mock id='2849081413248'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1118, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           │    │                   │       └ {}
+           │    │                   └ ()
+           │    └ <function CallableMixin._execute_mock_call at 0x0000029721C475B0>
+           └ <Mock id='2849081413248'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1173, in _execute_mock_call
+    raise effect
+          └ OSError('fixture closed console')
+
+OSError: fixture closed console
+2026-10-28 17:51:04.276 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.384 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.384 | ERROR    | voxgo.app:_finish_backend_startup:1369 - 后端已启动，启动提示显示失败
+Traceback (most recent call last):
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+           │         └ <code object <module> at 0x000002971FECA810, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+           └ <function _run_code at 0x000002971FB0AA70>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+         └ <code object <module> at 0x000002971FECA810, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\__main__.py", line 18, in <module>
+    main(module=None)
+    └ <class 'unittest.main.TestProgram'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 101, in __init__
+    self.runTests()
+    │    └ <function TestProgram.runTests at 0x000002971FF1DCF0>
+    └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 271, in runTests
+    self.result = testRunner.run(self.test)
+    │             │          │   │    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, None, <test_backend_...
+    │             │          │   └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+    │             │          └ <function TextTestRunner.run at 0x000002971FF1D630>
+    │             └ <unittest.runner.TextTestRunner object at 0x000002971FAEB790>
+    └ <unittest.main.TestProgram object at 0x000002971FAEB760>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\runner.py", line 184, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=3 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, None, <test_backend_...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=3 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, None, <test_backend_...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=3 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, None, <test_backend_startup.BackendStartupTests testM...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=3 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, None, <test_backend_startup.BackendStartupTests testM...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=3 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[None, None, <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=3 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x000002971FEC2950>
+           └ <unittest.suite.TestSuite tests=[None, None, <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=3 errors=0 failures=0>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 650, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=3 errors=0 failures=0>,)
+           │    └ <function TestCase.run at 0x000002971FEBF640>
+           └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+    │    │               └ <bound method BackendStartupTests.test_startup_notice_failure_cannot_disable_audio_consumption of <test_backend_startup.Backe...
+    │    └ <function TestCase._callTestMethod at 0x000002971FEBF490>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+    └ <bound method BackendStartupTests.test_startup_notice_failure_cannot_disable_audio_consumption of <test_backend_startup.Backe...
+
+  File "E:\my\my\game_voice_translator\tests\test_backend_startup.py", line 68, in test_startup_notice_failure_cannot_disable_audio_consumption
+    self.start(owner);self.assertTrue(owner._audio_timer.isActive());self.tick(owner)
+    │    │     │      │    │          │     │            │           │    │    └ <voxgo.app.VoxGoApp object at 0x000002975A86B160>
+    │    │     │      │    │          │     │            │           │    └ <function BackendStartupTests.tick at 0x000002975A78C5E0>
+    │    │     │      │    │          │     │            │           └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+    │    │     │      │    │          │     │            └ <built-in method isActive>
+    │    │     │      │    │          │     └ <PyQt5.QtCore.QTimer object at 0x000002975A78FE20>
+    │    │     │      │    │          └ <voxgo.app.VoxGoApp object at 0x000002975A86B160>
+    │    │     │      │    └ <function TestCase.assertTrue at 0x000002971FEBFAC0>
+    │    │     │      └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+    │    │     └ <voxgo.app.VoxGoApp object at 0x000002975A86B160>
+    │    └ <function BackendStartupTests.start at 0x000002975A78C550>
+    └ <test_backend_startup.BackendStartupTests testMethod=test_startup_notice_failure_cannot_disable_audio_consumption>
+
+  File "E:\my\my\game_voice_translator\tests\test_backend_startup.py", line 42, in start
+    owner._finish_backend_startup()
+    │     └ <function VoxGoApp._finish_backend_startup at 0x000002975A79F760>
+    └ <voxgo.app.VoxGoApp object at 0x000002975A86B160>
+
+> File "E:\my\my\game_voice_translator\voxgo\app.py", line 1360, in _finish_backend_startup
+    self._notify_user(
+    │    └ <Mock id='2849081110112'>
+    └ <voxgo.app.VoxGoApp object at 0x000002975A86B160>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1114, in __call__
+    return self._mock_call(*args, **kwargs)
+           │    │           │       └ {}
+           │    │           └ ('程序已启动', '当前方向: 英语 → 中文\n手机端: http://127.0.0.1:19662/mobile', '状态')
+           │    └ <function CallableMixin._mock_call at 0x0000029721C47490>
+           └ <Mock id='2849081110112'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1118, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           │    │                   │       └ {}
+           │    │                   └ ('程序已启动', '当前方向: 英语 → 中文\n手机端: http://127.0.0.1:19662/mobile', '状态')
+           │    └ <function CallableMixin._execute_mock_call at 0x0000029721C475B0>
+           └ <Mock id='2849081110112'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\mock.py", line 1173, in _execute_mock_call
+    raise effect
+          └ RuntimeError('fixture presentation failure')
+
+RuntimeError: fixture presentation failure
+2026-10-28 17:51:04.493 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.494 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.495 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.497 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.497 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.498 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.499 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.499 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.500 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.501 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.501 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.502 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.503 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.503 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.504 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.505 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.506 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.506 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.507 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.508 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.509 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.573 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.573 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.574 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.575 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.576 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.576 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.577 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.578 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.578 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.579 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.580 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.581 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.582 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.583 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.584 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.584 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.585 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.586 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.586 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.587 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.588 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.589 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.589 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.590 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.591 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.592 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.592 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.593 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.594 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.595 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.596 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.596 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.597 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.598 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.598 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.599 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.600 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.601 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.602 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.602 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.603 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.604 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.604 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.605 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.606 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.607 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.608 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.608 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.609 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.610 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.610 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.611 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.612 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.613 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.615 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.616 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.617 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.618 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.620 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.621 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.622 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.624 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.624 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.625 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.625 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.626 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.627 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.628 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.629 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.629 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.630 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.631 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.632 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.632 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.633 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.634 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.635 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.637 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+2026-10-28 17:51:04.637 | INFO     | voxgo.app:_finish_backend_startup:1355 - 后端服务已启动
+----------------------------------------------------------------------
+Ran 4 tests in 0.503s
+
+OK

@@ -1,0 +1,56 @@
+{
+  "runtime_commit": "4b366c14187071024db0f9cbde14e2956f8a9163",
+  "branch": "codex/release-0.6.0",
+  "canonical_source": "E:\\my\\my\\game_voice_translator",
+  "worktree_count": 1,
+  "removed_old_package_roots": 13,
+  "removed_extra_worktrees": 2,
+  "archived_main_untracked_roots": 5,
+  "preserved_preexisting_git_refs": 40,
+  "original_user_settings_unchanged": true,
+  "original_model_hashes_unchanged": true,
+  "manual_r2_all_file_hashes_unchanged": true,
+  "api_head_and_status_unchanged": true,
+  "latest_release_files_hash_checked_after_cleanup": {
+    "release-manifest.local.json": {
+      "bytes": 881,
+      "sha256": "563314bc3be37ca63f7f40a51c2d9e181fb8d52171abd23a027095ccb9756339"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 369,
+      "sha256": "7c9bd5f88afbb77920f4650c51cd452099663e3d1731049e9b13ce7d42d02f31"
+    },
+    "VoxGo-v0.6.0-cuda-runtime.zip": {
+      "bytes": 590591593,
+      "sha256": "a9204dabaffda64f36c0b36a82cca3f39f83d2fe995dc9764ff98cb00e26ff98"
+    },
+    "VoxGo-v0.6.0-full-cuda.zip": {
+      "bytes": 1307517725,
+      "sha256": "f68052f3b0e3bd4ccdefdd1e41719766cab9168ff19e7cf4a0370a637dbbb120"
+    },
+    "VoxGo-v0.6.0-full.zip": {
+      "bytes": 716800181,
+      "sha256": "4e8caeafa8bb76404825f3b9c0ca0823085a03c1f736f1da0c378197cc8f5308"
+    },
+    "VoxGo-v0.6.0-lite.zip": {
+      "bytes": 137001387,
+      "sha256": "2488b54a2b575d771ed73d9e68d4fb3b6c8b5fa786952ebacb8718aab66abb21"
+    }
+  },
+  "migrated_build_files": 3989,
+  "free_change_bytes": {
+    "C:/": 24276828160,
+    "E:/": 36127666176
+  },
+  "tests": {
+    "startup_unittest": 4,
+    "archive_portable_unittest": 5,
+    "private_archive_restore_files_verified": 14,
+    "release_preflight": "passed"
+  },
+  "runtime_changes": false,
+  "real_api_requests": 0,
+  "production_operations": 0,
+  "push_tag_release": false,
+  "validation_scope": "Workspace migration only. Previous 671-test and frozen-five-language evidence remains in the startup-fix report; no new manual GUI, real API, game FPS or low-end validation."
+}
