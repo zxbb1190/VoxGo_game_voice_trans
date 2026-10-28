@@ -161,8 +161,8 @@ def _translation_language_notice(config, ui_language: str) -> str:
                    "Unsupported direction: select an available source and target language.")
     if (config.source_lang, config.target_lang) not in LOCAL_DIRECTIONS:
         return _tr(ui_language,
-            "日/韩/俄相关方向仅支持在线直译，需自配 API Key。当前语言质量尚未完成独立验收。",
-            "Directions involving Japanese/Korean/Russian require direct online translation with your own API key. Language quality acceptance is still pending.")
+            "日/韩/俄相关方向仅支持在线直译，需自配 API Key。",
+            "Directions involving Japanese/Korean/Russian require direct online translation with your own API key.")
     return ""
 
 
