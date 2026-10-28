@@ -484,18 +484,21 @@ class VoxGoApp:
         self._diagnostics.write_crash_report(title, exc, detail)
 
     def _show_error_dialog(self, title: str, message: str):
-        self._diagnostics.show_error_dialog(title, message)
+        from voxgo.i18n import localize_text
+        self._diagnostics.show_error_dialog(localize_text(self._ui_language(), title), localize_text(self._ui_language(), message))
 
     def _notify_user(self, title: str, message: str, level: str = "状态"):
         self._event_bus.publish(AppNotice(level=level, title=title, message=message))
 
     def _ui_language(self) -> str:
-        return normalize_ui_language(getattr(getattr(self.config, "app", None), "language", ""))
+        return normalize_ui_language(getattr(getattr(getattr(self, "config", None), "app", None), "language", ""))
 
     def _handle_app_notice(self, event: AppNotice):
-        title = (event.title or "").strip()
-        message = (event.message or "").strip()
-        level = (event.level or "状态").strip()
+        from voxgo.i18n import localize_text
+        language = self._ui_language()
+        title = localize_text(language, (event.title or "").strip())
+        message = localize_text(language, (event.message or "").strip())
+        level = localize_text(language, (event.level or "状态").strip())
         if not title and not message:
             return
         original = f"[{level}] {title}" if title else f"[{level}]"
@@ -628,7 +631,7 @@ class VoxGoApp:
 
         message = self._model_download_notice_formatter.format(progress)
         item_id = "model-download-progress"
-        original = "[状态] 模型下载"
+        original = "[" + ui_text(self._ui_language(), "状态", "Status") + "] " + ui_text(self._ui_language(), "模型下载", "Model download")
         if self._overlay:
             if self._model_download_notice_started:
                 self._overlay.update_translation(item_id, message)
@@ -889,6 +892,8 @@ class VoxGoApp:
                 self._owner._handle_backend_startup_failure(message)
 
         self._qt_app = QApplication.instance() or QApplication(sys.argv)
+        from voxgo.i18n import set_qt_ui_language
+        set_qt_ui_language(self._ui_language())
         self._qt_app.setQuitOnLastWindowClosed(False)
         self._qt_app.setApplicationName(APP_NAME)
         self._qt_app.setApplicationDisplayName(APP_NAME)
@@ -1335,11 +1340,10 @@ class VoxGoApp:
         self._print_banner()
         self._notify_user(
             "程序已启动",
-            (
-                f"当前方向: {LANGUAGE_NAMES.get(self.config.translation.source_lang, self.config.translation.source_lang)} "
-                f"→ {LANGUAGE_NAMES.get(self.config.translation.target_lang, self.config.translation.target_lang)}\n"
-                f"手机端: {self._mobile.get_mobile_url()}"
-            ),
+            ui_text(self._ui_language(),
+                "当前方向: {0} → {1}\n手机端: {2}", "Direction: {0} → {1}\nMobile: {2}").format(
+                    language_label(self.config.translation.source_lang, self._ui_language()),
+                    language_label(self.config.translation.target_lang, self._ui_language()), self._mobile.get_mobile_url()),
             "状态",
         )
 

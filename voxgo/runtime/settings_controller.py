@@ -1,7 +1,7 @@
 from loguru import logger
 
 from voxgo.audio.capture import AudioConfig, normalize_latency_mode
-from voxgo.i18n import UI_LANGUAGE_ZH, language_label, normalize_ui_language, ui_text
+from voxgo.i18n import UI_LANGUAGE_ZH, language_label, normalize_ui_language, ui_text, localize_text
 from voxgo.asr.whisper_engine import (
     WhisperConfig,
     describe_model_download_source,
@@ -243,6 +243,7 @@ class OverlaySettingsController:
                 normalize_translation_provider(app.config.translation.provider),
                 app.config.translation.provider,
             )
+            provider_label = localize_text(current_ui_language, provider_label)
             detail = ui_text(
                 current_ui_language,
                 f"服务商: {provider_label}",
@@ -272,8 +273,8 @@ class OverlaySettingsController:
                 ui_text(current_ui_language, "识别设备已更新", "Recognition Device Updated"),
                 ui_text(
                     current_ui_language,
-                    f"当前选择: {WHISPER_DEVICE_NAMES[current_whisper_device]}\n重启程序后生效",
-                    f"Current selection: {WHISPER_DEVICE_NAMES[current_whisper_device]}\nRestart VoxGo to apply it.",
+                    f"当前选择: {localize_text(current_ui_language, WHISPER_DEVICE_NAMES[current_whisper_device])}\n重启程序后生效",
+                    f"Current selection: {localize_text(current_ui_language, WHISPER_DEVICE_NAMES[current_whisper_device])}\nRestart VoxGo to apply it.",
                 ),
                 ui_text(current_ui_language, "状态", "Status"),
             )
@@ -282,8 +283,8 @@ class OverlaySettingsController:
                 ui_text(current_ui_language, "模型下载源已更新", "Model Download Source Updated"),
                 ui_text(
                     current_ui_language,
-                    f"当前选择: {describe_model_download_source(*current_model_download_source)}\n重启程序后生效",
-                    f"Current selection: {describe_model_download_source(*current_model_download_source)}\nRestart VoxGo to apply it.",
+                    f"当前选择: {localize_text(current_ui_language, describe_model_download_source(*current_model_download_source))}\n重启程序后生效",
+                    f"Current selection: {localize_text(current_ui_language, describe_model_download_source(*current_model_download_source))}\nRestart VoxGo to apply it.",
                 ),
                 ui_text(current_ui_language, "状态", "Status"),
             )
@@ -293,7 +294,7 @@ class OverlaySettingsController:
                 ui_text(
                     current_ui_language,
                     f"自动检查: {'开启' if current_update[0] else '关闭'}\n通道: {current_update[1]}",
-                    f"Automatic checks: {'On' if current_update[0] else 'Off'}\nChannel: {current_update[1]}",
+                    f"Automatic checks: {ui_text(current_ui_language, '开启', 'On') if current_update[0] else ui_text(current_ui_language, '关闭', 'Off')}\nChannel: {current_update[1]}",
                 ),
                 ui_text(current_ui_language, "状态", "Status"),
             )

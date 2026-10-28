@@ -28,7 +28,7 @@ from PyQt5.QtWidgets import (
 )
 
 from voxgo.app_info import APP_NAME, APP_VERSION
-from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
+from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language, localize_text, set_qt_ui_language
 from voxgo.languages import DEFAULT_TARGET_LANGUAGE, ONLINE_DIRECTIONS, normalize_language_flow
 from voxgo.translation import TranslationConfig
 from voxgo.update.checker import UpdateCheckResult, UpdateInfo, UpdateSettings
@@ -954,9 +954,13 @@ class GameOverlay(QWidget):
             on_completed()
 
     def refresh_language(self):
+        set_qt_ui_language(self._ui_language())
+        if self._update_prompt_dialog:
+            self._update_prompt_dialog.refresh_language(self._ui_language())
         self._sync_language_controls()
         self._refresh_control_state()
         self._refresh_lock_state()
+        self._refresh_labels()
         if self._fullscreen_help_dialog and self._fullscreen_help_dialog.isVisible():
             self._fullscreen_help_dialog.close()
             self._fullscreen_help_dialog = None
@@ -1392,7 +1396,10 @@ class GameOverlay(QWidget):
         return max(1, int(doc.size().height()) + 3)
 
     def _format_item(self, item: TranslationItem, opacity: float, width: int = None) -> str:
-        translated = self._escape(self._normalize_display_text(item.translated))
+        # Only app notices/placeholders are localized; real subtitles and copied
+        # text stay exactly as returned by the translation provider.
+        displayed = item.translated if item.copyable else localize_text(self._ui_language(), item.translated)
+        translated = self._escape(self._normalize_display_text(displayed))
         original = self._escape(self._normalize_display_text(item.original))
         main_color = self._rgba_css(self.config.text_color, opacity)
         original_color = self._rgba_css(self.config.original_text_color, opacity * 0.92)

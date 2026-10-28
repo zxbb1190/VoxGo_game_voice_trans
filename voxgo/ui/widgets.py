@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import (
 )
 
 from voxgo.audio.capture import AudioConfig, AudioLevelMonitor, AudioRecoveryInProgress
-from voxgo.i18n import UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.i18n import UI_LANGUAGE_ZH, uses_english_source, normalize_ui_language, localize_text
 from voxgo.languages import translation_direction_error
 from voxgo.translation import GameTranslator, TranslationConfig
 from voxgo.ui.config_models import _copy_audio_config, _copy_translation_config, _tr
@@ -254,12 +254,10 @@ class AudioTestPanel(QWidget):
                 + f"{device.get('type', 'Audio')} [{device.get('index')}] "
                 + f"{device.get('name', '')} ({device.get('sample_rate')}Hz/{device.get('channels')}ch)"
             )
-        if is_english_ui(self._ui_language):
-            state = "Sound detected" if detected else "No clear sound yet"
-            self.status_label.setText(f"{state}. Current {rms:.1f} dBFS, peak {peak:.1f} dBFS.")
-        else:
-            state = "检测到声音" if detected else "暂未检测到明显声音"
-            self.status_label.setText(f"{state}。当前 {rms:.1f} dBFS，峰值 {peak:.1f} dBFS。")
+        state = _tr(self._ui_language, "检测到声音", "Sound detected") if detected else _tr(self._ui_language, "暂未检测到明显声音", "No clear sound yet")
+        self.status_label.setText(_tr(self._ui_language,
+            f"{state}。当前 {rms:.1f} dBFS，峰值 {peak:.1f} dBFS。",
+            f"{state}. Current {rms:.1f} dBFS, peak {peak:.1f} dBFS."))
 
     def close(self):
         self.stop_test()
@@ -270,8 +268,9 @@ class ColorButton(QPushButton):
 
     color_changed = pyqtSignal(str)
 
-    def __init__(self, color: str, parent=None):
+    def __init__(self, color: str, parent=None, ui_language=UI_LANGUAGE_ZH):
         super().__init__(parent)
+        self._ui_language = ui_language
         self._color = color
         self.setFixedWidth(80)
         self.clicked.connect(self._pick_color)
@@ -297,7 +296,10 @@ class ColorButton(QPushButton):
         """)
 
     def _pick_color(self):
-        color = QColorDialog.getColor(QColor(self._color), self, "选择颜色")
+        options = QColorDialog.ColorDialogOptions()
+        if normalize_ui_language(self._ui_language) not in ('zh-CN', 'en-US'):
+            options |= QColorDialog.DontUseNativeDialog
+        color = QColorDialog.getColor(QColor(self._color), self, _tr(self._ui_language, "选择颜色", "Select Color"), options=options)
         if color.isValid():
             self.set_color(color.name().upper())
             self.color_changed.emit(self._color)
@@ -325,14 +327,15 @@ class HotkeyCaptureEdit(QLineEdit):
         Qt.Key_Enter: "enter",
     }
 
-    def __init__(self, value: str, parent=None):
+    def __init__(self, value: str, parent=None, ui_language=UI_LANGUAGE_ZH):
         super().__init__(value, parent)
+        self._ui_language = ui_language
         self.setReadOnly(True)
-        self.setPlaceholderText("点击后按快捷键")
+        self.setPlaceholderText(_tr(self._ui_language, "点击后按快捷键", "Click and press a hotkey"))
         self.setCursor(Qt.PointingHandCursor)
 
     def mousePressEvent(self, event):
-        self.setText("请按快捷键...")
+        self.setText(_tr(self._ui_language, "请按快捷键...", "Press a hotkey..."))
         self.selectAll()
         self.setFocus(Qt.MouseFocusReason)
         event.accept()

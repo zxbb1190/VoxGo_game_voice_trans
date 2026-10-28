@@ -1,0 +1,44 @@
+from pathlib import Path
+import os,json,sys
+ROOT=Path.cwd();sys.path.insert(0,str(ROOT))
+os.environ['QT_QPA_PLATFORM']='windows'
+from PyQt5.QtWidgets import QApplication,QTabWidget,QLabel,QPushButton,QMessageBox
+from voxgo.ui.config_models import OverlayConfig,HotkeyConfig,RuntimeConfig,WhisperDeviceConfig
+from voxgo.translation import TranslationConfig
+from voxgo.ui.settings_dialog import SettingsDialog
+from voxgo.ui.dialogs import FirstRunWizard,FullscreenHelpDialog
+from voxgo.ui.overlay_window import GameOverlay
+from voxgo.i18n import set_qt_ui_language,localize_text
+
+app=QApplication([]);assert app.platformName()=='windows'
+out=ROOT/'build/ui-five-language-20261028/screenshots-v2';out.mkdir(exist_ok=False)
+results=[]
+for language in ('ja-JP','ko-KR','ru-RU'):
+    config=RuntimeConfig(language=language,telemetry_consent='denied')
+    translation=TranslationConfig(source_lang='ja',target_lang='ru',api_key='')
+    dialog=SettingsDialog(OverlayConfig(),HotkeyConfig(),translation_config=translation,app_config=config)
+    dialog.show();app.processEvents();tabs=dialog.findChild(QTabWidget)
+    for index in (0,1,tabs.count()-1):
+        tabs.setCurrentIndex(index);app.processEvents()
+        assert dialog.grab().save(str(out/f'{language}-settings-{index}.png'))
+    results.append(dict(language=language,title=dialog.windowTitle(),tabs=[tabs.tabText(i) for i in range(tabs.count())],
+        dialog_size=[dialog.width(),dialog.height()],screen_size=[app.primaryScreen().availableGeometry().width(),app.primaryScreen().availableGeometry().height()],
+        language_options=[dialog.ui_language_combo.itemText(i) for i in range(5)],privacy=dialog.privacy_title.text(),key_empty=not dialog.api_key_input.text()))
+    dialog.close();app.processEvents()
+    wizard=FirstRunWizard(None,translation,app_config=config)
+    wizard.show();app.processEvents();wizard.grab().save(str(out/f'{language}-wizard.png'));wizard.close();app.processEvents()
+    help=FullscreenHelpDialog(HotkeyConfig(),language)
+    help.show();app.processEvents();help.grab().save(str(out/f'{language}-help.png'));help.close();app.processEvents()
+    overlay=GameOverlay(app_config=config,translation_config=translation)
+    overlay.add_translation_with_id('ui-test','Public fixture; no actual request','...正在翻译')
+    app.processEvents()
+    overlay.update_translation('ui-test','[翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。',False)
+    overlay.show();app.processEvents();overlay.grab().save(str(out/f'{language}-incomplete.png'))
+    overlay._allow_close=True;overlay.close();app.processEvents()
+    set_qt_ui_language(language)
+    box=QMessageBox(QMessageBox.Question,localize_text(language,'Close VoxGo'),localize_text(language,'What should the close button do?'),QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel)
+    box.show();app.processEvents();box.grab().save(str(out/f'{language}-buttons.png'));box.close();app.processEvents()
+
+(out.parent/'render-verification-v2.json').write_text(json.dumps(dict(qt_platform=app.platformName(),scope='native source Qt components, not packaged Full/manual acceptance',
+    languages=results,screenshots=len(list(out.glob('*.png'))),real_api_requests=0,asr_runs=0,production_telemetry_initialized=False),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(results,ensure_ascii=False))

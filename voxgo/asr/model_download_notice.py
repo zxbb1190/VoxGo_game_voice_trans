@@ -1,3 +1,4 @@
+from voxgo.i18n import ui_text, localize_text
 from voxgo.asr.whisper_engine import ModelDownloadProgress, describe_model_download_source
 
 
@@ -44,28 +45,25 @@ class ModelDownloadNoticeFormatter:
             getattr(config.whisper, "model_download_source", "modelscope"),
             getattr(config.whisper, "model_download_endpoint", ""),
         )
-        header = f"模型: {model}\n仓库: {repo}\n来源: {source}"
-
+        language = getattr(getattr(config, 'app', None), 'language', 'zh-CN')
+        source = localize_text(language, source)
+        header = "\n".join((
+            ui_text(language, "模型: {0}", "Model: {0}").format(model),
+            ui_text(language, "仓库: {0}", "Repository: {0}").format(repo),
+            ui_text(language, "来源: {0}", "Source: {0}").format(source),
+        ))
         if progress.status == "checking":
-            return f"{header}\n正在检查本地缓存"
+            return header + "\n" + ui_text(language, "正在检查本地缓存", "Checking the local cache")
+        downloaded, total, percent = self.last_download_bytes
+        progress_line = format_download_amount(downloaded, total, percent)
         if progress.status == "complete":
-            detail = progress.message or "模型缓存已就绪"
-            downloaded, total, percent = self.last_download_bytes
-            progress_line = format_download_amount(downloaded, total, percent)
-            if progress_line:
-                return f"{header}\n已下载: {progress_line}\n{detail}，正在加载识别引擎"
-            return f"{header}\n{detail}，正在加载识别引擎"
+            detail = localize_text(language, progress.message or "模型缓存已就绪")
+            amount = ("\n" + ui_text(language, "已下载: {0}", "Downloaded: {0}").format(progress_line)) if progress_line else ""
+            return header + amount + "\n" + ui_text(language, "{0}，正在加载识别引擎", "{0}; loading the recognition engine").format(detail)
         if progress.status == "error":
-            downloaded, total, percent = self.last_download_bytes
-            progress_line = format_download_amount(downloaded, total, percent)
-            suffix = f"\n已下载: {progress_line}" if progress_line else ""
-            return f"{progress.message or '模型下载失败'}{suffix}"
-
-        progress_line = format_download_amount(
-            progress.downloaded_bytes,
-            progress.total_bytes,
-            progress.percent,
-        )
+            suffix = ("\n" + ui_text(language, "已下载: {0}", "Downloaded: {0}").format(progress_line)) if progress_line else ""
+            return localize_text(language, progress.message or "模型下载失败") + suffix
+        progress_line = format_download_amount(progress.downloaded_bytes, progress.total_bytes, progress.percent)
         if not progress_line:
-            progress_line = "正在准备下载"
-        return f"{header}\n已下载: {progress_line}"
+            progress_line = ui_text(language, "正在准备下载", "Preparing download")
+        return header + "\n" + ui_text(language, "已下载: {0}", "Downloaded: {0}").format(progress_line)

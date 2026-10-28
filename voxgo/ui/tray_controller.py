@@ -151,6 +151,7 @@ class TrayController:
             "settings": ("设置", "Settings"),
             "fullscreen_help": ("全屏兼容说明", "Fullscreen Compatibility"),
             "quit": ("退出", "Quit"),
+            "force_quit": ("强制退出", "Force Quit"),
         }
         for key, (zh, en) in static_labels.items():
             if key in self.actions:

@@ -11,9 +11,10 @@ from voxgo.i18n import system_ui_language
 
 class FirstRunLanguageTests(unittest.TestCase):
     def test_exact_system_language_policy(self):
-        for system in ('zh_CN', 'zh_TW', 'zh_HK', 'zh_SG', 'en_US', 'ja_JP', 'C'):
+        for system in ('zh_CN', 'zh_TW', 'zh_HK', 'zh_SG', 'en_US', 'ja_JP', 'ko_KR', 'ru_RU', 'C'):
             with self.subTest(system=system), patch('PyQt5.QtCore.QLocale.system', return_value=SimpleNamespace(name=lambda: system)):
-                self.assertEqual(system_ui_language(), 'zh-CN' if system in ('zh_CN', 'zh_TW') else 'en-US')
+                expected = {'zh_CN': 'zh-CN', 'zh_TW': 'zh-CN', 'ja_JP': 'ja-JP', 'ko_KR': 'ko-KR', 'ru_RU': 'ru-RU'}.get(system, 'en-US')
+                self.assertEqual(system_ui_language(), expected)
 
     def test_new_language_is_persisted_once(self):
         with tempfile.TemporaryDirectory() as folder:

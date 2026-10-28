@@ -31,7 +31,7 @@ from voxgo.audio.capture import (
     LATENCY_MODE_CUSTOM,
     normalize_latency_mode,
 )
-from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, uses_english_source, normalize_ui_language, localize_text, set_qt_ui_language
 from voxgo.languages import translation_direction_error
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.ui.download_panels import LocalModelPanel
@@ -94,6 +94,7 @@ class SettingsDialog(QDialog):
         self.app_config = _copy_runtime_config(app_config or RuntimeConfig())
         self.app_config.language = normalize_ui_language(getattr(self.app_config, "language", UI_LANGUAGE_ZH))
         self._ui_language = self.app_config.language
+        set_qt_ui_language(self._ui_language)
         self.setWindowTitle(_tr(self._ui_language, "浮窗设置", "Overlay Settings"))
         self.debug_config = debug_config or DebugConfig()
         self.update_config = update_config or UpdateSettings()
@@ -119,7 +120,7 @@ class SettingsDialog(QDialog):
         self.ui_language_combo = QComboBox()
         self._fill_ui_languages()
         self.ui_language_combo.currentIndexChanged.connect(self._ui_language_changed)
-        appearance_form.addRow("Language", self.ui_language_combo)
+        appearance_form.addRow(_tr(self._ui_language, "界面语言", "Interface Language"), self.ui_language_combo)
         self.close_action_combo = QComboBox()
         for label, value in [
             (_tr(self._ui_language, "每次询问", "Ask every time"), "ask"),
@@ -166,11 +167,11 @@ class SettingsDialog(QDialog):
         self.font_slider.valueChanged.connect(self._preview)
         appearance_form.addRow(_tr(self._ui_language, "字号", "Font Size"), font_row)
 
-        self.text_color_btn = ColorButton(self.overlay_config.text_color)
+        self.text_color_btn = ColorButton(self.overlay_config.text_color, ui_language=self._ui_language)
         self.text_color_btn.color_changed.connect(self._preview)
         appearance_form.addRow(_tr(self._ui_language, "译文颜色", "Translation Color"), self.text_color_btn)
 
-        self.original_color_btn = ColorButton(self.overlay_config.original_text_color)
+        self.original_color_btn = ColorButton(self.overlay_config.original_text_color, ui_language=self._ui_language)
         self.original_color_btn.color_changed.connect(self._preview)
         appearance_form.addRow(_tr(self._ui_language, "原文颜色", "Original Color"), self.original_color_btn)
 
@@ -185,7 +186,7 @@ class SettingsDialog(QDialog):
         appearance_form.addRow(_tr(self._ui_language, "紧凑模式", "Compact Mode"), self.compact_mode_check)
 
         self.provider_combo = QComboBox()
-        self.provider_combo.setToolTip("OpenAI 兼容适合硅基流动、DeepSeek、Qwen、GLM 和本地模型；Google 使用 Cloud Translation Basic v2")
+        self.provider_combo.setToolTip(_tr(self._ui_language, "OpenAI 兼容适合硅基流动、DeepSeek、Qwen、GLM 和本地模型；Google 使用 Cloud Translation Basic v2", "OpenAI-compatible supports SiliconFlow, DeepSeek, Qwen, GLM and local models; Google uses Cloud Translation Basic v2"))
         self._fill_translation_providers()
         self.provider_combo.currentIndexChanged.connect(self._provider_changed)
         translation_form.addRow(_tr(self._ui_language, "翻译服务", "Translation Provider"), self.provider_combo)
@@ -195,10 +196,10 @@ class SettingsDialog(QDialog):
 
         self.api_key_input = QLineEdit(self.translation_config.api_key)
         self.api_key_input.setEchoMode(QLineEdit.Password)
-        self.api_key_input.setPlaceholderText("OpenAI 兼容 API Key")
-        self.api_key_input.setToolTip("硅基流动、DeepSeek、Qwen、GLM 或本地兼容服务的 API Key；本地服务不需要时可留空")
+        self.api_key_input.setPlaceholderText(_tr(self._ui_language, "OpenAI 兼容 API Key", "OpenAI-compatible API Key"))
+        self.api_key_input.setToolTip(_tr(self._ui_language, "硅基流动、DeepSeek、Qwen、GLM 或本地兼容服务的 API Key；本地服务不需要时可留空", "API Key for SiliconFlow, DeepSeek, Qwen, GLM, or a local compatible service; leave blank when your local service does not need it"))
         self.api_key_input.editingFinished.connect(self._preview)
-        translation_form.addRow("API Key", self.api_key_input)
+        translation_form.addRow(_tr(self._ui_language, "API Key", "API Key"), self.api_key_input)
 
         translation_test_row = QHBoxLayout()
         self.translation_test_button = QPushButton(_tr(self._ui_language, "测试翻译", "Test Translation"))
@@ -215,13 +216,13 @@ class SettingsDialog(QDialog):
 
         self.model_input = QLineEdit(self.translation_config.model)
         self.model_input.setPlaceholderText("tencent/Hunyuan-MT-7B")
-        self.model_input.setToolTip("填写服务商要求的模型名，例如 tencent/Hunyuan-MT-7B、deepseek-chat、qwen-plus、glm-4-flash")
+        self.model_input.setToolTip(_tr(self._ui_language, "填写服务商要求的模型名，例如 tencent/Hunyuan-MT-7B、deepseek-chat、qwen-plus、glm-4-flash", "Enter the model name required by your provider, such as tencent/Hunyuan-MT-7B, deepseek-chat, qwen-plus, or glm-4-flash"))
         self.model_input.editingFinished.connect(self._preview)
         translation_form.addRow(_tr(self._ui_language, "模型名", "Model"), self.model_input)
 
         self.endpoint_input = QLineEdit(self.translation_config.endpoint)
         self.endpoint_input.setPlaceholderText("https://api.siliconflow.cn/v1/chat/completions")
-        self.endpoint_input.setToolTip("填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url")
+        self.endpoint_input.setToolTip(_tr(self._ui_language, "填写 OpenAI 兼容地址；可填完整 /chat/completions URL，也可填以 /v1 结尾的 base_url", "Enter an OpenAI-compatible endpoint; a full /chat/completions URL or a /v1 base URL both work"))
         self.endpoint_input.editingFinished.connect(self._preview)
         translation_form.addRow(_tr(self._ui_language, "兼容地址", "Compatible Endpoint"), self.endpoint_input)
         self.local_model_panel = LocalModelPanel(self.translation_config, self._ui_language, self)
@@ -229,12 +230,12 @@ class SettingsDialog(QDialog):
         self._refresh_translation_provider_ui()
 
         self.model_download_source_combo = QComboBox()
-        self.model_download_source_combo.setToolTip("lite 包首次运行会下载 Whisper 模型；大陆网络推荐 ModelScope 国内源")
+        self.model_download_source_combo.setToolTip(_tr(self._ui_language, "lite 包首次运行会下载 Whisper 模型；大陆网络推荐 ModelScope 国内源", "The Lite package downloads Whisper on first use; ModelScope is recommended in mainland China"))
         self.model_download_endpoint_input = QLineEdit(
             _normalize_model_download_endpoint(getattr(self.whisper_config, "model_download_endpoint", ""))
         )
         self.model_download_endpoint_input.setPlaceholderText("https://your-hf-endpoint.example.com")
-        self.model_download_endpoint_input.setToolTip("仅自定义 Hugging Face Endpoint 使用；ModelScope 不是 Hugging Face endpoint")
+        self.model_download_endpoint_input.setToolTip(_tr(self._ui_language, "仅自定义 Hugging Face Endpoint 使用；ModelScope 不是 Hugging Face endpoint", "Only used for a custom Hugging Face endpoint; ModelScope is not a Hugging Face endpoint"))
         self.model_download_endpoint_input.editingFinished.connect(self._preview)
         self._fill_model_download_sources()
         self.model_download_source_combo.currentIndexChanged.connect(self._download_source_changed)
@@ -249,7 +250,7 @@ class SettingsDialog(QDialog):
         advanced_form.addRow(_tr(self._ui_language, "调试模式", "Debug Mode"), self.debug_enabled_check)
 
         self.audio_device_combo = QComboBox()
-        self.audio_device_combo.setToolTip("优先选择 [系统声音] 或 Loopback；普通麦克风通常录不到游戏声音")
+        self.audio_device_combo.setToolTip(_tr(self._ui_language, "优先选择 [系统声音] 或 Loopback；普通麦克风通常录不到游戏声音", "Choose System audio or Loopback; a regular microphone usually cannot capture game audio"))
         self.refresh_audio_button = QPushButton(_tr(self._ui_language, "刷新", "Refresh"))
         self._fill_audio_devices()
         audio_row = QHBoxLayout()
@@ -337,7 +338,7 @@ class SettingsDialog(QDialog):
         self.max_speech_seconds_spin.setValue(
             float(getattr(self.audio_config, "max_speech_seconds", 4.5) or 4.5)
         )
-        self.max_speech_seconds_spin.setToolTip("连续有声超过这个时长会强制切成一段，推荐 4-8 秒")
+        self.max_speech_seconds_spin.setToolTip(_tr(self._ui_language, "连续有声超过这个时长会强制切成一段，推荐 4-8 秒", "Continuous speech exceeding this duration is cut into a segment; 4\u20138 seconds is recommended"))
         self.max_speech_seconds_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "最长捕获", "Max Capture"), self.max_speech_seconds_spin)
 
@@ -346,7 +347,7 @@ class SettingsDialog(QDialog):
         self.chunk_duration_spin.setSingleStep(10)
         self.chunk_duration_spin.setSuffix(" ms")
         self.chunk_duration_spin.setValue(int(getattr(self.audio_config, "chunk_duration_ms", 200) or 200))
-        self.chunk_duration_spin.setToolTip("单个音频块长度；越小响应越快，CPU/切段压力越高")
+        self.chunk_duration_spin.setToolTip(_tr(self._ui_language, "单个音频块长度；越小响应越快，CPU/切段压力越高", "Audio block length; smaller blocks respond faster but increase CPU and segmentation work"))
         self.chunk_duration_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "音频块", "Audio Chunk"), self.chunk_duration_spin)
 
@@ -355,14 +356,14 @@ class SettingsDialog(QDialog):
         self.speech_threshold_blocks_spin.setValue(
             int(getattr(self.audio_config, "speech_threshold_blocks", 2) or 2)
         )
-        self.speech_threshold_blocks_spin.setToolTip("连续多少个有声块后判定开始说话")
+        self.speech_threshold_blocks_spin.setToolTip(_tr(self._ui_language, "连续多少个有声块后判定开始说话", "Number of consecutive voiced blocks needed to detect speech"))
         self.speech_threshold_blocks_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "触发块数", "Trigger Blocks"), self.speech_threshold_blocks_spin)
 
         self.silence_limit_blocks_spin = QSpinBox()
         self.silence_limit_blocks_spin.setRange(1, 50)
         self.silence_limit_blocks_spin.setValue(int(getattr(self.audio_config, "silence_limit_blocks", 3) or 3))
-        self.silence_limit_blocks_spin.setToolTip("连续多少个静音块后切出一段")
+        self.silence_limit_blocks_spin.setToolTip(_tr(self._ui_language, "连续多少个静音块后切出一段", "Number of consecutive silent blocks needed to end a segment"))
         self.silence_limit_blocks_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "静音块数", "Silence Blocks"), self.silence_limit_blocks_spin)
 
@@ -371,7 +372,7 @@ class SettingsDialog(QDialog):
         self.pre_roll_ms_spin.setSingleStep(50)
         self.pre_roll_ms_spin.setSuffix(" ms")
         self.pre_roll_ms_spin.setValue(int(getattr(self.audio_config, "pre_roll_ms", 450) or 0))
-        self.pre_roll_ms_spin.setToolTip("开始说话前保留的缓冲，太小可能丢句首")
+        self.pre_roll_ms_spin.setToolTip(_tr(self._ui_language, "开始说话前保留的缓冲，太小可能丢句首", "Audio buffered before speech starts; too little may lose the beginning"))
         self.pre_roll_ms_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "句首缓冲", "Pre-roll"), self.pre_roll_ms_spin)
 
@@ -382,7 +383,7 @@ class SettingsDialog(QDialog):
         self.speech_idle_timeout_ms_spin.setValue(
             int(getattr(self.audio_config, "speech_idle_timeout_ms", 450) or 450)
         )
-        self.speech_idle_timeout_ms_spin.setToolTip("有语音缓冲但没有新音频块时，等待多久主动切段")
+        self.speech_idle_timeout_ms_spin.setToolTip(_tr(self._ui_language, "有语音缓冲但没有新音频块时，等待多久主动切段", "How long to wait before ending buffered speech when no new blocks arrive"))
         self.speech_idle_timeout_ms_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "空闲切段", "Idle Cut"), self.speech_idle_timeout_ms_spin)
 
@@ -394,7 +395,7 @@ class SettingsDialog(QDialog):
         self.min_segment_seconds_spin.setValue(
             float(getattr(self.audio_config, "min_segment_seconds", 0.35) or 0.0)
         )
-        self.min_segment_seconds_spin.setToolTip("低于这个语音活跃时长的片段会在识别前丢弃；设为 0 可关闭")
+        self.min_segment_seconds_spin.setToolTip(_tr(self._ui_language, "低于这个语音活跃时长的片段会在识别前丢弃；设为 0 可关闭", "Segments with less voiced audio are discarded before recognition; set 0 to disable"))
         self.min_segment_seconds_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "最短语音", "Minimum Speech"), self.min_segment_seconds_spin)
 
@@ -406,16 +407,16 @@ class SettingsDialog(QDialog):
         self.min_segment_peak_margin_spin.setValue(
             float(getattr(self.audio_config, "min_segment_peak_margin_db", 1.5) or 0.0)
         )
-        self.min_segment_peak_margin_spin.setToolTip("片段峰值至少要高过当前语音门限的 dB；设为 0 可关闭")
+        self.min_segment_peak_margin_spin.setToolTip(_tr(self._ui_language, "片段峰值至少要高过当前语音门限的 dB；设为 0 可关闭", "Minimum peak level above the speech threshold in dB; set 0 to disable"))
         self.min_segment_peak_margin_spin.valueChanged.connect(self._preview)
         advanced_form.addRow(_tr(self._ui_language, "触发余量", "Trigger Margin"), self.min_segment_peak_margin_spin)
         self._refresh_latency_preset_controls()
 
-        self.toggle_overlay_input = HotkeyCaptureEdit(self.hotkey_config.toggle_overlay)
-        self.toggle_translation_input = HotkeyCaptureEdit(self.hotkey_config.toggle_translation)
-        self.clear_history_input = HotkeyCaptureEdit(self.hotkey_config.clear_history)
-        self.toggle_lock_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_lock", ""))
-        self.toggle_compact_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_compact", ""))
+        self.toggle_overlay_input = HotkeyCaptureEdit(self.hotkey_config.toggle_overlay, ui_language=self._ui_language)
+        self.toggle_translation_input = HotkeyCaptureEdit(self.hotkey_config.toggle_translation, ui_language=self._ui_language)
+        self.clear_history_input = HotkeyCaptureEdit(self.hotkey_config.clear_history, ui_language=self._ui_language)
+        self.toggle_lock_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_lock", ""), ui_language=self._ui_language)
+        self.toggle_compact_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_compact", ""), ui_language=self._ui_language)
         self.toggle_overlay_input.hotkey_changed.connect(self._hotkeys_changed)
         self.toggle_translation_input.hotkey_changed.connect(self._hotkeys_changed)
         self.clear_history_input.hotkey_changed.connect(self._hotkeys_changed)
@@ -504,7 +505,7 @@ class SettingsDialog(QDialog):
             ('Discord', DISCORD_URL, {'discord.gg', 'discord.com'}),
             ('GitHub Issues', GITHUB_ISSUES_URL, {'github.com'}),
         ]
-        preferred_community = 'Discord' if is_english_ui(self._ui_language) else 'KOOK'
+        preferred_community = 'Discord' if uses_english_source(self._ui_language) else 'KOOK'
         community_links.sort(key=lambda item: (item[0] != preferred_community, item[0] != 'GitHub Issues'))
         for name, url, domains in community_links:
             parsed = urlsplit(url)
@@ -517,7 +518,7 @@ class SettingsDialog(QDialog):
         layout.addWidget(tabs, 1)
         from voxgo.analytics.consent import CONSENT_VERSION, telemetry_title, telemetry_summary
         privacy_form = self._make_settings_tab(tabs, _tr(self._ui_language, '隐私', 'Privacy'))
-        self.privacy_title = QLabel(telemetry_title(is_english_ui(self._ui_language)))
+        self.privacy_title = QLabel(_tr(self._ui_language, telemetry_title(False), telemetry_title(True)))
         title_font = self.privacy_title.font()
         title_font.setBold(True)
         self.privacy_title.setFont(title_font)
@@ -526,7 +527,7 @@ class SettingsDialog(QDialog):
         privacy_notice.setFixedSize(16, 16)
         privacy_notice.setAlignment(Qt.AlignCenter)
         privacy_notice.setStyleSheet('color: #666; border: 1px solid #999; border-radius: 8px;')
-        privacy_notice.setToolTip('<qt>' + telemetry_summary(is_english_ui(self._ui_language)) + '</qt>')
+        privacy_notice.setToolTip('<qt>' + _tr(self._ui_language, telemetry_summary(False), telemetry_summary(True)) + '</qt>')
         privacy_notice.setAccessibleName(_tr(self._ui_language, '隐私说明', 'Privacy information'))
         self.telemetry_consent_check = QCheckBox(_tr(self._ui_language,
             '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
@@ -599,10 +600,11 @@ class SettingsDialog(QDialog):
     def _ui_language_changed(self, *args):
         self.app_config.language = normalize_ui_language(self.ui_language_combo.currentData())
         self._ui_language = self.app_config.language
+        set_qt_ui_language(self._ui_language)
         if hasattr(self, 'privacy_notice'):
             from voxgo.analytics.consent import telemetry_title, telemetry_summary
-            self.privacy_title.setText(telemetry_title(is_english_ui(self._ui_language)))
-            self.privacy_notice.setToolTip('<qt>' + telemetry_summary(is_english_ui(self._ui_language)) + '</qt>')
+            self.privacy_title.setText(_tr(self._ui_language, telemetry_title(False), telemetry_title(True)))
+            self.privacy_notice.setToolTip('<qt>' + _tr(self._ui_language, telemetry_summary(False), telemetry_summary(True)) + '</qt>')
             self.privacy_notice.setAccessibleName(_tr(self._ui_language, '隐私说明', 'Privacy information'))
             self.telemetry_consent_check.setText(_tr(self._ui_language,
                 '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
@@ -642,10 +644,7 @@ class SettingsDialog(QDialog):
             device_id = (device.get("device_id") or "").strip()
             sample_rate = device.get("sample_rate") or 0
             channels = device.get("channels") or 0
-            if is_english_ui(self._ui_language):
-                device_type = "System audio" if device.get("is_loopback") else "Input"
-            else:
-                device_type = "系统声音" if device.get("is_loopback") else "输入设备"
+            device_type = _tr(self._ui_language, "系统声音", "System audio") if device.get("is_loopback") else _tr(self._ui_language, "输入设备", "Input")
             label = f"[{device_type}] [{index}] {name} ({sample_rate}Hz/{channels}ch)"
             self.audio_device_combo.addItem(label, device)
             if selected_device_id and selected_device_id == device_id:
@@ -758,7 +757,7 @@ class SettingsDialog(QDialog):
         )
         selected_row = 0
         for row, (provider, label) in enumerate(TRANSLATION_PROVIDERS.items()):
-            self.provider_combo.addItem(label, provider)
+            self.provider_combo.addItem(localize_text(self._ui_language, label), provider)
             if provider == selected_provider:
                 selected_row = row
         self.provider_combo.setCurrentIndex(selected_row)
@@ -1021,8 +1020,8 @@ class SettingsDialog(QDialog):
 
     def _handle_translation_test_result(self, ok: bool, message: str):
         prefix = _tr(self._ui_language, "成功", "Success") if ok else _tr(self._ui_language, "失败", "Failed")
-        separator = ": " if is_english_ui(self._ui_language) else "："
-        self.translation_test_label.setText(f"{prefix}{separator}{message}")
+        separator = ": " if uses_english_source(self._ui_language) else "："
+        self.translation_test_label.setText(f"{prefix}{separator}{localize_text(self._ui_language, message)}")
         _start_button_cooldown(
             self.translation_test_button,
             _tr(self._ui_language, "测试翻译", "Test Translation"),

@@ -100,7 +100,7 @@ class LocalModelPanel(BackgroundPanel):
         self.layout_box.insertWidget(0, self.source_combo)
         self.models = QComboBox()
         for key in LOCAL_MODELS:
-            self.models.addItem("OPUS-MT · English ↔ 中文 · CPU", key)
+            self.models.addItem(self.tr_text("OPUS-MT · English ↔ 中文 · CPU", "OPUS-MT English ↔ Chinese (CPU)"), key)
         index = self.models.findData(getattr(config, "local_model", "opus-mt-en-zh"))
         self.models.setCurrentIndex(max(0, index))
         self.layout_box.insertWidget(0, self.models)
@@ -117,6 +117,13 @@ class LocalModelPanel(BackgroundPanel):
         from voxgo.translation.local_models import model_files_present
 
         self.language = language
+        for index in range(self.models.count()):
+            self.models.setItemText(index, self.tr_text("OPUS-MT · English ↔ 中文 · CPU", "OPUS-MT English ↔ Chinese (CPU)"))
+        for index, (zh, en) in enumerate((
+                ("ModelScope 国内源（推荐）", "ModelScope China (Recommended)"),
+                ("HF-Mirror.net 国内源", "HF-Mirror.net China"),
+                ("国内镜像（HF-Mirror）", "China mirror (HF-Mirror)"))):
+            self.source_combo.setItemText(index, self.tr_text(zh, en))
         self.button.setText(self.tr_text("下载离线翻译模型", "Download Offline Translation Model"))
         if not self.busy:
             ready = model_files_present(self.models.currentData())

@@ -22,7 +22,7 @@ from PyQt5.QtWidgets import (
 
 from voxgo.app_info import APP_VERSION
 from voxgo.audio.capture import AudioConfig
-from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, is_english_ui, normalize_ui_language
+from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, uses_english_source, normalize_ui_language, localized_output, localize_text, set_qt_ui_language
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateInfo
 from voxgo.ui.download_panels import LocalModelPanel, UpdateInstallPanel
@@ -127,6 +127,18 @@ class UpdatePromptDialog(QDialog):
         self.setLayout(layout)
         self.resize(460, 260)
 
+    def refresh_language(self, language):
+        self._ui_language = normalize_ui_language(language)
+        self.setWindowTitle(_tr(language, "发现新版本", "Update Available"))
+        self.message_label.setText(self._build_message())
+        for button, zh, en in ((self.open_button, "打开下载页", "Open Downloads"),
+                               (self.later_button, "稍后提醒", "Later"),
+                               (self.ignore_button, "忽略此版本", "Ignore This Version")):
+            button.setText(_tr(language, zh, en))
+        self.install_panel.language = self._ui_language
+        for widget in (self.install_panel.button, self.install_panel.status):
+            widget.setText(localize_text(language, widget.text()))
+
     def reject(self):
         if not self.install_panel.busy:
             self.install_panel.discard()
@@ -139,12 +151,13 @@ class UpdatePromptDialog(QDialog):
             self.install_panel.discard()
             super().closeEvent(event)
 
+    @localized_output(lambda self: self._ui_language)
     def _build_message(self) -> str:
-        localized = self._update.notes_en if is_english_ui(self._ui_language) else self._update.notes_zh
+        localized = self._update.notes_en if uses_english_source(self._ui_language) else self._update.notes_zh
         notes = "\n".join(f"- {note}" for note in (localized or self._update.notes))
         if not notes:
             notes = _tr(self._ui_language, "- 查看下载页面了解更新内容", "- Open the download page for details")
-        if is_english_ui(self._ui_language):
+        if uses_english_source(self._ui_language):
             return (
                 f"New version available: {self._update.display_title()}\n\n"
                 f"Current version: v{self._current_version}\n"
@@ -184,7 +197,7 @@ class FullscreenHelpDialog(QDialog):
         hotkeys = hotkeys or HotkeyConfig()
 
         layout = QVBoxLayout()
-        if is_english_ui(self._ui_language):
+        if uses_english_source(self._ui_language):
             message_text = (
                 "If the overlay does not appear in exclusive fullscreen games, switch the game to borderless windowed or windowed fullscreen first.\n\n"
                 "Place the overlay on the desktop before locking it. Locked mode reduces mouse interference.\n\n"
@@ -202,7 +215,7 @@ class FullscreenHelpDialog(QDialog):
                 f"{_hotkey_label(hotkeys.clear_history)} 清空字幕。\n\n"
                 "如果游戏以管理员身份运行，VoxGo 也需要用管理员身份启动，热键和置顶才更稳定。"
             )
-        message = QLabel(message_text)
+        message = QLabel(localize_text(self._ui_language, message_text))
         message.setWordWrap(True)
         message.setTextInteractionFlags(Qt.TextSelectableByMouse)
         layout.addWidget(message)
@@ -217,10 +230,11 @@ class FullscreenHelpDialog(QDialog):
         self.resize(520, 300)
 
 
+@localized_output("ui_language")
 def _build_help_text(hotkeys: HotkeyConfig, ui_language: str = UI_LANGUAGE_ZH) -> str:
     hotkeys = hotkeys or HotkeyConfig()
     ui_language = normalize_ui_language(ui_language)
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return (
             "Fullscreen compatibility\n"
             "If the overlay does not appear in exclusive fullscreen games, switch the game to borderless windowed or windowed fullscreen first.\n"
@@ -489,9 +503,9 @@ class FirstRunWizard(QDialog):
         )
         selected_row = 0
         for row, (provider, label) in enumerate(TRANSLATION_PROVIDERS.items()):
-            if provider == "openai_compatible" and is_english_ui(self._ui_language):
+            if provider == "openai_compatible" and uses_english_source(self._ui_language):
                 label = "OpenAI-compatible"
-            self.wizard_provider_combo.addItem(label, provider)
+            self.wizard_provider_combo.addItem(localize_text(self._ui_language, label), provider)
             if provider == selected_provider:
                 selected_row = row
         self.wizard_provider_combo.setCurrentIndex(selected_row)
@@ -507,6 +521,7 @@ class FirstRunWizard(QDialog):
 
     def _refresh_ui_language(self):
         language = self._ui_language
+        set_qt_ui_language(language)
         self.app_config.language = language
         self.setWindowTitle(_tr(language, "VoxGo 首次启动向导", "VoxGo First-Run Setup"))
 
@@ -548,7 +563,7 @@ class FirstRunWizard(QDialog):
 
         self.wizard_telemetry_check.setText(_tr(language, "愿意帮助 VoxGo 改进体验", "Help improve VoxGo"))
         from voxgo.analytics.consent import telemetry_summary
-        self.wizard_telemetry_notice.setToolTip('<qt>' + telemetry_summary(is_english_ui(language)) + '</qt>')
+        self.wizard_telemetry_notice.setToolTip('<qt>' + _tr(language, telemetry_summary(False), telemetry_summary(True)) + '</qt>')
         self.wizard_telemetry_notice.setAccessibleName(_tr(language, '隐私说明', 'Privacy information'))
         self.wizard_finish_title.setText(_tr(language, "准备启动实时翻译", "Ready to Start Live Translation"))
         self.wizard_finish_note.setText(_tr(
@@ -625,15 +640,11 @@ class FirstRunWizard(QDialog):
         self.wizard_audio_device_combo.blockSignals(False)
 
     def _wizard_device_label(self, device: Optional[dict]) -> str:
-        if not is_english_ui(self._ui_language):
-            return _device_label(device)
         if not device:
-            return "Auto select"
-        device_type = "System Audio" if device.get("is_loopback") else "Input Device"
-        return (
-            f"[{device_type}] [{device.get('index')}] {device.get('name', '')} "
-            f"({device.get('sample_rate') or 0}Hz/{device.get('channels') or 0}ch)"
-        )
+            return _tr(self._ui_language, "自动选择", "Auto select")
+        kind = _tr(self._ui_language, "系统声音", "System audio") if device.get('is_loopback') else _tr(self._ui_language, "输入设备", "Input")
+        return (f"[{kind}] [{device.get('index')}] {device.get('name', '')} "
+                f"({device.get('sample_rate') or 0}Hz/{device.get('channels') or 0}ch)")
 
     def _refresh_wizard_audio_devices(self):
         if self._on_audio_devices_refresh:
@@ -685,8 +696,8 @@ class FirstRunWizard(QDialog):
 
     def _handle_translation_test_result(self, ok: bool, message: str):
         prefix = _tr(self._ui_language, "成功", "Success") if ok else _tr(self._ui_language, "失败", "Failed")
-        separator = ": " if is_english_ui(self._ui_language) else "："
-        self.wizard_translation_test_label.setText(f"{prefix}{separator}{message}")
+        separator = ": " if uses_english_source(self._ui_language) else "："
+        self.wizard_translation_test_label.setText(f"{prefix}{separator}{localize_text(self._ui_language, message)}")
         _start_button_cooldown(
             self.wizard_translation_test_button,
             _tr(self._ui_language, "测试翻译", "Test Translation") if self.translation_config.provider == "local" else _tr(self._ui_language, "测试 API Key", "Test API Key"),
@@ -718,8 +729,9 @@ class FirstRunWizard(QDialog):
         self._collect_values()
         provider = normalize_translation_provider(getattr(self.translation_config, "provider", "openai_compatible"))
         provider_label = TRANSLATION_PROVIDERS.get(provider, provider)
-        if provider == "openai_compatible" and is_english_ui(self._ui_language):
+        if provider == "openai_compatible" and uses_english_source(self._ui_language):
             provider_label = "OpenAI-compatible"
+        provider_label = localize_text(self._ui_language, provider_label)
         audio_label = self.wizard_audio_device_combo.currentText() or _tr(
             self._ui_language,
             "自动选择",
@@ -733,7 +745,7 @@ class FirstRunWizard(QDialog):
                 f"调试模式：{'开启' if self.debug_config.enabled else '关闭'}",
                 f"Translation provider: {provider_label}\n"
                 f"Audio device: {audio_label}\n"
-                f"Debug mode: {'On' if self.debug_config.enabled else 'Off'}",
+                f"Debug mode: {_tr(self._ui_language, '开启', 'On') if self.debug_config.enabled else _tr(self._ui_language, '关闭', 'Off')}",
             )
         )
 

@@ -1,0 +1,57 @@
+{
+  "base_head": "1b4a1fa0",
+  "languages": [
+    "zh-CN",
+    "en-US",
+    "ja-JP",
+    "ko-KR",
+    "ru-RU"
+  ],
+  "catalog_templates": 452,
+  "new_translation_strings": 1356,
+  "real_api_requests": 0,
+  "model_downloads": 0,
+  "asr_quality_runs": 0,
+  "production_operations": [],
+  "original_settings_sha256": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "original_settings_unchanged": true,
+  "protected_paths_unchanged": [
+    "voxgo/translation",
+    "voxgo/analytics",
+    "voxgo/audio/capture.py",
+    "voxgo/asr/whisper_engine.py",
+    "voxgo/asr/pipeline.py",
+    "voxgo/asr/language_profiles.py",
+    "config.example.json",
+    "requirements.txt"
+  ],
+  "historical_ledgers": [
+    {
+      "path": "docs/testing/evidence/v0.5.3-five-language-beta-2026-10-27/online-attempt-ledger.json",
+      "sha256": "c57726c844742cbc84e80a649a6548bec4fa72b17b80b09de4de075dd6340155",
+      "unchanged": true
+    },
+    {
+      "path": "docs/testing/evidence/v0.5.3-beta-blockers-online-2026-10-28/attempt-ledger.json",
+      "sha256": "17d0b73fdfcdc450b5b21e894fd933f3fbc80d7e226c7d21ed901f1dcbf81e92",
+      "unchanged": true
+    },
+    {
+      "path": "docs/testing/evidence/v0.5.3-prompt-ab-2026-10-28/attempt-ledger.json",
+      "sha256": "54724b4555ba0aae5db2a438d14062d4f535449ca966a3d4c6e9320983289260",
+      "unchanged": true
+    }
+  ],
+  "source_qt_native_screenshots": 21,
+  "packaged_full_gui_verified": false,
+  "full_package_rebuilt": false,
+  "source_catalog_sha256": "c9c48bb3614b84418d868d5ae4d67fcd59123f4dd3913d459539e79bafe3d44c",
+  "renderer_sha256": "5e49561a7cd7fce75b715ef691b1330e5355d7c92783b2e3c7c39dfbd1c5db9a",
+  "native_copy_review": "AI visual check only; native-speaker wording review pending",
+  "qa_corrections": [
+    "Explicit Qt standard button context and non-empty fallback",
+    "Raw Chinese provider aliases",
+    "New-locale system font selection and original font restore",
+    "Live update dialog and local model selector labels"
+  ]
+}

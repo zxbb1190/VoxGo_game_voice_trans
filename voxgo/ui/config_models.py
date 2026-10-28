@@ -21,10 +21,10 @@ from voxgo.audio.capture import (
 from voxgo.i18n import (
     UI_LANGUAGE_ZH,
     UI_LANGUAGE_OPTIONS,
-    is_english_ui,
+    uses_english_source,
     language_label,
     normalize_ui_language,
-    ui_text,
+    ui_text, localize_text, localized_output,
 )
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.languages import (
@@ -71,8 +71,9 @@ def _speech_language_options(ui_language: str):
     return tuple((code, language_label(code, ui_language)) for code in SPEECH_LANGUAGE_CODES)
 
 
+@localized_output("ui_language")
 def _whisper_device_options(ui_language: str):
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return (
             ("auto", "Auto detect (GPU first)"),
             ("cuda", "NVIDIA GPU / CUDA"),
@@ -81,8 +82,9 @@ def _whisper_device_options(ui_language: str):
     return WHISPER_DEVICE_OPTIONS
 
 
+@localized_output("ui_language")
 def _model_download_source_options(ui_language: str):
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return (
             ("modelscope", "ModelScope mirror (Recommended in China)"),
             ("huggingface", "Official Hugging Face"),
@@ -91,8 +93,9 @@ def _model_download_source_options(ui_language: str):
     return WHISPER_DOWNLOAD_SOURCE_OPTIONS
 
 
+@localized_output("ui_language")
 def _audio_latency_mode_options(ui_language: str):
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return (
             (LATENCY_MODE_FAST, "Fast / Game Performance (Recommended)"),
             (LATENCY_MODE_BALANCED, "Balanced"),
@@ -102,8 +105,9 @@ def _audio_latency_mode_options(ui_language: str):
     return AUDIO_LATENCY_MODE_OPTIONS
 
 
+@localized_output("ui_language")
 def _update_channel_options(ui_language: str):
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return (
             ("stable", "Stable"),
             ("beta", "Beta"),
@@ -402,13 +406,12 @@ def _device_label(device: Optional[dict]) -> str:
 
 
 def _format_bool(value, ui_language: str) -> str:
-    if is_english_ui(ui_language):
-        return "yes" if bool(value) else "no"
-    return "是" if bool(value) else "否"
+    return _tr(ui_language, "是", "yes") if bool(value) else _tr(ui_language, "否", "no")
 
 
+@localized_output("ui_language")
 def _recognition_runtime_lines(latency: dict, ui_language: str) -> list:
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return [
             "### Recognition Runtime",
             f"- Response mode: {latency.get('latency_mode') or 'unknown'}",
@@ -435,6 +438,7 @@ def _recognition_runtime_lines(latency: dict, ui_language: str) -> list:
     ]
 
 
+@localized_output("ui_language")
 def _build_feedback_report(
     translation_config: TranslationConfig,
     whisper_config,
@@ -446,7 +450,7 @@ def _build_feedback_report(
     ui_language: str = UI_LANGUAGE_ZH,
 ) -> str:
     provider = normalize_translation_provider(getattr(translation_config, "provider", "openai_compatible"))
-    provider_label = TRANSLATION_PROVIDERS.get(provider, provider)
+    provider_label = localize_text(ui_language, TRANSLATION_PROVIDERS.get(provider, provider))
     # Build from known diagnostic fields, never arbitrary config/log strings.
     source = last_latency_summary or {}
     latency = {}
@@ -467,12 +471,12 @@ def _build_feedback_report(
         if label in {'candidate', 'short_segment', 'low_confidence'})
     for key in ('fast_path_allowed', 'fast_path_ready'):
         latency[key] = source.get(key) is True
-    model = 'OPUS-MT en/zh' if provider == 'local' else 'custom / not shared'
+    model = 'OPUS-MT en/zh' if provider == 'local' else localize_text(ui_language, 'custom / not shared')
     device = getattr(whisper_config, 'device', 'unknown')
     device = device if device in ('cpu', 'cuda', 'auto') else 'unknown'
     import re
     app_version = app_version if re.fullmatch(r'\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?', app_version or '') else APP_VERSION
-    if is_english_ui(ui_language):
+    if uses_english_source(ui_language):
         return "\n".join([
             "## VoxGo Feedback",
             "",
@@ -487,7 +491,7 @@ def _build_feedback_report(
             f"- Translation provider: {provider_label}",
             f"- Model: {model}",
             f"- Recognition device (configured): {device}",
-            f"- Debug mode: {'on' if getattr(debug_config, 'enabled', False) else 'off'}",
+            f"- Debug mode: {_tr(ui_language, '开启', 'on') if getattr(debug_config, 'enabled', False) else _tr(ui_language, '关闭', 'off')}",
             "",
             "### Latest Latency",
             f"- Queue wait: {latency.get('wait_ms', 0)} ms",
