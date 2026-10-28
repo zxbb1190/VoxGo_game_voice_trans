@@ -1,0 +1,32 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 20,
+    "sha256": "e97602ab9cac70102245345c5ab0fc9830df8b17f1072b188265a662a3a547ae"
+  },
+  {
+    "path": "client-tests.txt",
+    "bytes": 17661,
+    "sha256": "1c3eafdd481cf2d1be7fe77985c97030618913d64eb48c97e362204acfe7f54d"
+  },
+  {
+    "path": "en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "release-preflight.txt",
+    "bytes": 949,
+    "sha256": "6e88babf3bcd63d58827c0d075c1339bb0ead88cd26718beaa08df211bbe4994"
+  },
+  {
+    "path": "runtime-matrix.json",
+    "bytes": 8093,
+    "sha256": "5e21982fb764c915dd0e36f29b37f624c79069b6f259fe25b7cd48fa8a1386ca"
+  },
+  {
+    "path": "safety-check.json",
+    "bytes": 714,
+    "sha256": "9c61c0f62e4916fa5a9de6fbc1e7410f337d4a8a4b5b1207be5cdfc0f7d7e37c"
+  }
+]

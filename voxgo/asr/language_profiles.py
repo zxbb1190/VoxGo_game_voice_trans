@@ -7,6 +7,7 @@ from voxgo.languages import ONLINE_DIRECTIONS
 
 LANGUAGE_AWARE = "language_aware"
 LEGACY = "legacy"
+SOURCE_SPEECH_STRATEGIES = {"ja": LEGACY, "ko": LEGACY, "ru": LANGUAGE_AWARE}
 
 
 @dataclass
@@ -23,19 +24,20 @@ def normalize_multilingual_strategy(value):
 def effective_speech_config(config, *, experimental=False):
     """Resolve a fresh runtime view, never overwrite user/English/Chinese tuning.
 
-    The client always uses the compatibility policy, including old candidate
-    settings. Only research tools may explicitly opt into historical
-    profiles; this keyword is not a persisted setting or a product UI option.
+    The client's source policy is internal: JA/KO compatibility, RU language-aware.
+    The retired shared preference cannot override it. Only research tools may
+    explicitly opt into historical profiles; this keyword is not a persisted
+    setting or a product UI option.
     Fast/Balanced/Accurate and explicit Custom tuning remain unchanged.
     """
-    if not experimental:
-        return config
     source = config.translation.source_lang
+    strategy = (normalize_multilingual_strategy(getattr(config.whisper, "multilingual_asr_strategy", LEGACY))
+                if experimental else SOURCE_SPEECH_STRATEGIES.get(source, LEGACY))
     if (source not in {"ja", "ko", "ru"} or (source, config.translation.target_lang) not in ONLINE_DIRECTIONS
             or config.translation.provider not in {"google", "openai_compatible"}
             or normalize_latency_mode(config.audio.latency_mode) != "fast"
             or getattr(config.whisper, "asr_impact_mode", "low") == "ultra_low"
-            or normalize_multilingual_strategy(getattr(config.whisper, "multilingual_asr_strategy", LEGACY)) == LEGACY):
+            or strategy == LEGACY):
         return config
     audio = LanguageAudioConfig(**{field.name: getattr(config.audio, field.name) for field in fields(AudioConfig)},
                                 speech_strategy=source + "_speech_v1")
@@ -43,6 +45,9 @@ def effective_speech_config(config, *, experimental=False):
     audio.pre_roll_ms = 450
     audio.speech_idle_timeout_ms = 450
     whisper = replace(config.whisper)
+    # The inference snapshot describes the effective policy, not the retired
+    # persisted preference. Never mutate the user's configuration object.
+    whisper.multilingual_asr_strategy = strategy
     whisper.vad_parameters = dict(DEFAULT_VAD_PARAMS if config.whisper.vad_parameters is None else config.whisper.vad_parameters)
     whisper.vad_parameters["max_speech_duration_s"] = audio.max_speech_seconds
     # Only replace the built-in Fast base choice, not an explicitly selected

@@ -84,9 +84,7 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         self.assertIs(effective_speech_config(config,experimental=True),config)
 
     def test_segment_events_and_work_items_capture_custom_mode_and_profile(self):
-        config=configured('ja','en')
-        config.whisper.multilingual_asr_strategy='language_aware'
-        config=effective_speech_config(config,experimental=True)
+        config=effective_speech_config(configured('ru','en'))
         diagnostics=[]
         pipeline=SpeechPipeline(lambda:config,lambda:None,EventBus(),defaultdict(int),
             lambda:True,lambda:False,lambda:'fixture',{},lambda *a:None,
@@ -100,6 +98,8 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         item=pipeline._queue.get_nowait()
         self.assertEqual(item.trace.latency_mode,'custom')
         self.assertEqual(item.target_lang,'en')
+        self.assertEqual(item.whisper_config_snapshot.multilingual_asr_strategy,'language_aware')
+        self.assertEqual(item.whisper_config_snapshot.source_language,'ru')
         beam=item.whisper_config_snapshot.beam_size
         config.whisper.beam_size=1
         self.assertEqual(item.whisper_config_snapshot.beam_size,beam)
@@ -185,13 +185,18 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         self.assertEqual(app._speech_recognizer._pending_config.active_model_size,'base')
         self.assertEqual(app._speech_recognizer.config.source_language,'en')
         self.assertEqual(len(captures),1)
+        change('ru','en')
+        self.assertEqual(app._speech_recognizer._pending_config.active_model_size,'base')
+        self.assertEqual(app._speech_recognizer._pending_config.cpu_threads,2)
+        self.assertEqual(app._speech_recognizer._pending_config.multilingual_asr_strategy,'language_aware')
+        self.assertEqual(len(captures),2)
         change('en','zh')
         self.assertEqual(asdict(app.config.audio),legacy_audio)
         self.assertEqual(app._speech_recognizer._pending_config.cpu_threads,1)
         self.assertEqual(app._speech_recognizer._pending_config.active_model_size,'base')
         self.assertEqual(app._speech_recognizer._pending_config.source_language,'en')
-        self.assertEqual(len(captures),2)
-        self.assertEqual(app._language_flow_revision,3)
+        self.assertEqual(len(captures),3)
+        self.assertEqual(app._language_flow_revision,4)
 
 
 if __name__=='__main__':unittest.main()

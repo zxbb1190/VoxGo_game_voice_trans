@@ -1,4 +1,4 @@
-"""Released compatibility policy; isolated settings, no audio/model/API calls."""
+"""Internal source policies; isolated settings, no audio/model/API calls."""
 import ast
 import copy
 from dataclasses import asdict
@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from scripts import release_preflight
 from voxgo.app import VoxGoApp
-from voxgo.asr.language_profiles import effective_speech_config, normalize_multilingual_strategy
+from voxgo.asr.language_profiles import effective_speech_config, normalize_multilingual_strategy, SOURCE_SPEECH_STRATEGIES
 from voxgo.asr.whisper_engine import WhisperConfig
 from voxgo.config.loader import default_app_config, load_config, save_user_settings, serialize_user_settings
 from voxgo.languages import ONLINE_DIRECTIONS
@@ -20,13 +20,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReleaseSpeechPolicyTests(unittest.TestCase):
-    def test_defaults_and_unknown_values_choose_compatibility(self):
+    def test_retired_preference_defaults_are_legacy_and_source_policy_is_internal(self):
+        self.assertEqual(SOURCE_SPEECH_STRATEGIES,{'ja':'legacy','ko':'legacy','ru':'language_aware'})
         for config in (WhisperConfig(), WhisperDeviceConfig(), default_app_config().whisper):
             self.assertEqual(config.multilingual_asr_strategy, 'legacy')
         for value in (None, '', 'unknown', 'legacy'):
             self.assertEqual(normalize_multilingual_strategy(value), 'legacy')
 
-    def test_client_cannot_enable_candidate_via_an_old_in_memory_setting(self):
+    def test_client_uses_source_policy_instead_of_old_shared_preference(self):
         for source, target in sorted(ONLINE_DIRECTIONS):
             for mode in ('fast', 'balanced', 'accurate', 'custom'):
                 for strategy in ('legacy', 'language_aware', 'unknown'):
@@ -37,9 +38,58 @@ class ReleaseSpeechPolicyTests(unittest.TestCase):
                         config.audio.latency_mode=mode
                         before=copy.deepcopy(asdict(config))
                         owner=VoxGoApp.__new__(VoxGoApp);owner.config=config
-                        self.assertIs(effective_speech_config(config),config)
-                        self.assertIs(owner._speech_runtime_config(),config)
+                        effective=effective_speech_config(config)
+                        self.assertEqual(asdict(owner._speech_runtime_config()),asdict(effective))
+                        if source=='ru' and mode=='fast':
+                            self.assertIsNot(effective,config)
+                            self.assertEqual(effective.whisper.multilingual_asr_strategy,'language_aware')
+                            self.assertEqual(effective.audio.max_speech_seconds,4.5)
+                            self.assertEqual(effective.audio.pre_roll_ms,450)
+                            self.assertEqual(effective.audio.speech_idle_timeout_ms,450)
+                            self.assertEqual(effective.audio.diagnostics_latency_mode,'custom')
+                            self.assertEqual(effective.audio.speech_strategy,'ru_speech_v1')
+                            self.assertEqual(effective.whisper.beam_size,1)
+                            self.assertEqual(effective.whisper.cpu_threads,max(2,config.whisper.cpu_threads))
+                            self.assertEqual(effective.whisper.active_model_size,config.whisper.active_model_size)
+                        else:
+                            self.assertIs(effective,config)
                         self.assertEqual(asdict(config),before)
+
+    def test_russian_policy_preserves_existing_provider_mode_and_impact_gates(self):
+        config=default_app_config()
+        config.translation.source_lang,config.translation.target_lang='ru','ja'
+        config.audio.latency_mode='fast'
+        for provider in ('google','openai_compatible'):
+            config.translation.provider=provider
+            self.assertIsNot(effective_speech_config(config),config)
+        config.translation.provider='local'
+        self.assertIs(effective_speech_config(config),config)
+        config.translation.provider='openai_compatible'
+        config.whisper.asr_impact_mode='ultra_low'
+        self.assertIs(effective_speech_config(config),config)
+        config.whisper.asr_impact_mode='low'
+        config.whisper.device='cuda';config.whisper.cpu_threads=1
+        self.assertEqual(effective_speech_config(config).whisper.cpu_threads,1)
+
+    def test_russian_internal_policy_survives_old_settings_save_and_restart(self):
+        for strategy in (None,'legacy','language_aware','unknown'):
+            with self.subTest(strategy=strategy),tempfile.TemporaryDirectory() as tmp:
+                directory=Path(tmp)
+                data={'audio':{'latency_mode':'fast'},'translation':{'source_lang':'ru','target_lang':'ja'},
+                      'whisper':{'model_download_source':'modelscope'}}
+                if strategy is not None:data['whisper']['multilingual_asr_strategy']=strategy
+                (directory/'user_settings.json').write_text(json.dumps(data),'utf-8')
+                loaded=load_config(runtime_dir=directory)
+                before=copy.deepcopy(asdict(loaded))
+                effective=effective_speech_config(loaded)
+                self.assertEqual(effective.whisper.multilingual_asr_strategy,'language_aware')
+                self.assertEqual(effective.whisper.active_model_size,'base')
+                self.assertEqual(effective.whisper.cpu_threads,2)
+                self.assertEqual(asdict(loaded),before)
+                save_user_settings(loaded,runtime_dir=directory)
+                restarted=load_config(runtime_dir=directory)
+                self.assertEqual(asdict(effective_speech_config(restarted).audio),asdict(effective.audio))
+                self.assertEqual(asdict(effective_speech_config(restarted).whisper),asdict(effective.whisper))
 
     def test_omitted_and_old_candidate_files_load_save_and_restart_as_legacy(self):
         for strategy in (None, 'legacy', 'language_aware', 'unknown'):
