@@ -1,0 +1,21 @@
+{
+  "qt_platform": "windows",
+  "tabs": [
+    "外观",
+    "翻译",
+    "语音",
+    "高级",
+    "说明",
+    "快捷键",
+    "关于",
+    "帮助与反馈",
+    "隐私"
+  ],
+  "visible_tab": "语音",
+  "candidate_checkbox_absent": true,
+  "old_candidate_collected_as": "legacy",
+  "source": "ko",
+  "target": "ja",
+  "real_api_requests": 0,
+  "scope": "native source SettingsDialog; no EXE build, no real settings, no audio or model load"
+}

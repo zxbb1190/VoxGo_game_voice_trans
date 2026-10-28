@@ -192,7 +192,7 @@ def audio_run(config, budget, manifest, output, *, sources=("ja", "ko", "ru"),
         migrate_runtime_defaults(app_config)
         sync_language_flow(app_config)
         apply_language_runtime_policy(app_config)
-        app_config = effective_speech_config(app_config)
+        app_config = effective_speech_config(app_config, experimental=True)
         app_config.whisper.local_files_only = True
         recognizer = SpeechRecognizer(app_config.whisper)
         recognizer.initialize()

@@ -28,7 +28,7 @@ PROFILES={
  'context_beam':{'model':'base','threads':1,'beam':3,'maximum':4.5,'pre_roll':450,'idle':450},
  'context_small':{'model':'small','threads':2,'beam':1,'maximum':4.5,'pre_roll':450,'idle':450},
  'context_beam_two':{'model':'base','threads':2,'beam':3,'maximum':4.5,'pre_roll':450,'idle':450},
- 'language_aware':{'resolver':'production effective_speech_config'},
+ 'language_aware':{'resolver':'historical effective_speech_config with explicit research opt-in'},
 }
 
 def normalized(text):
@@ -105,7 +105,8 @@ def main():
                 app=default_app_config()
                 app.translation.source_lang=sample['language'];app.translation.target_lang='zh'
                 migrate_runtime_defaults(app);sync_language_flow(app);apply_language_runtime_policy(app)
-                app=effective_speech_config(app)
+                app.whisper.multilingual_asr_strategy="language_aware"
+                app=effective_speech_config(app, experimental=True)
                 config=app.whisper;audio_config=app.audio
                 config.local_files_only=True;config.model_dir=str(args.models_directory)
             config.source_language=sample['language']

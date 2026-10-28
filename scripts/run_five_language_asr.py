@@ -33,7 +33,7 @@ def resolved_config(language,strategy,models):
     c=copy.deepcopy(default_app_config());c.translation.source_lang=language;c.translation.target_lang='en' if language=='zh' else 'zh'
     if strategy!='formal':c.whisper.multilingual_asr_strategy=strategy
     migrate_runtime_defaults(c);sync_language_flow(c);apply_language_runtime_policy(c);sync_whisper_vad_limit(c)
-    c=copy.deepcopy(effective_speech_config(c));c.whisper.model_dir=str(models.resolve());c.whisper.local_files_only=True
+    c=copy.deepcopy(effective_speech_config(c, experimental=True));c.whisper.model_dir=str(models.resolve());c.whisper.local_files_only=True
     local_model(models,c.whisper.active_model_size)
     return c
 

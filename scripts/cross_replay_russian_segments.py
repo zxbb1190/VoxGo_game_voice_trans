@@ -29,7 +29,7 @@ def main():
         config=default_app_config();config.translation.source_lang='ru';config.translation.target_lang='zh'
         config.whisper.multilingual_asr_strategy=strategy
         migrate_runtime_defaults(config);sync_language_flow(config);apply_language_runtime_policy(config)
-        config=effective_speech_config(config);config.whisper.local_files_only=True
+        config=effective_speech_config(config, experimental=True);config.whisper.local_files_only=True
         recognizer=SpeechRecognizer(config.whisper);recognizer.initialize()
         try:
             for row in observed['stream_asr']:

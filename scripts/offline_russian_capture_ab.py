@@ -140,7 +140,7 @@ def make_config(models, maximum, pre_roll, idle):
     sync_language_flow(user)
     apply_language_runtime_policy(user)
     before = copy.deepcopy(user)
-    config = copy.deepcopy(effective_speech_config(user))
+    config = copy.deepcopy(effective_speech_config(user, experimental=True))
     # Overrides AFTER profile resolution, used by BOTH capture and work snapshots.
     config.audio.max_speech_seconds = maximum
     config.audio.pre_roll_ms = pre_roll

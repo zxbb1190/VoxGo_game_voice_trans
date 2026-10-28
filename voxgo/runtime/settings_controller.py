@@ -50,7 +50,7 @@ class OverlaySettingsController:
             getattr(app.config.whisper, "language", "auto"),
             previous_whisper_model,
             bool(getattr(app.config.whisper, "pure_english_environment", False)),
-            (getattr(app, "_last_multilingual_asr_strategy", getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware"))
+            (getattr(app, "_last_multilingual_asr_strategy", getattr(app.config.whisper, "multilingual_asr_strategy", "legacy"))
              if previous_language_flow[0] in {"ja", "ko", "ru"} else ""),
         )
         previous_model_download_source = app._last_model_download_source
@@ -83,10 +83,10 @@ class OverlaySettingsController:
             "enable_english_model",
             "english_model_size",
             "fast_english_model_size",
-            "multilingual_asr_strategy",
         ):
             if hasattr(whisper_config, key):
                 setattr(app.config.whisper, key, getattr(whisper_config, key))
+        app.config.whisper.multilingual_asr_strategy = "legacy"
         app.config.whisper.model_download_source = normalize_model_download_source(
             getattr(
                 whisper_config,
@@ -163,7 +163,7 @@ class OverlaySettingsController:
             getattr(app.config.whisper, "language", "auto"),
             current_whisper_model,
             bool(getattr(app.config.whisper, "pure_english_environment", False)),
-            (getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware")
+            (getattr(app.config.whisper, "multilingual_asr_strategy", "legacy")
              if current_language_flow[0] in {"ja", "ko", "ru"} else ""),
         )
         if app._speech_recognizer:
@@ -313,7 +313,7 @@ class OverlaySettingsController:
             )
         app._last_audio_device = current_device
         app._last_speech_audio_signature = speech_signature
-        app._last_multilingual_asr_strategy = getattr(app.config.whisper, "multilingual_asr_strategy", "language_aware")
+        app._last_multilingual_asr_strategy = getattr(app.config.whisper, "multilingual_asr_strategy", "legacy")
         app._last_translation_settings = current_translation
         app._last_language_flow = current_language_flow
         app._last_whisper_device = current_whisper_device

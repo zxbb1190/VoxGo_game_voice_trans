@@ -17,22 +17,25 @@ class LanguageAudioConfig(AudioConfig):
 
 
 def normalize_multilingual_strategy(value):
-    return LEGACY if str(value or "").strip().lower() == LEGACY else LANGUAGE_AWARE
+    return LANGUAGE_AWARE if str(value or "").strip().lower() == LANGUAGE_AWARE else LEGACY
 
 
-def effective_speech_config(config):
+def effective_speech_config(config, *, experimental=False):
     """Resolve a fresh runtime view, never overwrite user/English/Chinese tuning.
 
-    Fast/Balanced/Accurate definitions remain unchanged. Fast-mode overrides for
-    new source languages are truthfully classified as Custom. Explicit Custom
-    tuning, other modes and the compatibility switch keep the selected policy.
+    The client always uses the compatibility policy, including old candidate
+    settings. Only research tools may explicitly opt into historical
+    profiles; this keyword is not a persisted setting or a product UI option.
+    Fast/Balanced/Accurate and explicit Custom tuning remain unchanged.
     """
+    if not experimental:
+        return config
     source = config.translation.source_lang
     if (source not in {"ja", "ko", "ru"} or (source, config.translation.target_lang) not in ONLINE_DIRECTIONS
             or config.translation.provider not in {"google", "openai_compatible"}
             or normalize_latency_mode(config.audio.latency_mode) != "fast"
             or getattr(config.whisper, "asr_impact_mode", "low") == "ultra_low"
-            or normalize_multilingual_strategy(getattr(config.whisper, "multilingual_asr_strategy", LANGUAGE_AWARE)) == LEGACY):
+            or normalize_multilingual_strategy(getattr(config.whisper, "multilingual_asr_strategy", LEGACY)) == LEGACY):
         return config
     audio = LanguageAudioConfig(**{field.name: getattr(config.audio, field.name) for field in fields(AudioConfig)},
                                 speech_strategy=source + "_speech_v1")

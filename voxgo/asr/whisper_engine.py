@@ -204,7 +204,8 @@ class WhisperConfig:
     language: str = "auto"
     # Runtime routing metadata; user-settings serialization remains unchanged.
     source_language: str = ""
-    multilingual_asr_strategy: str = "language_aware"
+    # Retained for old settings and historical offline tools; not a user option.
+    multilingual_asr_strategy: str = "legacy"
     beam_size: int = 5
     vad_filter: bool = False
     vad_parameters: dict = None

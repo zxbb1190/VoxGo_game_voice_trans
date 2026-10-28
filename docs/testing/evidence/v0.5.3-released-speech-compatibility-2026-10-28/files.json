@@ -1,0 +1,42 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 20,
+    "sha256": "e97602ab9cac70102245345c5ab0fc9830df8b17f1072b188265a662a3a547ae"
+  },
+  {
+    "path": "client-tests.txt",
+    "bytes": 17661,
+    "sha256": "3fdee01316626d42881b8076a8d2f0482de8391afae92952a5bc0a9c862bcad7"
+  },
+  {
+    "path": "en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "focused-tests.txt",
+    "bytes": 354,
+    "sha256": "f1e2becd5a705d1cb58c2b7fbfd2e5648c1d654ee006fa3d6b29ffa76524deeb"
+  },
+  {
+    "path": "native-settings.png",
+    "bytes": 14952,
+    "sha256": "b39240db97fe7c6ec5930329c945f26e5c9bdc57278027ebff02c3a9f1635b3b"
+  },
+  {
+    "path": "native-verification.json",
+    "bytes": 473,
+    "sha256": "a101c35d44e65bd0997426747c6f5d47fd17f4638d5453e4bd6a9a5a3fceb5c8"
+  },
+  {
+    "path": "release-preflight.txt",
+    "bytes": 942,
+    "sha256": "23577a76a7e03b3837d682ee785e2fade4393534d8089315e6f4b7f25fdee3ac"
+  },
+  {
+    "path": "safety-check.json",
+    "bytes": 604,
+    "sha256": "45924c7b1d9631e8e4fe8667a6b6456443964763056ca48c1112cb2696206010"
+  }
+]

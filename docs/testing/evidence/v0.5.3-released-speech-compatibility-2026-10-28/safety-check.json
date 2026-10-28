@@ -1,0 +1,22 @@
+{
+  "base": "05beab2b",
+  "protected_paths": [
+    "voxgo/translation",
+    "voxgo/analytics",
+    "voxgo/audio/capture.py",
+    "voxgo/asr/pipeline.py",
+    "config.example.json",
+    "requirements.txt",
+    "VoxGo.spec",
+    "voxgo/ui/chinese_text.py",
+    "voxgo/ui/_opencc"
+  ],
+  "protected_paths_unchanged": true,
+  "historical_ledgers_unchanged": true,
+  "original_user_settings_unchanged": true,
+  "original_secrets_absent_from_intended_changes": true,
+  "real_translation_requests": 0,
+  "models_downloaded": 0,
+  "package_built": false,
+  "production_operations": false
+}

@@ -194,6 +194,9 @@ def apply_section_data(config: AppConfig, data: dict, sections: list):
             target = getattr(config, section)
             for key, value in data[section].items():
                 if hasattr(target, key):
+                    # Retire the candidate setting without changing other tuning.
+                    if section == "whisper" and key == "multilingual_asr_strategy":
+                        value = "legacy"
                     setattr(target, key, value)
 
 
@@ -529,7 +532,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "toggle_compact": config.hotkeys.toggle_compact,
         },
         "whisper": {
-            **({"multilingual_asr_strategy": "legacy"} if getattr(config.whisper, "multilingual_asr_strategy", "language_aware") == "legacy" else {}),
+            "multilingual_asr_strategy": "legacy",
             "model_size": str(getattr(config.whisper, "model_size", "small") or "small").strip() or "small",
             "fast_model_size": str(getattr(config.whisper, "fast_model_size", "") or "").strip(),
             "asr_impact_mode": normalize_asr_impact_mode(

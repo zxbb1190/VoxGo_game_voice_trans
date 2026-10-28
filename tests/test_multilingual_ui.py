@@ -7,7 +7,7 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 from PyQt5.QtWidgets import QApplication
 
-from voxgo.i18n import UI_LANGUAGE_EN, UI_LANGUAGE_ZH, language_label
+from voxgo.i18n import UI_LANGUAGE_EN, UI_LANGUAGE_ZH, UI_LANGUAGE_OPTIONS, language_label
 from voxgo.translation import TranslationConfig
 from voxgo.ui.config_models import HotkeyConfig, OverlayConfig, RuntimeConfig, WhisperDeviceConfig
 from voxgo.ui.overlay_window import GameOverlay
@@ -60,21 +60,19 @@ class MultilingualUiTest(unittest.TestCase):
                     self.assertEqual((config.source_lang,config.target_lang,config.provider),(target,source,provider))
                     overlay.close()
 
-    def test_speech_strategy_checkbox_preserves_legacy_preference_without_network(self):
-        for source in ('en','zh','ja','ko','ru'):
-            whisper = WhisperDeviceConfig(multilingual_asr_strategy='legacy')
-            dialog = SettingsDialog(OverlayConfig(),HotkeyConfig(),
-                translation_config=TranslationConfig(source_lang=source,target_lang='en' if source=='zh' else 'zh'),
-                whisper_config=whisper)
-            self.addCleanup(dialog.close)
-            self.assertEqual(dialog.multilingual_strategy_check.isHidden(),source in {'en','zh'})
-            self.assertFalse(dialog.multilingual_strategy_check.isChecked())
-            dialog._collect_values()
-            self.assertEqual(whisper.multilingual_asr_strategy,'legacy')
-            if source in {'ja','ko','ru'}:
-                dialog.multilingual_strategy_check.setChecked(True)
-                self.assertEqual(whisper.multilingual_asr_strategy,'language_aware')
-            dialog.close()
+    def test_speech_strategy_checkbox_is_removed_for_every_source(self):
+        for language,_ in UI_LANGUAGE_OPTIONS:
+            for source in ('en','zh','ja','ko','ru'):
+                with self.subTest(ui=language,source=source):
+                    whisper = WhisperDeviceConfig(multilingual_asr_strategy='language_aware')
+                    dialog = SettingsDialog(OverlayConfig(),HotkeyConfig(),
+                        translation_config=TranslationConfig(source_lang=source,target_lang='en' if source=='zh' else 'zh'),
+                        whisper_config=whisper,app_config=RuntimeConfig(language=language))
+                    self.addCleanup(dialog.close)
+                    self.assertFalse(hasattr(dialog,'multilingual_strategy_check'))
+                    dialog._collect_values()
+                    self.assertEqual(whisper.multilingual_asr_strategy,'legacy')
+                    dialog.close()
 
     def test_chinese_japanese_is_explicit_online_choice_with_reverse_swap(self):
         config = TranslationConfig(provider="google", source_lang="zh", target_lang="en")

@@ -1,0 +1,212 @@
+1/20 semantic-anchor-1 HTTP=200 finish=stop failure=-
+2/20 semantic-new-1 HTTP=200 finish=length failure=other
+3/20 semantic-anchor-2 HTTP=200 finish=stop failure=-
+4/20 semantic-new-2 HTTP=200 finish=stop failure=-
+5/20 semantic-anchor-3 HTTP=200 finish=stop failure=-
+6/20 semantic-new-3 HTTP=200 finish=stop failure=-
+7/20 semantic-anchor-4 HTTP=200 finish=stop failure=-
+8/20 semantic-new-4 HTTP=200 finish=stop failure=-
+9/20 length-long-1 HTTP=200 finish=stop failure=-
+10/20 length-short-1 HTTP=200 finish=stop failure=-
+11/20 length-long-2 HTTP=200 finish=stop failure=-
+12/20 length-short-2 HTTP=200 finish=stop failure=-
+13/20 length-long-3 HTTP=200 finish=stop failure=-
+14/20 length-short-3 HTTP=200 finish=stop failure=-
+15/20 length-long-4 HTTP=200 finish=stop failure=-
+16/20 length-short-4 HTTP=200 finish=stop failure=-
+17/20 en-zh-regression-1 HTTP=200 finish=stop failure=-
+18/20 en-zh-regression-2 HTTP=200 finish=stop failure=-
+19/20 en-zh-regression-3 HTTP=200 finish=stop failure=-
+20/20 en-zh-regression-4 HTTP=200 finish=stop failure=-
+1/20 semantic-anchor-1 HTTP=200 finish=stop failure=-
+2/20 semantic-new-1 HTTP=200 finish=length failure=other
+3/20 semantic-anchor-2 HTTP=429 finish=None failure=rate_limit
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\i18n.py:138: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class UiTranslator(QTranslator):
+Executing <Task pending name='Task-269' coro=<IsolatedAsyncioTestCase._asyncioLoopRunner() running at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:95> wait_for=<Future pending cb=[Task.task_wakeup()] created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py:429> created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:117> took 0.500 seconds
+Executing <Task pending name='Task-272' coro=<IsolatedAsyncioTestCase._asyncioLoopRunner() running at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:95> wait_for=<Future pending cb=[Task.task_wakeup()] created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py:429> created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:117> took 0.454 seconds
+Wrote 3 records to C:\Users\Administrator\AppData\Local\Temp\tmpyp2x2yas\manifest.jsonl
+Wrote 2 records to C:\Users\Administrator\AppData\Local\Temp\tmpn02hnbrh\manifest.jsonl
+Wrote 3 records to C:\Users\Administrator\AppData\Local\Temp\tmpryyktdpl\manifest.jsonl
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+1/24 ab-new-01-B HTTP=None finish=None failure=other
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+2/24 ab-new-01-B HTTP=200 finish=length failure=other
+3/24 ab-new-02-B HTTP=200 finish=stop failure=-
+4/24 ab-new-02-A HTTP=200 finish=stop failure=-
+5/24 ab-new-03-A HTTP=200 finish=stop failure=-
+6/24 ab-new-03-B HTTP=200 finish=stop failure=-
+7/24 ab-new-04-B HTTP=200 finish=stop failure=-
+8/24 ab-new-04-A HTTP=200 finish=stop failure=-
+9/24 ab-new-05-A HTTP=200 finish=stop failure=-
+10/24 ab-new-05-B HTTP=200 finish=stop failure=-
+11/24 ab-new-06-B HTTP=200 finish=stop failure=-
+12/24 ab-new-06-A HTTP=200 finish=stop failure=-
+13/24 ab-new-07-A HTTP=200 finish=stop failure=-
+14/24 ab-new-07-B HTTP=200 finish=stop failure=-
+15/24 ab-new-08-B HTTP=200 finish=stop failure=-
+16/24 ab-new-08-A HTTP=200 finish=stop failure=-
+17/24 ab-new-09-A HTTP=200 finish=stop failure=-
+18/24 ab-new-09-B HTTP=200 finish=stop failure=-
+19/24 ab-new-10-B HTTP=200 finish=stop failure=-
+20/24 ab-new-10-A HTTP=200 finish=stop failure=-
+21/24 ab-new-11-A HTTP=200 finish=stop failure=-
+22/24 ab-new-11-B HTTP=200 finish=stop failure=-
+23/24 ab-new-12-B HTTP=200 finish=stop failure=-
+24/24 ab-new-12-A HTTP=200 finish=stop failure=-
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+2/24 ab-new-01-B HTTP=200 finish=length failure=other
+3/24 ab-new-02-B HTTP=429 finish=None failure=rate_limit
+0/24 ab-new-01-A HTTP=None finish=None failure=-
+usage: python.exe -m unittest [-h] --manifest MANIFEST
+                              [--output-dir OUTPUT_DIR]
+                              [--models MODELS [MODELS ...]]
+                              [--presets {fast,balanced,accurate} [{fast,balanced,accurate} ...]]
+                              [--prompts {off,game_en} [{off,game_en} ...]]
+                              [--paths {whole,capture_cut,full_pipeline} [{whole,capture_cut,full_pipeline} ...]]
+                              [--device {cpu,cuda,auto}]
+                              [--compute-type COMPUTE_TYPE] [--allow-download]
+                              [--resume] [--limit LIMIT]
+python.exe -m unittest: error: --resume report does not match the manifest or benchmark settings
+usage: python.exe -m unittest [-h] --manifest MANIFEST
+                              [--output-dir OUTPUT_DIR]
+                              [--models MODELS [MODELS ...]]
+                              [--presets {fast,balanced,accurate} [{fast,balanced,accurate} ...]]
+                              [--prompts {off,game_en} [{off,game_en} ...]]
+                              [--paths {whole,capture_cut,full_pipeline} [{whole,capture_cut,full_pipeline} ...]]
+                              [--device {cpu,cuda,auto}]
+                              [--compute-type COMPUTE_TYPE] [--allow-download]
+                              [--resume] [--limit LIMIT]
+python.exe -m unittest: error: --resume report does not match the manifest or benchmark settings
+2026-10-28 14:32:05.602 | WARNING  | voxgo.app:attempt:1099 - Shutdown cleanup failed for audio: device stuck
+2026-10-28 14:32:05.603 | WARNING  | voxgo.app:attempt:1099 - Shutdown cleanup failed for local translation: service is still running
+2026-10-28 14:32:05.607 | WARNING  | voxgo.asr.pipeline:_enqueue_with_backpressure:1225 - speech queue full: dropped current weak candidate, labels=candidate,short_segment,low_confidence, voice=0.15s, total=0.40s
+2026-10-28 14:32:05.607 | WARNING  | voxgo.asr.pipeline:_enqueue_with_backpressure:1236 - speech queue full: dropped queued segment, labels=candidate,short_segment,low_confidence, voice=0.15s, total=0.40s
+2026-10-28 14:32:06.103 | WARNING  | voxgo.config.loader:save_user_settings:474 - 用户设置保存失败: settings busy
+2026-10-28 14:32:06.119 | WARNING  | voxgo.config.loader:load_user_settings:225 - 用户设置加载失败: 'int' object has no attribute 'items'
+2026-10-28 14:32:06.184 | WARNING  | voxgo.config.loader:load_user_settings:225 - 用户设置加载失败: Expecting value: line 1 column 1 (char 0)
+2026-10-28 14:32:06.258 | WARNING  | voxgo.translation.client:translate_result:93 - API Key 未配置，返回原文
+2026-10-28 14:32:06.261 | ERROR    | voxgo.ui.tray_controller:setup:112 - 系统托盘初始化失败: System tray icon did not become visible
+Traceback (most recent call last):
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+           │         └ <code object <module> at 0x0000013EBC7FAAD0, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+           └ <function _run_code at 0x0000013EBC3CAB00>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': 'Main entry point', '__package__': 'unittest', '__loader__': <_frozen_importlib_external....
+         └ <code object <module> at 0x0000013EBC7FAAD0, file "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\__main__.py", line 18, in <module>
+    main(module=None)
+    └ <class 'unittest.main.TestProgram'>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 101, in __init__
+    self.runTests()
+    │    └ <function TestProgram.runTests at 0x0000013EBC84DBD0>
+    └ <unittest.main.TestProgram object at 0x0000013EBC3AB790>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\main.py", line 271, in runTests
+    self.result = testRunner.run(self.test)
+    │             │          │   │    └ <unittest.suite.TestSuite tests=[None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, No...
+    │             │          │   └ <unittest.main.TestProgram object at 0x0000013EBC3AB790>
+    │             │          └ <function TextTestRunner.run at 0x0000013EBC84D510>
+    │             └ <unittest.runner.TextTestRunner object at 0x0000013EF71BEDA0>
+    └ <unittest.main.TestProgram object at 0x0000013EBC3AB790>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\runner.py", line 184, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=595 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, No...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=595 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x0000013EBC7EE830>
+           └ <unittest.suite.TestSuite tests=[None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, No...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=595 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_tray_lifecycle.TrayLifecycleTests testMethod=test_fai...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=595 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x0000013EBC7EE830>
+           └ <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_tray_lifecycle.TrayLifecycleTests testMethod=test_fai...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=595 errors=0 failures=0>
+    └ <unittest.suite.TestSuite tests=[<test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_a...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=595 errors=0 failures=0>,)
+           │    └ <function TestSuite.run at 0x0000013EBC7EE830>
+           └ <unittest.suite.TestSuite tests=[<test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_a...
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\suite.py", line 122, in run
+    test(result)
+    │    └ <unittest.runner.TextTestResult run=595 errors=0 failures=0>
+    └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 650, in __call__
+    return self.run(*args, **kwds)
+           │    │    │       └ {}
+           │    │    └ (<unittest.runner.TextTestResult run=595 errors=0 failures=0>,)
+           │    └ <function TestCase.run at 0x0000013EBC7EB520>
+           └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 591, in run
+    self._callTestMethod(testMethod)
+    │    │               └ <bound method TrayLifecycleTests.test_failed_show_disposes_partial_setup_and_allows_retry of <test_tray_lifecycle.TrayLifecyc...
+    │    └ <function TestCase._callTestMethod at 0x0000013EBC7EB370>
+    └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\case.py", line 549, in _callTestMethod
+    method()
+    └ <bound method TrayLifecycleTests.test_failed_show_disposes_partial_setup_and_allows_retry of <test_tray_lifecycle.TrayLifecyc...
+
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\tests\test_tray_lifecycle.py", line 89, in test_failed_show_disposes_partial_setup_and_allows_retry
+    self.assertFalse(self.setup_tray())
+    │    │           │    └ <function TrayLifecycleTests.setup_tray at 0x0000013EF864B400>
+    │    │           └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+    │    └ <function TestCase.assertFalse at 0x0000013EBC7EB910>
+    └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\tests\test_tray_lifecycle.py", line 65, in setup_tray
+    return self.controller.setup(FakeTray, QMenu, self.app, QIcon(), None)
+           │    │          │     │         │      │    │    └ <class 'PyQt5.QtGui.QIcon'>
+           │    │          │     │         │      │    └ <PyQt5.QtWidgets.QApplication object at 0x0000013EF8697760>
+           │    │          │     │         │      └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+           │    │          │     │         └ <class 'PyQt5.QtWidgets.QMenu'>
+           │    │          │     └ <class 'test_tray_lifecycle.FakeTray'>
+           │    │          └ <function TrayController.setup at 0x0000013EF729E170>
+           │    └ <voxgo.ui.tray_controller.TrayController object at 0x0000013EF8F30CD0>
+           └ <test_tray_lifecycle.TrayLifecycleTests testMethod=test_failed_show_disposes_partial_setup_and_allows_retry>
+
+> File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\tray_controller.py", line 108, in setup
+    raise RuntimeError("System tray icon did not become visible")
+
+RuntimeError: System tray icon did not become visible
+2026-10-28 14:32:06.268 | WARNING  | voxgo.ui.tray_controller:_resolve_icon:38 - Using Qt fallback icon for system tray
+2026-10-28 14:32:06.273 | WARNING  | voxgo.ui.tray_controller:setup:62 - 系统托盘不可用，跳过托盘入口
+2026-10-28 14:32:25.326 | WARNING  | voxgo.asr.whisper_engine:transcribe_audio_bytes_with_language:981 - CUDA transcription failed; falling back to CPU for this session: Library cublas64_12.dll is not found or cannot be loaded
+2026-10-28 14:32:25.357 | WARNING  | voxgo.asr.whisper_engine:_model_load_candidates:792 - CUDA runtime failed during transcription; using CPU for the rest of this session
+2026-10-28 14:32:25.418 | WARNING  | voxgo.asr.whisper_engine:initialize:389 - 加载 Whisper 模型失败，将尝试下一个设备配置: device=cuda, compute_type=float16, error=unsupported cuda/float16
+2026-10-28 14:32:25.449 | WARNING  | voxgo.asr.whisper_engine:initialize:389 - 加载 Whisper 模型失败，将尝试下一个设备配置: device=cuda, compute_type=int8_float16, error=unsupported cuda/int8_float16
+2026-10-28 14:32:25.479 | WARNING  | voxgo.asr.whisper_engine:initialize:389 - 加载 Whisper 模型失败，将尝试下一个设备配置: device=cuda, compute_type=float32, error=unsupported cuda/float32
+2026-10-28 14:32:25.537 | WARNING  | voxgo.asr.whisper_engine:initialize:389 - 加载 Whisper 模型失败，将尝试下一个设备配置: device=cuda, compute_type=float16, error=unsupported cuda/float16
+----------------------------------------------------------------------
+Ran 660 tests in 55.925s
+
+OK
+ASR benchmark: 0 results, 0 failures; C:\Users\ADMINI~1\AppData\Local\Temp\tmp06u98eht\report\report.html

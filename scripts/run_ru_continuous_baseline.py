@@ -28,7 +28,7 @@ def strategy_config(models,strategy):
     config.translation.source_lang,config.translation.target_lang="ru","zh"
     config.whisper.multilingual_asr_strategy=strategy
     migrate_runtime_defaults(config);sync_language_flow(config);apply_language_runtime_policy(config);sync_whisper_vad_limit(config)
-    config=copy.deepcopy(effective_speech_config(config))
+    config=copy.deepcopy(effective_speech_config(config, experimental=True))
     config.whisper.model_dir=str(models.resolve());config.whisper.local_files_only=True
     if config.whisper.active_model_size!="base":raise ValueError("Expected existing RU base, no model substitution")
     return config

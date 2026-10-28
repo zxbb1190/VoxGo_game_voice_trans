@@ -53,7 +53,8 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
                 if source==target:continue
                 config=configured(source,target)
                 before=serialize_user_settings(config)
-                effective=effective_speech_config(config)
+                config.whisper.multilingual_asr_strategy='language_aware'
+                effective=effective_speech_config(config,experimental=True)
                 self.assertIsNot(effective,config)
                 self.assertEqual(serialize_user_settings(config),before)
                 self.assertEqual(effective.audio.diagnostics_latency_mode,'custom')
@@ -63,6 +64,7 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
                 self.assertNotEqual((config.whisper.vad_parameters or {}).get('max_speech_duration_s'),99)
                 config.translation.source_lang='en';config.translation.target_lang='zh'
                 config.whisper.pure_english_environment=True
+                config.whisper.multilingual_asr_strategy='legacy'
                 migrate_runtime_defaults(config,preserve_existing_audio_tuning=False)
                 sync_language_flow(config);apply_language_runtime_policy(config)
                 self.assertIs(effective_speech_config(config),config)
@@ -77,12 +79,14 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         config.whisper.multilingual_asr_strategy='language_aware'
         for mode in ('custom','balanced','accurate'):
             config.audio.latency_mode=mode
-            self.assertIs(effective_speech_config(config),config)
+            self.assertIs(effective_speech_config(config,experimental=True),config)
         config.audio.latency_mode='fast';config.whisper.asr_impact_mode='ultra_low'
-        self.assertIs(effective_speech_config(config),config)
+        self.assertIs(effective_speech_config(config,experimental=True),config)
 
     def test_segment_events_and_work_items_capture_custom_mode_and_profile(self):
-        config=effective_speech_config(configured('ja','en'))
+        config=configured('ja','en')
+        config.whisper.multilingual_asr_strategy='language_aware'
+        config=effective_speech_config(config,experimental=True)
         diagnostics=[]
         pipeline=SpeechPipeline(lambda:config,lambda:None,EventBus(),defaultdict(int),
             lambda:True,lambda:False,lambda:'fixture',{},lambda *a:None,
@@ -178,7 +182,7 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
                 app.config.translation,copy.deepcopy(app.config.whisper),app.config.app,app.config.update)
         legacy_audio=asdict(app.config.audio)
         change('ko','en')
-        self.assertEqual(app._speech_recognizer._pending_config.active_model_size,'small')
+        self.assertEqual(app._speech_recognizer._pending_config.active_model_size,'base')
         self.assertEqual(app._speech_recognizer.config.source_language,'en')
         self.assertEqual(len(captures),1)
         change('en','zh')

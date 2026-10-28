@@ -1,0 +1,6 @@
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\i18n.py:138: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class UiTranslator(QTranslator):
+----------------------------------------------------------------------
+Ran 48 tests in 1.868s
+
+OK

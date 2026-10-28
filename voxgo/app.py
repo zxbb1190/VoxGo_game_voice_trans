@@ -174,7 +174,7 @@ class VoxGoApp:
             self.config.translation.target_lang,
         )
         self._last_speech_audio_signature = audio_runtime_signature(self.config)
-        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "language_aware")
+        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "legacy")
         self._language_flow_revision = 1
         self._last_whisper_device = _normalize_whisper_device(self.config.whisper.device)
         self._last_model_download_source = (
@@ -438,7 +438,7 @@ class VoxGoApp:
 
     def _refresh_cached_settings(self):
         self._last_speech_audio_signature = audio_runtime_signature(self.config)
-        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "language_aware")
+        self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "legacy")
         self._last_audio_device = (
             self.config.audio.input_device_id,
             self.config.audio.input_device_index,

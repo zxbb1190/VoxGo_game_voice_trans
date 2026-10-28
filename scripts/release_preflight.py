@@ -241,8 +241,8 @@ def check_product_defaults(root: Path, base_ref: str) -> list[str]:
                     raise PreflightError("Whisper routing metadata must default to empty")
                 current_defaults.pop("source_language", None)
             if class_name in {"WhisperConfig", "WhisperDeviceConfig"} and "multilingual_asr_strategy" not in base_defaults:
-                if current_defaults.get("multilingual_asr_strategy") != "language_aware":
-                    raise PreflightError("New-language strategy must use its declared isolated default")
+                if current_defaults.get("multilingual_asr_strategy") != "legacy":
+                    raise PreflightError("Released new-language ASR must default to compatibility")
                 current_defaults.pop("multilingual_asr_strategy", None)
             if current_defaults != base_defaults:
                 raise PreflightError(f"{class_name} product defaults changed from {base_ref}")
@@ -265,7 +265,7 @@ def check_product_defaults(root: Path, base_ref: str) -> list[str]:
         raise PreflightError("Expected the existing game prompt condition for .en models")
     return [
         f"config.example.json defaults unchanged from {base_ref}",
-        "Existing EN/ZH Audio/Whisper defaults unchanged; isolated new-language strategy preference allowed",
+        "Existing EN/ZH Audio/Whisper defaults unchanged; new-language ASR defaults to compatibility",
         "Audio latency preset values unchanged",
         "prompt_profile=none; existing game prompt .en conditional present",
     ]

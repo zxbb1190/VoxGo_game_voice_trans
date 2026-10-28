@@ -297,7 +297,7 @@ class WhisperDeviceConfig:
     enable_english_model: bool = False
     english_model_size: str = "small.en"
     fast_english_model_size: str = ""
-    multilingual_asr_strategy: str = "language_aware"
+    multilingual_asr_strategy: str = "legacy"
     model_download_source: str = "modelscope"
     model_download_endpoint: str = ""
 

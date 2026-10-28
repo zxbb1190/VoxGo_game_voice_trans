@@ -1246,12 +1246,6 @@ MESSAGES = {
         "인터페이스 언어 변경됨",
         "Язык интерфейса изменён"
     ],
-    "JA/KO/RU speech completeness strategy (candidate)": [
-        "日/韩/俄语音完整性策略（候选）",
-        "日・韓・露の発話完全性を重視する認識方式（候補）",
-        "일본어·한국어·러시아어 발화 완전성 전략(후보)",
-        "Стратегия полноты речи для JA/KO/RU (кандидат)"
-    ],
     "Japanese": [
         "日语",
         "日本語",
@@ -1587,12 +1581,6 @@ MESSAGES = {
         "初回のみ約317 MBのダウンロードが必要です。その後はAPIキーなしで英語 ↔ 中国語をオフライン翻訳できます。",
         "최초 1회 약 317 MB를 다운로드합니다. 이후 API 키 없이 영어 ↔ 중국어를 오프라인으로 번역할 수 있습니다.",
         "Однократная загрузка около 317 МБ. Затем можно переводить между английским и китайским офлайн без ключа API."
-    ],
-    "Only JA/KO/RU Fast mode, except Ultra Low impact: longer speech units, normally base for Japanese/Russian and small for Korean. CPU and subtitle delay may increase. Disable for compatibility; English/Chinese recognition is unchanged.": [
-        "仅影响日/韩/俄的极速模式（极低影响除外）：保留更完整语音片段，默认日/俄使用base、韩语使用small，可能增加CPU和字幕等待。关闭恢复兼容策略；中英识别不变。",
-        "日・韓・露の高速モードのみ（超低負荷を除く）に適用します。発話区間を長くし、通常は日・露にbase、韓国語にsmallを使用します。CPU負荷と字幕遅延が増える場合があります。互換性を優先する場合は無効にしてください。英語・中国語の認識は変わりません。",
-        "일본어·한국어·러시아어의 빠름 모드에만 적용하며 초저부하는 제외합니다. 발화 구간을 늘리고 보통 일본어·러시아어는 base, 한국어는 small을 사용합니다. CPU 부하와 자막 지연이 늘 수 있습니다. 호환 모드로 돌아가려면 끄세요. 영어·중국어 인식은 바뀌지 않습니다.",
-        "Только для быстрого режима JA/KO/RU, кроме сверхнизкой нагрузки: более длинные фрагменты, обычно base для японского/русского и small для корейского. Нагрузка CPU и задержка могут вырасти. Отключите для совместимости; английское/китайское распознавание не меняется."
     ],
     "Only the selected official Whisper model cache will be deleted and downloaded again. API configuration, other settings, and custom models will not be deleted.\n\nDownloading requires an internet connection and may take a while. Continue?": [
         "将仅删除当前选用的 Whisper 官方模型缓存，并重新下载模型。不会删除 API 配置、其他设置或自定义模型。\n\n下载需要网络连接，可能耗时较长。是否继续？",
