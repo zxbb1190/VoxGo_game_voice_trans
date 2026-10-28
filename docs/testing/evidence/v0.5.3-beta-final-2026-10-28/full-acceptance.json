@@ -1,0 +1,130 @@
+{
+  "package": "E:\\my\\my\\VoxGo053Beta-Final-20261028\\VoxGo",
+  "actual_full_exe_run": true,
+  "ui_operator": "user; assisted by isolated local harness and disk/log verification",
+  "automated_native_window_found": false,
+  "screenshots_taken": false,
+  "offscreen_used_for_full": false,
+  "public_audio_mode": "existing benchmark-audio injection, not physical loopback/private/system/game audio",
+  "manual_reports": [
+    {
+      "step": "open settings",
+      "reply": "已打开"
+    },
+    {
+      "step": "five sources/four targets and swap; save ja→ru; normal exit",
+      "reply": "全部正常，已退出"
+    },
+    {
+      "step": "controlled restart restores ja→ru; unsupported local direction notice; loopback caption",
+      "reply": "恢复、限制提示和本地字幕均正常"
+    },
+    {
+      "step": "Full length notice and non-copyable",
+      "reply": "截断提示及不可复制均正常",
+      "fixture_port": 19053
+    },
+    {
+      "step": "earlier switch attempt before marked endpoint was actually saved",
+      "reply": "无旧结果，新方向本地字幕正常",
+      "counted_as_precise_direction_case": false
+    },
+    {
+      "step": "explicitly save marked fixture endpoint",
+      "reply": "已保存，仍显示19055",
+      "persisted_port_verified": 19055
+    },
+    {
+      "step": "8s en→zh delayed call, switch to en→ja, no old marker; new marker; pause",
+      "reply": "无旧标记，日文目标标记正常，已暂停",
+      "counted_as_precise_direction_case": true
+    },
+    {
+      "step": "Full HTTP503 notice then actual local OPUS en→zh; normal exit",
+      "reply": "正常"
+    },
+    {
+      "step": "controlled restart with public Chinese PCM; actual local OPUS zh→en; normal exit",
+      "reply": "正常"
+    }
+  ],
+  "normal_exits": [
+    {
+      "pid": 24308,
+      "returncode": 0,
+      "launch": 1
+    },
+    {
+      "pid": 31852,
+      "returncode": 0,
+      "launch": 2
+    },
+    {
+      "pid": 27964,
+      "returncode": 0,
+      "launch": 3
+    }
+  ],
+  "saved_and_reloaded_direction": "ja→ru",
+  "final_direction": "zh→en",
+  "final_provider": "local",
+  "key_empty": true,
+  "observed_unique_route_snapshots": [
+    "en->ja",
+    "en->zh",
+    "ja->ko",
+    "ja->ru",
+    "ja->zh",
+    "ko->zh",
+    "ru->zh",
+    "zh->en",
+    "zh->ja",
+    "zh->ko"
+  ],
+  "routes_exhaustively_translated_in_full_this_turn": false,
+  "submitted_whisper_segments": 74,
+  "benchmark_injections": 74,
+  "loopback_requests_by_mode": {
+    "normal": 5,
+    "length": 16,
+    "delay": 7
+  },
+  "marked_loopback_requests_by_mode": {
+    "delay": 6,
+    "error": 9
+  },
+  "real_api_requests": 0,
+  "precise_cancellation_evidence": {
+    "request_id": "1793154201815907500",
+    "request_local_time": "2026-10-28 10:23:21.8159 +08:00",
+    "direction_change_local_time": "2026-10-28 10:23:27 +08:00",
+    "new_direction_caption_local_time": "2026-10-28 10:23:37 +08:00",
+    "delayed_response_status": "no recorded HTTP200; local fixture socket raises WinError10053 on write after cancellation",
+    "evidence_scope": "one Full timing case + manual no-old-caption confirmation; does not prove all Provider cancellation semantics"
+  },
+  "actual_offline_outputs_examples": {
+    "en→zh": "然而,由于沟通渠道缓慢,",
+    "zh→en": "It's not goodbye."
+  },
+  "offline_inference_not_quality_acceptance": true,
+  "model_downloads": 0,
+  "full_consent": "unknown",
+  "full_upload_authorized": false,
+  "cleanup": {
+    "voxgo_processes_remaining": 0,
+    "local_listeners_remaining": 0,
+    "owned_fixture_processes_remaining": 0,
+    "full_exit": "all three normal user exits, returncode0; no force-kill",
+    "fixture_cleanup": "controller normal stop after Full exit; standalone direction fixture only terminated after path/PID verification"
+  },
+  "not_tested": [
+    "physical loopback",
+    "real game FPS/frametime",
+    "low-end Windows hardware",
+    "bilingual human semantics",
+    "long-session stability",
+    "installer/update replacement",
+    "bundled .en model load",
+    "real online API this turn"
+  ]
+}

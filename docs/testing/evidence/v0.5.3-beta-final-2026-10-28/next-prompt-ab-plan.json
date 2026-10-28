@@ -1,0 +1,139 @@
+{
+  "authorized": false,
+  "execution_ready": false,
+  "planned_requests": 24,
+  "hard_cap": 24,
+  "retries": 0,
+  "model": "tencent/Hunyuan-MT-7B",
+  "provider": "SiliconFlow existing config only",
+  "config": {
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "max_concurrent_requests": 1,
+    "timeout_seconds": 12,
+    "cache": false
+  },
+  "profile_a": "current translation_system_prompt",
+  "profile_b": "current prompt plus semantic_guard_v1 append",
+  "formal_en_zh_default_unchanged": true,
+  "rollback": "drop experimental profile; current SYSTEM_PROMPT and translation_system_prompt remain exact baseline",
+  "order": "AB/BA alternating by case; one call per profile; no retries or successful-selection reruns",
+  "acceptance": "proposal: zero new serious semantic regressions; bilingual review critical facts; transport/empty/length separate; latency +20% observation only, not a validated standard; stop on auth/payment/rate/model/route failures",
+  "needs_before_execution": [
+    "new user request authorization for 24 calls",
+    "current pricing and fixed credentials verification",
+    "new one-use approval bound to plan hash and fresh output",
+    "executor must explicitly support experimental profile; existing 20-call authorization is exhausted"
+  ],
+  "cases": [
+    {
+      "id": "ab-new-01",
+      "source": "zh",
+      "target": "en",
+      "text": "两名队友在地下一层，第三名队友在地面入口。不要把他们当成敌人。",
+      "critical_facts": "数量2/第3人；地下与地面；否定敌人关系",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-02",
+      "source": "zh",
+      "target": "en",
+      "text": "我在楼梯下方，补给箱在三楼。先别上来，等门打开。",
+      "critical_facts": "上下位置/3楼/禁止提前/开门条件",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-03",
+      "source": "ko",
+      "target": "zh",
+      "text": "정찰병은 지하 주차장에 있고, 의무실은 건물 3층에 있어.",
+      "critical_facts": "侦察兵人物/地下停车场；医务室地点/3楼",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-04",
+      "source": "ko",
+      "target": "zh",
+      "text": "기술자 한 명이 두 번째 문을 수리 중이야. 탄약고는 아직 열지 마.",
+      "critical_facts": "1技术人员/第2门维修；弹药库尚不打开",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-05",
+      "source": "zh",
+      "target": "ru",
+      "text": "桥后只有四名队友，没有敌人。等我喊撤退时再离开。",
+      "critical_facts": "4友军/无敌人；口令出现时再离开",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-06",
+      "source": "zh",
+      "target": "ru",
+      "text": "右边有一名狙击手，左边有两名敌人。不要向右边开枪。",
+      "critical_facts": "右1狙击手/左2敌人；禁止向右开火，不猜狙击手阵营",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-07",
+      "source": "ru",
+      "target": "ja",
+      "text": "Начинайте движение только после второго сигнала, а до него оставайтесь в укрытии.",
+      "critical_facts": "第2信号之后才移动；此前留在掩体",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-08",
+      "source": "ru",
+      "target": "ja",
+      "text": "Если разведчик не вернётся через двадцать секунд, закройте ворота; раньше этого не закрывайте их.",
+      "critical_facts": "20秒后仍未归来条件/关门；不得提前",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-09",
+      "source": "en",
+      "target": "zh",
+      "text": "Only two allies are inside the tower. Do not throw a grenade until both have left.",
+      "critical_facts": "2友军；两人离开前不得投掷",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-10",
+      "source": "en",
+      "target": "zh",
+      "text": "The engineer is below the bridge, while the ammunition is on the upper platform.",
+      "critical_facts": "工程师人物/桥下；弹药物品/上层平台",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-11",
+      "source": "zh",
+      "target": "en",
+      "text": "只剩二十秒。等所有队友过桥后再关门，不能提前关闭。",
+      "critical_facts": "20秒/所有队友过桥后关门/不得提前",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    },
+    {
+      "id": "ab-new-12",
+      "source": "zh",
+      "target": "en",
+      "text": "维修员在东侧，不在西侧；医疗站在下一层。",
+      "critical_facts": "人物/东非西；地点/下一层",
+      "source_human_review": "pending",
+      "expected_target_translation": null
+    }
+  ]
+}

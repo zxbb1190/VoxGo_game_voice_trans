@@ -1,0 +1,873 @@
+2026-10-28 10:07:12 | INFO     | 已加载配置: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\acceptance-config.json
+2026-10-28 10:07:12 | INFO     | benchmark audio mode enabled: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:07:12 | INFO     | 正在启动...
+2026-10-28 10:07:13 | INFO     | 手机端: http://127.0.0.1:19054/mobile
+2026-10-28 10:07:13 | INFO     | system tray initialized: visible=True
+2026-10-28 10:07:13 | INFO     | 浮窗已启动
+2026-10-28 10:07:13 | INFO     | 后台启动线程已启动
+2026-10-28 10:07:13 | INFO     | Whisper 模型目录: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\_internal\.models
+2026-10-28 10:07:13 | INFO     | 翻译事件循环已启动
+2026-10-28 10:07:13 | INFO     | Whisper 已启用 local_files_only，仅使用本地模型缓存
+2026-10-28 10:07:13 | INFO     | 加载 Whisper 模型: base (device=cpu, compute_type=int8, cpu_threads=1, num_workers=1, attempt=1/2)
+2026-10-28 10:07:14 | INFO     | Whisper 模型加载完成
+2026-10-28 10:07:14 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:07:14 | INFO     | speech processing queue started
+2026-10-28 10:07:14 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:07:14 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:07:14 | INFO     | 后端服务已启动
+2026-10-28 10:07:15 | INFO     | 跳过自动更新检查：尚未到达检查间隔或自动检查已关闭
+2026-10-28 10:07:18 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:07:18 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:18 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:07:20 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:34 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:07:34 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:34 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:07:36 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:39 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:07:39 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:07:41 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:07:41 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:07:50 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=16.0s
+2026-10-28 10:07:50 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:50 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:07:52 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:07:53 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:07:53 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:08:06 | INFO     | benchmark speech segment injected: #4 4.0s, next_in=16.0s
+2026-10-28 10:08:06 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:06 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:08:08 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:22 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:08:22 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:08:22 | INFO     | benchmark speech segment injected: #5 4.0s, next_in=16.0s
+2026-10-28 10:08:22 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:22 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:08:24 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:38 | INFO     | benchmark speech segment injected: #6 4.0s, next_in=16.0s
+2026-10-28 10:08:38 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:38 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:08:40 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:55 | INFO     | benchmark speech segment injected: #7 4.0s, next_in=16.0s
+2026-10-28 10:08:55 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:08:55 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:08:56 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:11 | INFO     | benchmark speech segment injected: #8 4.0s, next_in=16.0s
+2026-10-28 10:09:11 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:11 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:09:12 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:27 | INFO     | benchmark speech segment injected: #9 4.0s, next_in=16.0s
+2026-10-28 10:09:27 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:27 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:09:28 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:43 | INFO     | benchmark speech segment injected: #10 4.0s, next_in=16.0s
+2026-10-28 10:09:43 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:43 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:09:44 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:59 | INFO     | benchmark speech segment injected: #11 4.0s, next_in=16.0s
+2026-10-28 10:09:59 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:09:59 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:10:00 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:10:01 | INFO     | 翻译暂停
+2026-10-28 10:10:01 | INFO     | translation toggle cleared realtime buffers: paused=True, audio_blocks=0, speech_items=0
+2026-10-28 10:10:04 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:04 | INFO     | benchmark audio source stopped
+2026-10-28 10:10:04 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:10:04 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:10:04 | INFO     | language flow reset: revision=2, direction=zh->en, dropped_pending_queue=0
+2026-10-28 10:10:04 | INFO     | language flow changed: revision=2, direction=zh->en, cleared_audio_blocks=0
+2026-10-28 10:10:04 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:08 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:08 | INFO     | benchmark audio source stopped
+2026-10-28 10:10:08 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:10:08 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:10:08 | INFO     | language flow reset: revision=3, direction=en->zh, dropped_pending_queue=0
+2026-10-28 10:10:08 | INFO     | language flow changed: revision=3, direction=en->zh, cleared_audio_blocks=0
+2026-10-28 10:10:08 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:10 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:10 | INFO     | benchmark audio source stopped
+2026-10-28 10:10:10 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:10:10 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:10:10 | INFO     | language flow reset: revision=4, direction=ko->zh, dropped_pending_queue=0
+2026-10-28 10:10:10 | INFO     | language flow changed: revision=4, direction=ko->zh, cleared_audio_blocks=0
+2026-10-28 10:10:10 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ko→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:12 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:12 | INFO     | language flow reset: revision=5, direction=zh->en, dropped_pending_queue=0
+2026-10-28 10:10:12 | INFO     | language flow changed: revision=5, direction=zh->en, cleared_audio_blocks=0
+2026-10-28 10:10:12 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:13 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:13 | INFO     | language flow reset: revision=6, direction=ja->zh, dropped_pending_queue=0
+2026-10-28 10:10:13 | INFO     | language flow changed: revision=6, direction=ja->zh, cleared_audio_blocks=0
+2026-10-28 10:10:13 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:21 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:21 | INFO     | language flow reset: revision=7, direction=ja->ko, dropped_pending_queue=0
+2026-10-28 10:10:21 | INFO     | language flow changed: revision=7, direction=ja->ko, cleared_audio_blocks=0
+2026-10-28 10:10:21 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ko, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:22 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:22 | INFO     | language flow reset: revision=8, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:10:22 | INFO     | language flow changed: revision=8, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:10:22 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:33 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:33 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:34 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:34 | INFO     | language flow reset: revision=9, direction=ru->zh, dropped_pending_queue=0
+2026-10-28 10:10:34 | INFO     | language flow changed: revision=9, direction=ru->zh, cleared_audio_blocks=0
+2026-10-28 10:10:34 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ru→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:35 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:35 | INFO     | language flow reset: revision=10, direction=ko->zh, dropped_pending_queue=0
+2026-10-28 10:10:35 | INFO     | language flow changed: revision=10, direction=ko->zh, cleared_audio_blocks=0
+2026-10-28 10:10:35 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ko→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:37 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:37 | INFO     | language flow reset: revision=11, direction=ja->zh, dropped_pending_queue=0
+2026-10-28 10:10:37 | INFO     | language flow changed: revision=11, direction=ja->zh, cleared_audio_blocks=0
+2026-10-28 10:10:37 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:38 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:38 | INFO     | language flow reset: revision=12, direction=zh->en, dropped_pending_queue=0
+2026-10-28 10:10:38 | INFO     | language flow changed: revision=12, direction=zh->en, cleared_audio_blocks=0
+2026-10-28 10:10:38 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:39 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:39 | INFO     | language flow reset: revision=13, direction=zh->ko, dropped_pending_queue=0
+2026-10-28 10:10:39 | INFO     | language flow changed: revision=13, direction=zh->ko, cleared_audio_blocks=0
+2026-10-28 10:10:39 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→ko, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:40 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:40 | INFO     | language flow reset: revision=14, direction=zh->ja, dropped_pending_queue=0
+2026-10-28 10:10:40 | INFO     | language flow changed: revision=14, direction=zh->ja, cleared_audio_blocks=0
+2026-10-28 10:10:40 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:42 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:42 | INFO     | benchmark audio source stopped
+2026-10-28 10:10:42 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:10:42 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:10:42 | INFO     | language flow reset: revision=15, direction=en->zh, dropped_pending_queue=0
+2026-10-28 10:10:42 | INFO     | language flow changed: revision=15, direction=en->zh, cleared_audio_blocks=0
+2026-10-28 10:10:42 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:46 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:46 | INFO     | benchmark audio source stopped
+2026-10-28 10:10:46 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:10:46 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:10:46 | INFO     | language flow reset: revision=16, direction=ja->zh, dropped_pending_queue=0
+2026-10-28 10:10:46 | INFO     | language flow changed: revision=16, direction=ja->zh, cleared_audio_blocks=0
+2026-10-28 10:10:46 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:47 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:10:47 | INFO     | language flow reset: revision=17, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:10:47 | INFO     | language flow changed: revision=17, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:10:47 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:10:53 | INFO     | 翻译恢复
+2026-10-28 10:10:53 | INFO     | translation toggle cleared realtime buffers: paused=False, audio_blocks=0, speech_items=0
+2026-10-28 10:10:53 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:10:53 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:10:53 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=17, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:10:55 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:09 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:11:09 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:09 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=17, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:11:11 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:25 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=16.0s
+2026-10-28 10:11:25 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:25 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=17, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:11:27 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:41 | INFO     | benchmark speech segment injected: #4 4.0s, next_in=16.0s
+2026-10-28 10:11:41 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:41 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=17, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:11:43 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:52 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:11:52 | INFO     | benchmark audio source stopped
+2026-10-28 10:11:52 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:11:52 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:11:52 | INFO     | language flow reset: revision=18, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:11:52 | INFO     | language flow changed: revision=18, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:11:52 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:11:54 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:11:54 | INFO     | benchmark audio source stopped
+2026-10-28 10:11:54 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:11:54 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:11:54 | INFO     | language flow reset: revision=19, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:11:54 | INFO     | language flow changed: revision=19, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:11:54 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:11:58 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:11:58 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:11:58 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=19, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:12:00 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:12:11 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:12:11 | INFO     | benchmark audio source stopped
+2026-10-28 10:12:11 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:12:11 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:12:11 | INFO     | language flow reset: revision=20, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:12:11 | INFO     | language flow changed: revision=20, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:12:11 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:12:11 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:12:11 | INFO     | benchmark audio source stopped
+2026-10-28 10:12:11 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav, duration=0.1s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:12:11 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\silence.wav
+2026-10-28 10:12:11 | INFO     | language flow reset: revision=21, direction=ja->ru, dropped_pending_queue=0
+2026-10-28 10:12:11 | INFO     | language flow changed: revision=21, direction=ja->ru, cleared_audio_blocks=0
+2026-10-28 10:12:11 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:12:16 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:12:16 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:12:16 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=21, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:12:17 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:12:29 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:12:29 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:12:32 | INFO     | benchmark audio source stopped
+2026-10-28 10:12:44 | INFO     | 已加载配置: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\acceptance-config.json
+2026-10-28 10:12:44 | INFO     | 已加载用户设置: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\user_settings.json
+2026-10-28 10:12:44 | INFO     | benchmark audio mode enabled: E:\my\my\VoxGo053Beta-Final-20261028\control\en.wav
+2026-10-28 10:12:44 | INFO     | 正在启动...
+2026-10-28 10:12:44 | INFO     | 手机端: http://127.0.0.1:19054/mobile
+2026-10-28 10:12:45 | INFO     | system tray initialized: visible=True
+2026-10-28 10:12:45 | INFO     | 浮窗已启动
+2026-10-28 10:12:45 | INFO     | 后台启动线程已启动
+2026-10-28 10:12:45 | INFO     | Whisper 模型目录: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\_internal\.models
+2026-10-28 10:12:45 | INFO     | 翻译事件循环已启动
+2026-10-28 10:12:45 | INFO     | Whisper 已启用 local_files_only，仅使用本地模型缓存
+2026-10-28 10:12:45 | INFO     | 加载 Whisper 模型: base (device=cpu, compute_type=int8, cpu_threads=1, num_workers=1, attempt=1/2)
+2026-10-28 10:12:45 | INFO     | Whisper 模型加载完成
+2026-10-28 10:12:45 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:12:45 | INFO     | speech processing queue started
+2026-10-28 10:12:45 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\en.wav, duration=10.6s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:12:45 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\en.wav
+2026-10-28 10:12:45 | INFO     | 后端服务已启动
+2026-10-28 10:12:46 | INFO     | 跳过自动更新检查：尚未到达检查间隔或自动检查已关闭
+2026-10-28 10:12:49 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:12:49 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:12:49 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:12:51 | INFO     | [recognition] However, due to the slow communication channels, (lang=en, prob=0.98, expected=ja, direction=ja->ru, revision=1, avg_logprob=-0.36, no_speech=0.10, 1.6s)
+2026-10-28 10:12:51 | INFO     | translation skipped: language_mismatch:en->ja:prob=0.98:threshold=0.60, detected=en, expected=ja, prob=0.98, text=However, due to the slow communication channels,
+2026-10-28 10:13:05 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:13:05 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.1dB, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:13:05 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:13:07 | INFO     | [recognition] Styles in the West could lag behind by 25. (lang=en, prob=0.98, expected=ja, direction=ja->ru, revision=1, avg_logprob=-0.39, no_speech=0.07, 1.6s)
+2026-10-28 10:13:07 | INFO     | translation skipped: language_mismatch:en->ja:prob=0.98:threshold=0.60, detected=en, expected=ja, prob=0.98, text=Styles in the West could lag behind by 25.
+2026-10-28 10:13:21 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=16.0s
+2026-10-28 10:13:21 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.6dB, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:13:21 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:13:23 | INFO     | [recognition] 30 years. However, (lang=en, prob=0.99, expected=ja, direction=ja->ru, revision=1, avg_logprob=-0.63, no_speech=0.12, 1.6s)
+2026-10-28 10:13:23 | INFO     | translation skipped: language_mismatch:en->ja:prob=0.99:threshold=0.60, detected=en, expected=ja, prob=0.99, text=30 years. However,
+2026-10-28 10:13:37 | INFO     | benchmark speech segment injected: #4 4.0s, next_in=16.0s
+2026-10-28 10:13:37 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:13:37 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:13:39 | INFO     | [recognition] Due to the slow communication channels, styles in the (lang=en, prob=0.99, expected=ja, direction=ja->ru, revision=1, avg_logprob=-0.36, no_speech=0.18, 1.6s)
+2026-10-28 10:13:39 | INFO     | translation skipped: language_mismatch:en->ja:prob=0.99:threshold=0.60, detected=en, expected=ja, prob=0.99, text=Due to the slow communication channels, styles in the
+2026-10-28 10:13:47 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:13:47 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=ja→ru, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:13:53 | INFO     | benchmark speech segment injected: #5 4.0s, next_in=16.0s
+2026-10-28 10:13:53 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.6dB, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:13:53 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=ja->ru, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:13:55 | INFO     | [recognition] could lag behind by 25 to 30 years. (lang=en, prob=0.99, expected=ja, direction=ja->ru, revision=1, avg_logprob=-0.46, no_speech=0.11, 1.6s)
+2026-10-28 10:13:55 | INFO     | translation skipped: language_mismatch:en->ja:prob=0.99:threshold=0.60, detected=en, expected=ja, prob=0.99, text=could lag behind by 25 to 30 years.
+2026-10-28 10:13:59 | INFO     | 翻译暂停
+2026-10-28 10:13:59 | INFO     | translation toggle cleared realtime buffers: paused=True, audio_blocks=0, speech_items=0
+2026-10-28 10:14:03 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:14:03 | INFO     | benchmark audio source stopped
+2026-10-28 10:14:03 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\en.wav, duration=10.6s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:14:03 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\en.wav
+2026-10-28 10:14:03 | INFO     | language flow reset: revision=2, direction=en->zh, dropped_pending_queue=0
+2026-10-28 10:14:03 | INFO     | language flow changed: revision=2, direction=en->zh, cleared_audio_blocks=0
+2026-10-28 10:14:03 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:14:05 | INFO     | 翻译恢复
+2026-10-28 10:14:05 | INFO     | translation toggle cleared realtime buffers: paused=False, audio_blocks=0, speech_items=0
+2026-10-28 10:14:07 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:14:07 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:14:07 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:14:09 | INFO     | [recognition] However, due to the slow communication channels, (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.36, no_speech=0.10, 1.6s)
+2026-10-28 10:14:09 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:14:09 | INFO     | 翻译(en->zh): However, due to the slow communication channels,... → [本地协议测试，非真实翻译] 字幕链路正常。... (0.00s)
+2026-10-28 10:14:09 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (0.0s)
+2026-10-28 10:14:09 | INFO     | 更新浮窗翻译
+2026-10-28 10:14:09 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:14:23 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:14:23 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.1dB, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:14:23 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:14:25 | INFO     | [recognition] Styles in the West could lag behind by 25. (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.39, no_speech=0.07, 1.7s)
+2026-10-28 10:14:25 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:14:25 | INFO     | 翻译(en->zh): Styles in the West could lag behind by 25.... → [本地协议测试，非真实翻译] 字幕链路正常。... (0.00s)
+2026-10-28 10:14:25 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (0.0s)
+2026-10-28 10:14:25 | INFO     | 更新浮窗翻译
+2026-10-28 10:14:25 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:14:39 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=16.0s
+2026-10-28 10:14:39 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.6dB, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:14:39 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:14:41 | INFO     | [recognition] 30 years. However, (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.63, no_speech=0.12, 1.6s)
+2026-10-28 10:14:41 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:14:41 | INFO     | 翻译(en->zh): 30 years. However,... → [本地协议测试，非真实翻译] 字幕链路正常。... (0.00s)
+2026-10-28 10:14:41 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (0.0s)
+2026-10-28 10:14:41 | INFO     | 更新浮窗翻译
+2026-10-28 10:14:41 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:14:55 | INFO     | benchmark speech segment injected: #4 4.0s, next_in=16.0s
+2026-10-28 10:14:55 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:14:55 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:14:57 | INFO     | [recognition] Due to the slow communication channels, styles in the (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.36, no_speech=0.18, 1.6s)
+2026-10-28 10:14:57 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:14:57 | INFO     | 翻译(en->zh): Due to the slow communication channels, styles in ... → [本地协议测试，非真实翻译] 字幕链路正常。... (0.00s)
+2026-10-28 10:14:57 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (0.0s)
+2026-10-28 10:14:57 | INFO     | 更新浮窗翻译
+2026-10-28 10:14:57 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:15:11 | INFO     | benchmark speech segment injected: #5 4.0s, next_in=16.0s
+2026-10-28 10:15:11 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.6dB, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:15:11 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:15:13 | INFO     | [recognition] could lag behind by 25 to 30 years. (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.46, no_speech=0.11, 1.6s)
+2026-10-28 10:15:13 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:15:13 | INFO     | 翻译(en->zh): could lag behind by 25 to 30 years.... → [本地协议测试，非真实翻译] 字幕链路正常。... (0.00s)
+2026-10-28 10:15:13 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (0.0s)
+2026-10-28 10:15:13 | INFO     | 更新浮窗翻译
+2026-10-28 10:15:13 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:15:28 | INFO     | benchmark speech segment injected: #6 4.0s, next_in=16.0s
+2026-10-28 10:15:28 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.1dB, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:15:28 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:15:29 | INFO     | [recognition] However, due to the slow commute (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.51, no_speech=0.39, 1.6s)
+2026-10-28 10:15:29 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:15:29 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:15:29 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:15:29 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:15:44 | INFO     | benchmark speech segment injected: #7 4.0s, next_in=16.0s
+2026-10-28 10:15:44 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.3dB, voice=4.00s, total=4.00s, peak=-48.3 dBFS, gate=-40.0 dBFS
+2026-10-28 10:15:44 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.3 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:15:45 | INFO     | [recognition] communication channels. Styles in the West could lag behind. (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.64, no_speech=0.16, 1.6s)
+2026-10-28 10:15:45 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:15:45 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:15:45 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:15:45 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:16:00 | INFO     | benchmark speech segment injected: #8 4.0s, next_in=16.0s
+2026-10-28 10:16:00 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-12.0dB, voice=4.00s, total=4.00s, peak=-52.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:16:00 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-52.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:16:01 | INFO     | [recognition] by 25 to 30 years. (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.56, no_speech=0.11, 1.6s)
+2026-10-28 10:16:01 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:16:01 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:16:01 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:16:01 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:16:16 | INFO     | benchmark speech segment injected: #9 4.0s, next_in=16.0s
+2026-10-28 10:16:16 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:16:16 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:16:17 | INFO     | [recognition] However, due to the slow communication channels, (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.34, no_speech=0.08, 1.6s)
+2026-10-28 10:16:17 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:16:17 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:16:17 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:16:17 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:16:32 | INFO     | benchmark speech segment injected: #10 4.0s, next_in=16.0s
+2026-10-28 10:16:32 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.9dB, voice=4.00s, total=4.00s, peak=-47.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:16:32 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:16:34 | INFO     | [recognition] styles in the west could lag behind by 25 to 30 (lang=en, prob=0.96, expected=en, direction=en->zh, revision=2, avg_logprob=-0.41, no_speech=0.38, 1.7s)
+2026-10-28 10:16:34 | INFO     | language gate accepted: detected=en, expected=en, prob=0.96, snapshot=en->zh, revision=2
+2026-10-28 10:16:34 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:16:34 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:16:34 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:16:48 | INFO     | benchmark speech segment injected: #11 4.0s, next_in=16.0s
+2026-10-28 10:16:48 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.8dB, voice=4.00s, total=4.00s, peak=-49.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:16:48 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:16:50 | INFO     | [recognition] years. However, (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.84, no_speech=0.10, 1.7s)
+2026-10-28 10:16:50 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:16:50 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:16:50 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:16:50 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:17:04 | INFO     | benchmark speech segment injected: #12 4.0s, next_in=16.0s
+2026-10-28 10:17:04 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.3dB, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS
+2026-10-28 10:17:04 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:17:06 | INFO     | [recognition] Due to the slow communication channels, styles in the West (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.29, no_speech=0.09, 1.7s)
+2026-10-28 10:17:06 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:17:06 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:17:06 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:17:06 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:17:20 | INFO     | benchmark speech segment injected: #13 4.0s, next_in=16.0s
+2026-10-28 10:17:20 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.9dB, voice=4.00s, total=4.00s, peak=-49.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:17:20 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:17:22 | INFO     | [recognition] could lag behind by 25 to 30 years. (lang=en, prob=1.00, expected=en, direction=en->zh, revision=2, avg_logprob=-0.41, no_speech=0.02, 1.8s)
+2026-10-28 10:17:22 | INFO     | language gate accepted: detected=en, expected=en, prob=1.00, snapshot=en->zh, revision=2
+2026-10-28 10:17:22 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:17:22 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:17:22 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:17:36 | INFO     | benchmark speech segment injected: #14 4.0s, next_in=16.0s
+2026-10-28 10:17:36 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.6dB, voice=4.00s, total=4.00s, peak=-47.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:17:36 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:17:38 | INFO     | [recognition] However, due to the slow communication (lang=en, prob=0.97, expected=en, direction=en->zh, revision=2, avg_logprob=-0.41, no_speech=0.35, 1.6s)
+2026-10-28 10:17:38 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->zh, revision=2
+2026-10-28 10:17:38 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:17:38 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:17:38 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:17:52 | INFO     | benchmark speech segment injected: #15 4.0s, next_in=16.0s
+2026-10-28 10:17:52 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.7dB, voice=4.00s, total=4.00s, peak=-48.7 dBFS, gate=-40.0 dBFS
+2026-10-28 10:17:52 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.7 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:17:54 | INFO     | [recognition] channels. Styles in the West could lag behind. (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.64, no_speech=0.42, 1.6s)
+2026-10-28 10:17:54 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:17:54 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:17:54 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:17:54 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:18:08 | INFO     | benchmark speech segment injected: #16 4.0s, next_in=16.0s
+2026-10-28 10:18:08 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-12.4dB, voice=4.00s, total=4.00s, peak=-52.4 dBFS, gate=-40.0 dBFS
+2026-10-28 10:18:08 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-52.4 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:18:10 | INFO     | [recognition] 25 to 30 years. (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.73, no_speech=0.13, 1.6s)
+2026-10-28 10:18:10 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:18:10 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:18:10 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:18:10 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:18:24 | INFO     | benchmark speech segment injected: #17 4.0s, next_in=16.0s
+2026-10-28 10:18:24 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.0dB, voice=4.00s, total=4.00s, peak=-47.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:18:24 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:18:26 | INFO     | [recognition] However, due to the slow communication channels, stop... (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.39, no_speech=0.08, 1.6s)
+2026-10-28 10:18:26 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:18:26 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:18:26 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:18:26 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:18:40 | INFO     | benchmark speech segment injected: #18 4.0s, next_in=16.0s
+2026-10-28 10:18:40 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.8dB, voice=4.00s, total=4.00s, peak=-47.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:18:40 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:18:42 | INFO     | [recognition] in the west could lag behind by 25 to 30 years. (lang=en, prob=0.98, expected=en, direction=en->zh, revision=2, avg_logprob=-0.40, no_speech=0.32, 1.6s)
+2026-10-28 10:18:42 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=2
+2026-10-28 10:18:42 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:18:42 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:18:42 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:18:57 | INFO     | benchmark speech segment injected: #19 4.0s, next_in=16.0s
+2026-10-28 10:18:57 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-11.0dB, voice=4.00s, total=4.00s, peak=-51.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:18:57 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-51.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:18:58 | INFO     | filtered transcription: weak_candidate_low_asr_confidence (text=however, avg_logprob=-0.85, no_speech=0.37, compression=0.50), text=However,, labels=candidate,low_confidence, lang=en, prob=0.95, avg_logprob=-0.85, no_speech=0.37, compression=0.50
+2026-10-28 10:19:13 | INFO     | benchmark speech segment injected: #20 4.0s, next_in=16.0s
+2026-10-28 10:19:13 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.0dB, voice=4.00s, total=4.00s, peak=-47.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:19:13 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:19:14 | INFO     | [recognition] Due to the slow communication channels, styles in the West could... (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.34, no_speech=0.09, 1.7s)
+2026-10-28 10:19:14 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:19:14 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:19:14 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:19:14 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:19:29 | INFO     | benchmark speech segment injected: #21 4.0s, next_in=16.0s
+2026-10-28 10:19:29 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-10.6dB, voice=4.00s, total=4.00s, peak=-50.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:19:29 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-50.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:19:30 | INFO     | [recognition] lag behind by 25 to 30 years. (lang=en, prob=0.97, expected=en, direction=en->zh, revision=2, avg_logprob=-0.61, no_speech=0.15, 1.7s)
+2026-10-28 10:19:30 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->zh, revision=2
+2026-10-28 10:19:30 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:19:30 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:19:30 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:19:45 | INFO     | benchmark speech segment injected: #22 4.0s, next_in=16.0s
+2026-10-28 10:19:45 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:19:45 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:19:46 | INFO     | [recognition] However, due to the slow communication, (lang=en, prob=0.97, expected=en, direction=en->zh, revision=2, avg_logprob=-0.43, no_speech=0.26, 1.6s)
+2026-10-28 10:19:46 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->zh, revision=2
+2026-10-28 10:19:46 | WARNING  | 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 10:19:46 | INFO     | translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 10:19:46 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:20:01 | INFO     | benchmark speech segment injected: #23 4.0s, next_in=16.0s
+2026-10-28 10:20:01 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.6dB, voice=4.00s, total=4.00s, peak=-48.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:20:01 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:20:03 | INFO     | [recognition] styles in the west could lag behind by twins. (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.60, no_speech=0.36, 1.7s)
+2026-10-28 10:20:03 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:20:11 | INFO     | 翻译(en->zh): styles in the west could lag behind by twins.... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.02s)
+2026-10-28 10:20:11 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:20:11 | INFO     | 更新浮窗翻译
+2026-10-28 10:20:11 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:20:17 | INFO     | benchmark speech segment injected: #24 4.0s, next_in=16.0s
+2026-10-28 10:20:17 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-12.8dB, voice=4.00s, total=4.00s, peak=-52.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:20:17 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-52.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:20:19 | INFO     | [recognition] 35 to 30 years. (lang=en, prob=0.97, expected=en, direction=en->zh, revision=2, avg_logprob=-0.79, no_speech=0.12, 1.6s)
+2026-10-28 10:20:19 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->zh, revision=2
+2026-10-28 10:20:27 | INFO     | 翻译(en->zh): 35 to 30 years.... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.01s)
+2026-10-28 10:20:27 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:20:27 | INFO     | 更新浮窗翻译
+2026-10-28 10:20:27 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:20:33 | INFO     | benchmark speech segment injected: #25 4.0s, next_in=16.0s
+2026-10-28 10:20:33 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-6.2dB, voice=4.00s, total=4.00s, peak=-46.2 dBFS, gate=-40.0 dBFS
+2026-10-28 10:20:33 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-46.2 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:20:35 | INFO     | [recognition] However, due to the slow communication channels, styles... (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.35, no_speech=0.05, 1.6s)
+2026-10-28 10:20:35 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:20:43 | INFO     | 翻译(en->zh): However, due to the slow communication channels, s... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.01s)
+2026-10-28 10:20:43 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:20:43 | INFO     | 更新浮窗翻译
+2026-10-28 10:20:43 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:20:49 | INFO     | benchmark speech segment injected: #26 4.0s, next_in=16.0s
+2026-10-28 10:20:49 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.1dB, voice=4.00s, total=4.00s, peak=-49.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:20:49 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=2, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:20:51 | INFO     | [recognition] in the west could lag behind by 25 to 30 years. (lang=en, prob=0.99, expected=en, direction=en->zh, revision=2, avg_logprob=-0.43, no_speech=0.04, 1.7s)
+2026-10-28 10:20:51 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->zh, revision=2
+2026-10-28 10:20:51 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:20:51 | INFO     | language flow reset: revision=3, direction=en->ja, dropped_pending_queue=0
+2026-10-28 10:20:51 | INFO     | language flow changed: revision=3, direction=en->ja, cleared_audio_blocks=0
+2026-10-28 10:20:51 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19053/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:21:05 | INFO     | benchmark speech segment injected: #27 4.0s, next_in=16.0s
+2026-10-28 10:21:05 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.0dB, voice=4.00s, total=4.00s, peak=-49.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:21:05 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=3, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:21:07 | INFO     | [recognition] However, due to the (lang=en, prob=0.94, expected=en, direction=en->ja, revision=3, avg_logprob=-0.43, no_speech=0.67, 1.6s)
+2026-10-28 10:21:07 | INFO     | language gate accepted: detected=en, expected=en, prob=0.94, snapshot=en->ja, revision=3
+2026-10-28 10:21:15 | INFO     | 翻译(en->ja): However, due to the... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.01s)
+2026-10-28 10:21:15 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:21:15 | INFO     | 更新浮窗翻译
+2026-10-28 10:21:15 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:21:21 | INFO     | benchmark speech segment injected: #28 4.0s, next_in=16.0s
+2026-10-28 10:21:21 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.8dB, voice=4.00s, total=4.00s, peak=-47.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:21:21 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=3, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:21:23 | INFO     | [recognition] slow communication channels. Styles in the West could lag (lang=en, prob=0.99, expected=en, direction=en->ja, revision=3, avg_logprob=-0.45, no_speech=0.20, 1.7s)
+2026-10-28 10:21:23 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=3
+2026-10-28 10:21:31 | INFO     | 翻译(en->ja): slow communication channels. Styles in the West co... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.00s)
+2026-10-28 10:21:31 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:21:31 | INFO     | 更新浮窗翻译
+2026-10-28 10:21:31 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:21:37 | INFO     | benchmark speech segment injected: #29 4.0s, next_in=16.0s
+2026-10-28 10:21:37 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-11.3dB, voice=4.00s, total=4.00s, peak=-51.3 dBFS, gate=-40.0 dBFS
+2026-10-28 10:21:37 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=3, whisper_language=auto, voice=4.00s, total=4.00s, peak=-51.3 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:21:39 | INFO     | [recognition] behind by 25 to 30 years. (lang=en, prob=0.98, expected=en, direction=en->ja, revision=3, avg_logprob=-0.61, no_speech=0.06, 1.6s)
+2026-10-28 10:21:39 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->ja, revision=3
+2026-10-28 10:21:47 | INFO     | 翻译(en->ja): behind by 25 to 30 years.... → [本地协议测试，非真实翻译] 字幕链路正常。... (8.01s)
+2026-10-28 10:21:47 | INFO     | translated: [本地协议测试，非真实翻译] 字幕链路正常。 (8.0s)
+2026-10-28 10:21:47 | INFO     | 更新浮窗翻译
+2026-10-28 10:21:47 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:21:52 | INFO     | 翻译暂停
+2026-10-28 10:21:52 | INFO     | translation toggle cleared realtime buffers: paused=True, audio_blocks=0, speech_items=0
+2026-10-28 10:22:05 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:22:05 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:22:17 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:22:17 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:22:22 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:22:22 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:23:19 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:23:19 | INFO     | language flow reset: revision=4, direction=en->zh, dropped_pending_queue=0
+2026-10-28 10:23:19 | INFO     | language flow changed: revision=4, direction=en->zh, cleared_audio_blocks=0
+2026-10-28 10:23:19 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:23:20 | INFO     | 翻译恢复
+2026-10-28 10:23:20 | INFO     | translation toggle cleared realtime buffers: paused=False, audio_blocks=0, speech_items=0
+2026-10-28 10:23:20 | INFO     | benchmark speech segment injected: #30 4.0s, next_in=16.0s
+2026-10-28 10:23:20 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:23:20 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=4, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:23:21 | INFO     | [recognition] However, due to the slow communication channels, (lang=en, prob=0.98, expected=en, direction=en->zh, revision=4, avg_logprob=-0.39, no_speech=0.12, 1.6s)
+2026-10-28 10:23:21 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=4
+2026-10-28 10:23:27 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:23:27 | INFO     | language flow reset: revision=5, direction=en->ja, dropped_pending_queue=0
+2026-10-28 10:23:27 | INFO     | language flow changed: revision=5, direction=en->ja, cleared_audio_blocks=0
+2026-10-28 10:23:27 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→ja, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:23:36 | INFO     | benchmark speech segment injected: #31 4.0s, next_in=16.0s
+2026-10-28 10:23:36 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.1dB, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:23:36 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:23:37 | INFO     | [recognition] Styles in the West could lag behind by 25. (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.46, no_speech=0.23, 1.6s)
+2026-10-28 10:23:37 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:23:37 | INFO     | 翻译(en->ja): Styles in the West could lag behind by 25.... → [本地协议测试，非真实翻译] 英文 → 日文... (0.00s)
+2026-10-28 10:23:37 | INFO     | translated: [本地协议测试，非真实翻译] 英文 → 日文 (0.0s)
+2026-10-28 10:23:37 | INFO     | 更新浮窗翻译
+2026-10-28 10:23:37 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:23:52 | INFO     | benchmark speech segment injected: #32 4.0s, next_in=16.0s
+2026-10-28 10:23:52 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-10.0dB, voice=4.00s, total=4.00s, peak=-50.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:23:52 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-50.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:23:54 | INFO     | [recognition] up to 30 years. How was it? (lang=en, prob=0.98, expected=en, direction=en->ja, revision=5, avg_logprob=-0.80, no_speech=0.22, 1.7s)
+2026-10-28 10:23:54 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->ja, revision=5
+2026-10-28 10:23:54 | INFO     | 翻译(en->ja): up to 30 years. How was it?... → [本地协议测试，非真实翻译] 英文 → 日文... (0.00s)
+2026-10-28 10:23:54 | INFO     | translated: [本地协议测试，非真实翻译] 英文 → 日文 (0.0s)
+2026-10-28 10:23:54 | INFO     | 更新浮窗翻译
+2026-10-28 10:23:54 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:24:08 | INFO     | benchmark speech segment injected: #33 4.0s, next_in=16.0s
+2026-10-28 10:24:08 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.3dB, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS
+2026-10-28 10:24:08 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:24:10 | INFO     | [recognition] However, due to the slow communication channels, styles and (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.32, no_speech=0.30, 1.7s)
+2026-10-28 10:24:10 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:24:10 | INFO     | 翻译(en->ja): However, due to the slow communication channels, s... → [本地协议测试，非真实翻译] 英文 → 日文... (0.00s)
+2026-10-28 10:24:10 | INFO     | translated: [本地协议测试，非真实翻译] 英文 → 日文 (0.0s)
+2026-10-28 10:24:10 | INFO     | 更新浮窗翻译
+2026-10-28 10:24:10 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:24:24 | INFO     | benchmark speech segment injected: #34 4.0s, next_in=16.0s
+2026-10-28 10:24:24 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.5dB, voice=4.00s, total=4.00s, peak=-49.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:24:24 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:24:26 | INFO     | [recognition] the west could lag behind by 25 to 30 years. (lang=en, prob=1.00, expected=en, direction=en->ja, revision=5, avg_logprob=-0.46, no_speech=0.01, 1.6s)
+2026-10-28 10:24:26 | INFO     | language gate accepted: detected=en, expected=en, prob=1.00, snapshot=en->ja, revision=5
+2026-10-28 10:24:26 | INFO     | 翻译(en->ja): the west could lag behind by 25 to 30 years.... → [本地协议测试，非真实翻译] 英文 → 日文... (0.00s)
+2026-10-28 10:24:26 | INFO     | translated: [本地协议测试，非真实翻译] 英文 → 日文 (0.0s)
+2026-10-28 10:24:26 | INFO     | 更新浮窗翻译
+2026-10-28 10:24:26 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:24:40 | INFO     | benchmark speech segment injected: #35 4.0s, next_in=16.0s
+2026-10-28 10:24:40 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.5dB, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:24:40 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:24:42 | INFO     | [recognition] However, due to the slow (lang=en, prob=0.97, expected=en, direction=en->ja, revision=5, avg_logprob=-0.58, no_speech=0.36, 1.7s)
+2026-10-28 10:24:42 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->ja, revision=5
+2026-10-28 10:24:42 | INFO     | 翻译(en->ja): However, due to the slow... → [本地协议测试，非真实翻译] 英文 → 日文... (0.00s)
+2026-10-28 10:24:42 | INFO     | translated: [本地协议测试，非真实翻译] 英文 → 日文 (0.0s)
+2026-10-28 10:24:42 | INFO     | 更新浮窗翻译
+2026-10-28 10:24:42 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:24:56 | INFO     | benchmark speech segment injected: #36 4.0s, next_in=16.0s
+2026-10-28 10:24:56 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.0dB, voice=4.00s, total=4.00s, peak=-48.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:24:56 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:24:58 | INFO     | [recognition] communication channels. Styles in the West could lag behind. (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.50, no_speech=0.17, 1.7s)
+2026-10-28 10:24:58 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:24:58 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:24:58 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:24:58 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:25:12 | INFO     | benchmark speech segment injected: #37 4.0s, next_in=16.0s
+2026-10-28 10:25:12 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-11.8dB, voice=4.00s, total=4.00s, peak=-51.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:25:12 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-51.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:25:14 | INFO     | [recognition] by 25 to 30 years. (lang=en, prob=0.97, expected=en, direction=en->ja, revision=5, avg_logprob=-0.58, no_speech=0.22, 1.6s)
+2026-10-28 10:25:14 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->ja, revision=5
+2026-10-28 10:25:14 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:25:14 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:25:14 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:25:28 | INFO     | benchmark speech segment injected: #38 4.0s, next_in=16.0s
+2026-10-28 10:25:28 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:25:28 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:25:30 | INFO     | [recognition] However, due to the slow communication channels (lang=en, prob=0.98, expected=en, direction=en->ja, revision=5, avg_logprob=-0.27, no_speech=0.11, 1.6s)
+2026-10-28 10:25:30 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->ja, revision=5
+2026-10-28 10:25:30 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:25:30 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:25:30 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:25:44 | INFO     | benchmark speech segment injected: #39 4.0s, next_in=16.0s
+2026-10-28 10:25:44 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.1dB, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS
+2026-10-28 10:25:44 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.1 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:25:46 | INFO     | [recognition] Styles in the West could lag behind by 25 to (lang=en, prob=0.98, expected=en, direction=en->ja, revision=5, avg_logprob=-0.38, no_speech=0.11, 1.6s)
+2026-10-28 10:25:46 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->ja, revision=5
+2026-10-28 10:25:46 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:25:46 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:25:46 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:26:00 | INFO     | benchmark speech segment injected: #40 4.0s, next_in=16.0s
+2026-10-28 10:26:00 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.6dB, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS
+2026-10-28 10:26:00 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.6 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:26:02 | INFO     | [recognition] already years. However, (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.82, no_speech=0.12, 1.6s)
+2026-10-28 10:26:02 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:26:02 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:26:02 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:26:02 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:26:17 | INFO     | benchmark speech segment injected: #41 4.0s, next_in=16.0s
+2026-10-28 10:26:17 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.3dB, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS
+2026-10-28 10:26:17 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.3 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:26:18 | INFO     | [recognition] Due to the slow communication channels, styles in the west... (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.37, no_speech=0.11, 1.6s)
+2026-10-28 10:26:18 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:26:18 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:26:18 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:26:18 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:26:33 | INFO     | benchmark speech segment injected: #42 4.0s, next_in=16.0s
+2026-10-28 10:26:33 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-9.9dB, voice=4.00s, total=4.00s, peak=-49.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:26:33 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-49.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:26:34 | INFO     | [recognition] could lag behind by 25 to 30 years. (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.46, no_speech=0.10, 1.6s)
+2026-10-28 10:26:34 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:26:34 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:26:34 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:26:34 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:26:49 | INFO     | benchmark speech segment injected: #43 4.0s, next_in=16.0s
+2026-10-28 10:26:49 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.9dB, voice=4.00s, total=4.00s, peak=-47.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:26:49 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:26:50 | INFO     | [recognition] However, due to the slow communique (lang=en, prob=0.97, expected=en, direction=en->ja, revision=5, avg_logprob=-0.47, no_speech=0.38, 1.6s)
+2026-10-28 10:26:50 | INFO     | language gate accepted: detected=en, expected=en, prob=0.97, snapshot=en->ja, revision=5
+2026-10-28 10:26:50 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:26:50 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:26:50 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:27:05 | INFO     | benchmark speech segment injected: #44 4.0s, next_in=16.0s
+2026-10-28 10:27:05 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.5dB, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:27:05 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->ja, revision=5, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:27:06 | INFO     | [recognition] channels. Styles in the West could lag behind. (lang=en, prob=0.99, expected=en, direction=en->ja, revision=5, avg_logprob=-0.75, no_speech=0.31, 1.6s)
+2026-10-28 10:27:06 | INFO     | language gate accepted: detected=en, expected=en, prob=0.99, snapshot=en->ja, revision=5
+2026-10-28 10:27:06 | ERROR    | 翻译 API 错误: 503 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 503</p>
+        <p>Message: LOCAL FIXTURE ONLY.</p>
+        <p>Error code explanation: 503 - The server cannot process the request due to a high load.</p>
+    </body>
+</html>
+
+2026-10-28 10:27:06 | INFO     | translated: [翻译错误 503] <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/ (0.0s)
+2026-10-28 10:27:06 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:27:09 | INFO     | 翻译暂停
+2026-10-28 10:27:09 | INFO     | translation toggle cleared realtime buffers: paused=True, audio_blocks=0, speech_items=0
+2026-10-28 10:27:12 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:27:12 | INFO     | language flow reset: revision=6, direction=en->zh, dropped_pending_queue=0
+2026-10-28 10:27:12 | INFO     | language flow changed: revision=6, direction=en->zh, cleared_audio_blocks=0
+2026-10-28 10:27:12 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=openai_compatible, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:27:22 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:27:22 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:27:32 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:27:32 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:27:34 | INFO     | 翻译恢复
+2026-10-28 10:27:34 | INFO     | translation toggle cleared realtime buffers: paused=False, audio_blocks=0, speech_items=0
+2026-10-28 10:27:34 | INFO     | benchmark speech segment injected: #45 4.0s, next_in=16.0s
+2026-10-28 10:27:34 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-12.0dB, voice=4.00s, total=4.00s, peak=-52.0 dBFS, gate=-40.0 dBFS
+2026-10-28 10:27:34 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=6, whisper_language=auto, voice=4.00s, total=4.00s, peak=-52.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:27:36 | INFO     | [recognition] by 25 to 30 years. (lang=en, prob=0.96, expected=en, direction=en->zh, revision=6, avg_logprob=-0.51, no_speech=0.06, 1.6s)
+2026-10-28 10:27:36 | INFO     | language gate accepted: detected=en, expected=en, prob=0.96, snapshot=en->zh, revision=6
+2026-10-28 10:27:36 | INFO     | translated: 25至30岁 (0.0s)
+2026-10-28 10:27:36 | INFO     | 更新浮窗翻译
+2026-10-28 10:27:36 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:27:51 | INFO     | benchmark speech segment injected: #46 4.0s, next_in=16.0s
+2026-10-28 10:27:51 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:27:51 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=6, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:27:52 | INFO     | [recognition] However, due to the slow communication channels, (lang=en, prob=0.98, expected=en, direction=en->zh, revision=6, avg_logprob=-0.35, no_speech=0.06, 1.6s)
+2026-10-28 10:27:52 | INFO     | language gate accepted: detected=en, expected=en, prob=0.98, snapshot=en->zh, revision=6
+2026-10-28 10:27:52 | INFO     | translated: 然而,由于沟通渠道缓慢, (0.0s)
+2026-10-28 10:27:52 | INFO     | 更新浮窗翻译
+2026-10-28 10:27:52 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:28:04 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:28:04 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=2.5s, min_segment=0.30s, min_peak_margin=1.0dB, language=en→zh, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:28:07 | INFO     | benchmark speech segment injected: #47 4.0s, next_in=16.0s
+2026-10-28 10:28:07 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-7.5dB, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:28:07 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=6, whisper_language=auto, voice=4.00s, total=4.00s, peak=-47.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:28:07 | INFO     | benchmark audio source stopped
+2026-10-28 10:28:08 | INFO     | [recognition] The missiles in the west could lag behind by 25-30. (lang=en, prob=0.96, expected=en, direction=en->zh, revision=6, avg_logprob=-0.59, no_speech=0.43, 1.6s)
+2026-10-28 10:28:31 | INFO     | 已加载配置: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\acceptance-config.json
+2026-10-28 10:28:31 | INFO     | 已加载用户设置: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\user_settings.json
+2026-10-28 10:28:31 | INFO     | benchmark audio mode enabled: E:\my\my\VoxGo053Beta-Final-20261028\control\zh.wav
+2026-10-28 10:28:31 | INFO     | 正在启动...
+2026-10-28 10:28:32 | INFO     | 手机端: http://127.0.0.1:19054/mobile
+2026-10-28 10:28:33 | INFO     | system tray initialized: visible=True
+2026-10-28 10:28:33 | INFO     | 浮窗已启动
+2026-10-28 10:28:33 | INFO     | 后台启动线程已启动
+2026-10-28 10:28:33 | INFO     | Whisper 模型目录: E:\my\my\VoxGo053Beta-Final-20261028\VoxGo\_internal\.models
+2026-10-28 10:28:33 | INFO     | 翻译事件循环已启动
+2026-10-28 10:28:33 | INFO     | Whisper 已启用 local_files_only，仅使用本地模型缓存
+2026-10-28 10:28:33 | INFO     | 加载 Whisper 模型: base (device=cpu, compute_type=int8, cpu_threads=1, num_workers=1, attempt=1/2)
+2026-10-28 10:28:33 | INFO     | Whisper 模型加载完成
+2026-10-28 10:28:33 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:28:33 | INFO     | speech processing queue started
+2026-10-28 10:28:33 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\zh.wav, duration=10.4s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:28:33 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\zh.wav
+2026-10-28 10:28:33 | INFO     | 后端服务已启动
+2026-10-28 10:28:34 | INFO     | 跳过自动更新检查：尚未到达检查间隔或自动检查已关闭
+2026-10-28 10:28:37 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:28:37 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.5dB, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:28:37 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:28:39 | INFO     | [recognition] 這並不是告別 (lang=zh, prob=1.00, expected=en, direction=en->zh, revision=1, avg_logprob=-0.62, no_speech=0.04, 1.7s)
+2026-10-28 10:28:39 | INFO     | translation skipped: language_mismatch:zh->en:prob=1.00:threshold=0.85, detected=zh, expected=en, prob=1.00, text=這並不是告別
+2026-10-28 10:28:53 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:28:53 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-5.9dB, voice=4.00s, total=4.00s, peak=-45.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:28:53 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-45.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:28:55 | INFO     | [recognition] 這是一個偏章的結束 也是新偏章的開始 (lang=zh, prob=1.00, expected=en, direction=en->zh, revision=1, avg_logprob=-0.32, no_speech=0.08, 1.7s)
+2026-10-28 10:28:55 | INFO     | translation skipped: language_mismatch:zh->en:prob=1.00:threshold=0.60, detected=zh, expected=en, prob=1.00, text=這是一個偏章的結束 也是新偏章的開始
+2026-10-28 10:29:03 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:29:03 | INFO     | benchmark audio source stopped
+2026-10-28 10:29:03 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-Final-20261028\control\zh.wav, duration=10.4s, sample_rate=16000Hz, speech=4.0s, gap=12.0s, test_duration=900.0s
+2026-10-28 10:29:03 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-Final-20261028\control\zh.wav
+2026-10-28 10:29:03 | INFO     | language flow reset: revision=2, direction=zh->en, dropped_pending_queue=0
+2026-10-28 10:29:03 | INFO     | language flow changed: revision=2, direction=zh->en, cleared_audio_blocks=0
+2026-10-28 10:29:03 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:29:07 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=16.0s
+2026-10-28 10:29:07 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-8.5dB, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS
+2026-10-28 10:29:07 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=zh->en, revision=2, whisper_language=zh, voice=4.00s, total=4.00s, peak=-48.5 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:29:08 | INFO     | [recognition] 這並不是告別 (lang=zh, prob=1.00, expected=zh, direction=zh->en, revision=2, avg_logprob=-0.62, no_speech=0.04, 0.8s)
+2026-10-28 10:29:08 | INFO     | language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->en, revision=2
+2026-10-28 10:29:08 | INFO     | translated: It's not goodbye. (0.5s)
+2026-10-28 10:29:08 | INFO     | 更新浮窗翻译
+2026-10-28 10:29:08 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:29:19 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:29:19 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:29:23 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=16.0s
+2026-10-28 10:29:23 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-5.9dB, voice=4.00s, total=4.00s, peak=-45.9 dBFS, gate=-40.0 dBFS
+2026-10-28 10:29:23 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=zh->en, revision=2, whisper_language=zh, voice=4.00s, total=4.00s, peak=-45.9 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:29:24 | INFO     | [recognition] 這是一個偏章的結束 也是新偏章的開始 (lang=zh, prob=1.00, expected=zh, direction=zh->en, revision=2, avg_logprob=-0.32, no_speech=0.08, 0.9s)
+2026-10-28 10:29:24 | INFO     | language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->en, revision=2
+2026-10-28 10:29:24 | INFO     | translated: This is the end of a pageant and the beginning of a new page. (0.1s)
+2026-10-28 10:29:24 | INFO     | 更新浮窗翻译
+2026-10-28 10:29:24 | INFO     | 手机端无连接，跳过推送
+2026-10-28 10:29:30 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:29:30 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:29:39 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=16.0s
+2026-10-28 10:29:39 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-37.8dB, voice=4.00s, total=4.00s, peak=-77.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:29:39 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=zh->en, revision=2, whisper_language=zh, voice=4.00s, total=4.00s, peak=-77.8 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 10:29:40 | INFO     | empty asr: text_len=0, lang=zh, prob=1.00, voice=4.00s, total=4.00s, peak=-77.8 dBFS, gate=-40.0 dBFS
+2026-10-28 10:29:45 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:29:45 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:29:46 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 10:29:46 | INFO     | 浮窗设置已应用: opacity=0.88, bg_opacity=0.82, text_color=#00FF00, show_original=True, audio_device=None , latency_mode=fast, beam_size=1, max_speech=3.0s, min_segment=0.30s, min_peak_margin=1.0dB, language=zh→en, whisper_device=cpu, model_download_source=ModelScope 国内源, provider=local, model=local-fixture-only, endpoint=http://127.0.0.1:19055/v1, hotkeys=ctrl+shift+t/ctrl+alt+c/ctrl+alt+s//
+2026-10-28 10:29:47 | INFO     | benchmark audio source stopped

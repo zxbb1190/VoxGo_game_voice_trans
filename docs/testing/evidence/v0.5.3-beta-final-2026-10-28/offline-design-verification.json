@@ -1,0 +1,11 @@
+{
+  "base_head": "3b494192",
+  "formal_prompt_source_sha256": "5412cc10fe3d098cfb4735b67dd97ef0e76b534b0b9a127ecc7dc2c4397feeb5",
+  "shipped_en_zh_system_prompt_equal_afc33a67": true,
+  "online_directions": 20,
+  "candidate_pairs": 20,
+  "candidate_count": 1,
+  "new_ab_texts": 12,
+  "planned_calls": 24,
+  "actual_api_requests": 0
+}

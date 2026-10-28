@@ -1,0 +1,28 @@
+[
+  {
+    "kind": "automatic approval review rejection",
+    "action": "compile auxiliary isolation launcher",
+    "reason": "blocked by policy; no more specific reason returned",
+    "executed": false,
+    "resolution": "reuse existing Full package with process-local proxy/offline environment; no auxiliary executable"
+  },
+  {
+    "kind": "local fixture write after cancellation",
+    "ports": [
+      19053,
+      19055
+    ],
+    "exception": "ConnectionAbortedError WinError10053",
+    "effect": "request handler only; no success invented; server continued and Full did not crash",
+    "note": "original fixture catches BrokenPipeError/ConnectionResetError but not Windows ConnectionAbortedError; archived source not retroactively changed"
+  },
+  {
+    "kind": "first endpoint switch not saved",
+    "resolution": "readback detected19053; user explicitly saved19055, readback confirmed; only corrected marked run counted"
+  },
+  {
+    "kind": "one-off evidence collector import",
+    "exception": "ModuleNotFoundError: No module named 'voxgo'",
+    "resolution": "prepend repo root to sys.path; no ASR or API rerun"
+  }
+]

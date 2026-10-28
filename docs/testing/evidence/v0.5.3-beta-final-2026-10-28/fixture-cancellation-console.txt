@@ -1,0 +1,5 @@
+Observed console in both local fixture request handlers:
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+direction_fixture.py:22 -> socketserver.py:826 self._sock.sendall(b)
+controller.py:23 -> socketserver.py:826 self._sock.sendall(b)
+This is an excerpt transcribed from the exec console, not a complete raw stderr file.

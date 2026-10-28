@@ -1,0 +1,74 @@
+[
+  {
+    "category": "地下楼层/地面",
+    "old": {
+      "id": "semantic-anchor-1",
+      "source": "治疗师不在二楼，他在地下一层。我们还有十五秒，不是五十秒。",
+      "actual_translation": "The therapist is not on the second floor; he is on the ground floor. We have fifteen seconds left, not fifty."
+    },
+    "new": {
+      "id": "semantic-new-1",
+      "source": "地下二层有一名队友，地面一层没有人。",
+      "actual_translation": "There is a teammate on the second underground floor, and no one on the first floor above ground."
+    },
+    "ai_review": "明确位置差异；未获人工签收",
+    "source_ambiguity": "地下这一空间关系明确；治疗师的游戏/医疗语境可能影响用词，不解释ground floor",
+    "provider_prompt_attribution": "仅证明当前Provider+原Prompt输出有问题，不能单独归因模型或Prompt",
+    "existing_en_zh_impact": "zh→en属于既有方向，可能影响已发布在线英中；OPUS为不同Provider不受此Prompt候选直接影响",
+    "human_review": "pending"
+  },
+  {
+    "category": "人物角色/房间",
+    "old": {
+      "id": "semantic-anchor-3",
+      "source": "힐러는 2층이 아니라 지하 1층에 있어. 남은 시간은 50초가 아니라 15초야.",
+      "actual_translation": "治疗室不在二楼，而是在地下一层。剩下的时间不是50秒，而是15秒。"
+    },
+    "new": {
+      "id": "semantic-new-3",
+      "source": "힐러 두 명은 지하 2층에 있고, 치료실은 1층에 있어.",
+      "actual_translation": "两名治疗师在地下二楼，治疗室在一楼。"
+    },
+    "ai_review": "明确词义类别差异；未获人工签收",
+    "source_ambiguity": "힐러通常指治疗角色；不能直接解释成治疗室",
+    "provider_prompt_attribution": "在新句同时明确人物数量和房间后输出可区分，支持消歧/上下文敏感假设，尚非因果证明",
+    "existing_en_zh_impact": "非英中方向；正式英中隔离，不全局替换",
+    "human_review": "pending"
+  },
+  {
+    "category": "数量/禁止命令",
+    "old": {
+      "id": "semantic-anchor-4",
+      "source": "左边两个人，别开枪。",
+      "actual_translation": "Люди слева, не стреляйте."
+    },
+    "new": {
+      "id": "semantic-new-4",
+      "source": "左侧有三名敌人。先别开枪，等我发出信号。",
+      "actual_translation": "Слева трое врагов. Сначала не стреляйте, подождите моего сигнала."
+    },
+    "ai_review": "明确数量2遗漏；命令受事需要人工裁决",
+    "source_ambiguity": "原中文未说明两人阵营/命令对象，不能擅自补敌人或固定命令受事",
+    "provider_prompt_attribution": "新句明确3名敌人和等待信号，输出保留；不能据此把原数量遗漏归给输入",
+    "existing_en_zh_impact": "新方向；若通用Prompt进入既有英中须单独回归，默认不变",
+    "human_review": "pending"
+  },
+  {
+    "category": "条件/行动时序",
+    "old": {
+      "id": "semantic-anchor-2",
+      "source": "Держите северные ворота. Когда я досчитаю до трёх, отступаем вместе. Если командир ещё не вернулся, не включайте лифт.",
+      "actual_translation": "北の門を守ってください。私が「三」と数えるまで、一緒に後退してください。もし指揮官がまだ戻っていなければ、エレベーターを起動しないでください。"
+    },
+    "new": {
+      "id": "semantic-new-2",
+      "source": "Держите позицию, пока я не досчитаю до четырёх; затем отступайте.",
+      "actual_translation": "私が「4」まで数える間、その位置を守ってください。その後で撤退してください。"
+    },
+    "ai_review": "高度可疑时序变化，需俄日双语人工裁决",
+    "source_ambiguity": "原俄语在数到3时共同撤退；原日语まで接撤退可能形成不同时间范围",
+    "provider_prompt_attribution": "新句显式先守位后撤退有表达，支持显式时序约束假设，不证明追加规则有效",
+    "existing_en_zh_impact": "新方向；不得修改既有英中默认",
+    "human_review": "pending"
+  }
+]

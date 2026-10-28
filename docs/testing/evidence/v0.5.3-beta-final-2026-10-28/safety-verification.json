@@ -1,0 +1,24 @@
+{
+  "base_head": "3b494192",
+  "real_api_requests": 0,
+  "formal_changes": false,
+  "production_operations": [],
+  "original_settings_sha256": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "original_settings_unchanged": true,
+  "historical_ledgers": [
+    {
+      "path": "docs/testing/evidence/v0.5.3-five-language-beta-2026-10-27/online-attempt-ledger.json",
+      "sha256": "c57726c844742cbc84e80a649a6548bec4fa72b17b80b09de4de075dd6340155",
+      "unchanged": true
+    },
+    {
+      "path": "docs/testing/evidence/v0.5.3-beta-blockers-online-2026-10-28/attempt-ledger.json",
+      "sha256": "17d0b73fdfcdc450b5b21e894fd933f3fbc80d7e226c7d21ed901f1dcbf81e92",
+      "unchanged": true
+    }
+  ],
+  "full_app_original_log_sha256": "3a2d015b54ebeb59afdb22d6fa08641a8a84ccbbfc4f5ba8370f709687f4bc6c",
+  "app_log_filter": "only repeated buffer-clear messages omitted",
+  "proxy_connects_blocked": 2,
+  "proxy_payloads_forwarded": 0
+}

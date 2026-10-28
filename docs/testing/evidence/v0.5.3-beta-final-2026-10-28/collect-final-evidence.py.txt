@@ -1,0 +1,110 @@
+"""One-off evidence collection; no network, no application/config writes."""
+from pathlib import Path
+import ast, hashlib, json, re, shutil, subprocess, sys
+
+repo = Path.cwd()
+sys.path.insert(0, str(repo))
+root = Path('E:/my/my/VoxGo053Beta-Final-20261028')
+package = root / 'VoxGo'
+out = repo / 'docs/testing/evidence/v0.5.3-beta-final-2026-10-28'
+out.mkdir(exist_ok=True)
+
+def digest(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            h.update(block)
+    return h.hexdigest()
+
+def save(name, value):
+    (out / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+def git(*args):
+    return subprocess.check_output(['git', *args], cwd=repo)
+
+for name in ('client-tests.txt', 'api-tests.txt', 'api-build.txt', 'en-zh-compatibility.json', 'release-preflight.txt'):
+    shutil.copyfile(repo / 'build/beta-final-20261028' / name, out / name)
+
+for name in ('controller.py', 'direction_fixture.py'):
+    shutil.copyfile(root / 'control' / name, out / (name + '.txt'))
+
+for name in ('requests.jsonl', 'direction-fixture.jsonl'):
+    text = (root / 'control' / name).read_text('utf-8')
+    assert '"Authorization"' not in text and 'Bearer ' not in text
+    (out / name).write_text(text, encoding='utf-8')
+
+log = (package / 'app.log').read_text('utf-8')
+assert 'Bearer ' not in log
+filtered = '\n'.join(line for line in log.splitlines() if 'benchmark audio pending buffers cleared' not in line) + '\n'
+(out / 'full-app-log-filtered.txt').write_text(filtered, encoding='utf-8')
+
+old = json.loads((repo / 'docs/testing/evidence/v0.5.3-beta-blockers-2026-10-28/full-verification.json').read_text('utf-8'))
+models = []
+for item in old['models']:
+    p = package / '_internal/.models' / ('models--Systran--faster-whisper-' + item['model']) / 'snapshots' / item['revision'] / item['file']
+    row = dict(item, actual_sha256=digest(p))
+    assert row['actual_sha256'] == item['sha256']
+    models.append(row)
+
+from voxgo.translation.local_models import LOCAL_MODELS, DEFAULT_LOCAL_MODEL
+opus = []
+for direction in LOCAL_MODELS[DEFAULT_LOCAL_MODEL].directions:
+    for file in direction.files:
+        p = package / '.translation-models' / DEFAULT_LOCAL_MODEL / direction.direction / file.name
+        sha = digest(p)
+        assert sha == file.sha256 and p.stat().st_size == file.size
+        opus.append(dict(direction=direction.direction, revision=direction.revision, file=file.name, sha256=sha, bytes=file.size))
+exe_sha = digest(package / 'VoxGo.exe')
+assert exe_sha == old['exe_sha256']
+formal_files = {}
+for name, expected in old['formal_runtime_source_sha256'].items():
+    actual = digest(repo / name)
+    assert actual == expected
+    formal_files[name] = actual
+assert not git('diff', 'f7d2c35f', '--', 'voxgo', 'config.example.json').strip()
+corpus = json.loads((repo/'docs/testing/evidence/v0.5.3-five-language-beta-2026-10-27/dataset-manifest.json').read_text('utf-8'))
+audio_inputs = []
+for name in ('en.wav','zh.wav','silence.wav'):
+    sha = digest(root/'control'/name)
+    matches = [r for r in corpus['records'] if r.get('wav_sha256') == sha]
+    assert len(matches) == (0 if name == 'silence.wav' else 1)
+    source = {k:matches[0][k] for k in ('id','source_dataset','source_revision','source_member','source_url','license','license_source','attribution')} if matches else {'source':'generated zero PCM; no speech'}
+    audio_inputs.append(dict(name=name, sha256=sha, source=source, new_independent_quality_sample=False))
+save('package-and-model-fingerprints.json', dict(exe_sha256=exe_sha, runtime_source=formal_files, whisper=models, opus=opus,
+    audio_inputs=audio_inputs,
+    unchanged_formal_runtime_since='f7d2c35f', model_downloads=0))
+
+settings = json.loads((package / 'user_settings.json').read_text('utf-8'))
+assert not settings['translation'].get('api_key')
+consent = json.loads((package / 'telemetry_consent.json').read_text('utf-8'))
+assert consent['telemetry_consent'] == 'unknown'
+save('isolated-state-sanitized.json', dict(
+    source=settings['translation']['source_lang'], target=settings['translation']['target_lang'],
+    provider=settings['translation']['provider'], endpoint=settings['translation']['endpoint'],
+    model=settings['translation']['model'], key_empty=True,
+    multilingual_strategy=settings.get('whisper',{}).get('multilingual_asr_strategy','language_aware'),
+    setup_completed=settings.get('app',{}).get('setup_completed'),
+    consent={k:v for k,v in consent.items() if k in ('telemetry_consent','full_telemetry_source','telemetry_consent_version')},
+    close_action=settings.get('app',{}).get('close_action'),
+    raw_identity_and_consent_not_archived=True))
+
+ledgers = []
+for path in ('docs/testing/evidence/v0.5.3-five-language-beta-2026-10-27/online-attempt-ledger.json',
+             'docs/testing/evidence/v0.5.3-beta-blockers-online-2026-10-28/attempt-ledger.json'):
+    committed = git('show', '3b494192:' + path)
+    actual = (repo / path).read_bytes()
+    assert actual == committed
+    ledgers.append(dict(path=path, sha256=hashlib.sha256(actual).hexdigest(), unchanged=True))
+original_settings = Path('E:/my/my/game_voice_translator/user_settings.json')
+original_sha = digest(original_settings)
+assert original_sha == '73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e'
+save('safety-verification.json', dict(base_head='3b494192', real_api_requests=0, formal_changes=False,
+    production_operations=[], original_settings_sha256=original_sha, original_settings_unchanged=True, historical_ledgers=ledgers,
+    full_app_original_log_sha256=digest(package/'app.log'), app_log_filter='only repeated buffer-clear messages omitted',
+    proxy_connects_blocked=sum('"kind": "proxy_block"' in line for line in (root/'control/requests.jsonl').read_text('utf-8').splitlines()),
+    proxy_payloads_forwarded=0))
+
+for path in sorted((root/'control').glob('exit-*.json')):
+    shutil.copyfile(path, out / path.name)
+print(json.dumps(dict(collected=True, exe_sha256=exe_sha, whisper_files=len(models), opus_files=len(opus),
+    original_settings_unchanged=True, real_api_requests=0), ensure_ascii=False))

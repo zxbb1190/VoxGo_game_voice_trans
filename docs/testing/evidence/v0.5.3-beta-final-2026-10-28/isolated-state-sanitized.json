@@ -1,0 +1,17 @@
+{
+  "source": "zh",
+  "target": "en",
+  "provider": "local",
+  "endpoint": "http://127.0.0.1:19055/v1",
+  "model": "local-fixture-only",
+  "key_empty": true,
+  "multilingual_strategy": "legacy",
+  "setup_completed": true,
+  "consent": {
+    "telemetry_consent": "unknown",
+    "telemetry_consent_version": 0,
+    "full_telemetry_source": "migration_unknown"
+  },
+  "close_action": "quit",
+  "raw_identity_and_consent_not_archived": true
+}

@@ -1,0 +1,49 @@
+from pathlib import Path
+import json,os,subprocess,time,threading
+from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
+root=Path('E:/my/my/VoxGo053Beta-Final-20261028'); control=root/'control'; package=root/'VoxGo'
+lock=threading.Lock()
+def record(data):
+ with lock:
+  with (control/'requests.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps(dict(at=time.time(),**data),ensure_ascii=False)+'\n')
+class Handler(BaseHTTPRequestHandler):
+ def log_message(self,*a):pass
+ def do_CONNECT(self):
+  record(dict(kind='proxy_block',destination=self.path,payload_forwarded=False)); self.send_error(403,'External network blocked')
+ def do_GET(self):self.send_error(404)
+ def do_POST(self):
+  if self.headers.get('Authorization'):self.send_error(403,'Credentials forbidden in fixture');return
+  body=json.loads(self.rfile.read(int(self.headers['Content-Length'])))
+  mode=json.loads((control/'mode.json').read_text('utf-8'));behavior=mode['mode']
+  record(dict(kind='loopback_fixture',mode=behavior,path=self.path,payload=body))
+  if behavior=='delay':time.sleep(mode.get('delay_seconds',8))
+  if behavior=='error':self.send_error(503,'LOCAL FIXTURE ONLY');return
+  wire=dict(choices=[dict(message=dict(content='[本地协议测试，非真实翻译] 字幕链路正常。'),finish_reason='length' if behavior=='length' else 'stop')])
+  raw=json.dumps(wire,ensure_ascii=False).encode('utf-8')
+  try:self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
+  except (BrokenPipeError,ConnectionResetError):record(dict(kind='fixture_connection_closed'))
+server=ThreadingHTTPServer(('127.0.0.1',19053),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
+env=os.environ.copy()
+for key in ('HTTP_PROXY','HTTPS_PROXY','ALL_PROXY','http_proxy','https_proxy','all_proxy'):env[key]='http://127.0.0.1:19053'
+for key in ('NO_PROXY','no_proxy'):env[key]='127.0.0.1,localhost,::1'
+env.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',HF_HUB_DISABLE_TELEMETRY='1',QT_QPA_PLATFORM='windows')
+launch=0; process=None
+try:
+ while True:
+  mode=json.loads((control/'mode.json').read_text('utf-8'))
+  if mode.get('stop'):break
+  if mode['launch']!=launch:
+   assert process is None or process.poll() is not None,'Never replace a running GUI'
+   audio=control/(mode['audio']+'.wav');assert mode['audio'] in ('silence','en','zh')
+   args=[str(package/'VoxGo.exe'),'--config',str(package/'acceptance-config.json'),'--benchmark-audio',str(audio),'--benchmark-speech-seconds','4','--benchmark-gap-seconds','12','--benchmark-duration-seconds','900']
+   process=subprocess.Popen(args,cwd=package,env=env);launch=mode['launch']
+   record(dict(kind='gui_launched',pid=process.pid,audio=str(audio),exe=str(package/'VoxGo.exe'),launch=launch))
+   print(json.dumps(dict(pid=process.pid,launch=launch)),flush=True)
+  if process and process.poll() is not None:
+   status=dict(pid=process.pid,returncode=process.returncode,launch=launch)
+   path=control/f'exit-{launch}.json'
+   if not path.exists():path.write_text(json.dumps(status),encoding='utf-8');print(json.dumps(status),flush=True)
+  time.sleep(.25)
+finally:
+ assert process is None or process.poll() is not None,'Exit Full before closing its local proxy'
+ server.shutdown();server.server_close()
