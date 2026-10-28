@@ -58,14 +58,16 @@ function Compress-DirectoryWithRetry {
 
     for ($attempt = 1; $attempt -le 5; $attempt++) {
         try {
-            Remove-Item -Force $DestinationPath -ErrorAction SilentlyContinue
-            Compress-Archive -Path $SourceDir -DestinationPath $DestinationPath -CompressionLevel Optimal
+            Invoke-Checked $Python @(
+                "-B", "-X", "utf8", (Join-Path $PSScriptRoot "archive_portable.py"),
+                "--source", $SourceDir, "--destination", $DestinationPath
+            )
             return
         } catch {
             if ($attempt -eq 5) {
                 throw
             }
-            Write-Warning "Compress-Archive failed on attempt $attempt. Retrying..."
+            Write-Warning "Streaming ZIP creation failed on attempt $attempt. Retrying..."
             Start-Sleep -Seconds ([Math]::Min(10, $attempt * 2))
         }
     }
