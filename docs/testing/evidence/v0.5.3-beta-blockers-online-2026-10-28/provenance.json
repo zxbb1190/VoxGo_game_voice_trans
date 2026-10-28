@@ -1,0 +1,14 @@
+{
+  "plan_sha256": "bfa0f678548d21fd2bf2c63c139ceddcd220447523c68909b2f9f19d422aa248",
+  "settings_sha256_before": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "settings_sha256_after": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "settings_unchanged": true,
+  "runtime_head": "82a3e5ecbe7c2dba19355eb187b8e24deb65949f",
+  "script_sha256": "a5ddeafec8afa71980c4b402b292dfe4c1a5a73d6fa2ee6a3082bcbc3c612182",
+  "runtime_fix_commit": "f7d2c35f19ef0359e6d3c565d321d7d3c2438644",
+  "api_requests": 20,
+  "asr_runs": 0,
+  "real_audio_inputs": 0,
+  "retries": 0,
+  "human_acceptance": "pending"
+}

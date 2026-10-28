@@ -1,0 +1,21 @@
+1/20 semantic-anchor-1 HTTP=200 finish=stop failure=-
+2/20 semantic-new-1 HTTP=200 finish=stop failure=-
+3/20 semantic-anchor-2 HTTP=200 finish=stop failure=-
+4/20 semantic-new-2 HTTP=200 finish=stop failure=-
+5/20 semantic-anchor-3 HTTP=200 finish=stop failure=-
+6/20 semantic-new-3 HTTP=200 finish=stop failure=-
+7/20 semantic-anchor-4 HTTP=200 finish=stop failure=-
+8/20 semantic-new-4 HTTP=200 finish=stop failure=-
+9/20 length-long-1 HTTP=200 finish=length failure=other
+10/20 length-short-1 HTTP=200 finish=stop failure=-
+11/20 length-long-2 HTTP=200 finish=length failure=other
+12/20 length-short-2 HTTP=200 finish=stop failure=-
+13/20 length-long-3 HTTP=200 finish=length failure=other
+14/20 length-short-3 HTTP=200 finish=stop failure=-
+15/20 length-long-4 HTTP=200 finish=length failure=other
+16/20 length-short-4 HTTP=200 finish=stop failure=-
+17/20 en-zh-regression-1 HTTP=200 finish=stop failure=-
+18/20 en-zh-regression-2 HTTP=200 finish=stop failure=-
+19/20 en-zh-regression-3 HTTP=200 finish=stop failure=-
+20/20 en-zh-regression-4 HTTP=200 finish=stop failure=-
+{"planned": 20, "attempted": 20, "completed_case_results": 20, "http_200": 20, "complete_stop": 16, "length": 4, "timeouts": 0, "cancelled": 0, "unfinished": 0, "normal_copyable_subtitles": 16, "error_notices": 4, "api_all_p50_ms": 1010.1244000106817, "api_all_p95_ms": 2612.869590002811, "submit_to_qt_p50_ms": 1022.5154500076314, "submit_to_qt_p95_ms": 2630.789805001405, "stop_reason": null, "automatic_retries": 0, "human_language_accuracy": null, "human_intelligibility_rate": null, "semantic_correctness": null, "speech_latency": null, "game_fps": null, "scope": "20 text inputs -> real provider -> native Qt app handler; no ASR/Full EXE", "status": "complete"}

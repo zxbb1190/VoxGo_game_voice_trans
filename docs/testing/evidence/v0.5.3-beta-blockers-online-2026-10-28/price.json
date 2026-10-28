@@ -1,0 +1,14 @@
+{
+  "url": "https://www.siliconflow.cn/pricing",
+  "http_status": 200,
+  "checked_at_utc": "2026-10-28T01:52:18.921400+00:00",
+  "model": "tencent/Hunyuan-MT-7B",
+  "rows": [
+    "Hunyuan-MT-7B tencent/Hunyuan-MT-7B 免费 免费 -"
+  ],
+  "input_cny_per_million": 0,
+  "output_cny_per_million": 0,
+  "estimated_cost_cny": 0,
+  "html_sha256": "6274542942bbdc6d889987d99a9c426f7cb2812410f935126f377afd83217c77",
+  "invoice_checked": false
+}

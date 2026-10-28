@@ -1,0 +1,168 @@
+{
+  "planned": 20,
+  "actual_attempts": 20,
+  "retries": 0,
+  "route_and_payload_scope_passed": true,
+  "anchor_outputs_identical_to_old": {
+    "semantic-anchor-1": true,
+    "semantic-anchor-2": true,
+    "semantic-anchor-3": true,
+    "semantic-anchor-4": true
+  },
+  "length_completion_token_counts": [
+    78,
+    80,
+    80,
+    80
+  ],
+  "length_verdict_based_on": "explicit provider finish_reason, not usage == max_tokens; one response reports 78",
+  "usage_totals": {
+    "prompt_tokens": 5847,
+    "completion_tokens": 707,
+    "total_tokens": 6554
+  },
+  "old_255_call_ledger_unchanged": true,
+  "settings_unchanged": true,
+  "source_runtime_not_modified": true,
+  "asr_runs": 0,
+  "production_telemetry_initialized": false,
+  "human_acceptance": "pending",
+  "full_exe_acceptance": false,
+  "local_artifacts": [
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\attempt-ledger.json",
+      "bytes": 36018,
+      "sha256": "17d0b73fdfcdc450b5b21e894fd933f3fbc80d7e226c7d21ed901f1dcbf81e92"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\authorization.json",
+      "bytes": 612,
+      "sha256": "1b2b3328aefddef7e63c322a15e0bd109104350c44ea0be5831656470f15d97d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\cleanup.json",
+      "bytes": 179,
+      "sha256": "fce1257f3b6a9c4d7d2222e6ba3dc652e318c7e500876a49aa820a2162fb4553"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\en-zh-regression-1.png",
+      "bytes": 11007,
+      "sha256": "4e4bf7c8f82060f0f83cf66e55e73d790450aefa37381222f1ebc29839b078b2"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\en-zh-regression-2.png",
+      "bytes": 13433,
+      "sha256": "1fac115dc03e4c882793e19c69f050f07966422b92044d2b9c8b70016d84f871"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\en-zh-regression-3.png",
+      "bytes": 11571,
+      "sha256": "d05e49ebc572358c18b16af1b909585e91b4eba764d5c6aa38657d85b6edbf1d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\en-zh-regression-4.png",
+      "bytes": 11054,
+      "sha256": "2ff6bc49fe5afeb488522f8a1bb3c94de8195709df8a12288b421f4b8b50ead6"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-long-1.png",
+      "bytes": 30101,
+      "sha256": "b815d9cdd8b9e0ccf90aac73312b72ad5262e739c874d1e739a69db1a4d0fa39"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-long-2.png",
+      "bytes": 29990,
+      "sha256": "7c8d9497c901ad3b77b3669f771893e59d99d3c27c5b0dc39ed3230a4a3288bf"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-long-3.png",
+      "bytes": 32926,
+      "sha256": "629ae39f901985c1bcb0cb62a117b5393a26341ca3949d1e57fe50f513c756a3"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-long-4.png",
+      "bytes": 32407,
+      "sha256": "4ff491d7e17a441db019999a8256c21337ffcb5a5c3107a6d34b791f3681272e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-short-1.png",
+      "bytes": 16374,
+      "sha256": "db635d88353ebe3a6380d979db568364f2a2a830535edab11f4eeb844342921f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-short-2.png",
+      "bytes": 16055,
+      "sha256": "4e104f822f73625173e6a25bc5a99a25baf11dfcee6f0ab18f4f49733261d7a7"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-short-3.png",
+      "bytes": 17355,
+      "sha256": "5b39cae47c614428280d4320db36bf67049c80b6cc07c76cc9bb93151919b655"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\length-short-4.png",
+      "bytes": 17467,
+      "sha256": "f4b6a19ad7698b4adf5f05d3ed93227de6e35cb73cc4f0d1caa7a112fe4f0361"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\plan.json",
+      "bytes": 15317,
+      "sha256": "a90a8918b115a7444cdcc08b054a3591dec6aa62443e4a14067c286eb9493e17"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\provenance.json",
+      "bytes": 640,
+      "sha256": "0249403d34174ed53c850a7df028fcb8f6f9db831691c551998b4bd6b02e6f3a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\results.json",
+      "bytes": 56581,
+      "sha256": "f6c5498f6dccfda3b79f172be6ddef0194355c85fdd06b601278f5812c6cb90f"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-anchor-1.png",
+      "bytes": 10375,
+      "sha256": "d8975b446a11b4fe3059863f57fda3337076f615b78858577d9393a99fb72ff2"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-anchor-2.png",
+      "bytes": 24916,
+      "sha256": "5a9b947fb84f8fa478f4a10b42b1f7935d5965a26305b1c775159e8859daf023"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-anchor-3.png",
+      "bytes": 20032,
+      "sha256": "59a129e56abdd008328a18e833004ddb0739097b7772db38e16f1e1ae4b740c8"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-anchor-4.png",
+      "bytes": 15635,
+      "sha256": "4697b0426a0a6bdfc71de3a3fae8f96bfac9a3a97060585532d4a598237c288d"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-new-1.png",
+      "bytes": 9767,
+      "sha256": "3c055c338dec50fde98b59456bcba12c101f08131d30b1c80fc80f2a645a5b86"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-new-2.png",
+      "bytes": 20131,
+      "sha256": "8e55250ffd6211333c4dc9ffbf096f95d2125a4ea6778599e35c97e6d9fbb6db"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-new-3.png",
+      "bytes": 17403,
+      "sha256": "9679877d12a1a41619542a60d02efa41591f9c2ec3fcdfd9bc7c87639f2a4790"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\semantic-new-4.png",
+      "bytes": 18052,
+      "sha256": "c02142d74216b9af4e9aaa4790abc1446620ecb1ffd18df8042e63be21e724fa"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20\\summary.json",
+      "bytes": 718,
+      "sha256": "48b1814e70cb41bbf130ed856a99fba30333a34c30eb0d3925496cb8eb990ef0"
+    }
+  ]
+}

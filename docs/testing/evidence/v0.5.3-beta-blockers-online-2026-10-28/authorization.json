@@ -1,0 +1,12 @@
+{
+  "authorized": true,
+  "plan_sha256": "bfa0f678548d21fd2bf2c63c139ceddcd220447523c68909b2f9f19d422aa248",
+  "model": "tencent/Hunyuan-MT-7B",
+  "call_limit": 20,
+  "confirmed_free_price_date_utc": "2026-10-28",
+  "price_evidence_sha256": "7aa3fc46f4b2b51bef794b579d01806ac85ecf143c3ed944734b1b46a9dcd61a",
+  "user_authorization": "2026-10-28 用户确认执行本轮20次计划；不复用旧300次授权",
+  "output": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\beta-blockers-online-20261028-20",
+  "automatic_retries": 0,
+  "estimated_cost_cny": 0
+}

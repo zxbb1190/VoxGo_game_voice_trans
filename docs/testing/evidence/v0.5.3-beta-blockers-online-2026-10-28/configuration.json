@@ -1,0 +1,15 @@
+{
+  "provider": "openai_compatible",
+  "model": "tencent/Hunyuan-MT-7B",
+  "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "api_key_present": true,
+  "user_settings_sha256": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "benchmark_config": {
+    "max_tokens": 80,
+    "temperature": 0,
+    "context_messages": 0,
+    "max_concurrent_requests": 1,
+    "timeout_seconds": 12,
+    "local_phrase_cache": false
+  }
+}
