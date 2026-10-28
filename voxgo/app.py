@@ -35,7 +35,7 @@ from voxgo.translation import (
     should_skip_translation_for_language,
 )
 from voxgo.update.checker import UpdateSettings
-from voxgo.i18n import normalize_ui_language, ui_text
+from voxgo.i18n import language_label, normalize_ui_language, ui_text
 from voxgo.config.loader import (
     apply_language_runtime_policy,
     load_config as load_app_config,
@@ -1340,15 +1340,6 @@ class VoxGoApp:
 
         self._running = True
         self._start_speech_worker()
-        self._print_banner()
-        self._notify_user(
-            "程序已启动",
-            ui_text(self._ui_language(),
-                "当前方向: {0} → {1}\n手机端: {2}", "Direction: {0} → {1}\nMobile: {2}").format(
-                    language_label(self.config.translation.source_lang, self._ui_language()),
-                    language_label(self.config.translation.target_lang, self._ui_language()), self._mobile.get_mobile_url()),
-            "状态",
-        )
 
         try:
             self._start_audio_capture()
@@ -1362,6 +1353,20 @@ class VoxGoApp:
         self._audio_timer.timeout.connect(self._process_audio_tick)
         self._audio_timer.start(100)
         logger.info("后端服务已启动")
+        # Startup presentation is optional; it must not prevent the capture
+        # consumer timer from running after the model/worker have started.
+        try:
+            self._print_banner()
+            self._notify_user(
+                "程序已启动",
+                ui_text(self._ui_language(),
+                    "当前方向: {0} → {1}\n手机端: {2}", "Direction: {0} → {1}\nMobile: {2}").format(
+                        language_label(self.config.translation.source_lang, self._ui_language()),
+                        language_label(self.config.translation.target_lang, self._ui_language()), self._mobile.get_mobile_url()),
+                "状态",
+            )
+        except Exception:
+            logger.exception("后端已启动，启动提示显示失败")
 
     def _handle_backend_startup_failure(self, message: str):
         if self._stopping:
