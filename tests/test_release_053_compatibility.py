@@ -12,6 +12,7 @@ import uuid
 
 from voxgo.analytics.aggregation import AggregateStore
 from voxgo.analytics.daily_metrics import CLASSIFIED_COUNTERS, METRICS
+from voxgo.app_info import APP_VERSION
 
 ROOT=Path(__file__).resolve().parents[1]
 LEGACY_REF='52d77cbf'
@@ -53,7 +54,7 @@ class Release053CompatibilityTests(unittest.TestCase):
             old=Legacy(folder,'0.5.2',today=lambda:day)
             pending=old.snapshots()[0]
             self.assertEqual(len(pending['metrics']),35)
-            current=AggregateStore(folder,'0.5.3',today=lambda:day)
+            current=AggregateStore(folder,APP_VERSION,today=lambda:day)
             self.assertEqual(current.snapshots(),[pending])
             self.assertEqual(current.snapshots(),[pending])
             shard(folder,day,dict(asr_segments=1,asr_segment_duration_samples=1,
@@ -63,6 +64,7 @@ class Release053CompatibilityTests(unittest.TestCase):
             self.assertEqual(upgraded['install_id'],pending['install_id'])
             self.assertEqual(upgraded['revision'],pending['revision']+1)
             self.assertEqual(set(upgraded['metrics']),METRICS)
+            self.assertEqual(upgraded['app_version'],APP_VERSION)
             self.assertEqual(upgraded['metrics']['asr_segments'],4)
             self.assertEqual(upgraded['metrics']['asr_custom_segments'],1)
             self.assertFalse(current.acknowledge(pending))
@@ -74,7 +76,7 @@ class Release053CompatibilityTests(unittest.TestCase):
             shard(folder,day,dict(asr_segments=1,asr_fast_segments=1,
                 asr_segment_duration_samples=1,asr_segment_duration_sum_ms=1000,
                 asr_fast_segment_duration_samples=1,asr_fast_segment_duration_sum_ms=1000))
-            current=AggregateStore(folder,'0.5.3',today=lambda:day)
+            current=AggregateStore(folder,APP_VERSION,today=lambda:day)
             pending=current.snapshots()[0]
             tracked={p.name:p.read_bytes() for p in (Path(folder)/'aggregate.json',Path(folder)/'identity.json')}
             old=Legacy(folder,'0.5.2',today=lambda:day)
@@ -98,7 +100,7 @@ class Release053CompatibilityTests(unittest.TestCase):
             day=date(2026,10,14)
             shard(folder,day,dict(api_translation_failed=1,translation_failed=1,
                 api_translation_failed_network=1,api_translation_failed_google=1))
-            current=AggregateStore(folder,'0.5.3',today=lambda:day)
+            current=AggregateStore(folder,APP_VERSION,today=lambda:day)
             payload=current.snapshots()[0]
             self.assertTrue(current.acknowledge(payload))
             before=(Path(folder)/'aggregate.json').read_bytes()

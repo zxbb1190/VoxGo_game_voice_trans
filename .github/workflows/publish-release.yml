@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.5.3"
+        description: "Release version, for example 0.6.0"
         required: true
-        default: "0.5.3"
+        default: "0.6.0"
 
 permissions:
   contents: write
@@ -87,17 +87,17 @@ jobs:
 
           ### 更新内容
 
-          - 修复部分实时语音在停顿后可能被错误切分的问题。
-          - 增强语音识别异常保护，减少强噪声下出现异常重复字幕的情况。
-          - 改进聚合诊断信息，便于定位运行问题；诊断信息不包含语音、识别或翻译内容。
-          - 设置中的帮助与反馈新增 KOOK 和 Discord 社区入口，并保留 GitHub Issues。
+          - 新增中、英、日、韩、俄五语20方向在线翻译，保留英中离线 OPUS。
+          - 软件界面支持五语，中文识别原文显示简体；日/韩兼容、俄语极速采用内部完整性策略，不设用户开关。
+          - 切换方向取消并隔离旧任务，截断译文不显示或复制；保留原有英中策略。
+          - Full 匿名诊断新增 ASR 模式及 API 失败原因/服务商分类，不上报音频、字幕或 API Key。
 
           ### What's new
 
-          - Fixed cases where real-time speech audio could be segmented incorrectly after a pause.
-          - Strengthened speech recognition safeguards to reduce abnormal repeated captions under heavy noise.
-          - Improved aggregated diagnostic information for investigating runtime issues; diagnostics do not include audio, recognition, or translation content.
-          - Added KOOK and Discord community links to Help & Feedback in Settings, while keeping GitHub Issues.
+          - Added 20 online translation directions across Chinese, English, Japanese, Korean and Russian; retained offline English-Chinese OPUS.
+          - Added five interface languages and Simplified Chinese source display; JA/KO use compatibility and RU Fast uses an internal completeness policy, without a user switch.
+          - Language changes cancel and isolate stale tasks; truncated translations are neither displayed nor copied. Existing English-Chinese behavior is preserved.
+          - Full anonymous diagnostics classify ASR modes and API failure reasons/providers without uploading audio, captions or API keys.
 
           ### Downloads
 
@@ -164,16 +164,16 @@ jobs:
           $manifest.channel = "stable"
           $manifest.title = "VoxGo v$env:APP_VERSION"
           $notesEn = @(
-            "Fixed cases where real-time speech audio could be segmented incorrectly after a pause.",
-            "Strengthened speech recognition safeguards to reduce abnormal repeated captions under heavy noise.",
-            "Improved aggregated diagnostic information for investigating runtime issues; diagnostics do not include audio, recognition, or translation content.",
-            "Added KOOK and Discord community links to Help & Feedback in Settings, while keeping GitHub Issues."
+            "Added 20 online translation directions across Chinese, English, Japanese, Korean and Russian; retained offline English-Chinese OPUS.",
+            "Added five interface languages and Simplified Chinese source display; JA/KO use compatibility and RU Fast uses an internal completeness policy, without a user switch.",
+            "Language changes cancel and isolate stale tasks; truncated translations are neither displayed nor copied. Existing English-Chinese behavior is preserved.",
+            "Full anonymous diagnostics classify ASR modes and API failure reasons/providers without uploading audio, captions or API keys."
           )
           $notesZh = @(
-            "修复部分实时语音在停顿后可能被错误切分的问题。",
-            "增强语音识别异常保护，减少强噪声下出现异常重复字幕的情况。",
-            "改进聚合诊断信息，便于定位运行问题；诊断信息不包含语音、识别或翻译内容。",
-            "设置中的帮助与反馈新增 KOOK 和 Discord 社区入口，并保留 GitHub Issues。"
+            "新增中、英、日、韩、俄五语20方向在线翻译，保留英中离线 OPUS。",
+            "软件界面支持五语，中文识别原文显示简体；日/韩兼容、俄语极速采用内部完整性策略，不设用户开关。",
+            "切换方向取消并隔离旧任务，截断译文不显示或复制；保留原有英中策略。",
+            "Full 匿名诊断新增 ASR 模式及 API 失败原因/服务商分类，不上报音频、字幕或 API Key。"
           )
           $manifest.notes = $notesEn
           $manifest | Add-Member -NotePropertyName notes_en -NotePropertyValue $notesEn -Force
