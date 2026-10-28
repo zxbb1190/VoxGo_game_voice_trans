@@ -88,6 +88,20 @@ class OpenAICompatibleProvider(TranslatorProvider):
                     translation = (message.get("content") or "").strip()
                     reasoning = (message.get("reasoning_content") or "").strip()
                     elapsed = time.time() - start_time
+                    if choice.get("finish_reason") == "length":
+                        # A nonempty prefix is not a complete translation. Keep
+                        # the response for local diagnostics, but never publish
+                        # it as a subtitle or reuse it as conversation context.
+                        logger.warning("翻译 API 达到输出上限: max_tokens={}", self.config.max_tokens)
+                        return TranslationResult(
+                            translated="[翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。",
+                            source_lang=request.source_lang,
+                            target_lang=request.target_lang,
+                            provider=self.name,
+                            elapsed_seconds=elapsed,
+                            raw=data,
+                            failure_reason="other",
+                        )
                     if not translation:
                         finish_reason = choice.get("finish_reason")
                         logger.warning(

@@ -29,6 +29,8 @@ class TranslationRuntime:
         self._pending_lock = threading.RLock()
         self._pending = set()
         self._fallback_loops = set()
+        self._request_generation = 0
+        self._active_translations = {}
         self.analytics = None
         self.client: Optional[GameTranslator] = None
         self.loop: Optional[asyncio.AbstractEventLoop] = None
@@ -57,6 +59,17 @@ class TranslationRuntime:
             self.client.config = config
 
     def clear_context(self):
+        # Invalidate submissions that have not started, and cancel only tasks
+        # belonging to the previous context. New-flow requests are not touched.
+        with self._pending_lock:
+            self._request_generation += 1
+            tasks = tuple(self._active_translations)
+        for task in tasks:
+            loop = task.get_loop()
+            try:
+                loop.call_soon_threadsafe(task.cancel)
+            except RuntimeError:
+                pass  # The owning fallback loop has already closed.
         if self.client:
             self.client.clear_context()
 
@@ -100,6 +113,8 @@ class TranslationRuntime:
             source_lang = ""
             target_lang = ""
             language_revision = 0
+        with self._pending_lock:
+            request_generation = self._request_generation
         if self.loop and self.loop.is_running():
             future = asyncio.run_coroutine_threadsafe(
                 self._translate_and_publish(
@@ -111,6 +126,7 @@ class TranslationRuntime:
                     source_lang,
                     target_lang,
                     language_revision,
+                    request_generation=request_generation,
                 ),
                 self.loop,
             )
@@ -138,6 +154,7 @@ class TranslationRuntime:
                         source_lang,
                         target_lang,
                         language_revision,
+                        request_generation=request_generation,
                     )
                 )
             except asyncio.CancelledError:
@@ -224,6 +241,39 @@ class TranslationRuntime:
         source_lang: str = "",
         target_lang: str = "",
         language_revision: int = 0,
+        *,
+        request_generation=None,
+    ):
+        task = asyncio.current_task()
+        with self._pending_lock:
+            stale = (request_generation is not None
+                     and request_generation != self._request_generation)
+            if not stale:
+                self._active_translations[task] = item_id
+        if stale:
+            self._discard_cancelled_translation(item_id)
+            return
+        try:
+            await self._translate_current(
+                item_id, text, detected_language, trace, language_probability,
+                source_lang, target_lang, language_revision,
+            )
+        except asyncio.CancelledError:
+            self._discard_cancelled_translation(item_id)
+            raise
+        finally:
+            with self._pending_lock:
+                self._active_translations.pop(task, None)
+
+    def _discard_cancelled_translation(self, item_id):
+        self._latency_traces.pop(item_id, None)
+        self._remove_overlay_item(item_id)
+        self._stats["skipped_translations"] = self._stats.get("skipped_translations", 0) + 1
+
+    async def _translate_current(
+        self, item_id, text, detected_language="", trace=None,
+        language_probability=0.0, source_lang="", target_lang="",
+        language_revision=0,
     ):
         if self._shutdown_requested.is_set():
             return

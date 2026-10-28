@@ -64,7 +64,7 @@ class ShutdownLifecycleTests(unittest.TestCase):
         runtime = TranslationRuntime(Mock(), {'errors': 0}, {}, lambda: None)
         started = threading.Event()
         cancelled = threading.Event()
-        async def translate(*args):
+        async def translate(*args, **kwargs):
             started.set()
             try:
                 await asyncio.sleep(60)
