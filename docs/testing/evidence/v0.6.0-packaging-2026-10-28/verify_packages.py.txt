@@ -1,0 +1,145 @@
+"""Read-only release audits plus extraction into fresh, owned verification paths."""
+import hashlib
+import json
+import marshal
+from pathlib import Path
+import subprocess
+import sys
+import types
+import zipfile
+
+from PyInstaller.archive.readers import CArchiveReader
+
+STAGE = Path(__file__).resolve().parent
+PLAN = json.loads((STAGE / 'build-plan.json').read_text('utf-8'))
+SOURCE = Path(PLAN['source_root'])
+sys.path.insert(0, str(SOURCE))
+from voxgo.update.installer import extract_package
+
+
+def digest_stream(stream):
+    value = hashlib.sha256()
+    while True:
+        block = stream.read(1024 * 1024)
+        if not block:
+            return value.hexdigest()
+        value.update(block)
+
+
+def digest(path):
+    with path.open('rb') as stream:
+        return digest_stream(stream)
+
+
+def canonical(value):
+    if isinstance(value, types.CodeType):
+        return [value.co_code.hex(), value.co_names, value.co_varnames,
+                value.co_argcount, value.co_kwonlyargcount, value.co_posonlyargcount,
+                value.co_flags, value.co_freevars, value.co_cellvars,
+                [canonical(c) for c in value.co_consts]]
+    if isinstance(value, (tuple, list)):
+        return [canonical(v) for v in value]
+    if isinstance(value, frozenset):
+        return ['frozenset', sorted(repr(canonical(v)) for v in value)]
+    return [type(value).__name__, repr(value)]
+
+
+def code_digest(value):
+    return hashlib.sha256(json.dumps(canonical(value), sort_keys=True).encode()).hexdigest()
+
+
+def verify(edition):
+    name = 'VoxGo-v0.6.0-' + edition
+    archive = STAGE / 'artifacts' / (name + '.zip')
+    report = {'edition': edition, 'archive': str(archive), 'bytes': archive.stat().st_size,
+              'sha256': digest(archive), 'source_commit': PLAN['source_commit']}
+    with zipfile.ZipFile(archive) as package:
+        members = package.namelist()
+        assert all(p.split('/')[0] == name for p in members), 'Unexpected ZIP root'
+        assert package.testzip() is None, 'ZIP CRC failure'
+        assert not any(p.rsplit('/', 1)[-1].lower() in {'user_settings.json', 'telemetry_consent.json', 'app.log', 'crash_report.txt'} for p in members)
+        assert not any(set(p.lower().split('/')) & {'tests', 'diagnostics', 'scripts', '.git', 'analytics', 'analytics-remote', 'analytics-basic'} for p in members)
+        report['zip_crc_valid'] = True
+        report['files'] = len(members)
+        if edition == 'cuda-runtime':
+            expected = sorted(p.name for p in (SOURCE / 'runtime/cuda').glob('*.dll'))
+            assert sorted(p.rsplit('/', 1)[-1] for p in members if not p.endswith('/')) == expected
+            for dll in expected:
+                with package.open(name + '/' + dll) as entry:
+                    assert digest_stream(entry) == digest(SOURCE / 'runtime/cuda' / dll)
+            report['runtime_dlls'] = expected
+            return report
+        prefix = name + '/_internal/'
+        config = package.read(prefix + 'config.json')
+        assert config == (SOURCE / 'config.example.json').read_bytes()
+        assert json.loads(package.read(prefix + 'package-info.json'))['package_type'] == edition
+        provenance = json.loads((SOURCE / 'voxgo/ui/_opencc/UPSTREAM.json').read_text('utf-8'))
+        for item in provenance['files']:
+            if item['path'].endswith('.py'):
+                continue
+            assert hashlib.sha256(package.read(prefix + 'voxgo/ui/_opencc/' + item['path'])).hexdigest() == item['sha256']
+        models = [p for p in members if p.startswith(prefix + '.models/')]
+        if edition == 'lite':
+            assert not models
+        else:
+            repos = {p[len(prefix + '.models/'):].split('/')[0] for p in models}
+            assert repos - {'', 'CACHEDIR.TAG'} == {'models--Systran--faster-whisper-base', 'models--Systran--faster-whisper-small'}
+            for item in PLAN['whisper']:
+                relative = '.models/models--Systran--faster-whisper-' + item['model'] + '/snapshots/' + item['revision'] + '/' + item['file']
+                with package.open(prefix + relative) as entry:
+                    assert digest_stream(entry) == item['sha256']
+        cuda = [p for p in members if p.startswith(prefix + 'runtime/cuda/')]
+        if edition != 'full-cuda':
+            assert not cuda
+        else:
+            for dll in (SOURCE / 'runtime/cuda').glob('*.dll'):
+                with package.open(prefix + 'runtime/cuda/' + dll.name) as entry:
+                    assert digest_stream(entry) == digest(dll)
+        exe = SOURCE / 'release' / name / 'VoxGo.exe'
+        with package.open(name + '/VoxGo.exe') as entry:
+            assert digest_stream(entry) == digest(exe)
+    reader = CArchiveReader(str(exe))
+    pyz = reader.open_embedded_archive(next(name for name, item in reader.toc.items() if item[-1] == 'z'))
+    assert not any(m == 'tests' or m.startswith(('tests.', 'scripts.', 'diagnostics.')) for m in pyz.toc)
+    checked = {}
+    for module in sorted(pyz.toc):
+        if module != 'voxgo' and not module.startswith('voxgo.'):
+            continue
+        path = SOURCE.joinpath(*module.split('.')).with_suffix('.py')
+        if not path.exists():
+            path = SOURCE.joinpath(*module.split('.')) / '__init__.py'
+        if not path.exists():
+            continue  # A data-only namespace has no Python source to compare.
+        actual = pyz.extract(module)
+        expected = compile(path.read_bytes(), str(path), 'exec', dont_inherit=True, optimize=0)
+        assert code_digest(actual) == code_digest(expected), module
+        checked[module] = code_digest(actual)
+    entry = marshal.loads(reader.extract('app'))
+    expected = compile((SOURCE / 'voxgo/app.py').read_bytes(), 'app', 'exec', dont_inherit=True, optimize=0)
+    assert code_digest(entry) == code_digest(expected), 'app entrypoint'
+    checked['app entrypoint'] = code_digest(entry)
+    assert '0.6.0' in pyz.extract('voxgo.app_info').co_consts
+    assert all(m in checked for m in ('voxgo.ui.chinese_text', 'voxgo.ui._opencc.opencc', 'voxgo.ui.settings_dialog', 'voxgo.i18n_messages', 'voxgo.asr.language_profiles', 'voxgo.translation.openai_compatible', 'voxgo.translation.runtime'))
+    target = STAGE / 'verification-recovery' / 'extracted' / edition
+    assert target.resolve().is_relative_to(STAGE.resolve()) and not target.exists()
+    payload = extract_package(archive, target)
+    assert digest(payload / 'VoxGo.exe') == digest(exe)
+    probe = subprocess.run([str(payload / 'VoxGo.exe'), '--help'], cwd=STAGE,
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=45)
+    assert probe.returncode == 0, (edition, probe.returncode)
+    report.update(project_bytecode=checked, updater_extraction=True, frozen_help_exit=probe.returncode,
+                  models_and_opencc_hashes_valid=True, clean_default_config=True,
+                  payload=str(payload), exe_sha256=digest(exe), real_api_requests=0,
+                  native_full_gui_acceptance='pending manual', cuda_inference='not measured: no NVIDIA GPU')
+    return report
+
+
+if __name__ == '__main__':
+    reports = []
+    for edition in sys.argv[1:] or ['lite', 'full', 'full-cuda', 'cuda-runtime']:
+        result = verify(edition)
+        output = STAGE / ('audit-recovery-' + edition + '.json')
+        assert not output.exists()
+        output.write_text(json.dumps(result, indent=2) + '\n', 'utf-8')
+        reports.append(result)
+        print(edition, 'PASS', result['bytes'], result['sha256'], flush=True)

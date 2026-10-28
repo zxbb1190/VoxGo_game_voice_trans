@@ -1,0 +1,36 @@
+{
+  "protected_baseline": "ef398cba",
+  "protected_paths": [
+    "voxgo/translation",
+    "voxgo/asr",
+    "voxgo/audio",
+    "voxgo/ui",
+    "voxgo/i18n.py",
+    "voxgo/i18n_messages.py",
+    "voxgo/analytics",
+    "voxgo/config",
+    "voxgo/app.py",
+    "voxgo/runtime",
+    "config.example.json",
+    "requirements.txt",
+    "VoxGo.spec",
+    "docs/update.json",
+    "docs/index.html",
+    "docs/en/index.html"
+  ],
+  "protected_paths_unchanged": true,
+  "original_user_settings_unchanged": true,
+  "historical_request_ledgers_unchanged": true,
+  "published_update_version": "0.5.2",
+  "updater_editions": {
+    "lite": "lite",
+    "full": "full",
+    "full-cuda": "full-cuda"
+  },
+  "real_translation_api_requests": 0,
+  "new_models_downloaded": 0,
+  "system_pagefile_changed": false,
+  "wsl_stopped": false,
+  "production_operations": false,
+  "git_push_or_tag": false
+}

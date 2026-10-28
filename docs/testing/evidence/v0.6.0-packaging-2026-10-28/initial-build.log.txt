@@ -1,0 +1,10 @@
+VoxGo-v0.6.0-lite.zip
+  size: 134.1 MB
+  sha256: 91a628ef2cbc27c2933841add7bcb8d2016ba0e78c43d343fa5d1772538fb456
+Using existing faster-whisper-small cache.
+Using existing faster-whisper-base cache.
+VoxGo-v0.6.0-full.zip
+  size: 686.3 MB
+  sha256: 681fcdcfaeadb2b431856036e966945689db74d75b6596ed0675f58f08bbf2da
+Using existing faster-whisper-small cache.
+Using existing faster-whisper-base cache.

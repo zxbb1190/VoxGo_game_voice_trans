@@ -1,0 +1,27 @@
+2026-10-28 15:10:23.865 | INFO     | voxgo.config.loader:load_config:100 - 已加载配置: C:\Users\ADMINI~1\AppData\Local\Temp\tmpld_f3jk3\config.json
+2026-10-28 15:10:24.171 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp5kuhja3c\user_settings.json
+2026-10-28 15:10:24.175 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp5kuhja3c\user_settings.json
+2026-10-28 15:10:24.185 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmpurlcazit\user_settings.json
+2026-10-28 15:10:24.188 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmpurlcazit\user_settings.json
+2026-10-28 15:10:24.193 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmppgmshhml\user_settings.json
+2026-10-28 15:10:24.197 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmppgmshhml\user_settings.json
+2026-10-28 15:10:24.206 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp1qn8h9ou\user_settings.json
+2026-10-28 15:10:24.210 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp1qn8h9ou\user_settings.json
+2026-10-28 15:10:24.352 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmppyhv60an\user_settings.json
+2026-10-28 15:10:24.368 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmppyhv60an\user_settings.json
+2026-10-28 15:10:24.374 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmpa521n6ut\user_settings.json
+2026-10-28 15:10:24.394 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmpa521n6ut\user_settings.json
+2026-10-28 15:10:24.397 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp1t46o4ta\user_settings.json
+2026-10-28 15:10:24.413 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp1t46o4ta\user_settings.json
+2026-10-28 15:10:24.416 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp2wwixg67\user_settings.json
+2026-10-28 15:10:24.432 | INFO     | voxgo.config.loader:load_user_settings:223 - 已加载用户设置: C:\Users\ADMINI~1\AppData\Local\Temp\tmp2wwixg67\user_settings.json
+2026-10-28 15:10:24.437 | INFO     | voxgo.app:_handle_transcript_ready:567 - language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->en, revision=1
+2026-10-28 15:10:24.438 | INFO     | voxgo.app:_handle_transcript_ready:567 - language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->ja, revision=1
+2026-10-28 15:10:24.438 | INFO     | voxgo.app:_handle_transcript_ready:567 - language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->ko, revision=1
+2026-10-28 15:10:24.438 | INFO     | voxgo.app:_handle_transcript_ready:567 - language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->ru, revision=1
+2026-10-28 15:10:24.439 | INFO     | voxgo.app:_handle_transcript_ready:567 - language gate accepted: detected=zh, expected=zh, prob=1.00, snapshot=zh->en, revision=1
+2026-10-28 15:10:24.440 | INFO     | voxgo.app:_handle_translation_ready:621 - 更新浮窗翻译
+----------------------------------------------------------------------
+Ran 43 tests in 19.134s
+
+OK

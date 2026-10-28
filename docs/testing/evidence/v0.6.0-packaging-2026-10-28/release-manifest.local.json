@@ -1,0 +1,29 @@
+{
+  "version": "0.6.0",
+  "runtime_source_commit": "0a23fc676abc570120751ae200b7819068002697",
+  "packaging_commit": "47b753ec11b9ce5d5f0f439a71af58e8f0129b37",
+  "published": false,
+  "manual_acceptance": "pending",
+  "files": [
+    {
+      "file": "VoxGo-v0.6.0-lite.zip",
+      "bytes": 140596408,
+      "sha256": "91a628ef2cbc27c2933841add7bcb8d2016ba0e78c43d343fa5d1772538fb456"
+    },
+    {
+      "file": "VoxGo-v0.6.0-full.zip",
+      "bytes": 719634434,
+      "sha256": "681fcdcfaeadb2b431856036e966945689db74d75b6596ed0675f58f08bbf2da"
+    },
+    {
+      "file": "VoxGo-v0.6.0-full-cuda.zip",
+      "bytes": 1307517713,
+      "sha256": "9dfdf1915e6d97db9b8dcef5fd7c42d4def9596908122129a88a04794ac4f2e1"
+    },
+    {
+      "file": "VoxGo-v0.6.0-cuda-runtime.zip",
+      "bytes": 590591593,
+      "sha256": "a9204dabaffda64f36c0b36a82cca3f39f83d2fe995dc9764ff98cb00e26ff98"
+    }
+  ]
+}

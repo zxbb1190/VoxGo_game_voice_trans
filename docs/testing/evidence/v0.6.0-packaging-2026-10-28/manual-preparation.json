@@ -1,0 +1,13 @@
+{
+  "version": "0.6.0",
+  "root": "E:\\my\\my\\VoxGo-v0.6.0-Manual",
+  "exe_sha256": "29bfa010c81b66daaf5540c970dd1de6c7f766808cf240038f813527ee916cbc",
+  "matches_formal_full_exe": true,
+  "full_telemetry_denied": true,
+  "updates_disabled": true,
+  "key_empty": true,
+  "opus_hashes_valid": true,
+  "existing_settings_untouched": true,
+  "launcher_required_for_network_isolation": true,
+  "real_api_requests": 0
+}

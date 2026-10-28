@@ -1,0 +1,10 @@
+{
+  "Boot": "2026-10-28T15:22:03.5+08:00",
+  "CommittedBytes": 23238717440,
+  "CommitLimitBytes": 38383431680,
+  "AvailableMiB": 17175,
+  "PageFileMiB": 4096,
+  "NewResourceExhaustionEvents": 0,
+  "RemainingVoxGoProcesses": 0,
+  "SystemSettingsChanged": false
+}

@@ -1,0 +1,153 @@
+Using existing faster-whisper-small cache.
+Using existing faster-whisper-base cache.
+147 INFO: PyInstaller: 6.11.1, contrib hooks: 2026.5
+147 INFO: Python: 3.10.20
+156 INFO: Platform: Windows-10-10.0.26300-SP0
+156 INFO: Python environment: E:\my\my\VoxGo060-20261028\src\.venv-win
+159 INFO: Removing temporary files and cleaning cache in C:\Users\Administrator\AppData\Local\pyinstaller
+1030 INFO: Module search paths (PYTHONPATH):
+['E:\\my\\my\\VoxGo060-20261028\\src',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\python310.zip',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\DLLs',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\lib',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none',
+ 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win',
+ 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages',
+ 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\win32',
+ 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\win32\\lib',
+ 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\Pythonwin',
+ 'E:\\my\\my\\VoxGo060-20261028\\src',
+ 'E:\\my\\my\\VoxGo060-20261028\\src']
+1380 INFO: Appending 'binaries' from .spec
+1381 INFO: Appending 'datas' from .spec
+1382 INFO: checking Analysis
+1382 INFO: Building Analysis because Analysis-00.toc is non existent
+1383 INFO: Running Analysis Analysis-00.toc
+1383 INFO: Target bytecode optimization level: 0
+1383 INFO: Initializing module dependency graph...
+1385 INFO: Initializing module graph hook caches...
+1407 INFO: Analyzing base_library.zip ...
+1887 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2187 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2705 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3281 INFO: Caching module dependency graph...
+3352 INFO: Looking for Python shared library...
+3358 INFO: Using Python shared library: C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\python310.dll
+3358 INFO: Analyzing E:\my\my\VoxGo060-20261028\src\voxgo\app.py
+3414 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3485 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3847 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3859 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+3860 INFO: SetuptoolsInfo: initializing cached setuptools info...
+6184 INFO: Processing standard module hook 'hook-numpy.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+6499 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+6551 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+7478 INFO: Processing standard module hook 'hook-webrtcvad.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\hooks'
+7478 WARNING: collect_dynamic_libs - skipping library collection for module 'webrtcvad' as it is not a package.
+7513 INFO: Processing standard module hook 'hook-pkg_resources.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+7767 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+7773 INFO: Processing standard module hook 'hook-packaging.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+7838 INFO: Processing pre-safe-import-module hook 'hook-platformdirs.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+7844 INFO: Processing standard module hook 'hook-platformdirs.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+7920 INFO: Processing standard module hook 'hook-av.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+8451 INFO: Processing pre-safe-import-module hook 'hook-tensorflow.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+8675 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+8726 INFO: Processing standard module hook 'hook-anyio.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+9546 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+10514 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+11336 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11336 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+11339 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+11345 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11346 INFO: Processing pre-find-module-path hook 'hook-distutils.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+11621 INFO: Processing standard module hook 'hook-distutils.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+11631 INFO: Processing standard module hook 'hook-distutils.util.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+11674 INFO: Processing pre-safe-import-module hook 'hook-jaraco.text.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11674 INFO: Setuptools: 'jaraco.text' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.text'!
+11678 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+11680 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11680 INFO: Processing pre-safe-import-module hook 'hook-jaraco.functools.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11681 INFO: Setuptools: 'jaraco.functools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.functools'!
+11684 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11685 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+11719 INFO: Processing pre-safe-import-module hook 'hook-jaraco.context.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11720 INFO: Setuptools: 'jaraco.context' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.context'!
+11855 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11855 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+12102 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+12102 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+12170 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+12172 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+12172 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+12207 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+12804 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+13256 INFO: Processing standard module hook 'hook-sqlite3.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+13764 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+13844 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+14118 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+14179 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+14727 INFO: Processing standard module hook 'hook-jinja2.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+14962 INFO: Processing standard module hook 'hook-fsspec.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+15465 INFO: Processing standard module hook 'hook-onnxruntime.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+15938 INFO: Processing standard module hook 'hook-PyQt5.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+16052 INFO: Processing standard module hook 'hook-PyQt5.QtCore.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+16180 INFO: Processing standard module hook 'hook-PyQt5.QtWidgets.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+16289 INFO: Processing standard module hook 'hook-PyQt5.QtGui.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+16520 INFO: Processing standard module hook 'hook-uvicorn.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+16964 INFO: Processing standard module hook 'hook-websockets.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+17693 INFO: Analyzing hidden import 'uvicorn.lifespan.on'
+17696 INFO: Analyzing hidden import 'uvicorn.lifespan.off'
+17696 INFO: Analyzing hidden import 'uvicorn.protocols.websockets.auto'
+17697 INFO: Analyzing hidden import 'uvicorn.protocols.http.auto'
+17698 INFO: Analyzing hidden import 'uvicorn.loops.auto'
+17699 INFO: Analyzing hidden import 'setuptools._vendor.backports'
+17700 INFO: Analyzing hidden import 'setuptools._vendor.backports.tarfile'
+17730 INFO: Analyzing hidden import 'setuptools._vendor.backports.tarfile.__main__'
+17730 INFO: Processing module hooks (post-graph stage)...
+18067 WARNING: Hidden import "tzdata" not found!
+18200 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+19163 WARNING: Hidden import "sip" not found!
+19421 INFO: Performing binary vs. data reclassification (178 entries)
+19530 INFO: Looking for ctypes DLLs
+19571 INFO: Analyzing run-time hooks ...
+19578 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19579 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19580 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19582 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19583 INFO: Including run-time hook 'pyi_rth_pkgres.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19584 INFO: Including run-time hook 'pyi_rth_pyqt5.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+19585 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+19586 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+19609 INFO: Looking for dynamic libraries
+E:\my\my\VoxGo060-20261028\src\.venv-win\lib\site-packages\PyInstaller\building\build_main.py:226: UserWarning: The numpy.array_api submodule is still experimental. See NEP 47.
+  __import__(package)
+36055 INFO: Extra DLL search directories (AddDllDirectory): ['E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyQt5\\Qt5\\bin', 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\numpy\\.libs', 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\av.libs', 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\ctranslate2', 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\ctranslate2/../_rocm_sdk_core/bin', 'E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\torch\\lib']
+36055 INFO: Extra DLL search directories (PATH): ['E:\\my\\my\\VoxGo060-20261028\\src\\.venv-win\\lib\\site-packages\\PyQt5\\Qt5\\bin']
+37754 INFO: Warnings written to E:\my\my\VoxGo060-20261028\src\build\VoxGo\warn-VoxGo.txt
+37883 INFO: Graph cross-reference written to E:\my\my\VoxGo060-20261028\src\build\VoxGo\xref-VoxGo.html
+37927 INFO: checking PYZ
+37927 INFO: Building PYZ because PYZ-00.toc is non existent
+37928 INFO: Building PYZ (ZlibArchive) E:\my\my\VoxGo060-20261028\src\build\VoxGo\PYZ-00.pyz
+39333 INFO: Building PYZ (ZlibArchive) E:\my\my\VoxGo060-20261028\src\build\VoxGo\PYZ-00.pyz completed successfully.
+39364 INFO: checking PKG
+39364 INFO: Building PKG because PKG-00.toc is non existent
+39364 INFO: Building PKG (CArchive) VoxGo.pkg
+39391 INFO: Building PKG (CArchive) VoxGo.pkg completed successfully.
+39392 INFO: Bootloader E:\my\my\VoxGo060-20261028\src\.venv-win\lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+39392 INFO: checking EXE
+39392 INFO: Building EXE because EXE-00.toc is non existent
+39392 INFO: Building EXE from EXE-00.toc
+39392 INFO: Copying bootloader EXE to E:\my\my\VoxGo060-20261028\src\build\VoxGo\VoxGo.exe
+39438 INFO: Copying icon to EXE
+39440 INFO: Copying 0 resources to EXE
+39440 INFO: Embedding manifest in EXE
+39464 INFO: Appending PKG archive to EXE
+39562 INFO: Fixing EXE headers
+45834 INFO: Building EXE from EXE-00.toc completed successfully.
+45836 INFO: checking COLLECT
+45836 INFO: Building COLLECT because COLLECT-00.toc is non existent
+45836 INFO: Building COLLECT COLLECT-00.toc
+50060 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+WARNING: Compress-Archive failed on attempt 1. Retrying...
+WARNING: Compress-Archive failed on attempt 2. Retrying...
+WARNING: Compress-Archive failed on attempt 3. Retrying...

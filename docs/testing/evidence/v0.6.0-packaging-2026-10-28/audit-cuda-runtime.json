@@ -1,0 +1,16 @@
+{
+  "edition": "cuda-runtime",
+  "archive": "E:\\my\\my\\VoxGo060-20261028\\artifacts\\VoxGo-v0.6.0-cuda-runtime.zip",
+  "bytes": 590591593,
+  "sha256": "a9204dabaffda64f36c0b36a82cca3f39f83d2fe995dc9764ff98cb00e26ff98",
+  "source_commit": "0a23fc676abc570120751ae200b7819068002697",
+  "zip_crc_valid": true,
+  "files": 6,
+  "runtime_dlls": [
+    "cublas64_12.dll",
+    "cublasLt64_12.dll",
+    "cudart64_12.dll",
+    "cudnn64_9.dll",
+    "nvrtc64_120_0.dll"
+  ]
+}

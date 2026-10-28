@@ -1,0 +1,10 @@
+@echo off
+setlocal
+set "HTTPS_PROXY=http://127.0.0.1:1"
+set "HTTP_PROXY=http://127.0.0.1:1"
+set "ALL_PROXY="
+set "NO_PROXY=localhost,127.0.0.1,::1,api.siliconflow.cn,translation.googleapis.com,api.openai.com"
+set "HF_HUB_OFFLINE=1"
+set "TRANSFORMERS_OFFLINE=1"
+start "" /D "%~dp0VoxGo" "%~dp0VoxGo\VoxGo.exe"
+endlocal

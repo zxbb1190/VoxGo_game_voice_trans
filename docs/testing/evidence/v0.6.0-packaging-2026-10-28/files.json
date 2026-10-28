@@ -1,0 +1,132 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 21,
+    "sha256": "ffe82f3c5b968ed009c2577fa38f32c83be167799ee565d40a18e3440c57b342"
+  },
+  {
+    "path": "api-build.txt",
+    "bytes": 55,
+    "sha256": "3fa0ea004fbd30a4c70a06696c5206a983a5ecb4c0f6830cc1035c2e736e557f"
+  },
+  {
+    "path": "api-tests.txt",
+    "bytes": 16799,
+    "sha256": "93c44c415ac49d2d353fdca4fc53abe035ce5e91dfacbee87f859098b651a810"
+  },
+  {
+    "path": "audit-cuda-runtime.json",
+    "bytes": 481,
+    "sha256": "c9207771ca04a3a097f43825876467c3a5da1d63570cbf2e8bad64def73ca765"
+  },
+  {
+    "path": "audit-full-cuda.json",
+    "bytes": 8454,
+    "sha256": "29e82c8a20713a52dd30bcb590ae01bec2c09bfb085f750d9dcf29fb39ea9da1"
+  },
+  {
+    "path": "audit-full.json",
+    "bytes": 8433,
+    "sha256": "71482ad93e962b4b034c555b57a99f1da092618ebd5ff380ae8f17c3958a0a3d"
+  },
+  {
+    "path": "audit-lite.json",
+    "bytes": 8433,
+    "sha256": "9945c0b125a9de777542f015dc025ae3e08d2c3a91ebe574b935a225a8791021"
+  },
+  {
+    "path": "build-plan.json",
+    "bytes": 3269,
+    "sha256": "268cb73b8f9cb65782037338ac6acc31b3ddbd16c47993a7286ced0d059fd452"
+  },
+  {
+    "path": "client-tests.txt",
+    "bytes": 17661,
+    "sha256": "813449af86464e98d92d4c34802de9206597afef32587c58412e847b14448cd9"
+  },
+  {
+    "path": "cuda-build-before-reboot.log.txt",
+    "bytes": 17554,
+    "sha256": "9b5ca031d9d4283c2948dfa788af51ee9d08eb61492c6dc3916b74c5e5e70a79"
+  },
+  {
+    "path": "en-zh-compatibility.json",
+    "bytes": 331,
+    "sha256": "567398a98b354bcc2da40b3dfd2282dede8580e67ae1a7ead02c4d3b93d41058"
+  },
+  {
+    "path": "initial-build.log.txt",
+    "bytes": 408,
+    "sha256": "6d262863676a9938728c754607b44dac264853e40c142df80437417d3864f8f7"
+  },
+  {
+    "path": "manual-instructions.md",
+    "bytes": 1991,
+    "sha256": "438faf2d29a884ded57542b69e963413cdfeba4d520661057961f70e1700bb68"
+  },
+  {
+    "path": "manual-launcher.cmd.txt",
+    "bytes": 328,
+    "sha256": "11bf0f3bdcc3c55c95c63e951f9773a2045400dbc1d1570fbf07d1ba132fdf3b"
+  },
+  {
+    "path": "manual-preparation.json",
+    "bytes": 429,
+    "sha256": "9202b398630d3d5180e56b5effe68ef032b67fdcedf2f97a2907bed8ff890b77"
+  },
+  {
+    "path": "post-reboot-help.json",
+    "bytes": 156,
+    "sha256": "8a83b3131b5cb850c034d108c45770dd5a0410bd232bb4badb3fdfeb6f9895d2"
+  },
+  {
+    "path": "recovery-plan.json",
+    "bytes": 464,
+    "sha256": "2ea6ca9bf7375453d2ce6b00771d7fdce0e92f8d2b9ac5de3811ece5f11cc7f3"
+  },
+  {
+    "path": "recovery-system-state.json",
+    "bytes": 272,
+    "sha256": "ce734f915d3f8d55d449ea97b450d7df410362b10d42fbb617d83ce983242671"
+  },
+  {
+    "path": "release-manifest.local.json",
+    "bytes": 922,
+    "sha256": "30ea2a2201152eefed44801601d7fd58fbc610eef7f1b7421a2ad6e36c3d2ba6"
+  },
+  {
+    "path": "release-preflight.txt",
+    "bytes": 949,
+    "sha256": "3ba7f55c40204ee57a3d53ceb12a24414bfa72d2c254ecaf9b08c618180fa32f"
+  },
+  {
+    "path": "release-regression.txt",
+    "bytes": 3980,
+    "sha256": "d29871a7818c950fce379a207e54fb2a1e77451ee0c09d7f136e8b9c527ec86d"
+  },
+  {
+    "path": "resource-exhaustion-events.json",
+    "bytes": 1396,
+    "sha256": "fc8b98ce22c2ae7d44f0d816db6403859173d8759e3aa94d2f5e771dcbe7947f"
+  },
+  {
+    "path": "safety-check.json",
+    "bytes": 912,
+    "sha256": "57f5f3da5382e3e6cd9055696c717a951338cb0fc358115c14506d8084d17fea"
+  },
+  {
+    "path": "SHA256SUMS.txt",
+    "bytes": 369,
+    "sha256": "aff7bd7ad029f92817a911945189d469f703b1985e789b3b3a50b64bcc7301cf"
+  },
+  {
+    "path": "streaming-archive-tests.txt",
+    "bytes": 102,
+    "sha256": "d1fee7f22d7a3b3ae65ef3322fedc8adf223b22c29d6030649eda1da73de8498"
+  },
+  {
+    "path": "verify_packages.py.txt",
+    "bytes": 7650,
+    "sha256": "8837c34a0381367bc921e537bdeeb21fe4e23126b6ba52957518967cc0cbb1d6"
+  }
+]

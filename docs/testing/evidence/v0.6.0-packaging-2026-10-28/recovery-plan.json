@@ -1,0 +1,12 @@
+{
+  "runtime_commit": "0a23fc676abc570120751ae200b7819068002697",
+  "packaging_commit": "47b753ec11b9ce5d5f0f439a71af58e8f0129b37",
+  "runtime_sources_unchanged": true,
+  "serial_streaming_zip": true,
+  "preserved_cpu_archives": true,
+  "preserved_interrupted_archive": true,
+  "source_root": "E:\\my\\my\\VoxGo060-20261028\\src",
+  "artifacts": "E:\\my\\my\\VoxGo060-20261028\\artifacts",
+  "system_pagefile_modified": false,
+  "wsl_stopped": false
+}

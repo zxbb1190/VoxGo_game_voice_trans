@@ -1,0 +1,444 @@
+
+> voxgo-api@0.1.0 test
+> node --test
+
+TAP version 13
+# (node:22472) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: anonymous visitors see only login and never receive dashboard data
+ok 1 - anonymous visitors see only login and never receive dashboard data
+  ---
+  duration_ms: 24.6672
+  type: 'test'
+  ...
+# Subtest: login sets host-only HttpOnly session cookie, logout revokes it immediately
+ok 2 - login sets host-only HttpOnly session cookie, logout revokes it immediately
+  ---
+  duration_ms: 16.86
+  type: 'test'
+  ...
+# Subtest: five failed passwords lock the source IP for ten minutes without credential details
+ok 3 - five failed passwords lock the source IP for ten minutes without credential details
+  ---
+  duration_ms: 8.4101
+  type: 'test'
+  ...
+# Subtest: login and admin pre-rate-limits fail closed and remain independent
+ok 4 - login and admin pre-rate-limits fail closed and remain independent
+  ---
+  duration_ms: 19.7799
+  type: 'test'
+  ...
+# Subtest: anonymous admin requests and foreign-origin login do not consume valid-user quotas
+ok 5 - anonymous admin requests and foreign-origin login do not consume valid-user quotas
+  ---
+  duration_ms: 7.8454
+  type: 'test'
+  ...
+# Subtest: password rotation revokes old cookies without waiting for expiry
+ok 6 - password rotation revokes old cookies without waiting for expiry
+  ---
+  duration_ms: 8.1418
+  type: 'test'
+  ...
+# Subtest: host and Origin guards reject alternate Worker hosts and cross-site login
+ok 7 - host and Origin guards reject alternate Worker hosts and cross-site login
+  ---
+  duration_ms: 4.9242
+  type: 'test'
+  ...
+# Subtest: authorized API enforces methods, bounded days and returns aggregate-only views
+ok 8 - authorized API enforces methods, bounded days and returns aggregate-only views
+  ---
+  duration_ms: 8.6426
+  type: 'test'
+  ...
+# Subtest: public config and upload guards stay outside dashboard authentication
+ok 9 - public config and upload guards stay outside dashboard authentication
+  ---
+  duration_ms: 5.3478
+  type: 'test'
+  ...
+# (node:11020) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: empty range uses complete UTC dates while today is partial and unevaluated
+ok 10 - empty range uses complete UTC dates while today is partial and unevaluated
+  ---
+  duration_ms: 13.4188
+  type: 'test'
+  ...
+# Subtest: classification coverage separates payload support from events and preserves historical residuals
+ok 11 - classification coverage separates payload support from events and preserves historical residuals
+  ---
+  duration_ms: 7.0353
+  type: 'test'
+  ...
+# Subtest: today anomalies never enter complete range or health; UTC midnight switches boundaries
+ok 12 - today anomalies never enter complete range or health; UTC midnight switches boundaries
+  ---
+  duration_ms: 7.2699
+  type: 'test'
+  ...
+# Subtest: lifecycle separates record share from app start rate, with zero denominators null
+ok 13 - lifecycle separates record share from app start rate, with zero denominators null
+  ---
+  duration_ms: 5.0227
+  type: 'test'
+  ...
+# Subtest: unclean start observation is seven-day only, sample gated, strict, and warning only
+ok 14 - unclean start observation is seven-day only, sample gated, strict, and warning only
+  ---
+  duration_ms: 5.7696
+  type: 'test'
+  ...
+# Subtest: provider and health severities require their own samples; threshold edges stay strict
+ok 15 - provider and health severities require their own samples; threshold edges stay strict
+  ---
+  duration_ms: 7.0507
+  type: 'test'
+  ...
+# Subtest: DAU compares yesterday with three prior complete dates only above 30 baseline installations
+ok 16 - DAU compares yesterday with three prior complete dates only above 30 baseline installations
+  ---
+  duration_ms: 8.3036
+  type: 'test'
+  ...
+# Subtest: API failure concentration ranks install-days, rounds up top population, and returns no identities
+ok 17 - API failure concentration ranks install-days, rounds up top population, and returns no identities
+  ---
+  duration_ms: 6.3199
+  type: 'test'
+  ...
+# Subtest: API concentration is null when participating rows have no failures
+ok 18 - API concentration is null when participating rows have no failures
+  ---
+  duration_ms: 5.9752
+  type: 'test'
+  ...
+# Subtest: ASR distinguishes unknown legacy zero defaults from valid rows and null denominators
+ok 19 - ASR distinguishes unknown legacy zero defaults from valid rows and null denominators
+  ---
+  duration_ms: 7.6631
+  type: 'test'
+  ...
+# Subtest: bounded range and query failure
+ok 20 - bounded range and query failure
+  ---
+  duration_ms: 4.552
+  type: 'test'
+  ...
+# Subtest: ASR drop-only reports retain event coverage without inventing a segment denominator
+ok 21 - ASR drop-only reports retain event coverage without inventing a segment denominator
+  ---
+  duration_ms: 4.5374
+  type: 'test'
+  ...
+# Subtest: complete range preserves weighted metrics, buckets and unknown breakdown categories
+ok 22 - complete range preserves weighted metrics, buckets and unknown breakdown categories
+  ---
+  duration_ms: 5.0302
+  type: 'test'
+  ...
+# Subtest: Python canonical fixture matches digest
+ok 23 - Python canonical fixture matches digest
+  ---
+  duration_ms: 5.6723
+  type: 'test'
+  ...
+# Subtest: strict schema, limits, impossible/future/stale dates and digest rejected
+ok 24 - strict schema, limits, impossible/future/stale dates and digest rejected
+  ---
+  duration_ms: 2.1189
+  type: 'test'
+  ...
+# Subtest: missing, corrupt or failed config fails closed
+ok 25 - missing, corrupt or failed config fails closed
+  ---
+  duration_ms: 16.8933
+  type: 'test'
+  ...
+# Subtest: idempotent repeats, reversed arrivals and conflicting revisions preserve immutable data
+ok 26 - idempotent repeats, reversed arrivals and conflicting revisions preserve immutable data
+  ---
+  duration_ms: 4.8366
+  type: 'test'
+  ...
+# Subtest: content type, method and bounded streamed body
+ok 27 - content type, method and bounded streamed body
+  ---
+  duration_ms: 0.7877
+  type: 'test'
+  ...
+# Subtest: storage failure never acknowledges a snapshot
+ok 28 - storage failure never acknowledges a snapshot
+  ---
+  duration_ms: 1.0071
+  type: 'test'
+  ...
+# Subtest: per installation rate brake returns retry-after
+ok 29 - per installation rate brake returns retry-after
+  ---
+  duration_ms: 5.5187
+  type: 'test'
+  ...
+# Subtest: cleanup paginates and deletes expired data without unsupported TTL
+ok 30 - cleanup paginates and deletes expired data without unsupported TTL
+  ---
+  duration_ms: 0.7325
+  type: 'test'
+  ...
+# Subtest: health maintenance works even with telemetry disabled
+ok 31 - health maintenance works even with telemetry disabled
+  ---
+  duration_ms: 0.3916
+  type: 'test'
+  ...
+# (node:12084) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: disabled by default, missing schema/bindings fail closed; methods and routes
+ok 32 - disabled by default, missing schema/bindings fail closed; methods and routes
+  ---
+  duration_ms: 22.1937
+  type: 'test'
+  ...
+# Subtest: new, duplicate and delayed snapshots acknowledge exact identities without regression
+ok 33 - new, duplicate and delayed snapshots acknowledge exact identities without regression
+  ---
+  duration_ms: 13.2593
+  type: 'test'
+  ...
+# Subtest: equal revision conflicting hash and counter regression reject without overwriting
+ok 34 - equal revision conflicting hash and counter regression reject without overwriting
+  ---
+  duration_ms: 6.1369
+  type: 'test'
+  ...
+# Subtest: old snapshots preserve lifecycle counters and new snapshots require both lifecycle fields
+ok 35 - old snapshots preserve lifecycle counters and new snapshots require both lifecycle fields
+  ---
+  duration_ms: 6.4013
+  type: 'test'
+  ...
+# Subtest: strict schema/hash, streamed bytes, UTF8 and media type validation
+ok 36 - strict schema/hash, streamed bytes, UTF8 and media type validation
+  ---
+  duration_ms: 6.5669
+  type: 'test'
+  ...
+# Subtest: limiters prevent writes; missing bindings never bypass protection
+ok 37 - limiters prevent writes; missing bindings never bypass protection
+  ---
+  duration_ms: 9.4297
+  type: 'test'
+  ...
+# Subtest: transaction failure returns no ACK and rolls back INSERT
+ok 38 - transaction failure returns no ACK and rolls back INSERT
+  ---
+  duration_ms: 4.7543
+  type: 'test'
+  ...
+# Subtest: scheduled cleanup runs even disabled and keeps exactly 30 UTC dates
+ok 39 - scheduled cleanup runs even disabled and keeps exactly 30 UTC dates
+  ---
+  duration_ms: 5.377
+  type: 'test'
+  ...
+# Subtest: Basic exact ACK, duplicate, conflict and superseded state; sticky booleans
+ok 40 - Basic exact ACK, duplicate, conflict and superseded state; sticky booleans
+  ---
+  duration_ms: 7.0911
+  type: 'test'
+  ...
+# Subtest: Basic strict whitelist, booleans, source, hash, dates and body limits
+ok 41 - Basic strict whitelist, booleans, source, hash, dates and body limits
+  ---
+  duration_ms: 9.7735
+  type: 'test'
+  ...
+# Subtest: Basic and Full switches, sampling and limiter budgets are independent
+ok 42 - Basic and Full switches, sampling and limiter budgets are independent
+  ---
+  duration_ms: 7.0462
+  type: 'test'
+  ...
+# Subtest: Full v2 metrics preserve v1 writes and reject scope/counter inconsistencies
+ok 43 - Full v2 metrics preserve v1 writes and reject scope/counter inconsistencies
+  ---
+  duration_ms: 9.5436
+  type: 'test'
+  ...
+# Subtest: Full v2 accepts complete ASR counters and old snapshots preserve their values
+ok 44 - Full v2 accepts complete ASR counters and old snapshots preserve their values
+  ---
+  duration_ms: 9.8685
+  type: 'test'
+  ...
+# Subtest: Basic storage failures have no ACK and transaction rolls back
+ok 45 - Basic storage failures have no ACK and transaction rolls back
+  ---
+  duration_ms: 4.8517
+  type: 'test'
+  ...
+# Subtest: real Python classified fixture keeps canonical hash, all 63 counters and historical residuals
+ok 46 - real Python classified fixture keeps canonical hash, all 63 counters and historical residuals
+  ---
+  duration_ms: 5.9723
+  type: 'test'
+  ...
+# Subtest: classified snapshots are atomic, bounded by D1 binds, exact ACK and monotonic across old/new formats
+ok 47 - classified snapshots are atomic, bounded by D1 binds, exact ACK and monotonic across old/new formats
+  ---
+  duration_ms: 19.5195
+  type: 'test'
+  ...
+# Subtest: classification shape is strict, cross-counter checked, numeric only and Full-authorized
+ok 48 - classification shape is strict, cross-counter checked, numeric only and Full-authorized
+  ---
+  duration_ms: 23.8395
+  type: 'test'
+  ...
+# Subtest: 0006 adds zero counters to real historical 0001..0005 rows without attribution or rewriting
+ok 49 - 0006 adds zero counters to real historical 0001..0005 rows without attribution or rewriting
+  ---
+  duration_ms: 5.2654
+  type: 'test'
+  ...
+# Subtest: cleanup allocates both tables independent bounded quotas and attempts
+ok 50 - cleanup allocates both tables independent bounded quotas and attempts
+  ---
+  duration_ms: 7.6803
+  type: 'test'
+  ...
+# (node:31408) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: migration is independent and repeatable; successful login stores only a token hash
+ok 51 - migration is independent and repeatable; successful login stores only a token hash
+  ---
+  duration_ms: 14.9119
+  type: 'test'
+  ...
+# Subtest: logout revokes this session immediately without revoking another session
+ok 52 - logout revokes this session immediately without revoking another session
+  ---
+  duration_ms: 6.8465
+  type: 'test'
+  ...
+# Subtest: five failed attempts lock the IP for ten minutes, including the correct password
+ok 53 - five failed attempts lock the IP for ten minutes, including the correct password
+  ---
+  duration_ms: 6.9952
+  type: 'test'
+  ...
+# Subtest: invalid values share one failure response and per-IP counters store no raw IP or password
+ok 54 - invalid values share one failure response and per-IP counters store no raw IP or password
+  ---
+  duration_ms: 5.7574
+  type: 'test'
+  ...
+# Subtest: cleanup removes expired auth state only
+ok 55 - cleanup removes expired auth state only
+  ---
+  duration_ms: 5.2123
+  type: 'test'
+  ...
+# Subtest: D1 write failures fail closed for login and logout
+ok 56 - D1 write failures fail closed for login and logout
+  ---
+  duration_ms: 5.379
+  type: 'test'
+  ...
+# Subtest: rotating the administrator secret invalidates all existing sessions
+ok 57 - rotating the administrator secret invalidates all existing sessions
+  ---
+  duration_ms: 5.4246
+  type: 'test'
+  ...
+# Subtest: parallel attempts reserve distinct slots before validating credentials
+ok 58 - parallel attempts reserve distinct slots before validating credentials
+  ---
+  duration_ms: 7.4068
+  type: 'test'
+  ...
+# Subtest: classified diagnostics render modes, residuals and distinct payload/event coverage
+ok 59 - classified diagnostics render modes, residuals and distinct payload/event coverage
+  ---
+  duration_ms: 58.0988
+  type: 'test'
+  ...
+# Subtest: classification has no healthy zero-percent appearance without reporting or event coverage
+ok 60 - classification has no healthy zero-percent appearance without reporting or event coverage
+  ---
+  duration_ms: 4.3791
+  type: 'test'
+  ...
+# Subtest: Dashboard separates Partial observation from complete ranges and displays both lifecycle ratios
+ok 61 - Dashboard separates Partial observation from complete ranges and displays both lifecycle ratios
+  ---
+  duration_ms: 3.6295
+  type: 'test'
+  ...
+# Subtest: API panel renders success/failed samples, install-day population and failure concentration
+ok 62 - API panel renders success/failed samples, install-day population and failure concentration
+  ---
+  duration_ms: 3.1614
+  type: 'test'
+  ...
+# Subtest: unknown ASR history renders No valid data without fabricated zero rates
+ok 63 - unknown ASR history renders No valid data without fabricated zero rates
+  ---
+  duration_ms: 2.6167
+  type: 'test'
+  ...
+# Subtest: covered ASR renders permitted rates, drop counts and subset share separately
+ok 64 - covered ASR renders permitted rates, drop counts and subset share separately
+  ---
+  duration_ms: 3.9676
+  type: 'test'
+  ...
+# Subtest: valid ASR zero issues are distinguishable from unavailable denominators
+ok 65 - valid ASR zero issues are distinguishable from unavailable denominators
+  ---
+  duration_ms: 3.1379
+  type: 'test'
+  ...
+# Subtest: drop-only ASR events remain visible while segment rates have no valid denominator
+ok 66 - drop-only ASR events remain visible while segment rates have no valid denominator
+  ---
+  duration_ms: 3.7343
+  type: 'test'
+  ...
+# Subtest: expired login still redirects before rendering Dashboard data
+ok 67 - expired login still redirects before rendering Dashboard data
+  ---
+  duration_ms: 1.4172
+  type: 'test'
+  ...
+# (node:21072) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: RC deployment matrix: legacy Worker reads schema 0005/0006 and rejects classified uploads
+ok 68 - RC deployment matrix: legacy Worker reads schema 0005/0006 and rejects classified uploads
+  ---
+  duration_ms: 307.5942
+  type: 'test'
+  ...
+# Subtest: RC deployment matrix: new Worker requires 0006 for health/classified writes and preserves legacy route compatibility
+ok 69 - RC deployment matrix: new Worker requires 0006 for health/classified writes and preserves legacy route compatibility
+  ---
+  duration_ms: 18.9118
+  type: 'test'
+  ...
+# Subtest: RC legacy Worker rollback requires Full kill switch: config false and classified POST retryable 503
+ok 70 - RC legacy Worker rollback requires Full kill switch: config false and classified POST retryable 503
+  ---
+  duration_ms: 10.1137
+  type: 'test'
+  ...
+1..70
+# tests 70
+# suites 0
+# pass 70
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 456.3108
