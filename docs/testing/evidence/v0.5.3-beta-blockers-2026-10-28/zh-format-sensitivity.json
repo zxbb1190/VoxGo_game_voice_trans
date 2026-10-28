@@ -1,0 +1,170 @@
+[
+  {
+    "id": "beta-zh-1906-10026684690566417990",
+    "raw_cer": 0.43478260869565216,
+    "simplified_hypothesis": "这并不是告别 这是一个偏章的结束,也是新偏章的。",
+    "simplified_character_counts": {
+      "reference_words": 23,
+      "substitutions": 2,
+      "deletions": 2,
+      "insertions": 0,
+      "errors": 4
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-2006-10040380210557600780",
+    "raw_cer": 0.47619047619047616,
+    "simplified_hypothesis": "盖夹等元素属於金属 银河金的元素 当然也是金属",
+    "simplified_character_counts": {
+      "reference_words": 21,
+      "substitutions": 5,
+      "deletions": 0,
+      "insertions": 0,
+      "errors": 5
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1805-10112798408996336578",
+    "raw_cer": 0.4864864864864865,
+    "simplified_hypothesis": "Scotter 4035公尖其出 定期发出前往新特兰在螺卡角停止扣",
+    "simplified_character_counts": {
+      "reference_words": 37,
+      "substitutions": 10,
+      "deletions": 7,
+      "insertions": 1,
+      "errors": 18
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1965-10134195680525011353",
+    "raw_cer": 0.27586206896551724,
+    "simplified_hypothesis": "这里几乎都是沙滩游泳很安全,大部分 地方都有信息来生难受的树音",
+    "simplified_character_counts": {
+      "reference_words": 29,
+      "substitutions": 7,
+      "deletions": 0,
+      "insertions": 0,
+      "errors": 7
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1903-10142207404499844309",
+    "raw_cer": 0.3684210526315789,
+    "simplified_hypothesis": "当所有可用的资源在一个组织的质能部门 得到有效利用时创造力和毒创性就会发生",
+    "simplified_character_counts": {
+      "reference_words": 38,
+      "substitutions": 2,
+      "deletions": 2,
+      "insertions": 0,
+      "errors": 4
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1953-10144930991730701959",
+    "raw_cer": 0.7058823529411765,
+    "simplified_hypothesis": "它随後被传转送到剑桥的阿登",
+    "simplified_character_counts": {
+      "reference_words": 17,
+      "substitutions": 2,
+      "deletions": 5,
+      "insertions": 1,
+      "errors": 8
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1830-10147383166642115307",
+    "raw_cer": 0.5333333333333333,
+    "simplified_hypothesis": "执政党西南非洲人民组织也在议会上 现在就中保速了多数席位",
+    "simplified_character_counts": {
+      "reference_words": 30,
+      "substitutions": 3,
+      "deletions": 5,
+      "insertions": 2,
+      "errors": 10
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1910-10154699825088384418",
+    "raw_cer": 0.5,
+    "simplified_hypothesis": "大利人是出了名字以自我为中心出路",
+    "simplified_character_counts": {
+      "reference_words": 18,
+      "substitutions": 5,
+      "deletions": 3,
+      "insertions": 1,
+      "errors": 9
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1902-1015891181557233386",
+    "raw_cer": 0.4,
+    "simplified_hypothesis": "解出他被送往位於大雅毛市。 的站姆斯配积特医院进行救治",
+    "simplified_character_counts": {
+      "reference_words": 25,
+      "substitutions": 8,
+      "deletions": 0,
+      "insertions": 0,
+      "errors": 8
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1905-10279011772105822622",
+    "raw_cer": 0.7419354838709677,
+    "simplified_hypothesis": "摩尔多瓦的首都是新金纳物当地的",
+    "simplified_character_counts": {
+      "reference_words": 31,
+      "substitutions": 5,
+      "deletions": 16,
+      "insertions": 0,
+      "errors": 21
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1772-10325486695909573217",
+    "raw_cer": 0.1,
+    "simplified_hypothesis": "很可能这个符号只是作为一个标签添加的",
+    "simplified_character_counts": {
+      "reference_words": 20,
+      "substitutions": 0,
+      "deletions": 2,
+      "insertions": 0,
+      "errors": 2
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  },
+  {
+    "id": "beta-zh-1792-10343405611041314630",
+    "raw_cer": 0.4230769230769231,
+    "simplified_hypothesis": "这被称为化学物质的TH 你可以用红干兰去制作",
+    "simplified_character_counts": {
+      "reference_words": 26,
+      "substitutions": 4,
+      "deletions": 5,
+      "insertions": 0,
+      "errors": 9
+    },
+    "new_score_accepted": false,
+    "caveat": "Sensitivity only; one-to-many traditional/simplified mapping is not semantic validation"
+  }
+]

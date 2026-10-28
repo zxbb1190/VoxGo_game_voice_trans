@@ -1,0 +1,4 @@
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*.txt -whitespace
+# Preserve the generated empty-raw review line exactly as captured.
+focused-asr-review.md -whitespace

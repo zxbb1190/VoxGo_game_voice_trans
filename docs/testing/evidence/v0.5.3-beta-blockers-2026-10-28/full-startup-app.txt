@@ -1,0 +1,42 @@
+2026-10-28 09:15:19 | INFO     | 已加载配置: E:\my\my\VoxGo053Beta-20261028-closeout\dist\VoxGo\acceptance-config.json
+2026-10-28 09:15:19 | INFO     | benchmark audio mode enabled: E:\my\my\VoxGo053Beta-20261028-closeout\control\silence.wav
+2026-10-28 09:15:19 | INFO     | 正在启动...
+2026-10-28 09:15:19 | INFO     | 手机端: http://127.0.0.1:18954/mobile
+2026-10-28 09:15:20 | INFO     | system tray initialized: visible=True
+2026-10-28 09:15:20 | INFO     | 浮窗已启动
+2026-10-28 09:15:21 | INFO     | 后台启动线程已启动
+2026-10-28 09:15:21 | INFO     | Whisper 模型目录: E:\my\my\VoxGo053Beta-20261028-closeout\dist\VoxGo\_internal\.models
+2026-10-28 09:15:21 | INFO     | 翻译事件循环已启动
+2026-10-28 09:15:21 | INFO     | Whisper 已启用 local_files_only，仅使用本地模型缓存
+2026-10-28 09:15:21 | INFO     | 加载 Whisper 模型: base (device=cpu, compute_type=int8, cpu_threads=1, num_workers=1, attempt=1/2)
+2026-10-28 09:15:21 | INFO     | Whisper 模型加载完成
+2026-10-28 09:15:21 | INFO     | 热键已注册: 显示/隐藏=ctrl+shift+t, 清空历史=ctrl+alt+c, 暂停/恢复=ctrl+alt+s
+2026-10-28 09:15:21 | INFO     | speech processing queue started
+2026-10-28 09:15:21 | INFO     | benchmark audio loaded: path=E:\my\my\VoxGo053Beta-20261028-closeout\control\silence.wav, duration=1.0s, sample_rate=16000Hz, speech=4.0s, gap=3.0s, test_duration=600.0s
+2026-10-28 09:15:21 | INFO     | benchmark audio source started: E:\my\my\VoxGo053Beta-20261028-closeout\control\silence.wav
+2026-10-28 09:15:21 | INFO     | 后端服务已启动
+2026-10-28 09:15:22 | INFO     | 跳过自动更新检查：尚未到达检查间隔或自动检查已关闭
+2026-10-28 09:15:25 | INFO     | benchmark speech segment injected: #1 4.0s, next_in=7.0s
+2026-10-28 09:15:25 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:25 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:15:27 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:32 | INFO     | benchmark speech segment injected: #2 4.0s, next_in=7.0s
+2026-10-28 09:15:32 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:32 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:15:34 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:39 | INFO     | benchmark speech segment injected: #3 4.0s, next_in=7.0s
+2026-10-28 09:15:39 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:39 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:15:41 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:46 | INFO     | benchmark speech segment injected: #4 4.0s, next_in=7.0s
+2026-10-28 09:15:46 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:46 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:15:48 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:53 | INFO     | benchmark speech segment injected: #5 4.0s, next_in=7.0s
+2026-10-28 09:15:53 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:15:53 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:15:55 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:16:00 | INFO     | benchmark speech segment injected: #6 4.0s, next_in=7.0s
+2026-10-28 09:16:00 | INFO     | candidate low confidence: labels=candidate,low_confidence, reason=peak_margin=-160.0dB, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:16:00 | INFO     | sent to whisper: labels=candidate,low_confidence, direction=en->zh, revision=1, whisper_language=auto, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS, cut=benchmark_audio
+2026-10-28 09:16:02 | INFO     | empty asr: text_len=0, lang=en, prob=0.37, voice=4.00s, total=4.00s, peak=-200.0 dBFS, gate=-40.0 dBFS

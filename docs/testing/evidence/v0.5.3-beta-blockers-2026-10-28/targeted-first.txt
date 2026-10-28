@@ -1,0 +1,71 @@
+2026-10-28 09:10:34.746 | WARNING  | voxgo.translation.openai_compatible:translate:95 - 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 09:10:34.772 | WARNING  | voxgo.translation.openai_compatible:translate:95 - 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 09:10:34.796 | WARNING  | voxgo.translation.openai_compatible:translate:95 - 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 09:10:34.821 | WARNING  | voxgo.translation.openai_compatible:translate:95 - 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 09:10:34.941 | ERROR    | voxgo.translation.openai_compatible:translate:141 - 翻译 API 超时
+2026-10-28 09:10:34.964 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->zh): next valid fixture... → fixture complete... (0.02s)
+2026-10-28 09:10:35.020 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->ja): normal fixture... → fixture complete... (0.02s)
+2026-10-28 09:10:35.032 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->ko): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.044 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->ru): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.056 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->zh): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.068 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ja->en): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.081 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ja->ko): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.093 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ja->ru): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.106 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ja->zh): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.119 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ko->en): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.131 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ko->ja): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.143 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ko->ru): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.156 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ko->zh): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.168 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ru->en): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.180 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ru->ja): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.197 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ru->ko): normal fixture... → fixture complete... (0.02s)
+2026-10-28 09:10:35.210 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ru->zh): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.226 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(zh->en): normal fixture... → fixture complete... (0.02s)
+2026-10-28 09:10:35.239 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(zh->ja): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.252 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(zh->ko): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.265 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(zh->ru): normal fixture... → fixture complete... (0.01s)
+2026-10-28 09:10:35.278 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->zh): next fixture... → second complete... (0.01s)
+2026-10-28 09:10:35.324 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->zh): normal fixture... → fixture complete... (0.02s)
+2026-10-28 09:10:35.324 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: fixture complete (0.0s)
+2026-10-28 09:10:35.398 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(ru->ja): Новая команда... → fixture complete... (0.02s)
+2026-10-28 09:10:35.398 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: fixture complete (0.0s)
+2026-10-28 09:10:35.447 | WARNING  | voxgo.translation.openai_compatible:translate:95 - 翻译 API 达到输出上限: max_tokens=80
+2026-10-28 09:10:35.447 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: [翻译不完整] 服务商达到输出上限，未显示截断译文。请检查 max_tokens 设置。 (0.0s)
+2026-10-28 09:10:35.459 | INFO     | voxgo.asr.pipeline:_process:663 - sent to whisper: labels=candidate, direction=en->zh, revision=7, whisper_language=en, voice=0.10s, total=0.10s, peak=-20.0 dBFS, gate=-40.0 dBFS, cut=test
+2026-10-28 09:10:35.461 | INFO     | voxgo.asr.pipeline:_process:811 - [recognition] hello there (lang=en, prob=0.95, expected=en, direction=en->zh, revision=7, avg_logprob=0.00, no_speech=0.00, 0.0s)
+2026-10-28 09:10:35.462 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: translated (0.0s)
+2026-10-28 09:10:35.463 | INFO     | voxgo.translation.runtime:_translate_current:298 - translation skipped: stale_language_flow, item_revision=1, current_revision=2, snapshot=en->zh, text=hello
+2026-10-28 09:10:35.463 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: translated (0.0s)
+2026-10-28 09:10:35.464 | INFO     | voxgo.translation.runtime:_translate_current:319 - translation skipped: language_mismatch:zh->en:prob=0.95:threshold=0.85, detected=zh, expected=en, prob=0.95, text=你好
+2026-10-28 09:10:35.464 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: translated (0.0s)
+2026-10-28 09:10:35.467 | DEBUG    | voxgo.runtime.priority:apply_game_friendly_thread_priority:46 - failed to set thread priority: [WinError 6] 句柄无效。
+2026-10-28 09:10:35.489 | INFO     | voxgo.translation.runtime:start_loop:93 - 翻译事件循环已启动
+2026-10-28 09:10:35.490 | WARNING  | voxgo.app:attempt:1091 - Shutdown cleanup failed for audio: device stuck
+2026-10-28 09:10:35.491 | WARNING  | voxgo.app:attempt:1091 - Shutdown cleanup failed for local translation: service is still running
+2026-10-28 09:10:35.627 | INFO     | voxgo.audio.capture:_emit_speech_buffer:1295 - 检测到语音片段: 6400 字节, 0.2s/0.0s 语音, 1 块/0 语音块, peak=-120.0 dBFS, gate=-40.0 dBFS (synthetic test)
+2026-10-28 09:10:35.627 | INFO     | voxgo.audio.capture:stop:955 - 音频捕获已停止
+2026-10-28 09:10:35.628 | INFO     | voxgo.asr.pipeline:_log_candidate:1595 - candidate accepted: labels=candidate, reason=accepted, voice=1.40s, total=2.00s, peak=-20.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:10:35.628 | INFO     | voxgo.asr.pipeline:_log_candidate:1595 - candidate accepted: labels=candidate, reason=accepted, voice=1.40s, total=2.00s, peak=-20.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:10:35.628 | INFO     | voxgo.asr.pipeline:_log_candidate:1595 - candidate accepted: labels=candidate, reason=accepted, voice=1.40s, total=2.00s, peak=-20.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:10:35.628 | INFO     | voxgo.asr.pipeline:_log_candidate:1595 - candidate accepted: labels=candidate, reason=accepted, voice=1.40s, total=2.00s, peak=-20.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:10:35.628 | INFO     | voxgo.asr.pipeline:_log_candidate:1595 - candidate accepted: labels=candidate, reason=accepted, voice=1.40s, total=2.00s, peak=-20.0 dBFS, gate=-40.0 dBFS
+2026-10-28 09:10:35.642 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: [翻译失败] synthetic (0.0s)
+2026-10-28 09:10:35.656 | ERROR    | voxgo.translation.google:translate:78 - Google 翻译 API 超时
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.google:translate:87 - Google 翻译异常: private endpoint
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.google:translate:68 - Google 翻译 API 错误: 429 - private error body
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.google:translate:68 - Google 翻译 API 错误: 503 - private error body
+2026-10-28 09:10:35.657 | WARNING  | voxgo.translation.google:translate:52 - Google 翻译 API 返回空译文: {'data': {'translations': []}, 'choices': [{'message': {'content': ''}}]}
+2026-10-28 09:10:35.657 | INFO     | voxgo.translation.google:translate:54 - Google 翻译(en->zh): private speech... → ... (0.00s)
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.google:translate:87 - Google 翻译异常: private body
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.openai_compatible:translate:141 - 翻译 API 超时
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.openai_compatible:translate:150 - 翻译异常: private endpoint
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.openai_compatible:translate:131 - 翻译 API 错误: 429 - private error body
+2026-10-28 09:10:35.657 | ERROR    | voxgo.translation.openai_compatible:translate:131 - 翻译 API 错误: 503 - private error body
+2026-10-28 09:10:35.658 | WARNING  | voxgo.translation.openai_compatible:translate:107 - 翻译 API 返回空 content: finish_reason=None, reasoning_len=0
+2026-10-28 09:10:35.658 | INFO     | voxgo.translation.openai_compatible:translate:119 - 翻译(en->zh): private speech... → ... (0.00s)
+2026-10-28 09:10:35.658 | ERROR    | voxgo.translation.openai_compatible:translate:150 - 翻译异常: private body
+2026-10-28 09:10:35.674 | INFO     | voxgo.translation.runtime:_translate_current:379 - translated: [翻译失败] private error body (0.0s)
+----------------------------------------------------------------------
+Ran 31 tests in 1.120s
+
+OK

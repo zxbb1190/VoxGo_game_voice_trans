@@ -1,0 +1,19 @@
+{
+  "root": "E:\\my\\my\\VoxGo053Beta-20261028-closeout",
+  "changes": [
+    [
+      "root / \"build\" / \"packaged_config\" / \"config.json\"",
+      "'E:\\\\my\\\\my\\\\VoxGo053Beta-20261028-closeout\\\\staging_config\\\\config.json'"
+    ],
+    [
+      "root / \"build\" / \"packaged_models\" / \".models\"",
+      "'E:\\\\my\\\\my\\\\VoxGo053Beta-20261028-closeout\\\\packaged_models\\\\.models'"
+    ],
+    [
+      "[\"voxgo/app.py\"]",
+      "[str(root / \"voxgo\" / \"app.py\")]"
+    ]
+  ],
+  "original_spec_sha256": "ee0917018a87372f34e4f5d7e163252e9fc2a4ca728556743ee4088a0b17e578",
+  "targets_verified_fresh_and_contained": true
+}

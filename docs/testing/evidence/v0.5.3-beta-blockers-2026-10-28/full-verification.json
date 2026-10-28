@@ -1,0 +1,76 @@
+{
+  "path": "E:\\my\\my\\VoxGo053Beta-20261028-closeout\\dist\\VoxGo",
+  "exe_sha256": "f044647b0b3902e4c404d4d001d96e826b50a1f55829c328eaba5a78e4891c07",
+  "core_exe_plus_internal_bytes": 992209889,
+  "formal_runtime_source_sha256": {
+    "voxgo/translation/openai_compatible.py": "24a5791a4f42e5317bb5e165da2cf2d077d796bfec7c8d25f33d994e876cfa71",
+    "voxgo/translation/runtime.py": "dae1ae1afb9420e8032ed8bb73a10fcd6a56907cb561c3749ed8fe3a0a96c25c"
+  },
+  "app_log": "full-startup-app.txt",
+  "backend_local_base_loaded": true,
+  "gui_automation_target_found": false,
+  "native_full_gui_steps_executed": [],
+  "full_consent_authority": "unknown",
+  "full_authorized": false,
+  "real_api_requests": 0,
+  "proxy_connects_blocked": 1,
+  "proxy_payloads_forwarded": 0,
+  "audio": "benchmark silence only; not system/private audio; not quality/performance evidence",
+  "normal_gui_exit_verified": false,
+  "cleanup": "owned process path checked; forced process cleanup after GUI unavailable",
+  "first_build_error": "temporary spec path was str, corrected to Path; first failure retained; formal spec unchanged",
+  "silence_asr_submissions": 6,
+  "empty_asr_returns": 6,
+  "temporary_spec_sha256": "e85a90d775cba0229016ba28d7490979866c3b6218febbf6b312f1552da58a63",
+  "original_spec_unchanged": true,
+  "models": [
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "config.json",
+      "sha256": "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a"
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "model.bin",
+      "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9"
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "vocabulary.txt",
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "config.json",
+      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "model.bin",
+      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "vocabulary.txt",
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ]
+}

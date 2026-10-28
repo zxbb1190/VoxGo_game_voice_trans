@@ -1,0 +1,2 @@
+{"at": 1793150115.5524626, "kind": "gui_launched", "pid": 36860, "audio": "E:\\my\\my\\VoxGo053Beta-20261028-closeout\\control\\silence.wav", "exe": "E:\\my\\my\\VoxGo053Beta-20261028-closeout\\dist\\VoxGo\\VoxGo.exe"}
+{"at": 1793150122.1205144, "kind": "proxy_block", "destination": "api.voxgo.cn:443", "payload_forwarded": false}

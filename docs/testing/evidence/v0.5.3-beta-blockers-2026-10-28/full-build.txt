@@ -1,0 +1,22 @@
+174 INFO: PyInstaller: 6.11.1, contrib hooks: 2026.5
+174 INFO: Python: 3.10.20
+183 INFO: Platform: Windows-10-10.0.26300-SP0
+183 INFO: Python environment: C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 321, in <module>
+    run()
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 215, in run
+    run_build(pyi_config, spec_file, **vars(args))
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\__main__.py", line 70, in run_build
+    PyInstaller.building.build_main.main(pyi_config, spec_file, **kwargs)
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\build_main.py", line 1252, in main
+    build(specfile, distpath, workpath, clean_build)
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\build_main.py", line 1192, in build
+    exec(code, spec_namespace)
+  File "E:/my/my/VoxGo053Beta-20261028-closeout/VoxGo-Full-closeout.spec", line 15, in <module>
+    safe_config.parent.mkdir(parents=True, exist_ok=True)
+AttributeError: 'str' object has no attribute 'parent'

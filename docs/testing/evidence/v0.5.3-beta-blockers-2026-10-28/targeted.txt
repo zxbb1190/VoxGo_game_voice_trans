@@ -1,0 +1,52 @@
+C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\traceback.py:376: RuntimeWarning: coroutine 'BetaReleaseBlockerTests.test_fallback_request_cancels_on_its_own_loop_without_stopping_new_work.<locals>.close' was never awaited
+Coroutine created at (most recent call last)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 64, in _callTestMethod
+    self._callMaybeAsync(method)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 87, in _callMaybeAsync
+    return self._asyncioTestLoop.run_until_complete(fut)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 1901, in _run_once
+    handle._run()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 101, in _asyncioLoopRunner
+    ret = await awaitable
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\tests\test_beta_release_blockers.py", line 237, in test_fallback_request_cancels_on_its_own_loop_without_stopping_new_work
+    self.assertTrue(runtime.close())
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\translation\runtime.py", line 211, in close
+    self._run_in_private_event_loop(self.client.close())
+  result.append(FrameSummary(
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+======================================================================
+ERROR: test_fallback_request_cancels_on_its_own_loop_without_stopping_new_work (tests.test_beta_release_blockers.BetaReleaseBlockerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 64, in _callTestMethod
+    self._callMaybeAsync(method)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 87, in _callMaybeAsync
+    return self._asyncioTestLoop.run_until_complete(fut)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py", line 101, in _asyncioLoopRunner
+    ret = await awaitable
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\tests\test_beta_release_blockers.py", line 237, in test_fallback_request_cancels_on_its_own_loop_without_stopping_new_work
+    self.assertTrue(runtime.close())
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\translation\runtime.py", line 211, in close
+    self._run_in_private_event_loop(self.client.close())
+  File "C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\translation\runtime.py", line 228, in _run_in_private_event_loop
+    return loop.run_until_complete(coro)
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 625, in run_until_complete
+    self._check_running()
+  File "C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py", line 586, in _check_running
+    raise RuntimeError(
+RuntimeError: Cannot run the event loop while another loop is running
+
+----------------------------------------------------------------------
+Ran 36 tests in 1.110s
+
+FAILED (errors=1)
