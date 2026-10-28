@@ -1,0 +1,8 @@
+{
+  "exception": "NameError",
+  "message": "name 'language_label' is not defined",
+  "running_flag": true,
+  "speech_worker_started": true,
+  "audio_capture_started": false,
+  "audio_timer_created": false
+}

@@ -1,0 +1,93 @@
+{
+  "version": "0.6.0",
+  "source_commit": "5615b599c1f240594c198b0a5e22db89cf3c6c35",
+  "source_worktree": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator",
+  "staging_root": "E:\\my\\my\\VoxGo060-R2-20261028",
+  "source_root": "E:\\my\\my\\VoxGo060-R2-20261028\\src",
+  "source_archive_sha256": "1adcfd4b5693a868e8f5b3e85d33cf4560559bc5699c19224180a8f043d65ca0",
+  "fresh_mutation_targets": [
+    "dist/VoxGo",
+    "build/VoxGo",
+    "build/packaged_config",
+    "build/packaged_models",
+    "release/VoxGo-v0.6.0-lite",
+    "release/VoxGo-v0.6.0-lite.zip",
+    "release/VoxGo-v0.6.0-full",
+    "release/VoxGo-v0.6.0-full.zip",
+    "release/VoxGo-v0.6.0-full-cuda",
+    "release/VoxGo-v0.6.0-full-cuda.zip",
+    "release/VoxGo-v0.6.0-cuda-runtime",
+    "release/VoxGo-v0.6.0-cuda-runtime.zip"
+  ],
+  "read_only_junctions": {
+    ".venv-win": "E:\\my\\my\\game_voice_translator\\.venv-win",
+    ".models": "E:\\my\\my\\game_voice_translator\\.models",
+    "runtime/cuda": "E:\\my\\my\\game_voice_translator\\runtime\\cuda"
+  },
+  "whisper": [
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "config.json",
+      "sha256": "56a6d8110d311f19c8f0471e562832c7527f146b567275bfca59fcf7c184da9a",
+      "bytes": 2309
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "model.bin",
+      "sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+      "bytes": 145217532
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+      "bytes": 2203239
+    },
+    {
+      "model": "base",
+      "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+      "file": "vocabulary.txt",
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+      "bytes": 459861
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "config.json",
+      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+      "bytes": 2370
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "model.bin",
+      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+      "bytes": 483546902
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+      "bytes": 2203239
+    },
+    {
+      "model": "small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "file": "vocabulary.txt",
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+      "bytes": 459861
+    }
+  ],
+  "tools": {
+    "pyinstaller": "6.11.1",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.7.2",
+    "PyQt5": "5.15.9"
+  },
+  "network_downloads_allowed": false,
+  "production_operations_allowed": false
+}

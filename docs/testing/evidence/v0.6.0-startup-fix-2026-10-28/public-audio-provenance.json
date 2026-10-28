@@ -1,0 +1,62 @@
+[
+  {
+    "id": "beta-zh-1953-10144930991730701959",
+    "language": "zh",
+    "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\five-language-beta-20261027\\corpus\\audio\\zh-10144930991730701959.wav",
+    "wav_sha256": "5e50fad758ac73aec52c48b978f5ed24073894a32d99b6929ad90cfa05cfba27",
+    "seconds": 5.04,
+    "license": "CC-BY-4.0",
+    "source_dataset": "google/fleurs",
+    "source_revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "attribution": "FLEURS; Alexis Conneau et al., Google (2022); source contributors",
+    "reference_text": "他随后被转送到剑桥的阿登布鲁克医院。"
+  },
+  {
+    "id": "beta-en-1776-1038214857203833067",
+    "language": "en",
+    "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\five-language-beta-20261027\\corpus\\audio\\en-1038214857203833067.wav",
+    "wav_sha256": "50c508f2a1b759c6e2bccb0ab2634d706d572df7239f793d926787a394f3ad3a",
+    "seconds": 4.8,
+    "license": "CC-BY-4.0",
+    "source_dataset": "google/fleurs",
+    "source_revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "attribution": "FLEURS; Alexis Conneau et al., Google (2022); source contributors",
+    "reference_text": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\"."
+  },
+  {
+    "id": "beta-ja-1972-10683203810610128933",
+    "language": "ja",
+    "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\five-language-beta-20261027\\corpus\\audio\\ja-10683203810610128933.wav",
+    "wav_sha256": "7bf3ebbe191f9c9dd66c77b86efae3981bedf9d6752d13a2fce272c241456e83",
+    "seconds": 8.22,
+    "license": "CC-BY-4.0",
+    "source_dataset": "google/fleurs",
+    "source_revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "attribution": "FLEURS; Alexis Conneau et al., Google (2022); source contributors",
+    "reference_text": "羽を持ち、空を飛べるので、恐竜だと思っていない人も大勢います。"
+  },
+  {
+    "id": "beta-ko-1677-10745666594192256552",
+    "language": "ko",
+    "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\five-language-beta-20261027\\corpus\\audio\\ko-10745666594192256552.wav",
+    "wav_sha256": "d92164bb8cd9e1faa89ef520664af90bf9d64461ba61a2dbec9532931c211d1b",
+    "seconds": 4.68,
+    "license": "CC-BY-4.0",
+    "source_dataset": "google/fleurs",
+    "source_revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "attribution": "FLEURS; Alexis Conneau et al., Google (2022); source contributors",
+    "reference_text": "오늘날 날개를 접을 수 없는 곤충은 잠자리와 파리밖에 없습니다."
+  },
+  {
+    "id": "beta-ru-1861-10276863687632229120",
+    "language": "ru",
+    "audio": "C:\\Users\\Administrator\\.codex\\worktrees\\multilingual-online-053\\game_voice_translator\\build\\five-language-beta-20261027\\corpus\\audio\\ru-10276863687632229120.wav",
+    "wav_sha256": "12120ff2e490b1bd7e6b07dbec4fb7cdfc75ce68e1cdee9c8de69addc7f6fc6f",
+    "seconds": 7.56,
+    "license": "CC-BY-4.0",
+    "source_dataset": "google/fleurs",
+    "source_revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "attribution": "FLEURS; Alexis Conneau et al., Google (2022); source contributors",
+    "reference_text": "В результате актёры курят косяки с марихуаной на сцене, и сам театр поощряет публику присоединиться."
+  }
+]

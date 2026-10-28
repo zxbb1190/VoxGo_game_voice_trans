@@ -1,0 +1,15 @@
+{
+  "log_sha256": "93d9c6414769e73e15d7170bc4a13849901b3aad3dd4d7bd6f2de3cd6db2f43b",
+  "model_load_completions": 2,
+  "speech_worker_starts": 2,
+  "backend_started": 0,
+  "language_gate_accepts": 0,
+  "raw_queue_overflow_warnings": 53,
+  "observed_source_languages": [
+    "en",
+    "ja",
+    "ko",
+    "zh"
+  ],
+  "private_log_contents_not_archived": true
+}

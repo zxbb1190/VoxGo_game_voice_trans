@@ -1,0 +1,4 @@
+2488b54a2b575d771ed73d9e68d4fb3b6c8b5fa786952ebacb8718aab66abb21  VoxGo-v0.6.0-lite.zip
+4e8caeafa8bb76404825f3b9c0ca0823085a03c1f736f1da0c378197cc8f5308  VoxGo-v0.6.0-full.zip
+f68052f3b0e3bd4ccdefdd1e41719766cab9168ff19e7cf4a0370a637dbbb120  VoxGo-v0.6.0-full-cuda.zip
+a9204dabaffda64f36c0b36a82cca3f39f83d2fe995dc9764ff98cb00e26ff98  VoxGo-v0.6.0-cuda-runtime.zip

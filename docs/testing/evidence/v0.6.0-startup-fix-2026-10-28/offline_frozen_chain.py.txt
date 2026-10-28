@@ -1,0 +1,95 @@
+"""Real Full EXE -> public PCM -> Whisper -> loopback fixture -> Qt update.
+
+No private settings/voice or real provider requests; offscreen, not native GUI QA.
+"""
+import hashlib
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import threading
+import time
+
+STAGE=Path(__file__).resolve().parent
+PLAN=json.loads((STAGE/'build-plan.json').read_text('utf-8'))
+SOURCE=Path(PLAN['source_root'])
+worktree=Path(PLAN['source_worktree'])
+clips=json.loads((worktree/'build/v060-startup-fix-20261028/smoke-audio.json').read_text('utf-8'))
+profile=STAGE/'offline-smoke/VoxGo'
+assert not profile.exists()
+shutil.copytree(SOURCE/'release/VoxGo-v0.6.0-full',profile)
+results=[]
+
+class Fixture(BaseHTTPRequestHandler):
+    def do_POST(self):
+        if self.path!='/v1/chat/completions':self.send_error(404);return
+        size=int(self.headers.get('Content-Length','0'))
+        if not 0<size<=65536:self.send_error(400);return
+        request=json.loads(self.rfile.read(size))
+        self.server.calls.append({'source':self.server.source,'target':self.server.target,
+                                  'model':request.get('model'),'messages':request.get('messages',[])})
+        caption='Local pipeline check (not a real translation).' if self.server.target=='en' else '本地字幕链路校验（非真实翻译）。'
+        body=json.dumps({'choices':[{'message':{'content':caption},'finish_reason':'stop'}]},ensure_ascii=False).encode()
+        self.send_response(200);self.send_header('Content-Type','application/json; charset=utf-8')
+        self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
+    def log_message(self,*args):pass
+
+server=ThreadingHTTPServer(('127.0.0.1',0),Fixture);server.daemon_threads=True;server.calls=[]
+threading.Thread(target=server.serve_forever,daemon=True).start()
+env=os.environ.copy();env.update(QT_QPA_PLATFORM='offscreen',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',
+    HTTPS_PROXY='http://127.0.0.1:1',HTTP_PROXY='http://127.0.0.1:1',NO_PROXY='127.0.0.1,localhost,::1',ALL_PROXY='')
+try:
+    for index,clip in enumerate(clips):
+        wav=Path(clip['audio']);assert hashlib.sha256(wav.read_bytes()).hexdigest()==clip['wav_sha256']
+        language=clip['language'];target='en' if language=='zh' else 'zh'
+        case=STAGE/'offline-smoke'/language;case.mkdir()
+        log=profile/'app.log'
+        if log.exists():log.rename(case/'previous-app.log')
+        config=json.loads((SOURCE/'config.example.json').read_text('utf-8'))
+        config['app'].update(setup_completed=True,telemetry_consent='denied',telemetry_consent_version=2,telemetry_epoch='')
+        config['translation'].update(provider='openai_compatible',source_lang=language,target_lang=target,
+            endpoint=f'http://127.0.0.1:{server.server_port}/v1/chat/completions',
+            model='tencent/Hunyuan-MT-7B',api_key='local-fixture-not-a-real-key',enable_local_phrase_cache=False)
+        config['whisper']['local_files_only']=True
+        config['debug'].update(enabled=True,save_audio_chunks=False,save_transcripts=False)
+        config['hotkeys']={k:'' for k in config['hotkeys']}
+        config.setdefault('update',{})['enabled']=False
+        config['websocket'].update(host='127.0.0.1',port=19760+index,mobile_url=f'http://127.0.0.1:{19760+index}/mobile')
+        for name in ('config.json','user_settings.json'):(profile/name).write_text(json.dumps(config,ensure_ascii=False,indent=2),'utf-8')
+        (profile/'telemetry_consent.json').write_text(json.dumps({'telemetry_consent':'denied','telemetry_consent_version':2,'telemetry_epoch':''}),'utf-8')
+        server.source=language;server.target=target;start=len(server.calls)
+        args=[str(profile/'VoxGo.exe'),'--config',str(profile/'config.json'),'--benchmark-audio',str(wav),
+              '--benchmark-speech-seconds',str(clip['seconds']),'--benchmark-gap-seconds','60','--benchmark-duration-seconds','60']
+        with (case/'process-output.txt').open('wb') as output:
+            process=subprocess.Popen(args,cwd=profile,env=env,stdout=output,stderr=subprocess.STDOUT)
+            began=time.monotonic();text=''
+            try:
+                while time.monotonic()-began<40 and process.poll() is None:
+                    text=log.read_text('utf-8',errors='replace') if log.exists() else ''
+                    if len(server.calls)>start and '更新浮窗翻译' in text and '[延迟]' in text:break
+                    time.sleep(.2)
+            finally:
+                controlled=process.poll() is None
+                if controlled:process.terminate()
+                try:process.wait(timeout=10)
+                except subprocess.TimeoutExpired:process.kill();process.wait(timeout=5)
+        text=log.read_text('utf-8',errors='replace') if log.exists() else text
+        (case/'app.log').write_text(text,'utf-8')
+        row=dict(source=language,target=target,id=clip['id'],wav_sha256=clip['wav_sha256'],
+            backend_started='后端服务已启动' in text,model_loaded='Whisper 模型加载完成' in text,
+            pcm_injected='benchmark speech segment injected' in text,
+            asr_passed_language_gate='language gate accepted' in text,
+            local_http_requests=len(server.calls)-start,qt_translation_update='更新浮窗翻译' in text,
+            qt_latency_callback='[延迟]' in text,raw_queue_overflows=text.count('raw audio queue full'),
+            seconds=round(time.monotonic()-began,3),controlled_termination=controlled,
+            scope='actual frozen Full, offscreen Qt, public benchmark input, fake translation',real_api_requests=0)
+        row['passed']=all(row[k] for k in ('backend_started','model_loaded','pcm_injected','asr_passed_language_gate','qt_translation_update','qt_latency_callback')) and row['local_http_requests']>0
+        results.append(row);(case/'result.json').write_text(json.dumps(row,indent=2)+'\n','utf-8')
+        print(language,'PASS' if row['passed'] else 'FAIL',json.dumps(row),flush=True)
+finally:
+    server.shutdown();server.server_close()
+    (STAGE/'offline-smoke/results.json').write_text(json.dumps(results,indent=2)+'\n','utf-8')
+    (STAGE/'offline-smoke/requests.json').write_text(json.dumps(server.calls,ensure_ascii=False,indent=2)+'\n','utf-8')
+assert len(results)==5 and all(row['passed'] for row in results),'Frozen offline chain did not pass every source language'
