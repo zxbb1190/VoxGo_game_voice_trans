@@ -1,0 +1,32 @@
+{
+  "original_settings_unchanged": true,
+  "original_settings_sha256": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "historical_artifacts": [
+    {
+      "path": "docs/testing/evidence/v0.5.3-five-language-beta-2026-10-27/online-attempt-ledger.json",
+      "sha256": "c57726c844742cbc84e80a649a6548bec4fa72b17b80b09de4de075dd6340155",
+      "unchanged": true
+    },
+    {
+      "path": "docs/testing/evidence/v0.5.3-beta-blockers-online-2026-10-28/attempt-ledger.json",
+      "sha256": "17d0b73fdfcdc450b5b21e894fd933f3fbc80d7e226c7d21ed901f1dcbf81e92",
+      "unchanged": true
+    },
+    {
+      "path": "docs/testing/evidence/v0.5.3-beta-final-2026-10-28/next-prompt-ab-plan.json",
+      "sha256": "01ea5cf1fee5dc62ec8baa8225f1ad70336fdaef3b66b80076c3546a3b8353a7",
+      "unchanged": true
+    }
+  ],
+  "formal_runtime_unchanged": true,
+  "asr_runs": 0,
+  "models_downloaded": 0,
+  "real_api_requests": 24,
+  "retries": 0,
+  "source_human_review": "pending",
+  "target_human_review": "pending",
+  "production_operations": [],
+  "credential_value_absent_from_evidence": true,
+  "full_exe_test": false,
+  "native_qt_component": true
+}

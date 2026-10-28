@@ -1,0 +1,14 @@
+{
+  "authorized": true,
+  "plan_sha256": "01ea5cf1fee5dc62ec8baa8225f1ad70336fdaef3b66b80076c3546a3b8353a7",
+  "candidate_append_sha256": "741554e91528f34b7fb1ee4a9d51741b7e95dfd3b8575e7b1924a129f32c9f04",
+  "model": "tencent/Hunyuan-MT-7B",
+  "call_limit": 24,
+  "automatic_retries": 0,
+  "output_directory": "build/prompt-ab-live-20261028-24",
+  "confirmed_free_price_date_utc": "2026-10-28",
+  "price_sha256": "bf54c63fcbd179be65b812697a82779cbd439dc6486ba953f6d8590ed0f41e76",
+  "recorded_at_utc": "2026-10-28T02:41:03.235144+00:00",
+  "user_instruction": "授权执行这24次Prompt A/B，固定使用本机硅基流动 tencent/Hunyuan-MT-7B，硬上限24次、不重试",
+  "scope": "12 frozen texts, A and B once each; no ASR, formal settings or release changes"
+}

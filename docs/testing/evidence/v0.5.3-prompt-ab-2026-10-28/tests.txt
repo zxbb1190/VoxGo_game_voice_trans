@@ -1,0 +1,95 @@
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\download_panels.py:12: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class DownloadSignals(QObject):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\download_panels.py:18: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class BackgroundPanel(QWidget):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\download_panels.py:87: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class LocalModelPanel(BackgroundPanel):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\download_panels.py:157: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class UpdateInstallPanel(BackgroundPanel):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:29: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class TranslationTestSignals(QObject):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:110: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class AudioTestSignals(QObject):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:114: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class AudioTestPanel(QWidget):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:268: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class ColorButton(QPushButton):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:306: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class HotkeyCaptureEdit(QLineEdit):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\widgets.py:373: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class OverlayLockButton(QToolButton):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\dialogs.py:46: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class FeedbackDialog(QDialog):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\dialogs.py:85: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class UpdatePromptDialog(QDialog):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\dialogs.py:178: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class FullscreenHelpDialog(QDialog):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\dialogs.py:257: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class FirstRunWizard(QDialog):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\qr_widget.py:351: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class QrCodeWidget(QWidget):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\settings_dialog.py:64: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class SettingsDialog(QDialog):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\overlay_window.py:99: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class OverlaySignals(QObject):
+C:\Users\Administrator\.codex\worktrees\multilingual-online-053\game_voice_translator\voxgo\ui\overlay_window.py:114: DeprecationWarning: sipPyTypeDict() is deprecated, the extension module should use sipPyTypeDictRef() instead
+  class GameOverlay(QWidget):
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+1/24 ab-new-01-B HTTP=None finish=None failure=other
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+2/24 ab-new-01-B HTTP=200 finish=length failure=other
+3/24 ab-new-02-B HTTP=200 finish=stop failure=-
+4/24 ab-new-02-A HTTP=200 finish=stop failure=-
+5/24 ab-new-03-A HTTP=200 finish=stop failure=-
+6/24 ab-new-03-B HTTP=200 finish=stop failure=-
+7/24 ab-new-04-B HTTP=200 finish=stop failure=-
+8/24 ab-new-04-A HTTP=200 finish=stop failure=-
+9/24 ab-new-05-A HTTP=200 finish=stop failure=-
+10/24 ab-new-05-B HTTP=200 finish=stop failure=-
+11/24 ab-new-06-B HTTP=200 finish=stop failure=-
+12/24 ab-new-06-A HTTP=200 finish=stop failure=-
+13/24 ab-new-07-A HTTP=200 finish=stop failure=-
+14/24 ab-new-07-B HTTP=200 finish=stop failure=-
+15/24 ab-new-08-B HTTP=200 finish=stop failure=-
+16/24 ab-new-08-A HTTP=200 finish=stop failure=-
+17/24 ab-new-09-A HTTP=200 finish=stop failure=-
+18/24 ab-new-09-B HTTP=200 finish=stop failure=-
+19/24 ab-new-10-B HTTP=200 finish=stop failure=-
+20/24 ab-new-10-A HTTP=200 finish=stop failure=-
+21/24 ab-new-11-A HTTP=200 finish=stop failure=-
+22/24 ab-new-11-B HTTP=200 finish=stop failure=-
+23/24 ab-new-12-B HTTP=200 finish=stop failure=-
+24/24 ab-new-12-A HTTP=200 finish=stop failure=-
+1/24 ab-new-01-A HTTP=200 finish=stop failure=-
+2/24 ab-new-01-B HTTP=200 finish=length failure=other
+3/24 ab-new-02-B HTTP=429 finish=None failure=rate_limit
+0/24 ab-new-01-A HTTP=None finish=None failure=-
+1/20 semantic-anchor-1 HTTP=200 finish=stop failure=-
+2/20 semantic-new-1 HTTP=200 finish=length failure=other
+3/20 semantic-anchor-2 HTTP=200 finish=stop failure=-
+4/20 semantic-new-2 HTTP=200 finish=stop failure=-
+5/20 semantic-anchor-3 HTTP=200 finish=stop failure=-
+6/20 semantic-new-3 HTTP=200 finish=stop failure=-
+7/20 semantic-anchor-4 HTTP=200 finish=stop failure=-
+8/20 semantic-new-4 HTTP=200 finish=stop failure=-
+9/20 length-long-1 HTTP=200 finish=stop failure=-
+10/20 length-short-1 HTTP=200 finish=stop failure=-
+11/20 length-long-2 HTTP=200 finish=stop failure=-
+12/20 length-short-2 HTTP=200 finish=stop failure=-
+13/20 length-long-3 HTTP=200 finish=stop failure=-
+14/20 length-short-3 HTTP=200 finish=stop failure=-
+15/20 length-long-4 HTTP=200 finish=stop failure=-
+16/20 length-short-4 HTTP=200 finish=stop failure=-
+17/20 en-zh-regression-1 HTTP=200 finish=stop failure=-
+18/20 en-zh-regression-2 HTTP=200 finish=stop failure=-
+19/20 en-zh-regression-3 HTTP=200 finish=stop failure=-
+20/20 en-zh-regression-4 HTTP=200 finish=stop failure=-
+1/20 semantic-anchor-1 HTTP=200 finish=stop failure=-
+2/20 semantic-new-1 HTTP=200 finish=length failure=other
+3/20 semantic-anchor-2 HTTP=429 finish=None failure=rate_limit
+Executing <Task pending name='Task-162' coro=<IsolatedAsyncioTestCase._asyncioLoopRunner() running at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:95> wait_for=<Future pending cb=[Task.task_wakeup()] created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py:429> created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:117> took 0.500 seconds
+Executing <Task pending name='Task-165' coro=<IsolatedAsyncioTestCase._asyncioLoopRunner() running at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:95> wait_for=<Future pending cb=[Task.task_wakeup()] created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\asyncio\base_events.py:429> created at C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\lib\unittest\async_case.py:117> took 0.437 seconds
+----------------------------------------------------------------------
+Ran 24 tests in 7.464s
+
+OK

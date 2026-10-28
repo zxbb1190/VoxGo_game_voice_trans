@@ -1,0 +1,13 @@
+{
+  "ready": true,
+  "compiled_cases": 24,
+  "provider": "openai_compatible",
+  "model": "tencent/Hunyuan-MT-7B",
+  "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "key_present": true,
+  "settings_sha256_before": "73df2586a0781971ea9f391abdab9dbc2e33401ef87d5db08e70314ce776ad5e",
+  "real_requests_so_far": 0,
+  "formal_prompt_changed": false,
+  "script_sha256": "8d325ab07045fe705984a015e036723a7122e878b680f26cdffd9c7404396ff9",
+  "runner_sha256": "cde616128a7e8ba8f416718ab747da1ee8189837e13495d1f7bb5a2f6623aff2"
+}

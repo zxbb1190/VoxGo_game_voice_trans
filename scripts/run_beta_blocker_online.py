@@ -127,7 +127,7 @@ def summarize(rows, budget, planned):
         speech_latency=None, game_fps=None, scope="20 text inputs -> real provider -> native Qt app handler; no ASR/Full EXE")
 
 
-def run_cases(plan, budget, config, output, *, platform="windows", fixture=False):
+def run_cases(plan, budget, config, output, *, platform="windows", fixture=False, client_factory=BlockerClient):
     import os
     os.environ["QT_QPA_PLATFORM"] = platform
     from loguru import logger
@@ -150,7 +150,7 @@ def run_cases(plan, budget, config, output, *, platform="windows", fixture=False
     owner._overlay, owner._mobile, owner._analytics = overlay, SimpleNamespace(server=None), None
     bus = EventBus()
     runtime = TranslationRuntime(bus, owner._stats, owner._latency_traces, lambda: overlay)
-    client = BlockerClient(config, budget, plan["cases"], fixture=fixture)
+    client = client_factory(config, budget, plan["cases"], fixture=fixture)
     runtime.client = client
     runtime.set_language_revision_getter(lambda: owner._language_flow_revision)
     bus.subscribe(TranslationReady, owner._handle_translation_ready)
@@ -226,7 +226,7 @@ def run_cases(plan, budget, config, output, *, platform="windows", fixture=False
             atomic(output / "results.json", results)
             atomic(budget.path, budget.data)
             overlay.grab().save(str(output / (case["id"] + ".png")))
-            print(f"{len(budget.data['attempts'])}/20 {case['id']} HTTP={row.get('http_status')} finish={row.get('finish_reason')} failure={row.get('failure_reason') or '-'}", flush=True)
+            print(f"{len(budget.data['attempts'])}/{len(plan['cases'])} {case['id']} HTTP={row.get('http_status')} finish={row.get('finish_reason')} failure={row.get('failure_reason') or '-'}", flush=True)
     finally:
         closed = runtime.close()
         overlay._allow_close = True

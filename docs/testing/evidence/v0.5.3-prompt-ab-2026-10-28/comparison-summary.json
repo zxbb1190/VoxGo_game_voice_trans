@@ -1,0 +1,106 @@
+{
+  "profiles": {
+    "A": {
+      "requests": 12,
+      "http_200": 12,
+      "complete_stop": 12,
+      "copyable_subtitles": 12,
+      "api_p50_ms": 1168.2661999948323,
+      "api_p95_ms": 2531.464635007432,
+      "text_to_qt_p50_ms": 1177.7627999981632,
+      "text_to_qt_p95_ms": 2537.1051399910352,
+      "prompt_tokens": 3223,
+      "completion_tokens": 323
+    },
+    "B": {
+      "requests": 12,
+      "http_200": 12,
+      "complete_stop": 12,
+      "copyable_subtitles": 12,
+      "api_p50_ms": 1122.4384500092128,
+      "api_p95_ms": 1690.7534900004973,
+      "text_to_qt_p50_ms": 1125.025450004614,
+      "text_to_qt_p95_ms": 1702.3309249998417,
+      "prompt_tokens": 4195,
+      "completion_tokens": 324
+    }
+  },
+  "identical_raw_pairs": 8,
+  "changed_raw_pairs": 4,
+  "direct_http_p50_ms": 1155.0802999990992,
+  "direct_http_p95_ms": 2176.131839993468,
+  "cost_cny_estimated": 0,
+  "invoice_checked": false,
+  "human_semantic_accuracy": null,
+  "conclusion": "No demonstrated semantic improvement; retain formal Prompt A; bilingual human review pending",
+  "latency_causality": "12 observations/profile, one run, network/service outliers; lower B P95 does not prove Prompt speedup",
+  "paired_latency_observations": [
+    {
+      "id": "ab-new-01",
+      "B_minus_A_ms": 3.9357000205200166,
+      "B_over_A": 1.003755747509925
+    },
+    {
+      "id": "ab-new-02",
+      "B_minus_A_ms": -183.53720000595786,
+      "B_over_A": 0.8483234460472256
+    },
+    {
+      "id": "ab-new-03",
+      "B_minus_A_ms": 94.85510000376962,
+      "B_over_A": 1.1493724881939498
+    },
+    {
+      "id": "ab-new-04",
+      "B_minus_A_ms": 522.2556999942753,
+      "B_over_A": 1.737268475861243
+    },
+    {
+      "id": "ab-new-05",
+      "B_minus_A_ms": -280.87679998134263,
+      "B_over_A": 0.8685585442069889
+    },
+    {
+      "id": "ab-new-06",
+      "B_minus_A_ms": 429.05969999264926,
+      "B_over_A": 1.380886710484501
+    },
+    {
+      "id": "ab-new-07",
+      "B_minus_A_ms": 24.88039998570457,
+      "B_over_A": 1.0186139656406508
+    },
+    {
+      "id": "ab-new-08",
+      "B_minus_A_ms": 209.7082000109367,
+      "B_over_A": 1.1643378415749963
+    },
+    {
+      "id": "ab-new-09",
+      "B_minus_A_ms": 279.30229998310097,
+      "B_over_A": 1.3056743549502101
+    },
+    {
+      "id": "ab-new-10",
+      "B_minus_A_ms": -1485.3074999991804,
+      "B_over_A": 0.3208527336055046
+    },
+    {
+      "id": "ab-new-11",
+      "B_minus_A_ms": -2008.7701000156812,
+      "B_over_A": 0.3196270994298227
+    },
+    {
+      "id": "ab-new-12",
+      "B_minus_A_ms": 32.15409998665564,
+      "B_over_A": 1.0376229625333382
+    }
+  ],
+  "B_slower_pairs": 8,
+  "B_over_A_greater_than_1_2": [
+    "ab-new-04",
+    "ab-new-06",
+    "ab-new-09"
+  ],
+  "paired_B_minus_A_median_ms": 28.517249986180104
+}
