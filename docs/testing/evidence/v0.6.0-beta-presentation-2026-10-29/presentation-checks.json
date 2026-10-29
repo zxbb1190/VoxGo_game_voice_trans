@@ -1,0 +1,50 @@
+{
+  "base": "57d185ec20a2c3e9aa1aa974fc5980b6147d50d6",
+  "pages": [
+    {
+      "file": "docs/index.html",
+      "local_links_and_anchors": "pass",
+      "published_downloads_unchanged": true,
+      "language_rows": 5,
+      "beta_rows": 3
+    },
+    {
+      "file": "docs/en/index.html",
+      "local_links_and_anchors": "pass",
+      "published_downloads_unchanged": true,
+      "language_rows": 5,
+      "beta_rows": 3
+    }
+  ],
+  "protected_paths_unchanged": [
+    "docs/update.json",
+    "docs/sitemap.xml",
+    "config.example.json",
+    "requirements.txt",
+    "VoxGo.spec",
+    "voxgo/translation",
+    "voxgo/asr",
+    "voxgo/config",
+    "voxgo/runtime",
+    "voxgo/analytics",
+    "voxgo/app.py"
+  ],
+  "client_source_version": "0.6.0",
+  "published_update_version": "0.5.2",
+  "real_translation_requests": 0,
+  "live_release_check": {
+    "url": "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+    "resolved_tag": "v0.5.2",
+    "checked_local_date": "2026-10-29"
+  },
+  "readmes": {
+    "README.md": {
+      "old_external_links_preserved": true,
+      "xerj_badge": "present (restored; absent in starting HEAD)"
+    },
+    "README_EN.md": {
+      "old_external_links_preserved": true,
+      "xerj_badge": "present (restored; absent in starting HEAD)"
+    }
+  }
+}

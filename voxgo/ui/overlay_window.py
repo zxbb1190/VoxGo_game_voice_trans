@@ -22,6 +22,8 @@ from PyQt5.QtWidgets import (
     QLabel,
     QScrollArea,
     QSizePolicy,
+    QStyle,
+    QStyleOptionComboBox,
     QTabWidget,
     QToolButton,
     QVBoxLayout,
@@ -44,6 +46,7 @@ from voxgo.ui.config_models import (
     _normalize_language_code,
     _speech_language_options,
     _translation_language_notice,
+    _beta_language_notice,
     _tr,
 )
 from voxgo.ui.dialogs import (
@@ -318,6 +321,10 @@ class GameOverlay(QWidget):
         self._language_notice.setWordWrap(True)
         self._language_notice.setStyleSheet("color: #EAB86A; font-size: 11px;")
         self._layout.addWidget(self._language_notice)
+        self._beta_notice = QLabel()
+        self._beta_notice.setWordWrap(True)
+        self._beta_notice.setStyleSheet("color: #A8BAC8; font-size: 11px;")
+        self._layout.addWidget(self._beta_notice)
         self._refresh_language_notice()
 
         self._model_preparation_status = ModelPreparationStatus(
@@ -631,6 +638,11 @@ class GameOverlay(QWidget):
             for index in range(combo.count())
         )
         combo.setFixedWidth(text_width + 18)
+        option = QStyleOptionComboBox()
+        combo.initStyleOption(option)
+        edit_rect = combo.style().subControlRect(
+            QStyle.CC_ComboBox, option, QStyle.SC_ComboBoxEditField, combo)
+        combo.setFixedWidth(combo.width() + max(0, text_width - edit_rect.width()) + 2)
 
     def _sync_language_controls(self):
         source, target = normalize_language_flow(self.translation_config.source_lang, self.translation_config.target_lang)
@@ -662,6 +674,10 @@ class GameOverlay(QWidget):
             notice = _translation_language_notice(self.translation_config, self._ui_language())
             self._language_notice.setText(notice)
             self._language_notice.setVisible(bool(notice))
+        if hasattr(self, "_beta_notice"):
+            notice = _beta_language_notice(self.translation_config, self._ui_language())
+            self._beta_notice.setText(notice)
+            self._beta_notice.setVisible(bool(notice))
 
     def _set_combo_language(self, combo: QComboBox, language: str):
         for index in range(combo.count()):

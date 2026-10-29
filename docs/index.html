@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="VoxGo 是面向 PC 游戏玩家的开源实时游戏语音翻译工具，支持英语中文双向翻译、游戏字幕浮窗、本地语音识别和本地翻译模式。" />
+  <meta name="description" content="VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。" />
   <meta name="keywords"
     content="VoxGo, 游戏语音翻译, PC游戏语音翻译, 实时语音翻译, 游戏字幕浮窗, 游戏实时字幕, 游戏语音实时翻译, 外国队友语音翻译, PUBG语音翻译, APEX语音翻译, Discord游戏语音翻译, 英语中文翻译, 英译中, 中译英, Discord语音翻译, Discord实时字幕, 海外服开黑翻译, 队友语音翻译, 游戏队友语音翻译, Windows语音翻译工具, PC语音翻译工具, Whisper语音识别, faster-whisper, Whisper实时字幕, 系统声音捕获, WASAPI Loopback, OpenAI兼容翻译, Google Cloud Translation, 手机字幕同步, 游戏翻译工具, 实时字幕工具, 开源语音翻译工具, game voice translator, real-time game voice translation, PC game subtitle overlay, Discord voice translator" />
   <link rel="canonical" href="https://voxgo.cn/" />
@@ -14,7 +14,7 @@
 
   <meta property="og:title" content="VoxGo - PC 游戏语音实时翻译浮窗" />
   <meta property="og:description"
-    content="VoxGo 是面向 PC 游戏玩家的开源实时游戏语音翻译工具，支持英语中文双向翻译、游戏字幕浮窗、本地语音识别和本地翻译模式。" />
+    content="VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。" />
   <meta property="og:url" content="https://voxgo.cn/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://voxgo.cn/assets/logo.png" />
@@ -678,7 +678,7 @@ var _hmt = _hmt || [];
   <nav class="nav">
     <div class="container nav-inner"><a class="brand" href="#top"><img class="brand-logo" src="./assets/logo.png?v=2"
           alt="VoxGo Logo" /><span>VoxGo</span></a>
-      <div class="nav-links"><a href="#story">工作原理</a><a href="#modes">翻译方式</a><a href="#patch-notes">更新日志</a><a href="#download">下载</a><a href="#steps">使用步骤</a><a href="#community">社区</a><a
+      <div class="nav-links"><a href="#story">工作原理</a><a href="#languages">语言支持</a><a href="#modes">翻译方式</a><a href="#patch-notes">更新日志</a><a href="#download">下载</a><a href="#steps">使用步骤</a><a href="#community">社区</a><a
           href="#faq">FAQ</a><a href="/en/">English</a><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
     </div>
@@ -687,7 +687,8 @@ var _hmt = _hmt || [];
     <div class="container hero">
       <div><span class="eyebrow">开源 · Windows · 游戏语音实时翻译</span>
         <h1><span class="gradient-text">听不懂外国队友语音？</span><br />开一个游戏字幕浮窗。</h1>
-        <p class="lead">游戏、Discord 或视频的声音，经过本地 Whisper 识别与实时翻译，直接进入游戏字幕浮窗。VoxGo 支持英语 ↔ 中文双向翻译。</p>
+        <p class="lead">VoxGo v0.6.0 支持中文、英语、日语（Beta）、韩语（Beta）、俄语（Beta）本地识别，五语言20个在线翻译方向。将游戏、Discord 或视频语音显示为字幕浮窗。</p>
+        <p class="release-status">当前公开下载仍为 v0.5.2；v0.6.0 上线后同步更新。</p>
         <div class="actions"><a class="btn btn-primary"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip">下载 VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip">国内镜像下载（Lite v0.5.2）</a></div>
         <div class="hero-links"><a class="hero-community" href="#story">看看声音如何变成字幕 ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码 ↗</a></div>
@@ -737,18 +738,26 @@ var _hmt = _hmt || [];
         <div class="story-steps">
           <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>通过 WASAPI Loopback 捕获你正在听到的游戏、Discord 或视频系统声音。先看音量条，确认 VoxGo 听到了正确设备。</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper 在 PC 本地完成语音识别，把队友的话变成文字。Lite 版首次运行会按提示下载识别模型。</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
-          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>识别文本进入 API 或本地翻译模式。当前正式支持英语与中文双向翻译，翻译方式会在浮窗中显示。</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
+          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>v0.6.0 可选择20个在线直译方向，或英中本地翻译；浮窗显示当前翻译方式。</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>原文与译文进入透明置顶的游戏字幕浮窗。字幕可悬停复制，也可同步到同一局域网内的手机。</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
         </div>
       </div>
     </section>
+    <section id="languages" class="language-support">
+      <div class="container"><div class="section-head"><span class="section-kicker">v0.6.0 · MULTILINGUAL</span><h2>五种语言，20个在线方向。</h2><p>支持中文、英语、日语（Beta）、韩语（Beta）、俄语（Beta），每种源语言均可与其余四种语言直接互译。</p></div>
+        <div class="language-table-wrap" role="region" aria-label="语言支持" tabindex="0"><table class="language-table"><caption>语言支持 · v0.6.0</caption><thead><tr><th scope="col">语言</th><th scope="col">本地识别</th><th scope="col">在线翻译</th><th scope="col">离线翻译</th></tr></thead><tbody>
+<tr><th scope="row">中文（普通话）</th><td>支持</td><td>与其余四种语言互译</td><td>英语 ↔ 中文</td></tr><tr><th scope="row">英语</th><td>支持</td><td>与其余四种语言互译</td><td>英语 ↔ 中文</td></tr><tr><th scope="row">日语（Beta）</th><td>支持（Beta）</td><td>与其余四种语言互译</td><td>不支持</td></tr><tr><th scope="row">韩语（Beta）</th><td>支持（Beta）</td><td>与其余四种语言互译</td><td>不支持</td></tr><tr><th scope="row">俄语（Beta）</th><td>支持（Beta）</td><td>与其余四种语言互译</td><td>不支持</td></tr>
+        </tbody></table></div><p class="language-boundary">Whisper 在本机完成语音识别。在线翻译将识别文本交给用户配置的 OpenAI 兼容 Provider/模型或 Google Cloud Translation Basic v2，需自备 API Key/服务权限。本地 OPUS 仅支持英中双向，其他18方向需要在线翻译；语种能力与质量取决于所选服务商/模型，不会静默回退或经第三种语言中转。</p><p class="beta-limitations">Beta 语言在短报点、噪声、音乐和多人重叠下可能漏词、错译或延迟。我们将持续改进识别准确率、性能和字幕稳定性。</p>
+      </div>
+    </section>
     <section id="modes" class="mode-section">
       <div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>选择翻译方式，不改变信号路径。</h2><p>本地识别始终在 PC 上运行；翻译可以使用在线服务，也可以选择本地模型。</p></div>
-        <div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>接入已有翻译服务</h3><p>支持 OpenAI 兼容接口和 Google Cloud Translation Basic v2。首次向导可测试 API Key、模型和地址。</p><ul><li>配置灵活</li><li>可测试翻译接口</li><li>适合在线使用</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>无 API Key 翻译</h3><p>选择本地翻译模式，按提示准备本地模型。适合希望减少在线服务依赖的环境。</p><ul><li>无须配置 API Key</li><li>模型按需下载</li><li>识别与翻译可在本机完成</li></ul></div></div>
+        <div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>接入已有翻译服务</h3><p>v0.6.0 通过 OpenAI 兼容接口或 Google Cloud Translation Basic v2 接通20个在线方向。需自备 API Key，语种能力取决于服务商和模型。</p><ul><li>配置灵活</li><li>可测试翻译接口</li><li>适合在线使用</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>无 API Key 翻译</h3><p>本地 OPUS 仅支持英语 ↔ 中文。准备模型后可断网翻译，无需 API Key；其他18方向需明确选择并配置在线服务。</p><ul><li>无须配置 API Key</li><li>模型按需下载</li><li>识别与翻译可在本机完成</li></ul></div></div>
       </div>
     </section>
     <section class="experience"><div class="container experience-stage"><div><span class="section-kicker">IN GAME / ALWAYS VISIBLE</span><h2>不用切出游戏，<br />字幕就在那里。</h2><p>浮窗可拖拽、调整透明度并显示原文和译文。响应模式可选极速、均衡、准确或自定义；调试模式提供延迟和设备诊断。</p><div class="experience-meta"><span>OVERLAY POSITION RECOVERY</span><span>HOVER TO COPY</span><span>DEVICE DIAGNOSTICS</span></div></div><div class="experience-overlay"><small>● LIVE TRANSLATION / API</small><span>Push left with me.</span><b>跟我一起从左边推进。</b></div></div></section>
     <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">LATEST UPDATE / PATCH NOTES</span><h2>更新日志</h2><p>每一次改进，都能在这里追溯到 GitHub Release。</p></div>
+      <p class="release-draft">v0.6.0 尚未发布。<a href="/releases/v0.6.0.md">查看待发布更新日志草稿 →</a></p>
       <!-- CHANGELOG_HOME_START -->
       <div class="patch-board"><div class="patch-version" aria-hidden="true">0.5.2</div><div class="patch-content"><span class="patch-date">2026-10-06 / LATEST RELEASE</span><h3><a href="/changelog/v0.5.2/">VoxGo 0.5.2</a></h3><ul><li>修复部分实时语音在停顿后可能被错误切分的问题。</li><li>增强语音识别异常保护，减少强噪声下出现异常重复字幕的情况。</li><li>改进聚合诊断信息，便于定位运行问题；诊断信息不包含语音、识别或翻译内容。</li><li>设置中的帮助与反馈新增 KOOK 和 Discord 社区入口，并保留 GitHub Issues。</li></ul></div></div><div class="patch-history"><a href="/changelog/v0.5.1/">VoxGo 0.5.1</a><time datetime="2026-09-23">2026-09-23</time></div><div class="patch-history"><a href="/changelog/v0.5.0/">VoxGo 0.5.0</a><time datetime="2026-09-21">2026-09-21</time></div>
       <!-- CHANGELOG_HOME_END -->
@@ -760,6 +769,7 @@ var _hmt = _hmt || [];
           <span class="section-kicker">DOWNLOAD / WINDOWS</span><h2>先从 Lite 开始。</h2>
           <p>适合大多数玩家。首次运行按向导测试翻译和系统声音，并下载所需的语音识别模型。</p>
         </div>
+        <p class="release-status">当前公开下载：v0.5.2 · 英中双向。五语言 v0.6.0 候选尚未在此提供下载。</p>
         <div class="download">
           <div class="download-primary"><div><span class="tag">RECOMMENDED / VoxGo v0.5.2</span><h3>VoxGo Lite</h3><p>下载包更小，适合第一次体验。支持本地 Whisper 识别、API 或本地翻译，以及游戏字幕浮窗。</p></div><div class="download-actions"><a class="btn btn-primary" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip">下载 Lite 版</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip">国内镜像下载（Lite v0.5.2）</a></div></div>
           <div class="download-secondary"><div class="download-option"><div><h3>Full</h3><p>内置 Whisper small/base 通用模型，减少首次下载等待。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip">下载 Full ↗</a></div><div class="download-option"><div><h3>Full-CUDA / GPU</h3><p>内置通用模型和 CUDA DLL，适合 NVIDIA GPU 用户。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip">下载 GPU ↗</a></div></div>
@@ -819,13 +829,14 @@ var _hmt = _hmt || [];
           <p>把用户最担心的问题先说清楚，可以减少误解，也方便你收集更高质量的测试反馈。</p>
         </div>
         <div class="faq">
+          <details><summary>Beta 语言的准确率和延迟有什么限制？</summary><p>识别可能漏词或丢失句尾，翻译可能改变实体、数字和否定。噪声、音乐与多人重叠会增加风险；延迟取决于 CPU、切段、网络和服务商。Beta 表示仍在优化；不承诺准确率百分比、固定延迟或游戏 FPS。</p></details>
           <details open>
             <summary>VoxGo 能实时翻译外国队友语音吗？</summary>
-            <p>可以。VoxGo 捕获游戏或 Discord 的系统声音，将英语和中文语音识别并显示为实时字幕。</p>
+            <p>VoxGo 捕获游戏或 Discord 的系统声音。v0.6.0 支持五语言识别与20个在线方向，日/韩/俄标为 Beta。</p>
           </details>
           <details>
             <summary>支持本地翻译模式吗？</summary>
-            <p>支持。选择本地翻译模式后无需配置 API Key，按提示准备模型即可使用。</p>
+            <p>支持英中双向。准备本地 OPUS 模型后无需 API Key，可断网运行。日/韩/俄相关方向需要在线翻译。</p>
           </details>
           <details open>
             <summary>它会录我的麦克风吗？</summary>
@@ -846,7 +857,7 @@ var _hmt = _hmt || [];
           </details>
           <details>
             <summary>支持哪些语言？</summary>
-            <p>当前正式支持英语和中文双向：英语 → 中文、中文 → 英语。其它语言暂未在界面和识别/翻译流程中开放为可选项。</p>
+            <p>v0.6.0 支持中文（普通话）、英语、日语（Beta）、韩语（Beta）、俄语（Beta）与20个在线方向，具体范围见上方语言支持表。</p>
           </details>
           <details>
             <summary>Lite、Full 和 Full-CUDA 有什么区别？</summary>

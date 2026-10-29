@@ -4,6 +4,24 @@ Runtime values and external content are not translated. No network required.
 """
 
 MESSAGES = {
+    "Beta: speech recognition and translation quality are still being improved.": [
+        "Beta：语音识别与译文质量仍在优化。",
+        "Beta：音声認識と翻訳品質は引き続き改善中です。",
+        "Beta: 음성 인식과 번역 품질은 계속 개선 중입니다.",
+        "Beta: распознавание речи и качество перевода ещё улучшаются."
+    ],
+    "Beta: speech recognition for this language is still being improved.": [
+        "Beta：该语言的语音识别仍在优化。",
+        "Beta：この言語の音声認識は引き続き改善中です。",
+        "Beta: 이 언어의 음성 인식은 계속 개선 중입니다.",
+        "Beta: распознавание речи на этом языке ещё улучшается."
+    ],
+    "Beta: translation quality for this language is still being improved.": [
+        "Beta：该语言的译文质量仍在优化。",
+        "Beta：この言語の翻訳品質は引き続き改善中です。",
+        "Beta: 이 언어의 번역 품질은 계속 개선 중입니다.",
+        "Beta: качество перевода на этот язык ещё улучшается."
+    ],
     "Overall remaining time is not available yet": [
         "总剩余时间暂无法估算",
         "全体の残り時間はまだ計算できません",

@@ -1,5 +1,26 @@
 # 发布流程
 
+## v0.6.0 多语言展示同步（待发布，尚未执行）
+
+产品文案统一为：五语言识别、20个在线翻译方向；日语、韩语、俄语标为 Beta，表示持续优化，并非未开放。离线 OPUS 仍仅英中双向。官网与 README 改动已在本地准备，随 v0.6.0 实际发布同步上线；在此之前不部署官网，不提前替换公开下载和更新清单。
+
+发布时逐项核对：
+
+| 项目 | 同步内容 / 放行条件 |
+|---|---|
+| 客户端版本 | `voxgo/app_info.py`、`installer/VoxGo.iss`、`scripts/build_portable.ps1`、发布工作流默认版本已为0.6.0；本轮UI改动需要纳入下一次构建，已有Lite ZIP未自动重打 |
+| GitHub Release | 正式授权后创建实际 `v0.6.0` Release；双语正文来自 `docs/releases/v0.6.0.md`，发布时去掉待发布状态，保留Beta与离线边界 |
+| 官网首页（中/英） | 核对五语言文案、语言表、FAQ、description/OG；去掉临时的“当前公开下载v0.5.2 / v0.6.0待发布”说明，替换下载版本文字 |
+| GitHub下载 | 仅链接真实存在、已校验的 `releases/download/v0.6.0/` 附件；不能只把全部旧URL字符串替换成0.6.0 |
+| 仅发布Lite时 | 当前工作流仍会构建/发布四类附件；“仅Lite发布”需要另行确认发布方式。官网不应把Full/GPU按钮改成不存在的0.6.0文件；移除这些新版本入口或清楚保留为旧版入口 |
+| GitCode镜像 | Lite附件上传并从固定下载URL回读校验后再切换；未完成时保留明确的旧版标注，不能假定同版本镜像存在 |
+| 更新元数据 | `docs/update.json` 的 `latest/channel/title`、`release_url`、`notes/notes_zh/notes_en`、各实际附件URL和SHA256须一致；旧Full客户端按edition选择更新，缺失变体不能用0.5.2 ZIP冒充0.6.0。先确认缺失变体的更新行为，再放行清单 |
+| README | 中英文同步；去掉顶部“当前公开0.5.2、0.6.0待发布”过渡说明。保留Beta、隐私、安装/模型下载、升级、徽章和社区链接 |
+| 静态更新日志与SEO | 实际Release存在后再运行下方生成流程；生成 `docs/changelog/v0.6.0/`、首页Latest摘要和sitemap。发布前只有Markdown草稿，不伪造正式版本页或发布日期 |
+| Full遥测兼容 | 不改63字段协议。带分类快照的客户端对生产放行前仍需另行验收0006迁移、兼容Worker和新旧协议/授权/累计幂等；本轮不连接或改变生产 |
+
+验证真实下载、SHA256、更新清单和中英文网站后，再声明上线完成。此清单不是 push、tag、迁移或部署授权。
+
 ## 官网静态更新日志（v2 草案）
 
 `scripts/build_website_changelog.py` 从已经发布的 GitHub Release 正文读取中英文更新条目、发布日期和附件，生成 `docs/changelog/`、首页最新更新摘要和 `docs/sitemap.xml`。GitHub Release 是唯一的版本内容来源，网页在构建后就是完整静态 HTML，不依赖访客浏览器请求 GitHub API。

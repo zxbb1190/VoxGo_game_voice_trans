@@ -1,5 +1,7 @@
 # VoxGo
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
 English documentation: [README_EN.md](README_EN.md)
 
 VoxGo 是一个面向 PC 游戏玩家的开源实时语音翻译浮窗工具，适合海外服开黑、公会语音、Discord 队友沟通和直播字幕辅助。
@@ -7,13 +9,31 @@ VoxGo 是一个面向 PC 游戏玩家的开源实时语音翻译浮窗工具，�
 官网：<https://voxgo.cn/><br>
 GitHub：<https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
+## 多语言支持 — v0.6.0（待发布）
+
+以下说明针对 v0.6.0 候选，当前公开下载仍为 v0.5.2。参见[待发布更新日志](docs/releases/v0.6.0.md)；已发布安装包以 [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) 为准。
+
+| 语言 | 本地 Whisper 识别 | 在线翻译 | 本地 OPUS 翻译 |
+|---|---|---|---|
+| 中文（普通话，简体字幕） | 支持 | 与其余四种语言双向互译 | 英语 ↔ 中文 |
+| 英语 | 支持 | 与其余四种语言双向互译 | 英语 ↔ 中文 |
+| 日语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+| 韩语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+| 俄语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+
+五种语言提供 **20 个有方向的在线翻译组合**。语音由本地 Whisper 识别；在线翻译由用户配置的 OpenAI 兼容 Provider/模型或 Google Cloud Translation Basic v2 完成，将识别文本发送给所选服务商，需要自行配置 API Key/服务权限，并受服务商的语种能力限制。按所选源语言与目标语言直接翻译。本地 OPUS 继续**仅支持英中双向**，其他 **18 个方向需要在线翻译**，不会静默切换服务商。英文专用 `.en` 识别模型只用于英语。
+
+日语、韩语、俄语为 **Beta 实验性语言**，短报点、多人重叠、噪声和音乐下仍可能漏词、错译或延迟。可选择某个语言不代表准确率或延迟保证。双语人工、真实游戏/FPS和低配实机验收仍有待完成。Beta 标签表示语言成熟度，独立于内部 ASR 策略；正式界面不开放实验策略开关。后续基于独立录音持续改进准确率、性能和字幕稳定性。
+
+可通过 [GitHub Issues](https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new) 或设置 → 帮助与反馈提交版本、语言方向、服务商/模型及复现步骤；分享前请检查日志中的私人内容。下方社区入口继续保留。
+
 ## 🎮 功能特性
-- **首次启动向导**: 第一次打开先选择中文或 English，再完成翻译接口和音频设备测试，完成后保存 `setup_completed`
+- **首次启动向导**: 第一次打开先选择中文、English、日本語、한국어 或 Русский 界面，再完成翻译接口和音频设备测试，完成后保存 `setup_completed`
 - **API Key 测试**: 在向导和设置窗口里真实调用一次翻译接口，确认 Key、模型名和地址可用
 - **音频设备测试**: 真实打开当前设备并显示音量条，先确认能检测到游戏/Discord/视频声音
 - **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
-- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，当前支持固定英语/中文识别
-- **中英双向翻译**: 当前正式支持英语 ↔ 中文，在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
+- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，v0.6.0 候选支持中文（普通话）、英语及日语/韩语/俄语（Beta）识别
+- **多语言翻译**: v0.6.0 候选支持20个在线方向，本地 OPUS 仍仅支持英语 ↔ 中文，在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
 - **兼容多种翻译服务**: 支持 OpenAI 兼容 Chat Completions API，也支持 Google Cloud Translation Basic v2
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
 - **可见状态提示**: 启动状态、音频设备、暂停/恢复、翻译 API 错误码等会直接显示在浮窗里
@@ -95,7 +115,7 @@ Full 和 Full-CUDA 不内置英文专用模型 `small.en` / `base.en`。只有�
 
 ### 2. 走完首次启动向导
 第一次打开会先显示向导，不会立刻加载 Whisper。按顺序完成：
-- 选择简体中文或 English，后续向导和主界面立即使用所选语言
+- 选择简体中文、English、日本語、한국어 或 Русский 界面，后续向导和主界面立即使用所选语言
 - 选择翻译服务，填写 API Key、模型名和兼容地址
 - 点击“测试 API Key”，确认真实翻译接口能返回结果
 - 选择 `[系统声音]` / `Loopback` 音频设备
@@ -223,9 +243,9 @@ python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
 - 左侧下拉框是识别语言
 - 右侧下拉框是翻译目标语言
 - 中间按钮可以一键交换方向
-- 当前正式支持英语和中文双向：英语 → 中文、中文 → 英语
+- 当前公开版 v0.5.2 支持英语 → 中文、中文 → 英语；本分支 v0.6.0 待发布能力见下条
 - 中英文混杂内容会按主要语言判断，并尽量保留游戏术语、缩写、人名和地名
-- 其它语言暂未作为可选语言开放；即使某些翻译服务商本身支持更多语言，VoxGo 当前界面和识别/翻译流程仍以中英双向为准
+- v0.6.0 候选开放五语言20个在线方向，源语言与目标语言不能相同；日语、韩语、俄语标为 Beta。离线仅支持英中，其他18方向需明确选择并配置在线服务，不可用的方向会提示。
 
 ### 状态与错误提示
 除了正常翻译结果，浮窗也会显示必要的用户提示，例如：
@@ -272,7 +292,7 @@ VoxGo 默认每天从官网更新清单检查一次正式版更新。检查只�
 | `whisper.num_workers` | Whisper worker 数，默认 1；调高会增加内存占用 |
 | `whisper.model_download_source` | lite 包首次下载 Whisper 模型的下载源：`modelscope` 为 ModelScope 国内源（默认、推荐国内用户），`huggingface` 为官方 Hugging Face，`custom_hf_endpoint` 为自定义 Hugging Face Endpoint |
 | `whisper.model_download_endpoint` | 仅 `custom_hf_endpoint` 使用的 Hugging Face 兼容 Endpoint；ModelScope 不是 Hugging Face endpoint，不能填在这里 |
-| `whisper.language` | 固定识别语言，会随标题栏左侧语言选择同步；当前可选 `en` / `zh` |
+| `whisper.language` | 由源语言策略同步：日/韩/俄及普通英语使用 `auto`，纯英文模式使用 `en`，中文使用 `zh`；用户选择的源语言另存于 `translation.source_lang`，Beta 不写入 code |
 | `whisper.prompt_profile` | 识别提示词场景，默认 `none`，避免 Whisper 幻听提示词；必要时可手动改为 `general` 或 `game` |
 | `whisper.vad_filter` | faster-whisper 内部 VAD，默认关闭，避免和外部切段重复吞字 |
 | `audio.audio_queue_max_blocks` | 原始音频队列上限，默认 5；队列满时丢弃旧音频，避免暂停或游戏繁忙时堆积 |
@@ -301,8 +321,8 @@ VoxGo 默认每天从官网更新清单检查一次正式版更新。检查只�
 | `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions`；Google 模式不用填写 |
 | `translation.max_tokens` | 译文最大输出长度，默认 80，避免模型扩写 |
 | `translation.temperature` | 翻译随机性，默认 0，优先忠实稳定 |
-| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里；当前可选 `en` / `zh` |
-| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里；当前可选 `en` / `zh` |
+| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里；候选可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
+| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里；候选可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
 | `translation.context_messages` | 翻译历史上下文条数，默认 0，避免历史污染和补全 |
 | `translation.timeout_seconds` | 单次翻译请求超时时间，默认 12 秒；服务商较慢时可适当调高 |
 | `translation.max_concurrent_requests` | 同时进行的翻译请求数，默认 2；调低更稳，调高可能让慢服务商更容易超时 |
@@ -367,14 +387,16 @@ VoxGo 默认每天从官网更新清单检查一次正式版更新。检查只�
 - 如果看到 502，先在电脑浏览器打开 `http://127.0.0.1:8765/mobile`；如果本机可打开，通常是手机访问的 IP、代理或防火墙问题
 - 手机应访问浮窗二维码/启动提示里的电脑地址，不要手动使用浏览器代理给出的公网或代理地址
 
-## 📊 性能指标
+## 📊 性能说明
 
-| 组件 | 延迟 | 资源占用 |
-|------|------|----------|
-| 音频捕获 | < 50ms | 低 |
-| Whisper-small | 1-2s | CPU: 中等 / GPU: 低 |
-| OpenAI 兼容 API | 0.5-1.5s | 网络依赖 |
-| 浮窗渲染 | < 10ms | 低 |
+以下为影响因素，不是固定延迟或游戏 FPS 保证。可在调试模式查看实际阶段耗时。
+
+| 阶段 | 主要影响因素 |
+|------|------|
+| 音频捕获与切段 | 停顿、连续讲话、响应模式及音频设备 |
+| 本地 Whisper 识别 | CPU/GPU、模型大小、语音长度及游戏资源竞争 |
+| 在线翻译 | 排队、网络、服务商/模型响应及超时 |
+| 字幕更新 | 前序处理完成时间与 UI 调度 |
 
 ## 🎮 适用范围
 本工具通过 Windows 系统声音设备采集音频，不针对某一款游戏做专门适配。只要游戏语音能从当前扬声器、耳机、HDMI、USB 声卡或虚拟声卡正常播放，并且系统能暴露对应的 `[系统声音]` / `Loopback` 设备，通常就可以尝试使用。

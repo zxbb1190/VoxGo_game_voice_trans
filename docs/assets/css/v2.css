@@ -34,6 +34,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .brand-logo { border-radius: 9px; box-shadow: none }
 .nav-links { align-items: center; gap: 22px; font-family: ui-monospace, Consolas, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .05em }
 .nav-links a:hover, .nav-links a:focus-visible { color: var(--cyan) }
+.nav-links { flex-wrap: wrap; row-gap: 8px }
+.language-support { padding: 88px 0 }
+.release-status, .release-draft { color: var(--muted); font-size: 14px; line-height: 1.7 }
+.release-status strong { color: var(--green); font-weight: 600 }
+.release-draft a { color: var(--cyan); text-decoration: underline }
+.language-table-wrap { overflow-x: auto; border: 1px solid var(--line) }
+.language-table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.6 }
+.language-table caption { text-align: left; padding: 16px; color: var(--cyan); border-bottom: 1px solid var(--line) }
+.language-table th, .language-table td { text-align: left; vertical-align: top; padding: 16px; border-bottom: 1px solid var(--line); overflow-wrap: normal }
+.language-table thead { color: var(--cyan); background: rgba(105, 221, 242, .04) }
+.language-table tbody th { font-weight: 600 }
+.language-table tbody tr:last-child > * { border-bottom: 0 }
+.language-boundary, .beta-limitations { color: var(--muted); line-height: 1.8; max-width: 960px }
+.beta-limitations { padding-left: 18px; border-left: 2px solid var(--line) }
 
 .eyebrow, .hud-label, .section-kicker, .story-step-number, .story-state,
 .hero-readout, .mode-label, .download-index, .community-index, .patch-date {
@@ -205,6 +219,9 @@ footer { border-color: var(--line) }
   .safety-item:last-child { border-bottom: 0 }
 }
 @media (max-width: 720px) {
+  .language-support { padding: 64px 0 }
+  .language-table { font-size: 12px }
+  .language-table th, .language-table td { padding: 9px 7px }
   .container { width: min(100% - 30px, 1180px) }
   .nav-inner { height: auto; padding: 13px 0; align-items: flex-start; flex-direction: column; gap: 10px }
   .nav-links { width: 100%; gap: 18px; padding-bottom: 5px }

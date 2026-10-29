@@ -28,7 +28,7 @@ from voxgo.i18n import (
 )
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.languages import (
-    LANGUAGE_NAMES, LOCAL_DIRECTIONS, OPPOSITE_LANGUAGE, SPEECH_LANGUAGE_CODES,
+    LANGUAGE_NAMES, LOCAL_DIRECTIONS, OPPOSITE_LANGUAGE, SPEECH_LANGUAGE_CODES, SPEECH_LANGUAGES,
     normalize_language_code, translation_direction_error,
 )
 
@@ -68,7 +68,24 @@ def _tr(language: str, zh: str, en: str) -> str:
 
 
 def _speech_language_options(ui_language: str):
-    return tuple((code, language_label(code, ui_language)) for code in SPEECH_LANGUAGE_CODES)
+    return tuple((code, language_label(code, ui_language, include_beta=True)) for code in SPEECH_LANGUAGE_CODES)
+
+
+def _beta_language_notice(config, ui_language: str) -> str:
+    source = SPEECH_LANGUAGES.get(config.source_lang)
+    target = SPEECH_LANGUAGES.get(config.target_lang)
+    source_beta = bool(source and source.beta)
+    target_beta = bool(target and target.beta)
+    if source_beta and target_beta:
+        return _tr(ui_language, "Beta：语音识别与译文质量仍在优化。",
+                   "Beta: speech recognition and translation quality are still being improved.")
+    if source_beta:
+        return _tr(ui_language, "Beta：该语言的语音识别仍在优化。",
+                   "Beta: speech recognition for this language is still being improved.")
+    if target_beta:
+        return _tr(ui_language, "Beta：该语言的译文质量仍在优化。",
+                   "Beta: translation quality for this language is still being improved.")
+    return ""
 
 
 @localized_output("ui_language")

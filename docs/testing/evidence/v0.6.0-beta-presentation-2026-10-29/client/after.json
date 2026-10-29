@@ -1,0 +1,147 @@
+[
+  {
+    "phase": "after",
+    "locale": "zh-CN",
+    "source_labels": [
+      "英语",
+      "中文",
+      "日语（Beta）",
+      "韩语（Beta）",
+      "俄语（Beta）"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": "Beta：语音识别与译文质量仍在优化。"
+  },
+  {
+    "phase": "after",
+    "locale": "en-US",
+    "source_labels": [
+      "English",
+      "Chinese",
+      "Japanese (Beta)",
+      "Korean (Beta)",
+      "Russian (Beta)"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": "Beta: speech recognition and translation quality are still being improved."
+  },
+  {
+    "phase": "after",
+    "locale": "ja-JP",
+    "source_labels": [
+      "英語",
+      "中国語",
+      "日本語 (Beta)",
+      "韓国語 (Beta)",
+      "ロシア語 (Beta)"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": "Beta：音声認識と翻訳品質は引き続き改善中です。"
+  },
+  {
+    "phase": "after",
+    "locale": "ko-KR",
+    "source_labels": [
+      "영어",
+      "중국어",
+      "일본어 (Beta)",
+      "한국어 (Beta)",
+      "러시아어 (Beta)"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": "Beta: 음성 인식과 번역 품질은 계속 개선 중입니다."
+  },
+  {
+    "phase": "after",
+    "locale": "ru-RU",
+    "source_labels": [
+      "Английский",
+      "Китайский",
+      "Японский (Beta)",
+      "Корейский (Beta)",
+      "Русский (Beta)"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": "Beta: распознавание речи и качество перевода ещё улучшаются."
+  }
+]

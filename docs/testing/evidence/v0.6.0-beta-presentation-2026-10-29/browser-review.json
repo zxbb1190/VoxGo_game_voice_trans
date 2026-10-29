@@ -1,0 +1,179 @@
+{
+  "report": [
+    {
+      "locale": "zh",
+      "viewport": "desktop",
+      "title": "VoxGo - PC 游戏语音实时翻译",
+      "description": "VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 尚未发布。查看待发布更新日志草稿 →",
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "zh",
+      "viewport": "mobile",
+      "title": "VoxGo - PC 游戏语音实时翻译",
+      "description": "VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。",
+      "width": 390,
+      "scrollWidth": 375,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 尚未发布。查看待发布更新日志草稿 →",
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "storyStates": []
+    },
+    {
+      "locale": "zh",
+      "viewport": "narrow",
+      "title": "VoxGo - PC 游戏语音实时翻译",
+      "description": "VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。",
+      "width": 320,
+      "scrollWidth": 305,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 尚未发布。查看待发布更新日志草稿 →",
+      "tableWidth": 273,
+      "tableScrollWidth": 273,
+      "storyStates": []
+    },
+    {
+      "locale": "en",
+      "viewport": "desktop",
+      "title": "VoxGo - Real-time voice translation overlay for PC gamers",
+      "description": "VoxGo v0.6.0: five-language local speech recognition and 20 online translation directions. Japanese, Korean and Russian are Beta. Offline translation is English–Chinese only; public downloads remain v0.5.2.",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 is not published. Read the draft release notes →",
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "en",
+      "viewport": "mobile",
+      "title": "VoxGo - Real-time voice translation overlay for PC gamers",
+      "description": "VoxGo v0.6.0: five-language local speech recognition and 20 online translation directions. Japanese, Korean and Russian are Beta. Offline translation is English–Chinese only; public downloads remain v0.5.2.",
+      "width": 390,
+      "scrollWidth": 375,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 is not published. Read the draft release notes →",
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "storyStates": []
+    },
+    {
+      "locale": "en",
+      "viewport": "narrow",
+      "title": "VoxGo - Real-time voice translation overlay for PC gamers",
+      "description": "VoxGo v0.6.0: five-language local speech recognition and 20 online translation directions. Japanese, Korean and Russian are Beta. Offline translation is English–Chinese only; public downloads remain v0.5.2.",
+      "width": 320,
+      "scrollWidth": 305,
+      "tableRows": 5,
+      "betaRows": 3,
+      "missingAnchors": [],
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "latest": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest"
+      ],
+      "draft": "v0.6.0 is not published. Read the draft release notes →",
+      "tableWidth": 273,
+      "tableScrollWidth": 304,
+      "storyStates": []
+    }
+  ],
+  "errors": [],
+  "badLocalResponses": [],
+  "externalRequests": "blocked after initial CLI navigation; no translation API calls"
+}

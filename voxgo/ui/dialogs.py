@@ -39,6 +39,7 @@ from voxgo.ui.config_models import (
     _hotkey_label_for_ui,
     _start_button_cooldown,
     _tr,
+    _beta_language_notice,
 )
 from voxgo.ui.widgets import AudioTestPanel, TranslationTestRunner
 
@@ -374,6 +375,8 @@ class FirstRunWizard(QDialog):
         self.wizard_translation_title.setStyleSheet("font-size: 18px; font-weight: 600;")
         self.wizard_translation_note = QLabel()
         self.wizard_translation_note.setWordWrap(True)
+        self.wizard_beta_hint = QLabel()
+        self.wizard_beta_hint.setWordWrap(True)
 
         form = QFormLayout()
         form.setLabelAlignment(Qt.AlignRight)
@@ -415,6 +418,7 @@ class FirstRunWizard(QDialog):
 
         layout.addWidget(self.wizard_translation_title)
         layout.addWidget(self.wizard_translation_note)
+        layout.addWidget(self.wizard_beta_hint)
         layout.addSpacing(10)
         layout.addLayout(form)
         layout.addStretch()
@@ -590,6 +594,9 @@ class FirstRunWizard(QDialog):
             self._refresh_summary()
 
     def _refresh_wizard_translation_provider_ui(self):
+        beta_notice = _beta_language_notice(self.translation_config, self._ui_language)
+        self.wizard_beta_hint.setText(beta_notice)
+        self.wizard_beta_hint.setVisible(bool(beta_notice))
         provider = normalize_translation_provider(self.wizard_provider_combo.currentData())
         is_google = provider == "google"
         is_local = provider == "local"

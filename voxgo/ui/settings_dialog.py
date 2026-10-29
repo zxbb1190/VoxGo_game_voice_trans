@@ -54,6 +54,7 @@ from voxgo.ui.config_models import (
     _start_button_cooldown,
     _tr,
     _translation_language_notice,
+    _beta_language_notice,
     _update_channel_options,
     _whisper_device_options,
 )
@@ -193,6 +194,9 @@ class SettingsDialog(QDialog):
         self.provider_hint = QLabel()
         self.provider_hint.setWordWrap(True)
         translation_form.addRow(self.provider_hint)
+        self.beta_language_hint = QLabel()
+        self.beta_language_hint.setWordWrap(True)
+        translation_form.addRow(self.beta_language_hint)
 
         self.api_key_input = QLineEdit(self.translation_config.api_key)
         self.api_key_input.setEchoMode(QLineEdit.Password)
@@ -839,6 +843,9 @@ class SettingsDialog(QDialog):
         # Evaluate the selected provider without mutating it or choosing an online fallback.
         notice_config = replace(self.translation_config, provider=provider)
         notice = _translation_language_notice(notice_config, self._ui_language)
+        beta_notice = _beta_language_notice(notice_config, self._ui_language)
+        self.beta_language_hint.setText(beta_notice)
+        self.beta_language_hint.setVisible(bool(beta_notice))
         if hasattr(self, "provider_hint"):
             if notice:
                 self.provider_hint.setText(notice)

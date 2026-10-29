@@ -62,15 +62,16 @@ def ui_text(language: str, zh: str, en: str) -> str:
     return en if language == UI_LANGUAGE_EN else localize_text(language, en)
 
 
-def language_label(code: str, ui_language: str = UI_LANGUAGE_ZH) -> str:
-    labels = {
-        UI_LANGUAGE_ZH: {"en": "英语", "zh": "中文", "ja": "日语", "ko": "韩语", "ru": "俄语"},
-        UI_LANGUAGE_EN: {"en": "English", "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "ru": "Russian"},
-    }
+def language_label(code: str, ui_language: str = UI_LANGUAGE_ZH, *, include_beta: bool = False) -> str:
+    from voxgo.languages import SPEECH_LANGUAGES
+    info = SPEECH_LANGUAGES.get(code)
+    if info is None:
+        return code
     language = normalize_ui_language(ui_language)
-    if language == UI_LANGUAGE_ZH:
-        return labels[UI_LANGUAGE_ZH].get(code, code)
-    return localize_text(language, labels[UI_LANGUAGE_EN].get(code, code))
+    label = info.name_zh if language == UI_LANGUAGE_ZH else localize_text(language, info.name_en)
+    if include_beta and info.beta:
+        label += "（Beta）" if language == UI_LANGUAGE_ZH else " (Beta)"
+    return label
 
 
 def uses_english_source(language: str) -> bool:

@@ -1,0 +1,50 @@
+async (page) => {
+  await page.context().route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
+  const errors = [];
+  const badLocalResponses = [];
+  page.on('pageerror', e => errors.push(String(e)));
+  page.on('response', r => { if (r.url().startsWith('http://127.0.0.1:19061/') && r.status() >= 400) badLocalResponses.push([r.url(), r.status()]); });
+  const report = [];
+  for (const locale of ['zh', 'en']) {
+    for (const size of [{name:'desktop', width:1440, height:1080}, {name:'mobile', width:390, height:844}, {name:'narrow', width:320, height:800}]) {
+      await page.setViewportSize({width:size.width, height:size.height});
+      await page.goto('http://127.0.0.1:19061/' + (locale === 'en' ? 'en/' : ''), {waitUntil:'networkidle'});
+      await page.evaluate(() => { document.documentElement.style.scrollBehavior='auto'; window.scrollTo(0,0); });
+      const prefix = 'E:/my/my/game_voice_translator/output/playwright/v060-beta-20261029/' + locale + '-' + size.name;
+      if (size.name !== 'narrow') await page.screenshot({path:prefix+'-hero.png'});
+      const data = await page.evaluate(() => ({
+        title:document.title,
+        description:document.querySelector('meta[name="description"]').content,
+        width:innerWidth,
+        scrollWidth:document.documentElement.scrollWidth,
+        tableRows:document.querySelectorAll('.language-table tbody tr').length,
+        betaRows:[...document.querySelectorAll('.language-table tbody th')].filter(e=>e.textContent.includes('Beta')).length,
+        missingAnchors:[...document.querySelectorAll('a[href^="#"]')].map(e=>e.getAttribute('href')).filter(h=>h.length>1&&!document.getElementById(h.slice(1))),
+        downloads:[...document.querySelectorAll('a[href*="/releases/download/"]')].map(e=>e.href),
+        latest:[...document.querySelectorAll('a[href$="/releases/latest"]')].map(e=>e.href),
+        draft:document.querySelector('.release-draft').textContent,
+        tableWidth:document.querySelector('.language-table-wrap').clientWidth,
+        tableScrollWidth:document.querySelector('.language-table-wrap').scrollWidth
+      }));
+      if(data.scrollWidth>data.width || data.tableRows!==5 || data.betaRows!==3 || data.missingAnchors.length || data.downloads.some(u=>!u.includes('/v0.5.2/'))) throw new Error(JSON.stringify(data));
+      await page.locator('#languages').evaluate(el => window.scrollTo(0, el.offsetTop - 86));
+      if (size.name !== 'narrow') await page.screenshot({path:prefix+'-languages.png'});
+      if (size.name === 'mobile') {
+        await page.locator('#download').evaluate(el => window.scrollTo(0, el.offsetTop - 80));
+        await page.screenshot({path:prefix+'-download.png'});
+      }
+      const storyStates=[];
+      if(size.name==='desktop') {
+        for(const n of [1,2,3,4]) {
+          await page.locator('.story-step[data-scene="'+n+'"]').evaluate(el=>window.scrollTo(0,el.getBoundingClientRect().top+scrollY-innerHeight*.4));
+          await page.waitForTimeout(300);
+          storyStates.push(await page.locator('.story-shell').getAttribute('data-active'));
+        }
+        if(storyStates.join(',')!=='1,2,3,4') throw new Error('Story states '+storyStates);
+      }
+      report.push({locale,viewport:size.name,...data,storyStates});
+    }
+  }
+  if(errors.length||badLocalResponses.length) throw new Error(JSON.stringify({errors,badLocalResponses}));
+  return {report,errors,badLocalResponses,externalRequests:'blocked after initial CLI navigation; no translation API calls'};
+}

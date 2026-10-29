@@ -114,7 +114,7 @@ class MultilingualUiTest(unittest.TestCase):
         self.assertTrue(overlay._language_notice.isHidden())
         overlay.app_config.language = UI_LANGUAGE_EN
         overlay.refresh_language()
-        self.assertEqual(overlay._source_lang_combo.currentText(), "Korean")
+        self.assertEqual(overlay._source_lang_combo.currentText(), "Korean (Beta)")
         self.assertEqual(overlay._language_notice.text(), "")
         self.assertTrue(overlay._swap_lang_button.isEnabled())
         self.assertIn("Swap recognition", overlay._swap_lang_button.toolTip())

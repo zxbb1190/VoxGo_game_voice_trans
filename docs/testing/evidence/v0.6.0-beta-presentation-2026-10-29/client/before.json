@@ -1,0 +1,60 @@
+[
+  {
+    "phase": "before",
+    "locale": "zh-CN",
+    "source_labels": [
+      "英语",
+      "中文",
+      "日语",
+      "韩语",
+      "俄语"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": null
+  },
+  {
+    "phase": "before",
+    "locale": "en-US",
+    "source_labels": [
+      "English",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Russian"
+    ],
+    "source_codes": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "ru"
+    ],
+    "target_codes": [
+      "en",
+      "zh",
+      "ko",
+      "ru"
+    ],
+    "size": [
+      660,
+      240
+    ],
+    "beta_notice": null
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "full_suite": {
+    "tests": 709,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 57.966,
+    "local_api_joint": true
+  },
+  "new_ui_contract_tests": 7,
+  "english_chinese_comparison": {
+    "cases": 48,
+    "equal": true
+  },
+  "prior_attempts": [
+    {
+      "log": "build/beta-presentation-20261029/full-tests.log",
+      "errors": 1,
+      "skipped": 1,
+      "detail": "existing loopback relay ConnectionResetError 10054"
+    },
+    {
+      "log": "build/beta-presentation-20261029/full-tests-final.log",
+      "failures": 1,
+      "skipped": 1,
+      "detail": "existing relay blocked count 2 vs 1; isolated 12 tests pass"
+    }
+  ],
+  "final_log": "build/beta-presentation-20261029/full-tests-joint.log",
+  "real_api_requests": 0
+}

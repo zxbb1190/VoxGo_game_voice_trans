@@ -1,0 +1,71 @@
+"""Render actual source Qt widgets with defaults only; never load a user profile."""
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / 'docs/testing/evidence/v0.6.0-beta-presentation-2026-10-29/client'
+OUT.mkdir(parents=True, exist_ok=True)
+before = '--before' in sys.argv
+if before:
+    baseline = ROOT / 'build/beta-presentation-20261029/baseline'
+    for rel in subprocess.check_output(['git','ls-files','voxgo'], cwd=ROOT, text=True).splitlines():
+        path = baseline / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(subprocess.check_output(['git','show',f'57d185ec:{rel}'],cwd=ROOT))
+    sys.path.insert(0, str(baseline))
+else:
+    sys.path.insert(0, str(ROOT))
+os.environ['QT_QPA_PLATFORM']='offscreen'
+from PyQt5.QtGui import QFont, QFontDatabase
+from PyQt5.QtWidgets import QApplication, QTabWidget
+from voxgo.translation import TranslationConfig
+from voxgo.ui.config_models import AudioDeviceConfig, HotkeyConfig, OverlayConfig, RuntimeConfig
+from voxgo.ui.overlay_window import GameOverlay
+from voxgo.ui.settings_dialog import SettingsDialog
+from voxgo.ui.dialogs import FirstRunWizard
+
+app=QApplication([])
+for name in ['msyh.ttc','meiryo.ttc','malgun.ttf','segoeui.ttf']:
+    path=Path('C:/Windows/Fonts')/name
+    if path.exists(): QFontDatabase.addApplicationFont(str(path))
+app.setFont(QFont('Microsoft YaHei UI', 9))
+results=[]
+for locale in (['zh-CN','en-US'] if before else ['zh-CN','en-US','ja-JP','ko-KR','ru-RU']):
+    config=TranslationConfig(provider='openai_compatible', source_lang='ja',target_lang='ru',api_key='')
+    runtime=RuntimeConfig(language=locale, telemetry_consent='denied')
+    overlay=GameOverlay(translation_config=config,app_config=runtime)
+    overlay.resize(660,240)
+    overlay.show()
+    app.processEvents()
+    tag=('before-' if before else 'after-')+locale
+    overlay.grab().save(str(OUT/(tag+'-overlay.png')))
+    overlay._source_lang_combo.showPopup()
+    app.processEvents()
+    overlay._source_lang_combo.view().grab().save(str(OUT/(tag+'-choices.png')))
+    overlay._source_lang_combo.hidePopup()
+    results.append({'phase':'before' if before else 'after','locale':locale,
+        'source_labels':[overlay._source_lang_combo.itemText(i) for i in range(5)],
+        'source_codes':[overlay._source_lang_combo.itemData(i) for i in range(5)],
+        'target_codes':[overlay._target_lang_combo.itemData(i) for i in range(4)],
+        'size':[overlay.width(),overlay.height()],
+        'beta_notice':getattr(overlay,'_beta_notice',None).text() if hasattr(overlay,'_beta_notice') else None})
+    overlay.close()
+    if not before and locale in ('zh-CN','en-US'):
+        dialog=SettingsDialog(OverlayConfig(),HotkeyConfig(),translation_config=config,app_config=runtime)
+        dialog.findChild(QTabWidget).setCurrentIndex(1)
+        dialog.resize(820,720)
+        dialog.show()
+        app.processEvents()
+        dialog.grab().save(str(OUT/(tag+'-settings.png')))
+        dialog.close()
+        wizard=FirstRunWizard(audio_config=AudioDeviceConfig(),translation_config=config,app_config=runtime)
+        wizard.stack.setCurrentIndex(1)
+        wizard.show()
+        app.processEvents()
+        wizard.grab().save(str(OUT/(tag+'-wizard.png')))
+        wizard.close()
+    app.processEvents()
+(OUT/('before.json' if before else 'after.json')).write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

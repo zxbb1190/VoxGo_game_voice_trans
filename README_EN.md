@@ -1,5 +1,7 @@
 # VoxGo
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
 Chinese documentation: [README.md](README.md)
 
 VoxGo is an open-source real-time voice translation overlay for PC gamers, designed for overseas servers, guild voice chat, Discord teammates, and live-stream subtitle assistance.
@@ -7,13 +9,31 @@ VoxGo is an open-source real-time voice translation overlay for PC gamers, desig
 Website: <https://voxgo.cn/><br>
 GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
+## Language Support — v0.6.0 (unreleased)
+
+This describes the v0.6.0 candidate, not the public v0.5.2 download. See the [draft release notes](docs/releases/v0.6.0.md); use [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for published packages.
+
+| Language | Local Whisper recognition | Online translation | Local OPUS translation |
+|---|---|---|---|
+| Chinese (Mandarin, Simplified subtitles) | Supported | To/from the other four languages | English ↔ Chinese |
+| English | Supported | To/from the other four languages | English ↔ Chinese |
+| Japanese (Beta) | Supported (Beta) | To/from the other four languages | Not supported |
+| Korean (Beta) | Supported (Beta) | To/from the other four languages | Not supported |
+| Russian (Beta) | Supported (Beta) | To/from the other four languages | Not supported |
+
+The five languages provide **20 directed online translation pairs**. Recognition runs locally with Whisper; translation uses your configured OpenAI-compatible provider/model or Google Cloud Translation Basic v2. Online mode sends recognized text to that provider, requires your own API key/service access and depends on its language support. It translates directly between the selected languages. Local OPUS remains **English ↔ Chinese only**; the other **18 directions require online translation**, with no silent provider fallback. English-only `.en` recognition models are restricted to English.
+
+Japanese, Korean and Russian are **Beta languages**: missed words, mistranslations and delays remain possible, especially with short callouts, overlapping voices, noise or music. Language availability is not a guarantee of accuracy or latency. Bilingual human review, real-game/FPS and low-end hardware acceptance remain incomplete. Beta labels describe language maturity, independently of internal ASR strategy; no experimental strategy toggle is exposed. Further work will focus on accuracy, performance and subtitle stability, based on independent recordings.
+
+Report reproducible issues through [GitHub Issues](https://github.com/zxbb1190/VoxGo_game_voice_trans/issues/new) or Settings → Help & Feedback, including version, language direction, provider/model and steps. Review logs for private content before sharing; the community links below remain available.
+
 ## Features
-- **First-run setup wizard**: The first launch starts with a Chinese/English UI choice, then walks through translation and audio tests before saving `setup_completed`.
+- **First-run setup wizard**: The first launch starts with a Chinese, English, Japanese, Korean or Russian UI choice, then walks through translation and audio tests before saving `setup_completed`.
 - **API Key test**: The wizard and settings dialog can make one real translation request to verify the Key, model, and endpoint.
 - **Audio device test**: Opens the selected device and shows a live level bar so players can confirm game/Discord/video audio is detected.
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
-- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, currently with fixed English or Chinese recognition.
-- **English-Chinese translation**: Officially supports English ↔ Chinese today. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
+- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, with Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta) recognition in the v0.6.0 candidate.
+- **Multilingual translation**: The v0.6.0 candidate routes 20 online directions; local OPUS stays English ↔ Chinese only. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
 - **Multiple translation providers**: Supports OpenAI-compatible Chat Completions APIs and Google Cloud Translation Basic v2.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
@@ -94,7 +114,7 @@ The old installation remains in a sibling `.backup-*` directory for recovery; re
 
 ### 2. Complete The First-Run Wizard
 The first launch opens the setup wizard before Whisper starts loading. Complete this loop:
-- Choose Simplified Chinese or English; the rest of the wizard and main UI switch immediately.
+- Choose Simplified Chinese, English, Japanese, Korean or Russian for the interface; the rest of the wizard and main UI switch immediately.
 - Choose a translation provider and fill in the API Key, model name, and compatible endpoint.
 - Click "Test API Key" to confirm the real translation API returns a result.
 - Choose a `[System Audio]` / `Loopback` audio device.
@@ -217,9 +237,9 @@ Choose the fixed recognition and translation direction directly in the overlay t
 - The left dropdown is the recognition language.
 - The right dropdown is the translation target language.
 - The middle button swaps the direction.
-- Officially supported directions are English → Chinese and Chinese → English.
+- The v0.6.0 candidate supports 20 online directions across five languages; source and target must differ. Japanese, Korean and Russian are Beta.
 - Mixed Chinese/English terms are preserved where possible, but the recognition and translation direction follows the selected dropdowns.
-- Other languages are not exposed as selectable languages yet. Even when a provider supports more languages, VoxGo's current recognition and translation flow is built for English-Chinese use.
+- Offline translation remains English ↔ Chinese only. Choose and configure an online provider explicitly for the other 18 directions; unavailable routes show a notice.
 
 ### Status And Error Messages
 Important user-facing messages are shown in the overlay, including:
@@ -256,7 +276,7 @@ Edit `config.json` or use the overlay settings:
 | `whisper.num_workers` | Whisper worker count, default 1; increasing it uses more memory |
 | `whisper.model_download_source` | First-run Whisper model download source for lite packages: `modelscope` for ModelScope China source (default and recommended for mainland China), `huggingface` for the official Hugging Face Hub, or `custom_hf_endpoint` for a custom Hugging Face Endpoint |
 | `whisper.model_download_endpoint` | Hugging Face-compatible endpoint used only when `model_download_source` is `custom_hf_endpoint`; ModelScope is not a Hugging Face endpoint and should not be entered here |
-| `whisper.language` | Fixed recognition language, synchronized with the left title-bar language dropdown; currently `en` / `zh` |
+| `whisper.language` | Derived from source policy: `auto` for Japanese/Korean/Russian and normal English, `en` for Pure English, `zh` for Chinese. The selected source is stored separately in `translation.source_lang`; Beta is never part of the code |
 | `whisper.prompt_profile` | Recognition prompt profile, default `none` to avoid Whisper hallucinating the prompt; optionally use `general` or `game` manually |
 | `whisper.vad_filter` | faster-whisper internal VAD, disabled by default to avoid double-cutting speech |
 | `overlay.text_color` | Overlay text color |
@@ -284,8 +304,8 @@ Edit `config.json` or use the overlay settings:
 | `translation.endpoint` | OpenAI-compatible endpoint or `/v1` base URL; unused in Google mode |
 | `translation.max_tokens` | Maximum translation output length, default 80 to avoid expansion |
 | `translation.temperature` | Translation randomness, default 0 for faithful and stable subtitles |
-| `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown; currently `en` / `zh` |
-| `translation.target_lang` | Fixed translation target saved from the right title-bar dropdown; currently `en` / `zh` |
+| `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown; candidate codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
+| `translation.target_lang` | Fixed translation target saved from the right title-bar dropdown; candidate codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
 | `translation.context_messages` | Translation history context count, default 0 to avoid stale context pollution and completion |
 | `translation.timeout_seconds` | Single translation request timeout, default 12 seconds; increase it if your provider is slow |
 | `translation.max_concurrent_requests` | Concurrent translation requests, default 2; lower is steadier, higher can make slow providers time out more easily |
@@ -342,6 +362,17 @@ Edit `config.json` or use the overlay settings:
 - Check network connectivity and provider speed.
 - Lower `whisper.model_size` to speed up recognition.
 - Use a local translation model if you already have one deployed.
+
+## Performance
+
+These are influencing factors, not fixed latency or game FPS guarantees. Debug mode shows actual stage timings.
+
+| Stage | Main factors |
+|---|---|
+| Capture and segmentation | Pauses, continuous speech, response mode and audio device |
+| Local Whisper recognition | CPU/GPU, model size, audio duration and competition with the game |
+| Online translation | Queueing, network, provider/model response and timeouts |
+| Subtitle updates | Completion of earlier stages and UI scheduling |
 
 ## Scope
 This tool captures Windows system playback audio. It is not hard-coded for specific games and should not claim individual game compatibility without testing. If the game voice is audible through the selected playback device and Windows exposes a matching system-audio/loopback capture device, it can usually be tried.

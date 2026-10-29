@@ -1,0 +1,10 @@
+Command: .venv-win/Scripts/python.exe -B -X utf8 -m unittest discover -s tests -v
+VOXGO_API_ROOT=E:/my/my/voxgo-api (local in-memory Worker contract only)
+
+----------------------------------------------------------------------
+Ran 709 tests in 57.966s
+ASR benchmark: 0 results, 0 failures; C:\Users\ADMINI~1\AppData\Local\Temp\tmpdiezoyk9\report\report.html
+
+OK
+
+Earlier failure logs retained in build/beta-presentation-20261029.

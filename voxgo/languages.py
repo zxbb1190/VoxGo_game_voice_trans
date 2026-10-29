@@ -3,8 +3,26 @@
 These are routing capabilities, not language quality or release acceptance.
 """
 
-SPEECH_LANGUAGE_CODES = ("en", "zh", "ja", "ko", "ru")
-LANGUAGE_NAMES = {"en": "英语", "zh": "中文", "ja": "日语", "ko": "韩语", "ru": "俄语"}
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class SpeechLanguage:
+    name_zh: str
+    name_en: str
+    beta: bool = False
+
+
+# Product maturity is display metadata, independent of recognition strategies.
+SPEECH_LANGUAGES = {
+    "en": SpeechLanguage("英语", "English"),
+    "zh": SpeechLanguage("中文", "Chinese"),
+    "ja": SpeechLanguage("日语", "Japanese", beta=True),
+    "ko": SpeechLanguage("韩语", "Korean", beta=True),
+    "ru": SpeechLanguage("俄语", "Russian", beta=True),
+}
+SPEECH_LANGUAGE_CODES = tuple(SPEECH_LANGUAGES)
+LANGUAGE_NAMES = {code: info.name_zh for code, info in SPEECH_LANGUAGES.items()}
 LANGUAGE_ALIASES = {
     "eng": "en", "english": "en", "英语": "en",
     "zh-cn": "zh", "zh-tw": "zh", "cmn": "zh", "yue": "zh", "chinese": "zh", "中文": "zh",
