@@ -301,16 +301,26 @@ class SpeechRecognizer:
     def _apply_pending_config(self, config_override=None):
         # Called by the speech worker between inferences, never by GUI settings.
         with self._configuration_lock:
-            pending, self._pending_config = self._pending_config, None
+            pending = self._pending_config
+            if config_override is None:
+                self._pending_config = None
         if config_override is not None:
             pending = replace(config_override, vad_parameters=sanitize_vad_parameters(
                 DEFAULT_VAD_PARAMS.copy() if config_override.vad_parameters is None else dict(config_override.vad_parameters)))
         if pending is None:
-            return
+            return False
         reload_model = self._native_config_key(pending) != self._native_config_key(self.config)
-        if reload_model and self._initialized:
+        if reload_model:
             self.cleanup()
         self.config = pending
+        return True
+
+    def prepare_pending_config(self):
+        """Apply and prepare on the existing speech worker, without input audio."""
+        if not self._apply_pending_config():
+            return False
+        self.initialize()
+        return True
 
     def initialize(self):
         """初始化 Whisper 模型"""

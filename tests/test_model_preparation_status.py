@@ -230,11 +230,13 @@ class ModelStatusQtTests(unittest.TestCase):
         recognizer = SpeechRecognizer(WhisperConfig(active_model_size='base'))
         recognizer._loaded_model_size = 'base'
         owner._speech_recognizer = recognizer
+        owner._speech_pipeline = Mock()
         owner._queue_recognizer_config()
         self.qt.processEvents()
         self.assertIn('正在切换识别模型：small', owner._overlay._model_preparation_status.text())
         self.assertEqual(recognizer._pending_config.model_size, 'small')
         self.assertFalse(recognizer._initialized)
+        owner._speech_pipeline.request_model_preparation.assert_called_once_with()
 
     def test_old_model_completion_does_not_claim_new_selection_is_ready(self):
         overlay = self.overlay()

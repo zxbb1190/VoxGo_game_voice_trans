@@ -80,7 +80,7 @@ class MultilingualUiTest(unittest.TestCase):
         overlay._target_lang_combo.setCurrentIndex(overlay._target_lang_combo.findData("ja"))
         self.assertEqual((config.source_lang, config.target_lang, config.provider), ("zh", "ja", "google"))
         self.assertTrue(overlay._swap_lang_button.isEnabled())
-        self.assertIn("your own API key", overlay._language_notice.text())
+        self.assertEqual(overlay._language_notice.text(), "")
         overlay._toggle_lock()
         overlay._toggle_lock()
         self.assertTrue(overlay._swap_lang_button.isEnabled())
@@ -110,11 +110,12 @@ class MultilingualUiTest(unittest.TestCase):
     def test_bilingual_language_names_and_online_provider_notice(self):
         overlay = self.make_overlay(translation_config=TranslationConfig(provider="google", source_lang="ko", target_lang="zh"))
         self.assertEqual(language_label("ko", UI_LANGUAGE_ZH), "韩语")
-        self.assertEqual(overlay._language_notice.text(), "日/韩/俄相关方向仅支持在线直译，需自配 API Key。")
+        self.assertEqual(overlay._language_notice.text(), "")
+        self.assertTrue(overlay._language_notice.isHidden())
         overlay.app_config.language = UI_LANGUAGE_EN
         overlay.refresh_language()
         self.assertEqual(overlay._source_lang_combo.currentText(), "Korean")
-        self.assertEqual(overlay._language_notice.text(), "Directions involving Japanese/Korean/Russian require direct online translation with your own API key.")
+        self.assertEqual(overlay._language_notice.text(), "")
         self.assertTrue(overlay._swap_lang_button.isEnabled())
         self.assertIn("Swap recognition", overlay._swap_lang_button.toolTip())
 
@@ -135,7 +136,8 @@ class MultilingualUiTest(unittest.TestCase):
         self.assertTrue(whisper.pure_english_environment)
         dialog.provider_combo.setCurrentIndex(dialog.provider_combo.findData("google"))
         self.assertTrue(dialog.translation_test_button.isEnabled())
-        self.assertIn("your own API key", dialog.provider_hint.text())
+        self.assertEqual(dialog.provider_hint.text(), "")
+        self.assertTrue(dialog.provider_hint.isHidden())
 
     def test_connectivity_probe_uses_actual_source_once_and_only_on_run(self):
         calls = []

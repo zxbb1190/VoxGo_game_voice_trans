@@ -1,0 +1,33 @@
+{
+  "scope": "Offscreen Qt fixtures only, no API/audio",
+  "cases": [
+    {
+      "fixture": "fixture-online.png",
+      "provider": "openai_compatible",
+      "locale": "zh-CN",
+      "pending": false,
+      "api_notice_hidden": true
+    },
+    {
+      "fixture": "fixture-local.png",
+      "provider": "local",
+      "locale": "zh-CN",
+      "pending": false,
+      "api_notice_hidden": false
+    },
+    {
+      "fixture": "fixture-prepare.png",
+      "provider": "openai_compatible",
+      "locale": "zh-CN",
+      "pending": true,
+      "api_notice_hidden": true
+    },
+    {
+      "fixture": "fixture-prepare-ru.png",
+      "provider": "openai_compatible",
+      "locale": "ru-RU",
+      "pending": true,
+      "api_notice_hidden": true
+    }
+  ]
+}

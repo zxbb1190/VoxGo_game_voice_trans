@@ -416,6 +416,9 @@ class VoxGoApp:
             self._notify_model_download_progress(ModelDownloadProgress("pending", model))
         if hasattr(self._speech_recognizer, "request_config"):
             self._speech_recognizer.request_config(config)
+            prepare = getattr(getattr(self, "_speech_pipeline", None), "request_model_preparation", None)
+            if prepare is not None:
+                prepare()
         else:
             # Compatibility with integrations supplying their own recognizer.
             self._speech_recognizer.config = config

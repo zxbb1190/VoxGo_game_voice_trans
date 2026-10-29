@@ -1,0 +1,92 @@
+"""Actual cached base -> small preparation, paused, no audio or provider object."""
+import copy
+import json
+import os
+from pathlib import Path
+import sys
+import threading
+import time
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+os.environ.update(HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1',
+                  HTTP_PROXY='http://127.0.0.1:1', HTTPS_PROXY='http://127.0.0.1:1',
+                  NO_PROXY='localhost,127.0.0.1,::1')
+from voxgo.app import VoxGoApp
+from voxgo.config.loader import (default_app_config, migrate_runtime_defaults,
+    sync_language_flow, apply_language_runtime_policy, sync_whisper_vad_limit)
+from voxgo.asr.whisper_engine import SpeechRecognizer
+from voxgo.asr.pipeline import SpeechPipeline
+from voxgo.runtime.events import EventBus
+
+owner = VoxGoApp.__new__(VoxGoApp)
+owner.config = default_app_config()
+owner.config.translation.source_lang, owner.config.translation.target_lang = 'ko', 'zh'
+owner.config.whisper.local_files_only = True
+owner.config.whisper.model_dir = str(ROOT / '.models')
+owner._overlay = None
+owner._stopping = False
+owner._pending_model_download_progress = None
+
+
+def mode(value):
+    owner.config.audio.latency_mode = value
+    migrate_runtime_defaults(owner.config, preserve_existing_audio_tuning=False)
+    sync_language_flow(owner.config)
+    apply_language_runtime_policy(owner.config)
+    sync_whisper_vad_limit(owner.config)
+
+
+ready = threading.Event()
+events = []
+origin = time.monotonic()
+
+
+def progress(item):
+    events.append({'status': item.status, 'model': item.model_name,
+                   'thread': threading.current_thread().name,
+                   'seconds_from_start': round(time.monotonic() - origin, 4)})
+    owner._notify_model_download_progress(item)
+    if item.status == 'ready' and item.model_name == 'small':
+        ready.set()
+
+
+mode('fast')
+recognizer = SpeechRecognizer(copy.deepcopy(owner._speech_runtime_config().whisper), progress)
+owner._speech_recognizer = recognizer
+recognizer.initialize()
+assert recognizer._loaded_model_size == 'base'
+stats = {'speech_detected': 0, 'filtered_speech': 0, 'dropped_speech': 0, 'errors': 0}
+failures = []
+pipeline = SpeechPipeline(owner._speech_runtime_config, lambda: recognizer, EventBus(), stats,
+    lambda: True, lambda: True, lambda: 'no-audio-fixture', {}, lambda *args: failures.append(str(args)))
+owner._speech_pipeline = pipeline
+pipeline.start()
+stopped = False
+try:
+    mode('balanced')
+    began = time.monotonic()
+    owner._queue_recognizer_config()
+    queued_ms = (time.monotonic() - began) * 1000
+    assert ready.wait(20), failures
+    prepared_seconds = time.monotonic() - began
+    assert recognizer._loaded_model_size == 'small'
+    stopped = pipeline.stop()
+    assert stopped and not failures and stats['speech_detected'] == 0
+    result = {'kind': 'actual source worker with real existing cached models; not a frozen GUI test',
+        'source_language': 'ko', 'mode_change': 'fast -> balanced', 'models': 'base -> small',
+        'language': recognizer.config.language, 'device': recognizer.runtime_device,
+        'compute_type': recognizer.runtime_compute_type, 'cpu_threads': recognizer.config.cpu_threads,
+        'paused': True, 'input_audio_segments': 0, 'model_downloads': 0, 'translation_requests': 0,
+        'queue_call_ms': round(queued_ms, 3), 'model_ready_after_seconds': round(prepared_seconds, 4),
+        'events': events, 'stats': stats, 'worker_stopped': stopped,
+        'pending_notice_final_status': owner._pending_model_download_progress.status,
+        'meaning': 'Readiness without audio; one observation, not P50/P95 or game performance.'}
+    (Path(__file__).parent / 'cached-model-no-audio.json').write_bytes(
+        (json.dumps(result, indent=2) + '\n').encode('utf-8'))
+    print(json.dumps(result), flush=True)
+finally:
+    if not stopped:
+        stopped = pipeline.stop()
+    if stopped:
+        recognizer.cleanup()

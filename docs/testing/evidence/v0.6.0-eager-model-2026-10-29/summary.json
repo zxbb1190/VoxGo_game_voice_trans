@@ -1,0 +1,49 @@
+{
+  "baseline": "506d0962",
+  "new_tests": 14,
+  "full_suite_tests": 702,
+  "run_history": [
+    {
+      "log": "build/eager-model-20261029/full-tests.log",
+      "sha256": "e6639123c53e0d7695d99c89d365b8142dab5421aa0c68a4bbe833b0d4fe5ee6",
+      "tests": 702,
+      "seconds": 57.254,
+      "passed": false
+    },
+    {
+      "log": "build/eager-model-20261029/test_eager_model_preparation-stop-final.log",
+      "sha256": "9a9a55d094e0f9563019f20214d5034db75bd41e889712a0df58d62e31f91f0e",
+      "tests": 14,
+      "seconds": 0.42,
+      "passed": true
+    },
+    {
+      "log": "build/eager-model-20261029/test_offline_russian_capture_ab-stop-final.log",
+      "sha256": "979fbaad4dd0903b4a7fb58802779113f373a1aa7720305075e6c21a60ba8f71",
+      "tests": 15,
+      "seconds": 0.339,
+      "passed": true
+    },
+    {
+      "log": "build/eager-model-20261029/test_windows_online_acceptance-stop-final.log",
+      "sha256": "ecc2e30a5d26769c7afacf77e01fb021d6a3102791446167d5f3650793752392",
+      "tests": 12,
+      "seconds": 10.624,
+      "passed": true
+    },
+    {
+      "log": "build/eager-model-20261029/full-tests-final.log",
+      "sha256": "a18398948b4e29912fdf01a37e44d43ebe7e6d6eab91f134ed5f95fe1c931b29",
+      "tests": 702,
+      "seconds": 57.192,
+      "passed": true
+    }
+  ],
+  "native_no_audio_validation": "base -> small, paused, CPU INT8 one thread, auto; real cached model ready after 0.859s, no input or requests; single observation, not latency P50/P95.",
+  "asr_config_equivalence_cases": 48,
+  "production_accessed": false,
+  "real_api_requests": 0,
+  "real_model_downloads": 0,
+  "telemetry_fields_changed": false,
+  "first_full_run": "Stop acknowledgement left the control stop marker queued; repaired to keep the original empty-queue contract. One existing loopback helper blocked-counter flake was also observed; its 12 tests passed in isolation and final full suite passed. No assertion weakening."
+}

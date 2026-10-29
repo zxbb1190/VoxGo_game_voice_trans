@@ -1,0 +1,51 @@
+{
+  "kind": "actual source worker with real existing cached models; not a frozen GUI test",
+  "source_language": "ko",
+  "mode_change": "fast -> balanced",
+  "models": "base -> small",
+  "language": "auto",
+  "device": "cpu",
+  "compute_type": "int8",
+  "cpu_threads": 1,
+  "paused": true,
+  "input_audio_segments": 0,
+  "model_downloads": 0,
+  "translation_requests": 0,
+  "queue_call_ms": 0.0,
+  "model_ready_after_seconds": 0.859,
+  "events": [
+    {
+      "status": "loading",
+      "model": "base",
+      "thread": "MainThread",
+      "seconds_from_start": 0.0
+    },
+    {
+      "status": "ready",
+      "model": "base",
+      "thread": "MainThread",
+      "seconds_from_start": 0.485
+    },
+    {
+      "status": "loading",
+      "model": "small",
+      "thread": "speech-worker",
+      "seconds_from_start": 0.485
+    },
+    {
+      "status": "ready",
+      "model": "small",
+      "thread": "speech-worker",
+      "seconds_from_start": 1.344
+    }
+  ],
+  "stats": {
+    "speech_detected": 0,
+    "filtered_speech": 0,
+    "dropped_speech": 0,
+    "errors": 0
+  },
+  "worker_stopped": true,
+  "pending_notice_final_status": "ready",
+  "meaning": "Readiness without audio; one observation, not P50/P95 or game performance."
+}

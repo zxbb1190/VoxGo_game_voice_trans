@@ -163,10 +163,6 @@ def _translation_language_notice(config, ui_language: str) -> str:
                 "Offline supports English ↔ Chinese only. Other supported directions require an online provider and your API key. No automatic switch.")
         return _tr(ui_language, "不支持此语言方向，请选择可用的源语言和目标语言。",
                    "Unsupported direction: select an available source and target language.")
-    if (config.source_lang, config.target_lang) not in LOCAL_DIRECTIONS:
-        return _tr(ui_language,
-            "日/韩/俄相关方向仅支持在线直译，需自配 API Key。",
-            "Directions involving Japanese/Korean/Russian require direct online translation with your own API key.")
     return ""
 
 

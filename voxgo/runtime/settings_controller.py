@@ -166,9 +166,10 @@ class OverlaySettingsController:
             (getattr(app.config.whisper, "multilingual_asr_strategy", "legacy")
              if current_language_flow[0] in {"ja", "ko", "ru"} else ""),
         )
+        defer_recognizer_config = False
         if app._speech_recognizer:
             if hasattr(app, "_queue_recognizer_config"):
-                app._queue_recognizer_config()
+                defer_recognizer_config = True
             else:
                 app._speech_recognizer.config = app.config.whisper
                 if previous_whisper_model and current_whisper_model != previous_whisper_model:
@@ -238,6 +239,8 @@ class OverlaySettingsController:
                 f"{language_label(current_language_flow[1], current_ui_language)}",
                 ui_text(current_ui_language, "状态", "Status"),
             )
+        elif defer_recognizer_config:
+            app._queue_recognizer_config()
         if current_translation != previous_translation:
             provider_label = TRANSLATION_PROVIDERS.get(
                 normalize_translation_provider(app.config.translation.provider),

@@ -109,7 +109,7 @@ class ModelDownloadNoticeFormatter:
         }
         title = ui_text(language, *titles.get(progress.status, titles['checking'])).format(model)
         if progress.status == "pending":
-            detail = ui_text(language, "等待下一段语音检查并加载，首次使用可能需要下载。", "Waiting for the next audio segment to check and load; first use may require a download.")
+            detail = ui_text(language, "将自动检查缓存并下载或加载模型，请稍候。", "The cache will be checked and the model downloaded or loaded automatically. Please wait.")
         elif progress.status == "checking":
             detail = ui_text(language, "正在检查本地缓存", "Checking the local cache")
         elif progress.status == "downloading":

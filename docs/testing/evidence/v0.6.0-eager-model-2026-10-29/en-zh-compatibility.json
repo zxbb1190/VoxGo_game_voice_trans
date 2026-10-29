@@ -1,0 +1,13 @@
+{
+  "baseline": "afc33a67",
+  "cases": 48,
+  "equal": true,
+  "differences": [],
+  "source": "actual baseline/current config loader and SpeechPipeline; no network, telemetry or user settings",
+  "compared": [
+    "audio settings",
+    "decoding settings",
+    "model selection",
+    "pipeline scheduling policy"
+  ]
+}

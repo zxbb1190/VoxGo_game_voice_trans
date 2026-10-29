@@ -775,11 +775,8 @@ class SettingsDialog(QDialog):
         is_google = provider == "google"
         is_local = provider == "local"
         if hasattr(self, "provider_hint"):
-            self.provider_hint.setText(_tr(
-                self._ui_language,
-                "支持本地离线翻译；选择后可下载模型。",
-                "Offline translation is supported; select it to download the model.",
-            ))
+            self.provider_hint.clear()
+            self.provider_hint.setVisible(is_local)
         if hasattr(self, "local_model_panel"):
             self.local_model_panel.setVisible(is_local)
             self.local_model_panel.refresh_language(self._ui_language)
@@ -842,8 +839,12 @@ class SettingsDialog(QDialog):
         # Evaluate the selected provider without mutating it or choosing an online fallback.
         notice_config = replace(self.translation_config, provider=provider)
         notice = _translation_language_notice(notice_config, self._ui_language)
-        if notice and hasattr(self, "provider_hint"):
-            self.provider_hint.setText(notice)
+        if hasattr(self, "provider_hint"):
+            if notice:
+                self.provider_hint.setText(notice)
+            elif provider != "local":
+                self.provider_hint.clear()
+            self.provider_hint.setVisible(bool(notice) or provider == "local")
         if hasattr(self, "translation_test_button"):
             error = translation_direction_error(provider, notice_config.source_lang, notice_config.target_lang)
             self.translation_test_button.setEnabled(not error)

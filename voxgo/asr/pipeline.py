@@ -430,6 +430,8 @@ class SpeechPipeline:
         self._queue = queue.Queue(maxsize=self._queue_size)
         self._stop_token = object()
         self._worker_thread = None
+        self._model_preparation_requested = threading.Event()
+        self._stop_requested = threading.Event()
         self._recent_transcripts = deque(maxlen=12)
         self._weak_transcript_filter = WeakCandidateTranscriptFilter()
         self._candidate_policy = CandidatePolicy()
@@ -580,6 +582,8 @@ class SpeechPipeline:
     def start(self):
         if self._worker_thread and self._worker_thread.is_alive():
             return
+        self._restore_queue_items([item for item in self._drain_queue_items() if item is not self._stop_token])
+        self._stop_requested.clear()
         self._worker_thread = threading.Thread(
             target=self._worker,
             name="speech-worker",
@@ -588,7 +592,28 @@ class SpeechPipeline:
         self._worker_thread.start()
         logger.info("speech processing queue started")
 
+    def request_model_preparation(self):
+        # Coalesced control work: no fake speech segment or audio queue slot.
+        self._model_preparation_requested.set()
+
+    def _prepare_recognizer(self):
+        prepare = getattr(self._recognizer_getter(), 'prepare_pending_config', None)
+        if prepare is None:
+            return
+        self._recognition_busy = True
+        try:
+            with self._processing_lock:
+                prepare()
+        except Exception as exc:
+            self._stats['errors'] = self._stats.get('errors', 0) + 1
+            logger.exception("speech model preparation failed: {}", exc)
+            self._notify_user("语音识别模型", str(exc), "错误")
+        finally:
+            self._recognition_busy = False
+
     def stop(self) -> bool:
+        self._stop_requested.set()
+        self._model_preparation_requested.clear()
         pending = self._pending_buffer.clear()
         if pending:
             self._enqueue_with_backpressure(pending, self._mode_policy(self._config_getter()))
@@ -607,23 +632,32 @@ class SpeechPipeline:
             logger.warning("speech processing thread is still stopping; skip model cleanup to avoid resource race")
             return False
         self._worker_thread = None
+        self._drain_queue_items()
         return True
 
     def _worker(self):
         apply_game_friendly_thread_priority("speech-worker")
         while True:
+            if self._stop_requested.is_set():
+                return
+            if self._model_preparation_requested.is_set():
+                self._model_preparation_requested.clear()
+                self._prepare_recognizer()
+                continue
             try:
                 work_item = self._queue.get(timeout=0.1)
             except queue.Empty:
                 self._flush_expired_pending(time.time())
                 self._flush_busy_weak_buffer(time.time())
                 continue
-            if work_item is self._stop_token:
+            if work_item is self._stop_token or self._stop_requested.is_set():
                 return
             self._flush_expired_pending(time.time())
             self._recognition_busy = True
-            self._process(work_item)
-            self._recognition_busy = False
+            try:
+                self._process(work_item)
+            finally:
+                self._recognition_busy = False
             self._flush_busy_weak_buffer(time.time())
 
     def _process(self, work_item):
@@ -633,6 +667,13 @@ class SpeechPipeline:
             config = self._config_getter()
             segment, trace, item = self._normalize_work_item(work_item, config.audio.sample_rate)
             self._apply_language_snapshot(item, config)
+            current_revision = int(self._language_revision_getter() or 0)
+            if item.language_revision and current_revision and item.language_revision != current_revision:
+                self._stats['dropped_speech'] = self._stats.get('dropped_speech', 0) + 1
+                logger.info("stale speech work dropped before whisper: item_revision={}, current_revision={}, direction={}->{}",
+                            item.language_revision, current_revision, item.source_lang, item.target_lang)
+                self._debug_audio.dump_if_enabled(segment, "stale_language_flow", "save_dropped_audio")
+                return
             mode_policy = self._mode_policy(config)
             self._refresh_trace_metadata(item, config, mode_policy)
             fatal_reason = self._candidate_policy.fatal_drop_reason(segment)

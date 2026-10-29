@@ -138,6 +138,12 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         recognizer._apply_pending_config(old)
         self.assertEqual(recognizer.config.source_language,'ja')
         self.assertEqual(recognizer.config.beam_size,3)
+        # An older audio snapshot must not consume the newer GUI request.
+        with patch.object(recognizer, 'initialize') as initialize:
+            self.assertTrue(recognizer.prepare_pending_config())
+        initialize.assert_called_once_with()
+        self.assertEqual(recognizer.config.source_language, 'en')
+        self.assertEqual(recognizer.config.beam_size, 1)
 
     def test_queued_vad_config_retains_legacy_defaults_and_is_not_shared(self):
         from voxgo.asr.whisper_engine import DEFAULT_VAD_PARAMS
@@ -168,6 +174,9 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         app._speech_recognizer=SpeechRecognizer(copy.deepcopy(app.config.whisper))
         app._audio=Mock();app._audio.clear_pending_audio.return_value=0
         app._speech_pipeline=Mock();app._translation=Mock()
+        preparation_order=[]
+        app._speech_pipeline.reset_for_language_switch.side_effect=lambda *args:preparation_order.append('reset')
+        app._speech_pipeline.request_model_preparation.side_effect=lambda:preparation_order.append('prepare')
         for name in ('_setup_hotkeys','_save_user_settings','_analytics_call','_notify_user','_sync_tray_state'):
             setattr(app,name,Mock())
         captures=[]
@@ -197,6 +206,7 @@ class SpeechLanguageProfilesTest(unittest.TestCase):
         self.assertEqual(app._speech_recognizer._pending_config.source_language,'en')
         self.assertEqual(len(captures),3)
         self.assertEqual(app._language_flow_revision,4)
+        self.assertEqual(preparation_order,['reset','prepare']*3)
 
 
 if __name__=='__main__':unittest.main()
