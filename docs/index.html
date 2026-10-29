@@ -4,21 +4,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。" />
-  <meta name="keywords"
-    content="VoxGo, 游戏语音翻译, PC游戏语音翻译, 实时语音翻译, 游戏字幕浮窗, 游戏实时字幕, 游戏语音实时翻译, 外国队友语音翻译, PUBG语音翻译, APEX语音翻译, Discord游戏语音翻译, 英语中文翻译, 英译中, 中译英, Discord语音翻译, Discord实时字幕, 海外服开黑翻译, 队友语音翻译, 游戏队友语音翻译, Windows语音翻译工具, PC语音翻译工具, Whisper语音识别, faster-whisper, Whisper实时字幕, 系统声音捕获, WASAPI Loopback, OpenAI兼容翻译, Google Cloud Translation, 手机字幕同步, 游戏翻译工具, 实时字幕工具, 开源语音翻译工具, game voice translator, real-time game voice translation, PC game subtitle overlay, Discord voice translator" />
+  <meta name="description" content="将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。" />
+  <meta name="keywords" content="VoxGo, 游戏语音翻译, 实时游戏字幕, 多语言翻译, 日语游戏字幕, 韩语语音翻译, 俄语语音翻译, Discord字幕, Whisper, 英中离线翻译" />
   <link rel="canonical" href="https://voxgo.cn/" />
   <link rel="alternate" hreflang="zh-CN" href="https://voxgo.cn/" />
   <link rel="alternate" hreflang="en" href="https://voxgo.cn/en/" />
+  <link rel="alternate" hreflang="ja" href="https://voxgo.cn/ja/" />
+  <link rel="alternate" hreflang="ko" href="https://voxgo.cn/ko/" />
+  <link rel="alternate" hreflang="ru" href="https://voxgo.cn/ru/" />
   <link rel="alternate" hreflang="x-default" href="https://voxgo.cn/" />
 
-  <meta property="og:title" content="VoxGo - PC 游戏语音实时翻译浮窗" />
-  <meta property="og:description"
-    content="VoxGo v0.6.0 支持中文、英语、日语、韩语、俄语本地识别与20个在线翻译方向；日/韩/俄为Beta，离线仅支持英中。当前公开下载仍为v0.5.2。" />
+  <meta property="og:title" content="VoxGo — 多语言游戏语音翻译与实时字幕" />
+  <meta property="og:description" content="将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。" />
   <meta property="og:url" content="https://voxgo.cn/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://voxgo.cn/assets/logo.png" />
-  <title>VoxGo - PC 游戏语音实时翻译</title>
+  <!-- SITE_I18N_SEO_START -->
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="VoxGo — 多语言游戏语音翻译与实时字幕" />
+  <meta name="twitter:description" content="将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。" />
+  <meta name="twitter:image" content="https://voxgo.cn/assets/logo.png" />
+  <!-- SITE_I18N_SEO_END -->
+  <title>VoxGo — 多语言游戏语音翻译与实时字幕</title>
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png" />
@@ -679,8 +691,9 @@ var _hmt = _hmt || [];
     <div class="container nav-inner"><a class="brand" href="#top"><img class="brand-logo" src="./assets/logo.png?v=2"
           alt="VoxGo Logo" /><span>VoxGo</span></a>
       <div class="nav-links"><a href="#story">工作原理</a><a href="#languages">语言支持</a><a href="#modes">翻译方式</a><a href="#patch-notes">更新日志</a><a href="#download">下载</a><a href="#steps">使用步骤</a><a href="#community">社区</a><a
-          href="#faq">FAQ</a><a href="/en/">English</a><a
+          href="#faq">FAQ</a><a
           href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub</a></div>
+      <details class="site-language-switcher"><summary aria-label="网站语言"><span aria-hidden="true">◎</span> 简体中文</summary><div class="site-language-menu"><a href="/" lang="zh-CN" hreflang="zh-CN" aria-current="page">简体中文</a><a href="/en/" lang="en" hreflang="en">English</a><a href="/ja/" lang="ja" hreflang="ja">日本語</a><a href="/ko/" lang="ko" hreflang="ko">한국어</a><a href="/ru/" lang="ru" hreflang="ru">Русский</a></div></details>
     </div>
   </nav>
   <main id="top">

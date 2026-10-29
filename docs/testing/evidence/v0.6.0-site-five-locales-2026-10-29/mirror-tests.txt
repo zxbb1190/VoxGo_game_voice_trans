@@ -1,0 +1,10 @@
+test_create_upload_and_verify (test_publish_gitcode_release.GitCodeReleaseTest) ... ok
+test_existing_different_attachment_fails_without_upload (test_publish_gitcode_release.GitCodeReleaseTest) ... ok
+test_existing_matching_attachment_is_idempotent (test_publish_gitcode_release.GitCodeReleaseTest) ... ok
+test_missing_release_requires_exact_gitcode_commit (test_publish_gitcode_release.GitCodeReleaseTest) ... ok
+test_wrong_expected_hash_fails_before_network (test_publish_gitcode_release.GitCodeReleaseTest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.018s
+
+OK

@@ -1,0 +1,1308 @@
+{
+  "results": [
+    {
+      "locale": "zh-CN",
+      "viewport": "desktop",
+      "language": "zh-CN",
+      "title": "VoxGo — 多语言游戏语音翻译与实时字幕",
+      "canonical": "https://voxgo.cn/",
+      "description": "将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": "page"
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "游戏不该被语言挡住。",
+      "h1Count": 1,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "betaRows": 3,
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "viewport": "mobile",
+      "language": "zh-CN",
+      "title": "VoxGo — 多语言游戏语音翻译与实时字幕",
+      "canonical": "https://voxgo.cn/",
+      "description": "将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": "page"
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "游戏不该被语言挡住。",
+      "h1Count": 1,
+      "width": 390,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "betaRows": 3,
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "zh-CN",
+      "viewport": "narrow",
+      "language": "zh-CN",
+      "title": "VoxGo — 多语言游戏语音翻译与实时字幕",
+      "canonical": "https://voxgo.cn/",
+      "description": "将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": "page"
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "游戏不该被语言挡住。",
+      "h1Count": 1,
+      "width": 320,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "betaRows": 3,
+      "tableWidth": 273,
+      "tableScrollWidth": 273,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "en",
+      "viewport": "desktop",
+      "language": "en",
+      "title": "VoxGo — Live Game Subtitles & Voice Translation",
+      "canonical": "https://voxgo.cn/en/",
+      "description": "Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": "page"
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "h1Count": 1,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "betaRows": 3,
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "en",
+      "viewport": "mobile",
+      "language": "en",
+      "title": "VoxGo — Live Game Subtitles & Voice Translation",
+      "canonical": "https://voxgo.cn/en/",
+      "description": "Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": "page"
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "h1Count": 1,
+      "width": 390,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "betaRows": 3,
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "en",
+      "viewport": "narrow",
+      "language": "en",
+      "title": "VoxGo — Live Game Subtitles & Voice Translation",
+      "canonical": "https://voxgo.cn/en/",
+      "description": "Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": "page"
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "h1Count": 1,
+      "width": 320,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "betaRows": 3,
+      "tableWidth": 273,
+      "tableScrollWidth": 304,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ja",
+      "viewport": "desktop",
+      "language": "ja",
+      "title": "VoxGo — ゲーム音声翻訳とリアルタイム字幕",
+      "canonical": "https://voxgo.cn/ja/",
+      "description": "仲間のボイスチャット、ゲームの会話、配信音声をリアルタイム字幕に。VoxGoは5言語・20方向のオンライン翻訳に対応。日本語・韓国語・ロシア語はBeta、オフライン翻訳は英語と中国語のみ。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": "page"
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "ゲームに、言葉の壁はいらない。",
+      "h1Count": 1,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "betaRows": 3,
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "ja",
+      "viewport": "mobile",
+      "language": "ja",
+      "title": "VoxGo — ゲーム音声翻訳とリアルタイム字幕",
+      "canonical": "https://voxgo.cn/ja/",
+      "description": "仲間のボイスチャット、ゲームの会話、配信音声をリアルタイム字幕に。VoxGoは5言語・20方向のオンライン翻訳に対応。日本語・韓国語・ロシア語はBeta、オフライン翻訳は英語と中国語のみ。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": "page"
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "ゲームに、言葉の壁はいらない。",
+      "h1Count": 1,
+      "width": 390,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "betaRows": 3,
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ja",
+      "viewport": "narrow",
+      "language": "ja",
+      "title": "VoxGo — ゲーム音声翻訳とリアルタイム字幕",
+      "canonical": "https://voxgo.cn/ja/",
+      "description": "仲間のボイスチャット、ゲームの会話、配信音声をリアルタイム字幕に。VoxGoは5言語・20方向のオンライン翻訳に対応。日本語・韓国語・ロシア語はBeta、オフライン翻訳は英語と中国語のみ。",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": "page"
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "ゲームに、言葉の壁はいらない。",
+      "h1Count": 1,
+      "width": 320,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "betaRows": 3,
+      "tableWidth": 273,
+      "tableScrollWidth": 273,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ko",
+      "viewport": "desktop",
+      "language": "ko",
+      "title": "VoxGo — 게임 음성 번역과 실시간 자막",
+      "canonical": "https://voxgo.cn/ko/",
+      "description": "팀원 음성, 게임 대사, 방송 음성을 실시간 자막으로 확인하세요. VoxGo는 5개 언어와 20개 방향의 온라인 번역을 지원합니다. 일본어·한국어·러시아어는 Beta이며, 오프라인 번역은 영어↔중국어만 지원합니다.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": "page"
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "언어의 장벽이 게임을 막지 않도록.",
+      "h1Count": 1,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "betaRows": 3,
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "ko",
+      "viewport": "mobile",
+      "language": "ko",
+      "title": "VoxGo — 게임 음성 번역과 실시간 자막",
+      "canonical": "https://voxgo.cn/ko/",
+      "description": "팀원 음성, 게임 대사, 방송 음성을 실시간 자막으로 확인하세요. VoxGo는 5개 언어와 20개 방향의 온라인 번역을 지원합니다. 일본어·한국어·러시아어는 Beta이며, 오프라인 번역은 영어↔중국어만 지원합니다.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": "page"
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "언어의 장벽이 게임을 막지 않도록.",
+      "h1Count": 1,
+      "width": 390,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "betaRows": 3,
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ko",
+      "viewport": "narrow",
+      "language": "ko",
+      "title": "VoxGo — 게임 음성 번역과 실시간 자막",
+      "canonical": "https://voxgo.cn/ko/",
+      "description": "팀원 음성, 게임 대사, 방송 음성을 실시간 자막으로 확인하세요. VoxGo는 5개 언어와 20개 방향의 온라인 번역을 지원합니다. 일본어·한국어·러시아어는 Beta이며, 오프라인 번역은 영어↔중국어만 지원합니다.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": "page"
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": null
+        }
+      ],
+      "h1": "언어의 장벽이 게임을 막지 않도록.",
+      "h1Count": 1,
+      "width": 320,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "betaRows": 3,
+      "tableWidth": 273,
+      "tableScrollWidth": 273,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ru",
+      "viewport": "desktop",
+      "language": "ru",
+      "title": "VoxGo — Перевод речи в играх и живые субтитры",
+      "canonical": "https://voxgo.cn/ru/",
+      "description": "Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": "page"
+        }
+      ],
+      "h1": "Языковой барьер не должен мешать игре.",
+      "h1Count": 1,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "betaRows": 3,
+      "tableWidth": 1178,
+      "tableScrollWidth": 1178,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "locale": "ru",
+      "viewport": "mobile",
+      "language": "ru",
+      "title": "VoxGo — Перевод речи в играх и живые субтитры",
+      "canonical": "https://voxgo.cn/ru/",
+      "description": "Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": "page"
+        }
+      ],
+      "h1": "Языковой барьер не должен мешать игре.",
+      "h1Count": 1,
+      "width": 390,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "betaRows": 3,
+      "tableWidth": 343,
+      "tableScrollWidth": 343,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    },
+    {
+      "locale": "ru",
+      "viewport": "narrow",
+      "language": "ru",
+      "title": "VoxGo — Перевод речи в играх и живые субтитры",
+      "canonical": "https://voxgo.cn/ru/",
+      "description": "Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский.",
+      "alternates": [
+        [
+          "zh-CN",
+          "https://voxgo.cn/"
+        ],
+        [
+          "en",
+          "https://voxgo.cn/en/"
+        ],
+        [
+          "ja",
+          "https://voxgo.cn/ja/"
+        ],
+        [
+          "ko",
+          "https://voxgo.cn/ko/"
+        ],
+        [
+          "ru",
+          "https://voxgo.cn/ru/"
+        ],
+        [
+          "x-default",
+          "https://voxgo.cn/"
+        ]
+      ],
+      "menu": [
+        {
+          "language": "zh-CN",
+          "href": "/",
+          "text": "简体中文",
+          "current": null
+        },
+        {
+          "language": "en",
+          "href": "/en/",
+          "text": "English",
+          "current": null
+        },
+        {
+          "language": "ja",
+          "href": "/ja/",
+          "text": "日本語",
+          "current": null
+        },
+        {
+          "language": "ko",
+          "href": "/ko/",
+          "text": "한국어",
+          "current": null
+        },
+        {
+          "language": "ru",
+          "href": "/ru/",
+          "text": "Русский",
+          "current": "page"
+        }
+      ],
+      "h1": "Языковой барьер не должен мешать игре.",
+      "h1Count": 1,
+      "width": 320,
+      "scrollWidth": 320,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "betaRows": 3,
+      "tableWidth": 273,
+      "tableScrollWidth": 301,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": [],
+      "storyStates": []
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "realTranslationCalls": 0,
+  "externalRequests": "blocked before initial local navigation"
+}

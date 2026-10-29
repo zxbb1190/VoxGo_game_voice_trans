@@ -13,6 +13,7 @@ import html
 import json
 import os
 import re
+import sys
 from pathlib import Path
 from urllib.request import Request, urlopen
 
@@ -21,6 +22,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 API = "https://api.github.com/repos/zxbb1190/VoxGo_game_voice_trans"
 SITE = "https://voxgo.cn"
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts.build_localized_website import HOME_PATHS, build as build_localized_website
 TAG_PATTERN = re.compile(r"v\d+\.\d+\.\d+\Z")
 HOME_START = "<!-- CHANGELOG_HOME_START -->"
 HOME_END = "<!-- CHANGELOG_HOME_END -->"
@@ -130,9 +135,8 @@ def home_block(releases: list[dict], language: str = "zh") -> str:
 
 def write_sitemap(releases: list[dict]) -> None:
     build_date = date.today().isoformat()
-    urls = [(f"{SITE}/", build_date),
-            (f"{SITE}/en/", build_date),
-            (f"{SITE}/changelog/", build_date)]
+    urls = [(f"{SITE}{path}", build_date) for path in HOME_PATHS.values()]
+    urls.append((f"{SITE}/changelog/", build_date))
     urls.extend((f"{SITE}/changelog/{r['tag_name']}/", r["published_at"][:10]) for r in releases)
     entries = "".join(f"  <url><loc>{esc(url)}</loc><lastmod>{date}</lastmod></url>\n" for url, date in urls)
     (DOCS / "sitemap.xml").write_bytes((
@@ -190,6 +194,7 @@ def main() -> None:
     english_block = ("\n      " + home_block(releases, "en") + "\n      ").replace("\n", english_newline)
     english_home.write_bytes((english_source[:english_start] + english_block + english_source[english_end:]).encode("utf-8"))
     write_sitemap(releases)
+    build_localized_website(root=ROOT)
     print("Generated static changelog for " + ", ".join(r["tag_name"] for r in releases))
 
 

@@ -29,12 +29,25 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
 }
-.nav-inner { height: 72px }
+.nav-inner { height: 72px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto }
 .brand { letter-spacing: .02em }
 .brand-logo { border-radius: 9px; box-shadow: none }
 .nav-links { align-items: center; gap: 22px; font-family: ui-monospace, Consolas, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .05em }
 .nav-links a:hover, .nav-links a:focus-visible { color: var(--cyan) }
 .nav-links { flex-wrap: wrap; row-gap: 8px }
+.nav-links { justify-content: flex-end; min-width: 0 }
+.site-language-switcher { position: relative; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: 12px; color: var(--text) }
+.site-language-switcher summary { cursor: pointer; list-style: none; white-space: nowrap; padding: 8px 10px; border: 1px solid var(--line); border-radius: 3px }
+.site-language-switcher summary::-webkit-details-marker { display: none }
+.site-language-switcher summary span { color: var(--cyan); margin-right: 5px }
+.site-language-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 30; min-width: 152px; padding: 6px; background: #0b1723; border: 1px solid var(--line); border-radius: 3px; box-shadow: 0 12px 28px rgba(0,0,0,.3) }
+.site-language-menu a { display: block; padding: 10px 12px; white-space: nowrap }
+.site-language-menu a:hover, .site-language-menu a[aria-current="page"] { color: var(--cyan); background: rgba(105,221,242,.07) }
+.hero-brand-title:lang(ja), .hero-brand-title:lang(ko) { overflow-wrap: break-word }
+.hero .hero-brand-title:lang(ja), .hero .hero-brand-title:lang(ko) { font-size: clamp(42px, 4.2vw, 62px); line-height: 1.25; letter-spacing: -.025em }
+.hero .hero-brand-title:lang(ru) { font-size: clamp(42px, 4vw, 58px); line-height: 1.1; letter-spacing: -.035em }
+:lang(ja) .hero-copy, :lang(ko) .hero-copy, :lang(ru) .hero-copy { min-width: 0 }
+.hero-copy:lang(ko) { word-break: keep-all; overflow-wrap: break-word }
 .language-support { padding: 88px 0 }
 .release-status, .release-draft { color: var(--muted); font-size: 14px; line-height: 1.7 }
 .release-status strong { color: var(--green); font-weight: 600 }
@@ -216,7 +229,7 @@ section { border-top: 1px solid rgba(105, 170, 196, .12) }
 footer { border-color: var(--line) }
 
 @media (max-width: 980px) {
-  .nav-links { display: flex; overflow-x: auto; white-space: nowrap; scrollbar-width: thin }
+  .nav-links { display: flex; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; flex-wrap: nowrap; justify-content: flex-start }
   .nav-inner { gap: 20px }
   .hero { grid-template-columns: 1fr; min-height: 0 }
   .mock { min-height: 480px }
@@ -236,14 +249,21 @@ footer { border-color: var(--line) }
   .language-table th, .language-table td { padding: 9px 7px }
   .container { width: min(100% - 30px, 1180px) }
   .nav-inner { height: auto; padding: 13px 0; align-items: flex-start; flex-direction: column; gap: 10px }
+  .nav-inner { grid-template-columns: minmax(0, 1fr) auto; align-items: center }
+  .nav-inner > .brand { grid-column: 1; grid-row: 1 }
+  .nav-inner > .site-language-switcher { grid-column: 2; grid-row: 1 }
+  .nav-inner > .nav-links { grid-column: 1 / -1; grid-row: 2 }
   .nav-links { width: 100%; gap: 18px; padding-bottom: 5px }
   .hero { padding: 48px 0 58px; gap: 30px }
   .hero h1 { font-size: clamp(44px, 11vw, 70px) }
   .hero .hero-brand-title { font-size: clamp(44px, 12vw, 70px) }
   .hero .hero-brand-title:lang(en) { font-size: clamp(40px, 10.5vw, 62px) }
+  .hero .hero-brand-title:lang(ja), .hero .hero-brand-title:lang(ko) { font-size: clamp(38px, 10.5vw, 58px) }
+  .hero .hero-brand-title:lang(ru) { font-size: clamp(36px, 10vw, 56px) }
   .hero-languages { gap: 8px 16px }
   .hero-scope { font-size: 9px }
   .tagline-break { display: none }
+  .tagline-break:lang(ja), .tagline-break:lang(ko), .tagline-break:lang(ru) { display: inline }
   .hero .actions .btn { width: 100% }
   .mock { min-height: 380px }
   .hero-readout { top: 82px; left: 18px; font-size: 9px }
@@ -266,6 +286,11 @@ footer { border-color: var(--line) }
   .patch-content { padding: 14px 0 30px }
   .download-primary { gap: 20px }
   .download-actions { min-width: 0 }
+  .download, .download-primary, .download-secondary, .download-primary > div { min-width: 0 }
+  .download { grid-template-columns: minmax(0, 1fr) }
+  .download-primary, .download-secondary { grid-template-columns: minmax(0, 1fr) }
+  .download-actions .btn { white-space: normal; overflow-wrap: anywhere }
+  .download-option { flex-wrap: wrap }
   .steps { grid-template-columns: 1fr }
   .step { border-right: 0 }
 }

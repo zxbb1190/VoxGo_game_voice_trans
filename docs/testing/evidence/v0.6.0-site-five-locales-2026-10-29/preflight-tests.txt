@@ -1,0 +1,11 @@
+test_class_default_parser_resolves_unchanged_named_preset (test_release_preflight.ReleasePreflightTests) ... ok
+test_packaging_allows_only_runtime_data_and_staged_output (test_release_preflight.ReleasePreflightTests) ... ok
+test_release_notes_require_both_languages_and_real_publish_commands (test_release_preflight.ReleasePreflightTests) ... ok
+test_release_version_must_match_all_packaging_positions (test_release_preflight.ReleasePreflightTests) ... ok
+test_requirement_parser_normalizes_names_and_ignores_options (test_release_preflight.ReleasePreflightTests) ... ok
+test_update_manifest_must_match_selected_published_baseline (test_release_preflight.ReleasePreflightTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.027s
+
+OK

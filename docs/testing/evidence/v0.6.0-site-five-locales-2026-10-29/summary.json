@@ -1,0 +1,12 @@
+{
+  "website_unit_tests": 10,
+  "preflight_unit_tests": 6,
+  "mirror_unit_tests": 5,
+  "passed_total": 21,
+  "browser_cases": 15,
+  "screenshots": 26,
+  "release_preflight": "pass",
+  "client_full_suite": "not rerun; no client change",
+  "known_review_gap": "new JA/KO/RU website copy has no native-editor signoff",
+  "earlier_browser_failure": "RU 320px download module overflowed by about 9px; fixed and full 15-case replay passed; logs retained in build"
+}

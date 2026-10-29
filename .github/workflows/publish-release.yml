@@ -213,7 +213,14 @@ jobs:
             $page = $page -replace 'China mirror \(Lite[^)]*\)', "China mirror (Lite v$mirrorVersion)"
             [System.IO.File]::WriteAllText((Join-Path $pwd $pagePath), $page, (New-Object System.Text.UTF8Encoding($false)))
           }
-          git add $manifestPath docs/index.html docs/en/index.html
+          # Generate JA/KO/RU from the updated EN page, preserving mirror version
+          # labels and requiring complete translations before publishing the site.
+          $websiteDate = Get-Date -Format "yyyy-MM-dd"
+          python scripts/build_localized_website.py --write --lastmod $websiteDate
+          if ($LASTEXITCODE -ne 0) { throw "Localized website generation failed" }
+          python scripts/build_localized_website.py --check
+          if ($LASTEXITCODE -ne 0) { throw "Localized website verification failed" }
+          git add $manifestPath docs/index.html docs/en/index.html docs/ja/index.html docs/ko/index.html docs/ru/index.html docs/sitemap.xml
           git diff --cached --quiet
           if ($LASTEXITCODE -eq 0) {
             Write-Host "Release manifest already up to date."

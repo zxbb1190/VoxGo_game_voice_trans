@@ -1,0 +1,37 @@
+{
+  "zh-CN": {
+    "title": "VoxGo — 多语言游戏语音翻译与实时字幕",
+    "description": "将队友语音、游戏剧情与直播声音转为实时字幕。VoxGo 支持五语言20个在线翻译方向，日/韩/俄为Beta；Whisper本地识别，OPUS离线翻译仅限英中。",
+    "keywords": "VoxGo, 游戏语音翻译, 实时游戏字幕, 多语言翻译, 日语游戏字幕, 韩语语音翻译, 俄语语音翻译, Discord字幕, Whisper, 英中离线翻译",
+    "language_label": "网站语言",
+    "og_locale": "zh_CN"
+  },
+  "en": {
+    "title": "VoxGo — Live Game Subtitles & Voice Translation",
+    "description": "Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese.",
+    "keywords": "VoxGo, game voice translator, live game subtitles, multilingual speech translation, Japanese game dialogue, Korean voice translation, Russian voice translation, Discord subtitles, Whisper, offline English Chinese translation",
+    "language_label": "Website language",
+    "og_locale": "en_US"
+  },
+  "ja": {
+    "title": "VoxGo — ゲーム音声翻訳とリアルタイム字幕",
+    "description": "仲間のボイスチャット、ゲームの会話、配信音声をリアルタイム字幕に。VoxGoは5言語・20方向のオンライン翻訳に対応。日本語・韓国語・ロシア語はBeta、オフライン翻訳は英語と中国語のみ。",
+    "keywords": "VoxGo, ゲーム音声翻訳, リアルタイム字幕, 多言語翻訳, ゲーム会話翻訳, ボイスチャット翻訳, Discord字幕, Whisper, 英中オフライン翻訳",
+    "language_label": "サイトの言語",
+    "og_locale": "ja_JP"
+  },
+  "ko": {
+    "title": "VoxGo — 게임 음성 번역과 실시간 자막",
+    "description": "팀원 음성, 게임 대사, 방송 음성을 실시간 자막으로 확인하세요. VoxGo는 5개 언어와 20개 방향의 온라인 번역을 지원합니다. 일본어·한국어·러시아어는 Beta이며, 오프라인 번역은 영어↔중국어만 지원합니다.",
+    "keywords": "VoxGo, 게임 음성 번역, 실시간 게임 자막, 다국어 번역, 게임 대사 번역, 음성 채팅 번역, Discord 자막, Whisper, 영어 중국어 오프라인 번역",
+    "language_label": "웹사이트 언어",
+    "og_locale": "ko_KR"
+  },
+  "ru": {
+    "title": "VoxGo — Перевод речи в играх и живые субтитры",
+    "description": "Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский.",
+    "keywords": "VoxGo, перевод речи в играх, субтитры в реальном времени, многоязычный перевод, перевод игровых диалогов, голосовой чат, субтитры Discord, Whisper, офлайн перевод английский китайский",
+    "language_label": "Язык сайта",
+    "og_locale": "ru_RU"
+  }
+}

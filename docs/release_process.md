@@ -23,6 +23,25 @@
 
 ## 官网静态更新日志（v2 草案）
 
+### 五语言官网与SEO维护
+
+官网首页为中文`/`、英文`/en/`、日文`/ja/`、韩文`/ko/`、俄文`/ru/`。中英文首页手工维护，日/韩/俄静态HTML由英文首页及`scripts/website_locales/messages.json`生成；各语言标题、description、精简keywords和分享卡片信息来自`metadata.json`。不要单独编辑生成的三个HTML文件。原始字幕示例仍保留英中原文，历史详细更新日志和待发布说明仍为中英文，并在新语言入口标注。
+
+```powershell
+# 仅本地生成/校验，不请求翻译服务，也不部署。
+.\.venv-win\Scripts\python.exe -B -X utf8 scripts/build_localized_website.py --write --lastmod 2026-10-29
+.\.venv-win\Scripts\python.exe -B -X utf8 scripts/build_localized_website.py --check
+.\.venv-win\Scripts\python.exe -B -X utf8 -m unittest discover -s tests -p test_website_localization.py -v
+```
+
+`--lastmod`应使用首页实际修改日期；省略时保留已有日期，不改变历史Release日期。更改英文文案后需补齐三语词条；未知文案会使构建报错，不默默生成混合语言页面。版本号和日期参数独立保留，GitCode旧镜像的版本不会随GitHub链接一起被提前提升。
+
+正式发布流程在更新中英文链接后离线生成并检查三语页面，再把五个首页及sitemap一起提交。静态更新日志生成器也会刷新三语首页，并保留五个首页的sitemap入口。新Release正文有新词条时，应在发布前准备翻译；构建失败不会自行调用在线翻译或回退成英文。当前发布工作流仍有四类构建附件，“仅Lite发布”的既有待确认项并未由本轮改变。
+
+五个首页均有自指canonical、互相完整的`hreflang`和中文根页`x-default`；保持显式语言链接，不按浏览器语言强制重定向。SEO注重各页自然、准确的正文和独立描述，keywords不做重复堆砌，不将其视为Google排名因素。页面实现通过不代表已收录、排名提升或搜索摘要一定采用description。上站后才可做各URL的真实访问、Search Console和分享卡片验收；本轮没有部署或提交收录。
+
+### 静态更新日志生成
+
 `scripts/build_website_changelog.py` 从已经发布的 GitHub Release 正文读取中英文更新条目、发布日期和附件，生成 `docs/changelog/`、首页最新更新摘要和 `docs/sitemap.xml`。GitHub Release 是唯一的版本内容来源，网页在构建后就是完整静态 HTML，不依赖访客浏览器请求 GitHub API。
 
 本地生成示例：`.\.venv-win\Scripts\python.exe scripts/build_website_changelog.py --tags v0.5.1 v0.5.0`。现有更早版本的 Release 正文缺少双语结构，首次生成应明确指定 `--tags`；不指定时会校验全部正式版本，可能因旧版格式失败。首页只显示最新三个已生成版本。匿名 GitHub API 有速率限制；在 CI 中使用 `GITHUB_TOKEN`。生成后检查版本页与 Release 正文、下载链接和 sitemap，再提交官网文件。

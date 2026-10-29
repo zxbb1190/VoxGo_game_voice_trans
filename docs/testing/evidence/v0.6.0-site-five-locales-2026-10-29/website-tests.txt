@@ -1,0 +1,15 @@
+test_catalog_rejects_missing_locale_and_lost_version_fields (test_website_localization.WebsiteLocalizationTests) ... ok
+test_committed_generated_pages_are_current_without_writing (test_website_localization.WebsiteLocalizationTests) ... ok
+test_dynamic_version_and_release_date_are_not_hardcoded (test_website_localization.WebsiteLocalizationTests) ... ok
+test_five_pages_have_self_canonical_and_identical_reciprocal_hreflang (test_website_localization.WebsiteLocalizationTests) ... ok
+test_future_release_workflow_generates_and_stages_localized_pages (test_website_localization.WebsiteLocalizationTests) ... ok
+test_generation_is_idempotent_and_preserves_published_assets (test_website_localization.WebsiteLocalizationTests) ... ok
+test_illustrative_subtitle_pairs_and_localized_image_alts_are_preserved (test_website_localization.WebsiteLocalizationTests) ... ok
+test_mirror_version_does_not_advance_with_github_release (test_website_localization.WebsiteLocalizationTests) ... ok
+test_missing_translation_fails_before_any_page_is_written (test_website_localization.WebsiteLocalizationTests) ... ok
+test_sitemap_and_changelog_generator_keep_all_five_homepages (test_website_localization.WebsiteLocalizationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.452s
+
+OK
