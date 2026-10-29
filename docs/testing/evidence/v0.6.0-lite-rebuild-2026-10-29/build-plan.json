@@ -1,0 +1,38 @@
+{
+  "version": "0.6.0",
+  "edition": "lite",
+  "source_root": "E:\\my\\my\\game_voice_translator",
+  "source_commit": "d1cc217f1f676a0d104e4664cbaa72f7fbae851a",
+  "stage": "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-d1cc217f",
+  "archive_name": "VoxGo-v0.6.0-lite.zip",
+  "source_clean": true,
+  "target_files_before": [],
+  "build_command": [
+    ".venv-win/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "PyInstaller",
+    "--clean",
+    "--noconfirm",
+    "--distpath",
+    "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-d1cc217f\\dist",
+    "--workpath",
+    "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-d1cc217f\\work",
+    "VoxGo.spec"
+  ],
+  "build_environment": {
+    "INCLUDE_MODEL": "0",
+    "INCLUDE_CUDA_RUNTIME": "0"
+  },
+  "tools": {
+    "pyinstaller": "6.11.1",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.7.2",
+    "PyQt5": "5.15.9"
+  },
+  "real_model_downloads_allowed": false,
+  "real_api_requests_allowed": false,
+  "production_operations_allowed": false
+}

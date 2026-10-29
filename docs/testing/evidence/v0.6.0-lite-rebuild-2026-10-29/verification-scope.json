@@ -1,0 +1,30 @@
+{
+  "runtime_commit": "d1cc217f1f676a0d104e4664cbaa72f7fbae851a",
+  "edition": "lite",
+  "package_version": "0.6.0",
+  "full_source_suite": {
+    "tests": 688,
+    "scope": "previous model-feedback acceptance on identical source commit; not rerun for packaging"
+  },
+  "english_chinese_configuration_equivalence": 48,
+  "zip_crc": true,
+  "project_code_fingerprints": 79,
+  "new_model_status_component_included": true,
+  "updater_extraction": true,
+  "help_exit_code": 0,
+  "actual_frozen_cases_passed": 6,
+  "independent_public_recordings": 5,
+  "ko_balanced": "cold start, small, CPU INT8, 2 threads, language auto",
+  "model_status_callback_errors": 0,
+  "raw_audio_queue_overflows": 0,
+  "real_model_downloads": 0,
+  "real_translation_api_requests": 0,
+  "native_gui_acceptance": "pending user manual test",
+  "physical_system_capture": "not measured; benchmark input",
+  "translation_quality": "not measured; local mock translations",
+  "normal_gui_exit": "not measured; owned smoke processes terminated after evidence",
+  "source_user_settings_unchanged": true,
+  "api_code_changed": false,
+  "production_accessed": false,
+  "push_tag_release": false
+}

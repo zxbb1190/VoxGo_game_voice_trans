@@ -1,0 +1,14 @@
+{
+  "target": "E:\\my\\my\\game_voice_translator\\release\\v0.6.0\\VoxGo-v0.6.0-lite.zip",
+  "sha256": "383f1f9a842743b8b1412e2c74a39c1b9b81e53966c51ba53c2188db71aec4f4",
+  "bytes": 137006694,
+  "source_commit": "d1cc217f1f676a0d104e4664cbaa72f7fbae851a",
+  "overwritten_files_backed_up": [],
+  "source_settings_unchanged": true,
+  "files_written": [
+    "VoxGo-v0.6.0-lite.zip",
+    "SHA256SUMS.txt",
+    "release-manifest.local.json"
+  ],
+  "production_operations": false
+}
