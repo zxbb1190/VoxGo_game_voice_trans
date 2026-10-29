@@ -1,0 +1,264 @@
+{
+  "report": [
+    {
+      "locale": "zh",
+      "viewport": 1440,
+      "h1Count": 1,
+      "h1": "游戏不该被语言挡住。",
+      "tagline": "让听不懂的声音，变成看得懂的字幕。",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 78,
+      "taglineSize": 28,
+      "betaSize": 10,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "actionsBottom": 745.921875,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "zh",
+      "viewport": 1024,
+      "h1Count": 1,
+      "h1": "游戏不该被语言挡住。",
+      "tagline": "让听不懂的声音，变成看得懂的字幕。",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 56.32,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 1009,
+      "copyWidth": 469,
+      "copyScrollWidth": 469,
+      "actionsBottom": 713.5,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "zh",
+      "viewport": 390,
+      "h1Count": 1,
+      "h1": "游戏不该被语言挡住。",
+      "tagline": "让听不懂的声音，变成看得懂的字幕。",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 46.8,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "actionsBottom": 826.421875,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "zh",
+      "viewport": 320,
+      "h1Count": 1,
+      "h1": "游戏不该被语言挡住。",
+      "tagline": "让听不懂的声音，变成看得懂的字幕。",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 44,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "actionsBottom": 896.28125,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "en",
+      "viewport": 1440,
+      "h1Count": 1,
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "tagline": "Turn unfamiliar voices into subtitles you can follow.",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 64,
+      "taglineSize": 28,
+      "betaSize": 10,
+      "scrollWidth": 1425,
+      "copyWidth": 580,
+      "copyScrollWidth": 580,
+      "actionsBottom": 823.296875,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "en",
+      "viewport": 1024,
+      "h1Count": 1,
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "tagline": "Turn unfamiliar voices into subtitles you can follow.",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 46.08,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 1009,
+      "copyWidth": 469,
+      "copyScrollWidth": 469,
+      "actionsBottom": 751.109375,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "en",
+      "viewport": 390,
+      "h1Count": 1,
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "tagline": "Turn unfamiliar voices into subtitles you can follow.",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 40.95,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 375,
+      "copyWidth": 345,
+      "copyScrollWidth": 345,
+      "actionsBottom": 948.234375,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    },
+    {
+      "locale": "en",
+      "viewport": 320,
+      "h1Count": 1,
+      "h1": "Your game shouldn't stop at a language barrier.",
+      "tagline": "Turn unfamiliar voices into subtitles you can follow.",
+      "version": "VOXGO 0.6.0",
+      "scope": "5 LANGUAGES · 20 ONLINE DIRECTIONS",
+      "languages": [
+        "中文",
+        "English",
+        "日本語 Beta",
+        "한국어 Beta",
+        "Русский Beta"
+      ],
+      "h1Size": 40,
+      "taglineSize": 22,
+      "betaSize": 10,
+      "scrollWidth": 305,
+      "copyWidth": 275,
+      "copyScrollWidth": 275,
+      "actionsBottom": 1069.59375,
+      "downloads": [
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/VoxGo-v0.5.2-lite.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full.zip",
+        "https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2-full-cuda.zip"
+      ],
+      "missingAnchors": []
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "externalRequests": "blocked before first local navigation",
+  "translationRequests": 0
+}

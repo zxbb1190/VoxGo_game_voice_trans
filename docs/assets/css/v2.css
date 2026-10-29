@@ -67,6 +67,18 @@ section { border-top: 1px solid rgba(105, 170, 196, .12) }
 .hero h1 { font-size: clamp(48px, 5.8vw, 82px); line-height: 1.04; letter-spacing: -.06em }
 .gradient-text { background: none; -webkit-text-fill-color: var(--text); color: var(--text) }
 .hero .lead { color: #bdd0db; max-width: 620px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.7 }
+.hero-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px }
+.hero-scope { color: var(--muted); font: 10px/1.5 ui-monospace, Consolas, monospace; letter-spacing: .06em }
+.hero .hero-brand-title { margin: 24px 0 18px; font-size: clamp(48px, 5.5vw, 78px); line-height: 1.08; letter-spacing: -.045em }
+.brand-line { display: block }
+.hero .hero-brand-title:lang(en) { max-width: 17ch; font-size: clamp(44px, 4.5vw, 64px); letter-spacing: -.045em }
+.hero-tagline { margin: 0 0 18px; color: var(--cyan); font-size: clamp(22px, 2vw, 28px); line-height: 1.5; letter-spacing: -.015em }
+.hero-copy .lead { margin: 0 0 20px; font-size: 16px; line-height: 1.75 }
+.hero-languages { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; line-height: 1.6 }
+.hero-languages span { white-space: nowrap }
+.hero-languages small { margin-left: 3px; color: var(--muted); font-size: 10px; font-weight: 400 }
+.hero-boundary { margin: 12px 0 18px; color: var(--muted); font-size: 12px; line-height: 1.8 }
+.hero-copy .release-status { font-size: 12px }
 .hero .actions { margin-bottom: 14px }
 .btn { border-radius: 3px; box-shadow: none; background: transparent; border: 1px solid var(--line); transition: color .18s, background .18s, border-color .18s, transform .18s }
 .btn:hover { background: rgba(105, 221, 242, .08); border-color: var(--cyan) }
@@ -227,6 +239,11 @@ footer { border-color: var(--line) }
   .nav-links { width: 100%; gap: 18px; padding-bottom: 5px }
   .hero { padding: 48px 0 58px; gap: 30px }
   .hero h1 { font-size: clamp(44px, 11vw, 70px) }
+  .hero .hero-brand-title { font-size: clamp(44px, 12vw, 70px) }
+  .hero .hero-brand-title:lang(en) { font-size: clamp(40px, 10.5vw, 62px) }
+  .hero-languages { gap: 8px 16px }
+  .hero-scope { font-size: 9px }
+  .tagline-break { display: none }
   .hero .actions .btn { width: 100% }
   .mock { min-height: 380px }
   .hero-readout { top: 82px; left: 18px; font-size: 9px }

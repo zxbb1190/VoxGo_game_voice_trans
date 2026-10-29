@@ -1,0 +1,19 @@
+{
+  "base": "a1e0e1ec",
+  "checks": [
+    {
+      "file": "docs/index.html",
+      "local_links_and_anchors": "pass",
+      "published_download_links_unchanged": true,
+      "SEO_head_unchanged": true
+    },
+    {
+      "file": "docs/en/index.html",
+      "local_links_and_anchors": "pass",
+      "published_download_links_unchanged": true,
+      "SEO_head_unchanged": true
+    }
+  ],
+  "client_and_update_metadata": "unchanged",
+  "deployment": "not performed"
+}
