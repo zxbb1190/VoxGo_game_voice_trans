@@ -8,6 +8,7 @@ import socket
 import sys
 import time
 from collections import deque
+from types import SimpleNamespace
 from typing import Callable, List, Optional
 
 from loguru import logger
@@ -53,6 +54,7 @@ from voxgo.ui.dialogs import (
     _build_help_text,
 )
 from voxgo.ui.icons import _make_icon
+from voxgo.ui.model_preparation_status import ModelPreparationStatus
 from voxgo.ui.qr_widget import QrCodeWidget
 from voxgo.ui.settings_dialog import SettingsDialog
 from voxgo.ui.widgets import (
@@ -102,6 +104,7 @@ class OverlaySignals(QObject):
     new_translation_with_id = pyqtSignal(str, str, str)
     update_translation = pyqtSignal(str, str, bool)
     remove_translation = pyqtSignal(str)
+    model_preparation_progress = pyqtSignal(object)
     clear_history = pyqtSignal()
     toggle_visibility = pyqtSignal()
     toggle_lock = pyqtSignal()
@@ -316,6 +319,10 @@ class GameOverlay(QWidget):
         self._language_notice.setStyleSheet("color: #EAB86A; font-size: 11px;")
         self._layout.addWidget(self._language_notice)
         self._refresh_language_notice()
+
+        self._model_preparation_status = ModelPreparationStatus(
+            lambda: SimpleNamespace(app=self.app_config, whisper=self.whisper_config), self)
+        self._layout.addWidget(self._model_preparation_status)
 
         self._lock_button = OverlayLockButton(self)
 
@@ -961,6 +968,7 @@ class GameOverlay(QWidget):
         self._refresh_control_state()
         self._refresh_lock_state()
         self._refresh_labels()
+        self._model_preparation_status.refresh()
         if self._fullscreen_help_dialog and self._fullscreen_help_dialog.isVisible():
             self._fullscreen_help_dialog.close()
             self._fullscreen_help_dialog = None
@@ -1258,6 +1266,7 @@ class GameOverlay(QWidget):
         self._signals.new_translation_with_id.connect(self._add_translation_with_id)
         self._signals.update_translation.connect(self._update_translation)
         self._signals.remove_translation.connect(self._remove_translation)
+        self._signals.model_preparation_progress.connect(self._model_preparation_status.set_progress)
         self._signals.clear_history.connect(self._clear_history)
         self._signals.toggle_visibility.connect(self._toggle_visibility)
         self._signals.toggle_lock.connect(self._toggle_lock)
@@ -1268,6 +1277,10 @@ class GameOverlay(QWidget):
     def add_translation(self, original: str, translated: str):
         """线程安全地添加翻译"""
         self._signals.new_translation.emit(original, translated)
+
+    def set_model_preparation_progress(self, progress):
+        """Thread-safe status delivery; never resurrect a missing subtitle item."""
+        self._signals.model_preparation_progress.emit(progress)
 
     def add_translation_with_id(self, item_id: str, original: str, translated: str):
         """线程安全地添加可更新的翻译记录。"""
@@ -1598,6 +1611,7 @@ class GameOverlay(QWidget):
 
     def prepare_shutdown(self):
         """Prevent auxiliary dialogs from starting more work while quitting."""
+        self._model_preparation_status.stop()
         monitors = []
         for dialog in (self._settings_dialog, self._first_run_wizard):
             if dialog:
@@ -1627,6 +1641,7 @@ class GameOverlay(QWidget):
             callback()
             return
         self._fade_timer.stop()
+        self._model_preparation_status.stop()
         for index, signal in enumerate(self._screen_connections):
             try:
                 signal.disconnect(self._screens_changed if index < 2 else self._schedule_geometry_recovery)

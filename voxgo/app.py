@@ -69,7 +69,6 @@ from voxgo.runtime.priority import (
 )
 from voxgo.runtime.settings_controller import OverlaySettingsController
 from voxgo.diagnostics.reporter import DiagnosticsReporter
-from voxgo.asr.model_download_notice import ModelDownloadNoticeFormatter
 from voxgo.asr.pipeline import SpeechPipeline
 from voxgo.audio.benchmark import BenchmarkAudioOptions, resolve_benchmark_audio_path
 from voxgo.audio.runtime import AudioRuntime
@@ -186,9 +185,7 @@ class VoxGoApp:
                 getattr(self.config.whisper, "model_download_endpoint", "")
             ),
         )
-        self._model_download_notice_started = False
-        self._last_model_download_update = 0.0
-        self._model_download_notice_formatter = ModelDownloadNoticeFormatter(lambda: self.config)
+        self._pending_model_download_progress = None
         self._stats = {
             "audio_chunks": 0, "speech_detected": 0,
             "transcriptions": 0, "translations": 0, "errors": 0,
@@ -414,6 +411,9 @@ class VoxGoApp:
         if not self._speech_recognizer:
             return
         config = self._speech_runtime_config().whisper
+        model = str(config.active_model_size or config.model_size)
+        if model != self._current_recognizer_model_size():
+            self._notify_model_download_progress(ModelDownloadProgress("pending", model))
         if hasattr(self._speech_recognizer, "request_config"):
             self._speech_recognizer.request_config(config)
         else:
@@ -626,23 +626,12 @@ class VoxGoApp:
             self._broadcast_to_mobile(recognition_display_text(event.original, event.source_lang), translated)
 
     def _notify_model_download_progress(self, progress: ModelDownloadProgress):
-        self._model_download_notice_formatter.record_progress(progress)
-        now = time.time()
-        if progress.status == "downloading" and now - self._last_model_download_update < 0.5:
+        if getattr(self, "_stopping", False):
             return
-        self._last_model_download_update = now
-
-        message = self._model_download_notice_formatter.format(progress)
-        item_id = "model-download-progress"
-        original = "[" + ui_text(self._ui_language(), "状态", "Status") + "] " + ui_text(self._ui_language(), "模型下载", "Model download")
         if self._overlay:
-            if self._model_download_notice_started:
-                self._overlay.update_translation(item_id, message)
-            else:
-                self._overlay.add_translation_with_id(item_id, original, message)
-                self._model_download_notice_started = True
+            self._overlay.set_model_preparation_progress(progress)
         else:
-            self._pending_notices.append((original, message))
+            self._pending_model_download_progress = progress
 
     def _notify_recognition_device_fallback(self, reason: str, message: str):
         logger.warning("recognition device fallback: reason={}, message={}", reason, message)
@@ -938,6 +927,9 @@ class VoxGoApp:
             on_overlay_updated=self._on_overlay_updated,
         )
         self._overlay.model_recovery_requested.connect(self._request_model_recovery)
+        if self._pending_model_download_progress is not None:
+            self._overlay.set_model_preparation_progress(self._pending_model_download_progress)
+            self._pending_model_download_progress = None
         self._overlay._on_close_requested = self._request_window_close
         self._overlay.show()
         self._setup_tray_icon(QSystemTrayIcon, QMenu)

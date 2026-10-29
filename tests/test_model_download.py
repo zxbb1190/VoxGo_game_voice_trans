@@ -123,10 +123,13 @@ class ModelDownloadConfigTest(unittest.TestCase):
 
         progress = progress_cls(total=100, unit="B", unit_scale=True)
         progress.update(40)
+        progress.set_description("complete")
         progress.close()
 
         self.assertTrue(any(event.total_bytes == 100 for event in events))
         self.assertTrue(any(event.downloaded_bytes == 40 for event in events))
+        self.assertTrue(all(event.progress_scope == 'file' for event in events))
+        self.assertTrue(all(event.status == 'downloading' for event in events))
 
 
 if __name__ == "__main__":

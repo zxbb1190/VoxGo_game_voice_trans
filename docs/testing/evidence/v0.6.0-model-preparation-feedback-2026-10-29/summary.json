@@ -1,0 +1,95 @@
+{
+  "baseline": "d0068c24",
+  "branch": "codex/release-0.6.0",
+  "scope": "UI-only model preparation feedback; no speech policy, prompt, translation, settings or telemetry protocol change.",
+  "reproduced_before_fix": {
+    "initial_notice_rows": 1,
+    "rows_after_history_roll_and_second_model_check": 0
+  },
+  "source_log_metadata_only": {
+    "sha256": "02ce7a31e92ab697149d9efb7ebb9b22064fc0d5cc9b070d42bf70ca33484b5c",
+    "date": "2026-10-29",
+    "ko_balanced_start": "09:51:13",
+    "small_loaded": "09:51:44",
+    "no_audio_available_for_language_truth": true
+  },
+  "run_history": [
+    {
+      "log": "build/model-preparation-status-20261029/focused-first.log",
+      "sha256": "212f28c1686a9f139e5ae83f7e40bd8759f6d698bb1aa19bcbb989f89c42a6d3",
+      "tests": 15,
+      "seconds": 0.263,
+      "passed": false
+    },
+    {
+      "log": "build/model-preparation-status-20261029/focused-final.log",
+      "sha256": "7f57548c230bb502be3ce0e22745248eb0a0da3b709327f99975029f7f663758",
+      "tests": 16,
+      "seconds": 0.259,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/focused-guard-final.log",
+      "sha256": "f664c121f81ae3506a14dc0e44774067f366d46b0709198c3f4cf4149fe650ab",
+      "tests": 17,
+      "seconds": 0.28,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/download-regression.log",
+      "sha256": "09107d90e4531cda30708849b2529a2181a0459a55b8a9261a56c529bdadc9ed",
+      "tests": 10,
+      "seconds": 0.008,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/localization-regression.log",
+      "sha256": "eccaf2dd4890acefb0403791b1a8f722d79a08d055c639916aa1f69d1ef66a05",
+      "tests": 9,
+      "seconds": 0.871,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/full-tests.log",
+      "sha256": "2a625f8ccddad7f3591160a809e7d9fe50502dc86b8c9d08408c5d2d1b6fab0b",
+      "tests": 687,
+      "seconds": 58.383,
+      "passed": false
+    },
+    {
+      "log": "build/model-preparation-status-20261029/relay-isolated.log",
+      "sha256": "1c958fcd2a276d85be69afa245526e2acf40f1b0beafcbee1da6939ebd65ce82",
+      "tests": 12,
+      "seconds": 10.698,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/full-tests-rerun.log",
+      "sha256": "7181c534bf109f098234ebe8fff00931ba48975fa3bd34f54bd25fa910f9ca71",
+      "tests": 687,
+      "seconds": 56.515,
+      "passed": true
+    },
+    {
+      "log": "build/model-preparation-status-20261029/full-final-688.log",
+      "sha256": "31f07f3cd1b199d4c74fbab4646d6620cb6ade5876f07bb242fe3b99267f5a8c",
+      "tests": 688,
+      "seconds": 56.38,
+      "passed": true
+    }
+  ],
+  "final_full_tests": 688,
+  "english_chinese_equal_cases": 48,
+  "offscreen_visual_cases": 10,
+  "real_model_downloads": 0,
+  "real_translation_api_requests": 0,
+  "production_operations": 0,
+  "runtime_dependencies_added": false,
+  "formal_R2_packages_rebuilt": false,
+  "native_full_exe_retested": false,
+  "notes": [
+    "Initial new shutdown test emitted on the GUI thread; corrected to use a real worker for a queued shutdown scenario. Original log retained.",
+    "First full run had two existing loopback helper failures: connection reset and blocked counter 2 versus 1. All 12 helper tests passed in isolation; subsequent full runs passed (687, then final 688). No helper code or assertions changed.",
+    "Visual fixtures use synthetic byte counts and locally registered Windows fonts, not a measured live download; no fonts were added to runtime packaging."
+  ]
+}

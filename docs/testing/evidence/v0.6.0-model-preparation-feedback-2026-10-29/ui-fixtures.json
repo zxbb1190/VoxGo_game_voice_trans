@@ -1,0 +1,95 @@
+{
+  "kind": "Offscreen Qt component fixture with locally registered Windows fonts; simulated byte counts, no actual download or Full EXE acceptance.",
+  "cases": [
+    {
+      "locale": "zh-CN",
+      "compact": false,
+      "width": 640,
+      "height": 320,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-zh-CN-normal.png"
+    },
+    {
+      "locale": "zh-CN",
+      "compact": true,
+      "width": 360,
+      "height": 240,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-zh-CN-compact.png"
+    },
+    {
+      "locale": "en-US",
+      "compact": false,
+      "width": 640,
+      "height": 320,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-en-US-normal.png"
+    },
+    {
+      "locale": "en-US",
+      "compact": true,
+      "width": 360,
+      "height": 240,
+      "status_height": 75,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-en-US-compact.png"
+    },
+    {
+      "locale": "ja-JP",
+      "compact": false,
+      "width": 640,
+      "height": 320,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ja-JP-normal.png"
+    },
+    {
+      "locale": "ja-JP",
+      "compact": true,
+      "width": 360,
+      "height": 240,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ja-JP-compact.png"
+    },
+    {
+      "locale": "ko-KR",
+      "compact": false,
+      "width": 640,
+      "height": 320,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ko-KR-normal.png"
+    },
+    {
+      "locale": "ko-KR",
+      "compact": true,
+      "width": 360,
+      "height": 240,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ko-KR-compact.png"
+    },
+    {
+      "locale": "ru-RU",
+      "compact": false,
+      "width": 640,
+      "height": 320,
+      "status_height": 60,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ru-RU-normal.png"
+    },
+    {
+      "locale": "ru-RU",
+      "compact": true,
+      "width": 360,
+      "height": 240,
+      "status_height": 75,
+      "visible_inside_window": true,
+      "file": "fixture-status-legible-ru-RU-compact.png"
+    }
+  ]
+}

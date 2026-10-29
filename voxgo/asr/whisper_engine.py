@@ -251,6 +251,7 @@ class ModelDownloadProgress:
     total_bytes: int = 0
     percent: float = 0.0
     message: str = ""
+    progress_scope: str = "model"
 
 
 class SpeechRecognizer:
@@ -330,6 +331,10 @@ class SpeechRecognizer:
 
         self._model_dir.mkdir(parents=True, exist_ok=True)
         self._ensure_model_downloaded()
+        progress_repo = self._model_repo_id() or effective_model
+        progress_source = describe_model_download_source(
+            self._effective_download_source(), self._effective_download_endpoint())
+        self._emit_download_progress("loading", progress_repo, progress_source)
         self._release_model_loader_memory()
         self._runtime_device = ""
         self._runtime_compute_type = ""
@@ -367,9 +372,11 @@ class SpeechRecognizer:
                     elif device == "cpu":
                         self._notify_pending_cpu_fallback()
                     logger.info("Whisper 模型加载完成")
+                    self._emit_download_progress("ready", progress_repo, progress_source)
                     return
-                except WhisperLanguageCapabilityError:
+                except WhisperLanguageCapabilityError as error:
                     self._release_model_loader_memory()
+                    self._emit_download_progress("error", progress_repo, progress_source, message=str(error))
                     raise
                 except Exception as e:
                     last_error = e
@@ -405,7 +412,9 @@ class SpeechRecognizer:
             self.cleanup()
             return self.initialize()
 
-        raise RuntimeError("Whisper 模型加载失败，没有可用的设备配置") from last_error
+        message = "Whisper 模型加载失败，没有可用的设备配置"
+        self._emit_download_progress("error", progress_repo, progress_source, message=message)
+        raise RuntimeError(message) from last_error
 
     def _release_model_loader_memory(self):
         self._model = None
@@ -743,7 +752,8 @@ class SpeechRecognizer:
             def set_description(self, desc=None, refresh=True):
                 result = super().set_description(desc=desc, refresh=refresh)
                 if getattr(self, "_is_bytes_progress", False) and desc:
-                    self._emit("complete" if "complete" in str(desc).lower() else "downloading")
+                    # A completed file is not a completed model snapshot.
+                    self._emit("downloading")
                 return result
 
             def _emit(self, status: str):
@@ -759,6 +769,7 @@ class SpeechRecognizer:
                     total_bytes=total,
                     percent=percent,
                     message="正在下载模型文件" if status == "downloading" else "模型下载完成",
+                    progress_scope="file",
                 ))
 
         return DownloadProgressTqdm
@@ -775,16 +786,20 @@ class SpeechRecognizer:
     ):
         if self._download_progress_callback is None:
             return
-        self._download_progress_callback(ModelDownloadProgress(
-            status=status,
-            model_name=self._effective_model_size(),
-            repo_id=repo_id,
-            source=source,
-            downloaded_bytes=downloaded_bytes,
-            total_bytes=total_bytes,
-            percent=percent,
-            message=message,
-        ))
+        try:
+            self._download_progress_callback(ModelDownloadProgress(
+                status=status,
+                model_name=self._effective_model_size(),
+                repo_id=repo_id,
+                source=source,
+                downloaded_bytes=downloaded_bytes,
+                total_bytes=total_bytes,
+                percent=percent,
+                message=message,
+            ))
+        except Exception:
+            # Presentation failures must not abort a download or a loaded model.
+            logger.warning("Model preparation status update failed")
 
     def _model_load_candidates(self):
         configured_device = (self.config.device or "auto").strip().lower()
