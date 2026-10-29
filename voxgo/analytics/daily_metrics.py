@@ -2,6 +2,7 @@
 import math
 import threading
 from copy import deepcopy
+from .language_usage import direction_key, usage_map, usage_rows, MAX_COUNT
 
 COUNTERS = {'app_starts', 'sessions', 'session_seconds', 'offline_sessions',
             'api_sessions', 'translation_success', 'translation_failed',
@@ -33,8 +34,10 @@ LIMIT = 10 ** 12
 
 
 class DailyMetrics:
-    def __init__(self, store, app_version, package_type='unknown', environment=None):
+    def __init__(self, store, app_version, package_type='unknown', environment=None,
+                 language_usage_allowed=None):
         self.store = store
+        self.language_usage_allowed = language_usage_allowed
         self.app_version = app_version
         self.package_type = package_type
         self.environment = {k: str(v)[:100] for k, v in (environment or {}).items()
@@ -51,9 +54,17 @@ class DailyMetrics:
                  and isinstance(metrics, dict))
         clean = {k: v for k, v in metrics.items()
                  if k in METRICS and type(v) is int and 0 <= v <= LIMIT} if valid else {}
-        return {'schema_version': 2, 'date': day, 'app_version': self.app_version,
+        snapshot = {'schema_version': 2, 'date': day, 'app_version': self.app_version,
                 'package_type': self.package_type, 'environment': self.environment.copy(),
                 'metrics': clean}
+        if valid and 'language_usage' in data:
+            try:
+                from .language_usage import validate_totals
+                validate_totals(data['language_usage'], clean)
+                snapshot['language_usage'] = deepcopy(data['language_usage'])
+            except (ValueError, TypeError):
+                pass  # An invalid extension never reclassifies old totals.
+        return snapshot
 
     def _rollover(self):
         today = self.store.today().isoformat()
@@ -122,7 +133,8 @@ class DailyMetrics:
         return True
 
     def translation_result(self, success, elapsed_ms=None, mode=None,
-                           failure_reason=None, provider=None):
+                           failure_reason=None, provider=None, source_lang='', target_lang='',
+                           usage_mode=None):
         """Apply one result as a single day/lock transaction, or drop it whole."""
         if type(success) is not bool or mode not in (None, 'api', 'offline'):
             return False
@@ -145,6 +157,20 @@ class DailyMetrics:
                     metrics[key] = min(LIMIT, metrics.get(key, 0) + 1)
             if self._valid_elapsed(elapsed_ms):
                 self._observe_locked('translation_latency', elapsed_ms)
+            language_mode = usage_mode or mode or 'unknown'
+            compatible_mode = (language_mode == mode if mode in ('api', 'offline')
+                               else language_mode in ('cache', 'unknown'))
+            key = direction_key(source_lang, target_lang, language_mode) if compatible_mode else None
+            try:
+                allowed = self.language_usage_allowed is None or self.language_usage_allowed()
+            except Exception:
+                allowed = False
+            if key and allowed:
+                usage = usage_map(self.snapshot.get('language_usage', []))
+                counts = usage.setdefault(key, {'success': 0, 'failed': 0})
+                name = 'success' if success else 'failed'
+                counts[name] = min(MAX_COUNT, counts[name] + 1)
+                self.snapshot['language_usage'] = usage_rows(usage)
         return True
 
     def flush(self):

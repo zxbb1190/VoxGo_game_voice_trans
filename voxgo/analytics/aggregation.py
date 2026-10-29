@@ -11,6 +11,7 @@ from tempfile import NamedTemporaryFile
 import uuid
 
 from .daily_metrics import METRICS, LIMIT
+from .language_usage import usage_map, usage_rows, validate_totals, MAX_COUNT
 
 
 def utc_today():
@@ -63,10 +64,14 @@ class AggregateStore:
     State and exact pending payload are one atomic transaction. Watermarks remain
     after shard removal so stale shard resurrection cannot count data twice.
     """
-    def __init__(self, root, app_version, today=utc_today, package_type=None):
+    def __init__(self, root, app_version, today=utc_today, package_type=None, language_usage=False):
         self.root = Path(root)
         self.app_version = app_version
         self.today = today
+        if language_usage is not None and type(language_usage) is not bool:
+            raise ValueError('invalid language payload mode')
+        # None is inspection/pruning before capability negotiation, never a POST.
+        self.language_usage = language_usage
         from voxgo.package_info import package_type as current_package_type
         self.package_type = current_package_type() if package_type is None else package_type
 
@@ -108,8 +113,37 @@ class AggregateStore:
                     or entry['revision'] < 1 or len(entry['seen']) > 512):
                 raise ValueError('invalid aggregate entry')
             self._metrics(entry['totals'])
+            if (type(entry.get('language_payload_enabled', False)) is not bool
+                    or type(entry.get('language_revision', 0)) is not int
+                    or not 0 <= entry.get('language_revision', 0) <= entry['revision']):
+                raise ValueError('invalid language revision')
             for metrics in entry['seen'].values():
                 self._metrics(metrics)
+            validate_totals(entry.get('language_totals', []), self._metrics(entry['totals']))
+            language_seen = entry.get('language_seen', {})
+            if not isinstance(language_seen, dict) or len(language_seen) > 512:
+                raise ValueError('invalid language watermarks')
+            for key, rows in language_seen.items():
+                if key not in entry['seen']:
+                    raise ValueError('missing language shard watermark')
+                validate_totals(rows, self._metrics(entry['seen'][key]))
+            language_pending = entry.get('language_pending')
+            if language_pending is not None:
+                if (language_pending.get('schema_version') != 3
+                        or language_pending.get('install_id') != state['install_id']
+                        or language_pending.get('date') != day
+                        or type(language_pending.get('revision')) is not int
+                        or language_pending['revision'] > entry['revision']):
+                    raise ValueError('invalid language pending')
+                validate_totals(language_pending.get('language_usage'), self._metrics(language_pending['metrics']))
+                unsigned = {k: v for k, v in language_pending.items() if k != 'snapshot_id'}
+                canonical = json.dumps(unsigned, sort_keys=True, separators=(',', ':'), ensure_ascii=True)
+                if language_pending.get('snapshot_id') != hashlib.sha256(canonical.encode('ascii')).hexdigest():
+                    raise ValueError('invalid language pending hash')
+                if language_pending['revision'] == entry['revision']:
+                    if (self._metrics(language_pending['metrics']) != self._metrics(entry['totals'])
+                            or usage_map(language_pending['language_usage']) != usage_map(entry.get('language_totals', []))):
+                        raise ValueError('language pending differs from totals')
             pending = entry.get('pending')
             if pending is not None:
                 if (pending['install_id'] != state['install_id'] or pending['date'] != day
@@ -210,27 +244,77 @@ class AggregateStore:
             for name in METRICS:
                 entry['totals'][name] += delta[name]
             entry['seen'][key] = {name: max(metrics[name], previous.get(name, 0)) for name in METRICS}
+            # Keep independent high watermarks so old writers can ignore this
+            # extension without either erasing it or counting resurrected shards.
+            try:
+                incoming = validate_totals(shard.get('language_usage', []), metrics)
+            except (ValueError, TypeError, KeyError):
+                incoming = {}
+            totals = usage_map(entry.get('language_totals', []))
+            seen = entry.setdefault('language_seen', {})
+            previous_language = usage_map(seen.get(key, []))
+            candidate = deepcopy(totals)
+            watermark = deepcopy(previous_language)
+            language_changed = False
+            for direction, amounts in incoming.items():
+                old = previous_language.get(direction, {'success': 0, 'failed': 0})
+                watermark[direction] = {name: max(amounts[name], old[name]) for name in ('success', 'failed')}
+                accumulated = candidate.setdefault(direction, {'success': 0, 'failed': 0})
+                for name in ('success', 'failed'):
+                    increment = max(0, amounts[name] - old[name])
+                    accumulated[name] += increment
+                    language_changed |= increment > 0
+            if all(max(row.values()) <= MAX_COUNT for row in candidate.values()):
+                validate_totals(usage_rows(candidate), entry['totals'])
+                entry['language_totals'] = usage_rows(candidate)
+                if watermark:
+                    seen[key] = usage_rows(watermark)
+                if language_changed:
+                    changed.add(path.stem)
             if any(delta.values()) or entry['revision'] == 0:
                 changed.add(path.stem)
+        for day, entry in state['days'].items():
+            enabled = (entry.get('language_payload_enabled', False) if self.language_usage is None
+                       else self.language_usage)
+            if self.language_usage is not None and enabled != entry.get('language_payload_enabled', False):
+                changed.add(day)
+            # An older executable may have advanced only the coarse revision.
+            if enabled and entry.get('language_revision', 0) != entry['revision']:
+                changed.add(day)
+            pending = entry.get('language_pending')
+            if pending and pending['revision'] < entry['revision']:
+                entry['language_pending'] = None
         for day in changed:
             entry = state['days'][day]
             entry['revision'] += 1
-            entry['pending'] = {'schema_version': 2, 'install_id': state['install_id'],
+            enabled = (entry.get('language_payload_enabled', False) if self.language_usage is None
+                       else self.language_usage)
+            payload = {'schema_version': 3 if enabled else 2, 'install_id': state['install_id'],
                                 'date': day, 'revision': entry['revision'],
                                 'app_version': self.app_version,
                                 'package_type': self.package_type, 'metrics': deepcopy(entry['totals'])}
-            canonical = json.dumps(entry['pending'], sort_keys=True, separators=(',', ':'), ensure_ascii=True)
-            entry['pending']['snapshot_id'] = hashlib.sha256(canonical.encode('ascii')).hexdigest()
+            if enabled:
+                payload['language_usage'] = deepcopy(entry.get('language_totals', []))
+            canonical = json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True)
+            payload['snapshot_id'] = hashlib.sha256(canonical.encode('ascii')).hexdigest()
+            # schema3 has a separate outbox slot invisible to legacy binaries.
+            entry['pending'] = None if enabled else payload
+            entry['language_pending'] = payload if enabled else None
+            entry['language_payload_enabled'] = enabled
+            if enabled:
+                entry['language_revision'] = entry['revision']
         self._save(state)
-        return [deepcopy(entry['pending']) for day, entry in sorted(state['days'].items())
-                if entry.get('pending') is not None]
+        return [deepcopy(entry.get('language_pending') or entry.get('pending'))
+                for day, entry in sorted(state['days'].items())
+                if entry.get('language_pending') is not None or entry.get('pending') is not None]
 
     def acknowledge(self, payload):
         state = self._load()
         entry = state['days'].get(payload.get('date'))
-        if entry is None or entry.get('pending') != payload:
+        slot = 'language_pending' if payload.get('schema_version') == 3 else 'pending'
+        if entry is None or entry.get(slot) != payload:
             return False
-        entry['pending'] = None
+        entry[slot] = None
         self._save(state)
         # Baseline and watermarks intentionally survive successful upload.
         return True

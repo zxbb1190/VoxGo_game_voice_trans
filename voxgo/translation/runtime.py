@@ -36,10 +36,15 @@ class TranslationRuntime:
         self.loop: Optional[asyncio.AbstractEventLoop] = None
         self.thread: Optional[threading.Thread] = None
 
-    def _record_analytics(self, success, elapsed_ms=None, mode=None, failure_reason=None, provider=None):
+    def _record_analytics(self, success, elapsed_ms=None, mode=None, failure_reason=None, provider=None,
+                          source_lang='', target_lang='', usage_mode=None):
         try:
             if self.analytics:
-                if not success and mode == 'api':
+                if callable(getattr(type(self.analytics), 'translation_result_with_language', None)):
+                    self.analytics.translation_result_with_language(
+                        success, elapsed_ms, mode, failure_reason, provider,
+                        source_lang, target_lang, usage_mode)
+                elif not success and mode == 'api':
                     self.analytics.translation_result(success, elapsed_ms, mode, failure_reason, provider)
                 else:
                     self.analytics.translation_result(success, elapsed_ms, mode)
@@ -340,7 +345,8 @@ class TranslationRuntime:
                 self._remove_overlay_item(item_id)
                 self._stats['skipped_translations'] = self._stats.get('skipped_translations', 0) + 1
                 return
-            self._handle_error(item_id, exc, mode=mode, provider=provider)
+            self._handle_error(item_id, exc, mode=mode, provider=provider,
+                               source_lang=config.source_lang, target_lang=config.target_lang)
             return
         if getattr(result, 'provider', '') == 'local_cache':
             mode = None
@@ -375,7 +381,9 @@ class TranslationRuntime:
         elapsed = time.time() - t0
         if not translated.startswith('[未翻译]'):
             self._record_analytics(not translated.startswith('[翻译'), elapsed * 1000, mode=mode,
-                                   failure_reason=failure_reason, provider=provider)
+                                   failure_reason=failure_reason, provider=provider,
+                                   source_lang=config.source_lang, target_lang=config.target_lang,
+                                   usage_mode='cache' if getattr(result, 'provider', '') == 'local_cache' else mode)
         logger.info("translated: {} ({:.1f}s)", translated[:80], elapsed)
         self._event_bus.publish(
             TranslationReady(
@@ -457,13 +465,15 @@ class TranslationRuntime:
             logger.exception("异步翻译任务失败: {}", exc)
             self._handle_error(item_id, exc, already_logged=True)
 
-    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False, mode=None, provider=None):
+    def _handle_error(self, item_id: str, exc: Exception, already_logged: bool = False, mode=None, provider=None,
+                      source_lang='', target_lang=''):
         if self._shutdown_requested.is_set():
             return
         if not already_logged:
             logger.exception("翻译任务失败: {}", exc)
         self._stats["errors"] += 1
-        self._record_analytics(False, mode=mode, failure_reason=classify_api_failure(exc), provider=provider)
+        self._record_analytics(False, mode=mode, failure_reason=classify_api_failure(exc), provider=provider,
+                               source_lang=source_lang, target_lang=target_lang)
         trace = self._latency_traces.get(item_id)
         if trace and not trace.translation_finished_at:
             trace.translation_finished_at = time.time()

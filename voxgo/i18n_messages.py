@@ -4,6 +4,31 @@ Runtime values and external content are not translated. No network required.
 """
 
 MESSAGES = {
+    "New Full opt-ins include language-direction counts; existing Full users enable them separately.": [
+        "新开启详细统计包含语言方向计数；已有详细统计用户需单独启用。",
+        "新たに詳細統計を有効にすると言語方向別の件数も含まれます。既存ユーザーは別途有効にします。",
+        "상세 통계를 새로 켜면 언어 방향별 횟수도 포함됩니다. 기존 사용자는 별도로 활성화합니다.",
+        "При новом включении подробной статистики добавляются счётчики языковых направлений. Действующие пользователи включают их отдельно."
+    ],
+    "Language usage adds only source/target language codes, mode and success/failure counts. New Full opt-ins include it; existing Full users enable it separately in Privacy. It stops with Full statistics.": [
+        "语言使用统计仅增加源/目标语言代码、模式及成功失败计数。新开启详细统计包含此项，已有用户在隐私页单独启用；随详细统计一起关闭。",
+        "言語使用統計は入力・出力の言語コード、モード、成功・失敗件数のみです。新規の詳細統計には含まれ、既存ユーザーはプライバシー画面で別途有効にします。詳細統計と一緒に停止します。",
+        "언어 사용 통계는 원본·목표 언어 코드, 모드, 성공·실패 횟수만 추가합니다. 새 상세 통계 동의에는 포함되며 기존 사용자는 개인정보 화면에서 별도로 켭니다. 상세 통계를 끄면 함께 중지됩니다.",
+        "Добавляются только коды исходного и целевого языков, режим и число успехов/ошибок. При новом согласии они включены; действующие пользователи включают их отдельно в разделе конфиденциальности. Отключаются вместе с подробной статистикой."
+    ],
+    "Language usage includes only source/target languages and success/failure counts, never audio or captions. It turns off with Full statistics.": [
+        "语言使用统计仅包含源/目标语言与成功失败计数，不包含语音或字幕内容。随详细统计一起关闭。",
+        "言語使用統計は入力・出力言語と成功・失敗件数のみで、音声や字幕は含みません。詳細統計と一緒に停止します。",
+        "언어 사용 통계는 원본·목표 언어와 성공·실패 횟수만 포함하며 음성·자막은 포함하지 않습니다. 상세 통계를 끄면 함께 중지됩니다.",
+        "Только исходный и целевой языки и число успехов/ошибок, без аудио или субтитров. Отключается вместе с подробной статистикой."
+    ],
+    "New language usage includes only source/target languages and success/failure counts. Existing Full consent keeps its original scope until you enable language classification.": [
+        "新增语言使用统计仅包含源/目标语言与成功失败计数。已有详细统计授权保持原范围，启用后才加入语言分类。",
+        "新しい言語使用統計は入力・出力言語と成功・失敗件数のみです。有効にするまでは、既存の詳細統計の同意範囲は変わりません。",
+        "새 언어 사용 통계는 원본·목표 언어와 성공·실패 횟수만 포함합니다. 언어 분류를 켜기 전에는 기존 상세 통계 동의 범위를 유지합니다.",
+        "Новая статистика содержит только исходный и целевой языки и число успехов/ошибок. До её включения прежнее согласие сохраняет прежний объём."
+    ],
+    "Enable language usage statistics": ["启用语言使用统计", "言語使用統計を有効にする", "언어 사용 통계 활성화", "Включить статистику языков"],
     "Beta: speech recognition and translation quality are still being improved.": [
         "Beta：语音识别与译文质量仍在优化。",
         "Beta：音声認識と翻訳品質は引き続き改善中です。",

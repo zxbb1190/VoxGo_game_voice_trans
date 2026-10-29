@@ -1,0 +1,72 @@
+{
+  "scope": "local only, no production access or real translation calls",
+  "client_base": "fa5f6054",
+  "api_commit": "9fd68125e928bc1ba25b5ae7d80f350133f66de3",
+  "full_suite": {
+    "passed": 732,
+    "seconds": 58.054,
+    "api_contract_enabled": true
+  },
+  "dedicated_language_tests": 13,
+  "api_tests": 79,
+  "api_build": "passed",
+  "local_workerd_D1": "passed 0001-0007, JSON batch, replay, rollback, FK cascade",
+  "legacy_metrics": 63,
+  "english_chinese_comparison": {
+    "cases": 48,
+    "equal": true,
+    "baseline": "afc33a67"
+  },
+  "browser": {
+    "fixture": "synthetic SQLite aggregate only",
+    "widths": [
+      1440,
+      390
+    ],
+    "mobile_document_width": 390,
+    "modes": [
+      "all",
+      "api",
+      "offline",
+      "cache",
+      "unknown"
+    ],
+    "day_ranges": [
+      7,
+      14,
+      30
+    ],
+    "console_errors": 0
+  },
+  "privacy_components": {
+    "locales": [
+      "zh-CN",
+      "en-US",
+      "ja-JP",
+      "ko-KR",
+      "ru-RU"
+    ],
+    "states": [
+      "old Full, ungranted",
+      "explicitly granted"
+    ],
+    "offscreen": true,
+    "full_exe_tested": false
+  },
+  "production_migration_state": "not queried",
+  "production_changed": false,
+  "package_rebuilt": false,
+  "review": "one pre-grant queue race found, fixed with admission and writer checks; independent regression passed",
+  "intermittent_test": {
+    "name": "test_production_helper_with_fake_credential_exposes_only_health_and_gate",
+    "initial": "blocked 2 instead of 1",
+    "isolated": "pass",
+    "subsequent_full": "732 pass"
+  },
+  "raw_local_logs": {
+    "full-final.log": "713af3fe8e94a31df93126a1b2b40d06af4363b75a311c41ef2e2ae8dd162883",
+    "language-final.log": "371de890cebb6fbe2fef582011b8b351a4064e32e65d004b09a72fa4a32fd177",
+    "loopback-isolated.log": "676a169826eeceacec01b0f66fad1fcd98a3d9f3d64249a46baec9579a86d427",
+    "full-intermittent-loopback.log": "ef5d9500e3c77605b0f9c344c9c3f94a901a030188a98f26f8acd5835ff610d6"
+  }
+}

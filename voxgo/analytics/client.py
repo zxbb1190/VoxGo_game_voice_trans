@@ -19,11 +19,13 @@ class LocalAnalytics:
     """Best-effort collector. No public method waits for disk or network IO."""
 
     def __init__(self, root, app_version, *, flush_interval=30.0, storage_root=None, cleanup_hook=None,
-                 collection_allowed=None, count_start=True, lifecycle_root=None):
+                 collection_allowed=None, count_start=True, lifecycle_root=None,
+                 language_usage_allowed=None):
         self._root = Path(storage_root) if storage_root is not None else Path(root) / 'analytics'
         self._version = app_version
         self._cleanup_hook = cleanup_hook
         self._collection_allowed = collection_allowed
+        self._language_usage_allowed = language_usage_allowed
         self._count_start = count_start
         self._lifecycle_root = Path(lifecycle_root) if lifecycle_root is not None else None
         self._lifecycle = None
@@ -61,8 +63,16 @@ class LocalAnalytics:
         self._submit('asr_segment', duration_ms, forced, short, mode)
 
     def translation_result(self, success, elapsed_ms=None, mode=None,
-                           failure_reason=None, provider=None):
-        self._submit('translation_result', success, elapsed_ms, mode, failure_reason, provider)
+                           failure_reason=None, provider=None, source_lang='', target_lang='', usage_mode=None):
+        args = (success, elapsed_ms, mode, failure_reason, provider)
+        if source_lang or target_lang or usage_mode is not None:
+            args += (source_lang, target_lang, usage_mode)
+        self._submit('translation_result', *args)
+
+    def translation_result_with_language(self, success, elapsed_ms, mode, failure_reason, provider,
+                                         source_lang, target_lang, usage_mode):
+        self.translation_result(success, elapsed_ms, mode, failure_reason, provider,
+                                source_lang, target_lang, usage_mode)
 
     def set_active(self, active, mode=None):
         try:
@@ -188,7 +198,8 @@ class LocalAnalytics:
                 return
             store = DailySnapshotStore(self._root / uuid.uuid4().hex,
                 today=lambda: datetime.now(timezone.utc).date())
-            metrics = DailyMetrics(store, self._version, package_type=self._package_type)
+            metrics = DailyMetrics(store, self._version, package_type=self._package_type,
+                                   language_usage_allowed=self._language_usage_allowed)
             with self._lifecycle_guard:
                 if self._lifecycle_abandoned.is_set() or not self._can_collect():
                     return
@@ -295,7 +306,7 @@ class AuthorizedAnalytics:
         if epoch and str(uuid.UUID(epoch)) == epoch:
             remote_root = self.root / 'analytics-remote' / epoch
             if (remote_root / 'aggregate.json').exists():
-                store = AggregateStore(remote_root, self.version)
+                store = AggregateStore(remote_root, self.version, language_usage=None)
                 with store.lock() as acquired:
                     if acquired:
                         store.snapshots()  # Prune expired aggregate days even offline.
@@ -348,6 +359,7 @@ class AuthorizedAnalytics:
                     storage_root=remote_root / 'shards',
                     lifecycle_root=remote_root,
                     collection_allowed=lambda: may_upload(self._remote_consent(epoch), True),
+                    language_usage_allowed=lambda: self._language_usage_allowed(epoch),
                     count_start=not self._remote_started)
                 self._remote_started = True
                 self.remote.set_active(*self._active)
@@ -362,7 +374,14 @@ class AuthorizedAnalytics:
                 getattr(self.local, method)(*args)
                 self.refresh_consent()
                 if self.remote:
-                    getattr(self.remote, method)(*args)
+                    remote_args = args
+                    if (method == 'translation_result' and len(args) > 5
+                            and not self._language_usage_allowed(self._epoch)):
+                        # Granting the category later must not classify events
+                        # already queued before the grant. The writer checks
+                        # again so revocation also stops queued collection.
+                        remote_args = args[:5]
+                    getattr(self.remote, method)(*remote_args)
         except Exception:
             pass
 
@@ -376,8 +395,20 @@ class AuthorizedAnalytics:
         self._call('asr_segment', duration_ms, forced, short, mode)
 
     def translation_result(self, success, elapsed_ms=None, mode=None,
-                           failure_reason=None, provider=None):
-        self._call('translation_result', success, elapsed_ms, mode, failure_reason, provider)
+                           failure_reason=None, provider=None, source_lang='', target_lang='', usage_mode=None):
+        args = (success, elapsed_ms, mode, failure_reason, provider)
+        if source_lang or target_lang or usage_mode is not None:
+            args += (source_lang, target_lang, usage_mode)
+        self._call('translation_result', *args)
+
+    def _language_usage_allowed(self, epoch):
+        from .language_usage import language_usage_allowed
+        return language_usage_allowed(self._remote_consent(epoch))
+
+    def translation_result_with_language(self, success, elapsed_ms, mode, failure_reason, provider,
+                                         source_lang, target_lang, usage_mode):
+        self.translation_result(success, elapsed_ms, mode, failure_reason, provider,
+                                source_lang, target_lang, usage_mode)
 
     def set_active(self, active, mode=None):
         self._active = (active, mode)

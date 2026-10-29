@@ -10,9 +10,11 @@ def telemetry_summary(english=False, confirmation=False):
     if english:
         return ('Basic statistics are always enabled to count daily active installations, using a daily identifier that is not linked across days. '
                 'Optional Full statistics help improve usage and stability; you can turn Full off at any time. '
-                'Neither includes audio, recognized text or translations.')
+                'Neither includes audio, recognized text or translations.\n'
+                'New Full opt-ins include language-direction counts; existing Full users enable them separately.')
     return ('基础统计始终启用，用于统计每日活跃安装数，使用不跨日关联的每日标识。'
-            '可选的详细使用与稳定性统计帮助改进体验，你可以随时关闭。均不包含语音、识别或翻译内容。')
+            '可选的详细使用与稳定性统计帮助改进体验，你可以随时关闭。均不包含语音、识别或翻译内容。\n'
+            '新开启详细统计包含语言方向计数；已有详细统计用户需单独启用。')
 
 
 def normalize_consent(value):
@@ -42,7 +44,8 @@ def privacy_text(english=False):
             'success/failure counts, active use duration, ASR/translation performance, ASR segmentation/filter counts '
             'and clean/unclean shutdown counts. '
             'It uses a random installation identifier across days. No audio, recognized text, translations, keys, '
-            'paths, hardware identifiers, crash stacks or error messages are uploaded by either channel.\n\n'
+            'paths, hardware identifiers, crash stacks or error messages are uploaded by either channel.\n'
+            'Language usage adds only source/target language codes, mode and success/failure counts. New Full opt-ins include it; existing Full users enable it separately in Privacy. It stops with Full statistics.\n\n'
             'You may disable Full in Settings. This stops future Full reporting, but does not disable Basic or local '
             'statistics and cannot recall an already sent request. Re-enabling Full starts a new identifier without '
             'backfilling disabled-period data. New data categories require new authorization; consent version remains 3 '
@@ -59,7 +62,8 @@ def privacy_text(english=False):
         '详细使用与稳定性统计遵循首次向导或设置中的选择。新安装向导默认勾选，完成向导后才启用；'
         '历史开启、拒绝和未知状态保持原选择。包含版本、安装包类型、翻译模式、成功失败数量、活跃使用时长、'
         '识别与翻译性能、识别分段及过滤次数、正常退出与未正常退出次数，使用随机安装标识关联每日汇总。'
-        '两类统计均不上传语音、识别或翻译内容、密钥、本地路径、硬件标识、崩溃堆栈或错误正文。\n\n'
+        '两类统计均不上传语音、识别或翻译内容、密钥、本地路径、硬件标识、崩溃堆栈或错误正文。\n'
+        '语言使用统计仅增加源/目标语言代码、模式及成功失败计数。新开启详细统计包含此项，已有用户在隐私页单独启用；随详细统计一起关闭。\n\n'
         '可以随时在设置中关闭详细统计，停止后续详细统计上报；基础统计和本地统计继续运行。已发出的请求无法撤回。'
         '再次开启详细统计使用新标识，不补传关闭期间数据。新增数据类别需要重新授权；已有数值统计细化保持授权版本 3。\n\n'
         '本地统计最多保留 30 天、90 个文件、总量 2 MiB。远程待上传缓冲覆盖最多 7 个 UTC 日期。'

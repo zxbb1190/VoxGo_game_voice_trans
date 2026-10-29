@@ -534,6 +534,13 @@ class SettingsDialog(QDialog):
         telemetry_row.addStretch()
         privacy_form.addRow(telemetry_row)
         self.privacy_notice = privacy_notice
+        self.language_usage_consent_hint = QLabel()
+        self.language_usage_consent_hint.setWordWrap(True)
+        self.language_usage_consent_button = QPushButton()
+        self.language_usage_consent_button.clicked.connect(self._enable_language_usage_consent)
+        privacy_form.addRow(self.language_usage_consent_hint)
+        privacy_form.addRow(self.language_usage_consent_button)
+        self._refresh_language_usage_consent()
 
         action_row = QHBoxLayout()
         feedback_button = QPushButton(_tr(self._ui_language, "提交反馈", "Submit Feedback"))
@@ -574,9 +581,31 @@ class SettingsDialog(QDialog):
             self.app_config.telemetry_epoch = ''
         self.app_config.telemetry_consent = 'allowed' if allowed else 'denied'
         self.app_config.telemetry_consent_version = CONSENT_VERSION
+        self.app_config.telemetry_language_usage_consent_version = 1 if allowed else 0
         self.app_config.full_telemetry_source = 'user_enabled' if allowed else 'user_disabled'
         self.app_config._telemetry_consent_changed = True
+        self._refresh_language_usage_consent()
         self._preview()
+
+    def _enable_language_usage_consent(self):
+        from voxgo.analytics.consent import may_upload
+        if may_upload(self.app_config, True):
+            self.app_config.telemetry_language_usage_consent_version = 1
+            self.app_config._telemetry_consent_changed = True
+            self._refresh_language_usage_consent()
+            self._preview()
+
+    def _refresh_language_usage_consent(self):
+        from voxgo.analytics.consent import may_upload
+        from voxgo.analytics.language_usage import language_usage_allowed
+        allowed = language_usage_allowed(self.app_config)
+        self.language_usage_consent_hint.setText(_tr(self._ui_language,
+            '语言使用统计仅包含源/目标语言与成功失败计数，不包含语音或字幕内容。随详细统计一起关闭。' if allowed else
+            '新增语言使用统计仅包含源/目标语言与成功失败计数。已有详细统计授权保持原范围，启用后才加入语言分类。',
+            'Language usage includes only source/target languages and success/failure counts, never audio or captions. It turns off with Full statistics.' if allowed else
+            'New language usage includes only source/target languages and success/failure counts. Existing Full consent keeps its original scope until you enable language classification.'))
+        self.language_usage_consent_button.setText(_tr(self._ui_language, '启用语言使用统计', 'Enable language usage statistics'))
+        self.language_usage_consent_button.setVisible(may_upload(self.app_config, True) and not allowed)
 
     def _fill_ui_languages(self):
         self.ui_language_combo.blockSignals(True)
@@ -601,6 +630,7 @@ class SettingsDialog(QDialog):
             self.privacy_notice.setAccessibleName(_tr(self._ui_language, '隐私说明', 'Privacy information'))
             self.telemetry_consent_check.setText(_tr(self._ui_language,
                 '愿意帮助 VoxGo 改进体验', 'Help improve VoxGo'))
+            self._refresh_language_usage_consent()
         if hasattr(self, "close_action_combo"):
             self.close_action_label.setText(_tr(self._ui_language, "点击关闭按钮", "Close button"))
             for index, (zh, en) in enumerate([("每次询问", "Ask every time"), ("最小化到托盘", "Minimize to tray"), ("退出程序", "Quit VoxGo")]):

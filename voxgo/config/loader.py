@@ -484,6 +484,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "telemetry_consent": getattr(config.app, 'telemetry_consent', 'unknown'),
             "telemetry_consent_version": getattr(config.app, 'telemetry_consent_version', 0),
             "telemetry_epoch": getattr(config.app, 'telemetry_epoch', ''),
+            "telemetry_language_usage_consent_version": getattr(config.app, 'telemetry_language_usage_consent_version', 0),
             **{key: getattr(config.app, key, default) for key, default in (
                 ('basic_install_seed', ''), ('basic_first_run_date', ''),
                 ('telemetry_v2_migrated', False), ('telemetry_install_origin', 'historical_install'),

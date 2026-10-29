@@ -774,6 +774,7 @@ class FirstRunWizard(QDialog):
             was_allowed = self.app_config.telemetry_consent == 'allowed' and self.app_config.telemetry_consent_version == CONSENT_VERSION
             self.app_config.telemetry_consent = "allowed" if allowed else "denied"
             self.app_config.telemetry_consent_version = CONSENT_VERSION
+            self.app_config.telemetry_language_usage_consent_version = 1 if allowed else 0
             if allowed and (not was_allowed or not self.app_config.telemetry_epoch):
                 self.app_config.telemetry_epoch = str(uuid.uuid4())
             elif not allowed:

@@ -1,5 +1,9 @@
 # Classified Full diagnostics: local acceptance, 2026-10-14
 
+Later additive language usage is documented in [telemetry-language-usage.md](telemetry-language-usage.md).
+It preserves these 63 metric meanings and adds a separately authorized, capability-negotiated
+schema3 envelope; this historical schema2 acceptance retains its original scope.
+
 This is a prepared next-version change, not a client release or a production
 deployment. The app version, Fast/Balanced/Accurate parameters, Whisper models,
 translation prompts, capture admission and ASR filters are unchanged.

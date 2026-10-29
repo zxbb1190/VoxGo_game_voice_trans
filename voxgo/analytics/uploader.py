@@ -13,6 +13,7 @@ from pathlib import Path
 from .aggregation import AggregateStore
 from .consent import may_upload, normalize_consent
 from .debug import AnalyticsDebug
+from .language_usage import language_usage_allowed
 
 API_ROOT = 'https://api.voxgo.cn'
 
@@ -32,7 +33,7 @@ class HTTPTransport:
         self.api_root = api_root.rstrip('/')
 
     def __call__(self, method, path, payload=None):
-        if path not in ('/v1/config', '/v1/telemetry/sync', '/v1/telemetry/basic'):
+        if path not in ('/v1/config', '/v1/config?language_usage=1', '/v1/telemetry/sync', '/v1/telemetry/basic'):
             raise ValueError('invalid API path')
         body = json.dumps(payload, sort_keys=True, separators=(',', ':')).encode() if payload else None
         request = urllib.request.Request(self.api_root + path, data=body, method=method,
@@ -133,7 +134,7 @@ class RemoteUploader:
         store = None
         stage = 'aggregate'
         try:
-            store = AggregateStore(self.root, self.app_version)
+            store = AggregateStore(self.root, self.app_version, language_usage=None)
             with store.lock() as acquired:
                 if not acquired or not self.allowed():
                     self.debug.update(persist=self.allowed(), skip_reason=
@@ -155,12 +156,14 @@ class RemoteUploader:
                     return
                 try:
                     stage = 'config_request'
+                    wants_language_usage = language_usage_allowed(self.consent_getter())
+                    config_path = '/v1/config?language_usage=1' if wants_language_usage else '/v1/config'
                     self.debug.update(last_attempt=self.clock(), last_result='config_request',
                         config_attempt_at=self.clock(), config_request_url=(
-                            self.transport.api_root + '/v1/config' if isinstance(self.transport, HTTPTransport) else None),
+                            self.transport.api_root + config_path if isinstance(self.transport, HTTPTransport) else None),
                         config_http_status=None, config_server_header=None, config_cf_ray=None,
                         config_raw_enabled=None, config_effective_enabled=None)
-                    status, headers, data = self.transport('GET', '/v1/config')
+                    status, headers, data = self.transport('GET', config_path)
                     response_headers = {k.lower(): v for k, v in headers.items()}
                     raw_enabled = data.get('telemetry_enabled') if isinstance(data, dict) else None
                     self.debug.update(http_status=status, config_http_status=status,
@@ -176,6 +179,8 @@ class RemoteUploader:
                         return
                     stage = 'config_parse'
                     enabled, rate, interval = parse_config(data)
+                    store.language_usage = (language_usage_allowed(self.consent_getter())
+                        and type(data.get('language_usage_schema')) is int and data['language_usage_schema'] == 1)
                     self.debug.update(config_enabled=enabled, config_effective_enabled=enabled, last_result='config_valid')
                 except Exception as error:
                     self._defer_retry(store)
@@ -200,6 +205,11 @@ class RemoteUploader:
                     if not self.allowed() or time.monotonic() - started > 10:
                         self.debug.update(persist=self.allowed(), skip_reason=
                             'consent_or_stopped' if not self.allowed() else 'round_time_limit')
+                        break
+                    # Consent may have been revoked by another process after
+                    # capability negotiation; never send an extended payload then.
+                    if payload.get('schema_version') == 3 and not language_usage_allowed(self.consent_getter()):
+                        self.debug.update(skip_reason='language_usage_consent_changed')
                         break
                     try:
                         stage = 'post_request'
