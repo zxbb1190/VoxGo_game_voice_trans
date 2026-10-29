@@ -1,0 +1,54 @@
+{
+  "version": "0.6.0",
+  "edition": "lite",
+  "source_root": "E:\\my\\my\\game_voice_translator",
+  "source_commit": "a23d72362b82ea47cb7d1e57df45afd2cf799d78",
+  "stage": "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-a23d7236",
+  "archive_name": "VoxGo-v0.6.0-lite.zip",
+  "source_clean": true,
+  "target_files_before": [
+    {
+      "file": "VoxGo-v0.6.0-lite.zip",
+      "sha256": "383f1f9a842743b8b1412e2c74a39c1b9b81e53966c51ba53c2188db71aec4f4",
+      "bytes": 137006694
+    },
+    {
+      "file": "SHA256SUMS.txt",
+      "sha256": "f4cc56c8865f93877815a61b083f3b0a2277aaba73b9f6fd07f25abe48af50c9",
+      "bytes": 88
+    },
+    {
+      "file": "release-manifest.local.json",
+      "sha256": "8ffd89449a3f4770e0e6c526941a1da9529deac30eb90ddddbdb9e63aac5dc23",
+      "bytes": 449
+    }
+  ],
+  "build_command": [
+    ".venv-win/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "PyInstaller",
+    "--clean",
+    "--noconfirm",
+    "--distpath",
+    "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-a23d7236\\dist",
+    "--workpath",
+    "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-a23d7236\\work",
+    "VoxGo.spec"
+  ],
+  "build_environment": {
+    "INCLUDE_MODEL": "0",
+    "INCLUDE_CUDA_RUNTIME": "0"
+  },
+  "tools": {
+    "pyinstaller": "6.11.1",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.7.2",
+    "PyQt5": "5.15.9"
+  },
+  "real_model_downloads_allowed": false,
+  "real_api_requests_allowed": false,
+  "production_operations_allowed": false
+}

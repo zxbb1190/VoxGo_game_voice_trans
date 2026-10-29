@@ -1,0 +1,16 @@
+{
+  "version": "0.6.0",
+  "revision": "eager model preparation and API notice cleanup; Lite only",
+  "runtime_commit": "a23d72362b82ea47cb7d1e57df45afd2cf799d78",
+  "edition": "lite",
+  "built_at": "2026-10-29T11:28:09.586170+08:00",
+  "published": false,
+  "manual_acceptance": "pending",
+  "files": [
+    {
+      "file": "VoxGo-v0.6.0-lite.zip",
+      "bytes": 137007270,
+      "sha256": "48b60687b3a8f9749aaf0ed1d149b65cdc6912085c64a886eb08c574e5711add"
+    }
+  ]
+}

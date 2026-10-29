@@ -1,0 +1,148 @@
+122 INFO: PyInstaller: 6.11.1, contrib hooks: 2026.5
+122 INFO: Python: 3.10.20
+131 INFO: Platform: Windows-10-10.0.26300-SP0
+131 INFO: Python environment: E:\my\my\game_voice_translator\.venv-win
+133 INFO: Removing temporary files and cleaning cache in C:\Users\Administrator\AppData\Local\pyinstaller
+655 INFO: Module search paths (PYTHONPATH):
+['E:\\my\\my\\game_voice_translator',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\python310.zip',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\DLLs',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none\\lib',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\uv\\python\\cpython-3.10.20-windows-x86_64-none',
+ 'E:\\my\\my\\game_voice_translator\\.venv-win',
+ 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages',
+ 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\win32',
+ 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\win32\\lib',
+ 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\Pythonwin',
+ 'E:\\my\\my\\game_voice_translator',
+ 'E:\\my\\my\\game_voice_translator']
+976 INFO: Appending 'binaries' from .spec
+976 INFO: Appending 'datas' from .spec
+977 INFO: checking Analysis
+977 INFO: Building Analysis because Analysis-00.toc is non existent
+977 INFO: Running Analysis Analysis-00.toc
+977 INFO: Target bytecode optimization level: 0
+977 INFO: Initializing module dependency graph...
+979 INFO: Initializing module graph hook caches...
+989 INFO: Analyzing base_library.zip ...
+1531 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+1563 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2288 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+2849 INFO: Caching module dependency graph...
+2923 INFO: Looking for Python shared library...
+2928 INFO: Using Python shared library: C:\Users\Administrator\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\python310.dll
+2928 INFO: Analyzing E:\my\my\game_voice_translator\voxgo\app.py
+2977 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3047 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3347 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+3358 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+3360 INFO: SetuptoolsInfo: initializing cached setuptools info...
+5661 INFO: Processing standard module hook 'hook-numpy.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+5944 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+5995 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+6883 INFO: Processing standard module hook 'hook-webrtcvad.py' from 'E:\\my\\my\\game_voice_translator\\hooks'
+6884 WARNING: collect_dynamic_libs - skipping library collection for module 'webrtcvad' as it is not a package.
+6919 INFO: Processing standard module hook 'hook-pkg_resources.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+7154 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+7159 INFO: Processing standard module hook 'hook-packaging.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+7220 INFO: Processing pre-safe-import-module hook 'hook-platformdirs.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+7226 INFO: Processing standard module hook 'hook-platformdirs.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+7300 INFO: Processing standard module hook 'hook-av.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+7714 INFO: Processing pre-safe-import-module hook 'hook-tensorflow.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+7934 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+7977 INFO: Processing standard module hook 'hook-anyio.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+8692 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+9603 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+10383 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10384 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+10386 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+10392 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10392 INFO: Processing pre-find-module-path hook 'hook-distutils.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+10658 INFO: Processing standard module hook 'hook-distutils.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+10668 INFO: Processing standard module hook 'hook-distutils.util.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+10710 INFO: Processing pre-safe-import-module hook 'hook-jaraco.text.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10711 INFO: Setuptools: 'jaraco.text' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.text'!
+10715 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+10716 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10717 INFO: Processing pre-safe-import-module hook 'hook-jaraco.functools.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10718 INFO: Setuptools: 'jaraco.functools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.functools'!
+10721 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10722 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+10785 INFO: Processing pre-safe-import-module hook 'hook-jaraco.context.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10786 INFO: Setuptools: 'jaraco.context' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.context'!
+10890 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10891 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+11129 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11130 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+11196 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+11197 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+11198 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+11228 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+11733 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+12161 INFO: Processing standard module hook 'hook-sqlite3.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+12650 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+12730 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+13003 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+13067 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+13607 INFO: Processing standard module hook 'hook-jinja2.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+13831 INFO: Processing standard module hook 'hook-fsspec.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+14318 INFO: Processing standard module hook 'hook-onnxruntime.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+14728 INFO: Processing standard module hook 'hook-PyQt5.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+14811 INFO: Processing standard module hook 'hook-PyQt5.QtCore.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+14939 INFO: Processing standard module hook 'hook-PyQt5.QtWidgets.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+15034 INFO: Processing standard module hook 'hook-PyQt5.QtGui.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+15252 INFO: Processing standard module hook 'hook-uvicorn.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+15653 INFO: Processing standard module hook 'hook-websockets.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+16404 INFO: Analyzing hidden import 'uvicorn.lifespan.on'
+16406 INFO: Analyzing hidden import 'uvicorn.lifespan.off'
+16407 INFO: Analyzing hidden import 'uvicorn.protocols.websockets.auto'
+16408 INFO: Analyzing hidden import 'uvicorn.protocols.http.auto'
+16408 INFO: Analyzing hidden import 'uvicorn.loops.auto'
+16410 INFO: Analyzing hidden import 'setuptools._vendor.backports'
+16410 INFO: Analyzing hidden import 'setuptools._vendor.backports.tarfile'
+16443 INFO: Analyzing hidden import 'setuptools._vendor.backports.tarfile.__main__'
+16444 INFO: Processing module hooks (post-graph stage)...
+16769 WARNING: Hidden import "tzdata" not found!
+16893 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+17811 WARNING: Hidden import "sip" not found!
+18059 INFO: Performing binary vs. data reclassification (159 entries)
+18100 INFO: Looking for ctypes DLLs
+18139 INFO: Analyzing run-time hooks ...
+18145 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18146 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18147 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18148 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18149 INFO: Including run-time hook 'pyi_rth_pkgres.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18151 INFO: Including run-time hook 'pyi_rth_pyqt5.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+18151 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+18153 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyInstaller\\hooks'
+18181 INFO: Looking for dynamic libraries
+E:\my\my\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\building\build_main.py:226: UserWarning: The numpy.array_api submodule is still experimental. See NEP 47.
+  __import__(package)
+35798 INFO: Extra DLL search directories (AddDllDirectory): ['E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyQt5\\Qt5\\bin', 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\numpy\\.libs', 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\av.libs', 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\ctranslate2', 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\ctranslate2/../_rocm_sdk_core/bin', 'E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\torch\\lib']
+35798 INFO: Extra DLL search directories (PATH): ['E:\\my\\my\\game_voice_translator\\.venv-win\\lib\\site-packages\\PyQt5\\Qt5\\bin']
+37295 INFO: Warnings written to E:\my\my\game_voice_translator\build\lite-20261029-a23d7236\work\VoxGo\warn-VoxGo.txt
+37434 INFO: Graph cross-reference written to E:\my\my\game_voice_translator\build\lite-20261029-a23d7236\work\VoxGo\xref-VoxGo.html
+37477 INFO: checking PYZ
+37477 INFO: Building PYZ because PYZ-00.toc is non existent
+37477 INFO: Building PYZ (ZlibArchive) E:\my\my\game_voice_translator\build\lite-20261029-a23d7236\work\VoxGo\PYZ-00.pyz
+38916 INFO: Building PYZ (ZlibArchive) E:\my\my\game_voice_translator\build\lite-20261029-a23d7236\work\VoxGo\PYZ-00.pyz completed successfully.
+38947 INFO: checking PKG
+38947 INFO: Building PKG because PKG-00.toc is non existent
+38947 INFO: Building PKG (CArchive) VoxGo.pkg
+38975 INFO: Building PKG (CArchive) VoxGo.pkg completed successfully.
+38975 INFO: Bootloader E:\my\my\game_voice_translator\.venv-win\lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+38975 INFO: checking EXE
+38976 INFO: Building EXE because EXE-00.toc is non existent
+38976 INFO: Building EXE from EXE-00.toc
+38976 INFO: Copying bootloader EXE to E:\my\my\game_voice_translator\build\lite-20261029-a23d7236\work\VoxGo\VoxGo.exe
+39020 INFO: Copying icon to EXE
+39023 INFO: Copying 0 resources to EXE
+39023 INFO: Embedding manifest in EXE
+41935 INFO: Appending PKG archive to EXE
+42024 INFO: Fixing EXE headers
+46819 INFO: Building EXE from EXE-00.toc completed successfully.
+46821 INFO: checking COLLECT
+46822 INFO: Building COLLECT because COLLECT-00.toc is non existent
+46822 INFO: Building COLLECT COLLECT-00.toc
+50017 INFO: Building COLLECT COLLECT-00.toc completed successfully.

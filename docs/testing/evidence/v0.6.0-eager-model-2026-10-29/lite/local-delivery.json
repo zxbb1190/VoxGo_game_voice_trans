@@ -1,0 +1,12 @@
+{
+  "target": "E:\\my\\my\\game_voice_translator\\release\\v0.6.0\\VoxGo-v0.6.0-lite.zip",
+  "runtime_commit": "a23d72362b82ea47cb7d1e57df45afd2cf799d78",
+  "bytes": 137007270,
+  "sha256": "48b60687b3a8f9749aaf0ed1d149b65cdc6912085c64a886eb08c574e5711add",
+  "source_settings_unchanged": true,
+  "frozen_cases_passed": 6,
+  "real_api_requests": 0,
+  "real_model_downloads": 0,
+  "old_package_backup": "E:\\my\\my\\game_voice_translator\\build\\lite-20261029-a23d7236\\previous-release",
+  "production_operations": false
+}
