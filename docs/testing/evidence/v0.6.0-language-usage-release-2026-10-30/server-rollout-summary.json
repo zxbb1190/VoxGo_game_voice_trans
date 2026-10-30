@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-30",
+  "migrations_applied": [
+    "0006_classified_diagnostics.sql",
+    "0007_language_usage.sql"
+  ],
+  "backup": {
+    "local_sql_bytes": 2224386,
+    "sha256": "5472de1d840a267de8fcc23019b0324440d2233cd93e6ba49944b78d6a3a32ee",
+    "private_bookmark_saved": true
+  },
+  "legacy_aggregates_before": {
+    "full_rows": 1056,
+    "translation_success": 251125,
+    "translation_failed": 8219
+  },
+  "legacy_aggregates_after_migration": {
+    "full_rows": 1056,
+    "translation_success": 251125,
+    "translation_failed": 8219
+  },
+  "legacy_aggregates_unchanged": true,
+  "classified_reporters_immediately_after_migration": 0,
+  "language_reporters_immediately_after_migration": 0,
+  "language_rows_immediately_after_migration": 0,
+  "disabled_worker_version": "1026a3e0-57d3-4046-bf65-66998cd552e2",
+  "active_worker_version": "21f2727f-373d-4911-a646-972d7f742bc6",
+  "runtime_commit": "fa84f50ffef011e61ebf80808d155d92fb282b3a",
+  "disabled_smoke": {
+    "phase": "capability_disabled",
+    "health": "ok",
+    "database": "ready",
+    "ordinary_config": {
+      "schema_version": 1,
+      "telemetry_enabled": true,
+      "basic_telemetry_enabled": true,
+      "telemetry_sample_rate": 1,
+      "sync_interval_seconds": 900
+    },
+    "ordinary_field_count": 5,
+    "optin_advertises_language": false,
+    "invalid_legacy_payload_status": 400,
+    "unauthenticated_admin_status": 401
+  },
+  "enabled_smoke": {
+    "phase": "capability_enabled",
+    "runtime_commit": "fa84f50ffef011e61ebf80808d155d92fb282b3a",
+    "health": "ok",
+    "database": "ready",
+    "ordinary_config": {
+      "schema_version": 1,
+      "telemetry_enabled": true,
+      "basic_telemetry_enabled": true,
+      "telemetry_sample_rate": 1,
+      "sync_interval_seconds": 900
+    },
+    "ordinary_field_count": 5,
+    "language_usage_schema": 1,
+    "invalid_schema3_payload_status": 400,
+    "unauthenticated_admin_status": 401,
+    "synthetic_telemetry_rows_inserted": 0
+  },
+  "authenticated_dashboard_checked": false,
+  "valid_production_snapshot_posted": false,
+  "new_client_end_to_end_reporting": "pending user local test",
+  "synthetic_rows_inserted": 0
+}

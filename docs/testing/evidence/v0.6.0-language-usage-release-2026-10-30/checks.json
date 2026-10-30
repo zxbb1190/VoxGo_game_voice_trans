@@ -1,0 +1,16 @@
+{
+  "client_tests": 732,
+  "api_tests": 79,
+  "targeted_tests": 20,
+  "independent_privacy_tests": 11,
+  "enzh_cases": 48,
+  "frozen_sources": 5,
+  "frozen_project_modules": 80,
+  "source_commit": "4e959416f9c098dafee31f747378a0c7804a30ff",
+  "real_translation_requests": 0,
+  "production_fake_telemetry_rows": 0,
+  "single_full_switch": true,
+  "new_install_default_checked": true,
+  "historical_denied_unknown_preserved": true,
+  "native_gui_and_real_reporting": "pending user manual acceptance"
+}

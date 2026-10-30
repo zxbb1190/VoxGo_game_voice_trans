@@ -8,7 +8,7 @@
 
 | 项目 | 同步内容 / 放行条件 |
 |---|---|
-| 客户端版本 | `voxgo/app_info.py`、`installer/VoxGo.iss`、`scripts/build_portable.ps1`、发布工作流默认版本已为0.6.0；本轮UI改动需要纳入下一次构建，已有Lite ZIP未自动重打 |
+| 客户端版本 | `voxgo/app_info.py`、`installer/VoxGo.iss`、`scripts/build_portable.ps1`、发布工作流默认版本已为0.6.0；2026-10-30本地Lite重建已包含多语言展示、单隐私开关和语言计数，尚未公开发布；见[交付记录](testing/v0.6.0-language-usage-release-2026-10-30.md) |
 | GitHub Release | 正式授权后创建实际 `v0.6.0` Release；双语正文来自 `docs/releases/v0.6.0.md`，发布时去掉待发布状态，保留Beta与离线边界 |
 | 官网首页（中/英） | 核对五语言文案、语言表、FAQ、description/OG；去掉临时的“当前公开下载v0.5.2 / v0.6.0待发布”说明，替换下载版本文字 |
 | GitHub下载 | 仅链接真实存在、已校验的 `releases/download/v0.6.0/` 附件；不能只把全部旧URL字符串替换成0.6.0 |
@@ -17,7 +17,7 @@
 | 更新元数据 | `docs/update.json` 的 `latest/channel/title`、`release_url`、`notes/notes_zh/notes_en`、各实际附件URL和SHA256须一致；旧Full客户端按edition选择更新，缺失变体不能用0.5.2 ZIP冒充0.6.0。先确认缺失变体的更新行为，再放行清单 |
 | README | 中英文同步；去掉顶部“当前公开0.5.2、0.6.0待发布”过渡说明。保留Beta、隐私、安装/模型下载、升级、徽章和社区链接 |
 | 静态更新日志与SEO | 实际Release存在后再运行下方生成流程；生成 `docs/changelog/v0.6.0/`、首页Latest摘要和sitemap。发布前只有Markdown草稿，不伪造正式版本页或发布日期 |
-| Full遥测兼容 | 不改63字段协议。带分类快照的客户端对生产放行前仍需另行验收0006迁移、兼容Worker和新旧协议/授权/累计幂等；本轮不连接或改变生产 |
+| Full遥测兼容 | 原63指标口径不变，语言计数增加协商后的schema3扩展，统一原详细统计开关。2026-10-30已授权完成生产0006/0007迁移及兼容Worker启用，新旧契约/幂等本地验证通过；真实本地客户端上报ACK/入库及登录后Dashboard仍待手测。Full指统计类别，Lite也受同一规则控制 |
 
 验证真实下载、SHA256、更新清单和中英文网站后，再声明上线完成。此清单不是 push、tag、迁移或部署授权。
 

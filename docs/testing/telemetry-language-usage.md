@@ -1,6 +1,10 @@
 # 语言使用统计 / Language usage telemetry
 
-Local implementation acceptance, 2026-10-29. Not deployed or packaged by this task.
+Initial implementation accepted on2026-10-29; current activation/package status is below.
+
+Update2026-10-30: the user authorized production compatibility rollout and a new local Lite;
+both completed. See [current release/test handoff](v0.6.0-language-usage-release-2026-10-30.md).
+The earlier separate category opt-in was superseded by the original Full switch.
 
 ## 范围与口径 / Counting contract
 

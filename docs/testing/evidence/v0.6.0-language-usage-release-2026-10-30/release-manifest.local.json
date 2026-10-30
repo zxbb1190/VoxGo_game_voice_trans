@@ -1,0 +1,25 @@
+{
+  "version": "0.6.0",
+  "revision": "language usage follows original Full privacy switch; telemetry server compatible and active; Lite only",
+  "runtime_commit": "4e959416f9c098dafee31f747378a0c7804a30ff",
+  "edition": "lite",
+  "built_at": "2026-10-30T09:17:12.502365+08:00",
+  "published": false,
+  "manual_acceptance": "pending user local telemetry test",
+  "telemetry_server_commit": "fa84f50ffef011e61ebf80808d155d92fb282b3a",
+  "language_usage_schema": 1,
+  "files": [
+    {
+      "file": "VoxGo-v0.6.0-lite.zip",
+      "bytes": 137014693,
+      "sha256": "b0ebccacdda4e6422b86132b12e5bea628cb2382b2f8f4efb97159f6cda26894"
+    }
+  ],
+  "checks": {
+    "frozen_project_modules": 80,
+    "five_source_local_direction_cases": 5,
+    "real_translation_api_requests": 0,
+    "models_bundled": false,
+    "synthetic_production_telemetry_rows": 0
+  }
+}
