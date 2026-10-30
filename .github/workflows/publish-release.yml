@@ -49,6 +49,7 @@ jobs:
           python -m venv .venv-win
           .\.venv-win\Scripts\python.exe -m pip install --upgrade pip
           .\.venv-win\Scripts\python.exe -m pip install -r requirements.txt
+          .\.venv-win\Scripts\python.exe -m pip install -r requirements-test.txt
           .\.venv-win\Scripts\python.exe -m pip install pyinstaller==6.11.1
 
       - name: Validate Python sources

@@ -1,0 +1,2 @@
+# Offline evaluation-tool tests only; excluded from application dependencies.
+soundfile==0.13.1
