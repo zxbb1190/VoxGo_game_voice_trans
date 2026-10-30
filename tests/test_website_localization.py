@@ -79,18 +79,22 @@ class WebsiteLocalizationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = self.make_root(tmp)
             path = root / 'docs/en/index.html'
-            source = path.read_text('utf-8').replace(
-                'github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.5.2/VoxGo-v0.5.2',
-                'github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0')
+            source = re.sub(
+                r'(github\.com/zxbb1190/VoxGo_game_voice_trans/releases/download/)v\d+\.\d+\.\d+/VoxGo-v\d+\.\d+\.\d+',
+                r'\g<1>v0.6.1/VoxGo-v0.6.1', path.read_text('utf-8'))
+            source = re.sub(
+                r'(gitcode\.com/zxbb1190/VoxGo/releases/download/)v\d+\.\d+\.\d+/VoxGo-v\d+\.\d+\.\d+',
+                r'\g<1>v0.5.2/VoxGo-v0.5.2', source)
+            source = re.sub(r'(China mirror \(Lite v)\d+\.\d+\.\d+', r'\g<1>0.5.2', source)
             path.write_text(source, encoding='utf-8')
             website.build(root)
             messages = website.load_messages()
             for locale in website.GENERATED:
                 localized = (root / f'docs/{locale}/index.html').read_text('utf-8')
-                self.assertIn('github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/', localized)
+                self.assertIn('github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.1/', localized)
                 self.assertIn('gitcode.com/zxbb1190/VoxGo/releases/download/v0.5.2/', localized)
                 self.assertIn(website.translate('China mirror (Lite v0.5.2)', locale, messages), localized)
-                self.assertNotIn('gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/', localized)
+                self.assertNotIn('gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.1/', localized)
 
     def test_dynamic_version_and_release_date_are_not_hardcoded(self):
         messages = website.load_messages()

@@ -70,51 +70,8 @@ jobs:
       - name: Write release notes
         shell: pwsh
         run: |
-          $lite = "release\VoxGo-v$env:APP_VERSION-lite.zip"
-          $full = "release\VoxGo-v$env:APP_VERSION-full.zip"
-          $fullCuda = "release\VoxGo-v$env:APP_VERSION-full-cuda.zip"
-          $cudaRuntime = "release\VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
-          $liteHash = (Get-FileHash $lite -Algorithm SHA256).Hash.ToLowerInvariant()
-          $fullHash = (Get-FileHash $full -Algorithm SHA256).Hash.ToLowerInvariant()
-          $fullCudaHash = (Get-FileHash $fullCuda -Algorithm SHA256).Hash.ToLowerInvariant()
-          $cudaRuntimeHash = (Get-FileHash $cudaRuntime -Algorithm SHA256).Hash.ToLowerInvariant()
-          $liteSize = [math]::Round((Get-Item $lite).Length / 1MB, 1)
-          $fullSize = [math]::Round((Get-Item $full).Length / 1MB, 1)
-          $fullCudaSize = [math]::Round((Get-Item $fullCuda).Length / 1MB, 1)
-          $cudaRuntimeSize = [math]::Round((Get-Item $cudaRuntime).Length / 1MB, 1)
-          @"
-          ## VoxGo $env:APP_VERSION
-
-          ### 更新内容
-
-          - 新增中、英、日、韩、俄五语20方向在线翻译，保留英中离线 OPUS。
-          - 软件界面支持五语，中文识别原文显示简体；日/韩兼容、俄语极速采用内部完整性策略，不设用户开关。
-          - 切换方向取消并隔离旧任务，截断译文不显示或复制；保留原有英中策略。
-          - Full 匿名诊断新增 ASR 模式及 API 失败原因/服务商分类，不上报音频、字幕或 API Key。
-
-          ### What's new
-
-          - Added 20 online translation directions across Chinese, English, Japanese, Korean and Russian; retained offline English-Chinese OPUS.
-          - Added five interface languages and Simplified Chinese source display; JA/KO use compatibility and RU Fast uses an internal completeness policy, without a user switch.
-          - Language changes cancel and isolate stale tasks; truncated translations are neither displayed nor copied. Existing English-Chinese behavior is preserved.
-          - Full anonymous diagnostics classify ASR modes and API failure reasons/providers without uploading audio, captions or API keys.
-
-          ### Downloads
-
-          - ``VoxGo-v$env:APP_VERSION-lite.zip``: $liteSize MB
-            - SHA256: ``$liteHash``
-          - ``VoxGo-v$env:APP_VERSION-full.zip``: $fullSize MB
-            - SHA256: ``$fullHash``
-          - ``VoxGo-v$env:APP_VERSION-full-cuda.zip``: $fullCudaSize MB
-            - SHA256: ``$fullCudaHash``
-          - ``VoxGo-v$env:APP_VERSION-cuda-runtime.zip``: $cudaRuntimeSize MB
-            - SHA256: ``$cudaRuntimeHash``
-          "@ | Set-Content -Encoding UTF8 release-notes.md
-
-          "LITE_SHA256=$liteHash" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "FULL_SHA256=$fullHash" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "FULL_CUDA_SHA256=$fullCudaHash" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "CUDA_RUNTIME_SHA256=$cudaRuntimeHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+          .\.venv-win\Scripts\python.exe scripts/release_metadata.py notes --version "$env:APP_VERSION" --packages release --output release-notes.md --github-env "$env:GITHUB_ENV"
+          if ($LASTEXITCODE -ne 0) { throw "Release notes or artifact hashing failed" }
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -159,60 +116,15 @@ jobs:
           git checkout -B main origin/main
 
           $manifestPath = "docs\update.json"
-          $manifest = Get-Content $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-          $manifest.latest = $env:APP_VERSION
-          $manifest.channel = "stable"
-          $manifest.title = "VoxGo v$env:APP_VERSION"
-          $notesEn = @(
-            "Added 20 online translation directions across Chinese, English, Japanese, Korean and Russian; retained offline English-Chinese OPUS.",
-            "Added five interface languages and Simplified Chinese source display; JA/KO use compatibility and RU Fast uses an internal completeness policy, without a user switch.",
-            "Language changes cancel and isolate stale tasks; truncated translations are neither displayed nor copied. Existing English-Chinese behavior is preserved.",
-            "Full anonymous diagnostics classify ASR modes and API failure reasons/providers without uploading audio, captions or API keys."
-          )
-          $notesZh = @(
-            "新增中、英、日、韩、俄五语20方向在线翻译，保留英中离线 OPUS。",
-            "软件界面支持五语，中文识别原文显示简体；日/韩兼容、俄语极速采用内部完整性策略，不设用户开关。",
-            "切换方向取消并隔离旧任务，截断译文不显示或复制；保留原有英中策略。",
-            "Full 匿名诊断新增 ASR 模式及 API 失败原因/服务商分类，不上报音频、字幕或 API Key。"
-          )
-          $manifest.notes = $notesEn
-          $manifest | Add-Member -NotePropertyName notes_en -NotePropertyValue $notesEn -Force
-          $manifest | Add-Member -NotePropertyName notes_zh -NotePropertyValue $notesZh -Force
-          $manifest.release_url = "https://github.com/${{ github.repository }}/releases/tag/$env:TAG_NAME"
-          $manifest.download_lite_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
-          $manifest.download_full_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full.zip"
-          $manifest.download_full_cuda_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-full-cuda.zip"
-          $manifest.cuda_runtime_url = "https://github.com/${{ github.repository }}/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-cuda-runtime.zip"
-          $manifest.sha256_lite = $env:LITE_SHA256
-          $manifest.sha256_full = $env:FULL_SHA256
-          $manifest.sha256_full_cuda = $env:FULL_CUDA_SHA256
-          $manifest.sha256_cuda_runtime = $env:CUDA_RUNTIME_SHA256
-          $manifest.mandatory = $false
-          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $manifestPath
-
-          # Advance the China mirror only when the matching ZIP is available.
-          $mirrorUrl = "https://gitcode.com/zxbb1190/VoxGo/releases/download/$env:TAG_NAME/VoxGo-v$env:APP_VERSION-lite.zip"
-          $mirrorReady = $env:GITCODE_MIRROR_VERIFIED -eq 'true'
-          if (-not $mirrorReady) { Write-Warning "China mirror not verified; retaining its previous version." }
-          # Protect old mirror links from the general website version replacement.
-          foreach ($pagePath in @("docs/index.html", "docs/en/index.html")) {
-            $page = Get-Content $pagePath -Raw -Encoding UTF8
-            $mirrorMatches = [regex]::Matches($page, 'https://gitcode\.com/[^"<> ]+').Value | Select-Object -Unique
-            foreach ($oldMirror in $mirrorMatches) { $page = $page.Replace($oldMirror, '__VOXGO_CHINA_MIRROR__') }
-            $page = $page -replace 'VoxGo-v\d+\.\d+\.\d+', "VoxGo-v$env:APP_VERSION"
-            $page = $page -replace 'releases/download/v\d+\.\d+\.\d+', "releases/download/$env:TAG_NAME"
-            $page = $page -replace 'VoxGo v\d+\.\d+\.\d+', "VoxGo v$env:APP_VERSION"
-            if ($mirrorReady) {
-              $page = $page.Replace('__VOXGO_CHINA_MIRROR__', $mirrorUrl)
-              $mirrorVersion = $env:APP_VERSION
-            } elseif ($mirrorMatches) {
-              $page = $page.Replace('__VOXGO_CHINA_MIRROR__', [string]@($mirrorMatches)[0])
-              $mirrorVersion = [regex]::Match([string]@($mirrorMatches)[0], '/download/v(\d+\.\d+\.\d+)/').Groups[1].Value
-            }
-            $page = $page -replace '国内镜像下载（Lite[^）]*）', "国内镜像下载（Lite v$mirrorVersion）"
-            $page = $page -replace 'China mirror \(Lite[^)]*\)', "China mirror (Lite v$mirrorVersion)"
-            [System.IO.File]::WriteAllText((Join-Path $pwd $pagePath), $page, (New-Object System.Text.UTF8Encoding($false)))
-          }
+          $syncArgs = @("site", "--version", $env:APP_VERSION)
+          if ($env:GITCODE_MIRROR_VERIFIED -eq 'true') { $syncArgs += "--mirror-verified" }
+          .\.venv-win\Scripts\python.exe scripts/release_metadata.py @syncArgs
+          if ($LASTEXITCODE -ne 0) { throw "Published release metadata validation failed" }
+          # Render only the new release and previously generated bilingual history.
+          $historyTags = @(Get-ChildItem docs/changelog -Directory | Where-Object { $_.Name -match '^v\d+\.\d+\.\d+$' } | ForEach-Object { $_.Name })
+          $releaseTags = @(@($env:TAG_NAME) + $historyTags | Select-Object -Unique)
+          python scripts/build_website_changelog.py --tags @releaseTags
+          if ($LASTEXITCODE -ne 0) { throw "Published changelog generation failed" }
           # Generate JA/KO/RU from the updated EN page, preserving mirror version
           # labels and requiring complete translations before publishing the site.
           $websiteDate = Get-Date -Format "yyyy-MM-dd"
@@ -220,7 +132,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Localized website generation failed" }
           python scripts/build_localized_website.py --check
           if ($LASTEXITCODE -ne 0) { throw "Localized website verification failed" }
-          git add $manifestPath docs/index.html docs/en/index.html docs/ja/index.html docs/ko/index.html docs/ru/index.html docs/sitemap.xml
+          git add $manifestPath docs/index.html docs/en/index.html docs/ja/index.html docs/ko/index.html docs/ru/index.html docs/sitemap.xml docs/changelog README.md README_EN.md docs/releases
           git diff --cached --quiet
           if ($LASTEXITCODE -eq 0) {
             Write-Host "Release manifest already up to date."
