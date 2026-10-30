@@ -1,0 +1,28 @@
+{
+  "client_ui_tests": 18,
+  "api_tests": 87,
+  "independent_tests": 41,
+  "local_workerd_read_batch": 6,
+  "browser": {
+    "fixture": "synthetic, no production session",
+    "desktop": 1440,
+    "mobile": 390,
+    "document_width": 390,
+    "today_tasks": 11,
+    "complete_tasks": 16,
+    "today_cache_tasks": 2,
+    "duplicate_ids": 0,
+    "console_errors": 0,
+    "no_report_state": "passed",
+    "independent_selectors": "passed"
+  },
+  "unchanged_complete_day_semantics": true,
+  "racy_coverage_regression": "closed; parent and children read in one batch",
+  "api_runtime_commit": "47ad5d8d29fb5969fa05f7b5d1462e787bd2dd02",
+  "worker_version": "66ccb44e-1fcd-455c-a72f-d3b5c82868ac",
+  "client_runtime_commit": "f75fc910898df9333d0f27703fe99cfa153134f9",
+  "d1_migrations": 0,
+  "production_fake_rows": 0,
+  "real_translation_api_requests": 0,
+  "raw_ui_log_sha256": "14302f8d5f4b63968d79aecb87a16625b091588261309664ffc38f5caa3034b8"
+}

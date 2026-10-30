@@ -1,0 +1,31 @@
+{
+  "version": "0.6.0",
+  "revision": "concise privacy tooltip; only the final language-count sentence removed",
+  "runtime_commit": "f75fc910898df9333d0f27703fe99cfa153134f9",
+  "edition": "lite",
+  "built_at": "2026-10-30T10:16:34.315976+08:00",
+  "published": false,
+  "manual_acceptance": "updated tooltip pending user confirmation",
+  "telemetry_server_commit": "47ad5d8d29fb5969fa05f7b5d1462e787bd2dd02",
+  "today_classifications_live": true,
+  "files": [
+    {
+      "file": "VoxGo-v0.6.0-lite.zip",
+      "bytes": 137014604,
+      "sha256": "6cd5ccbb09ca22edb188a8d9c7bd1aa2d12e470aca9028d34bda665d2ddca560"
+    }
+  ],
+  "checks": {
+    "client_ui_tests": 18,
+    "api_tests": 87,
+    "frozen_project_modules": 80,
+    "changed_modules": [
+      "voxgo.analytics.consent",
+      "voxgo.i18n_messages"
+    ],
+    "remaining_modules_unchanged": true,
+    "update_extraction": true,
+    "frozen_help_exit": 0,
+    "real_translation_api_requests": 0
+  }
+}

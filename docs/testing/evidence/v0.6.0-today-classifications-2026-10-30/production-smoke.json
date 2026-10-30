@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-30",
+  "api_runtime_commit": "47ad5d8d29fb5969fa05f7b5d1462e787bd2dd02",
+  "health": "ok",
+  "database": "ready",
+  "ordinary_config_fields": 5,
+  "telemetry_enabled": true,
+  "language_usage_schema": 1,
+  "unauthenticated_admin_status": 401,
+  "d1_migrations_performed": 0,
+  "telemetry_payload_changed": false,
+  "synthetic_production_telemetry_rows": 0,
+  "authenticated_dashboard_session": "not accessed; user refresh pending"
+}

@@ -1,0 +1,8 @@
+{
+  "modules": 80,
+  "changes": [
+    "voxgo.analytics.consent",
+    "voxgo.i18n_messages"
+  ],
+  "only_privacy_copy_changed": true
+}

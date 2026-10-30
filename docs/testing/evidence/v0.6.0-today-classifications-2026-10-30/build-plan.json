@@ -1,0 +1,27 @@
+{
+  "version": "0.6.0",
+  "edition": "lite",
+  "source_root": "E:\\my\\my\\game_voice_translator",
+  "source_commit": "f75fc910898df9333d0f27703fe99cfa153134f9",
+  "source_clean": true,
+  "stage": "E:\\my\\my\\game_voice_translator\\build\\lite-20261030-f75fc910",
+  "archive_name": "VoxGo-v0.6.0-lite.zip",
+  "created_at": "2026-10-30T10:06:39.174694+08:00",
+  "build_environment": {
+    "INCLUDE_MODEL": "0",
+    "INCLUDE_CUDA_RUNTIME": "0",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "tools": {
+    "pyinstaller": "6.11.1",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.7.2",
+    "PyQt5": "5.15.9"
+  },
+  "real_model_downloads_allowed": false,
+  "real_translation_api_requests_allowed": false,
+  "scope": "privacy tooltip copy only; telemetry contract unchanged",
+  "source_clean_definition": "tracked source matched runtime_commit; untracked task screenshots excluded"
+}

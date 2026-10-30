@@ -5,6 +5,8 @@ Initial implementation accepted on2026-10-29; current activation/package status 
 Update2026-10-30: the user authorized production compatibility rollout and a new local Lite;
 both completed. See [current release/test handoff](v0.6.0-language-usage-release-2026-10-30.md).
 The earlier separate category opt-in was superseded by the original Full switch.
+Later the same day, [independent partial-today classification views](v0.6.0-today-classifications-2026-10-30.md)
+were deployed beside the unchanged complete-day views; the short privacy tooltip was trimmed.
 
 ## 范围与口径 / Counting contract
 
