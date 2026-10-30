@@ -10,11 +10,9 @@ def telemetry_summary(english=False, confirmation=False):
     if english:
         return ('Basic statistics are always enabled to count daily active installations, using a daily identifier that is not linked across days. '
                 'Optional Full statistics help improve usage and stability; you can turn Full off at any time. '
-                'Neither includes audio, recognized text or translations.\n'
-                'Full statistics include language-direction counts and use the same switch.')
+                'Neither includes audio, recognized text or translations.')
     return ('基础统计始终启用，用于统计每日活跃安装数，使用不跨日关联的每日标识。'
-            '可选的详细使用与稳定性统计帮助改进体验，你可以随时关闭。均不包含语音、识别或翻译内容。\n'
-            '详细统计包含语言方向计数，统一使用此开关。')
+            '可选的详细使用与稳定性统计帮助改进体验，你可以随时关闭。均不包含语音、识别或翻译内容。')
 
 
 def normalize_consent(value):

@@ -4,12 +4,6 @@ Runtime values and external content are not translated. No network required.
 """
 
 MESSAGES = {
-    "Full statistics include language-direction counts and use the same switch.": [
-        "详细统计包含语言方向计数，统一使用此开关。",
-        "詳細統計には言語方向別の件数も含まれ、同じスイッチで切り替えます。",
-        "상세 통계에는 언어 방향별 횟수가 포함되며 같은 스위치로 제어합니다.",
-        "Подробная статистика включает счётчики языковых направлений и управляется тем же переключателем."
-    ],
     "Language usage contains only source/target language codes, mode and success/failure counts. It follows the same Full statistics switch, with no separate opt-in.": [
         "语言使用统计仅包含源/目标语言代码、模式及成功失败计数，跟随同一个详细统计开关，无需单独启用。",
         "言語使用統計は入力・出力言語コード、モード、成功・失敗件数のみです。詳細統計と同じスイッチに従い、別途の有効化は不要です。",
