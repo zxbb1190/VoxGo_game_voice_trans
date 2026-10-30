@@ -9,9 +9,9 @@ VoxGo is an open-source real-time voice translation overlay for PC gamers, desig
 Website: <https://voxgo.cn/><br>
 GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
-## Language Support — v0.6.0 (unreleased)
+## Language Support — v0.6.0
 
-This describes the v0.6.0 candidate, not the public v0.5.2 download. See the [draft release notes](docs/releases/v0.6.0.md); use [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for published packages.
+VoxGo v0.6.0 supports the languages and directions below. See the [release notes](docs/releases/v0.6.0.md) and [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for packages.
 
 | Language | Local Whisper recognition | Online translation | Local OPUS translation |
 |---|---|---|---|
@@ -32,8 +32,8 @@ Report reproducible issues through [GitHub Issues](https://github.com/zxbb1190/V
 - **API Key test**: The wizard and settings dialog can make one real translation request to verify the Key, model, and endpoint.
 - **Audio device test**: Opens the selected device and shows a live level bar so players can confirm game/Discord/video audio is detected.
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
-- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, with Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta) recognition in the v0.6.0 candidate.
-- **Multilingual translation**: The v0.6.0 candidate routes 20 online directions; local OPUS stays English ↔ Chinese only. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
+- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, with Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta) recognition in v0.6.0.
+- **Multilingual translation**: The v0.6.0 routes 20 online directions; local OPUS stays English ↔ Chinese only. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
 - **Multiple translation providers**: Supports OpenAI-compatible Chat Completions APIs and Google Cloud Translation Basic v2.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
@@ -237,7 +237,7 @@ Choose the fixed recognition and translation direction directly in the overlay t
 - The left dropdown is the recognition language.
 - The right dropdown is the translation target language.
 - The middle button swaps the direction.
-- The v0.6.0 candidate supports 20 online directions across five languages; source and target must differ. Japanese, Korean and Russian are Beta.
+- The v0.6.0 supports 20 online directions across five languages; source and target must differ. Japanese, Korean and Russian are Beta.
 - Mixed Chinese/English terms are preserved where possible, but the recognition and translation direction follows the selected dropdowns.
 - Offline translation remains English ↔ Chinese only. Choose and configure an online provider explicitly for the other 18 directions; unavailable routes show a notice.
 

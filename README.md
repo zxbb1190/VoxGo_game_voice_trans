@@ -9,9 +9,9 @@ VoxGo 是一个面向 PC 游戏玩家的开源实时语音翻译浮窗工具，�
 官网：<https://voxgo.cn/><br>
 GitHub：<https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
-## 多语言支持 — v0.6.0（待发布）
+## 多语言支持 — v0.6.0
 
-以下说明针对 v0.6.0 候选，当前公开下载仍为 v0.5.2。参见[待发布更新日志](docs/releases/v0.6.0.md)；已发布安装包以 [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) 为准。
+VoxGo v0.6.0 支持下列语言与翻译方向。参见[更新日志](docs/releases/v0.6.0.md)；安装包见 [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest)。
 
 | 语言 | 本地 Whisper 识别 | 在线翻译 | 本地 OPUS 翻译 |
 |---|---|---|---|
@@ -32,8 +32,8 @@ GitHub：<https://github.com/zxbb1190/VoxGo_game_voice_trans>
 - **API Key 测试**: 在向导和设置窗口里真实调用一次翻译接口，确认 Key、模型名和地址可用
 - **音频设备测试**: 真实打开当前设备并显示音量条，先确认能检测到游戏/Discord/视频声音
 - **实时音频捕获**: 使用 WASAPI Loopback 捕获系统音频输出（不是麦克风）
-- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，v0.6.0 候选支持中文（普通话）、英语及日语/韩语/俄语（Beta）识别
-- **多语言翻译**: v0.6.0 候选支持20个在线方向，本地 OPUS 仍仅支持英语 ↔ 中文，在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
+- **本地语音识别**: 基于 faster-whisper 的离线语音转文字，v0.6.0支持中文（普通话）、英语及日语/韩语/俄语（Beta）识别
+- **多语言翻译**: v0.6.0支持20个在线方向，本地 OPUS 仍仅支持英语 ↔ 中文，在浮窗标题栏选择识别语言和翻译目标语言，并可一键交换方向
 - **兼容多种翻译服务**: 支持 OpenAI 兼容 Chat Completions API，也支持 Google Cloud Translation Basic v2
 - **游戏浮窗**: 透明置顶窗口，在游戏内显示翻译结果
 - **可见状态提示**: 启动状态、音频设备、暂停/恢复、翻译 API 错误码等会直接显示在浮窗里
@@ -243,9 +243,8 @@ python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
 - 左侧下拉框是识别语言
 - 右侧下拉框是翻译目标语言
 - 中间按钮可以一键交换方向
-- 当前公开版 v0.5.2 支持英语 → 中文、中文 → 英语；本分支 v0.6.0 待发布能力见下条
 - 中英文混杂内容会按主要语言判断，并尽量保留游戏术语、缩写、人名和地名
-- v0.6.0 候选开放五语言20个在线方向，源语言与目标语言不能相同；日语、韩语、俄语标为 Beta。离线仅支持英中，其他18方向需明确选择并配置在线服务，不可用的方向会提示。
+- v0.6.0开放五语言20个在线方向，源语言与目标语言不能相同；日语、韩语、俄语标为 Beta。离线仅支持英中，其他18方向需明确选择并配置在线服务，不可用的方向会提示。
 
 ### 状态与错误提示
 除了正常翻译结果，浮窗也会显示必要的用户提示，例如：
