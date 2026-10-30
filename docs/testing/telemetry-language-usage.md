@@ -48,20 +48,19 @@ from the parent to its child rows.
 
 ## 授权与协商 / Authorization and negotiation
 
-Existing Full consent version **3** and all 63 metrics retain their authorization behavior.
-The new category uses local-only `telemetry_language_usage_consent_version=1`:
+As of2026-10-30, language counts follow the **original Full privacy switch**, with no separate
+button, category grant or stored consent marker. Existing allowed/version3 grants include
+language counts without another click. New-install setup keeps its original checked default,
+and Full starts only after setup completes. Existing denied/unknown choices are preserved.
 
-- Existing Full grants default to 0 and retain their original scope. Privacy provides an
-  explicit **Enable language usage statistics** button; ordinary saves do not opt in.
-- New Full opt-ins include the category after the updated notice. New setup must complete
-  before Full starts. Denied/unknown/invalid old consent remains fail-closed.
-- Remote admission checks before queueing; the writer checks again when consuming. A later
-  grant cannot classify queued pre-grant events. Revocation stops queued collection.
-- Full off clears this category. Full re-enable uses the original new-epoch rule without
-  disabled-period backfill. Enabling the category alone preserves the coarse epoch.
+- The updated five-locale privacy notice includes fixed language codes/mode/outcome counts.
+- Remote admission and the background writer both check Full permission; revocation stops
+  queued collection. An obsolete per-language marker in older settings is ignored.
+- Full off stops all Full dimensions. Re-enable uses the existing new-epoch rule without
+  disabled-period backfill. Ordinary saves cannot restore a revoked grant from another process.
 - Local-only statistics remain separate from the consent-authorized remote buffer.
 
-Only opted-in clients request `GET /v1/config?language_usage=1`. Schema3 requires the exact
+Only Full-authorized clients request `GET /v1/config?language_usage=1`. Schema3 requires the exact
 integer capability `language_usage_schema:1`. Ordinary config retains its original five fields.
 Old Worker, disabled flag, missing migration or invalid capability yields the original
 schema2/63-field payload. Consent is checked again before a schema3 POST.
@@ -105,7 +104,7 @@ No production operation is authorized or executed here. Future release must:
 3. After 0007 is verified, explicitly enable `LANGUAGE_USAGE_TELEMETRY_ENABLED=true` and
    check opt-in capability, controlled exact ACK, duplicate/reversed idempotency and coverage.
 4. Separately build/test/distribute the updated client. This source change does not replace
-   the already-built v0.6.0 Lite ZIP. Existing users must explicitly enable the new category.
+   the already-built v0.6.0 Lite ZIP. One Full switch controls both old and new numeric dimensions.
 
 Rollback: disable the language flag first so new clients use the original 63 fields. Keep 0007
 and cumulative state. A compatible Worker can remain deployed with the flag off; client

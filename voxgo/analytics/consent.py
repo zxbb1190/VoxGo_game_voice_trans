@@ -11,10 +11,10 @@ def telemetry_summary(english=False, confirmation=False):
         return ('Basic statistics are always enabled to count daily active installations, using a daily identifier that is not linked across days. '
                 'Optional Full statistics help improve usage and stability; you can turn Full off at any time. '
                 'Neither includes audio, recognized text or translations.\n'
-                'New Full opt-ins include language-direction counts; existing Full users enable them separately.')
+                'Full statistics include language-direction counts and use the same switch.')
     return ('基础统计始终启用，用于统计每日活跃安装数，使用不跨日关联的每日标识。'
             '可选的详细使用与稳定性统计帮助改进体验，你可以随时关闭。均不包含语音、识别或翻译内容。\n'
-            '新开启详细统计包含语言方向计数；已有详细统计用户需单独启用。')
+            '详细统计包含语言方向计数，统一使用此开关。')
 
 
 def normalize_consent(value):
@@ -45,11 +45,11 @@ def privacy_text(english=False):
             'and clean/unclean shutdown counts. '
             'It uses a random installation identifier across days. No audio, recognized text, translations, keys, '
             'paths, hardware identifiers, crash stacks or error messages are uploaded by either channel.\n'
-            'Language usage adds only source/target language codes, mode and success/failure counts. New Full opt-ins include it; existing Full users enable it separately in Privacy. It stops with Full statistics.\n\n'
+            'Language usage contains only source/target language codes, mode and success/failure counts. It follows the same Full statistics switch, with no separate opt-in.\n\n'
             'You may disable Full in Settings. This stops future Full reporting, but does not disable Basic or local '
             'statistics and cannot recall an already sent request. Re-enabling Full starts a new identifier without '
-            'backfilling disabled-period data. New data categories require new authorization; consent version remains 3 '
-            'for refinements of existing numeric statistics.\n\n'
+            'backfilling disabled-period data. Language counts refine existing numeric usage statistics under '
+            'consent version 3; historical disabled and unknown choices remain unchanged.\n\n'
             'Local statistics retain up to 30 days within 90 files / 2 MiB. Remote buffers cover up to 7 UTC dates. '
             'Server retention targets 30 days and depends on scheduled cleanup. Translation, model downloads and updates '
             'make their own requests. Debug logs are separate and may contain text; review them before sharing. '
@@ -63,9 +63,9 @@ def privacy_text(english=False):
         '历史开启、拒绝和未知状态保持原选择。包含版本、安装包类型、翻译模式、成功失败数量、活跃使用时长、'
         '识别与翻译性能、识别分段及过滤次数、正常退出与未正常退出次数，使用随机安装标识关联每日汇总。'
         '两类统计均不上传语音、识别或翻译内容、密钥、本地路径、硬件标识、崩溃堆栈或错误正文。\n'
-        '语言使用统计仅增加源/目标语言代码、模式及成功失败计数。新开启详细统计包含此项，已有用户在隐私页单独启用；随详细统计一起关闭。\n\n'
+        '语言使用统计仅包含源/目标语言代码、模式及成功失败计数，跟随同一个详细统计开关，无需单独启用。\n\n'
         '可以随时在设置中关闭详细统计，停止后续详细统计上报；基础统计和本地统计继续运行。已发出的请求无法撤回。'
-        '再次开启详细统计使用新标识，不补传关闭期间数据。新增数据类别需要重新授权；已有数值统计细化保持授权版本 3。\n\n'
+        '再次开启详细统计使用新标识，不补传关闭期间数据。语言计数是现有数值使用统计的细分，保持授权版本 3；历史关闭或未知状态不变。\n\n'
         '本地统计最多保留 30 天、90 个文件、总量 2 MiB。远程待上传缓冲覆盖最多 7 个 UTC 日期。'
         '服务端目标保留期为 30 天，实际删除取决于定时清理成功运行。翻译服务、模型下载和更新有各自的网络请求。'
         '调试日志独立于统计，可能含文本，分享前请检查。反馈仅在你主动复制或提交时分享。'

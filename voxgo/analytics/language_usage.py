@@ -1,7 +1,6 @@
 """Bounded numeric direction summaries. No text, provider URL or UI labels."""
 from voxgo.languages import ONLINE_DIRECTIONS, LOCAL_DIRECTIONS, normalize_language_code
 
-LANGUAGE_USAGE_CONSENT_VERSION = 1
 LANGUAGE_MODES = ('api', 'offline', 'cache', 'unknown')
 MAX_ROWS = 80
 MAX_COUNT = 10_000_000
@@ -10,9 +9,8 @@ ROW_FIELDS = {'source_lang', 'target_lang', 'mode', 'success', 'failed'}
 
 def language_usage_allowed(config):
     from .consent import may_upload
-    return (may_upload(config, True)
-            and type(getattr(config, 'telemetry_language_usage_consent_version', 0)) is int
-            and getattr(config, 'telemetry_language_usage_consent_version', 0) == LANGUAGE_USAGE_CONSENT_VERSION)
+    # Language counts are a dimension of Full statistics, not a second choice.
+    return may_upload(config, True)
 
 
 def direction_key(source, target, mode):

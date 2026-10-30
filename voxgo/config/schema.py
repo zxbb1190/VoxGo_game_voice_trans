@@ -59,7 +59,6 @@ class RuntimeConfig:
     telemetry_consent: str = 'unknown'
     telemetry_consent_version: int = 0
     telemetry_epoch: str = ''
-    telemetry_language_usage_consent_version: int = 0
     basic_install_seed: str = ''
     basic_first_run_date: str = ''
     telemetry_v2_migrated: bool = False

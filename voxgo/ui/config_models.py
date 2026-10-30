@@ -145,7 +145,6 @@ def _copy_runtime_config(config):
         telemetry_consent=getattr(config, 'telemetry_consent', 'unknown'),
         telemetry_consent_version=getattr(config, 'telemetry_consent_version', 0),
         telemetry_epoch=getattr(config, 'telemetry_epoch', ''),
-        telemetry_language_usage_consent_version=getattr(config, 'telemetry_language_usage_consent_version', 0),
         **{key: getattr(config, key, default) for key, default in (('basic_install_seed', ''), ('basic_first_run_date', ''), ('telemetry_v2_migrated', False), ('telemetry_install_origin', 'historical_install'), ('full_telemetry_source', 'migration_unknown'))},
     )
     copied._telemetry_consent_changed = bool(getattr(config, '_telemetry_consent_changed', False))
@@ -325,7 +324,6 @@ class RuntimeConfig:
     telemetry_consent: str = 'unknown'
     telemetry_consent_version: int = 0
     telemetry_epoch: str = ''
-    telemetry_language_usage_consent_version: int = 0
     basic_install_seed: str = ''
     basic_first_run_date: str = ''
     telemetry_v2_migrated: bool = False

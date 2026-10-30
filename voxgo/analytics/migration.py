@@ -22,8 +22,7 @@ def valid_uuid(value):
 
 
 def validated_consent(data):
-    unknown = dict(telemetry_consent='unknown', telemetry_consent_version=0, telemetry_epoch='',
-                   telemetry_language_usage_consent_version=0)
+    unknown = dict(telemetry_consent='unknown', telemetry_consent_version=0, telemetry_epoch='')
     if not isinstance(data, dict):
         return unknown
     state, version, epoch = (data.get(k) for k in ('telemetry_consent', 'telemetry_consent_version', 'telemetry_epoch'))
@@ -33,10 +32,7 @@ def validated_consent(data):
         return unknown
     if state != 'allowed' and epoch != '':
         return unknown
-    language_version = data.get('telemetry_language_usage_consent_version', 0)
-    return dict(telemetry_consent=state, telemetry_consent_version=version, telemetry_epoch=epoch,
-                telemetry_language_usage_consent_version=(1 if state == 'allowed' and version == CONSENT_VERSION
-                    and type(language_version) is int and language_version == 1 else 0))
+    return dict(telemetry_consent=state, telemetry_consent_version=version, telemetry_epoch=epoch)
 
 
 def read_consent_authority(root, fallback):
@@ -160,7 +156,6 @@ def initialize_telemetry_v2(config, runtime_dir, now=None):
         config.app.telemetry_v2_migrated = False
         config.app.telemetry_consent = 'unknown'
         config.app.telemetry_epoch = ''
-        config.app.telemetry_language_usage_consent_version = 0
     return config.app
 
 

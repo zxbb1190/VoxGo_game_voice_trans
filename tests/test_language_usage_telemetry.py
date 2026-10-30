@@ -220,8 +220,9 @@ class LanguageUploaderTests(unittest.TestCase):
                     return 200, {}, dict(success=True, snapshot_id=payload['snapshot_id'], revision=payload['revision'])
                 RemoteUploader(root, lambda: consent, transport=transport, start=False).sync_once()
                 self.assertEqual(len(calls), 2)
-                self.assertEqual(calls[0][1], '/v1/config?language_usage=1' if marker else '/v1/config')
-                expected = 3 if marker and type(capability) is int and capability == 1 else 2
+                # The obsolete category marker has no authority: Full is the only choice.
+                self.assertEqual(calls[0][1], '/v1/config?language_usage=1')
+                expected = 3 if type(capability) is int and capability == 1 else 2
                 self.assertEqual(calls[1][2]['schema_version'], expected)
                 self.assertEqual(len(calls[1][2]['metrics']), 63)
                 self.assertEqual('language_usage' in calls[1][2], expected == 3)
@@ -233,7 +234,7 @@ class LanguageConsentTests(unittest.TestCase):
         from PyQt5.QtWidgets import QApplication
         cls.qt = QApplication.instance() or QApplication([])
 
-    def test_old_grant_requires_explicit_enable_and_full_off_revokes(self):
+    def test_existing_full_automatically_includes_languages_without_another_control(self):
         from voxgo.config.loader import default_app_config, save_user_settings, load_user_settings
         from voxgo.ui.settings_dialog import SettingsDialog
         config = default_app_config()
@@ -242,12 +243,12 @@ class LanguageConsentTests(unittest.TestCase):
         config.app.telemetry_epoch = str(uuid.uuid4())
         with tempfile.TemporaryDirectory() as folder:
             save_user_settings(config, Path(folder))
-            self.assertFalse(language_usage_allowed(config.app))
+            self.assertTrue(language_usage_allowed(config.app))
             dialog = SettingsDialog(config.overlay, config.hotkeys, app_config=config.app)
             try:
-                self.assertFalse(dialog.language_usage_consent_button.isHidden())
+                self.assertFalse(hasattr(dialog, 'language_usage_consent_button'))
+                self.assertTrue(dialog.telemetry_consent_check.isChecked())
                 epoch = dialog.app_config.telemetry_epoch
-                dialog._enable_language_usage_consent()
                 self.assertEqual(dialog.app_config.telemetry_epoch, epoch)
                 config.app = dialog.app_config
                 save_user_settings(config, Path(folder))
@@ -256,11 +257,16 @@ class LanguageConsentTests(unittest.TestCase):
                 self.assertTrue(language_usage_allowed(loaded.app))
                 dialog._change_telemetry_consent(False)
                 self.assertFalse(language_usage_allowed(dialog.app_config))
-                self.assertEqual(dialog.app_config.telemetry_language_usage_consent_version, 0)
+                config.app = dialog.app_config
+                save_user_settings(config, Path(folder))
+                content = (Path(folder) / 'user_settings.json').read_text(encoding='utf-8')
+                self.assertNotIn('telemetry_language_usage_consent_version', content)
+                load_user_settings(loaded, Path(folder))
+                self.assertFalse(language_usage_allowed(loaded.app))
             finally:
                 dialog.close()
 
-    def test_new_full_optin_includes_category_but_unchanged_historical_setup_does_not(self):
+    def test_new_install_default_checked_and_historical_full_use_same_switch(self):
         from voxgo.config.loader import default_app_config
         from voxgo.ui.dialogs import FirstRunWizard
         for origin in ('new_install', 'historical_install'):
@@ -271,25 +277,29 @@ class LanguageConsentTests(unittest.TestCase):
             cfg.app.telemetry_epoch = str(uuid.uuid4())
             wizard = FirstRunWizard(None, translation_config=cfg.translation, app_config=cfg.app)
             try:
+                self.assertTrue(wizard.wizard_telemetry_check.isChecked())
                 wizard._mark_completed()
-                self.assertEqual(language_usage_allowed(wizard.app_config), origin == 'new_install')
+                self.assertTrue(language_usage_allowed(wizard.app_config))
             finally:
                 wizard.close()
 
-    def test_durable_authority_beats_stale_settings_and_invalid_scope(self):
+    def test_removed_category_marker_cannot_grant_or_deny_the_full_switch(self):
         from voxgo.analytics.migration import read_consent_authority, validated_consent
         state = dict(telemetry_consent='allowed', telemetry_consent_version=CONSENT_VERSION,
                      telemetry_epoch=str(uuid.uuid4()))
-        self.assertEqual(validated_consent(state)['telemetry_language_usage_consent_version'], 0)
-        for bad in (True, '1', 2, -1):
-            self.assertEqual(validated_consent(dict(state, telemetry_language_usage_consent_version=bad))[
-                'telemetry_language_usage_consent_version'], 0)
+        self.assertEqual(validated_consent(state), state)
+        for obsolete in (0, 1, True, '1', 2, -1):
+            clean = validated_consent(dict(state, telemetry_language_usage_consent_version=obsolete))
+            self.assertEqual(clean, state)
+            self.assertTrue(language_usage_allowed(SimpleNamespace(**clean)))
         with tempfile.TemporaryDirectory() as root:
-            (Path(root) / 'telemetry_consent.json').write_text(json.dumps(state))
+            denied = dict(state, telemetry_consent='denied', telemetry_epoch='')
+            (Path(root) / 'telemetry_consent.json').write_text(json.dumps(denied))
             result = read_consent_authority(root, dict(state, telemetry_language_usage_consent_version=1))
-            self.assertEqual(result['telemetry_language_usage_consent_version'], 0)
+            self.assertEqual(result['telemetry_consent'], 'denied')
+            self.assertFalse(language_usage_allowed(SimpleNamespace(**result)))
 
-    def test_grant_cannot_classify_queued_pregrant_events_and_revoke_stops_writer(self):
+    def test_full_admission_and_revocation_still_check_queued_language_events(self):
         from voxgo.analytics.client import AuthorizedAnalytics, LocalAnalytics
         def collector():
             result = LocalAnalytics.__new__(LocalAnalytics)

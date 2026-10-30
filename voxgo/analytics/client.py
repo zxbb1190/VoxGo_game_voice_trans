@@ -377,9 +377,9 @@ class AuthorizedAnalytics:
                     remote_args = args
                     if (method == 'translation_result' and len(args) > 5
                             and not self._language_usage_allowed(self._epoch)):
-                        # Granting the category later must not classify events
-                        # already queued before the grant. The writer checks
-                        # again so revocation also stops queued collection.
+                        # The original Full switch controls every dimension.
+                        # Recheck at consumption too, so revocation stops
+                        # queued collection in another process.
                         remote_args = args[:5]
                     getattr(self.remote, method)(*remote_args)
         except Exception:

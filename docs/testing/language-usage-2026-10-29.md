@@ -1,5 +1,9 @@
 # v0.6.0 language usage — local acceptance, 2026-10-29
 
+Historical acceptance of the initial separate-consent design. On2026-10-30 the user requested
+one existing Full switch instead; see the updated [protocol](telemetry-language-usage.md).
+Screenshots and test counts below retain their original meaning and are not the final UI.
+
 ## Result
 
 Implemented and locally validated. **No production migration, deployment, translation API
