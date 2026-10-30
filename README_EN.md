@@ -304,8 +304,8 @@ Edit `config.json` or use the overlay settings:
 | `translation.endpoint` | OpenAI-compatible endpoint or `/v1` base URL; unused in Google mode |
 | `translation.max_tokens` | Maximum translation output length, default 80 to avoid expansion |
 | `translation.temperature` | Translation randomness, default 0 for faithful and stable subtitles |
-| `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown; candidate codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
-| `translation.target_lang` | Fixed translation target saved from the right title-bar dropdown; candidate codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
+| `translation.source_lang` | Fixed recognition language saved from the left title-bar dropdown; codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
+| `translation.target_lang` | Fixed translation target saved from the right title-bar dropdown; codes `en` / `zh` / `ja` / `ko` / `ru` (Beta is a display label, not part of the code) |
 | `translation.context_messages` | Translation history context count, default 0 to avoid stale context pollution and completion |
 | `translation.timeout_seconds` | Single translation request timeout, default 12 seconds; increase it if your provider is slow |
 | `translation.max_concurrent_requests` | Concurrent translation requests, default 2; lower is steadier, higher can make slow providers time out more easily |

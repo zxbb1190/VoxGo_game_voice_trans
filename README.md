@@ -320,8 +320,8 @@ VoxGo 默认每天从官网更新清单检查一次正式版更新。检查只�
 | `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions`；Google 模式不用填写 |
 | `translation.max_tokens` | 译文最大输出长度，默认 80，避免模型扩写 |
 | `translation.temperature` | 翻译随机性，默认 0，优先忠实稳定 |
-| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里；候选可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
-| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里；候选可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
+| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里；可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
+| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里；可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
 | `translation.context_messages` | 翻译历史上下文条数，默认 0，避免历史污染和补全 |
 | `translation.timeout_seconds` | 单次翻译请求超时时间，默认 12 秒；服务商较慢时可适当调高 |
 | `translation.max_concurrent_requests` | 同时进行的翻译请求数，默认 2；调低更稳，调高可能让慢服务商更容易超时 |

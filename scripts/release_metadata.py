@@ -101,6 +101,7 @@ def sync_site(root, version, release, hashes, mirror_verified=False):
                       'VoxGo v0.6.0 supports the languages and directions below. See the [release notes](docs/releases/v0.6.0.md) and [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for packages.', text, flags=re.M)
         text = re.sub(r'^- .*v0\.5\.2.*v0\.6\.0.*\n', '', text, flags=re.M)
         text = text.replace('v0.6.0 候选', 'v0.6.0').replace('v0.6.0 待发布', 'v0.6.0').replace('the v0.6.0 candidate', 'v0.6.0').replace('v0.6.0 candidate', 'v0.6.0')
+        text = text.replace('候选可选', '可选').replace('candidate codes', 'codes')
         writes[path] = text
     notes_path = root / f'docs/releases/{tag}.md'
     notes = notes_path.read_text('utf-8')
