@@ -100,11 +100,19 @@ def version_page(release: dict) -> str:
         f'<li><a href="{esc(a["browser_download_url"])}">{esc(a["name"])}</a> <small>{a["size"] / 1048576:.1f} MiB</small></li>'
         for a in assets
     )
+    guide = ""
+    guide_heading = "### Lite 升级 / Updating Lite"
+    for section in release["body"].split("\n### "):
+        heading, _, text = section.partition("\n")
+        if "### " + heading.strip() == guide_heading:
+            paragraphs = "".join(f"<p>{esc(line)}</p>" for line in text.splitlines() if line.strip())
+            guide = f"<section><h2>Lite 升级 / Updating Lite</h2>{paragraphs}</section>"
+            break
     content = f'''<div class="crumb"><a href="/">VoxGo</a> / <a href="/changelog/">更新日志</a> / {esc(tag)}</div>
 <header class="release-hero"><span class="label">PATCH NOTES / {esc(tag)}</span><h1>VoxGo <strong>{esc(version)}</strong></h1><time datetime="{date}">{date}</time><p>本页内容由 <a href="{release_link}">GitHub Release</a> 生成。</p></header>
 <section><h2>更新内容</h2><ol class="note-list">{zh_list}</ol></section>
 <section lang="en"><h2>What's new</h2><ol class="note-list">{en_list}</ol></section>
-<section><h2>下载 / Downloads</h2><ul class="download-list">{downloads}</ul><p>附件与 SHA256 校验信息请以 <a href="{release_link}">GitHub Release</a> 为准。</p></section>
+{guide}<section><h2>下载 / Downloads</h2><ul class="download-list">{downloads}</ul><p>附件与 SHA256 校验信息请以 <a href="{release_link}">GitHub Release</a> 为准。</p></section>
 <a class="back" href="/changelog/">← 全部更新日志</a>'''
     return page(f"VoxGo {version} 更新日志 / Patch Notes", description, url, content, date)
 

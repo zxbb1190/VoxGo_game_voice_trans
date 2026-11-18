@@ -56,6 +56,16 @@ class ReleaseMetadataTests(unittest.TestCase):
                 self.assertIn(metadata.package_name('0.6.0', edition), notes)
                 self.assertIn(digest, notes)
 
+    def test_upgrade_steps_only_appear_in_detailed_notes(self):
+        body = ("### 更新内容\n- 修复已知问题。\n### What's new\n- Fixed known issues.\n"
+                "### Lite 升级 / Updating Lite\n\nBack up <settings>.\n\n### Downloads\n- archive.zip")
+        release = dict(tag_name='v0.6.1', body=body, published_at='2026-11-18', html_url='https://example.com')
+        self.assertEqual(changelog.release_notes(body), (['修复已知问题。'], ['Fixed known issues.']))
+        self.assertNotIn('Back up', changelog.home_block([release], 'en'))
+        page = changelog.version_page(release)
+        self.assertIn('<p>Back up &lt;settings&gt;.</p>', page)
+        self.assertNotIn('archive.zip', page)
+
     def test_reject_missing_wrong_or_unpublished_assets_before_writing(self):
         for scenario in ('missing', 'digest', 'url', 'draft', 'tag'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as folder:
