@@ -362,14 +362,6 @@ Basic statistics are always enabled to count Daily Active Installations using id
 
 Optional Full usage and stability statistics can be disabled in Settings. New installations default to checked in the setup wizard and start Full only after completion; upgrades preserve historical allowed, denied or unknown choices. Disabling Full does not disable Basic. Neither channel uploads audio, recognized text, translations, API keys, hardware identifiers, file paths, crash stacks or error messages.
 
-## License and contact
-
-This community edition is licensed under the GNU General Public License v3.0. See [LICENSE](../../LICENSE).
-
-Closed-source commercial use, private custom distribution, or commercial edition licensing requires separate authorization.
-
-Email: [douyaj33@gmail.com](mailto:douyaj33@gmail.com)
-
 ## Demo image credits
 
 The README shows Windows captures of [cinema subtitles](screens/cinema.png) and the [classic overlay](screens/classic.png) on the same gameplay still. Both use the same sample dialogue.

@@ -34,6 +34,14 @@
 
 [使用指南](docs/guide.md) · [API 与模型配置](docs/guide.md#翻译服务与配置) · [从源码运行](docs/guide.md#从源码运行) · [反馈问题](https://github.com/zxbb1190/VoxGo_game_voice_trans/issues) · [社区](https://voxgo.cn/#community)
 
-欢迎提交 Issue 或 Pull Request。VoxGo 社区版使用 [GPL-3.0](LICENSE)。首屏演示将 Windows 字幕截图叠加在《Xonotic》游戏画面上。[画面来源与授权](docs/guide.md#演示画面)
+欢迎提交 Issue 或 Pull Request。首屏演示将 Windows 字幕截图叠加在《Xonotic》游戏画面上。[画面来源与授权](docs/guide.md#演示画面)
 
 [![XERJ Corpus Hub 贡献者](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
+## 许可证与联系
+
+本社区版项目采用 GNU General Public License v3.0，详见 [LICENSE](LICENSE)。
+
+如需闭源商业使用、私有定制发行或商业版授权，请另行取得授权。
+
+邮箱：[douyaj33@gmail.com](mailto:douyaj33@gmail.com)

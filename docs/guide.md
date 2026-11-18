@@ -380,14 +380,6 @@ python -m unittest discover -s tests
 
 详细使用与稳定性统计可在设置中关闭。新安装首次向导默认勾选，完成向导后才启用；升级保留历史开启、拒绝或未知状态。关闭详细统计不会关闭基础统计。两类统计均不上传语音、识别或翻译内容、API Key、硬件标识、文件路径、崩溃堆栈或错误正文。
 
-## 许可证与联系
-
-本社区版项目采用 GNU General Public License v3.0，详见 [LICENSE](../LICENSE)。
-
-如需闭源商业使用、私有定制发行或商业版授权，请另行取得授权。
-
-邮箱：[douyaj33@gmail.com](mailto:douyaj33@gmail.com)
-
 ## 演示画面
 
 首页将 VoxGo 的 [电影字幕](screens/cinema.png) 与 [经典浮窗](screens/classic.png) Windows 截图分别叠在同一张游戏画面上。示例对白用于比较两种字幕模式。

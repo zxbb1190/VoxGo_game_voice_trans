@@ -34,6 +34,14 @@ Basic usage statistics are always on. You can turn off detailed statistics in Se
 
 [User guide](docs/en/guide.md) · [API and model settings](docs/en/guide.md#translation-and-configuration) · [Run from source](docs/en/guide.md#run-from-source) · [Report an issue](https://github.com/zxbb1190/VoxGo_game_voice_trans/issues) · [Community](https://voxgo.cn/en/#community)
 
-Issues and pull requests are welcome. The VoxGo community edition uses [GPL-3.0](LICENSE). The demo pairs VoxGo subtitle captures from Windows with a Xonotic gameplay still. [Image credits and license](docs/en/guide.md#demo-image-credits)
+Issues and pull requests are welcome. The demo pairs VoxGo subtitle captures from Windows with a Xonotic gameplay still. [Image credits and license](docs/en/guide.md#demo-image-credits)
 
 [![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/zxbb1190/badge.svg)](https://hub.xerj.org/contributors/zxbb1190)
+
+## License and contact
+
+This community edition is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).
+
+Closed-source commercial use, private custom distribution, or commercial edition licensing requires separate authorization.
+
+Email: [douyaj33@gmail.com](mailto:douyaj33@gmail.com)
