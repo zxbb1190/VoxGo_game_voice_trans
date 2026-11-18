@@ -592,7 +592,7 @@ var _hmt = _hmt || [];
         <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5言語 · 20方向のオンライン翻訳</span></div>
         <h1 class="hero-brand-title">ゲームに、言葉の壁はいらない。</h1>
         <p class="hero-tagline">聞き取れない声を、<br class="tagline-break" /> 読める字幕に。</p>
-        <p class="lead">物語の会話は映画字幕で、チームの会話は従来のオーバーレイで読めます。</p>
+        <p class="lead">選んだゲームやアプリの音声だけを翻訳できます。ストーリーの会話には映画字幕、チームの会話には従来のオーバーレイが使えます。</p>
         <div class="hero-languages" aria-label="対応言語とBetaの状態"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">5言語・20方向のオンライン翻訳 · 日本語・韓国語・ロシア語はBeta · 英語↔中国語はオフライン対応</p>
         <div class="actions"><a class="btn btn-primary"
@@ -639,7 +639,7 @@ var _hmt = _hmt || [];
           <div class="story-progress"></div>
         </div>
         <div class="story-steps">
-          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / 取り込む</span><h3>ゲーム音声</h3><p>WASAPIループバックで、Windowsから再生中のゲーム、Discord、動画の音声を取り込みます。音量メーターで正しい出力デバイスか確認できます。</p><span class="story-state">入力：WINDOWSシステム音声</span></article>
+          <article class="story-step" id="app-audio" data-scene="1"><span class="story-step-number">STEP 01 / 取り込む</span><h3>指定したアプリだけ翻訳</h3><p>ゲームとDiscordを同時に開いているときは、ゲームを選ぶとそのセリフだけが字幕になります。仲間の会話を読みたいときはDiscordを選びます。</p><span class="story-state">音声入力 · アプリ単体 / システム音声</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / 認識する</span><h3>WHISPER ASR</h3><p>faster-whisperがPC上で音声を認識します。VoxGo Liteでは初回利用時に認識モデルをダウンロードします。</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">ローカル音声認識：動作中</span></article>
           <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / 翻訳する</span><h3>翻訳</h3><p>v0.6.1は20方向のオンライン直接翻訳と、英語↔中国語のローカル翻訳に対応。現在の翻訳方式は字幕ウィンドウに表示されます。</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">方式：API / ローカル</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / 字幕を見る</span><h3>字幕表示</h3><p>原文と訳文を透明な最前面ウィンドウに表示します。翻訳済み字幕のコピーや、同じLAN内のスマートフォンへの同期も可能です。</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">出力：リアルタイム字幕</span></article>
@@ -656,7 +656,7 @@ var _hmt = _hmt || [];
     <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">翻訳エンジン</span><h2>翻訳方法を選べます。</h2><p>どちらの方式でも音声認識はローカルで実行します。翻訳には、設定したオンラインサービスかPC上のモデルを利用できます。</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / APIモード</span><h3>お好みの翻訳サービス</h3><p>v0.6.1は、ご自身で設定したOpenAI互換サービスまたはGoogle Cloud Translation Basic v2を通じて20方向のオンライン翻訳に対応します。APIキーは各自でご用意ください。対応言語はサービス・モデルに依存します。</p><ul><li>サービスを柔軟に設定</li><li>接続テスト機能</li><li>オンライン利用向け</li></ul></div><div class="mode"><span class="mode-label">02 / ローカルモード</span><h3>APIキー不要</h3><p>ローカルOPUSは英語↔中国語のみ対応。モデルを準備すればAPIキーなしでオフライン翻訳できます。他の18方向では、オンラインサービスを明示的に選択・設定する必要があります。</p><ul><li>APIキーの設定不要</li><li>必要なときにモデルを取得</li><li>認識も翻訳もPC上で実行可能</li></ul></div></div></div></section>
     <section class="experience" id="cinema">
       <div class="container experience-stage">
-        <div><h2>映画字幕</h2><p>訳文を大きく、その下に原文を小さく表示します。ツールバーまたは Ctrl+Alt+M で切り替えられます。初期設定は従来のオーバーレイです。</p><p>表示中の字幕にマウスを重ねると操作ボタンが現れます。字幕をドラッグして位置を決めたらロックできます。解除するときも字幕にマウスを重ねます。</p></div>
+        <div><h2>映画字幕</h2><p>訳文を大きく、その下に原文を小さく表示します。ツールバーまたは Ctrl+Alt+M で切り替えられます。初期設定は従来のオーバーレイです。</p><p>字幕は好きな位置にドラッグして固定できます。</p></div>
         <div class="subtitle-screens">
           <figure><figcaption>映画字幕 · Windows 実画面</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="青い鍵についての訳文と、その下に小さく表示された原文" loading="lazy" /></a></figure>
           <figure><figcaption>従来のオーバーレイ · Windows 実画面</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="同じ会話をツールバー付きの従来のオーバーレイで表示" loading="lazy" /></a></figure>
@@ -701,8 +701,8 @@ var _hmt = _hmt || [];
             <p>OpenAI互換サービスまたはGoogle Translationを選択し、APIテストを実行します。</p>
           </div>
           <div class="card step">
-            <h3>音声をテスト</h3>
-            <p>システム音声・ループバックデバイスを選択し、音量メーターが動くか確認します。</p>
+            <h3>音声入力を選ぶ</h3>
+            <p>既定ではシステム音声を使います。Windows 11 では設定の音声タブで「指定したアプリだけ翻訳」を選べます。会話を再生して音量メーターを確認してください。</p>
           </div>
           <div class="card step">
             <h3>ゲームを開始</h3>

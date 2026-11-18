@@ -702,7 +702,7 @@ var _hmt = _hmt || [];
         <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5 LANGUAGES · 20 ONLINE DIRECTIONS</span></div>
         <h1 class="hero-brand-title"><span class="brand-line">游戏不该被</span><span class="brand-line">语言挡住。</span></h1>
         <p class="hero-tagline">让听不懂的声音，<br />变成看得懂的字幕。</p>
-        <p class="lead">游戏剧情可以用电影字幕看译文，队友语音也可以继续用经典浮窗。</p>
+        <p class="lead">只翻译你选中的游戏或应用。看剧情时用电影字幕，和队友开黑时用经典浮窗。</p>
         <div class="hero-languages" aria-label="支持语言与 Beta 状态"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">五语言20个在线翻译方向 · 日/韩/俄实验性支持 · 英中支持离线翻译</p>
         <div class="actions"><a class="btn btn-primary"
@@ -751,7 +751,7 @@ var _hmt = _hmt || [];
           <div class="story-progress"></div>
         </div>
         <div class="story-steps">
-          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>通过 WASAPI Loopback 捕获你正在听到的游戏、Discord 或视频系统声音。先看音量条，确认 VoxGo 听到了正确设备。</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
+          <article class="story-step" id="app-audio" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>只翻译指定应用</h3><p>游戏和 Discord 同时开着时，选中游戏，字幕里就只有游戏对白。想看队友说了什么，选 Discord 即可。</p><span class="story-state">音源可选 · 单个应用 / 系统声音</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper 在 PC 本地完成语音识别，把队友的话变成文字。Lite 版首次运行会按提示下载识别模型。</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
           <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>v0.6.1 可选择20个在线直译方向，或英中本地翻译；浮窗显示当前翻译方式。</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>原文与译文进入透明置顶的游戏字幕浮窗。字幕可悬停复制，也可同步到同一局域网内的手机。</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
@@ -772,7 +772,7 @@ var _hmt = _hmt || [];
     </section>
     <section class="experience" id="cinema">
       <div class="container experience-stage">
-        <div><h2>电影字幕</h2><p>译文在上，原文以小字排在下方。点击浮窗工具栏的模式按钮，或按 Ctrl+Alt+M 即可切换。默认使用经典浮窗。</p><p>鼠标移到正在显示的字幕上，工具栏才会出现。拖到合适的位置后可以锁定，再次移入字幕即可解锁。</p></div>
+        <div><h2>电影字幕</h2><p>译文在上，原文以小字排在下方。点击浮窗工具栏的模式按钮，或按 Ctrl+Alt+M 即可切换。默认使用经典浮窗。</p><p>字幕位置可拖动、锁定。</p></div>
         <div class="subtitle-screens">
           <figure><figcaption>电影字幕 · Windows 实际截图</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="蓝色钥匙这句对白的中文译文，下方为小字号英文原文" loading="lazy" /></a></figure>
           <figure><figcaption>经典浮窗 · Windows 实际截图</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="同一句对白在经典浮窗中的显示效果，顶部保留工具栏" loading="lazy" /></a></figure>
@@ -814,8 +814,8 @@ var _hmt = _hmt || [];
             <p>首次向导里选择翻译服务，填写 API Key、模型名和地址，然后点击测试，确认接口真实可用。</p>
           </div>
           <div class="card step">
-            <h3>测试系统声音</h3>
-            <p>选择 [系统声音] 或 Loopback，播放游戏、Discord 或视频声音，确认音量条会跳动。</p>
+            <h3>选择字幕音源</h3>
+            <p>默认使用系统声音。Windows 11 用户可在「设置 → 语音」中选择「只翻译指定应用」。播放一段对白即可查看音量变化。</p>
           </div>
           <div class="card step">
             <h3>进入游戏测试</h3>

@@ -591,7 +591,7 @@ var _hmt = _hmt || [];
         <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5 LANGUAGES · 20 ONLINE DIRECTIONS</span></div>
         <h1 class="hero-brand-title">Your game shouldn't stop at a language barrier.</h1>
         <p class="hero-tagline">Turn unfamiliar voices into<br class="tagline-break" /> subtitles you can follow.</p>
-        <p class="lead">Watch the dialogue in cinema subtitles, or keep the classic overlay for team chat.</p>
+        <p class="lead">Translate just the game or app you choose. Use cinema subtitles for story dialogue or the classic overlay for team chat.</p>
         <div class="hero-languages" aria-label="Supported languages and Beta status"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">Five languages · 20 online translation directions · Japanese, Korean and Russian in Beta · English ↔ Chinese offline</p>
         <div class="actions"><a class="btn btn-primary"
@@ -639,7 +639,7 @@ var _hmt = _hmt || [];
           <div class="story-progress"></div>
         </div>
         <div class="story-steps">
-          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>WASAPI loopback captures the game, Discord, or video audio already playing through Windows. Use the audio meter to confirm the right output device.</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
+          <article class="story-step" id="app-audio" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>Translate only one application</h3><p>With a game and Discord both open, choose the game to subtitle its dialogue. Choose Discord to read what your teammates are saying.</p><span class="story-state">Audio source · One app or system audio</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper recognizes speech locally on your PC. VoxGo Lite downloads its recognition model on first use.</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
           <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>In v0.6.1, choose one of 20 direct online directions or English ↔ Chinese local translation. The overlay shows the active mode.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>Original speech and translation appear in a transparent always-on-top subtitle window. Copy a completed subtitle or mirror it to a phone on your local network.</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
@@ -656,7 +656,7 @@ var _hmt = _hmt || [];
     <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>Choose your translation mode.</h2><p>Speech recognition runs locally in either mode. Translation can use a configured online provider or an on-device model.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>Your chosen provider</h3><p>v0.6.1 routes 20 online directions through your OpenAI-compatible service or Google Cloud Translation Basic v2. Bring your own API key; language support depends on the provider/model.</p><ul><li>Flexible provider configuration</li><li>Built-in connection test</li><li>For online use</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>No API key required</h3><p>Local OPUS is English ↔ Chinese only. Prepare the model to translate offline without an API key. The other 18 directions require an explicitly configured online provider.</p><ul><li>No API key setup</li><li>Download the model when needed</li><li>Recognition and translation can run on your PC</li></ul></div></div></div></section>
     <section class="experience" id="cinema">
       <div class="container experience-stage">
-        <div><h2>Cinema subtitles</h2><p>Read the translation first, with the original in smaller type underneath. Switch from the toolbar or press Ctrl+Alt+M. The classic overlay is the default.</p><p>Hover over a visible subtitle to show the controls. Drag it into place, then lock it. Hover again to unlock.</p></div>
+        <div><h2>Cinema subtitles</h2><p>Read the translation first, with the original in smaller type underneath. Switch from the toolbar or press Ctrl+Alt+M. The classic overlay is the default.</p><p>Drag the subtitles into place and lock their position.</p></div>
         <div class="subtitle-screens">
           <figure><figcaption>Cinema mode · Windows screenshot</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="A translated line about the blue key, with the original dialogue beneath it" loading="lazy" /></a></figure>
           <figure><figcaption>Classic overlay · Windows screenshot</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="The same dialogue in the classic overlay with its toolbar" loading="lazy" /></a></figure>
@@ -702,8 +702,8 @@ var _hmt = _hmt || [];
             <p>Choose OpenAI-compatible or Google Translation and run the API test.</p>
           </div>
           <div class="card step">
-            <h3>Test audio</h3>
-            <p>Select a system audio / loopback device and make sure the level meter moves.</p>
+            <h3>Choose an audio source</h3>
+            <p>System audio is the default. On Windows 11, you can choose “Translate only one application” in Settings → Speech. Play some dialogue to check the level meter.</p>
           </div>
           <div class="card step">
             <h3>Play</h3>

@@ -592,7 +592,7 @@ var _hmt = _hmt || [];
         <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5개 언어 · 20개 온라인 번역 방향</span></div>
         <h1 class="hero-brand-title">언어의 장벽이 게임을 막지 않도록.</h1>
         <p class="hero-tagline">알아듣기 어려운 목소리를<br class="tagline-break" /> 읽을 수 있는 자막으로.</p>
-        <p class="lead">스토리 대사는 영화 자막으로, 팀 대화는 클래식 오버레이로 읽으세요.</p>
+        <p class="lead">선택한 게임이나 앱의 소리만 번역하세요. 스토리 대사는 영화 자막으로, 팀 대화는 클래식 오버레이로 볼 수 있습니다.</p>
         <div class="hero-languages" aria-label="지원 언어와 Beta 상태"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">5개 언어·20개 온라인 번역 방향 · 일본어·한국어·러시아어 Beta · 영어↔중국어 오프라인 지원</p>
         <div class="actions"><a class="btn btn-primary"
@@ -639,7 +639,7 @@ var _hmt = _hmt || [];
           <div class="story-progress"></div>
         </div>
         <div class="story-steps">
-          <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / 소리 캡처</span><h3>게임 오디오</h3><p>WASAPI 루프백으로 Windows에서 재생 중인 게임, Discord, 동영상 소리를 캡처합니다. 오디오 미터로 올바른 출력 장치인지 확인하세요.</p><span class="story-state">입력: WINDOWS 시스템 소리</span></article>
+          <article class="story-step" id="app-audio" data-scene="1"><span class="story-step-number">STEP 01 / 소리 캡처</span><h3>지정한 앱만 번역</h3><p>게임과 Discord를 함께 켜 둔 상태에서 게임을 선택하면 게임 대사만 자막에 표시됩니다. 팀원들의 대화를 보려면 Discord를 선택하세요.</p><span class="story-state">오디오 입력 · 개별 앱 / 시스템 소리</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / 음성 인식</span><h3>WHISPER ASR</h3><p>faster-whisper가 PC에서 로컬로 음성을 인식합니다. VoxGo Lite는 처음 사용할 때 인식 모델을 다운로드합니다.</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">로컬 음성 인식: 작동 중</span></article>
           <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / 번역</span><h3>번역</h3><p>v0.6.1에서는 20개 방향의 온라인 직접 번역 또는 영어↔중국어 로컬 번역을 선택할 수 있습니다. 현재 모드는 자막 창에 표시됩니다.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">모드: API / 로컬</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / 자막 표시</span><h3>자막 창</h3><p>원문과 번역문이 투명한 항상 위 자막 창에 표시됩니다. 완성된 자막을 복사하거나 같은 로컬 네트워크의 휴대폰으로 동기화할 수 있습니다.</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">출력: 실시간 자막</span></article>
@@ -656,7 +656,7 @@ var _hmt = _hmt || [];
     <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">번역 엔진</span><h2>번역 방식을 선택하세요.</h2><p>어느 모드에서든 음성 인식은 PC에서 실행됩니다. 번역에는 설정한 온라인 서비스 또는 기기 내 모델을 사용할 수 있습니다.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / API 모드</span><h3>직접 선택한 번역 서비스</h3><p>v0.6.1은 사용자의 OpenAI 호환 서비스 또는 Google Cloud Translation Basic v2를 통해 20개 온라인 번역 방향을 제공합니다. API 키를 직접 준비해야 하며 지원 언어는 서비스·모델에 따라 다릅니다.</p><ul><li>유연한 서비스 설정</li><li>연결 테스트 내장</li><li>온라인 이용</li></ul></div><div class="mode"><span class="mode-label">02 / 로컬 모드</span><h3>API 키 불필요</h3><p>로컬 OPUS는 영어↔중국어만 지원합니다. 모델을 준비하면 API 키 없이 오프라인으로 번역할 수 있습니다. 나머지 18개 방향은 온라인 서비스를 직접 선택하고 설정해야 합니다.</p><ul><li>API 키 설정 불필요</li><li>필요할 때 모델 다운로드</li><li>인식과 번역을 PC에서 실행 가능</li></ul></div></div></div></section>
     <section class="experience" id="cinema">
       <div class="container experience-stage">
-        <div><h2>영화 자막</h2><p>번역문은 크게, 그 아래 원문은 작게 표시됩니다. 도구 모음이나 Ctrl+Alt+M으로 전환하세요. 기본값은 클래식 오버레이입니다.</p><p>표시된 자막에 마우스를 올리면 도구 모음이 나타납니다. 원하는 위치로 드래그한 뒤 잠그세요. 다시 마우스를 올리면 잠금을 해제할 수 있습니다.</p></div>
+        <div><h2>영화 자막</h2><p>번역문은 크게, 그 아래 원문은 작게 표시됩니다. 도구 모음이나 Ctrl+Alt+M으로 전환하세요. 기본값은 클래식 오버레이입니다.</p><p>자막을 원하는 위치로 옮겨 고정할 수 있습니다.</p></div>
         <div class="subtitle-screens">
           <figure><figcaption>영화 자막 · Windows 실제 화면</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="파란 열쇠에 관한 번역문과 그 아래 작은 원문" loading="lazy" /></a></figure>
           <figure><figcaption>클래식 오버레이 · Windows 실제 화면</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="도구 모음이 있는 클래식 오버레이에 표시된 같은 대사" loading="lazy" /></a></figure>
@@ -701,8 +701,8 @@ var _hmt = _hmt || [];
             <p>OpenAI 호환 서비스 또는 Google Translation을 선택하고 API 테스트를 실행하세요.</p>
           </div>
           <div class="card step">
-            <h3>오디오 테스트</h3>
-            <p>시스템 오디오·루프백 장치를 선택하고 레벨 미터가 움직이는지 확인하세요.</p>
+            <h3>오디오 입력 선택</h3>
+            <p>기본값은 시스템 소리입니다. Windows 11에서는 설정의 음성 탭에서 ‘지정한 앱만 번역’을 선택할 수 있습니다. 대사를 재생해 음량계를 확인하세요.</p>
           </div>
           <div class="card step">
             <h3>게임 시작</h3>
