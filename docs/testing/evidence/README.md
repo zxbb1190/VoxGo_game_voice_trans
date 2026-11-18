@@ -7,7 +7,7 @@ Keep original paths and bytes: reports, provenance, hashes and external links ma
 Store routine CI logs and coverage in Actions artifacts (14-day retention), not new evidence snapshots.
 Add a historical batch only for an explicit release or acceptance record; exclude keys and user configuration.
 
-Tracked batches: **32**; files: **1,251**; bytes: **38,408,076**.
+Tracked batches: **33**; files: **1,252**; bytes: **38,411,624**.
 
 Regenerate with `python scripts/index_test_evidence.py --write`; verify with `--check`.
 Sizes and tree hashes cover Git blob bytes and sorted relative paths, independent of checkout line endings.
@@ -47,3 +47,4 @@ Stage new evidence files before regenerating; the index intentionally ignores un
 | [v0.6.0-startup-fix-2026-10-28](v0.6.0-startup-fix-2026-10-28/) | 27 | 200,042 | `53537a21b6cb48dae213cd2addfd7049c6ac9dfa48393f73f76ea5b8199f17c3` |
 | [v0.6.0-today-classifications-2026-10-30](v0.6.0-today-classifications-2026-10-30/) | 18 | 598,330 | `9fa03cd58445edf82f2de40026339c9938f2413c47b677fa8b824c91079503f1` |
 | [v0.6.0-workspace-closeout-2026-10-28](v0.6.0-workspace-closeout-2026-10-28/) | 4 | 33,333 | `29e0d16fc86c85b51b0555d71ce04c0f70bd7750423fc00c541efc3b9f0060e3` |
+| [v0.6.1-release-2026-11-18](v0.6.1-release-2026-11-18/) | 1 | 3,548 | `c65685e30a13466c9d88991980f698c2590f4b6bb067e56bac7b2de9e1fc6bfc` |
