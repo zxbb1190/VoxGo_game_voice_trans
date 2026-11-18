@@ -32,5 +32,10 @@
     "没有字幕时，在「设置 → 帮助与反馈」点「自动检测」即可查找原因。",
     "使用 0.6.0 Lite？请到官网下载新版 Lite，避免下载较大的完整包。",
     "修复已知问题。"
-  ]
+  ],
+  "gitcode_lite": {
+    "version": "0.6.1",
+    "url": "https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.1/VoxGo-v0.6.1-lite.zip",
+    "sha256": "449a975720e2d675287259074a69832f534a8d2237068ee297f02beaead81541"
+  }
 }
