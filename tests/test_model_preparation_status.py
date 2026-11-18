@@ -5,7 +5,6 @@ import tempfile
 import threading
 import unittest
 from dataclasses import replace
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 

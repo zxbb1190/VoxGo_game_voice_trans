@@ -16,6 +16,12 @@ UPDATE_CHECK_INTERVAL_SECONDS = 24 * 60 * 60
 UPDATE_CHANNELS = ("stable", "beta")
 
 
+def gitcode_lite_url(version: str) -> str:
+    if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
+        return ''
+    return f'https://gitcode.com/zxbb1190/VoxGo/releases/download/v{version}/VoxGo-v{version}-lite.zip'
+
+
 @dataclass
 class UpdateSettings:
     enabled: bool = True
@@ -47,6 +53,15 @@ class UpdateInfo:
 
     def display_title(self) -> str:
         return self.title or f"VoxGo v{self.latest}"
+
+    def verified_gitcode_lite_url(self) -> str:
+        mirror = self.raw.get('gitcode_lite')
+        url = gitcode_lite_url(self.latest)
+        if (url and isinstance(mirror, dict) and mirror.get('version') == self.latest
+                and mirror.get('url') == url and re.fullmatch(r'[0-9a-fA-F]{64}', self.sha256_lite)
+                and mirror.get('sha256') == self.sha256_lite):
+            return url
+        return ''
 
 
 @dataclass

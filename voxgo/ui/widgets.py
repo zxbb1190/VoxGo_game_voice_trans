@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import (
 )
 
 from voxgo.audio.capture import AudioConfig, AudioLevelMonitor, AudioRecoveryInProgress
-from voxgo.i18n import UI_LANGUAGE_ZH, uses_english_source, normalize_ui_language, localize_text
+from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
 from voxgo.languages import translation_direction_error
 from voxgo.translation import GameTranslator, TranslationConfig
 from voxgo.ui.config_models import _copy_audio_config, _copy_translation_config, _tr
@@ -179,7 +179,11 @@ class AudioTestPanel(QWidget):
         self.stop_button.setEnabled(True)
         try:
             config = _copy_audio_config(self._get_audio_config())
-            self._monitor = AudioLevelMonitor(config, self._signals.level.emit)
+            if getattr(config, "source_mode", "system") == "process":
+                from voxgo.audio.process_loopback import ProcessLevelMonitor
+                self._monitor = ProcessLevelMonitor(config, self._signals.level.emit)
+            else:
+                self._monitor = AudioLevelMonitor(config, self._signals.level.emit)
             self._monitor.start()
             self.status_label.setText(_tr(
                 self._ui_language,
@@ -285,9 +289,12 @@ class ColorButton(QPushButton):
 
     def _refresh(self):
         self.setText(self._color)
+        color = QColor(self._color)
+        luminance = .2126 * color.red() + .7152 * color.green() + .0722 * color.blue()
+        foreground = '#152019' if luminance > 140 else '#FFFFFF'
         self.setStyleSheet(f"""
             QPushButton {{
-                color: #FFFFFF;
+                color: {foreground};
                 background: {self._color};
                 border: 1px solid #7D8794;
                 border-radius: 4px;

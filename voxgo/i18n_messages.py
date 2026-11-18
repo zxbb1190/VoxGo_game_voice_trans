@@ -4,6 +4,16 @@ Runtime values and external content are not translated. No network required.
 """
 
 MESSAGES = {
+    "Download source": ["下载来源", "ダウンロード元", "다운로드 출처", "Источник загрузки"],
+    "Cancel download": ["取消下载", "ダウンロードを中止", "다운로드 취소", "Отменить загрузку"],
+    "Download cancelled. Choose a source and retry.": ["下载已取消，可切换来源后重试。", "ダウンロードを中止しました。ダウンロード元を選んで再試行してください。", "다운로드를 취소했습니다. 다운로드 출처를 선택한 후 다시 시도하세요.", "Загрузка отменена. Выберите источник и повторите попытку."],
+    "China mirror (GitCode)": ["国内镜像（GitCode）", "中国向けミラー（GitCode）", "중국 미러 (GitCode)", "Зеркало в Китае (GitCode)"],
+    "Cannot identify this edition. Open Downloads to update manually.": [
+        "无法识别当前安装包类型，请打开下载页手动更新。",
+        "エディションを識別できません。ダウンロードページから手動で更新してください。",
+        "설치된 에디션을 확인할 수 없습니다. 다운로드 페이지에서 수동으로 업데이트하세요.",
+        "Не удалось определить редакцию. Откройте страницу загрузки и обновите приложение вручную."
+    ],
     "Language usage contains only source/target language codes, mode and success/failure counts. It follows the same Full statistics switch, with no separate opt-in.": [
         "语言使用统计仅包含源/目标语言代码、模式及成功失败计数，跟随同一个详细统计开关，无需单独启用。",
         "言語使用統計は入力・出力言語コード、モード、成功・失敗件数のみです。詳細統計と同じスイッチに従い、別途の有効化は不要です。",
@@ -2837,5 +2847,12 @@ MESSAGES = {
         "Истекло время загрузки или произошёл сбой соединения. Смените источник и повторите попытку: {0}"
     ]
 }
+
+from voxgo.i18n_experience import MESSAGES as EXPERIENCE_MESSAGES
+
+MESSAGES.update(EXPERIENCE_MESSAGES)
+from voxgo.i18n_detection import MESSAGES as DETECTION_MESSAGES
+
+MESSAGES.update(DETECTION_MESSAGES)
 
 QT_MESSAGES = frozenset(['&Abort', '&Add to Custom Colors', '&Apply', '&Basic colors', '&Cancel', '&Close', '&Custom colors', '&Discard', '&Green:', '&HTML:', '&Ignore', '&No', '&OK', '&Open', '&Red:', '&Retry', '&Sat:', '&Save', '&Val:', '&Yes', 'A&lpha channel:', 'Abort', 'Apply', 'Bl&ue:', 'Cancel', 'Close', 'Discard', 'Hu&e:', 'Ignore', 'No', 'OK', 'Open', 'Reset', 'Restore Defaults', 'Retry', 'Save', 'Select Color', 'Yes'])

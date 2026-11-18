@@ -211,6 +211,9 @@ def check_community_links(root: Path) -> list[str]:
 def check_product_defaults(root: Path, base_ref: str) -> list[str]:
     current_json = json.loads(_read(root, "config.example.json"))
     base_json = json.loads(_git_show(root, base_ref, "config.example.json"))
+    for key, expected in {"source_mode": "system", "process_path": "", "process_id": 0, "process_started": 0}.items():
+        if current_json.get("audio", {}).get(key, expected) != expected:
+            raise PreflightError("Application audio capture must remain opt-in with no default target")
     for path, expected in DEFAULT_CONFIG_PATHS.items():
         current_value = _dotted_value(current_json, path)
         base_value = _dotted_value(base_json, path)
@@ -233,6 +236,15 @@ def check_product_defaults(root: Path, base_ref: str) -> list[str]:
         for class_name, fields in classes.items():
             current_defaults = _class_defaults(current_source, class_name, fields)
             base_defaults = _class_defaults(base_source, class_name, fields)
+            if class_name in {"AudioConfig", "AudioDeviceConfig"}:
+                # Application capture is opt-in. Preserve every historical audio
+                # tuning value and reject a changed/default-selected target.
+                for name, expected in {"source_mode": "system", "process_path": "",
+                                       "process_id": 0, "process_started": 0}.items():
+                    if name not in base_defaults and name in current_defaults:
+                        if current_defaults[name] != expected:
+                            raise PreflightError("Application audio capture must remain opt-in with no default target")
+                        current_defaults.pop(name)
             # New runtime routing metadata is not an ASR tuning default. Only
             # this empty, non-persisted field may be added; every old setting
             # and every other extra field still participates in the check.

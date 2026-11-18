@@ -3,16 +3,14 @@ from dataclasses import asdict, replace
 import threading
 import unittest
 from collections import defaultdict
-from types import SimpleNamespace
 from unittest.mock import patch, Mock
 
 from voxgo.config.loader import default_app_config, migrate_runtime_defaults, sync_language_flow, apply_language_runtime_policy, serialize_user_settings
 from voxgo.asr.language_profiles import effective_speech_config, audio_runtime_signature
 from voxgo.asr.pipeline import SpeechPipeline
 from voxgo.asr.whisper_engine import SpeechRecognizer, WhisperConfig, TranscriptionResult
-from voxgo.audio.capture import SystemAudioCapture, SpeechSegment
+from voxgo.audio.capture import SpeechSegment
 from voxgo.runtime.events import EventBus
-from voxgo.runtime.work_items import SpeechWorkItem, LatencyTrace
 from voxgo.languages import ONLINE_DIRECTIONS, LOCAL_DIRECTIONS
 
 

@@ -119,6 +119,65 @@ class InstallerTests(unittest.TestCase):
         (self.root / 'runtime/cuda').mkdir(parents=True)
         self.assertEqual(installer.detect_edition(self.root), 'full-cuda')
 
+    def test_installed_edition_survives_model_and_cuda_downloads(self):
+        (self.root / '_internal/.models').mkdir(parents=True)
+        (self.root / 'runtime/cuda').mkdir(parents=True)
+        marker = self.root / '_internal/package-info.json'
+        for edition in ('lite', 'full', 'full-cuda'):
+            marker.write_text(json.dumps({'package_type': edition}))
+            self.assertEqual(installer.detect_edition(self.root), edition)
+        marker.write_text('{}')
+        self.assertEqual(installer.detect_edition(self.root), 'unknown')
+
+    def test_mirror_requires_verified_lite_and_checks_cdn_and_bytes(self):
+        from voxgo.update.checker import gitcode_lite_url
+        version = '0.6.1'
+        url = gitcode_lite_url(version)
+        cdn = 'https://file-cdn.gitcode.com/10941786/releases/asset/VoxGo-v0.6.1-lite.zip?signature=example'
+        data = self.archive().read_bytes()
+        sha = hashlib.sha256(data).hexdigest()
+        record = dict(version=version, url=url, sha256=sha)
+        update = UpdateInfo(version, sha256_lite=sha, raw={'gitcode_lite': record})
+        with patch.object(installer, 'auto_update_supported', return_value=True), \
+                patch('urllib.request.build_opener') as factory:
+            for edition in ('full', 'full-cuda'):
+                with self.assertRaises(installer.UpdateInstallError):
+                    installer.prepare_update(update, edition=edition, source='gitcode')
+            for field, wrong in [('version', '0.6.0'), ('url', url.replace('0.6.1','0.6.0')),
+                                 ('sha256', '0' * 64), ('url', 'https://example.com/mirror.zip')]:
+                with patch.dict(record, {field: wrong}), self.assertRaises(installer.UpdateInstallError):
+                    installer.prepare_update(update, edition='lite', source='gitcode')
+            factory.assert_not_called()
+            for final_url, body, ok in [(cdn, data, True), (cdn, b'tampered', False),
+                                        (cdn.replace('file-cdn.gitcode.com','example.com'), data, False)]:
+                response = FakeResponse(body)
+                response.geturl = lambda: final_url
+                factory.return_value.open.return_value = response
+                if ok:
+                    prepared = installer.prepare_update(update, edition='lite', source='gitcode')
+                    try:
+                        self.assertEqual(prepared.edition, 'lite')
+                        self.assertEqual((prepared.payload_dir / 'VoxGo.exe').read_bytes(), b'program')
+                    finally:
+                        prepared.cleanup()
+                else:
+                    with self.assertRaises(installer.UpdateInstallError):
+                        installer.prepare_update(update, edition='lite', source='gitcode')
+                self.assertEqual(factory.return_value.open.call_args.args[0].full_url, url)
+
+    def test_cancel_during_download_removes_partial_file(self):
+        from threading import Event
+        cancel = Event()
+        destination = self.root / 'partial.zip'
+        data = b'123' * 1024 * 1024
+        url = 'https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v1/a.zip'
+        with patch('urllib.request.build_opener') as factory:
+            factory.return_value.open.return_value = FakeResponse(data)
+            with self.assertRaisesRegex(installer.UpdateInstallError, 'cancelled'):
+                installer.download_package(url, hashlib.sha256(data).hexdigest(), destination,
+                                           lambda *_: cancel.set(), cancel=cancel)
+        self.assertFalse(destination.exists())
+
     def test_preparation_failure_cleans_staging(self):
         stage = self.root / 'stage'
         stage.mkdir()
@@ -187,6 +246,8 @@ class InstallerTests(unittest.TestCase):
                                   'analytics/shards/lifecycle.json', 'analytics-basic/state.json'):
                     self.assertEqual((app / preserved).read_text(), 'user data')
                 self.assertEqual((app / 'config.json').read_text(), 'user data')
+                self.assertEqual((app / 'user_settings.json').read_text(), 'user data')
+                self.assertEqual((app / '_internal/.models/whisper.bin').read_text(), 'user data')
                 self.assertEqual((app / '.translation-models/model.bin').read_text(), 'user data')
                 self.assertEqual((app / 'runtime/cuda/cuda.dll').read_text(), 'user data')
                 self.assertEqual((app / 'VoxGo.exe').read_bytes(), old.read_bytes())

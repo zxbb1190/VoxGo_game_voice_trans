@@ -23,6 +23,7 @@ def print_startup_banner(config, mobile_url: str):
 ║    {toggle_translation:<14} 暂停/恢复翻译       ║
 ║    {toggle_lock:<14} 锁定/解锁浮窗            ║
 ║    {toggle_compact:<14} 切换紧凑模式          ║
+║    {toggle_display_mode:<14} 切换字幕模式          ║
 ╠══════════════════════════════════════════════╣
 ║  手机端: {url}  ║
 ╠══════════════════════════════════════════════╣
@@ -35,6 +36,7 @@ def print_startup_banner(config, mobile_url: str):
             toggle_translation=hotkey_label(hotkeys.toggle_translation),
             toggle_lock=hotkey_label(hotkeys.toggle_lock),
             toggle_compact=hotkey_label(hotkeys.toggle_compact),
+            toggle_display_mode=hotkey_label(hotkeys.toggle_display_mode),
             url=mobile_url,
         )
     )

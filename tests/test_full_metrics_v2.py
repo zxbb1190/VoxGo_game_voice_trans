@@ -84,7 +84,6 @@ class FullV2Tests(unittest.TestCase):
                         return SimpleNamespace(translated='translated', source_lang='en', target_lang='zh', provider=provider)
                     runtime.client = SimpleNamespace(config=TranslationConfig(provider=provider), translate_result_with_config=translate)
                     asyncio.run(runtime._translate_and_publish('x', 'sentence', 'en'))
-                    result = 'failed' if fail else 'success'
                     runtime.analytics.translation_result.assert_called_once()
                     args = runtime.analytics.translation_result.call_args.args
                     self.assertEqual((args[0], args[2]), (not fail, category))

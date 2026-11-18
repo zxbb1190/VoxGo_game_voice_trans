@@ -6,7 +6,6 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 from PyQt5.QtWidgets import QApplication, QMessageBox
-from PyQt5.QtCore import QTimer
 from voxgo.app import VoxGoApp
 from voxgo.config.loader import default_app_config, save_user_settings, load_user_settings
 from voxgo.ui.config_models import _copy_runtime_config

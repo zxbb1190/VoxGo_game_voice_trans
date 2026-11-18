@@ -1,5 +1,4 @@
 import io
-import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -10,7 +9,7 @@ from scripts.run_five_language_asr import resolved_config,make_schedule,cjk_unit
 from scripts.offline_russian_capture_ab import local_model
 from scripts.native_five_language_protocol import loopback_connect
 from scripts.review_five_language_asr import cues
-from scripts.plan_five_language_online import build_plan,TEXTS
+from scripts.plan_five_language_online import build_plan
 
 
 class FiveLanguageCorpusTest(unittest.TestCase):

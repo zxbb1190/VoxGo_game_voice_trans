@@ -7,7 +7,7 @@ import threading
 import time
 
 from .glossary import preprocess, postprocess
-from .base import ProviderTestResult, TranslationRequest, TranslationResult, TranslatorProvider
+from .base import ProviderTestResult, TranslationRequest, TranslationResult, TranslatorProvider, guard_translation_result
 from .local_models import DEFAULT_LOCAL_MODEL, LOCAL_MODELS, is_model_ready, model_path
 
 # Shared executor prevents multiple providers from competing with game/ASR CPU.
@@ -93,7 +93,8 @@ class LocalTranslationProvider(TranslatorProvider):
         # Timeout/cancellation cannot kill native inference; keep its queue slot
         # occupied until completion to prevent unbounded retries and CPU work.
         translated = await asyncio.wait_for(asyncio.shield(wrapped), timeout=max(1.0, float(self.config.timeout_seconds)))
-        return TranslationResult(translated, request.source_lang, request.target_lang, self.name, time.monotonic() - start)
+        return guard_translation_result(TranslationResult(
+            translated, request.source_lang, request.target_lang, self.name, time.monotonic() - start))
 
     async def test(self):
         start = time.monotonic()
@@ -102,6 +103,7 @@ class LocalTranslationProvider(TranslatorProvider):
             target = "en" if source == "zh" else "zh"
             text = "请在桥边等我。" if source == "zh" else "Please wait for me near the bridge."
             result = await self.translate(TranslationRequest(text, source or "en", target))
-            return ProviderTestResult(bool(result.translated), result.translated, int((time.monotonic() - start) * 1000))
+            return ProviderTestResult(bool(result.translated) and not result.failure_reason,
+                                      result.translated, int((time.monotonic() - start) * 1000))
         except Exception as exc:
             return ProviderTestResult(False, str(exc), int((time.monotonic() - start) * 1000))

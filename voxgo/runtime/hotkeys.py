@@ -1,5 +1,6 @@
 import keyboard
 from loguru import logger
+from voxgo.config.hotkeys import HOTKEY_ACTIONS, hotkey_conflicts
 
 
 class HotkeyManager:
@@ -9,25 +10,22 @@ class HotkeyManager:
 
     def setup(self, hotkeys, callbacks):
         self.remove_all()
-        registrations = (
-            ("显示/隐藏", hotkeys.toggle_overlay, callbacks["toggle_overlay"]),
-            ("清空历史", hotkeys.clear_history, callbacks["clear_history"]),
-            ("暂停/恢复", hotkeys.toggle_translation, callbacks["toggle_translation"]),
-            ("锁定/解锁", hotkeys.toggle_lock, callbacks["toggle_lock"]),
-            ("紧凑模式", hotkeys.toggle_compact, callbacks["toggle_compact"]),
-        )
+        conflicts = dict((duplicate, first) for first, duplicate in hotkey_conflicts(hotkeys))
         active_hotkeys = []
-        try:
-            for label, value, callback in registrations:
-                value = str(value or "").strip()
-                if not value:
-                    continue
-                self._handles.append(keyboard.add_hotkey(value, callback))
+        for name, label, _ in HOTKEY_ACTIONS:
+            value = str(getattr(hotkeys, name, '') or '').strip()
+            if not value or name not in callbacks:
+                continue
+            if name in conflicts:
+                self._notify_error("快捷键冲突", f"{label}: {value} 已被其他功能使用，请在设置中修改。", "错误")
+                continue
+            try:
+                self._handles.append(keyboard.add_hotkey(value, callbacks[name]))
                 active_hotkeys.append(f"{label}={value}")
-            logger.info("热键已注册: {}", ", ".join(active_hotkeys) or "无")
-        except Exception as e:
-            logger.exception(f"热键注册失败: {e}")
-            self._notify_error("热键注册失败", str(e), "错误")
+            except Exception as e:
+                logger.exception(f"热键注册失败: {e}")
+                self._notify_error("热键注册失败", str(e), "错误")
+        logger.info("热键已注册: {}", ", ".join(active_hotkeys) or "无")
 
     def remove_all(self):
         for handle in self._handles:

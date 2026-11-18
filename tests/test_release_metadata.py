@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 class ReleaseMetadataTests(unittest.TestCase):
     def fixture(self, folder):
         root = Path(folder)
-        for relative in ('docs/update.json', 'docs/index.html', 'docs/en/index.html',
+        (root / 'docs').mkdir()
+        (root / 'docs/update.json').write_text(json.dumps({'latest': '0.5.2'}), encoding='utf-8')
+        for relative in ('docs/index.html', 'docs/en/index.html',
                          'docs/sitemap.xml', 'docs/releases/v0.6.0.md', 'README.md', 'README_EN.md'):
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -70,8 +72,13 @@ class ReleaseMetadataTests(unittest.TestCase):
     def test_published_site_keeps_old_mirror_until_verified(self):
         with tempfile.TemporaryDirectory() as folder:
             root, _, hashes, release = self.fixture(folder)
+            manifest = root / 'docs/update.json'
+            previous = json.loads(manifest.read_text('utf8'))
+            previous['gitcode_lite'] = {'version': '0.5.2', 'url': 'old-mirror'}
+            manifest.write_text(json.dumps(previous), encoding='utf8')
             metadata.sync_site(root, '0.6.0', release, hashes)
             result = json.loads((root / 'docs/update.json').read_text('utf-8'))
+            self.assertNotIn('gitcode_lite', result)
             self.assertEqual(result['latest'], '0.6.0')
             self.assertEqual(result['sha256_full'], hashes['full'])
             self.assertIn('Beta', '\n'.join(result['notes_en']))
@@ -91,6 +98,10 @@ class ReleaseMetadataTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root, _, hashes, release = self.fixture(folder)
             metadata.sync_site(root, '0.6.0', release, hashes, mirror_verified=True)
+            from voxgo.update.checker import parse_update_manifest
+            published = parse_update_manifest(json.loads((root / 'docs/update.json').read_text('utf8')))
+            self.assertEqual(published.verified_gitcode_lite_url(),
+                             'https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip')
             for locale, relative in (('zh', 'docs/index.html'), ('en', 'docs/en/index.html')):
                 path = root / relative
                 page = path.read_text('utf-8')
@@ -104,6 +115,20 @@ class ReleaseMetadataTests(unittest.TestCase):
                 self.assertIn('gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/', page)
                 self.assertNotIn('class="release-draft"', page)
                 self.assertIn('/changelog/v0.6.0/', page)
+
+    def test_mirror_retry_does_not_downgrade_or_advertise_unconfirmed_bytes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root, _, hashes, release = self.fixture(folder)
+            release['assets'][0].pop('digest')
+            metadata.sync_site(root, '0.6.0', release, hashes, mirror_verified=True)
+            path = root / 'docs/update.json'
+            data = json.loads(path.read_text('utf8'))
+            self.assertNotIn('gitcode_lite', data)
+            data['latest'] = '0.6.1'
+            path.write_text(json.dumps(data), encoding='utf8')
+            with self.assertRaisesRegex(ValueError, 'newer published'):
+                metadata.sync_site(root, '0.6.0', release, hashes, mirror_verified=True)
+            self.assertEqual(json.loads(path.read_text('utf8')), data)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,3 @@
-import copy
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -8,7 +7,7 @@ import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from scripts.run_prompt_ab_online import (
-    APPEND_SHA, FROZEN, MODEL, OUTPUT, PLAN_SHA, PromptABClient, compile_plan, validate_approval,
+    APPEND_SHA, FROZEN, MODEL, PLAN_SHA, PromptABClient, compile_plan, validate_approval,
 )
 from scripts.run_beta_blocker_online import run_cases
 from scripts.run_five_language_online import AttemptBudget, load

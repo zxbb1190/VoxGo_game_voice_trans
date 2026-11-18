@@ -257,12 +257,19 @@ namespace VoxGoAcceptance {
             var listener = new TcpListener(IPAddress.Loopback, port);
             listener.ExclusiveAddressUse = true;
             listener.Start();
+            string readyPath = Path.Combine(Path.GetDirectoryName(logPath), "online-relay.ready");
             try {
+                // Tests wait for readiness without creating half-open HTTP probes
+                // during PowerShell compilation and the listener's startup race.
+                File.WriteAllText(readyPath, instance);
                 while (!File.Exists(stopFile)) {
                     if (listener.Pending()) ThreadPool.QueueUserWorkItem(Handle, listener.AcceptTcpClient());
                     else Thread.Sleep(25);
                 }
-            } finally { listener.Stop(); }
+            } finally {
+                listener.Stop();
+                try { File.Delete(readyPath); } catch { }
+            }
         }
     }
 }

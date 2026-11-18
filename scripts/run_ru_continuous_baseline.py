@@ -5,7 +5,6 @@ recording per fresh process makes frame ownership and recording metrics explicit
 """
 import argparse
 import copy
-from dataclasses import asdict
 import hashlib
 import json
 from pathlib import Path

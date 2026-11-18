@@ -1,6 +1,5 @@
 """Zero-request summary and A/B review forms; never invent human acceptance."""
 import argparse
-from collections import defaultdict
 import json
 from pathlib import Path
 import re

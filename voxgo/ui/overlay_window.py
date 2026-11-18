@@ -43,31 +43,26 @@ from voxgo.ui.config_models import (
     OPPOSITE_LANGUAGE,
     RuntimeConfig,
     WhisperDeviceConfig,
-    _normalize_language_code,
     _speech_language_options,
     _translation_language_notice,
     _beta_language_notice,
+    _hotkey_label,
     _tr,
 )
 from voxgo.ui.dialogs import (
-    FeedbackDialog,
     FirstRunWizard,
     FullscreenHelpDialog,
     UpdatePromptDialog,
-    _build_help_text,
 )
 from voxgo.ui.icons import _make_icon
 from voxgo.ui.model_preparation_status import ModelPreparationStatus
 from voxgo.ui.qr_widget import QrCodeWidget
 from voxgo.ui.settings_dialog import SettingsDialog
+from voxgo.config.models import normalize_overlay_display
+from voxgo.ui.cinema_subtitles import CinemaSubtitles
+from voxgo.ui.overlay_presentation import OverlayPresentation
 from voxgo.ui.widgets import (
-    AudioTestPanel,
-    AudioTestSignals,
-    ColorButton,
-    HotkeyCaptureEdit,
     OverlayLockButton,
-    TranslationTestRunner,
-    TranslationTestSignals,
 )
 
 
@@ -112,15 +107,19 @@ class OverlaySignals(QObject):
     toggle_visibility = pyqtSignal()
     toggle_lock = pyqtSignal()
     toggle_compact = pyqtSignal()
+    toggle_display_mode = pyqtSignal()
     settings_changed = pyqtSignal(object, object, object, object, object, object, object)
     refresh_audio_devices = pyqtSignal()
     update_checking = pyqtSignal(bool)
     update_check_result = pyqtSignal(object, bool)
 
-class GameOverlay(QWidget):
+class GameOverlay(OverlayPresentation, QWidget):
     """游戏浮窗叠加层"""
 
     model_recovery_requested = pyqtSignal(bool)
+    live_check_requested = pyqtSignal()
+    subtitle_presented = pyqtSignal(str)
+    presentation_changed = pyqtSignal()
 
     def __init__(
         self,
@@ -151,6 +150,14 @@ class GameOverlay(QWidget):
     ):
         super().__init__()
         self.config = config or OverlayConfig()
+        normalize_overlay_display(self.config)
+        self._active_display_mode = 'classic'
+        self._subtitle_sequence = 0
+        self._cinema_hovered = False
+        self._cinema_fit_pending = False
+        self._source_attention = False
+        self._cinema_problem = ''
+        self._tray_available = True
         self.hotkeys = hotkeys or HotkeyConfig()
         self.audio_config = audio_config or AudioDeviceConfig()
         self.translation_config = translation_config or TranslationConfig()
@@ -190,6 +197,7 @@ class GameOverlay(QWidget):
         self._fade_timer = QTimer()
         self._fade_timer.timeout.connect(self._update_fade)
         self._fade_timer.start(100)
+        self._init_cinema_hover()
 
         self._init_ui()
         self._connect_signals()
@@ -277,6 +285,13 @@ class GameOverlay(QWidget):
         self._compact_button.clicked.connect(self.toggle_compact_mode)
         toolbar_layout.addWidget(self._compact_button)
 
+        self._display_mode_button = QToolButton()
+        self._display_mode_button.setObjectName("displayModeButton")
+        self._display_mode_button.setFixedSize(28, 24)
+        self._display_mode_button.setCursor(Qt.PointingHandCursor)
+        self._display_mode_button.clicked.connect(self.toggle_display_mode)
+        toolbar_layout.addWidget(self._display_mode_button)
+
         self._qr_button = QToolButton()
         self._qr_button.setObjectName("qrButton")
         self._qr_button.setIcon(_make_icon("qr", self.config.text_color))
@@ -330,6 +345,13 @@ class GameOverlay(QWidget):
         self._model_preparation_status = ModelPreparationStatus(
             lambda: SimpleNamespace(app=self.app_config, whisper=self.whisper_config), self)
         self._layout.addWidget(self._model_preparation_status)
+        source_row = QHBoxLayout()
+        self._source_status = QLabel()
+        self._source_status.setTextFormat(Qt.PlainText)
+        self._source_status.setWordWrap(True)
+        self._source_status.setStyleSheet("color: #B7C4D8; font-size: 11px;")
+        source_row.addWidget(self._source_status, 1)
+        self._layout.addLayout(source_row)
 
         self._lock_button = OverlayLockButton(self)
 
@@ -407,6 +429,18 @@ class GameOverlay(QWidget):
             self._subtitle_rows.append(row)
             self._copy_buttons.append(copy_button)
 
+        self._cinema_notice = QLabel()
+        self._cinema_notice.setWordWrap(True)
+        self._cinema_notice.setTextFormat(Qt.PlainText)
+        self._cinema_notice.setAlignment(Qt.AlignCenter)
+        self._cinema_notice.setStyleSheet('color: #FFE0A0; background: rgba(16, 22, 18, 210); padding: 4px;')
+        self._layout.addWidget(self._cinema_notice)
+        self._cinema_notice.hide()
+        self._cinema_view = CinemaSubtitles(self.config, self)
+        self._cinema_view.frame_presented.connect(self.subtitle_presented)
+        self._layout.addWidget(self._cinema_view)
+        self._cinema_view.hide()
+
         # 设置窗口透明度
         self.setWindowOpacity(self.config.opacity)
         self._apply_styles()
@@ -414,9 +448,13 @@ class GameOverlay(QWidget):
         self._refresh_compact_mode()
         self._refresh_lock_state()
         self._initializing_geometry = False
+        self._activate_display_mode()
         QTimer.singleShot(0, self._position_lock_button)
 
     def _restore_window_geometry(self):
+        if self.is_cinema():
+            self._restore_cinema_geometry()
+            return
         primary = QApplication.primaryScreen().availableGeometry()
         width = max(260, min(980, int(getattr(self.config, "window_width", 500) or 500)))
         height = max(92, min(520, int(getattr(self.config, "window_height", 200) or 200)))
@@ -486,14 +524,23 @@ class GameOverlay(QWidget):
         primary = QApplication.primaryScreen()
         if not primary:
             return
-        self.move(*self._default_position_for_size(primary.availableGeometry(), self.width(), self.height()))
+        if self.is_cinema():
+            self.config.cinema_x = self.config.cinema_bottom = None
+            self._restore_cinema_geometry()
+        else:
+            self.move(*self._default_position_for_size(primary.availableGeometry(), self.width(), self.height()))
         self._remember_window_geometry()
-        self._notify_settings_changed()
+        self.presentation_changed.emit()
         if show:
             self.show()
 
     def _remember_window_geometry(self):
-        if not hasattr(self, "config"):
+        if not hasattr(self, "config") or self._initializing_geometry:
+            return
+        if self.is_cinema():
+            self.config.cinema_width = int(self.width())
+            self.config.cinema_x = int(self.x())
+            self.config.cinema_bottom = int(self.y() + self.height())
             return
         self.config.window_width = int(self.width())
         self.config.window_height = int(self.height())
@@ -533,13 +580,13 @@ class GameOverlay(QWidget):
                 background: rgba(255, 255, 255, 28);
             }}
             QToolButton#pauseButton, QToolButton#compactButton, QToolButton#qrButton,
-            QToolButton#settingsButton, QToolButton#quitButton {{
+            QToolButton#settingsButton, QToolButton#quitButton, QToolButton#displayModeButton {{
                 background: rgba(18, 24, 33, 150);
                 border: 1px solid {self.config.text_color};
                 border-radius: 4px;
             }}
             QToolButton#pauseButton:hover, QToolButton#compactButton:hover, QToolButton#qrButton:hover,
-            QToolButton#settingsButton:hover, QToolButton#quitButton:hover {{
+            QToolButton#settingsButton:hover, QToolButton#quitButton:hover, QToolButton#displayModeButton:hover {{
                 background: rgba(40, 60, 48, 210);
             }}
             QLabel#pausedStatus {{
@@ -723,6 +770,7 @@ class GameOverlay(QWidget):
 
     def _refresh_control_state(self):
         ui_language = self._ui_language()
+        self._refresh_display_mode_button()
         self.refresh_translation_mode()
         if hasattr(self, "_pause_button"):
             self._pause_button.setIcon(_make_icon("play" if self._paused else "pause", self.config.text_color))
@@ -756,6 +804,15 @@ class GameOverlay(QWidget):
         for button in getattr(self, "_copy_buttons", ()):
             button.setToolTip(_tr(ui_language, "复制译文", "Copy translation"))
 
+    def _refresh_display_mode_button(self):
+        if not hasattr(self, '_display_mode_button'):
+            return
+        self._display_mode_button.setIcon(_make_icon('subtitles', self.config.text_color))
+        label = _tr(self._ui_language(), '切换为经典浮窗' if self.is_cinema() else '切换为电影字幕',
+                    'Switch to classic overlay' if self.is_cinema() else 'Switch to cinema subtitles')
+        hotkey = str(getattr(self.hotkeys, 'toggle_display_mode', '') or '').strip()
+        self._display_mode_button.setToolTip(label + (f' ({_hotkey_label(hotkey)})' if hotkey else ''))
+
     def refresh_translation_mode(self):
         """Refresh the short provider label after settings or language changes."""
         if not hasattr(self, "_provider_label"):
@@ -774,6 +831,7 @@ class GameOverlay(QWidget):
     def set_paused(self, paused: bool):
         self._paused = bool(paused)
         self._refresh_control_state()
+        self._refresh_display_controls()
         self.update()
 
     def _request_pause_toggle(self):
@@ -793,6 +851,8 @@ class GameOverlay(QWidget):
         self.set_compact_mode(not bool(getattr(self.config, "compact_mode", False)))
 
     def set_compact_mode(self, compact: bool):
+        if self.is_cinema():
+            return
         compact = bool(compact)
         if bool(getattr(self.config, "compact_mode", False)) == compact:
             self._refresh_compact_mode()
@@ -804,7 +864,7 @@ class GameOverlay(QWidget):
     def _refresh_compact_mode(self):
         if not hasattr(self, "_toolbar"):
             return
-        compact = bool(getattr(self.config, "compact_mode", False))
+        compact = bool(getattr(self.config, "compact_mode", False)) and not self.is_cinema()
         for widget in (
             getattr(self, "_source_lang_combo", None),
             getattr(self, "_swap_lang_button", None),
@@ -815,10 +875,12 @@ class GameOverlay(QWidget):
         self._layout.setContentsMargins(7 if compact else 10, 5 if compact else 8, 7 if compact else 10, 7 if compact else 10)
         self._layout.setSpacing(3 if compact else 6)
         self._content_layout.setSpacing(2 if compact else 4)
-        self.setMinimumSize(260 if compact else 360, 92 if compact else 150)
+        self.setMinimumSize(240 if self.is_cinema() else (260 if compact else 360),
+                            80 if self.is_cinema() else (92 if compact else 150))
         self._remember_window_geometry()
         self._refresh_control_state()
         self._refresh_labels()
+        self._refresh_display_controls()
         self.update()
 
     def show_fullscreen_help(self):
@@ -936,7 +998,9 @@ class GameOverlay(QWidget):
                 self,
             )
             self._settings_dialog.settings_changed.connect(self._apply_settings)
+            self._settings_dialog.presentation_changed.connect(self._apply_presentation_settings)
             self._settings_dialog.model_recovery_requested.connect(self.model_recovery_requested.emit)
+            self._settings_dialog.live_check_requested.connect(self.live_check_requested.emit)
             if self._pending_update:
                 self._settings_dialog.show_pending_update(self._pending_update)
             self._set_update_badge_visible(False)
@@ -1017,14 +1081,18 @@ class GameOverlay(QWidget):
         return bool(getattr(self.config, "locked", False))
 
     def _can_interact(self) -> bool:
-        return not self._is_locked() and bool(getattr(self.config, "draggable", True))
+        return (not self._is_locked() and bool(getattr(self.config, "draggable", True))
+                and (not self.is_cinema() or self._cinema_hovered))
 
     def _toggle_lock(self, checked=None):
         self.config.locked = not self._is_locked()
         self._refresh_lock_state()
-        self._notify_settings_changed()
+        self.presentation_changed.emit()
 
     def _refresh_lock_state(self):
+        if self.is_cinema() and self._cinema_hovered:
+            # Keep unlock visible while the pointer crosses from the old toolbar.
+            self._cinema_hover_origin = self.frameGeometry()
         locked = self._is_locked()
         self.config.locked = locked
         self._dragging = False
@@ -1040,6 +1108,7 @@ class GameOverlay(QWidget):
             self._swap_lang_button,
             self._pause_button,
             self._compact_button,
+            self._display_mode_button,
             self._qr_button,
             self._settings_button,
             self._quit_button,
@@ -1056,6 +1125,7 @@ class GameOverlay(QWidget):
         ))
         self._style_lock_button()
         self._set_overlay_mouse_passthrough(locked)
+        self._refresh_display_controls()
         self._position_lock_button()
         self._set_update_badge_visible(bool(self._pending_update))
         self.update()
@@ -1110,7 +1180,16 @@ class GameOverlay(QWidget):
     def _position_lock_button(self):
         if not hasattr(self, "_lock_button") or not hasattr(self, "_lock_slot"):
             return
-        self._lock_button.move(self._lock_slot.mapToGlobal(QPoint(0, 0)))
+        if not self.isVisible():
+            self._lock_button.hide()
+            return
+        if self.is_cinema() and not self._cinema_hovered:
+            self._lock_button.hide()
+            return
+        self._layout.activate()
+        anchor = (self._lock_slot.mapToGlobal(QPoint(0, 0)) if self._toolbar.isVisible()
+                  else self.mapToGlobal(QPoint(self.width() - 40, self._layout.contentsMargins().top())))
+        self._lock_button.move(anchor)
         if self.isVisible():
             self._lock_button.show()
             self._lock_button.raise_()
@@ -1226,7 +1305,14 @@ class GameOverlay(QWidget):
         overlay_config.window_y = self.config.window_y
         overlay_config.window_width = self.config.window_width
         overlay_config.window_height = self.config.window_height
+        overlay_config.cinema_x = self.config.cinema_x
+        overlay_config.cinema_bottom = self.config.cinema_bottom
+        overlay_config.cinema_width = self.config.cinema_width
+        overlay_config.locked = self.config.locked
+        overlay_config.draggable = self.config.draggable
         self.config = overlay_config
+        normalize_overlay_display(self.config)
+        self._cinema_view.config = self.config
         self.hotkeys = hotkey_config
         self.audio_config = audio_config
         self.translation_config = translation_config
@@ -1234,19 +1320,16 @@ class GameOverlay(QWidget):
         self.app_config = app_config or self.app_config or RuntimeConfig()
         self.app_config.language = normalize_ui_language(getattr(self.app_config, "language", UI_LANGUAGE_ZH))
         self.update_config = update_config or self.update_config
-        self.setWindowOpacity(self.config.opacity)
+        self.setWindowOpacity(1.0 if self.is_cinema() else self.config.opacity)
         self._apply_styles()
-        self._qr_button.setIcon(_make_icon("qr", self.config.text_color))
-        self._swap_lang_button.setIcon(_make_icon("swap", self.config.original_text_color))
-        self._settings_button.setIcon(_make_icon("settings", self.config.text_color))
-        self._quit_button.setIcon(_make_icon("close", self.config.text_color))
-        for button in self._copy_buttons:
-            button.setIcon(_make_icon("copy", self.config.text_color))
+        self._refresh_appearance_icons()
         self._sync_language_controls()
         self._refresh_control_state()
         self._refresh_compact_mode()
         self._refresh_labels()
         self._refresh_lock_state()
+        if self.config.display_mode != self._active_display_mode:
+            self._activate_display_mode()
         self.update()
         if self._on_settings_changed:
             self._on_settings_changed(
@@ -1258,6 +1341,14 @@ class GameOverlay(QWidget):
                 self.app_config,
                 self.update_config,
             )
+
+    def _refresh_appearance_icons(self):
+        self._qr_button.setIcon(_make_icon('qr', self.config.text_color))
+        self._swap_lang_button.setIcon(_make_icon('swap', self.config.original_text_color))
+        self._settings_button.setIcon(_make_icon('settings', self.config.text_color))
+        self._quit_button.setIcon(_make_icon('close', self.config.text_color))
+        for button in self._copy_buttons:
+            button.setIcon(_make_icon('copy', self.config.text_color))
 
     def request_audio_device_refresh(self):
         if self._on_audio_devices_refresh:
@@ -1287,6 +1378,7 @@ class GameOverlay(QWidget):
         self._signals.toggle_visibility.connect(self._toggle_visibility)
         self._signals.toggle_lock.connect(self._toggle_lock)
         self._signals.toggle_compact.connect(self.toggle_compact_mode)
+        self._signals.toggle_display_mode.connect(self.toggle_display_mode)
         self._signals.update_checking.connect(self._handle_update_checking)
         self._signals.update_check_result.connect(self._handle_update_check_result)
 
@@ -1320,6 +1412,8 @@ class GameOverlay(QWidget):
         self._append_translation_item(item)
 
     def _append_translation_item(self, item: TranslationItem):
+        self._subtitle_sequence += 1
+        item.sequence = self._subtitle_sequence
         self._translations.append(item)
 
         # 更新标签显示
@@ -1340,12 +1434,23 @@ class GameOverlay(QWidget):
                 item.copyable = bool(copyable) and bool(translated.strip())
                 item.fade_start = None
                 item.timestamp = time.time()
+                if item.copyable:
+                    accepted = self._cinema_view.timeline.offer(item.sequence, item.item_id, item.original, item.translated)
+                    if accepted:
+                        self._cinema_problem = ''
+                elif item.sequence >= self._cinema_view.timeline.latest_sequence:
+                    self._cinema_problem = localize_text(self._ui_language(), translated)[:500]
+                    self._cinema_view.timeline.remove(item_id)
                 self._refresh_labels()
+                if item.copyable and self.isVisible() and not self.is_cinema():
+                    self.subtitle_presented.emit(item_id)
+                self._refresh_display_controls()
                 if self._on_overlay_updated:
                     self._on_overlay_updated(item_id)
                 return
 
     def _remove_translation(self, item_id: str):
+        self._cinema_view.timeline.remove(item_id)
         for item in list(self._translations):
             if item.item_id == item_id:
                 self._translations.remove(item)
@@ -1356,6 +1461,7 @@ class GameOverlay(QWidget):
 
     def _update_fade(self):
         """更新淡出效果"""
+        self._cinema_view.tick()
         needs_update = False
         to_remove = []
 
@@ -1376,6 +1482,14 @@ class GameOverlay(QWidget):
         self._render_items(list(self._translations))
 
     def _render_items(self, items: List[TranslationItem]):
+        if self.is_cinema():
+            cue = self._cinema_view.timeline.cue
+            self._visible_items = [item for item in items if cue and item.item_id == cue.item_id
+                                   and self._cinema_view.timeline.opacity > 0]
+            self._cinema_view.rebuild(max(80, self.width() - 20), self._cinema_height_limit())
+            self._cinema_view.update()
+            self._fit_cinema_height()
+            return
         text_width = self._label_text_width()
         visible_items = []
 
@@ -1479,7 +1593,10 @@ class GameOverlay(QWidget):
     def _clear_history(self):
         """清除翻译历史"""
         self._translations.clear()
+        self._cinema_view.timeline.clear()
+        self._cinema_problem = ''
         self._refresh_labels()
+        self._refresh_display_controls()
 
     def _toggle_visibility(self):
         """切换可见性"""
@@ -1492,6 +1609,8 @@ class GameOverlay(QWidget):
         """绘制半透明背景"""
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
+        if self.is_cinema():
+            return
 
         # 背景
         bg_color = QColor(self.config.bg_color)
@@ -1556,8 +1675,7 @@ class GameOverlay(QWidget):
             width = max(self.minimumWidth(), min(self.maximumWidth(), self._resize_start_size.width() + delta.x()))
             height = max(self.minimumHeight(), min(self.maximumHeight(), self._resize_start_size.height() + delta.y()))
             self.resize(width, height)
-            self.config.window_width = width
-            self.config.window_height = height
+            self._remember_window_geometry()
             self._refresh_labels()
             event.accept()
         elif self._dragging and event.buttons() == Qt.LeftButton:
@@ -1575,7 +1693,7 @@ class GameOverlay(QWidget):
         self._refresh_labels()
         if was_resizing or event.button() == Qt.LeftButton:
             self._remember_window_geometry()
-            self._notify_settings_changed()
+            self.presentation_changed.emit()
         event.accept()
 
     def enable_drag(self):
@@ -1611,8 +1729,14 @@ class GameOverlay(QWidget):
         self._refresh_lock_state()
         self._refresh_labels()
         self._position_lock_button()
+        if self.is_cinema():
+            self._cinema_hover_timer.start()
+        for item in getattr(self, "_visible_items", []):
+            if item.copyable and item.item_id and not self.is_cinema():
+                self.subtitle_presented.emit(item.item_id)
 
     def hideEvent(self, event):
+        self._stop_cinema_hover()
         if hasattr(self, "_lock_button"):
             self._lock_button.hide()
         if hasattr(self, "_qr_popup"):
@@ -1628,6 +1752,7 @@ class GameOverlay(QWidget):
     def prepare_shutdown(self):
         """Prevent auxiliary dialogs from starting more work while quitting."""
         self._model_preparation_status.stop()
+        self._stop_cinema_hover()
         monitors = []
         for dialog in (self._settings_dialog, self._first_run_wizard):
             if dialog:
@@ -1657,6 +1782,7 @@ class GameOverlay(QWidget):
             callback()
             return
         self._fade_timer.stop()
+        self._stop_cinema_hover()
         self._model_preparation_status.stop()
         for index, signal in enumerate(self._screen_connections):
             try:

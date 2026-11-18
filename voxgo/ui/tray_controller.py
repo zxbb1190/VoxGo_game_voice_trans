@@ -80,6 +80,8 @@ class TrayController:
                 "toggle_translation": self.menu.addAction(ui_text(ui_language, "暂停翻译", "Pause Translation")),
                 "clear_history": self.menu.addAction(ui_text(ui_language, "清空字幕", "Clear Subtitles")),
                 "compact_mode": self.menu.addAction(ui_text(ui_language, "启用紧凑浮窗", "Enable Compact Overlay")),
+                "display_mode": self.menu.addAction(ui_text(ui_language, "切换为电影字幕", "Switch to cinema subtitles")),
+                "lock_overlay": self.menu.addAction(ui_text(ui_language, "锁定浮窗", "Lock overlay")),
             }
             self.menu.addSeparator()
             self.actions["settings"] = self.menu.addAction(ui_text(ui_language, "设置", "Settings"))
@@ -95,6 +97,8 @@ class TrayController:
             self.actions["toggle_translation"].triggered.connect(self._owner._toggle_translation)
             self.actions["clear_history"].triggered.connect(self._owner._clear_history)
             self.actions["compact_mode"].triggered.connect(self._owner._tray_toggle_compact_mode)
+            self.actions["display_mode"].triggered.connect(self._owner._tray_toggle_display_mode)
+            self.actions["lock_overlay"].triggered.connect(self._owner._tray_toggle_lock)
             self.actions["settings"].triggered.connect(self._owner._tray_open_settings)
             self.actions["fullscreen_help"].triggered.connect(self._owner._tray_show_fullscreen_help)
             self.actions["quit"].triggered.connect(lambda: self._owner._request_shutdown(from_tray=True))
@@ -139,12 +143,22 @@ class TrayController:
                 "Resume Translation" if paused else "Pause Translation",
             ))
         if "compact_mode" in self.actions:
+            self.actions["compact_mode"].setEnabled(shutdown == 'idle' and getattr(config.overlay, 'display_mode', 'classic') != 'cinema')
             compact = bool(getattr(config.overlay, "compact_mode", False))
             self.actions["compact_mode"].setText(ui_text(
                 ui_language,
                 "退出紧凑浮窗" if compact else "启用紧凑浮窗",
                 "Exit Compact Overlay" if compact else "Enable Compact Overlay",
             ))
+        if 'display_mode' in self.actions:
+            cinema = getattr(config.overlay, 'display_mode', 'classic') == 'cinema'
+            self.actions['display_mode'].setText(ui_text(ui_language,
+                '切换为经典浮窗' if cinema else '切换为电影字幕',
+                'Switch to classic overlay' if cinema else 'Switch to cinema subtitles'))
+        if 'lock_overlay' in self.actions:
+            locked = bool(getattr(config.overlay, 'locked', False))
+            self.actions['lock_overlay'].setText(ui_text(ui_language,
+                '解锁浮窗' if locked else '锁定浮窗', 'Unlock overlay' if locked else 'Lock overlay'))
         static_labels = {
             "clear_history": ("清空字幕", "Clear Subtitles"),
             "reset_overlay_position": ("重置浮窗位置", "Reset Overlay Position"),

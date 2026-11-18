@@ -88,12 +88,90 @@ class UpdateOfflineUiTest(unittest.TestCase):
         self.assertFalse(panel.button.isEnabled())
         panel.close()
 
+    def test_only_verified_lite_offers_mirror_and_failure_allows_retry(self):
+        from PyQt5.QtTest import QTest
+        from voxgo.update.checker import gitcode_lite_url
+        sha = 'a' * 64
+        record = dict(version='0.6.1', url=gitcode_lite_url('0.6.1'), sha256=sha)
+        info = UpdateInfo('0.6.1', sha256_lite=sha)
+        with patch('voxgo.update.installer.auto_update_supported', return_value=True):
+            for edition, verified in [('lite', False), ('full', True), ('full-cuda', True), ('lite', True)]:
+                info.raw = {'gitcode_lite': record} if verified else {}
+                with patch('voxgo.update.installer.detect_edition', return_value=edition):
+                    panel = UpdateInstallPanel(info, 'zh-CN', Mock())
+                panel.show()
+                try:
+                    available = verified and edition == 'lite'
+                    self.assertEqual(panel.source_combo.isVisible(), available)
+                    self.assertEqual(panel.source_combo.currentData(), 'github')
+                    if available:
+                        self.assertEqual(panel.source_combo.itemText(1), '国内镜像（GitCode）')
+                        panel.source_combo.setCurrentIndex(1)
+                        prepared = Mock()
+                        with patch('voxgo.update.installer.prepare_update',
+                                   side_effect=[OSError('timeout'), prepared]) as download:
+                            for i, source in enumerate(['gitcode', 'github']):
+                                panel.button.click()
+                                for _ in range(100):
+                                    QTest.qWait(5)
+                                    if not panel.busy:
+                                        break
+                                self.assertFalse(panel.busy)
+                                self.assertEqual(download.call_args.kwargs['source'], source)
+                                if i == 0:
+                                    self.assertIsNone(panel.prepared)
+                                    self.assertTrue(panel.source_combo.isEnabled())
+                                    panel.source_combo.setCurrentIndex(0)
+                            self.assertIs(panel.prepared, prepared)
+                            self.assertFalse(panel.source_combo.isVisible())
+                            panel.on_shutdown.assert_not_called()
+                finally:
+                    panel.discard()
+                    panel.close()
+
     def test_downloaded_model_still_offers_integrity_repair(self):
         with patch("voxgo.translation.local_models.model_files_present", return_value=True):
             panel = LocalModelPanel(TranslationConfig(), "en-US")
         self.assertTrue(panel.button.isEnabled())
         self.assertEqual(panel.button.text(), "Verify / Repair Model")
         panel.close()
+
+    def test_cancel_racing_verified_download_discards_it_and_keeps_both_sources(self):
+        from threading import Event
+        from PyQt5.QtTest import QTest
+        from voxgo.update.checker import gitcode_lite_url
+        stop = Event()
+        update = UpdateInfo('0.6.1', sha256_lite='f' * 64)
+        update.raw['gitcode_lite'] = dict(version=update.latest, url=gitcode_lite_url(update.latest),
+                                         sha256=update.sha256_lite)
+        prepared = Mock()
+
+        def at_end(info, progress, source, cancel):
+            stop.wait(3)
+            return prepared
+
+        with patch('voxgo.update.installer.auto_update_supported', return_value=True), \
+                patch('voxgo.update.installer.detect_edition', return_value='lite'), \
+                patch('voxgo.update.installer.prepare_update', side_effect=at_end):
+            panel = UpdateInstallPanel(update, 'en-US', Mock())
+            try:
+                panel.show()
+                panel.button.click()
+                self.assertTrue(panel.cancel_button.isVisible())
+                panel.cancel_button.click()
+                stop.set()
+                for _ in range(100):
+                    QTest.qWait(5)
+                    if not panel.busy:
+                        break
+                prepared.cleanup.assert_called_once()
+                self.assertIsNone(panel.prepared)
+                self.assertTrue(panel.source_combo.isEnabled())
+                self.assertTrue(panel.button.isEnabled())
+                panel.on_shutdown.assert_not_called()
+            finally:
+                stop.set()
+                panel.close()
 
     def test_dismissing_prepared_update_cleans_staging_but_not_after_handoff(self):
         dialog = UpdatePromptDialog(UpdateInfo(latest="9.0.0"), "0.4.1", lambda version: None)

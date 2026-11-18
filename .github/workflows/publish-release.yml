@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, for example 0.6.0"
+        description: "Release version, for example 0.6.1"
         required: true
-        default: "0.6.0"
+        default: "0.6.1"
 
 permissions:
   contents: write
@@ -90,6 +90,7 @@ jobs:
           overwrite_files: true
 
       - name: Sync GitCode Lite mirror
+        id: gitcode_mirror
         # A mirror outage must not block the already-published GitHub update.
         continue-on-error: true
         shell: pwsh
@@ -106,12 +107,13 @@ jobs:
           $mirrorCommit = ($mirrorHead -split '\s+')[0]
           .\.venv-win\Scripts\python.exe scripts/publish_gitcode_release.py --tag "$env:TAG_NAME" --zip "release/VoxGo-v$env:APP_VERSION-lite.zip" --notes-file release-notes.md --sha256 "$env:LITE_SHA256" --target-commitish "$mirrorCommit"
           if ($LASTEXITCODE -ne 0) { throw "GitCode mirror synchronization failed" }
-          "GITCODE_MIRROR_VERIFIED=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "verified=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Update website release manifest
         shell: pwsh
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          GITCODE_MIRROR_VERIFIED: ${{ steps.gitcode_mirror.outputs.verified }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

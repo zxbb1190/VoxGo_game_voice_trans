@@ -125,6 +125,9 @@ class Issue2UiTest(unittest.TestCase):
             def setText(self, text):
                 self.text = text
 
+            def setEnabled(self, enabled):
+                self.enabled = enabled
+
         class Menu:
             def __init__(self, parent):
                 self.parent = parent
@@ -186,6 +189,8 @@ class Issue2UiTest(unittest.TestCase):
             _toggle_translation=lambda: None,
             _clear_history=lambda: None,
             _tray_toggle_compact_mode=lambda: None,
+            _tray_toggle_display_mode=lambda: None,
+            _tray_toggle_lock=lambda: None,
             _tray_open_settings=lambda: None,
             _tray_show_fullscreen_help=lambda: None,
             _request_shutdown=lambda: None,

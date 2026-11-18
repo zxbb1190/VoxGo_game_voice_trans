@@ -1,6 +1,6 @@
 from loguru import logger
 
-from voxgo.audio.capture import AudioConfig, normalize_latency_mode
+from voxgo.audio.capture import AudioConfig, normalize_latency_mode, audio_source_signature
 from voxgo.i18n import UI_LANGUAGE_ZH, language_label, normalize_ui_language, ui_text, localize_text
 from voxgo.asr.whisper_engine import (
     WhisperConfig,
@@ -40,6 +40,7 @@ class OverlaySettingsController:
     ):
         app = self._app
         previous_device = app._last_audio_device
+        previous_source = getattr(app, "_last_audio_source", audio_source_signature(app.config.audio))
         previous_translation = app._last_translation_settings
         previous_whisper_device = app._last_whisper_device
         previous_whisper_model = app._current_recognizer_model_size()
@@ -63,6 +64,12 @@ class OverlaySettingsController:
         previous_ui_language = normalize_ui_language(
             getattr(app.config.app, "language", UI_LANGUAGE_ZH)
         )
+        if app_config and app.config.app:
+            # A settings dialog opened before first success must not erase it.
+            for name in ("first_subtitle_at", "first_translation_at", "subtitle_check_completed",
+                         "community_invitation_seen", "community_invitation_dismissed"):
+                if getattr(app.config.app, name, False):
+                    setattr(app_config, name, getattr(app.config.app, name))
         app.config.app = app_config or app.config.app or RuntimeConfig()
         app.config.app.language = normalize_ui_language(
             getattr(app.config.app, "language", UI_LANGUAGE_ZH)
@@ -73,86 +80,8 @@ class OverlaySettingsController:
             app.config.translation.provider
         )
         app.config.update = update_config or app.config.update or UpdateSettings()
-        app.config.whisper.device = normalize_whisper_device(
-            getattr(whisper_config, "device", app.config.whisper.device)
-        )
-        for key in (
-            "model_size",
-            "fast_model_size",
-            "pure_english_environment",
-            "enable_english_model",
-            "english_model_size",
-            "fast_english_model_size",
-        ):
-            if hasattr(whisper_config, key):
-                setattr(app.config.whisper, key, getattr(whisper_config, key))
-        app.config.whisper.multilingual_asr_strategy = "legacy"
-        app.config.whisper.model_download_source = normalize_model_download_source(
-            getattr(
-                whisper_config,
-                "model_download_source",
-                getattr(app.config.whisper, "model_download_source", "modelscope"),
-            ),
-            getattr(
-                whisper_config,
-                "model_download_endpoint",
-                getattr(app.config.whisper, "model_download_endpoint", ""),
-            ),
-        )
-        app.config.whisper.model_download_endpoint = normalize_model_download_endpoint(
-            getattr(
-                whisper_config,
-                "model_download_endpoint",
-                getattr(app.config.whisper, "model_download_endpoint", ""),
-            )
-        )
-        app.config.audio.input_device_id = getattr(audio_config, "input_device_id", "")
-        app.config.audio.input_device_index = audio_config.input_device_index
-        app.config.audio.input_device_name = audio_config.input_device_name
-        app.config.audio.latency_mode = normalize_latency_mode(
-            getattr(audio_config, "latency_mode", app.config.audio.latency_mode)
-        )
-        app.config.audio.chunk_duration_ms = getattr(
-            audio_config,
-            "chunk_duration_ms",
-            app.config.audio.chunk_duration_ms,
-        )
-        app.config.audio.speech_threshold_blocks = getattr(
-            audio_config,
-            "speech_threshold_blocks",
-            app.config.audio.speech_threshold_blocks,
-        )
-        app.config.audio.silence_limit_blocks = getattr(
-            audio_config,
-            "silence_limit_blocks",
-            app.config.audio.silence_limit_blocks,
-        )
-        app.config.audio.max_buffer_blocks = getattr(
-            audio_config,
-            "max_buffer_blocks",
-            app.config.audio.max_buffer_blocks,
-        )
-        app.config.audio.max_speech_seconds = audio_config.max_speech_seconds
-        app.config.audio.pre_roll_ms = getattr(
-            audio_config,
-            "pre_roll_ms",
-            app.config.audio.pre_roll_ms,
-        )
-        app.config.audio.speech_idle_timeout_ms = getattr(
-            audio_config,
-            "speech_idle_timeout_ms",
-            app.config.audio.speech_idle_timeout_ms,
-        )
-        app.config.audio.min_segment_seconds = getattr(
-            audio_config,
-            "min_segment_seconds",
-            app.config.audio.min_segment_seconds,
-        )
-        app.config.audio.min_segment_peak_margin_db = getattr(
-            audio_config,
-            "min_segment_peak_margin_db",
-            app.config.audio.min_segment_peak_margin_db,
-        )
+        self._apply_whisper_settings(whisper_config)
+        self._apply_audio_settings(audio_config)
         app._migrate_runtime_defaults(app.config, preserve_existing_audio_tuning=False)
         current_language_flow = app._sync_language_flow()
         app._sync_whisper_vad_limit()
@@ -228,9 +157,13 @@ class OverlaySettingsController:
             normalize_update_channel(getattr(app.config.update, "channel", "stable")),
         )
         speech_signature = audio_runtime_signature(app.config)
+        current_source = audio_source_signature(app.config.audio)
         speech_audio_changed = (getattr(app, "_last_speech_audio_signature", speech_signature) != speech_signature)
         if app._running and (current_device != previous_device or speech_audio_changed):
-            app._restart_audio_capture(reuse_noise_gate=current_device[:3] == previous_device[:3])
+            if current_language_runtime == previous_language_runtime:
+                app._on_audio_source_lost()
+            app._clear_realtime_buffers("audio_source_changed")
+            app._restart_audio_capture(reuse_noise_gate=current_source == previous_source)
         if current_language_runtime != previous_language_runtime:
             app._handle_language_flow_changed(current_language_flow[0], current_language_flow[1])
             app._notify_user(
@@ -242,35 +175,7 @@ class OverlaySettingsController:
         elif defer_recognizer_config:
             app._queue_recognizer_config()
         if current_translation != previous_translation:
-            provider_label = TRANSLATION_PROVIDERS.get(
-                normalize_translation_provider(app.config.translation.provider),
-                app.config.translation.provider,
-            )
-            provider_label = localize_text(current_ui_language, provider_label)
-            detail = ui_text(
-                current_ui_language,
-                f"服务商: {provider_label}",
-                f"Provider: {provider_label}",
-            )
-            if normalize_translation_provider(app.config.translation.provider) == "google":
-                detail += ui_text(
-                    current_ui_language,
-                    "\n接口: Google Cloud Translation Basic v2",
-                    "\nAPI: Google Cloud Translation Basic v2",
-                )
-            elif normalize_translation_provider(app.config.translation.provider) == "local":
-                detail += ui_text(current_ui_language, "\n本地中英双向翻译，无需 API Key", "\nLocal English-Chinese translation; no API key needed")
-            else:
-                detail += ui_text(
-                    current_ui_language,
-                    f"\n模型: {app.config.translation.model}\n兼容地址: {app.config.translation.endpoint}",
-                    f"\nModel: {app.config.translation.model}\nEndpoint: {app.config.translation.endpoint}",
-                )
-            app._notify_user(
-                ui_text(current_ui_language, "翻译接口已更新", "Translation Provider Updated"),
-                detail,
-                ui_text(current_ui_language, "状态", "Status"),
-            )
+            self._notify_translation_settings(current_ui_language)
         if current_whisper_device != previous_whisper_device:
             app._notify_user(
                 ui_text(current_ui_language, "识别设备已更新", "Recognition Device Updated"),
@@ -316,12 +221,107 @@ class OverlaySettingsController:
             )
         app._last_audio_device = current_device
         app._last_speech_audio_signature = speech_signature
+        app._last_audio_source = current_source
         app._last_multilingual_asr_strategy = getattr(app.config.whisper, "multilingual_asr_strategy", "legacy")
         app._last_translation_settings = current_translation
         app._last_language_flow = current_language_flow
         app._last_whisper_device = current_whisper_device
         app._last_model_download_source = current_model_download_source
         app._sync_tray_state()
+        self._log_settings(overlay_config, hotkey_config, current_language_flow,
+                           current_whisper_device, current_model_download_source)
+
+    def _apply_whisper_settings(self, whisper_config):
+        app = self._app
+        app.config.whisper.device = normalize_whisper_device(
+            getattr(whisper_config, "device", app.config.whisper.device)
+        )
+        for key in (
+            "model_size",
+            "fast_model_size",
+            "pure_english_environment",
+            "enable_english_model",
+            "english_model_size",
+            "fast_english_model_size",
+        ):
+            if hasattr(whisper_config, key):
+                setattr(app.config.whisper, key, getattr(whisper_config, key))
+        app.config.whisper.multilingual_asr_strategy = "legacy"
+        app.config.whisper.model_download_source = normalize_model_download_source(
+            getattr(
+                whisper_config,
+                "model_download_source",
+                getattr(app.config.whisper, "model_download_source", "modelscope"),
+            ),
+            getattr(
+                whisper_config,
+                "model_download_endpoint",
+                getattr(app.config.whisper, "model_download_endpoint", ""),
+            ),
+        )
+        app.config.whisper.model_download_endpoint = normalize_model_download_endpoint(
+            getattr(
+                whisper_config,
+                "model_download_endpoint",
+                getattr(app.config.whisper, "model_download_endpoint", ""),
+            )
+        )
+
+    def _apply_audio_settings(self, audio_config):
+        app = self._app
+        for key, default in (("source_mode", "system"), ("process_path", ""),
+                             ("process_id", 0), ("process_started", 0)):
+            setattr(app.config.audio, key, getattr(audio_config, key, default))
+        app.config.audio.input_device_id = getattr(audio_config, "input_device_id", "")
+        app.config.audio.input_device_index = audio_config.input_device_index
+        app.config.audio.input_device_name = audio_config.input_device_name
+        app.config.audio.latency_mode = normalize_latency_mode(
+            getattr(audio_config, "latency_mode", app.config.audio.latency_mode)
+        )
+        app.config.audio.chunk_duration_ms = getattr(
+            audio_config,
+            "chunk_duration_ms",
+            app.config.audio.chunk_duration_ms,
+        )
+        app.config.audio.speech_threshold_blocks = getattr(
+            audio_config,
+            "speech_threshold_blocks",
+            app.config.audio.speech_threshold_blocks,
+        )
+        app.config.audio.silence_limit_blocks = getattr(
+            audio_config,
+            "silence_limit_blocks",
+            app.config.audio.silence_limit_blocks,
+        )
+        app.config.audio.max_buffer_blocks = getattr(
+            audio_config,
+            "max_buffer_blocks",
+            app.config.audio.max_buffer_blocks,
+        )
+        app.config.audio.max_speech_seconds = audio_config.max_speech_seconds
+        app.config.audio.pre_roll_ms = getattr(
+            audio_config,
+            "pre_roll_ms",
+            app.config.audio.pre_roll_ms,
+        )
+        app.config.audio.speech_idle_timeout_ms = getattr(
+            audio_config,
+            "speech_idle_timeout_ms",
+            app.config.audio.speech_idle_timeout_ms,
+        )
+        app.config.audio.min_segment_seconds = getattr(
+            audio_config,
+            "min_segment_seconds",
+            app.config.audio.min_segment_seconds,
+        )
+        app.config.audio.min_segment_peak_margin_db = getattr(
+            audio_config,
+            "min_segment_peak_margin_db",
+            app.config.audio.min_segment_peak_margin_db,
+        )
+
+    def _log_settings(self, overlay_config, hotkey_config, current_language_flow, current_whisper_device, current_model_download_source):
+        app = self._app
         logger.info(
             "浮窗设置已应用: opacity={:.2f}, bg_opacity={:.2f}, text_color={}, show_original={}, audio_device={} {}, latency_mode={}, beam_size={}, max_speech={}s, min_segment={:.2f}s, min_peak_margin={:.1f}dB, language={}→{}, whisper_device={}, model_download_source={}, provider={}, model={}, endpoint={}, hotkeys={}/{}/{}/{}/{}",
             overlay_config.opacity,
@@ -347,4 +347,36 @@ class OverlaySettingsController:
             hotkey_config.toggle_translation,
             hotkey_config.toggle_lock,
             hotkey_config.toggle_compact,
+        )
+
+    def _notify_translation_settings(self, current_ui_language):
+        app = self._app
+        provider_label = TRANSLATION_PROVIDERS.get(
+            normalize_translation_provider(app.config.translation.provider),
+            app.config.translation.provider,
+        )
+        provider_label = localize_text(current_ui_language, provider_label)
+        detail = ui_text(
+            current_ui_language,
+            f"服务商: {provider_label}",
+            f"Provider: {provider_label}",
+        )
+        if normalize_translation_provider(app.config.translation.provider) == "google":
+            detail += ui_text(
+                current_ui_language,
+                "\n接口: Google Cloud Translation Basic v2",
+                "\nAPI: Google Cloud Translation Basic v2",
+            )
+        elif normalize_translation_provider(app.config.translation.provider) == "local":
+            detail += ui_text(current_ui_language, "\n本地中英双向翻译，无需 API Key", "\nLocal English-Chinese translation; no API key needed")
+        else:
+            detail += ui_text(
+                current_ui_language,
+                f"\n模型: {app.config.translation.model}\n兼容地址: {app.config.translation.endpoint}",
+                f"\nModel: {app.config.translation.model}\nEndpoint: {app.config.translation.endpoint}",
+            )
+        app._notify_user(
+            ui_text(current_ui_language, "翻译接口已更新", "Translation Provider Updated"),
+            detail,
+            ui_text(current_ui_language, "状态", "Status"),
         )

@@ -142,3 +142,14 @@ class ReleaseSpeechPolicyTests(unittest.TestCase):
         with patch.object(release_preflight,'_read',side_effect=candidate):
             with self.assertRaisesRegex(release_preflight.PreflightError,'default to compatibility'):
                 release_preflight.check_product_defaults(ROOT,'afc33a67')
+
+    def test_preflight_rejects_default_process_capture_without_changing_audio_guard(self):
+        original = release_preflight._read
+        def changed(root, relative):
+            source = original(root, relative)
+            if relative == 'voxgo/audio/capture.py':
+                source = source.replace('source_mode: str = "system"', 'source_mode: str = "process"')
+            return source
+        with patch.object(release_preflight, '_read', side_effect=changed):
+            with self.assertRaisesRegex(release_preflight.PreflightError, 'must remain opt-in'):
+                release_preflight.check_product_defaults(ROOT, 'afc33a67')

@@ -855,12 +855,6 @@ class SpeechRecognizer:
             logger.debug("CUDA 运行环境不可用: {}", e)
             return False
 
-    def _compute_type_for_device(self, device: str) -> str:
-        configured = (self.config.compute_type or "auto").strip().lower()
-        if configured in ("", "auto", "default"):
-            return "float16" if device == "cuda" else "int8"
-        return configured
-
     def _compute_candidates_for_device(self, device: str) -> list:
         configured = (self.config.compute_type or "auto").strip().lower()
         if configured not in ("", "auto", "default"):

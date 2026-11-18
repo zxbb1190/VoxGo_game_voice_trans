@@ -109,6 +109,13 @@ def _valid_identity(app):
 def initialize_telemetry_v2(config, runtime_dir, now=None):
     root = Path(runtime_dir)
     try:
+        # Cold Qt / configuration imports must not consume the short settings
+        # lock budget of another process starting at the same time.
+        from voxgo.config.loader import serialize_user_settings
+        from voxgo.i18n import normalize_ui_language, system_ui_language
+        new_language = None
+        if not _is_historical_install(config, root):
+            new_language = system_ui_language()
         with settings_lock(root):
             path = root / 'user_settings.json'
             existed = path.exists()
@@ -120,14 +127,13 @@ def initialize_telemetry_v2(config, runtime_dir, now=None):
                         or app.get('basic_install_seed', '') != ''
                         or app.get('basic_first_run_date', '') != ''):
                     raise ValueError('existing v2 identity invalid; refusing identity reset')
-                historical = existed or (root / 'telemetry_consent.json').exists() or config.app.setup_completed or config.app.telemetry_consent != 'unknown' or getattr(config.app, '_telemetry_existing_config', False) or any((root / p).exists() for p in ('analytics', 'analytics-remote'))
+                historical = existed or _is_historical_install(config, root)
                 origin = 'historical_install' if historical else 'new_install'
                 if not historical:
-                    from voxgo.i18n import system_ui_language
-                    config.app.language = system_ui_language()
+                    if new_language is not None:
+                        config.app.language = new_language
                 app.update(basic_install_seed=str(uuid.uuid4()), basic_first_run_date='' if historical else (now or datetime.now(timezone.utc)).date().isoformat(), telemetry_v2_migrated=True, telemetry_install_origin=origin)
                 authority['full_telemetry_source'] = 'migration_' + authority['telemetry_consent'] if historical else 'new_install_pending'
-                from voxgo.config.loader import serialize_user_settings
                 defaults = serialize_user_settings(config)
                 for section, values in defaults.items():
                     data.setdefault(section, values)
@@ -145,7 +151,6 @@ def initialize_telemetry_v2(config, runtime_dir, now=None):
             if type(app.get('setup_completed')) is bool:
                 config.app.setup_completed = app['setup_completed']
             if isinstance(app.get('language'), str):
-                from voxgo.i18n import normalize_ui_language
                 config.app.language = normalize_ui_language(app['language'])
             for key in IDENTITY_FIELDS:
                 setattr(config.app, key, app[key])
@@ -157,6 +162,13 @@ def initialize_telemetry_v2(config, runtime_dir, now=None):
         config.app.telemetry_consent = 'unknown'
         config.app.telemetry_epoch = ''
     return config.app
+
+
+def _is_historical_install(config, root):
+    return (config.app.setup_completed or config.app.telemetry_consent != 'unknown'
+            or getattr(config.app, '_telemetry_existing_config', False)
+            or any((root / name).exists() for name in (
+                'user_settings.json', 'telemetry_consent.json', 'analytics', 'analytics-remote')))
 
 
 def persist_user_settings(config, root, data):

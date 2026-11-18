@@ -68,4 +68,7 @@ def audio_runtime_signature(config):
         "input_device_id", "input_device_index", "input_device_name", "latency_mode",
         "chunk_duration_ms", "speech_threshold_blocks", "silence_limit_blocks",
         "max_buffer_blocks", "max_speech_seconds", "pre_roll_ms", "speech_idle_timeout_ms",
-    )) + (getattr(audio, "diagnostics_latency_mode", ""),)
+    )) + tuple(getattr(audio, name, default) for name, default in (
+        ("diagnostics_latency_mode", ""), ("source_mode", "system"),
+        ("process_path", ""), ("process_id", 0), ("process_started", 0),
+    ))

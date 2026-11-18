@@ -7,8 +7,11 @@ from pathlib import Path
 def package_type():
     if not getattr(sys, 'frozen', False):
         return 'source'
+    return read_package_type(Path(__file__).resolve().parent.parent / 'package-info.json')
+
+
+def read_package_type(path: Path):
     try:
-        path = Path(__file__).resolve().parent.parent / 'package-info.json'
         if path.stat().st_size > 1024:
             return 'unknown'
         value = json.loads(path.read_text(encoding='utf-8')).get('package_type')

@@ -3,8 +3,8 @@
 import threading
 import time
 
-from PyQt5.QtCore import QObject, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QComboBox, QPushButton, QLabel, QProgressBar
+from PyQt5.QtCore import QObject, Qt, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QDialog, QHBoxLayout, QVBoxLayout, QComboBox, QPushButton, QLabel, QProgressBar
 
 from voxgo.i18n import ui_text
 
@@ -84,6 +84,39 @@ class BackgroundPanel(QWidget):
         self.status.setText(prefix + message[:500])
 
 
+class LocalModelRequiredDialog(QDialog):
+    SKIP = 1
+    DOWNLOAD = 2
+
+    def __init__(self, language, downloading=False, parent=None):
+        super().__init__(parent)
+        self.setWindowFlag(Qt.WindowContextHelpButtonHint, False)
+        self.setWindowTitle(ui_text(language, "本地翻译模型尚未准备好", "Local translation model is not ready"))
+        layout = QVBoxLayout(self)
+        self.message = QLabel(ui_text(
+            language,
+            "模型正在下载。继续跳过可进入下一步，但模型准备好前无法使用本地翻译。选择“下载模型”可返回查看下载进度。" if downloading else
+            "本地翻译模型尚未下载完整。继续跳过可进入下一步，但模型准备好前无法使用本地翻译。选择“下载模型”会留在当前页面下载。",
+            "The model is downloading. You can skip to the next step, but local translation will be unavailable until it is ready. Choose Download model to return to the download progress." if downloading else
+            "The local translation model has not been fully downloaded. You can skip to the next step, but local translation will be unavailable until it is ready. Choose Download model to download it on this page.",
+        ))
+        self.message.setWordWrap(True)
+        layout.addWidget(self.message)
+        buttons = QHBoxLayout()
+        buttons.addStretch()
+        self.skip_button = QPushButton(ui_text(language, "继续跳过", "Skip and continue"))
+        self.skip_button.setAutoDefault(False)
+        self.download_button = QPushButton(ui_text(language, "下载模型", "Download model"))
+        self.download_button.setDefault(True)
+        self.skip_button.clicked.connect(lambda: self.done(self.SKIP))
+        self.download_button.clicked.connect(lambda: self.done(self.DOWNLOAD))
+        buttons.addWidget(self.skip_button)
+        buttons.addWidget(self.download_button)
+        layout.addLayout(buttons)
+        self.resize(440, self.sizeHint().height())
+        self.download_button.setFocus()
+
+
 class LocalModelPanel(BackgroundPanel):
     def __init__(self, config, language, parent=None):
         super().__init__(language, parent)
@@ -135,7 +168,25 @@ class LocalModelPanel(BackgroundPanel):
                 "Model ready. Translate offline without an API key." if ready else "One-time download: about 317 MB. Then translate English ↔ Chinese offline without an API key.",
             ))
 
+    def confirm_before_continue(self):
+        from voxgo.translation.local_models import model_files_present
+
+        if model_files_present(self.models.currentData()):
+            return True
+        prompt = LocalModelRequiredDialog(self.language, self.busy, self)
+        choice = prompt.exec_()
+        prompt.deleteLater()
+        if choice == LocalModelRequiredDialog.SKIP:
+            return True
+        if choice == LocalModelRequiredDialog.DOWNLOAD:
+            # The existing worker may have finished while the prompt was open.
+            if not model_files_present(self.models.currentData()):
+                self._download()
+        return False
+
     def _download(self):
+        if self.busy:
+            return
         from voxgo.translation.local_models import download_model
 
         model = self.models.currentData()
@@ -164,7 +215,7 @@ class LocalModelPanel(BackgroundPanel):
 class UpdateInstallPanel(BackgroundPanel):
     def __init__(self, update, language, on_shutdown, parent=None):
         super().__init__(language, parent)
-        from voxgo.update.installer import auto_update_supported
+        from voxgo.update.installer import auto_update_supported, detect_edition
 
         self.update = update
         self.on_shutdown = on_shutdown
@@ -172,13 +223,37 @@ class UpdateInstallPanel(BackgroundPanel):
         self.installing = False
         self.button.setText(self.tr_text("下载更新", "Download Update"))
         supported = auto_update_supported() and callable(on_shutdown)
-        self.button.setEnabled(supported)
+        edition = detect_edition() if supported else None
+        self.source_combo = QComboBox()
+        self.source_combo.addItem("GitHub", "github")
+        self.source_combo.addItem("", "gitcode")
+        self.cancel_download = threading.Event()
+        self.cancel_button = QPushButton()
+        self.cancel_button.hide()
+        self.cancel_button.clicked.connect(self._cancel_download)
+        self.refresh_source_labels()
+        self.source_combo.setVisible(edition == 'lite' and bool(update.verified_gitcode_lite_url()))
+        self.layout_box.insertWidget(0, self.source_combo)
+        self.layout_box.addWidget(self.cancel_button)
+        self.button.setEnabled(supported and edition != 'unknown')
         self.status.setText(self.tr_text(
             "下载完成后点击安装并重启，保留配置和模型。" if supported else "源码运行不支持自动安装，请通过下载页获取新版。",
             "After downloading, click Install and Restart. Settings and models are preserved." if supported else "Automatic installation is unavailable in source mode. Use the download page.",
         ))
+        if edition == 'unknown':
+            self.status.setText(self.tr_text("无法识别当前安装包类型，请打开下载页手动更新。",
+                                             "Cannot identify this edition. Open Downloads to update manually."))
         self.button.clicked.connect(self._action)
         self.signals.finished.connect(self._finished)
+
+    def refresh_source_labels(self):
+        self.source_combo.setAccessibleName(self.tr_text("下载来源", "Download source"))
+        self.source_combo.setItemText(1, self.tr_text("国内镜像（GitCode）", "China mirror (GitCode)"))
+        self.cancel_button.setText(self.tr_text("取消下载", "Cancel download"))
+
+    def _cancel_download(self):
+        self.cancel_download.set()
+        self.cancel_button.setEnabled(False)
 
     def discard(self):
         if not self.busy and not self.installing and self.prepared is not None:
@@ -189,24 +264,40 @@ class UpdateInstallPanel(BackgroundPanel):
         from voxgo.update.installer import prepare_update, launch_update
 
         if self.prepared is None:
+            source = self.source_combo.currentData()
+            self.cancel_download.clear()
+            self.cancel_button.setEnabled(True)
+            self.cancel_button.setVisible(not self.source_combo.isHidden())
+            self.source_combo.setEnabled(False)
             self.status.setText(self.tr_text("正在下载并校验更新…", "Downloading and verifying the update…"))
-            self._start(lambda progress: prepare_update(self.update, progress=progress))
+            self._start(lambda progress: prepare_update(self.update, progress=progress, source=source,
+                                                        cancel=self.cancel_download))
         else:
             self.installing = True
             self.status.setText(self.tr_text("正在准备安装，程序即将退出并重启…", "Preparing installation. VoxGo will close and restart…"))
             self._start(lambda progress: launch_update(self.prepared))
 
     def _finished(self, result):
+        if self.cancel_download.is_set() and not self.installing:
+            result.cleanup()
+            self._failed("")
+            return
         self.busy = False
+        self.cancel_button.hide()
         self.bar.hide()
         if self.installing:
             self.on_shutdown()
         else:
             self.prepared = result
+            self.source_combo.hide()
             self.status.setText(self.tr_text("更新已校验，点击下方按钮安装。", "Update verified. Click below to install."))
             self.button.setText(self.tr_text("安装并重启", "Install and Restart"))
             self.button.setEnabled(True)
 
     def _failed(self, message):
         self.installing = False
+        self.cancel_button.hide()
+        self.source_combo.setEnabled(self.prepared is None)
         super()._failed(message)
+        if self.cancel_download.is_set():
+            self.status.setText(self.tr_text("下载已取消，可切换来源后重试。", "Download cancelled. Choose a source and retry."))

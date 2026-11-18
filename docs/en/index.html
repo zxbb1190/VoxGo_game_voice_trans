@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
+  <meta name="description" content="Translate game dialogue and squad chat live. Cinema subtitles show the translation above a smaller original line. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
   <meta name="keywords" content="VoxGo, game voice translator, live game subtitles, multilingual speech translation, Japanese game dialogue, Korean voice translation, Russian voice translation, Discord subtitles, Whisper, offline English Chinese translation" />
   <link rel="canonical" href="https://voxgo.cn/en/" />
   <link rel="alternate" hreflang="zh-CN" href="https://voxgo.cn/" />
@@ -15,7 +15,7 @@
   <link rel="alternate" hreflang="x-default" href="https://voxgo.cn/" />
 
   <meta property="og:title" content="VoxGo — Live Game Subtitles &amp; Voice Translation" />
-  <meta property="og:description" content="Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
+  <meta property="og:description" content="Translate game dialogue and squad chat live. Cinema subtitles show the translation above a smaller original line. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
   <meta property="og:url" content="https://voxgo.cn/en/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://voxgo.cn/assets/logo.png" />
@@ -27,7 +27,7 @@
   <meta property="og:locale:alternate" content="ru_RU" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="VoxGo — Live Game Subtitles &amp; Voice Translation" />
-  <meta name="twitter:description" content="Live subtitles for game dialogue, squad voice and streams. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
+  <meta name="twitter:description" content="Translate game dialogue and squad chat live. Cinema subtitles show the translation above a smaller original line. Five languages, 20 online directions; Japanese, Korean and Russian are Beta. Offline translation: English–Chinese." />
   <meta name="twitter:image" content="https://voxgo.cn/assets/logo.png" />
   <!-- SITE_I18N_SEO_END -->
   <title>VoxGo — Live Game Subtitles &amp; Voice Translation</title>
@@ -588,16 +588,16 @@ var _hmt = _hmt || [];
   <main id="top">
     <div class="container hero">
       <div class="hero-copy">
-        <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.0</span><span class="hero-scope">5 LANGUAGES · 20 ONLINE DIRECTIONS</span></div>
+        <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5 LANGUAGES · 20 ONLINE DIRECTIONS</span></div>
         <h1 class="hero-brand-title">Your game shouldn't stop at a language barrier.</h1>
         <p class="hero-tagline">Turn unfamiliar voices into<br class="tagline-break" /> subtitles you can follow.</p>
-        <p class="lead">From squad comms to game stories and live streams. VoxGo recognizes speech, translates it, and shows live subtitles in an overlay that stays with your game.</p>
+        <p class="lead">Watch the dialogue in cinema subtitles, or keep the classic overlay for team chat.</p>
         <div class="hero-languages" aria-label="Supported languages and Beta status"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">Five languages · 20 online translation directions · Japanese, Korean and Russian in Beta · English ↔ Chinese offline</p>
         <div class="actions"><a class="btn btn-primary"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">Download
             VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">China mirror (Lite v0.6.0)</a></div>
-        <div class="hero-links"><a class="hero-community" href="#story">See how audio becomes subtitles ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub source ↗</a></div>
+        <div class="hero-links"><a class="hero-community" href="#cinema">Compare subtitle modes ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub source ↗</a></div>
       </div>
       <div class="mock">
         <div class="game-screen">
@@ -641,20 +641,28 @@ var _hmt = _hmt || [];
         <div class="story-steps">
           <article class="story-step" data-scene="1"><span class="story-step-number">STEP 01 / HEAR</span><h3>GAME AUDIO</h3><p>WASAPI loopback captures the game, Discord, or video audio already playing through Windows. Use the audio meter to confirm the right output device.</p><span class="story-state">INPUT: WINDOWS SYSTEM AUDIO</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">STEP 02 / UNDERSTAND</span><h3>WHISPER ASR</h3><p>faster-whisper recognizes speech locally on your PC. VoxGo Lite downloads its recognition model on first use.</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">LOCAL ASR: ACTIVE</span></article>
-          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>In v0.6.0, choose one of 20 direct online directions or English ↔ Chinese local translation. The overlay shows the active mode.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
+          <article class="story-step" data-scene="3"><span class="story-step-number">STEP 03 / TRANSLATE</span><h3>TRANSLATION</h3><p>In v0.6.1, choose one of 20 direct online directions or English ↔ Chinese local translation. The overlay shows the active mode.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">MODE: API / LOCAL</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">STEP 04 / SEE</span><h3>OVERLAY</h3><p>Original speech and translation appear in a transparent always-on-top subtitle window. Copy a completed subtitle or mirror it to a phone on your local network.</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">OUTPUT: LIVE SUBTITLE</span></article>
         </div>
       </div>
     </section>
     <section id="languages" class="language-support">
-      <div class="container"><div class="section-head"><span class="section-kicker">v0.6.0 · MULTILINGUAL</span><h2>Five languages. 20 online directions.</h2><p>Chinese, English, Japanese (Beta), Korean (Beta) and Russian (Beta): each source can translate directly to the other four languages.</p></div>
-        <div class="language-table-wrap" role="region" aria-label="Language support" tabindex="0"><table class="language-table"><caption>Language support · v0.6.0</caption><thead><tr><th scope="col">Language</th><th scope="col">Local ASR</th><th scope="col">Online</th><th scope="col">Offline</th></tr></thead><tbody>
+      <div class="container"><div class="section-head"><span class="section-kicker">v0.6.1 · MULTILINGUAL</span><h2>Five languages. 20 online directions.</h2><p>Chinese, English, Japanese (Beta), Korean (Beta) and Russian (Beta): each source can translate directly to the other four languages.</p></div>
+        <div class="language-table-wrap" role="region" aria-label="Language support" tabindex="0"><table class="language-table"><caption>Language support · v0.6.1</caption><thead><tr><th scope="col">Language</th><th scope="col">Local ASR</th><th scope="col">Online</th><th scope="col">Offline</th></tr></thead><tbody>
 <tr><th scope="row">Chinese (Mandarin)</th><td>Supported</td><td>Other four languages</td><td>English ↔ Chinese</td></tr><tr><th scope="row">English</th><td>Supported</td><td>Other four languages</td><td>English ↔ Chinese</td></tr><tr><th scope="row">Japanese (Beta)</th><td>Supported (Beta)</td><td>Other four languages</td><td>Not supported</td></tr><tr><th scope="row">Korean (Beta)</th><td>Supported (Beta)</td><td>Other four languages</td><td>Not supported</td></tr><tr><th scope="row">Russian (Beta)</th><td>Supported (Beta)</td><td>Other four languages</td><td>Not supported</td></tr>
         </tbody></table></div><p class="language-boundary">Whisper recognizes speech on your PC. Your configured OpenAI-compatible provider/model or Google Cloud Translation Basic v2 translates recognized text online using your own API key/service access. Local OPUS supports English ↔ Chinese only; the other 18 directions require online translation. Provider language support and quality vary. No silent fallback or intermediate-language translation.</p><p class="beta-limitations">Beta languages may miss words, mistranslate or respond slowly with short callouts, noise, music or overlapping voices. We will continue improving recognition, performance and subtitle stability.</p>
       </div>
     </section>
-    <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>Choose your translation mode.</h2><p>Speech recognition runs locally in either mode. Translation can use a configured online provider or an on-device model.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>Your chosen provider</h3><p>v0.6.0 routes 20 online directions through your OpenAI-compatible service or Google Cloud Translation Basic v2. Bring your own API key; language support depends on the provider/model.</p><ul><li>Flexible provider configuration</li><li>Built-in connection test</li><li>For online use</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>No API key required</h3><p>Local OPUS is English ↔ Chinese only. Prepare the model to translate offline without an API key. The other 18 directions require an explicitly configured online provider.</p><ul><li>No API key setup</li><li>Download the model when needed</li><li>Recognition and translation can run on your PC</li></ul></div></div></div></section>
-    <section class="experience"><div class="container experience-stage"><div><span class="section-kicker">IN GAME / ALWAYS VISIBLE</span><h2>Keep playing.<br />Read the callout.</h2><p>Drag the overlay, adjust its transparency, and see both the original and translated subtitle. Choose speed, balanced, accuracy, or custom response settings; diagnostics show device and latency details.</p><div class="experience-meta"><span>OVERLAY POSITION RECOVERY</span><span>HOVER TO COPY</span><span>DEVICE DIAGNOSTICS</span></div></div><div class="experience-overlay"><small>● LIVE TRANSLATION / API</small><span>Push left with me.</span><b>跟我一起从左边推进。</b></div></div></section>
+    <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">TRANSLATION ENGINE</span><h2>Choose your translation mode.</h2><p>Speech recognition runs locally in either mode. Translation can use a configured online provider or an on-device model.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / API MODE</span><h3>Your chosen provider</h3><p>v0.6.1 routes 20 online directions through your OpenAI-compatible service or Google Cloud Translation Basic v2. Bring your own API key; language support depends on the provider/model.</p><ul><li>Flexible provider configuration</li><li>Built-in connection test</li><li>For online use</li></ul></div><div class="mode"><span class="mode-label">02 / LOCAL MODE</span><h3>No API key required</h3><p>Local OPUS is English ↔ Chinese only. Prepare the model to translate offline without an API key. The other 18 directions require an explicitly configured online provider.</p><ul><li>No API key setup</li><li>Download the model when needed</li><li>Recognition and translation can run on your PC</li></ul></div></div></div></section>
+    <section class="experience" id="cinema">
+      <div class="container experience-stage">
+        <div><h2>Cinema subtitles</h2><p>Read the translation first, with the original in smaller type underneath. Switch from the toolbar or press Ctrl+Alt+M. The classic overlay is the default.</p><p>Hover over a visible subtitle to show the controls. Drag it into place, then lock it. Hover again to unlock.</p></div>
+        <div class="subtitle-screens">
+          <figure><figcaption>Cinema mode · Windows screenshot</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="A translated line about the blue key, with the original dialogue beneath it" loading="lazy" /></a></figure>
+          <figure><figcaption>Classic overlay · Windows screenshot</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="The same dialogue in the classic overlay with its toolbar" loading="lazy" /></a></figure>
+        </div>
+      </div>
+    </section>
 
     <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">LATEST UPDATE / PATCH NOTES</span><h2>Patch Notes</h2><p>Trace every improvement to its GitHub Release.</p></div>
       <!-- CHANGELOG_HOME_START -->
@@ -730,11 +738,11 @@ var _hmt = _hmt || [];
           <details><summary>What does Beta mean for quality and latency?</summary><p>Recognition can miss words or sentence endings; translation may change entities, numbers or negation. Noise, music and overlapping speech add risk. Latency depends on your CPU, audio segmentation, network and provider. Beta means ongoing improvement; no accuracy percentage, fixed latency or game FPS guarantee is claimed.</p></details>
           <details open>
             <summary>Can VoxGo translate foreign teammate voice in real time?</summary>
-            <p>VoxGo captures game or Discord system audio. v0.6.0 supports five-language recognition and 20 online directions, with Japanese, Korean and Russian marked Beta.</p>
+            <p>VoxGo captures game or Discord system audio. v0.6.1 supports five-language recognition and 20 online directions, with Japanese, Korean and Russian marked Beta.</p>
           </details>
           <details>
             <summary>Does VoxGo support local translation?</summary>
-            <p>Yes, for English ↔ Chinese only. Prepare the local OPUS models; no API key is required. Japanese, Korean and Russian directions require online translation in v0.6.0.</p>
+            <p>Yes, for English ↔ Chinese only. Prepare the local OPUS models; no API key is required. Japanese, Korean and Russian directions require online translation in v0.6.1.</p>
           </details>
           <details open>
             <summary>Does VoxGo record my microphone?</summary>
@@ -753,7 +761,7 @@ var _hmt = _hmt || [];
           </details>
           <details>
             <summary>Which languages are supported?</summary>
-            <p>v0.6.0 supports Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta), with 20 online directions. See the language support table above.</p>
+            <p>v0.6.1 supports Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta), with 20 online directions. See the language support table above.</p>
           </details>
           <details>
             <summary>Lite, Full, or Full-CUDA?</summary>

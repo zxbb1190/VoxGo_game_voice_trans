@@ -76,6 +76,10 @@ def _make_icon(kind: str, color: str) -> QIcon:
         painter.drawLine(18, 14, 23, 14)
         painter.drawLine(21, 11, 23, 14)
         painter.drawLine(21, 17, 23, 14)
+    elif kind == "subtitles":
+        painter.drawRoundedRect(QRect(4, 6, 20, 16), 2, 2)
+        painter.drawLine(8, 14, 20, 14)
+        painter.drawLine(10, 18, 18, 18)
     elif kind == "help":
         painter.drawEllipse(QPoint(14, 14), 10, 10)
         painter.drawArc(QRect(10, 7, 8, 8), 20 * 16, 220 * 16)

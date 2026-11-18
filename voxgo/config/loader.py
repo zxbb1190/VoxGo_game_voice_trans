@@ -27,6 +27,7 @@ from voxgo.translation import TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateSettings, normalize_update_channel
 from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
 from voxgo.languages import normalize_language_flow
+from voxgo.config.models import DISPLAY_SETTING_NAMES
 
 from voxgo.config.schema import (
     OPPOSITE_LANGUAGE,
@@ -35,7 +36,6 @@ from voxgo.config.schema import (
     HotkeyConfig,
     OverlayConfig,
     RuntimeConfig,
-    normalize_language_code,
     normalize_whisper_device,
 )
 
@@ -198,6 +198,13 @@ def apply_section_data(config: AppConfig, data: dict, sections: list):
                     if section == "whisper" and key == "multilingual_asr_strategy":
                         value = "legacy"
                     setattr(target, key, value)
+    if "app" in sections and "app" in data:
+        settings = data["app"]
+        if "community_invitation_dismissed" not in settings and settings.get("community_invitation_seen"):
+            # Older builds conflated seen and dismissed. Preserve possible opt-outs.
+            config.app.community_invitation_dismissed = True
+        if "first_translation_at" not in settings and settings.get("first_subtitle_at"):
+            config.app.first_translation_at = settings["first_subtitle_at"]
 
 
 def load_user_settings(config: AppConfig, runtime_dir: Path):
@@ -212,7 +219,6 @@ def load_user_settings(config: AppConfig, runtime_dir: Path):
         authority = read_consent_authority(Path(runtime_dir), data.get('app', {}))
         for key, value in authority.items():
             setattr(config.app, key, value)
-        migrate_recognition_device_policy(config, data)
         if "latency_mode" not in data.get("audio", {}):
             config.audio.latency_mode = ""
         migrate_legacy_model_download_settings(config, data.get("whisper", {}))
@@ -233,11 +239,9 @@ def migrate_legacy_model_download_settings(config: AppConfig, whisper_data: dict
         config.whisper.model_download_source = MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT
 
 
-def migrate_recognition_device_policy(config: AppConfig, user_settings_data: dict):
-    return
-
-
 def migrate_runtime_defaults(config: AppConfig, preserve_existing_audio_tuning: bool = True):
+    from voxgo.config.models import normalize_overlay_display
+    normalize_overlay_display(config.overlay)
     if not getattr(config, "app", None):
         config.app = RuntimeConfig()
     config.app.language = normalize_ui_language(getattr(config.app, "language", UI_LANGUAGE_ZH))
@@ -479,6 +483,11 @@ def serialize_user_settings(config: AppConfig) -> dict:
     return {
         "app": {
             "setup_completed": bool(getattr(config.app, "setup_completed", False)),
+            "first_subtitle_at": getattr(config.app, "first_subtitle_at", ""),
+            "first_translation_at": getattr(config.app, "first_translation_at", ""),
+            "subtitle_check_completed": bool(getattr(config.app, "subtitle_check_completed", False)),
+            "community_invitation_seen": bool(getattr(config.app, "community_invitation_seen", False)),
+            "community_invitation_dismissed": bool(getattr(config.app, "community_invitation_dismissed", False)),
             "close_action": getattr(config.app, "close_action", "ask"),
             "close_action_remember": bool(getattr(config.app, "close_action_remember", False)),
             "telemetry_consent": getattr(config.app, 'telemetry_consent', 'unknown'),
@@ -492,6 +501,8 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "recognition_device_policy_version": RECOGNITION_DEVICE_POLICY_VERSION,
         },
         "audio": {
+            "source_mode": getattr(config.audio, "source_mode", "system"),
+            "process_path": getattr(config.audio, "process_path", ""),
             "latency_mode": config.audio.latency_mode,
             "input_device_id": config.audio.input_device_id,
             "input_device_index": config.audio.input_device_index,
@@ -509,6 +520,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "min_segment_peak_margin_db": config.audio.min_segment_peak_margin_db,
         },
         "overlay": {
+            **{name: getattr(config.overlay, name) for name in DISPLAY_SETTING_NAMES},
             "font_size": config.overlay.font_size,
             "text_color": config.overlay.text_color,
             "original_text_color": config.overlay.original_text_color,
@@ -530,6 +542,7 @@ def serialize_user_settings(config: AppConfig) -> dict:
             "clear_history": config.hotkeys.clear_history,
             "toggle_lock": config.hotkeys.toggle_lock,
             "toggle_compact": config.hotkeys.toggle_compact,
+            "toggle_display_mode": config.hotkeys.toggle_display_mode,
         },
         "whisper": {
             "multilingual_asr_strategy": "legacy",

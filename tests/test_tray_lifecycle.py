@@ -54,7 +54,7 @@ class TrayLifecycleTests(unittest.TestCase):
             _shutdown_state="idle", _paused=False,
         )
         for method in ("_tray_toggle_overlay", "_tray_reset_overlay_position", "_toggle_translation", "_clear_history",
-                       "_tray_toggle_compact_mode", "_tray_open_settings",
+                       "_tray_toggle_compact_mode", "_tray_toggle_display_mode", "_tray_toggle_lock", "_tray_open_settings",
                        "_tray_show_fullscreen_help", "_request_shutdown",
                        "_handle_tray_activated", "_force_shutdown"):
             setattr(self.owner, method, Mock())
@@ -127,6 +127,18 @@ class TrayLifecycleTests(unittest.TestCase):
         self.assertEqual(self.controller.actions["reset_overlay_position"].text(), "Reset Overlay Position")
         self.controller.actions["reset_overlay_position"].trigger()
         self.owner._tray_reset_overlay_position.assert_called_once()
+
+    def test_cinema_mode_and_unlock_actions_remain_accessible(self):
+        self.owner.config.overlay.display_mode = 'cinema'
+        self.owner.config.overlay.locked = True
+        self.assertTrue(self.setup_tray())
+        self.controller.actions['display_mode'].trigger()
+        self.owner._tray_toggle_display_mode.assert_called_once()
+        self.assertEqual(self.controller.actions['display_mode'].text(), 'Switch to classic overlay')
+        self.assertFalse(self.controller.actions['compact_mode'].isEnabled())
+        self.assertEqual(self.controller.actions['lock_overlay'].text(), 'Unlock overlay')
+        self.controller.actions['lock_overlay'].trigger()
+        self.owner._tray_toggle_lock.assert_called_once()
 
 
 if __name__ == "__main__":

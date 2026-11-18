@@ -9,9 +9,19 @@ VoxGo is an open-source real-time voice translation overlay for PC gamers, desig
 Website: <https://voxgo.cn/><br>
 GitHub: <https://github.com/zxbb1190/VoxGo_game_voice_trans>
 
-## Language Support — v0.6.0
+## Two subtitle modes
 
-VoxGo v0.6.0 supports the languages and directions below. See the [release notes](docs/releases/v0.6.0.md) and [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for packages.
+The classic overlay opens by default and keeps a translation history and toolbar. For story dialogue, use the subtitle mode button or press **Ctrl+Alt+M** to switch to cinema subtitles. The translation is centered above a smaller original line. Hover over a visible subtitle to show the controls. Drag it into place and lock it. Hover again to unlock.
+
+Windows screenshots
+
+![Cinema subtitles showing the English translation above the Chinese dialogue about a blue key](docs/en/screens/cinema.png)
+
+![The same dialogue in the classic overlay with its toolbar](docs/en/screens/classic.png)
+
+## Language Support — v0.6.1
+
+VoxGo v0.6.1 supports the languages and directions below. See the [release notes](docs/releases/v0.6.1.md) and [GitHub Releases](https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest) for packages.
 
 | Language | Local Whisper recognition | Online translation | Local OPUS translation |
 |---|---|---|---|
@@ -32,8 +42,8 @@ Report reproducible issues through [GitHub Issues](https://github.com/zxbb1190/V
 - **API Key test**: The wizard and settings dialog can make one real translation request to verify the Key, model, and endpoint.
 - **Audio device test**: Opens the selected device and shows a live level bar so players can confirm game/Discord/video audio is detected.
 - **System-audio capture**: Captures Windows playback audio through WASAPI Loopback, not the microphone.
-- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, with Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta) recognition in v0.6.0.
-- **Multilingual translation**: The v0.6.0 routes 20 online directions; local OPUS stays English ↔ Chinese only. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
+- **Local speech recognition**: Uses faster-whisper for offline speech-to-text, with Chinese (Mandarin), English, Japanese (Beta), Korean (Beta) and Russian (Beta) recognition in v0.6.1.
+- **Multilingual translation**: VoxGo supports 20 online directions; local OPUS stays English ↔ Chinese only. Choose the recognition language and translation target from the overlay title bar, with one-click swap.
 - **Multiple translation providers**: Supports OpenAI-compatible Chat Completions APIs and Google Cloud Translation Basic v2.
 - **In-game overlay**: Transparent always-on-top PyQt overlay for translation results.
 - **Visible status and error messages**: Startup status, selected audio device, pause/resume events, API status codes, and provider error messages are shown in the overlay.
@@ -226,6 +236,7 @@ For labelled batch ASR comparisons across models, response modes, whole audio, l
 ### Overlay Controls
 - **Ctrl+Shift+T**: Show/hide overlay
 - **Ctrl+Alt+C**: Clear translation history
+- **Ctrl+Alt+M** — Switch between classic and cinema subtitles. Change the shortcut in Settings.
 - **Ctrl+Alt+S**: Pause/resume translation
 - **Drag overlay**: Move the overlay window
 - **Overlay buttons**: Pause/resume translation, toggle compact mode, open the mobile QR code or settings, quit, or lock the overlay.
@@ -237,7 +248,7 @@ Choose the fixed recognition and translation direction directly in the overlay t
 - The left dropdown is the recognition language.
 - The right dropdown is the translation target language.
 - The middle button swaps the direction.
-- The v0.6.0 supports 20 online directions across five languages; source and target must differ. Japanese, Korean and Russian are Beta.
+- VoxGo supports 20 online directions across five languages; source and target must differ. Japanese, Korean and Russian are Beta.
 - Mixed Chinese/English terms are preserved where possible, but the recognition and translation direction follows the selected dropdowns.
 - Offline translation remains English ↔ Chinese only. Choose and configure an online provider explicitly for the other 18 directions; unavailable routes show a notice.
 

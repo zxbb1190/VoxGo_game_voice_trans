@@ -6,6 +6,7 @@ import ipaddress
 import json
 import socket
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -52,6 +53,7 @@ class MobileWebSocketManager:
         self._connections: Set[WebSocket] = set()
         self._app = FastAPI(title=f"{APP_NAME} Mobile")
         self._server = None
+        self._startup_failed = threading.Event()
         self._static_dir = mobile_static_dir()
         self._app.mount(
             "/mobile/static",
@@ -118,7 +120,8 @@ class MobileWebSocketManager:
 
         logger.info(f"推送翻译到手机端: {len(self._connections)} 个连接")
         disconnected = set()
-        for connection in self._connections:
+        # Sending yields to connect/disconnect handlers on this same loop.
+        for connection in tuple(self._connections):
             try:
                 await connection.send_json(message)
             except Exception as e:
@@ -148,7 +151,11 @@ class MobileWebSocketManager:
         try:
             await self._server.serve()
         except SystemExit as exc:
+            self._startup_failed.set()
             raise RuntimeError(f"手机端服务启动失败，端口 {self.config.port} 可能被占用") from exc
+        except BaseException:
+            self._startup_failed.set()
+            raise
 
     async def stop_server(self):
         """停止服务器"""
@@ -172,15 +179,17 @@ class MobileWebSocketManager:
 
     def is_running(self) -> bool:
         """Return whether the HTTP/WebSocket server is currently accepting connections."""
-        return self._can_connect()
+        return bool(self._server and self._server.started
+                    and not self._server.should_exit and self._can_connect())
 
     def wait_until_ready(self, timeout_seconds: float = 5.0) -> bool:
         """Wait briefly for uvicorn to bind the listening socket."""
-        deadline = time.time() + max(0.1, timeout_seconds)
-        while time.time() < deadline:
-            if self._can_connect():
+        deadline = time.monotonic() + max(0.1, timeout_seconds)
+        while time.monotonic() < deadline:
+            if self.is_running():
                 return True
-            time.sleep(0.05)
+            if self._startup_failed.wait(0.05):
+                return False
         return False
 
     def _can_connect(self) -> bool:

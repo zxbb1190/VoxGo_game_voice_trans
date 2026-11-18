@@ -3,7 +3,7 @@ from functools import lru_cache
 import re
 from string import Formatter
 
-from voxgo.i18n_messages import MESSAGES, QT_MESSAGES
+from voxgo.i18n_messages import MESSAGES, QT_MESSAGES as QT_MESSAGES
 
 _COLUMNS = {'zh-CN': 0, 'ja-JP': 1, 'ko-KR': 2, 'ru-RU': 3}
 _ERROR_FIELDS = {'[Translation failed] {0}': 0, '[Translation error {0}] {1}': 1, 'Test failed: {0}': 0}

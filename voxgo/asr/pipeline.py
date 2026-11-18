@@ -1026,7 +1026,6 @@ class SpeechPipeline:
     def _mode_policy(self, config) -> RecognitionModePolicy:
         policy = RecognitionModePolicy.from_audio_config(config.audio)
         source_lang = str(getattr(getattr(config, "translation", None), "source_lang", "") or "").strip().lower()
-        target_lang = str(getattr(getattr(config, "translation", None), "target_lang", "") or "").strip().lower()
         pure_english = bool(getattr(getattr(config, "whisper", None), "pure_english_environment", False))
         if source_lang == "en":
             policy = self._pure_english_mode_policy(policy) if pure_english else self._english_realtime_mode_policy(policy)

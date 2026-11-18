@@ -28,6 +28,9 @@ crash_report.txt
 .ruff_cache/
 .coverage
 coverage.xml
+coverage.json
+test-results.log
+.contract-api/
 htmlcov/
 
 # Local model caches and packaged model copies

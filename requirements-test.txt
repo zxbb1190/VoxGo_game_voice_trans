@@ -1,2 +1,4 @@
-# Offline evaluation-tool tests only; excluded from application dependencies.
+# Test and quality tools only; excluded from application dependencies.
 soundfile==0.13.1
+coverage[toml]==7.16.2
+ruff==0.17.3

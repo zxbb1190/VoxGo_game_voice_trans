@@ -1,7 +1,7 @@
 from voxgo.asr.whisper_engine import (
     MODEL_DOWNLOAD_SOURCE_CUSTOM_HF_ENDPOINT,
     MODEL_DOWNLOAD_SOURCE_HUGGINGFACE,
-    MODEL_DOWNLOAD_SOURCE_MODELSCOPE,
+    MODEL_DOWNLOAD_SOURCE_MODEL_SCOPE as MODEL_DOWNLOAD_SOURCE_MODELSCOPE,
     ModelDownloadProgress,
     describe_model_download_source,
     format_model_download_error,

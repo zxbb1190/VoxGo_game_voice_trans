@@ -3,11 +3,10 @@
 """
 
 import sys
-import time
 from pathlib import Path
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
-from PyQt5.QtCore import Qt, QTimer, QPoint
-from PyQt5.QtGui import QFont, QColor, QPainter, QBrush, QPen
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QColor, QPainter, QBrush, QPen
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:

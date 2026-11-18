@@ -35,7 +35,7 @@ class PrivacyConsentTests(unittest.TestCase):
         dialog = SettingsDialog(config.overlay, config.hotkeys, app_config=config.app)
         try:
             self.assertFalse(dialog.telemetry_consent_check.isChecked())
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry') as prompt:
+            with patch.object(QMessageBox, 'exec_', side_effect=AssertionError('Consent must not open a modal')) as prompt:
                 dialog.telemetry_consent_check.click()
                 prompt.assert_not_called()
             self.assertTrue(may_upload(dialog.app_config, True))
@@ -44,8 +44,7 @@ class PrivacyConsentTests(unittest.TestCase):
             dialog.telemetry_consent_check.click()
             self.assertEqual(dialog.app_config.telemetry_consent, 'denied')
             self.assertEqual(dialog.app_config.telemetry_epoch, '')
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry', return_value=QMessageBox.Yes):
-                dialog.telemetry_consent_check.click()
+            dialog.telemetry_consent_check.click()
             self.assertNotEqual(dialog.app_config.telemetry_epoch, first_epoch)
             dialog.telemetry_consent_check.click()
             config.app = _copy_runtime_config(dialog.app_config)
@@ -65,8 +64,7 @@ class PrivacyConsentTests(unittest.TestCase):
         wizard = FirstRunWizard(None, translation_config=config.translation, app_config=config.app)
         try:
             self.assertTrue(wizard.wizard_telemetry_check.isChecked())
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry', return_value=QMessageBox.Yes):
-                wizard._complete_setup()
+            wizard._complete_setup()
             self.assertTrue(may_upload(wizard.app_config, True))
             epoch = wizard.app_config.telemetry_epoch
             self.assertEqual(str(uuid.UUID(epoch)), epoch)
@@ -120,7 +118,7 @@ class PrivacyConsentTests(unittest.TestCase):
         try:
             self.assertFalse(may_upload(wizard.app_config, True))
             wizard.wizard_telemetry_check.click()
-            with patch('voxgo.ui.telemetry_consent.confirm_telemetry') as prompt:
+            with patch.object(QMessageBox, 'exec_', side_effect=AssertionError('Consent must not open a modal')) as prompt:
                 wizard._complete_setup()
                 prompt.assert_not_called()
             self.assertEqual(wizard.app_config.telemetry_consent, 'denied')

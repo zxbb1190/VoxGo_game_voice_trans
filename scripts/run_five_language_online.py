@@ -8,7 +8,6 @@ import asyncio
 from collections import defaultdict
 import contextvars
 import copy
-from dataclasses import fields
 from datetime import datetime,timezone
 import hashlib
 import json
@@ -27,7 +26,7 @@ sys.path.insert(0,str(ROOT))
 from scripts import offline_russian_capture_ab as replay
 from scripts.run_five_language_asr import resolved_config
 from scripts.run_ru_continuous_baseline import input_stream
-from voxgo.translation import GameTranslator,TranslationConfig
+from voxgo.translation import GameTranslator
 from voxgo.translation.prompt import translation_system_prompt
 
 TRACE=contextvars.ContextVar('acceptance_trace_id',default='')
@@ -272,6 +271,7 @@ def main():
     if a.audio_child:
         audio_child(a,plan,approval,budget,config);return
     output=replay.create_output(a.output);initial_settings_sha=sha(a.settings)
+    atomic(budget.path,budget.data)  # Audio-only runs have no text attempt to create the initial ledger.
     atomic(output/'authorization.json',approval)
     status=dict(status='running',completed_audio_cases=[],initial_settings_sha256=initial_settings_sha,plan_sha256=sha(a.plan))
     try:

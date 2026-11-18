@@ -1,5 +1,4 @@
 """Real local HTTP contracts; responses are fixtures, never quality evidence."""
-import asyncio
 import copy
 import unittest
 from types import SimpleNamespace

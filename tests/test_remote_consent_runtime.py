@@ -13,7 +13,7 @@ from voxgo.analytics.consent import CONSENT_VERSION, may_upload
 class RemoteConsentRuntimeTests(unittest.TestCase):
     def test_epoch_rotation_revocation_and_durable_gate(self):
         with tempfile.TemporaryDirectory() as tmp, \
-                patch('voxgo.analytics.client.LocalAnalytics') as collector, \
+                patch('voxgo.analytics.client.LocalAnalytics'), \
                 patch('voxgo.analytics.uploader.RemoteUploader') as uploader:
             root = Path(tmp)
             config = SimpleNamespace(telemetry_consent='unknown', telemetry_consent_version=0,

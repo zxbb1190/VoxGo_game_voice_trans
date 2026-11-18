@@ -7,9 +7,8 @@ import uuid
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import patch
 
-from voxgo.analytics.basic import (BasicTelemetry, BasicStore, daily_identity,
+from voxgo.analytics.basic import (BasicTelemetry, daily_identity,
                                    canonical_hash, installation_state)
 
 

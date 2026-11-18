@@ -20,7 +20,7 @@ configure_local_dll_paths()
 from loguru import logger
 
 from voxgo.app_info import APP_NAME, APP_VERSION
-from voxgo.audio.capture import AudioConfig, LATENCY_MODE_BALANCED, LATENCY_MODE_FAST
+from voxgo.audio.capture import AudioConfig, LATENCY_MODE_BALANCED, LATENCY_MODE_FAST, audio_source_signature
 from voxgo.asr.whisper_engine import (
     ModelDownloadProgress,
     SpeechRecognizer,
@@ -47,7 +47,6 @@ from voxgo.config.loader import (
 from voxgo.config.schema import (
     AppConfig,
     HotkeyConfig,
-    LANGUAGE_NAMES,
     OverlayConfig,
     RuntimeConfig,
     normalize_whisper_device as _normalize_whisper_device,
@@ -119,6 +118,7 @@ class VoxGoApp:
             self._notify_user,
             self._write_crash_report,
             benchmark_options=self._benchmark_audio,
+            on_source_lost=self._on_audio_source_lost,
         )
         self._updates = UpdateRuntime(
             APP_VERSION,
@@ -173,6 +173,7 @@ class VoxGoApp:
             self.config.translation.target_lang,
         )
         self._last_speech_audio_signature = audio_runtime_signature(self.config)
+        self._last_audio_source = audio_source_signature(self.config.audio)
         self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "legacy")
         self._language_flow_revision = 1
         self._last_whisper_device = _normalize_whisper_device(self.config.whisper.device)
@@ -441,6 +442,7 @@ class VoxGoApp:
 
     def _refresh_cached_settings(self):
         self._last_speech_audio_signature = audio_runtime_signature(self.config)
+        self._last_audio_source = audio_source_signature(self.config.audio)
         self._last_multilingual_asr_strategy = getattr(self.config.whisper, "multilingual_asr_strategy", "legacy")
         self._last_audio_device = (
             self.config.audio.input_device_id,
@@ -567,6 +569,11 @@ class VoxGoApp:
             from voxgo.ui.chinese_text import recognition_display_text
             self._overlay.add_translation_with_id(
                 event.trace_id, recognition_display_text(event.text, source_lang), "...正在翻译")
+        experience = getattr(self, "_first_success", None)
+        if experience:
+            experience.transcript_received.emit(
+                event.trace_id, event_revision or self._language_flow_revision,
+                trace.speech_detected_at if trace else time.time())
         logger.info(
             "language gate accepted: detected={}, expected={}, prob={:.2f}, snapshot={}->{}, revision={}",
             event.language or "unknown",
@@ -607,6 +614,11 @@ class VoxGoApp:
             return
         translated = event.translated
         is_notice = translated.startswith("[翻译") or translated.startswith("[未翻译]")
+        experience = getattr(self, "_first_success", None)
+        if experience:
+            experience.translation_received.emit(
+                event.trace_id, event_revision or self._language_flow_revision, translated,
+                translated if is_notice else ("翻译结果为空 / Empty translation" if not translated.strip() else ""))
         if is_notice:
             if translated.startswith("[翻译"):
                 self._stats["errors"] += 1
@@ -783,6 +795,14 @@ class VoxGoApp:
         speech_items = self._speech_pipeline.clear_pending_work(reason)
         return audio_blocks, speech_items
 
+    def _on_audio_source_lost(self):
+        self._language_flow_revision += 1
+        self._translation.clear_context()
+        self._speech_pipeline.reset_for_language_switch(
+            self.config.translation.source_lang, self.config.translation.target_lang,
+            self._language_flow_revision)
+        self._audio.clear_pending_audio()
+
     def _setup_hotkeys(self):
         self._hotkeys.setup(
             self.config.hotkeys,
@@ -792,6 +812,7 @@ class VoxGoApp:
                 "toggle_translation": self._toggle_translation,
                 "toggle_lock": self._toggle_lock,
                 "toggle_compact": self._toggle_compact_mode,
+                "toggle_display_mode": self._toggle_display_mode,
             },
         )
 
@@ -864,6 +885,10 @@ class VoxGoApp:
             self._overlay._signals.toggle_compact.emit()
             self._sync_tray_state()
 
+    def _toggle_display_mode(self):
+        if self._overlay:
+            self._overlay._signals.toggle_display_mode.emit()
+
     def _start_qt(self):
         from PyQt5.QtWidgets import QApplication, QMenu, QSystemTrayIcon
         from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt, QTimer
@@ -930,6 +955,9 @@ class VoxGoApp:
             on_overlay_updated=self._on_overlay_updated,
         )
         self._overlay.model_recovery_requested.connect(self._request_model_recovery)
+        self._overlay.presentation_changed.connect(self._save_overlay_presentation)
+        from voxgo.ui.live_check import FirstSuccessController
+        self._first_success = FirstSuccessController(self)
         if self._pending_model_download_progress is not None:
             self._overlay.set_model_preparation_progress(self._pending_model_download_progress)
             self._pending_model_download_progress = None
@@ -964,6 +992,10 @@ class VoxGoApp:
             getattr(self, "_app_icon", None) or self._qt_app.windowIcon(),
             self._overlay,
         )
+        if self._overlay:
+            self._overlay._tray_available = bool(tray_ready)
+            if hasattr(self._overlay, '_position_lock_button'):
+                self._overlay._position_lock_button()
         if not tray_ready:
             ui_language = self._ui_language()
             hotkey = str(getattr(self.config.hotkeys, "toggle_overlay", "") or "").strip()
@@ -989,6 +1021,20 @@ class VoxGoApp:
 
     def _tray_toggle_overlay(self):
         self._toggle_overlay()
+
+    def _save_overlay_presentation(self):
+        if self._overlay:
+            self.config.overlay = self._overlay.config
+        self._save_user_settings()
+        self._sync_tray_state()
+
+    def _tray_toggle_display_mode(self):
+        if self._overlay:
+            self._overlay.toggle_display_mode()
+
+    def _tray_toggle_lock(self):
+        if self._overlay:
+            self._overlay._toggle_lock()
 
     def _tray_toggle_compact_mode(self):
         if self._overlay:
@@ -1026,6 +1072,7 @@ class VoxGoApp:
             return
 
     def _start_backend_after_setup(self):
+        self._setup_attempted = True
         self._sync_language_flow()
         self._sync_whisper_vad_limit()
         self.config.app.setup_completed = True
@@ -1052,6 +1099,9 @@ class VoxGoApp:
         if getattr(self, "_shutdown_state", "idle") in ("stopping", "complete") or (getattr(self, "_shutdown_thread", None) and self._shutdown_thread.is_alive()):
             return
         self._stopping = True
+        experience = getattr(self, "_first_success", None)
+        if experience:
+            experience.stop()
         self._audio.cancel_recovery()
         self._paused = True
         self._running = False
@@ -1424,12 +1474,9 @@ class VoxGoApp:
         self._updates.ignore_version(version)
 
     def _show_audio_startup_warning(self, exc: Exception):
-        detail = (
-            "音频采集启动失败，程序已继续运行，但暂时不会识别游戏声音。\n"
-            "请在 Windows 声音设置里启用“立体声混音 / Stereo Mix”，"
-            "或安装/选择可采集系统声音的虚拟声卡后重启本程序。\n"
-            f"错误: {exc}"
-        )
+        detail = ui_text(self._ui_language(),
+            f"音频采集未启动。请在设置中检查所选应用或播放设备，再打开帮助与反馈 → 自动检测。\n{exc}",
+            f"Audio capture could not start. Check the selected app or playback device in Settings, then open Help & Feedback → Automatic diagnostics.\n{exc}")
         self._write_crash_report("音频采集启动失败", exc, detail)
         logger.exception(detail)
         self._notify_user("音频采集未启动", detail, "错误")

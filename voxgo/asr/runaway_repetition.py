@@ -16,6 +16,8 @@ _MIN_MULTIWORD_REPEAT_SPAN = 20
 _MIN_MULTIWORD_REPEAT_COUNT = 4
 _MIN_SINGLE_WORD_REPEAT_COUNT = 12
 _MIN_WORDS_PER_SECOND = 8.0
+_DOMINANT_REPEAT_SHARE = 0.8
+_MIN_DOMINANT_PHRASE_REPEATS = 8
 
 
 @dataclass(frozen=True)
@@ -79,13 +81,27 @@ def is_runaway_repetition(
 
     A candidate must be long, cover a substantial repeated span, and repeat a
     multiword phrase at least four times or a single word at least twelve times.
-    When audio duration is supplied, the transcript must also exceed 8 words/s.
+    A long output dominated by a sustained loop is invalid even at a plausible
+    word rate. Less dominant repetitions still require at least 8 words/s when
+    audio duration is supplied. Short spoken game callouts remain below the
+    minimum text length.
     ``compression_ratio`` is accepted for integration with Whisper results, but
     is not used as a standalone signal; the repeated text must meet these gates.
     """
     analysis = analyze_repetition(text)
     if analysis.word_count < _MIN_ABNORMAL_WORD_COUNT:
         return False
+
+    words = _tokens(text if isinstance(text, str) else "")
+    runs = list(_repeated_runs(words))
+    if any(
+        span >= _MIN_MULTIWORD_REPEAT_SPAN
+        and span / analysis.word_count >= _DOMINANT_REPEAT_SHARE
+        and count >= (_MIN_SINGLE_WORD_REPEAT_COUNT if ngram_words == 1
+                      else _MIN_DOMINANT_PHRASE_REPEATS)
+        for span, count, ngram_words in runs
+    ):
+        return True
 
     try:
         duration = float(duration_seconds or 0)
@@ -95,7 +111,6 @@ def is_runaway_repetition(
         if analysis.word_count / duration < _MIN_WORDS_PER_SECOND:
             return False
 
-    words = _tokens(text if isinstance(text, str) else "")
     return any(
         (ngram_words == 1
          and count >= _MIN_SINGLE_WORD_REPEAT_COUNT
@@ -103,5 +118,5 @@ def is_runaway_repetition(
         or (ngram_words > 1
             and span >= _MIN_MULTIWORD_REPEAT_SPAN
             and count >= _MIN_MULTIWORD_REPEAT_COUNT)
-        for span, count, ngram_words in _repeated_runs(words)
+        for span, count, ngram_words in runs
     )

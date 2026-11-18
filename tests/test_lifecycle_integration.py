@@ -79,7 +79,7 @@ class LifecycleIntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             # Delay the daemon entirely until the clean-exit call has completed.
-            with patch.object(LocalAnalytics, '_run') as run:
+            with patch.object(LocalAnalytics, '_run'):
                 collector = LocalAnalytics(root, '0.4.3', lifecycle_root=root)
                 collector._thread.join(3)
             collector.stop()

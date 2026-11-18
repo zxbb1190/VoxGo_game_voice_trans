@@ -28,6 +28,10 @@ class ModelPreparationStatus(QLabel):
         self._dismiss_timer.timeout.connect(self.hide)
         self.hide()
 
+    @property
+    def preparation_state(self):
+        return self._progress.status if self._progress is not None else ""
+
     def set_progress(self, progress):
         if self._stopped:
             return

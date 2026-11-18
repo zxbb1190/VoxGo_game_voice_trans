@@ -7,7 +7,6 @@ Qt. This is not Full EXE, voice-end, game or bilingual human acceptance.
 import argparse
 import copy
 from datetime import datetime, timezone
-import hashlib
 import json
 from pathlib import Path
 import subprocess

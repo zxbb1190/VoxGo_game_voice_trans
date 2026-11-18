@@ -15,7 +15,6 @@ import os
 from pathlib import Path
 import platform
 import re
-import statistics
 import subprocess
 import sys
 import threading
@@ -213,10 +212,13 @@ def memory():
 
 
 def fingerprint():
-    paths = subprocess.check_output(["git", "ls-files", "voxgo", "scripts/offline_asr_observer.py", "scripts/offline_russian_capture_ab.py"], cwd=ROOT, text=True).splitlines()
-    paths += ["scripts/offline_asr_observer.py", "scripts/offline_russian_capture_ab.py"]
+    # Fingerprint the working tree being exercised, including new, unignored modules.
+    entries = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--",
+                                       "voxgo", "scripts/offline_asr_observer.py", "scripts/offline_russian_capture_ab.py"], cwd=ROOT)
+    paths = sorted({os.fsdecode(raw) for raw in entries.split(b"\0") if raw})
     return dict(head=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                files={p: digest((ROOT/p).read_bytes()) for p in sorted(set(paths))},
+                files={p: digest((ROOT/p).read_bytes()) for p in paths if (ROOT/p).is_file()},
+                missing_files=[p for p in paths if not (ROOT/p).is_file()],
                 python=sys.version, platform=platform.platform(), processor=platform.processor(),
                 packages={p: importlib.metadata.version(p) for p in ("faster-whisper", "ctranslate2", "numpy", "webrtcvad-wheels")})
 
@@ -226,7 +228,7 @@ def run_child(args, *, replay_input=None, app_config=None, summarize_recordings=
     from loguru import logger
     logger.remove()
     import voxgo.asr.pipeline as production_pipeline
-    from scripts.offline_asr_observer import Journal, ObservedCapture, ObservedPipeline, ObservedRecognizer, observe_merge, write_wav
+    from scripts.offline_asr_observer import Journal, ObservedCapture, ObservedPipeline, ObservedRecognizer, observe_merge
     from voxgo.runtime.events import EventBus, TranscriptReady
     from voxgo.translation.base import should_skip_translation_for_language
     spec = json.loads(args.child.read_text(encoding="utf-8"))

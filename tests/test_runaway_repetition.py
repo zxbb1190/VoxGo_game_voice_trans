@@ -67,11 +67,24 @@ class RunawayRepetitionTest(unittest.TestCase):
         self.assertGreaterEqual(analyze_repetition(text).word_count, 30)
         self.assertFalse(is_runaway_repetition(text))
 
-    def test_requires_high_word_rate_when_duration_is_known(self):
+    def test_dominant_long_loop_is_blocked_even_at_normal_word_rate(self):
         text = " ".join(["The site is southwest."] * 40)
 
         self.assertTrue(is_runaway_repetition(text, duration_seconds=5))
+        self.assertTrue(is_runaway_repetition(text, duration_seconds=30))
+
+    def test_brief_repeat_inside_normal_speech_still_requires_high_word_rate(self):
+        text = ("Check the stairs and watch the door. "
+                + "Enemy at the east site. " * 5
+                + "I will cover you while you move across the road.")
+        self.assertTrue(is_runaway_repetition(text, duration_seconds=3))
         self.assertFalse(is_runaway_repetition(text, duration_seconds=30))
+
+    def test_ordinary_short_multilingual_callouts_are_preserved(self):
+        for text in ("go go go", "Push, push, push!", "No, no, no!", "Cover me!",
+                     "走走走", "快快快", "行け、行け！", "빨리 빨리", "Давай, давай!"):
+            with self.subTest(text=text):
+                self.assertFalse(is_runaway_repetition(text, duration_seconds=0.5))
 
     def test_empty_and_non_string_input_are_safe(self):
         self.assertEqual(analyze_repetition("").word_count, 0)

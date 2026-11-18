@@ -60,6 +60,8 @@ from voxgo.ui.config_models import (
 )
 from voxgo.ui.dialogs import FeedbackDialog, _build_help_text
 from voxgo.ui.widgets import AudioTestPanel, ColorButton, HotkeyCaptureEdit, TranslationTestRunner
+from voxgo.ui.cinema_settings import CinemaSettings
+from voxgo.config.hotkeys import HOTKEY_ACTIONS, hotkey_conflicts
 
 
 class SettingsDialog(QDialog):
@@ -67,6 +69,8 @@ class SettingsDialog(QDialog):
 
     settings_changed = pyqtSignal(object, object, object, object, object, object, object)
     model_recovery_requested = pyqtSignal(bool)
+    live_check_requested = pyqtSignal()
+    presentation_changed = pyqtSignal(object)
 
     def __init__(
         self,
@@ -86,7 +90,7 @@ class SettingsDialog(QDialog):
     ):
         super().__init__(parent)
         self.setWindowFlags(self.windowFlags() | Qt.Tool)
-        self.overlay_config = overlay_config
+        self.overlay_config = replace(overlay_config)
         self.hotkey_config = hotkey_config
         self.audio_config = audio_config or AudioDeviceConfig()
         self.translation_config = translation_config or TranslationConfig()
@@ -97,6 +101,7 @@ class SettingsDialog(QDialog):
         self._ui_language = self.app_config.language
         set_qt_ui_language(self._ui_language)
         self.setWindowTitle(_tr(self._ui_language, "浮窗设置", "Overlay Settings"))
+        self.setWindowFlag(Qt.WindowContextHelpButtonHint, False)
         self.debug_config = debug_config or DebugConfig()
         self.update_config = update_config or UpdateSettings()
         self.app_version = app_version
@@ -118,6 +123,39 @@ class SettingsDialog(QDialog):
         about_form = self._make_settings_tab(tabs, _tr(self._ui_language, "关于", "About"))
         about_form.setRowWrapPolicy(QFormLayout.WrapLongRows)
 
+        self._init_appearance_controls(appearance_form)
+
+        self._init_translation_controls(translation_form)
+
+        self._init_speech_controls(audio_form, advanced_form)
+
+        self._init_tuning_controls(advanced_form)
+
+        self._init_hotkey_controls(hotkey_form)
+
+        self._init_guide_controls(help_form)
+
+        self._init_about_controls(about_form)
+        self._init_feedback_controls(tabs)
+        layout.addWidget(tabs, 1)
+        self._init_privacy_controls(tabs)
+
+        action_row = QHBoxLayout()
+        feedback_button = QPushButton(_tr(self._ui_language, "提交反馈", "Submit Feedback"))
+        close_button = QPushButton(_tr(self._ui_language, "关闭", "Close"))
+        feedback_button.clicked.connect(self._open_feedback_dialog)
+        close_button.clicked.connect(self.close)
+        action_row.addWidget(feedback_button)
+        action_row.addStretch()
+        action_row.addWidget(close_button)
+        layout.addLayout(action_row)
+        self.setLayout(layout)
+        self.resize(780, 620)
+        selected = self.audio_source_selector.mode.currentData() == "process"
+        self.audio_device_combo.setEnabled(not selected)
+        self.refresh_audio_button.setEnabled(not selected)
+
+    def _init_appearance_controls(self, appearance_form):
         self.ui_language_combo = QComboBox()
         self._fill_ui_languages()
         self.ui_language_combo.currentIndexChanged.connect(self._ui_language_changed)
@@ -135,6 +173,18 @@ class SettingsDialog(QDialog):
         self.close_action_label = QLabel(_tr(self._ui_language, "点击关闭按钮", "Close button"))
         appearance_form.addRow(self.close_action_label, self.close_action_combo)
 
+        self.display_mode_combo = QComboBox()
+        self.display_mode_combo.addItem(_tr(self._ui_language, '经典浮窗', 'Classic overlay'), 'classic')
+        self.display_mode_combo.addItem(_tr(self._ui_language, '电影字幕', 'Cinema subtitles'), 'cinema')
+        self.display_mode_combo.setCurrentIndex(1 if self.overlay_config.display_mode == 'cinema' else 0)
+        appearance_form.addRow(_tr(self._ui_language, '字幕展示方式', 'Subtitle display mode'), self.display_mode_combo)
+        self.cinema_settings = CinemaSettings(self.overlay_config, self._ui_language)
+        appearance_form.addRow(self.cinema_settings)
+        self.classic_appearance = QWidget()
+        appearance_form.addRow(self.classic_appearance)
+        appearance_form = QFormLayout(self.classic_appearance)
+        appearance_form.setContentsMargins(0, 0, 0, 0)
+
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setRange(30, 100)
         self.opacity_slider.setValue(int(self.overlay_config.opacity * 100))
@@ -143,7 +193,7 @@ class SettingsDialog(QDialog):
         opacity_row.addWidget(self.opacity_slider)
         opacity_row.addWidget(self.opacity_label)
         self.opacity_slider.valueChanged.connect(lambda value: self.opacity_label.setText(f"{value}%"))
-        self.opacity_slider.valueChanged.connect(self._preview)
+        self.opacity_slider.valueChanged.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "整体透明度", "Window Opacity"), opacity_row)
 
         self.bg_opacity_slider = QSlider(Qt.Horizontal)
@@ -154,7 +204,7 @@ class SettingsDialog(QDialog):
         bg_opacity_row.addWidget(self.bg_opacity_slider)
         bg_opacity_row.addWidget(self.bg_opacity_label)
         self.bg_opacity_slider.valueChanged.connect(lambda value: self.bg_opacity_label.setText(f"{value}%"))
-        self.bg_opacity_slider.valueChanged.connect(self._preview)
+        self.bg_opacity_slider.valueChanged.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "背景透明度", "Background Opacity"), bg_opacity_row)
 
         self.font_slider = QSlider(Qt.Horizontal)
@@ -165,27 +215,60 @@ class SettingsDialog(QDialog):
         font_row.addWidget(self.font_slider)
         font_row.addWidget(self.font_label)
         self.font_slider.valueChanged.connect(lambda value: self.font_label.setText(f"{value}px"))
-        self.font_slider.valueChanged.connect(self._preview)
+        self.font_slider.valueChanged.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "字号", "Font Size"), font_row)
 
         self.text_color_btn = ColorButton(self.overlay_config.text_color, ui_language=self._ui_language)
-        self.text_color_btn.color_changed.connect(self._preview)
+        self.text_color_btn.color_changed.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "译文颜色", "Translation Color"), self.text_color_btn)
 
         self.original_color_btn = ColorButton(self.overlay_config.original_text_color, ui_language=self._ui_language)
-        self.original_color_btn.color_changed.connect(self._preview)
+        self.original_color_btn.color_changed.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "原文颜色", "Original Color"), self.original_color_btn)
 
         self.show_original_check = QCheckBox(_tr(self._ui_language, "显示语音原文", "Show original speech text"))
         self.show_original_check.setChecked(self.overlay_config.show_original)
-        self.show_original_check.stateChanged.connect(self._preview)
+        self.show_original_check.stateChanged.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "双语对照", "Bilingual Display"), self.show_original_check)
 
         self.compact_mode_check = QCheckBox(_tr(self._ui_language, "启用紧凑浮窗", "Enable compact overlay"))
         self.compact_mode_check.setChecked(bool(getattr(self.overlay_config, "compact_mode", False)))
-        self.compact_mode_check.stateChanged.connect(self._preview)
+        self.compact_mode_check.stateChanged.connect(self._preview_appearance)
         appearance_form.addRow(_tr(self._ui_language, "紧凑模式", "Compact Mode"), self.compact_mode_check)
+        self.display_mode_combo.currentIndexChanged.connect(self._preview_appearance)
+        self.cinema_settings.changed.connect(self._preview_appearance)
+        self._refresh_appearance_groups()
 
+    def _refresh_appearance_groups(self):
+        cinema = self.display_mode_combo.currentData() == 'cinema'
+        self.classic_appearance.setVisible(not cinema)
+        self.cinema_settings.setVisible(cinema)
+
+    def sync_overlay_presentation(self, config):
+        self.overlay_config = replace(config)
+        self.display_mode_combo.blockSignals(True)
+        self.display_mode_combo.setCurrentIndex(1 if config.display_mode == 'cinema' else 0)
+        self.display_mode_combo.blockSignals(False)
+        self.cinema_settings.sync(config)
+        self._refresh_appearance_groups()
+
+    def _preview_appearance(self, *args):
+        self._collect_appearance_values()
+        self._refresh_appearance_groups()
+        self.presentation_changed.emit(replace(self.overlay_config))
+
+    def _collect_appearance_values(self):
+        self.overlay_config.display_mode = self.display_mode_combo.currentData()
+        self.overlay_config.opacity = self.opacity_slider.value() / 100
+        self.overlay_config.bg_opacity = self.bg_opacity_slider.value() / 100
+        self.overlay_config.font_size = self.font_slider.value()
+        self.overlay_config.text_color = self.text_color_btn.color()
+        self.overlay_config.original_text_color = self.original_color_btn.color()
+        self.overlay_config.show_original = self.show_original_check.isChecked()
+        self.overlay_config.compact_mode = self.compact_mode_check.isChecked()
+        self.cinema_settings.collect(self.overlay_config)
+
+    def _init_translation_controls(self, translation_form):
         self.provider_combo = QComboBox()
         self.provider_combo.setToolTip(_tr(self._ui_language, "OpenAI 兼容适合硅基流动、DeepSeek、Qwen、GLM 和本地模型；Google 使用 Cloud Translation Basic v2", "OpenAI-compatible supports SiliconFlow, DeepSeek, Qwen, GLM and local models; Google uses Cloud Translation Basic v2"))
         self._fill_translation_providers()
@@ -233,6 +316,7 @@ class SettingsDialog(QDialog):
         translation_form.addRow(self.local_model_panel)
         self._refresh_translation_provider_ui()
 
+    def _init_speech_controls(self, audio_form, advanced_form):
         self.model_download_source_combo = QComboBox()
         self.model_download_source_combo.setToolTip(_tr(self._ui_language, "lite 包首次运行会下载 Whisper 模型；大陆网络推荐 ModelScope 国内源", "The Lite package downloads Whisper on first use; ModelScope is recommended in mainland China"))
         self.model_download_endpoint_input = QLineEdit(
@@ -263,6 +347,10 @@ class SettingsDialog(QDialog):
         self.audio_device_combo.currentIndexChanged.connect(self._preview)
         self.refresh_audio_button.clicked.connect(self._request_audio_refresh)
         audio_form.addRow(_tr(self._ui_language, "音频设备", "Audio Device"), audio_row)
+        from voxgo.ui.audio_source import AudioSourceSelector
+        self.audio_source_selector = AudioSourceSelector(self.audio_config, self._ui_language, self)
+        audio_form.addRow(_tr(self._ui_language, "收音范围", "Capture source"), self.audio_source_selector)
+        self.audio_source_selector.changed.connect(self._audio_source_changed)
 
         self.audio_test_panel = AudioTestPanel(self._current_audio_config, self, self._ui_language)
         audio_form.addRow(_tr(self._ui_language, "测试音频", "Test Audio"), self.audio_test_panel)
@@ -317,6 +405,7 @@ class SettingsDialog(QDialog):
         self._refresh_english_fast_path_ui()
         audio_form.addRow(_tr(self._ui_language, "英文快路径", "English Fast Path"), self.pure_english_environment_check)
 
+    def _init_tuning_controls(self, advanced_form):
         self.latency_hint_label = QLabel()
         self.latency_hint_label.setWordWrap(True)
         self.latency_hint_label.setMinimumHeight(42)
@@ -405,28 +494,39 @@ class SettingsDialog(QDialog):
         advanced_form.addRow(_tr(self._ui_language, "触发余量", "Trigger Margin"), self.min_segment_peak_margin_spin)
         self._refresh_latency_preset_controls()
 
+    def _init_hotkey_controls(self, hotkey_form):
         self.toggle_overlay_input = HotkeyCaptureEdit(self.hotkey_config.toggle_overlay, ui_language=self._ui_language)
         self.toggle_translation_input = HotkeyCaptureEdit(self.hotkey_config.toggle_translation, ui_language=self._ui_language)
         self.clear_history_input = HotkeyCaptureEdit(self.hotkey_config.clear_history, ui_language=self._ui_language)
         self.toggle_lock_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_lock", ""), ui_language=self._ui_language)
         self.toggle_compact_input = HotkeyCaptureEdit(getattr(self.hotkey_config, "toggle_compact", ""), ui_language=self._ui_language)
+        self.toggle_display_mode_input = HotkeyCaptureEdit(self.hotkey_config.toggle_display_mode, ui_language=self._ui_language)
         self.toggle_overlay_input.hotkey_changed.connect(self._hotkeys_changed)
         self.toggle_translation_input.hotkey_changed.connect(self._hotkeys_changed)
         self.clear_history_input.hotkey_changed.connect(self._hotkeys_changed)
         self.toggle_lock_input.hotkey_changed.connect(self._hotkeys_changed)
         self.toggle_compact_input.hotkey_changed.connect(self._hotkeys_changed)
+        self.toggle_display_mode_input.hotkey_changed.connect(self._hotkeys_changed)
         hotkey_form.addRow(_tr(self._ui_language, "显示/隐藏", "Show / Hide"), self.toggle_overlay_input)
         hotkey_form.addRow(_tr(self._ui_language, "暂停/恢复", "Pause / Resume"), self.toggle_translation_input)
         hotkey_form.addRow(_tr(self._ui_language, "清空历史", "Clear Subtitles"), self.clear_history_input)
         hotkey_form.addRow(_tr(self._ui_language, "锁定/解锁", "Lock / Unlock"), self.toggle_lock_input)
         hotkey_form.addRow(_tr(self._ui_language, "紧凑模式", "Compact Mode"), self.toggle_compact_input)
+        hotkey_form.addRow(_tr(self._ui_language, "切换字幕模式", "Switch subtitle mode"), self.toggle_display_mode_input)
+        self.hotkey_conflict_label = QLabel()
+        self.hotkey_conflict_label.setWordWrap(True)
+        self.hotkey_conflict_label.setStyleSheet('color: #EAB86A;')
+        hotkey_form.addRow(self.hotkey_conflict_label)
+        self._collect_hotkey_values()
 
+    def _init_guide_controls(self, help_form):
         self.help_text_label = QLabel()
         self.help_text_label.setWordWrap(True)
         self.help_text_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
         help_form.addRow(_tr(self._ui_language, "使用说明", "Guide"), self.help_text_label)
         self._refresh_help_text()
 
+    def _init_about_controls(self, about_form):
         self.update_enabled_check = QCheckBox(_tr(self._ui_language, "每天自动检查", "Check daily"))
         self.update_enabled_check.setChecked(bool(getattr(self.update_config, "enabled", True)))
         self.update_enabled_check.stateChanged.connect(self._preview)
@@ -485,10 +585,20 @@ class SettingsDialog(QDialog):
         about_form.addRow(_tr(self._ui_language, "链接", "Links"), about_links_label)
 
         about_form.addRow(_tr(self._ui_language, "检查更新", "Updates"), update_row)
+
+    def _init_feedback_controls(self, tabs):
         from voxgo.app_info import GITHUB_ISSUES_URL, KOOK_URL, DISCORD_URL
         from urllib.parse import urlsplit
         import webbrowser
         feedback_form = self._make_settings_tab(tabs, _tr(self._ui_language, "帮助与反馈", "Help & Feedback"))
+        self.live_check_button = QPushButton(_tr(self._ui_language, "自动检测", "Automatic diagnostics"))
+        self.live_check_button.clicked.connect(self.live_check_requested.emit)
+        feedback_form.addRow(self.live_check_button)
+        detection_hint = QLabel(_tr(self._ui_language,
+            "没有字幕或翻译异常时，可检测模型、收音、识别、翻译和显示环节。需要你播放一段语音；不会自动更改设置。",
+            "If subtitles are missing or translation fails, check models, audio, recognition, translation and display. Play speech during the check; settings will not change automatically."))
+        detection_hint.setWordWrap(True)
+        feedback_form.addRow(detection_hint)
         diagnostics_button = QPushButton(_tr(self._ui_language, "预览并复制诊断信息", "Preview and Copy Diagnostics"))
         diagnostics_button.clicked.connect(self._open_feedback_dialog)
         feedback_form.addRow(diagnostics_button)
@@ -508,7 +618,8 @@ class SettingsDialog(QDialog):
             button.clicked.connect(lambda checked=False, target=url: webbrowser.open(target))
             feedback_form.addRow(button)
             self.feedback_link_buttons[name] = button
-        layout.addWidget(tabs, 1)
+
+    def _init_privacy_controls(self, tabs):
         from voxgo.analytics.consent import CONSENT_VERSION, telemetry_title, telemetry_summary
         privacy_form = self._make_settings_tab(tabs, _tr(self._ui_language, '隐私', 'Privacy'))
         self.privacy_title = QLabel(_tr(self._ui_language, telemetry_title(False), telemetry_title(True)))
@@ -534,18 +645,6 @@ class SettingsDialog(QDialog):
         telemetry_row.addStretch()
         privacy_form.addRow(telemetry_row)
         self.privacy_notice = privacy_notice
-
-        action_row = QHBoxLayout()
-        feedback_button = QPushButton(_tr(self._ui_language, "提交反馈", "Submit Feedback"))
-        close_button = QPushButton(_tr(self._ui_language, "关闭", "Close"))
-        feedback_button.clicked.connect(self._open_feedback_dialog)
-        close_button.clicked.connect(self.close)
-        action_row.addWidget(feedback_button)
-        action_row.addStretch()
-        action_row.addWidget(close_button)
-        layout.addLayout(action_row)
-        self.setLayout(layout)
-        self.resize(780, 620)
 
     def _make_settings_tab(self, tabs: QTabWidget, title: str) -> QFormLayout:
         page = QWidget()
@@ -607,6 +706,7 @@ class SettingsDialog(QDialog):
                 self.close_action_combo.setItemText(index, _tr(self._ui_language, zh, en))
         if hasattr(self, "audio_test_panel"):
             self.audio_test_panel.set_ui_language(self._ui_language)
+        self.audio_source_selector.set_language(self._ui_language)
         self._refresh_model_recovery_text()
         self._fill_whisper_devices()
         self._fill_model_download_sources()
@@ -622,6 +722,13 @@ class SettingsDialog(QDialog):
             self.audio_test_panel.stop_test()
         self._preview()
         super().closeEvent(event)
+
+    def done(self, result):
+        if hasattr(self, "audio_test_panel"):
+            self.audio_test_panel.stop_test()
+        if self._translation_test_runner:
+            self._translation_test_runner.cancel()
+        super().done(result)
 
     def _fill_audio_devices(self):
         self.audio_device_combo.blockSignals(True)
@@ -993,6 +1100,14 @@ class SettingsDialog(QDialog):
         self._collect_values()
         return _copy_audio_config(self.audio_config)
 
+    def _audio_source_changed(self):
+        if hasattr(self, "audio_test_panel"):
+            self.audio_test_panel.stop_test()
+        selected = self.audio_source_selector.mode.currentData() == "process"
+        self.audio_device_combo.setEnabled(not selected)
+        self.refresh_audio_button.setEnabled(not selected)
+        self._preview()
+
     def _test_translation(self):
         self._collect_values()
         if translation_direction_error(self.translation_config.provider,
@@ -1023,13 +1138,25 @@ class SettingsDialog(QDialog):
         )
 
     def _hotkeys_changed(self, *args):
-        self.hotkey_config.toggle_overlay = self.toggle_overlay_input.text().strip()
-        self.hotkey_config.toggle_translation = self.toggle_translation_input.text().strip()
-        self.hotkey_config.clear_history = self.clear_history_input.text().strip()
-        self.hotkey_config.toggle_lock = self.toggle_lock_input.text().strip()
-        self.hotkey_config.toggle_compact = self.toggle_compact_input.text().strip()
+        if not self._collect_hotkey_values():
+            return
         self._refresh_help_text()
         self._preview()
+
+    def _collect_hotkey_values(self):
+        candidate = replace(self.hotkey_config, **{
+            name: getattr(self, name + '_input').text().strip() for name, _, _ in HOTKEY_ACTIONS})
+        conflicts = hotkey_conflicts(candidate)
+        self.hotkey_conflict_label.setVisible(bool(conflicts))
+        if conflicts:
+            labels = {name: _tr(self._ui_language, zh, en) for name, zh, en in HOTKEY_ACTIONS}
+            pairs = '; '.join(f'{labels[first]} / {labels[second]}' for first, second in conflicts)
+            self.hotkey_conflict_label.setText(_tr(self._ui_language,
+                '重复快捷键未应用，请修改：', 'Duplicate shortcuts were not applied. Change: ') + pairs)
+            return False
+        for name, _, _ in HOTKEY_ACTIONS:
+            setattr(self.hotkey_config, name, getattr(candidate, name))
+        return True
 
     def _refresh_help_text(self):
         if hasattr(self, "help_text_label"):
@@ -1081,6 +1208,8 @@ class SettingsDialog(QDialog):
         self.model_recovery_requested.emit(bool(reset))
 
     def _preview(self, *args):
+        if not self._collect_hotkey_values():
+            return
         self._collect_values()
         self.settings_changed.emit(
             self.overlay_config,
@@ -1093,22 +1222,13 @@ class SettingsDialog(QDialog):
         )
 
     def _collect_values(self):
+        self.audio_source_selector.collect()
         self.whisper_config.multilingual_asr_strategy = "legacy"
-        self.overlay_config.opacity = self.opacity_slider.value() / 100
-        self.overlay_config.bg_opacity = self.bg_opacity_slider.value() / 100
-        self.overlay_config.font_size = self.font_slider.value()
-        self.overlay_config.text_color = self.text_color_btn.color()
-        self.overlay_config.original_text_color = self.original_color_btn.color()
-        self.overlay_config.show_original = self.show_original_check.isChecked()
-        self.overlay_config.compact_mode = self.compact_mode_check.isChecked()
+        self._collect_appearance_values()
         self.app_config.language = normalize_ui_language(self.ui_language_combo.currentData())
         self._ui_language = self.app_config.language
 
-        self.hotkey_config.toggle_overlay = self.toggle_overlay_input.text().strip()
-        self.hotkey_config.toggle_translation = self.toggle_translation_input.text().strip()
-        self.hotkey_config.clear_history = self.clear_history_input.text().strip()
-        self.hotkey_config.toggle_lock = self.toggle_lock_input.text().strip()
-        self.hotkey_config.toggle_compact = self.toggle_compact_input.text().strip()
+        self._collect_hotkey_values()
         self.debug_config.enabled = self.debug_enabled_check.isChecked()
         self.update_config.enabled = self.update_enabled_check.isChecked()
         self.update_config.channel = normalize_update_channel(self.update_channel_combo.currentData())

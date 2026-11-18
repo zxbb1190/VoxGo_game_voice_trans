@@ -2,14 +2,23 @@
 
 import platform
 from dataclasses import dataclass
+from voxgo.config.models import (
+    OverlayConfig as OverlayConfig,
+    HotkeyConfig as HotkeyConfig,
+    RuntimeConfig as RuntimeConfig,
+    DebugConfig as DebugConfig,
+)
 from typing import Optional
 
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QPushButton
 
 from voxgo.app_info import APP_VERSION
+from voxgo.asr.model_download import (
+    normalize_model_download_endpoint,
+    normalize_model_download_source,
+)
 from voxgo.audio.capture import (
-    AUDIO_LATENCY_PRESETS,
     LATENCY_MODE_ACCURATE,
     LATENCY_MODE_BALANCED,
     LATENCY_MODE_CUSTOM,
@@ -20,7 +29,6 @@ from voxgo.audio.capture import (
 )
 from voxgo.i18n import (
     UI_LANGUAGE_ZH,
-    UI_LANGUAGE_OPTIONS,
     uses_english_source,
     language_label,
     normalize_ui_language,
@@ -28,9 +36,14 @@ from voxgo.i18n import (
 )
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.languages import (
-    LANGUAGE_NAMES, LOCAL_DIRECTIONS, OPPOSITE_LANGUAGE, SPEECH_LANGUAGE_CODES, SPEECH_LANGUAGES,
+    LANGUAGE_NAMES, OPPOSITE_LANGUAGE as OPPOSITE_LANGUAGE, SPEECH_LANGUAGE_CODES, SPEECH_LANGUAGES,
     normalize_language_code, translation_direction_error,
 )
+
+
+# Compatibility names used by the UI; normalization has one implementation.
+_normalize_model_download_endpoint = normalize_model_download_endpoint
+_normalize_model_download_source = normalize_model_download_source
 
 
 LANGUAGE_OPTIONS = tuple(LANGUAGE_NAMES.items())
@@ -139,6 +152,11 @@ def _hotkey_label_for_ui(value: str, ui_language: str) -> str:
 def _copy_runtime_config(config):
     copied = RuntimeConfig(
         setup_completed=bool(getattr(config, "setup_completed", False)),
+        first_subtitle_at=getattr(config, "first_subtitle_at", ""),
+        first_translation_at=getattr(config, "first_translation_at", ""),
+        subtitle_check_completed=bool(getattr(config, "subtitle_check_completed", False)),
+        community_invitation_seen=bool(getattr(config, "community_invitation_seen", False)),
+        community_invitation_dismissed=bool(getattr(config, "community_invitation_dismissed", False)),
         language=normalize_ui_language(getattr(config, "language", UI_LANGUAGE_ZH)),
         close_action=getattr(config, "close_action", "ask"),
         close_action_remember=bool(getattr(config, "close_action_remember", False)),
@@ -196,96 +214,12 @@ def _normalize_whisper_device(value: str) -> str:
     return value if value in WHISPER_DEVICE_LABELS else "auto"
 
 
-def _normalize_model_download_endpoint(value: str) -> str:
-    endpoint = (value or "").strip()
-    if endpoint.lower() in ("official", "huggingface", "huggingface.co", "default", "none"):
-        return ""
-    if not endpoint:
-        return ""
-    aliases = {
-        "hf-mirror": "https://hf-mirror.com",
-        "hf-mirror.com": "https://hf-mirror.com",
-        "mirror": "https://hf-mirror.com",
-        "china": "https://hf-mirror.com",
-        "cn": "https://hf-mirror.com",
-    }
-    endpoint = aliases.get(endpoint.lower(), endpoint)
-    endpoint = endpoint.rstrip("/")
-    if endpoint in ("https://huggingface.co", "http://huggingface.co"):
-        return ""
-    if not endpoint.startswith(("http://", "https://")):
-        endpoint = "https://" + endpoint
-    return endpoint.rstrip("/")
-
-
-def _normalize_model_download_source(value: str, endpoint: str = "") -> str:
-    source = (value or "").strip().lower().replace("-", "_")
-    normalized_endpoint = _normalize_model_download_endpoint(endpoint)
-    if not source and normalized_endpoint:
-        return "custom_hf_endpoint"
-    aliases = {
-        "": "modelscope",
-        "default": "modelscope",
-        "china": "modelscope",
-        "cn": "modelscope",
-        "domestic": "modelscope",
-        "modelscope": "modelscope",
-        "model_scope": "modelscope",
-        "ms": "modelscope",
-        "official": "huggingface",
-        "huggingface": "huggingface",
-        "hugging_face": "huggingface",
-        "hf": "huggingface",
-        "custom": "custom_hf_endpoint",
-        "custom_hf": "custom_hf_endpoint",
-        "custom_huggingface": "custom_hf_endpoint",
-        "custom_hugging_face": "custom_hf_endpoint",
-        "custom_hf_endpoint": "custom_hf_endpoint",
-    }
-    normalized = aliases.get(source, source)
-    if normalized not in {"modelscope", "huggingface", "custom_hf_endpoint"}:
-        normalized = "custom_hf_endpoint" if normalized_endpoint else "modelscope"
-    if normalized == "huggingface" and normalized_endpoint:
-        return "custom_hf_endpoint"
-    if normalized == "custom_hf_endpoint" and not normalized_endpoint:
-        return "huggingface"
-    return normalized
-
-
-@dataclass
-class OverlayConfig:
-    font_size: int = 16
-    font_family: str = "Microsoft YaHei"
-    text_color: str = "#00FF00"
-    bg_color: str = "#20242A"
-    bg_opacity: float = 0.82
-    position: str = "bottom"
-    max_lines: int = 5
-    fade_duration: int = 5
-    window_width: int = 500
-    window_height: int = 200
-    window_x: Optional[int] = None
-    window_y: Optional[int] = None
-    opacity: float = 0.85
-    original_text_color: str = "#B7C4D8"
-    show_original: bool = True
-    draggable: bool = True
-    locked: bool = False
-    compact_mode: bool = False
-    mobile_url: str = ""
-
-
-@dataclass
-class HotkeyConfig:
-    toggle_overlay: str = "ctrl+shift+t"
-    toggle_translation: str = "ctrl+alt+s"
-    clear_history: str = "ctrl+alt+c"
-    toggle_lock: str = ""
-    toggle_compact: str = ""
-
-
 @dataclass
 class AudioDeviceConfig:
+    source_mode: str = "system"
+    process_path: str = ""
+    process_id: int = 0
+    process_started: int = 0
     latency_mode: str = LATENCY_MODE_FAST
     input_device_index: Optional[int] = None
     input_device_name: str = ""
@@ -313,35 +247,6 @@ class WhisperDeviceConfig:
     multilingual_asr_strategy: str = "legacy"
     model_download_source: str = "modelscope"
     model_download_endpoint: str = ""
-
-
-@dataclass
-class RuntimeConfig:
-    setup_completed: bool = False
-    language: str = UI_LANGUAGE_ZH
-    close_action: str = "ask"
-    close_action_remember: bool = False
-    telemetry_consent: str = 'unknown'
-    telemetry_consent_version: int = 0
-    telemetry_epoch: str = ''
-    basic_install_seed: str = ''
-    basic_first_run_date: str = ''
-    telemetry_v2_migrated: bool = False
-    telemetry_install_origin: str = 'historical_install'
-    full_telemetry_source: str = 'migration_unknown'
-
-
-@dataclass
-class DebugConfig:
-    enabled: bool = False
-    log_level: str = "INFO"
-    save_audio_chunks: bool = False
-    save_transcripts: bool = False
-    save_failed_audio: bool = False
-    save_dropped_audio: bool = False
-    save_empty_asr_audio: bool = False
-    save_low_confidence_audio: bool = False
-    diagnostics_audio_dir: str = "diagnostics/audio"
 
 
 UPDATE_CHANNEL_OPTIONS = (

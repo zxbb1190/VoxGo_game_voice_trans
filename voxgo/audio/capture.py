@@ -230,6 +230,10 @@ class AudioConfig:
     input_device_index: Optional[int] = None
     input_device_name: str = ""
     input_device_id: str = ""
+    source_mode: str = "system"
+    process_path: str = ""
+    process_id: int = 0
+    process_started: int = 0
     audio_queue_max_blocks: int = DEFAULT_AUDIO_QUEUE_MAX_BLOCKS
     format: int = pyaudio.paInt16
     initial_noise_floor_dbfs: Optional[float] = None
@@ -513,13 +517,24 @@ class AudioLevelMonitor:
         self._running = False
 
 
+def audio_source_signature(config):
+    return tuple(getattr(config, key, default) for key, default in (
+        ("source_mode", "system"), ("process_path", ""), ("process_id", 0), ("process_started", 0),
+        ("input_device_id", ""), ("input_device_index", None), ("input_device_name", ""),
+    ))
+
+
 class SystemAudioCapture:
     """WASAPI Loopback 音频捕获"""
 
-    def __init__(self, config: AudioConfig = None):
+    def __init__(self, config: AudioConfig = None, *, initialize_portaudio: bool = True):
         self.config = config or AudioConfig()
+        self._audio = None
         with PORTAUDIO_LIFECYCLE_LOCK:
-            self._audio = pyaudio.PyAudio()
+            if initialize_portaudio:
+                self._audio = pyaudio.PyAudio()
+        self.last_level_dbfs = -120.0
+        self.last_level_at = 0.0
         self._stream: Optional[pyaudio.Stream] = None
         self._running = False
         self._capture_fault = None
@@ -1018,6 +1033,8 @@ class SystemAudioCapture:
         if len(audio_np) == 0:
             return None
         rms = calculate_rms_dbfs(audio_np)
+        self.last_level_dbfs = rms
+        self.last_level_at = time.monotonic()
         self._update_noise_gate(rms, len(audio_np))
         vad_speech, vad_ratio = self._is_vad_speech(audio_np)
         energy_activity = rms > self._energy_threshold

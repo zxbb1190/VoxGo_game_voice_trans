@@ -103,6 +103,23 @@ print(config.app.basic_install_seed)
             self.assertIs(app['setup_completed'], False)
             self.assertEqual(app['telemetry_install_origin'], 'new_install')
 
+    def test_cold_locale_probe_does_not_hold_the_settings_lock(self):
+        from voxgo.analytics.aggregation import CrossProcessLock
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            config = default_app_config()
+
+            def probe():
+                with CrossProcessLock(root / '.telemetry-settings.lock') as acquired:
+                    self.assertTrue(acquired, 'Qt locale discovery must run before locking settings')
+                return 'ja-JP'
+
+            with patch('voxgo.i18n.system_ui_language', side_effect=probe):
+                initialize_telemetry_v2(config, root)
+            self.assertTrue(config.app.telemetry_v2_migrated)
+            self.assertEqual(config.app.language, 'ja-JP')
+            self.assertEqual(json.loads((root / 'user_settings.json').read_text())['app']['language'], 'ja-JP')
+
     def test_old_denial_remains_denial_and_external_config_is_historical(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

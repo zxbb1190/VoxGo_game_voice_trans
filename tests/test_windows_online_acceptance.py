@@ -22,6 +22,21 @@ MODEL = 'tencent/Hunyuan-MT-7B'
 TOKEN = 'local-acceptance-' + 'a' * 32
 PRIVATE = 'PRIVATE-FIXTURE-CONTENT-MUST-NOT-BE-LOGGED'
 
+
+def wait_relay_ready(server, folder, instance, timeout=8):
+    deadline = time.monotonic() + timeout
+    ready = Path(folder) / 'online-relay.ready'
+    while time.monotonic() < deadline:
+        if server.poll() is not None:
+            raise AssertionError('Relay exited before becoming ready')
+        try:
+            if ready.read_text(encoding='utf-8-sig') == instance:
+                return
+        except (OSError, UnicodeError):
+            pass
+        time.sleep(.02)
+    raise AssertionError('Relay readiness timeout')
+
 FAKE_UPSTREAM = r'''
 using System;
 using System.IO;
@@ -76,6 +91,11 @@ $relay.Run((Join-Path $Folder 'stop'))
                                        '-Port', str(self.port), '-Folder', str(self.folder)],
                                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         self.direct = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        try:
+            wait_relay_ready(self.server, self.folder, 'fixture')
+        except Exception:
+            self.tearDown()
+            raise
         for _ in range(100):
             try:
                 self.health()
@@ -111,13 +131,24 @@ $relay.Run((Join-Path $Folder 'stop'))
             with self.direct.open(request, timeout=4) as response:
                 return response.status, response.read()
         except urllib.error.HTTPError as error:
-            try:
-                return error.code, error.read()
-            except (ConnectionResetError, http.client.IncompleteRead):
-                # Windows may reset a connection rejected before its request
-                # body is consumed. The received HTTP status still proves the
-                # gate rejected it; valid 200 responses must remain complete.
-                return error.code, b''
+            return error.code, error.read()
+
+    def send_headers_only(self, body=None, path='/v1/chat/completions', token=TOKEN):
+        # Header gates reject before consuming a body. Send the declared headers
+        # first so an unread body cannot cause a Windows TCP reset to obscure the
+        # HTTP response. Still require the exact status and complete JSON body.
+        data = json.dumps(payload() if body is None else body).encode('utf-8')
+        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=2)
+        try:
+            connection.putrequest('POST', path)
+            connection.putheader('Authorization', 'Bearer ' + token)
+            connection.putheader('Content-Type', 'application/json')
+            connection.putheader('Content-Length', str(len(data)))
+            connection.endheaders()
+            response = connection.getresponse()
+            return response.status, response.read()
+        finally:
+            connection.close()
 
     def count(self):
         path = self.folder / 'fixture-count'
@@ -135,11 +166,12 @@ $relay.Run((Join-Path $Folder 'stop'))
             with self.assertRaises(OSError):
                 HTTPTransport()('POST', '/v1/telemetry/sync',
                     {'schema_version': 2, 'metrics': {f'fixture_{i}': 0 for i in range(63)}})
-        self.assertEqual(self.send({'metrics': {'fixture_62': 0}}, '/v1/telemetry/sync')[0], 403)
-        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=2)
-        connection.request('POST', 'http://example.invalid/v1/chat/completions', body=b'{}')
-        self.assertEqual(connection.getresponse().status, 502)
-        connection.close()
+        status, body = self.send_headers_only({'metrics': {'fixture_62': 0}}, '/v1/telemetry/sync')
+        self.assertEqual(status, 403)
+        self.assertEqual(json.loads(body)['error']['message'], 'route_blocked')
+        status, body = self.send_headers_only({}, 'http://example.invalid/v1/chat/completions')
+        self.assertEqual(status, 502)
+        self.assertEqual(json.loads(body)['error']['message'], 'external_request_blocked')
         self.assertEqual(self.count(), 0)
         self.assertEqual(self.health()['upstream_attempts'], 0)
         log = (self.folder / 'online-relay.jsonl').read_text()
@@ -157,9 +189,32 @@ $relay.Run((Join-Path $Folder 'stop'))
             (payload(tools=[]), '/v1/chat/completions', TOKEN, 400),
         ):
             with self.subTest(path=path, expected=status):
-                self.assertEqual(self.send(body, path, token)[0], status)
+                send = self.send_headers_only if status in (401, 403) else self.send
+                actual, response_body = send(body, path, token)
+                self.assertEqual(actual, status)
+                self.assertIn('message', json.loads(response_body)['error'])
         self.assertEqual(self.count(), 0)
         self.assertEqual(self.health()['upstream_attempts'], 0)
+
+    def test_full_body_rejection_is_durable_even_if_windows_resets_the_socket(self):
+        # Also exercise ordinary clients that send headers and body together.
+        # A reset alone is not success: require this request's rejection record,
+        # exact reason/status, a live server, and zero upstream operations.
+        for _ in range(10):
+            try:
+                status, body = self.send(token='wrong')
+            except (ConnectionResetError, http.client.IncompleteRead):
+                pass
+            else:
+                self.assertEqual(status, 401)
+                self.assertEqual(json.loads(body)['error']['message'], 'local_session_required')
+        rows = [json.loads(line) for line in (self.folder / 'online-relay.jsonl').read_text().splitlines()]
+        self.assertEqual(len(rows), 10)
+        self.assertTrue(all(row['kind'] == 'local_session_required' and row['status'] == 401
+                            and row['request_bytes'] == 0 for row in rows))
+        self.assertEqual(self.health()['blocked'], 10)
+        self.assertEqual(self.health()['upstream_attempts'], 0)
+        self.assertEqual(self.count(), 0)
 
     def test_formal_provider_round_trip_preserves_prompt_and_language_without_real_key(self):
         from voxgo.translation import GameTranslator, TranslationConfig
@@ -323,6 +378,7 @@ if (-not $failed) {{ throw 'The locked-file replacement unexpectedly succeeded' 
                 '-CredentialSettings', str(credential)], env=environment, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             direct = urllib.request.build_opener(urllib.request.ProxyHandler({}))
             try:
+                wait_relay_ready(server, root, 'a' * 32)
                 for _ in range(100):
                     try:
                         with direct.open(f'http://127.0.0.1:{port}/_acceptance/health', timeout=.5) as response:
@@ -336,9 +392,12 @@ if (-not $failed) {{ throw 'The locked-file replacement unexpectedly succeeded' 
                     self.fail('Production helper with fixture startup timeout')
                 self.assertEqual(health['upstream_attempts'], 0)
                 self.assertEqual(health['instance'], 'a' * 32)
+                self.assertEqual(health['blocked'], 0)
                 connection = http.client.HTTPConnection('127.0.0.1', port, timeout=2)
                 connection.request('CONNECT', 'telemetry-fixture.invalid:443')
-                self.assertEqual(connection.getresponse().status, 502)
+                response = connection.getresponse()
+                self.assertEqual(response.status, 502)
+                self.assertEqual(json.loads(response.read())['error']['message'], 'external_request_blocked')
                 connection.close()
                 with direct.open(f'http://127.0.0.1:{port}/_acceptance/health', timeout=1) as response:
                     health = json.load(response)

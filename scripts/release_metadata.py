@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from scripts.build_website_changelog import github_json, release_notes
+from voxgo.update.checker import gitcode_lite_url, is_newer_version
 
 REPO = 'https://github.com/zxbb1190/VoxGo_game_voice_trans'
 EDITIONS = ('lite', 'full', 'full-cuda', 'cuda-runtime')
@@ -67,11 +68,21 @@ def sync_site(root, version, release, hashes, mirror_verified=False):
 
     manifest_path = root / 'docs/update.json'
     manifest = json.loads(manifest_path.read_text('utf-8-sig'))
+    if is_newer_version(manifest['latest'], version):
+        raise ValueError('Refusing to replace a newer published update manifest')
+    if mirror_verified and not assets[package_name(version, 'lite')].get('digest'):
+        print('GitHub Lite has no published digest; keeping the update on GitHub only.', file=sys.stderr)
+        mirror_verified = False
     manifest.update(values, latest=version, channel='stable', title=f'VoxGo v{version}',
                     notes=en, notes_zh=zh, notes_en=en, mandatory=False,
                     release_url=f'{REPO}/releases/tag/{tag}')
+    mirror_url = gitcode_lite_url(version)
+    if mirror_verified:
+        manifest['gitcode_lite'] = dict(version=version, url=mirror_url, sha256=hashes['lite'])
+    else:
+        # Never carry an earlier release's mirror forward on an outage or missing credentials.
+        manifest.pop('gitcode_lite', None)
     writes = {manifest_path: json.dumps(manifest, ensure_ascii=False, indent=2) + '\n'}
-    mirror_url = f'https://gitcode.com/zxbb1190/VoxGo/releases/download/{tag}/{package_name(version, "lite")}'
     for relative in ('docs/index.html', 'docs/en/index.html'):
         path = root / relative
         page = path.read_text('utf-8')

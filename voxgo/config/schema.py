@@ -1,5 +1,10 @@
 from dataclasses import dataclass
-from typing import Optional
+from voxgo.config.models import (
+    OverlayConfig as OverlayConfig,
+    HotkeyConfig as HotkeyConfig,
+    RuntimeConfig as RuntimeConfig,
+    DebugConfig as DebugConfig,
+)
 
 from voxgo.audio.capture import AudioConfig
 from voxgo.i18n import UI_LANGUAGE_ZH, normalize_ui_language
@@ -7,7 +12,7 @@ from voxgo.mobile.server import WebSocketConfig
 from voxgo.asr.whisper_engine import WhisperConfig
 from voxgo.translation import TranslationConfig
 from voxgo.update.checker import UpdateSettings
-from voxgo.languages import LANGUAGE_ALIASES, LANGUAGE_NAMES, OPPOSITE_LANGUAGE
+from voxgo.languages import LANGUAGE_ALIASES as LANGUAGE_ALIASES, LANGUAGE_NAMES as LANGUAGE_NAMES, OPPOSITE_LANGUAGE as OPPOSITE_LANGUAGE
 from voxgo.languages import normalize_language_code as _normalize_language_code
 
 
@@ -16,67 +21,6 @@ WHISPER_DEVICE_NAMES = {
     "cuda": "NVIDIA GPU / CUDA",
     "cpu": "CPU",
 }
-
-
-@dataclass
-class OverlayConfig:
-    font_size: int = 16
-    font_family: str = "Microsoft YaHei"
-    text_color: str = "#00FF00"
-    bg_color: str = "#20242A"
-    bg_opacity: float = 0.82
-    position: str = "bottom"
-    max_lines: int = 5
-    fade_duration: int = 5
-    window_width: int = 500
-    window_height: int = 200
-    window_x: Optional[int] = None
-    window_y: Optional[int] = None
-    opacity: float = 0.85
-    original_text_color: str = "#B7C4D8"
-    show_original: bool = True
-    draggable: bool = True
-    locked: bool = False
-    compact_mode: bool = False
-    mobile_url: str = ""
-
-
-@dataclass
-class HotkeyConfig:
-    toggle_overlay: str = "ctrl+shift+t"
-    toggle_translation: str = "ctrl+alt+s"
-    clear_history: str = "ctrl+alt+c"
-    toggle_lock: str = ""
-    toggle_compact: str = ""
-
-
-@dataclass
-class RuntimeConfig:
-    setup_completed: bool = False
-    language: str = UI_LANGUAGE_ZH
-    close_action: str = "ask"
-    close_action_remember: bool = False
-    telemetry_consent: str = 'unknown'
-    telemetry_consent_version: int = 0
-    telemetry_epoch: str = ''
-    basic_install_seed: str = ''
-    basic_first_run_date: str = ''
-    telemetry_v2_migrated: bool = False
-    telemetry_install_origin: str = 'historical_install'
-    full_telemetry_source: str = 'migration_unknown'
-
-
-@dataclass
-class DebugConfig:
-    enabled: bool = False
-    log_level: str = "INFO"
-    save_audio_chunks: bool = False
-    save_transcripts: bool = False
-    save_failed_audio: bool = False
-    save_dropped_audio: bool = False
-    save_empty_asr_audio: bool = False
-    save_low_confidence_audio: bool = False
-    diagnostics_audio_dir: str = "diagnostics/audio"
 
 
 @dataclass

@@ -1,13 +1,13 @@
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Optional
 from urllib.parse import urlparse
 
 import aiohttp
 from voxgo.languages import (
-    LANGUAGE_ALIASES, OPPOSITE_LANGUAGE, DEFAULT_TARGET_LANGUAGE,
-    LOCAL_DIRECTIONS, normalize_language_code, translation_direction_error,
+    LANGUAGE_ALIASES as LANGUAGE_ALIASES, OPPOSITE_LANGUAGE as OPPOSITE_LANGUAGE, DEFAULT_TARGET_LANGUAGE,
+    LOCAL_DIRECTIONS, normalize_language_code, translation_direction_error as translation_direction_error,
 )
 
 
@@ -335,6 +335,27 @@ def clean_translation_output(text: str) -> str:
     cleaned = re.sub(r"</?\s*(?:source_text|target_text)\s*>", "", cleaned, flags=re.IGNORECASE)
     cleaned = " ".join(cleaned.split())
     return cleaned.strip()
+
+
+def guard_translation_result(result):
+    """Hide output dominated by explicit decoder/replacement markers.
+
+    Ordinary question marks, punctuation, game codes and occasional unknown
+    characters in otherwise readable text are not evidence of decoder failure.
+    Keep the existing telemetry category vocabulary and failure-notice contract.
+    """
+    if result is None:
+        return result
+    text = clean_translation_output(result.translated)
+    if text.startswith(("[翻译", "[未翻译]")):
+        return result
+    text = re.sub(r"<unk>", "\u2047", text, flags=re.IGNORECASE)
+    unknown = sum(char in "\u2047\ufffd" for char in text)
+    readable = sum(char.isalnum() for char in text)
+    if unknown and (not readable or (unknown >= 3 and unknown >= readable)):
+        return replace(result, translated="[翻译失败] 返回内容无效，已隐藏异常译文。",
+                       failure_reason="other")
+    return result
 
 
 class TranslatorProvider:

@@ -30,12 +30,15 @@ class AudioRuntime:
         notify_user,
         write_crash_report,
         benchmark_options: BenchmarkAudioOptions = None,
+        on_source_lost=None,
     ):
         self._config_getter = config_getter
         self._speech_callback = speech_callback
         self._notify_user = notify_user
         self._write_crash_report = write_crash_report
         self._benchmark_options = benchmark_options
+        self._on_source_lost = on_source_lost
+        self.last_error = ""
         self.capture = None
         self._lock = threading.RLock()
         self._io_lock = threading.Lock()
@@ -82,8 +85,13 @@ class AudioRuntime:
                 self.capture = None
 
     def _make_capture(self, audio_config, allow_fallback=False):
+        if getattr(audio_config, "source_mode", "system") not in {"system", "process"}:
+            raise RuntimeError("Unknown audio source mode; select a source in Settings")
         if self._benchmark_options:
             capture = BenchmarkAudioSource(audio_config, self._benchmark_options)
+        elif getattr(audio_config, "source_mode", "system") == "process":
+            from voxgo.audio.process_loopback import ProcessAudioCapture
+            capture = ProcessAudioCapture(audio_config)
         else:
             capture = SystemAudioCapture(audio_config)
         try:
@@ -103,6 +111,8 @@ class AudioRuntime:
         self._recovery_cancel.set()
         with self._io_lock, self._lock:
             self._stopped = False
+            self.last_error = ""
+            self._default_watch_stop.set()
             # A manual settings change supersedes an in-flight recovery.
             self._recovery_cancel = threading.Event()
             config = self._config_getter()
@@ -153,6 +163,17 @@ class AudioRuntime:
     def _schedule_recovery(self, reason):
         if self._benchmark_options:
             return
+        if getattr(self._config_getter().audio, "source_mode", "system") == "process":
+            if not self.last_error:
+                self.last_error = str(reason)
+                self._needs_recovery = False
+                self._notice("应用收音已暂停", "App capture paused", self.last_error, self.last_error)
+                with self._lock:
+                    self._dispose_capture()
+                if self._on_source_lost:
+                    self._on_source_lost()
+            return
+        self.last_error = str(reason)
         with self._lock:
             if self._stopped or self._recovery_exhausted:
                 return
@@ -294,7 +315,8 @@ class AudioRuntime:
         self._default_watch_stop.set()
 
     def _ensure_default_watch(self):
-        if self._benchmark_options or self._stopped:
+        if (self._benchmark_options or self._stopped
+                or getattr(self._config_getter().audio, "source_mode", "system") == "process"):
             return
         if self._default_watch_thread and self._default_watch_thread.is_alive() and not self._default_watch_stop.is_set():
             return
@@ -313,6 +335,8 @@ class AudioRuntime:
             with self._lock:
                 if self._stopped:
                     continue
+                if getattr(self._config_getter().audio, "source_mode", "system") == "process":
+                    return
                 capture = self.capture
                 selected_id = (capture.selected_device or {}).get("device_id", "") if capture else ""
                 follow_default = self._follow_default

@@ -3,7 +3,6 @@
 No second segmentation/filter implementation: all decisions delegate to production
 methods. Frame provenance follows actual queue objects, not ambiguous byte.find().
 """
-from collections import defaultdict
 from dataclasses import asdict
 import hashlib
 import json
@@ -14,7 +13,6 @@ import time
 import wave
 
 import numpy as np
-from loguru import logger
 
 from voxgo.audio.capture import SystemAudioCapture
 from voxgo.asr.pipeline import SpeechPipeline

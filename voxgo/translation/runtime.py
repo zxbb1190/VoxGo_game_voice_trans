@@ -16,6 +16,7 @@ from voxgo.translation import (
     should_skip_translation_for_language,
 )
 from voxgo.translation.failures import classify_api_failure
+from voxgo.translation.base import guard_translation_result
 
 
 class TranslationRuntime:
@@ -367,6 +368,7 @@ class TranslationRuntime:
                 text[:80],
             )
             return
+        result = guard_translation_result(result)
         translated = clean_translation_output("" if result is None else result.translated)
         failure_reason = getattr(result, 'failure_reason', '')
         if trace:

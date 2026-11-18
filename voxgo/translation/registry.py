@@ -1,4 +1,4 @@
-from .base import TRANSLATION_PROVIDERS, normalize_translation_provider
+from .base import TRANSLATION_PROVIDERS as TRANSLATION_PROVIDERS, normalize_translation_provider
 from .google import GoogleCloudProvider
 from .local import LocalTranslationProvider
 from .openai_compatible import OpenAICompatibleProvider

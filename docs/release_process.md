@@ -1,27 +1,20 @@
 # 发布流程
 
-## v0.6.0 多语言展示同步（本次按四附件工作流执行）
+## 当前维护流程
 
-产品文案统一为：五语言识别、20个在线翻译方向；日语、韩语、俄语标为 Beta，表示持续优化，并非未开放。离线 OPUS 仍仅英中双向。本次已获发布授权，按现有工作流构建 Lite、Full、Full-CUDA 和 CUDA runtime；实际 Release 及附件校验通过后同步官网、README 和更新清单。GitCode 仍只镜像同一份正式 Lite，不同步源码。
+本页记录可重复执行的发布步骤；实际版本、附件和镜像状态以本次发布验证为准。
+[2026-10-30 的 v0.6.0 计划](testing/history/release-plan-v060-2026-10-30.md)已归档，
+其中的“待发布”“已获授权”等描述只属于当时的任务。
 
-发布时逐项核对：
+1. 明确本次版本和需要发布的变体；现有发布工作流默认构建四类附件。仅构建 Lite 时，应显式选择对应构建参数并逐项确认更新清单兼容行为。
+2. 先通过[日常回归与质量检查](testing/README.md)，再完成对应变体的真实打包、启动和升级验证。
+3. 发布前核对版本文件、双语说明和附件 SHA256；缺少的变体不能链接到不存在的文件，也不能用旧文件冒充新版本。
+4. 取得本次发布授权后才推送标签、发布或更新官网。日常 CI 不创建 Release、不部署、不推送代码。
+5. 从正式固定下载地址回读附件，验证字节数和 SHA256，再同步更新清单、官网五语言页面和 README。
+6. GitCode 仅镜像同一份正式 Lite；镜像失败时保留明确的旧版状态，按下文流程补发。
+7. 将本次交付结论链接到[历史证据索引](testing/evidence/README.md)；旧验收结果不能替代本次验证。
 
-| 项目 | 同步内容 / 放行条件 |
-|---|---|
-| 客户端版本 | `voxgo/app_info.py`、`installer/VoxGo.iss`、`scripts/build_portable.ps1`、发布工作流默认版本已为0.6.0；2026-10-30本地Lite已包含多语言展示、单隐私开关、语言计数及精简隐私气泡，尚未公开发布；见[最新交付记录](testing/v0.6.0-today-classifications-2026-10-30.md) |
-| GitHub Release | 正式授权后创建实际 `v0.6.0` Release；双语正文来自 `docs/releases/v0.6.0.md`，发布时去掉待发布状态，保留Beta与离线边界 |
-| 官网首页（中/英） | 核对五语言文案、语言表、FAQ、description/OG；去掉临时的“当前公开下载v0.5.2 / v0.6.0待发布”说明，替换下载版本文字 |
-| GitHub下载 | 仅链接真实存在、已校验的 `releases/download/v0.6.0/` 附件；不能只把全部旧URL字符串替换成0.6.0 |
-| 仅发布Lite时 | 本次按四类附件发布，旧Full更新及CUDA下载有对应资源；将来若改为“仅Lite发布”，仍需另行适配更新与下载。官网不应把Full/GPU按钮改成不存在的0.6.0文件；移除这些新版本入口或清楚保留为旧版入口 |
-| GitCode镜像 | Lite附件上传并从固定下载URL回读校验后再切换；未完成时保留明确的旧版标注，不能假定同版本镜像存在 |
-| 更新元数据 | `docs/update.json` 的 `latest/channel/title`、`release_url`、`notes/notes_zh/notes_en`、各实际附件URL和SHA256须一致；旧Full客户端按edition选择更新，缺失变体不能用0.5.2 ZIP冒充0.6.0。先确认缺失变体的更新行为，再放行清单 |
-| README | 中英文同步；去掉顶部“当前公开0.5.2、0.6.0待发布”过渡说明。保留Beta、隐私、安装/模型下载、升级、徽章和社区链接 |
-| 静态更新日志与SEO | 实际Release存在后再运行下方生成流程；生成 `docs/changelog/v0.6.0/`、首页Latest摘要和sitemap。发布前只有Markdown草稿，不伪造正式版本页或发布日期 |
-| Full遥测兼容 | 原63指标口径不变，语言计数增加协商后的schema3扩展，统一原详细统计开关。2026-10-30生产0006/0007及兼容Worker已启用，已只读核验真实客户端ACK/分类入库；独立今日分类视图已上线，登录后显示待用户刷新确认。Full指统计类别，Lite也受同一规则控制 |
-
-验证真实下载、SHA256、更新清单和中英文网站后，再声明上线完成。此清单不是 push、tag、迁移或部署授权。
-
-## 官网静态更新日志（v2 草案）
+## 官网静态更新日志
 
 ### 五语言官网与SEO维护
 
@@ -36,7 +29,7 @@
 
 `--lastmod`应使用首页实际修改日期；省略时保留已有日期，不改变历史Release日期。更改英文文案后需补齐三语词条；未知文案会使构建报错，不默默生成混合语言页面。版本号和日期参数独立保留，GitCode旧镜像的版本不会随GitHub链接一起被提前提升。
 
-正式发布流程在更新中英文链接后离线生成并检查三语页面，再把五个首页及sitemap一起提交。静态更新日志生成器也会刷新三语首页，并保留五个首页的sitemap入口。新Release正文有新词条时，应在发布前准备翻译；构建失败不会自行调用在线翻译或回退成英文。本次按四类构建附件发布，不采用仅Lite发布路径。
+正式发布流程在更新中英文链接后离线生成并检查三语页面，再把五个首页及sitemap一起提交。静态更新日志生成器也会刷新三语首页，并保留五个首页的sitemap入口。新Release正文有新词条时，应在发布前准备翻译；构建失败不会自行调用在线翻译或回退成英文。发布变体须与本次实际构建和校验结果一致。
 
 五个首页均有自指canonical、互相完整的`hreflang`和中文根页`x-default`；保持显式语言链接，不按浏览器语言强制重定向。SEO注重各页自然、准确的正文和独立描述，keywords不做重复堆砌，不将其视为Google排名因素。页面实现通过不代表已收录、排名提升或搜索摘要一定采用description。上站后才可做各URL的真实访问、Search Console和分享卡片验收；本轮没有部署或提交收录。
 
@@ -64,7 +57,8 @@
 - GitHub 是客户端源码、构建和正式发行版的来源；GitCode 仓库 `zxbb1190/VoxGo` **只发布发行版和 Lite 附件，不上传、推送或同步客户端源码**。
 - GitCode 创建版本 tag 时，`target_commitish` 使用该镜像仓库现有 HEAD 的 40 位 SHA，不使用 GitHub 客户端提交，不向 GitCode 执行 `git push`。读取 HEAD 的 `git ls-remote` 不上传代码。
 - 每次发版上传 GitHub Release 中的同一份正式 `VoxGo-vX.Y.Z-lite.zip`，不得用 Preview 包替代，也不得为 GitCode 单独重新打包。
-- Full、Full-CUDA 和 CUDA runtime 仍仅使用 GitHub；`docs/update.json` 保持 GitHub 下载来源，国内镜像不改变客户端自动更新来源。
+- GitHub 正式发布 Lite、Full、Full-CUDA 和独立 CUDA runtime 四个 ZIP；四个主下载地址始终指向 GitHub。自 0.6.1 起，仅 Lite 在同版本镜像通过验证后另提供 GitCode 选项，默认仍为 GitHub。国内用户可取消下载后切换来源，两个来源使用同一个正式 Lite SHA256。
+- 0.6.0 的选包逻辑已经发出：Lite 只要已有默认 Whisper 缓存目录，就可能选 Full。务必保留真实 Full 附件，不将 Full URL 指向 Lite。希望保留 Lite 的用户应按[升级说明](releases/v0.6.1.md)手动原地覆盖；即使最初从 GitCode 安装，旧版也不会自动选择该镜像。已通过旧版装入 Full 的用户以后按 Full 更新。
 - 国内下载地址固定为：`https://gitcode.com/zxbb1190/VoxGo/releases/download/vX.Y.Z/VoxGo-vX.Y.Z-lite.zip`。
 
 ### 凭据配置
@@ -79,8 +73,8 @@
 1. GitHub Actions 完成测试、正式包构建、双语说明及 SHA256 计算，发布 GitHub Release。
 2. `Sync GitCode Lite mirror` 步骤读取 Secret 和镜像仓库现有 HEAD，调用 `scripts/publish_gitcode_release.py`。
 3. 脚本先核对本地 Lite ZIP 与 GitHub SHA256，再查询或创建同版本 GitCode Release，取得预签名上传地址并 PUT 上传原文件。
-4. 脚本从官网实际使用的固定国内下载 URL 执行完整 GET 下载，核对字节数及 SHA256 一致后，工作流才设置 `GITCODE_MIRROR_VERIFIED=true`。
-5. 官网更新步骤据此更新中英文页面的国内链接和显示版本。GitCode 同步失败不阻断已发布的 GitHub 更新清单；缺少 Token 或验证失败时，明确报告镜像待补发，保留并标注上一版国内镜像，不提前放出新版本链接。
+4. 脚本从官网实际使用的固定国内下载 URL 执行完整 GET 下载，核对字节数及 SHA256 一致后，镜像步骤才输出 `verified=true`，清单步骤只读取本次运行的这个结果。生成清单时还会与 GitHub Lite 附件公布的 digest 核对；若 GitHub 未提供 digest，暂不启用国内更新源。
+5. 镜像校验成功后，`release_metadata.py site --mirror-verified` 同步官网入口，并在清单写入可选的 `gitcode_lite: {version, url, sha256}`。版本和摘要必须与主清单的 `latest`、`sha256_lite` 一致。失败或无凭据时省略该字段（不继承上次记录），GitHub 照常发布；官网可明确标注上一版国内镜像，但客户端不能用旧包更新。旧客户端忽略新增字段。
 
 已有同名附件仅在下载校验一致时跳过；文件大小或 SHA256 不一致必须报错，不得覆盖不同文件或强行视为成功。重试前先排查失败原因。
 
@@ -110,13 +104,13 @@ try {
 }
 ```
 
-3. 脚本成功后，将 `docs/index.html` 和 `docs/en/index.html` 中首屏、Lite 下载卡片的 GitCode URL 和显示版本一并更新。只提交指定官网文件，不包含 Token、诊断快照或本机配置。
-4. 推送官网改动，等待 Pages 部署成功，再从线上中英文页面核对各两个国内入口均指向本版本。
+3. 仅在上一步验证成功、且此 tag 仍是当前正式版时补登记。将同一正式清单中的四个 SHA256 赋给 `LITE_SHA256`、`FULL_SHA256`、`FULL_CUDA_SHA256`、`CUDA_RUNTIME_SHA256` 环境变量，运行 `scripts/release_metadata.py site --version X.Y.Z --mirror-verified`，再按上文重新生成和校验五语官网。不要把旧 tag 的重试结果写进新版本清单。
+4. 核对差异只更新预期镜像信息，保留 GitHub 四个正式下载地址及哈希；按发布授权同步官网。回读线上清单和各语言 Lite 链接，并用带模型缓存的 Lite 验证两种来源均准备相同的安装包，Full/Full-CUDA 不显示国内选项。
 
 ### 发版完成检查
 
 - GitCode 同版本发行版及 Lite 附件存在；固定下载 URL 可实际 GET 下载。
-- GitCode 下载文件与 GitHub 正式附件的大小、SHA256 完全一致。**不能仅靠 HEAD 判断可用性**：本次验证中 GitCode HEAD 返回 401，而有效旧版 URL 的 Range GET 返回 206；最终以完整 GET 和哈希校验为准。
+- GitCode 下载文件与 GitHub 正式附件的大小、SHA256 完全一致。**不能仅靠 HEAD 判断可用性**：历史验证中曾遇到 GitCode HEAD 返回 401，而有效 URL 的 Range GET 返回 206；最终以完整 GET 和哈希校验为准。
 - 中英文官网均已部署正确的国内版本链接和标签；GitHub 更新清单保持正确，不被镜像失败拖住。
 - GitCode 仓库源码分支未改变，没有上传客户端源码；Token 文件未被 Git 跟踪或提交。
 - 若镜像仍失败，状态必须写明“GitHub 已发布，GitCode 待补发”，不能宣称双源发版全部完成。

@@ -1,5 +1,4 @@
 import asyncio
-import time
 from typing import List, Optional
 
 import aiohttp
@@ -10,6 +9,7 @@ from .base import (
     TranslationRequest,
     TranslationResult,
     detect_language,
+    guard_translation_result,
     is_placeholder_api_key,
     local_phrase_cache_lookup,
     normalize_translation_provider,
@@ -98,7 +98,7 @@ class GameTranslator:
         request = TranslationRequest(text=text, source_lang=source_language, target_lang=target, detected_language=detected_language)
         async with self._translation_semaphore():
             session = await self._get_session()
-            result = await provider.translate(request, session)
+            result = guard_translation_result(await provider.translate(request, session))
             if result.translated and not result.translated.startswith("["):
                 self._translation_count += 1
                 self._total_time += result.elapsed_seconds
@@ -137,7 +137,7 @@ class GameTranslator:
         )
         async with self._translation_semaphore():
             session = await self._get_session()
-            result = await provider.translate(request, session)
+            result = guard_translation_result(await provider.translate(request, session))
             if result.translated and not result.translated.startswith("["):
                 self._translation_count += 1
                 self._total_time += result.elapsed_seconds
@@ -160,14 +160,16 @@ class GameTranslator:
             text[:80],
             translated[:80],
         )
-        self._translation_count += 1
-        return TranslationResult(
+        result = guard_translation_result(TranslationResult(
             translated=translated,
             source_lang=source_language,
             target_lang=target_language_code,
             provider="local_cache",
             elapsed_seconds=0.0,
-        )
+        ))
+        if not result.failure_reason:
+            self._translation_count += 1
+        return result
 
     async def translate(self, text: str, detected_language: str = "") -> str:
         result = await self.translate_result(text, detected_language)

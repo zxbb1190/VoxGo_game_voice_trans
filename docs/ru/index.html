@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
+  <meta name="description" content="Перевод игровых диалогов и голосового чата в реальном времени. В кинорежиме перевод появляется над оригиналом. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
   <meta name="keywords" content="VoxGo, перевод речи в играх, субтитры в реальном времени, многоязычный перевод, перевод игровых диалогов, голосовой чат, субтитры Discord, Whisper, офлайн перевод английский китайский" />
   <link rel="canonical" href="https://voxgo.cn/ru/" />
   <link rel="alternate" hreflang="zh-CN" href="https://voxgo.cn/" />
@@ -16,7 +16,7 @@
   <link rel="alternate" hreflang="x-default" href="https://voxgo.cn/" />
 
   <meta property="og:title" content="VoxGo — Перевод речи в играх и живые субтитры" />
-  <meta property="og:description" content="Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
+  <meta property="og:description" content="Перевод игровых диалогов и голосового чата в реальном времени. В кинорежиме перевод появляется над оригиналом. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
   <meta property="og:url" content="https://voxgo.cn/ru/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://voxgo.cn/assets/logo.png" />
@@ -28,7 +28,7 @@
   <meta property="og:locale:alternate" content="ko_KR" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="VoxGo — Перевод речи в играх и живые субтитры" />
-  <meta name="twitter:description" content="Субтитры для голосового чата, диалогов в играх и трансляций. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
+  <meta name="twitter:description" content="Перевод игровых диалогов и голосового чата в реальном времени. В кинорежиме перевод появляется над оригиналом. 5 языков, 20 направлений онлайн-перевода. Японский, корейский и русский — Beta. Офлайн: английский↔китайский." />
   <meta name="twitter:image" content="https://voxgo.cn/assets/logo.png" />
   <!-- SITE_I18N_SEO_END -->
   <title>VoxGo — Перевод речи в играх и живые субтитры</title>
@@ -589,15 +589,15 @@ var _hmt = _hmt || [];
   <main id="top">
     <div class="container hero">
       <div class="hero-copy">
-        <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.0</span><span class="hero-scope">5 ЯЗЫКОВ · 20 НАПРАВЛЕНИЙ ОНЛАЙН-ПЕРЕВОДА</span></div>
+        <div class="hero-kicker"><span class="eyebrow">VOXGO 0.6.1</span><span class="hero-scope">5 ЯЗЫКОВ · 20 НАПРАВЛЕНИЙ ОНЛАЙН-ПЕРЕВОДА</span></div>
         <h1 class="hero-brand-title">Языковой барьер не должен мешать игре.</h1>
         <p class="hero-tagline">Незнакомая речь —<br class="tagline-break" /> в понятные субтитры.</p>
-        <p class="lead">От общения с командой до игровых диалогов и трансляций. VoxGo распознаёт и переводит речь, показывая субтитры в окне поверх игры.</p>
+        <p class="lead">Читайте сюжетные диалоги в кинорежиме, а для командного чата выбирайте классическое окно.</p>
         <div class="hero-languages" aria-label="Поддерживаемые языки и статус Beta"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">5 языков · 20 направлений онлайн-перевода · Японский, корейский и русский — Beta · Английский↔китайский офлайн</p>
         <div class="actions"><a class="btn btn-primary"
             href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">Скачать VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">Зеркало в Китае (Lite v0.6.0)</a></div>
-        <div class="hero-links"><a class="hero-community" href="#story">Как речь становится субтитрами ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">Исходный код на GitHub ↗</a></div>
+        <div class="hero-links"><a class="hero-community" href="#cinema">Сравнить режимы субтитров ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">Исходный код на GitHub ↗</a></div>
       </div>
       <div class="mock">
         <div class="game-screen">
@@ -641,20 +641,28 @@ var _hmt = _hmt || [];
         <div class="story-steps">
           <article class="story-step" data-scene="1"><span class="story-step-number">ШАГ 01 / УСЛЫШАТЬ</span><h3>ЗВУК ИГРЫ</h3><p>WASAPI Loopback захватывает звук игры, Discord или видео, который воспроизводит Windows. Индикатор уровня помогает выбрать правильное устройство.</p><span class="story-state">ВХОД: СИСТЕМНЫЙ ЗВУК WINDOWS</span></article>
           <article class="story-step" data-scene="2"><span class="story-step-number">ШАГ 02 / РАСПОЗНАТЬ</span><h3>WHISPER ASR</h3><p>faster-whisper распознаёт речь локально на вашем ПК. VoxGo Lite загружает модель при первом использовании.</p><span class="story-example">He is one shot behind the box.</span><span class="story-state">ЛОКАЛЬНОЕ РАСПОЗНАВАНИЕ: АКТИВНО</span></article>
-          <article class="story-step" data-scene="3"><span class="story-step-number">ШАГ 03 / ПЕРЕВЕСТИ</span><h3>ПЕРЕВОД</h3><p>В v0.6.0 доступны 20 направлений прямого онлайн-перевода и локальный перевод английский↔китайский. Текущий режим виден в окне субтитров.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">РЕЖИМ: API / ЛОКАЛЬНО</span></article>
+          <article class="story-step" data-scene="3"><span class="story-step-number">ШАГ 03 / ПЕРЕВЕСТИ</span><h3>ПЕРЕВОД</h3><p>В v0.6.1 доступны 20 направлений прямого онлайн-перевода и локальный перевод английский↔китайский. Текущий режим виден в окне субтитров.</p><span class="story-example">Rotate B, don't peek mid. → 转 B，别探中路。</span><span class="story-state">РЕЖИМ: API / ЛОКАЛЬНО</span></article>
           <article class="story-step" data-scene="4"><span class="story-step-number">ШАГ 04 / ПРОЧИТАТЬ</span><h3>ОКНО СУБТИТРОВ</h3><p>Оригинал и перевод появляются в прозрачном окне поверх других окон. Готовые субтитры можно скопировать или передать на телефон в локальной сети.</p><span class="story-example">LIVE SUBTITLE / 转 B，别探中路。</span><span class="story-state">ВЫХОД: ЖИВЫЕ СУБТИТРЫ</span></article>
         </div>
       </div>
     </section>
     <section id="languages" class="language-support">
-      <div class="container"><div class="section-head"><span class="section-kicker">v0.6.0 · НЕСКОЛЬКО ЯЗЫКОВ</span><h2>5 языков. 20 направлений онлайн-перевода.</h2><p>Китайский, английский, японский (Beta), корейский (Beta) и русский (Beta): с каждого можно переводить напрямую на остальные четыре.</p></div>
-        <div class="language-table-wrap" role="region" aria-label="Поддержка языков" tabindex="0"><table class="language-table"><caption>Поддержка языков · v0.6.0</caption><thead><tr><th scope="col">Язык</th><th scope="col">ASR на ПК</th><th scope="col">Онлайн</th><th scope="col">Офлайн</th></tr></thead><tbody>
+      <div class="container"><div class="section-head"><span class="section-kicker">v0.6.1 · НЕСКОЛЬКО ЯЗЫКОВ</span><h2>5 языков. 20 направлений онлайн-перевода.</h2><p>Китайский, английский, японский (Beta), корейский (Beta) и русский (Beta): с каждого можно переводить напрямую на остальные четыре.</p></div>
+        <div class="language-table-wrap" role="region" aria-label="Поддержка языков" tabindex="0"><table class="language-table"><caption>Поддержка языков · v0.6.1</caption><thead><tr><th scope="col">Язык</th><th scope="col">ASR на ПК</th><th scope="col">Онлайн</th><th scope="col">Офлайн</th></tr></thead><tbody>
 <tr><th scope="row">Китайский (путунхуа)</th><td>Да</td><td>Остальные четыре языка</td><td>Английский ↔ китайский</td></tr><tr><th scope="row">Английский</th><td>Да</td><td>Остальные четыре языка</td><td>Английский ↔ китайский</td></tr><tr><th scope="row">Японский (Beta)</th><td>Да (Beta)</td><td>Остальные четыре языка</td><td>Нет</td></tr><tr><th scope="row">Корейский (Beta)</th><td>Да (Beta)</td><td>Остальные четыре языка</td><td>Нет</td></tr><tr><th scope="row">Русский (Beta)</th><td>Да (Beta)</td><td>Остальные четыре языка</td><td>Нет</td></tr>
         </tbody></table></div><p class="language-boundary">Whisper распознаёт речь на вашем ПК. Распознанный текст переводит настроенный вами OpenAI-совместимый сервис/модель или Google Cloud Translation Basic v2 с вашим API-ключом и доступом. Локальный OPUS поддерживает только английский↔китайский; остальные 18 направлений требуют онлайн-перевода. Языки и качество зависят от сервиса и модели. Скрытого переключения провайдера или перевода через промежуточный язык нет.</p><p class="beta-limitations">В языках Beta возможны пропуски слов, ошибки перевода и задержки, особенно при коротких репликах, шуме, музыке и одновременной речи. Мы продолжим улучшать распознавание, производительность и стабильность субтитров.</p>
       </div>
     </section>
-    <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">СИСТЕМА ПЕРЕВОДА</span><h2>Выберите режим перевода.</h2><p>В обоих режимах речь распознаётся локально. Для перевода можно использовать настроенный онлайн-сервис или модель на ПК.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / РЕЖИМ API</span><h3>Ваш провайдер перевода</h3><p>В v0.6.0 доступны 20 направлений через ваш OpenAI-совместимый сервис или Google Cloud Translation Basic v2. Нужен ваш API-ключ; поддержка языков зависит от провайдера и модели.</p><ul><li>Гибкая настройка провайдера</li><li>Встроенная проверка подключения</li><li>Для работы в сети</li></ul></div><div class="mode"><span class="mode-label">02 / ЛОКАЛЬНЫЙ РЕЖИМ</span><h3>Без API-ключа</h3><p>Локальный OPUS работает только с английским↔китайским. Подготовьте модель для перевода без сети и API-ключа. Для остальных 18 направлений нужно явно настроить онлайн-провайдера.</p><ul><li>Не нужно настраивать API-ключ</li><li>Загрузка модели по необходимости</li><li>Распознавание и перевод на ПК</li></ul></div></div></div></section>
-    <section class="experience"><div class="container experience-stage"><div><span class="section-kicker">В ИГРЕ / ПЕРЕД ГЛАЗАМИ</span><h2>Продолжайте играть.<br />Читайте реплики.</h2><p>Перемещайте окно, меняйте прозрачность и читайте оригинал вместе с переводом. Доступны быстрый, сбалансированный, точный и пользовательский режимы; диагностика показывает устройство и задержки.</p><div class="experience-meta"><span>ВОССТАНОВЛЕНИЕ ПОЗИЦИИ ОКНА</span><span>КОПИРОВАНИЕ ПРИ НАВЕДЕНИИ</span><span>ДИАГНОСТИКА УСТРОЙСТВ</span></div></div><div class="experience-overlay"><small>● LIVE TRANSLATION / API</small><span>Push left with me.</span><b>跟我一起从左边推进。</b></div></div></section>
+    <section id="modes" class="mode-section"><div class="container"><div class="section-head"><span class="section-kicker">СИСТЕМА ПЕРЕВОДА</span><h2>Выберите режим перевода.</h2><p>В обоих режимах речь распознаётся локально. Для перевода можно использовать настроенный онлайн-сервис или модель на ПК.</p></div><div class="mode-grid"><div class="mode"><span class="mode-label">01 / РЕЖИМ API</span><h3>Ваш провайдер перевода</h3><p>В v0.6.1 доступны 20 направлений через ваш OpenAI-совместимый сервис или Google Cloud Translation Basic v2. Нужен ваш API-ключ; поддержка языков зависит от провайдера и модели.</p><ul><li>Гибкая настройка провайдера</li><li>Встроенная проверка подключения</li><li>Для работы в сети</li></ul></div><div class="mode"><span class="mode-label">02 / ЛОКАЛЬНЫЙ РЕЖИМ</span><h3>Без API-ключа</h3><p>Локальный OPUS работает только с английским↔китайским. Подготовьте модель для перевода без сети и API-ключа. Для остальных 18 направлений нужно явно настроить онлайн-провайдера.</p><ul><li>Не нужно настраивать API-ключ</li><li>Загрузка модели по необходимости</li><li>Распознавание и перевод на ПК</li></ul></div></div></div></section>
+    <section class="experience" id="cinema">
+      <div class="container experience-stage">
+        <div><h2>Субтитры в кинорежиме</h2><p>Перевод показан крупно, а оригинал — строкой ниже, меньшим шрифтом. Переключайте режим кнопкой на панели или сочетанием Ctrl+Alt+M. По умолчанию открывается классическое окно.</p><p>Наведите указатель на видимые субтитры, чтобы открыть панель. Перетащите их в нужное место и закрепите. Чтобы снять блокировку, снова наведите указатель.</p></div>
+        <div class="subtitle-screens">
+          <figure><figcaption>Кинорежим · снимок окна Windows</figcaption><a href="screens/cinema.png"><img src="screens/cinema.png" width="900" height="117" alt="Перевод реплики о синем ключе и оригинал строкой ниже" loading="lazy" /></a></figure>
+          <figure><figcaption>Классическое окно · снимок окна Windows</figcaption><a href="screens/classic.png"><img src="screens/classic.png" width="500" height="200" alt="Та же реплика в классическом окне с панелью инструментов" loading="lazy" /></a></figure>
+        </div>
+      </div>
+    </section>
 
     <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">ПОСЛЕДНИЕ ОБНОВЛЕНИЯ</span><h2>Обновления</h2><p>Подробности каждого изменения доступны в GitHub Release.</p></div>
       <!-- CHANGELOG_HOME_START -->
@@ -729,11 +737,11 @@ var _hmt = _hmt || [];
           <details><summary>Что означает Beta для качества и задержки?</summary><p>Распознавание может пропускать слова и окончания фраз, а перевод — менять сущности, числа или отрицание. Шум, музыка и одновременная речь повышают риск. Задержка зависит от CPU, разбиения аудио, сети и провайдера. Beta означает продолжающееся улучшение, без гарантий процента точности, фиксированной задержки или FPS.</p></details>
           <details open>
             <summary>Можно ли переводить речь иностранных товарищей в реальном времени?</summary>
-            <p>VoxGo захватывает системный звук игры или Discord. v0.6.0 поддерживает распознавание пяти языков и 20 направлений онлайн-перевода; японский, корейский и русский отмечены Beta.</p>
+            <p>VoxGo захватывает системный звук игры или Discord. v0.6.1 поддерживает распознавание пяти языков и 20 направлений онлайн-перевода; японский, корейский и русский отмечены Beta.</p>
           </details>
           <details>
             <summary>Есть ли локальный перевод?</summary>
-            <p>Да, только английский↔китайский. Подготовьте локальные модели OPUS; API-ключ не нужен. В v0.6.0 направления с японским, корейским и русским требуют онлайн-перевода.</p>
+            <p>Да, только английский↔китайский. Подготовьте локальные модели OPUS; API-ключ не нужен. В v0.6.1 направления с японским, корейским и русским требуют онлайн-перевода.</p>
           </details>
           <details open>
             <summary>Записывает ли VoxGo микрофон?</summary>
@@ -749,7 +757,7 @@ var _hmt = _hmt || [];
           </details>
           <details>
             <summary>Какие языки поддерживаются?</summary>
-            <p>v0.6.0 поддерживает китайский (путунхуа), английский, японский (Beta), корейский (Beta) и русский (Beta), всего 20 направлений онлайн-перевода. См. таблицу выше.</p>
+            <p>v0.6.1 поддерживает китайский (путунхуа), английский, японский (Beta), корейский (Beta) и русский (Beta), всего 20 направлений онлайн-перевода. См. таблицу выше.</p>
           </details>
           <details>
             <summary>Что выбрать: Lite, Full или Full-CUDA?</summary>

@@ -1,19 +1,17 @@
 """UI localization contracts. No downloads, external API, real settings or audio."""
 import ast
 import copy
-import json
 import os
 from pathlib import Path
 from string import Formatter
 import tempfile
 import unittest
-from unittest.mock import patch
 
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QApplication, QLabel, QMessageBox, QTabWidget
 from voxgo.i18n import (
-    UI_LANGUAGE_OPTIONS, normalize_ui_language, ui_text, language_label, localize_text, set_qt_ui_language,
+    UI_LANGUAGE_OPTIONS, normalize_ui_language, ui_text, localize_text, set_qt_ui_language,
 )
 from voxgo.i18n_messages import MESSAGES
 from voxgo.config.loader import load_config, save_user_settings

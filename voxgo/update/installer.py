@@ -21,7 +21,8 @@ from urllib.parse import urlparse
 import zipfile
 from dataclasses import dataclass
 
-from voxgo.update.checker import UpdateInfo
+from voxgo.package_info import read_package_type
+from voxgo.update.checker import UpdateInfo, gitcode_lite_url
 
 MAX_DOWNLOAD_BYTES = 8 * 1024**3
 MAX_EXTRACTED_BYTES = 16 * 1024**3
@@ -56,6 +57,10 @@ def auto_update_supported():
 
 def detect_edition(app_dir=None):
     root = Path(app_dir) if app_dir else Path(sys.executable).resolve().parent
+    marker = root / '_internal/package-info.json'
+    if marker.exists():
+        return read_package_type(marker)
+    # Compatibility with historical builds that shipped without an edition marker.
     if any((root / p).is_dir() for p in ('runtime/cuda', '_internal/runtime/cuda')):
         return 'full-cuda'
     if (root / '_internal/.models').is_dir():
@@ -63,10 +68,18 @@ def detect_edition(app_dir=None):
     return 'lite'
 
 
-def _validate_download_url(url, redirected=False):
+def _validate_download_url(url, redirected=False, *, gitcode_version=None):
     parsed = urlparse(url)
     if parsed.scheme != 'https' or parsed.username or parsed.password or parsed.port not in (None, 443):
         raise UpdateInstallError('Update downloads require trusted HTTPS URLs')
+    if gitcode_version is not None:
+        canonical = gitcode_lite_url(gitcode_version)
+        if canonical and url == canonical:
+            return
+        if (canonical and redirected and parsed.hostname == 'file-cdn.gitcode.com'
+                and re.fullmatch(r'/[0-9]+/releases/[^/]+/' + re.escape(canonical.rsplit('/', 1)[1]), parsed.path)):
+            return
+        raise UpdateInstallError('Unexpected GitCode Lite download URL')
     if redirected and parsed.hostname in ('release-assets.githubusercontent.com', 'objects.githubusercontent.com'):
         return
     if (parsed.hostname != 'github.com' or
@@ -76,29 +89,37 @@ def _validate_download_url(url, redirected=False):
 
 
 class _TrustedRedirect(urllib.request.HTTPRedirectHandler):
+    def __init__(self, gitcode_version=None):
+        super().__init__()
+        self.gitcode_version = gitcode_version
+
     def redirect_request(self, req, fp, code, msg, headers, newurl):
-        _validate_download_url(newurl, redirected=True)
+        _validate_download_url(newurl, redirected=True, gitcode_version=self.gitcode_version)
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
-def download_package(url, checksum, destination, progress=None):
-    _validate_download_url(url)
+def download_package(url, checksum, destination, progress=None, *, gitcode_version=None, cancel=None):
+    _validate_download_url(url, gitcode_version=gitcode_version)
     if not re.fullmatch(r'[0-9a-fA-F]{64}', checksum or ''):
         raise UpdateInstallError('Update manifest is missing a valid SHA256 checksum')
     digest = hashlib.sha256()
     received = 0
-    opener = urllib.request.build_opener(_TrustedRedirect())
+    opener = urllib.request.build_opener(_TrustedRedirect(gitcode_version))
     request = urllib.request.Request(url, headers={'User-Agent': 'VoxGo-Updater'})
     try:
         with opener.open(request, timeout=30) as response, open(destination, 'wb') as output:
-            _validate_download_url(response.geturl(), redirected=True)
+            _validate_download_url(response.geturl(), redirected=True, gitcode_version=gitcode_version)
             total = int(response.headers.get('Content-Length', 0))
             if total < 0 or total > MAX_DOWNLOAD_BYTES:
                 raise UpdateInstallError('Update package exceeds download limit')
             if total and shutil.disk_usage(Path(destination).parent).free < total + 256 * 1024**2:
                 raise UpdateInstallError('Not enough disk space for update download')
+            read = getattr(response, 'read1', response.read) if cancel is not None else response.read
+            last_progress = 0
             while True:
-                chunk = response.read(1024 * 1024)
+                if cancel is not None and cancel.is_set():
+                    raise UpdateInstallError('Download cancelled')
+                chunk = read(1024 * 1024)
                 if not chunk:
                     break
                 received += len(chunk)
@@ -106,8 +127,9 @@ def download_package(url, checksum, destination, progress=None):
                     raise UpdateInstallError('Update package exceeds download limit')
                 output.write(chunk)
                 digest.update(chunk)
-                if progress:
+                if progress and (cancel is None or received == total or time.monotonic() - last_progress >= 0.1):
                     progress(received, total)
+                    last_progress = time.monotonic()
         if digest.hexdigest() != checksum.lower():
             raise UpdateInstallError('Update checksum mismatch; installation cancelled')
     except Exception:
@@ -172,7 +194,7 @@ def extract_package(archive, destination):
         raise
 
 
-def prepare_update(update: UpdateInfo, progress=None, edition=None):
+def prepare_update(update: UpdateInfo, progress=None, edition=None, *, source='github', cancel=None):
     if not auto_update_supported():
         raise UpdateInstallError('Automatic installation requires the packaged Windows application')
     edition = edition or detect_edition()
@@ -181,13 +203,22 @@ def prepare_update(update: UpdateInfo, progress=None, edition=None):
     suffix = edition.replace('-', '_')
     url = getattr(update, 'download_' + suffix + '_url')
     checksum = getattr(update, 'sha256_' + suffix)
+    if source == 'gitcode':
+        url = update.verified_gitcode_lite_url() if edition == 'lite' else ''
+        if not url:
+            raise UpdateInstallError('No verified GitCode mirror for this edition and version')
+    elif source != 'github':
+        raise UpdateInstallError('Unknown update source')
     app_dir = Path(sys.executable).resolve().parent
     stage = Path(tempfile.mkdtemp(prefix='VoxGo-update-')).resolve()
     try:
         if stage == app_dir or app_dir in stage.parents:
             raise UpdateInstallError('Update staging directory must be outside the application')
         archive = stage / 'package.zip'
-        download_package(url, checksum, archive, progress)
+        download_package(url, checksum, archive, progress,
+                         gitcode_version=update.latest if source == 'gitcode' else None, cancel=cancel)
+        if cancel is not None and cancel.is_set():
+            raise UpdateInstallError('Download cancelled')
         payload = extract_package(archive, stage / 'extracted')
         archive.unlink()
         return PreparedUpdate(stage, payload, app_dir, update.latest, edition)

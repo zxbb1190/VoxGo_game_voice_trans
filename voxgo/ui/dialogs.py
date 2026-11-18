@@ -26,6 +26,7 @@ from voxgo.i18n import UI_LANGUAGE_OPTIONS, UI_LANGUAGE_ZH, uses_english_source,
 from voxgo.translation import TRANSLATION_PROVIDERS, TranslationConfig, normalize_translation_provider
 from voxgo.update.checker import UpdateInfo
 from voxgo.ui.download_panels import LocalModelPanel, UpdateInstallPanel
+from voxgo.ui.api_setup import ApiConfigurationRequiredDialog, missing_api_field
 from voxgo.ui.config_models import (
     AudioDeviceConfig,
     DebugConfig,
@@ -34,7 +35,6 @@ from voxgo.ui.config_models import (
     WhisperDeviceConfig,
     _build_feedback_report,
     _copy_audio_config,
-    _device_label,
     _hotkey_label,
     _hotkey_label_for_ui,
     _start_button_cooldown,
@@ -137,6 +137,7 @@ class UpdatePromptDialog(QDialog):
                                (self.ignore_button, "忽略此版本", "Ignore This Version")):
             button.setText(_tr(language, zh, en))
         self.install_panel.language = self._ui_language
+        self.install_panel.refresh_source_labels()
         for widget in (self.install_panel.button, self.install_panel.status):
             widget.setText(localize_text(language, widget.text()))
 
@@ -246,7 +247,8 @@ def _build_help_text(hotkeys: HotkeyConfig, ui_language: str = UI_LANGUAGE_ZH) -
             f"{_hotkey_label_for_ui(hotkeys.toggle_translation, ui_language)}: Pause/resume translation\n"
             f"{_hotkey_label_for_ui(hotkeys.clear_history, ui_language)}: Clear subtitles\n"
             f"{_hotkey_label_for_ui(getattr(hotkeys, 'toggle_lock', ''), ui_language)}: Lock/unlock overlay\n"
-            f"{_hotkey_label_for_ui(getattr(hotkeys, 'toggle_compact', ''), ui_language)}: Toggle compact mode\n\n"
+            f"{_hotkey_label_for_ui(getattr(hotkeys, 'toggle_compact', ''), ui_language)}: Toggle compact mode\n"
+            f"{_hotkey_label_for_ui(hotkeys.toggle_display_mode, ui_language)}: " + _tr(ui_language, "切换字幕模式", "Switch subtitle mode") + "\n\n"
             "System tray\n"
             "The tray icon can show/hide the overlay, pause/resume, clear subtitles, toggle compact mode, open settings, and quit.\n"
             "If a game covers the overlay or the overlay is hidden, use the tray icon or hotkeys."
@@ -262,7 +264,8 @@ def _build_help_text(hotkeys: HotkeyConfig, ui_language: str = UI_LANGUAGE_ZH) -
         f"{_hotkey_label(hotkeys.toggle_translation)}：暂停/恢复翻译\n"
         f"{_hotkey_label(hotkeys.clear_history)}：清空字幕\n"
         f"{_hotkey_label(getattr(hotkeys, 'toggle_lock', ''))}：锁定/解锁浮窗\n"
-        f"{_hotkey_label(getattr(hotkeys, 'toggle_compact', ''))}：切换紧凑模式\n\n"
+        f"{_hotkey_label(getattr(hotkeys, 'toggle_compact', ''))}：切换紧凑模式\n"
+        f"{_hotkey_label(hotkeys.toggle_display_mode)}：切换字幕模式\n\n"
         "系统托盘\n"
         "任务栏托盘图标可以显示/隐藏浮窗、暂停/恢复、清空字幕、切换紧凑模式、打开设置和退出。\n"
         "如果游戏遮住浮窗或浮窗被隐藏，优先从托盘或快捷键控制。"
@@ -337,6 +340,7 @@ class FirstRunWizard(QDialog):
         self.resize(760, 560)
         self._refresh_ui_language()
         self._refresh_buttons()
+        self._wizard_source_changed()
 
     def _build_language_page(self) -> QWidget:
         page = QWidget()
@@ -445,6 +449,10 @@ class FirstRunWizard(QDialog):
         audio_row.addWidget(self.wizard_refresh_audio_button)
         self.wizard_audio_device_label = QLabel()
         form.addRow(self.wizard_audio_device_label, audio_row)
+        from voxgo.ui.audio_source import AudioSourceSelector
+        self.audio_source_selector = AudioSourceSelector(self.audio_config, self._ui_language, self)
+        form.addRow(self.audio_source_selector)
+        self.audio_source_selector.changed.connect(self._wizard_source_changed)
 
         self.wizard_audio_test_panel = AudioTestPanel(self._current_audio_config, self, self._ui_language)
         self.wizard_audio_test_label = QLabel()
@@ -527,6 +535,8 @@ class FirstRunWizard(QDialog):
         language = self._ui_language
         set_qt_ui_language(language)
         self.app_config.language = language
+        if hasattr(self, "audio_source_selector"):
+            self.audio_source_selector.set_language(language)
         self.setWindowTitle(_tr(language, "VoxGo 首次启动向导", "VoxGo First-Run Setup"))
 
         self.wizard_language_title.setText(_tr(language, "选择界面语言", "Choose Your Interface Language"))
@@ -665,11 +675,12 @@ class FirstRunWizard(QDialog):
     def _collect_translation_values(self):
         self.translation_config.provider = normalize_translation_provider(self.wizard_provider_combo.currentData())
         self.translation_config.api_key = self.wizard_api_key_input.text().strip()
-        if self.translation_config.provider != "google":
-            self.translation_config.model = self.wizard_model_input.text().strip() or self.translation_config.model
-            self.translation_config.endpoint = self.wizard_endpoint_input.text().strip() or self.translation_config.endpoint
+        if self.translation_config.provider == "openai_compatible":
+            self.translation_config.model = self.wizard_model_input.text().strip()
+            self.translation_config.endpoint = self.wizard_endpoint_input.text().strip()
 
     def _collect_audio_values(self):
+        self.audio_source_selector.collect()
         device = self.wizard_audio_device_combo.currentData()
         if device:
             self.audio_config.input_device_index = int(device.get("index"))
@@ -685,6 +696,12 @@ class FirstRunWizard(QDialog):
         self._collect_translation_values()
         self._collect_audio_values()
         self.debug_config.enabled = self.wizard_debug_check.isChecked()
+
+    def _wizard_source_changed(self):
+        self.wizard_audio_test_panel.stop_test()
+        selected = self.audio_source_selector.mode.currentData() == "process"
+        self.wizard_audio_device_combo.setEnabled(not selected)
+        self.wizard_refresh_audio_button.setEnabled(not selected)
 
     def _test_translation(self):
         self._collect_translation_values()
@@ -716,6 +733,19 @@ class FirstRunWizard(QDialog):
     def _go_next(self):
         if self.stack.currentIndex() == 1:
             self._collect_translation_values()
+            if (self.translation_config.provider == "local"
+                    and not self.wizard_local_model_panel.confirm_before_continue()):
+                return
+            missing_field = missing_api_field(self.translation_config)
+            if missing_field:
+                dialog = ApiConfigurationRequiredDialog(self._ui_language, self)
+                result = dialog.exec_()
+                dialog.deleteLater()
+                if result != dialog.SKIP:
+                    field = getattr(self, "wizard_" + missing_field + "_input")
+                    field.setFocus()
+                    field.selectAll()
+                    return
         elif self.stack.currentIndex() == 2:
             self._collect_audio_values()
             self.wizard_audio_test_panel.stop_test()
@@ -804,9 +834,10 @@ class FirstRunWizard(QDialog):
         )
         self._feedback_dialog.show()
 
-    def closeEvent(self, event):
+    def done(self, result):
+        # QDialog's Escape/reject path does not call closeEvent.
         if hasattr(self, "wizard_audio_test_panel"):
             self.wizard_audio_test_panel.stop_test()
-        if not self._completed:
-            self._mark_completed()
-        super().closeEvent(event)
+        if self._translation_test_runner:
+            self._translation_test_runner.cancel()
+        super().done(result)

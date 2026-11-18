@@ -75,7 +75,7 @@ class UpdateRuntime:
         logger.info("更新检查完成: status={}, message={}", result.status, result.message)
         if overlay and not is_stopping():
             overlay.handle_update_check_result(result, manual)
-        if manual and result.status == "error":
+        if manual and result.status == "error" and not is_stopping():
             self._notify_user("更新检查失败", result.message, "错误")
 
     def ignore_version(self, version: str):

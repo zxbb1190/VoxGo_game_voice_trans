@@ -4,6 +4,8 @@
     "language": "zh-CN"
   },
   "audio": {
+    "source_mode": "system",
+    "process_path": "",
     "latency_mode": "fast",
     "sample_rate": 44100,
     "channels": 1,
@@ -77,6 +79,16 @@
     "local_phrase_cache": {}
   },
   "overlay": {
+    "display_mode": "classic",
+    "cinema_font_size": 32,
+    "cinema_original_font_size": 20,
+    "cinema_text_color": "#FFFFFF",
+    "cinema_original_text_color": "#DCE4DF",
+    "cinema_show_original": true,
+    "cinema_bg_opacity": 0.0,
+    "cinema_width": 900,
+    "cinema_x": null,
+    "cinema_bottom": null,
     "font_size": 16,
     "font_family": "Microsoft YaHei",
     "text_color": "#00FF00",
@@ -106,7 +118,8 @@
     "toggle_translation": "ctrl+alt+s",
     "clear_history": "ctrl+alt+c",
     "toggle_lock": "",
-    "toggle_compact": ""
+    "toggle_compact": "",
+    "toggle_display_mode": "ctrl+alt+m"
   },
   "debug": {
     "enabled": false,

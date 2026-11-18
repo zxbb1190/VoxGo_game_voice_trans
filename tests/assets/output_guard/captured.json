@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "provenance": "Actual local Whisper base CPU int8 output captured on 2026-11-11; ASR text is observed output, not a human reference transcript. Reuses existing repository audio without duplicating it.",
+  "audio": "tests/assets/pubg_voice_30s.m4a",
+  "audio_sha256": "2373a37f2b3417d051e114b46dc0108293c4ec8ae2ba5f1ab788b9ae0c0f6042",
+  "model": {
+    "model_size": "base",
+    "device": "cpu",
+    "compute_type": "int8",
+    "cpu_threads": 1,
+    "beam_size": 1,
+    "language": "auto",
+    "condition_on_previous_text": false
+  },
+  "cases": [
+    {
+      "id": "abnormal",
+      "start": 0,
+      "end": 6,
+      "gain": 1,
+      "rms_dbfs": -58.6867425459174,
+      "asr": {
+        "text": "",
+        "language": "cy",
+        "language_probability": 0.5254623293876648,
+        "avg_logprob": -0.22153573354085287,
+        "no_speech_prob": 0.2768581509590149,
+        "compression_ratio": 11.628571428571428,
+        "segment_count": 1,
+        "duration_seconds": 6.0,
+        "raw_text": "Ysgol, mae'n gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'r gweithio'",
+        "runaway_guarded": true
+      },
+      "expected_blocked": true,
+      "expected_text": null
+    },
+    {
+      "id": "quiet_speech",
+      "start": 12,
+      "end": 18,
+      "gain": 1,
+      "rms_dbfs": -48.31301603662393,
+      "asr": {
+        "text": "Oh, I suck! No, no one in the warehouse, I think. You bet you ain't in between.",
+        "language": "en",
+        "language_probability": 0.9738956093788147,
+        "avg_logprob": -0.7034544790944746,
+        "no_speech_prob": 0.14783944189548492,
+        "compression_ratio": 1.0,
+        "segment_count": 3,
+        "duration_seconds": 6.0,
+        "raw_text": "Oh, I suck! No, no one in the warehouse, I think. You bet you ain't in between.",
+        "runaway_guarded": false
+      },
+      "expected_blocked": false,
+      "expected_text": "Oh, I suck! No, no one in the warehouse, I think. You bet you ain't in between."
+    },
+    {
+      "id": "quiet_speech_minus6db",
+      "start": 12,
+      "end": 18,
+      "gain": 0.5,
+      "rms_dbfs": -54.35157677668363,
+      "asr": {
+        "text": "",
+        "language": "en",
+        "language_probability": 0.9530922174453735,
+        "avg_logprob": -0.12512121783362495,
+        "no_speech_prob": 0.20345085859298706,
+        "compression_ratio": 26.235294117647058,
+        "segment_count": 2,
+        "duration_seconds": 6.0,
+        "raw_text": "Oh, I suck. No, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no",
+        "runaway_guarded": true
+      },
+      "expected_blocked": true,
+      "expected_text": null
+    }
+  ],
+  "invalid_translation": "⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇ , ⁇",
+  "callouts": [
+    {
+      "id": "go",
+      "audio": "tests/assets/output_guard/go.wav",
+      "sha256": "5762c802280315581882c418142e1d73c56bf9b6495e75dd51d57c6865a543c7",
+      "reference": "Go! Go! Go!",
+      "source": "Synthetic Windows SAPI Microsoft Zira Desktop; not human speech",
+      "synthetic": true,
+      "seconds": 3.405
+    },
+    {
+      "id": "push",
+      "audio": "tests/assets/output_guard/push.wav",
+      "sha256": "a09d973fb196c137b9dedf7aeb73d84b8a67ce3fc18b26d04958e7892c4d3264",
+      "reference": "Push, push, push!",
+      "source": "Synthetic Windows SAPI Microsoft Zira Desktop; not human speech",
+      "synthetic": true,
+      "seconds": 2.88
+    },
+    {
+      "id": "cover",
+      "audio": "tests/assets/output_guard/cover.wav",
+      "sha256": "c9b3d17583158331d736df6e25733675c51b3bfb13a6ddbcd9e12b81b4c522d5",
+      "reference": "Cover me.",
+      "source": "Synthetic Windows SAPI Microsoft Zira Desktop; not human speech",
+      "synthetic": true,
+      "seconds": 1.4
+    }
+  ]
+}
