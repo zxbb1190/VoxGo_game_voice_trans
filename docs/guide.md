@@ -1,0 +1,395 @@
+# VoxGo 使用指南
+
+[返回首页](../README.md) · [English guide](en/guide.md)
+
+## 安装与模型
+
+如果使用 Release 里的免安装包，解压后直接运行 `VoxGo.exe`。当前 Release 提供 3 个包：
+
+| 包 | 内容 | 适合谁 |
+|----|------|--------|
+| Lite | 不带 Whisper 模型，不带 CUDA DLL，体积最小；首次运行按需下载模型 | 大多数用户、网络能下载模型 |
+| Full | 内置 Whisper small/base 通用模型，不带 CUDA DLL | 网络不稳定、不想首次下载通用模型的 CPU 用户 |
+| Full-CUDA / GPU 版 | 内置 Whisper small/base 通用模型和 CUDA DLL | NVIDIA 显卡用户，想直接使用 GPU 识别 |
+
+离线翻译模型不随 Lite/Full/Full-CUDA 默认植入；三种包共用“设置中下载”流程。模型约 317 MB，且双向加载约占 381 MiB 工作集，因此默认不增加所有用户的下载体积和内存占用。只有明确使用离线翻译的用户才下载；若有企业内网或完全断网部署需求，可在未来提供单独 Offline Bundle。
+
+Lite 和 Full 不会在启动阶段下载 CUDA DLL。只有你在设置里明确选择 `NVIDIA GPU / CUDA` 时，程序才会先检测是否为 NVIDIA 显卡：不是 NVIDIA 会提示无法使用 GPU 并保持原设置；是 NVIDIA 但本包缺少 CUDA DLL 时，会从当前 Release 下载 CUDA 运行库到程序目录，完成后重启即可启用 GPU。
+
+Full 和 Full-CUDA 不内置英文专用模型 `small.en` / `base.en`。只有你在设置里开启“纯英文环境”后，VoxGo 才会按需下载英文专用模型；不需要英文快路径的用户不用为这部分模型增加下载体积。
+
+### 本地离线翻译
+
+在首次向导或设置的“翻译服务”选择“本地离线翻译 / Offline Translation”，点击“下载离线翻译模型”。一次下载约 317 MB，完成后点击“测试翻译”。模型准备好后，英语与中文可双向离线翻译，无需 API Key，也不会回退到云端翻译。
+
+模型保存在程序旁的 `.translation-models`；“校验 / 修复模型”可检查并重新下载损坏文件。此目录会在应用内更新时保留。Whisper 语音识别模型仍需单独准备（Full 包已内置），下载翻译模型并不会替代语音识别模型。
+
+离线翻译使用 OPUS-MT（Apache-2.0）与 CPU int8 推理，无需独显。一次 Windows 独立进程测试中，双向模型工作集约 381 MiB、提交内存约 1.2 GiB，另需留出游戏与 Whisper 的资源。通用小模型的游戏术语、口语和上下文翻译质量可能不及云端大模型。
+
+### 安装应用更新
+
+发现新版本后，点击“下载更新”；下载、SHA256 校验完成后，再点击“安装并重启”。程序退出后由独立更新器替换文件并重新启动。安装器保留配置、语音识别和离线翻译模型及 CUDA 运行库；替换失败或检测到新程序启动失败时尝试恢复旧版。
+
+旧安装保留在相邻的 `.backup-*` 目录，确认新版正常后可手动删除以回收空间。安装需要程序所在目录可写，并有足够空间同时保留新版和旧版。旧版 0.4.2 只有下载页提示，首次升级到支持此功能的版本仍需手动下载；此后才可应用内安装更新。
+
+### 首次启动
+
+在向导中选择界面语言和翻译服务。在线模式需要填写服务商凭据并测试，英中离线模式可在此下载模型并测试翻译。选择声音来源，播放一段游戏或 Discord 语音，确认音量条跳动后完成向导。Lite 首次启动还需要准备 Whisper 识别模型。
+
+## 语言支持
+
+| 语言 | 本地 Whisper 识别 | 在线翻译 | 本地 OPUS 翻译 |
+|---|---|---|---|
+| 中文（普通话，简体字幕） | 支持 | 与其余四种语言双向互译 | 英语 ↔ 中文 |
+| 英语 | 支持 | 与其余四种语言双向互译 | 英语 ↔ 中文 |
+| 日语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+| 韩语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+| 俄语（Beta） | 支持（Beta） | 与其余四种语言双向互译 | 不支持 |
+
+五种语言提供 **20 个有方向的在线翻译组合**。语音由本地 Whisper 识别；在线翻译由用户配置的 OpenAI 兼容 Provider/模型或 Google Cloud Translation Basic v2 完成，将识别文本发送给所选服务商，需要自行配置 API Key/服务权限，并受服务商的语种能力限制。按所选源语言与目标语言直接翻译。本地 OPUS 继续**仅支持英中双向**，其他 **18 个方向需要在线翻译**，不会静默切换服务商。英文专用 `.en` 识别模型只用于英语。
+
+日语、韩语、俄语为 **Beta 实验性语言**，短报点、多人重叠、噪声和音乐下仍可能漏词、错译或延迟。可选择某个语言不代表准确率或延迟保证。双语人工、真实游戏/FPS和低配实机验收仍有待完成。Beta 标签表示语言成熟度，独立于内部 ASR 策略；正式界面不开放实验策略开关。后续基于独立录音持续改进准确率、性能和字幕稳定性。
+
+离线游戏术语层覆盖交火、走位、治疗护甲、投掷物、搜刮和团队指令，支持部分无标点中文组合及句内规范化。疑问、引用和未识别语境保留模型处理；并非每句话都能纠正。英译中显式指定简体普通话语言标记。详见 [52 条开发对照评测](evaluations/game-glossary.md)。
+
+## 音源与字幕
+
+默认采集当前播放设备的系统声音。要单独采集游戏或 Discord，请先打开该应用，在「设置 → 语音」选择「只翻译指定应用」。应用收音需要 Windows 内部版本 20348 或更高。应用退出后收音暂停，重新打开后需再次选择。
+
+经典浮窗默认开启，保留翻译历史和工具栏。看剧情时，点击工具栏的字幕模式按钮或按 **Ctrl+Alt+M** 切换到电影字幕。译文居中显示，原文以较小字号排在下方。鼠标移入正在显示的字幕即可使用工具栏；拖动字幕可以调整位置，锁定后再次移入可解锁。
+
+### 系统声音与音频路由
+默认会优先使用 Windows WASAPI Loopback 采集当前扬声器/耳机输出，不需要选择麦克风。
+
+在浮窗右上角齿轮设置里可以选择音频设备。优先选择和当前 Windows 输出设备同名的 `[系统声音]` 或带有 `Loopback` 的设备，例如你正在用耳机听游戏，就选对应耳机的系统声音/Loopback 项。
+
+不要选择普通 `[输入设备] 麦克风`。麦克风只能录到环境声，通常录不到游戏声音；如果列表里大部分都是麦克风，说明系统声音捕获设备还没暴露出来。
+
+如果只看到麦克风，可以运行 `install.bat` 更新依赖，或手动安装：
+```bash
+pip install PyAudioWPatch==0.2.12.8
+```
+
+还可以安装 VB-Cable 虚拟音频设备作为备选：
+1. 下载：https://vb-audio.com/Cable/
+2. 安装后，将系统默认音频输出切换到 VB-Cable
+3. 游戏音频将通过 VB-Cable 被捕获
+
+NVIDIA 显卡用户也可以尝试 NVIDIA Broadcast / RTX Voice 作为语音降噪与虚拟音频设备备选：
+1. 下载 NVIDIA Broadcast：https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/
+2. 在 NVIDIA Broadcast / RTX Voice 中选择实际麦克风或扬声器，并开启需要的降噪效果
+3. 如果本工具的音频设备列表里出现 NVIDIA Broadcast / RTX Voice 虚拟麦克风或扬声器，可以选择它进行测试
+
+注意：NVIDIA Broadcast / RTX Voice 更适合语音聊天降噪和虚拟麦克风/扬声器场景；采集游戏整体系统声音时，仍优先使用 `[系统声音]` / `Loopback`，或使用 VB-Cable。
+
+### 浮窗控制
+- **Ctrl+Shift+T**: 切换浮窗显示/隐藏
+- **Ctrl+Alt+C**: 清空翻译历史
+- **Ctrl+Alt+M** — 切换经典浮窗和电影字幕，可在设置中更改快捷键。
+- **Ctrl+Alt+S**: 暂停/恢复翻译
+- **拖拽浮窗**: 可移动位置
+- **浮窗按钮**: 可暂停/恢复翻译、切换紧凑浮窗、打开手机二维码、进入设置、退出或锁定浮窗
+- **暂停状态**: 暂停时浮窗显示“已暂停”并高亮边框；较窄窗口保留高亮边框和恢复按钮
+- **系统托盘**: 可在浮窗被隐藏或游戏遮挡时显示/隐藏浮窗、暂停/恢复、清空字幕、切换紧凑模式、打开设置或退出
+- **关闭按钮**: 首次询问“最小化到托盘”或“退出程序”，可勾选“以后不再提示”；在设置的“点击关闭按钮”中可改回每次询问。最小化保留当前翻译状态，可扫码在手机查看结果；托盘不可用时不会隐藏浮窗。
+- **安全退出**: 先暂停并阻止新翻译请求，再在后台释放资源。退出失败时保留托盘和恢复弹窗，可重试或强制退出当前进程；已发送到服务端的请求不能保证撤销计费。Windows 可能将托盘图标放在任务栏的隐藏图标区域。
+- **右上角齿轮**: 配置翻译服务、测试 API Key、测试音频设备、开启调试模式、提交反馈、调整透明度和快捷键
+
+### 翻译方向
+浮窗标题栏可以直接选择识别语言和翻译目标语言：
+- 左侧下拉框是识别语言
+- 右侧下拉框是翻译目标语言
+- 中间按钮可以一键交换方向
+- 中英文混杂内容会按主要语言判断，并尽量保留游戏术语、缩写、人名和地名
+- v0.6.1开放五语言20个在线方向，源语言与目标语言不能相同；日语、韩语、俄语标为 Beta。离线仅支持英中，其他18方向需明确选择并配置在线服务，不可用的方向会提示。
+
+### 状态与错误提示
+除了正常翻译结果，浮窗也会显示必要的用户提示，例如：
+- 启动进度、Whisper 模型加载状态
+- lite 包首次下载 Whisper 模型时的模型名、下载来源、已下载大小、总大小和百分比
+- 当前选中的系统声音 / Loopback 音频设备
+- 音频捕获启动失败或设备枚举失败
+- 翻译暂停 / 恢复、清空历史、热键触发
+- 翻译 API 超时、服务商 HTTP 状态码和错误信息
+
+### 检查更新
+VoxGo 默认每天从官网更新清单检查一次正式版更新。检查只会提示新版本，不会自动下载、安装或替换本地文件。
+
+在浮窗右上角齿轮设置里可以：
+- 开启或关闭“每天自动检查”
+- 点击“检查更新”手动查询当前版本是否最新
+- 发现新版本后打开下载页、稍后提醒，或忽略当前这个版本
+
+自动检查状态、忽略版本和最近检查时间会保存在本机 `user_settings.json`。发布清单位于 `https://voxgo.cn/update.json`，其中下载地址固定到具体 Release tag，避免 `latest` 变化后旧清单指向不匹配的安装包。
+
+### 调试与反馈
+设置窗口可以开启“调试模式”，程序会在 `app.log` 里记录最近一次从语音检测、识别、翻译到浮窗更新的延迟。“帮助与反馈”支持预览并复制诊断模板及打开 GitHub Issues；社区邀请入口仅在配置有效链接后显示。诊断模板不包含接口地址、密钥、设备名称或本地路径，自定义模型名不对外提供。实际调试日志与诊断模板不同，提交日志前应自行检查敏感内容。
+
+### 手机端访问
+1. 确保电脑和手机在同一局域网
+2. 手机浏览器访问：`http://电脑IP:8765/mobile`
+3. 实时接收翻译结果
+
+## 翻译服务与配置
+
+### 手动配置翻译 API
+首次使用先复制配置模板：
+```bash
+copy config.example.json config.json
+```
+
+然后编辑 `config.json`，或先启动程序后在浮窗右上角齿轮设置里选择翻译服务并填写 API Key。
+
+默认使用 OpenAI 兼容接口：
+```json
+"translation": {
+    "provider": "openai_compatible",
+    "api_key": "你的 OpenAI 兼容 API Key",
+    "model": "tencent/Hunyuan-MT-7B",
+    "endpoint": "https://api.siliconflow.cn/v1/chat/completions"
+}
+```
+
+模板默认使用硅基流动的 `tencent/Hunyuan-MT-7B`，这是面向翻译的免费模型。只需要注册账号并创建一个 API Key 即可调用；具体免费模型和额度以官网为准。
+
+注册/获取 API Key：<https://cloud.siliconflow.cn/i/iA6DF2nP>
+
+注意：硅基流动账号/额度可能需要支付宝实名或人脸认证；部分海外地区用户可能无法完成该认证。海外用户如果无法开通硅基流动，可以改用 Google Cloud Translation、DeepSeek、Qwen、GLM，或本地模型服务。
+
+也可以使用其他 OpenAI 兼容接口。常见填写示例：
+
+| 来源 | 兼容地址示例 | 模型名示例 |
+|------|--------------|------------|
+| 硅基流动 | `https://api.siliconflow.cn/v1/chat/completions` | `tencent/Hunyuan-MT-7B` |
+| DeepSeek | `https://api.deepseek.com/chat/completions` | `deepseek-v4-flash` |
+| Qwen / 阿里云百炼 | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` | `qwen-plus` |
+| GLM / 智谱 | `https://open.bigmodel.cn/api/paas/v4/chat/completions` | `glm-4.7` |
+| 本地模型 | `http://127.0.0.1:11434/v1/chat/completions` 或 `http://127.0.0.1:8000/v1/chat/completions` | 按本地服务填写 |
+
+如果服务商只给了 `base_url`，例如以 `/v1` 结尾，也可以直接填写；程序会自动补上 `/chat/completions`。真实 API Key 会保存在本机 `user_settings.json`，该文件不会提交到 Git。
+
+也可以使用 Google Cloud Translation：
+```json
+"translation": {
+    "provider": "google",
+    "api_key": "你的 Google Cloud Translation API Key",
+    "source_lang": "en",
+    "target_lang": "zh"
+}
+```
+
+Google 这里使用的是官方 **Cloud Translation API Basic v2**，不是通用 Google API。需要在 Google Cloud 项目里启用 Cloud Translation API，然后创建 API Key。Google 模式下不需要填写模型名和兼容地址；设置窗口会自动禁用这两个字段。
+
+Google Cloud Translation 价格和免费额度以官方为准：<https://cloud.google.com/translate/pricing>
+
+### 竞技游戏设置
+PUBG、APEX、Valorant 这类实时竞技游戏优先保护帧时间和响应速度。推荐设置为：
+
+- 响应模式：`极速 / 游戏性能`
+- 识别设备：`CPU`
+- 英文快路径：如果队友语音几乎全是英文，开启“纯英文环境”
+
+“极速 + 纯英文环境”会使用 `base.en` 英文专用模型，通常比通用 `base` 更快、更适合英文游戏语音。第一次开启时会按需下载 `base.en`；Full 包也不会预置它。如果语音里经常有中文或中英混杂，请保持“纯英文环境”关闭，让多语言模型继续做语言判断。
+
+开发性能基准可以跳过真实声卡，使用固定音频文件按 4 秒语音 + 3 秒间隔循环注入识别链路：
+```bash
+python main.py --benchmark-audio tests/assets/pubg_voice_30s.m4a
+```
+
+可选参数：`--benchmark-speech-seconds 4`、`--benchmark-gap-seconds 3`、`--benchmark-duration-seconds 300`。WAV 可直接使用；M4A/AAC 需要当前环境可导入 PyAV，标准安装通常会随 faster-whisper 一起具备。
+
+带标准答案的批量 ASR 对比（模型、响应模式、整段、实时切段与正式识别 Pipeline）见 [VoxGo ASR Benchmark](asr_benchmark.md)。
+
+### 配置调优
+编辑 `config.json`：
+
+| 配置项 | 说明 |
+|--------|------|
+| `app.setup_completed` | 首次启动向导是否已完成；向导完成后会保存到 `user_settings.json` |
+| `debug.enabled` | 是否开启调试模式并记录最近一次端到端延迟 |
+| `whisper.model_size` | 模型大小: tiny/base/small/medium (越大越准越慢) |
+| `whisper.fast_model_size` | 极速/游戏性能模式使用的通用模型，默认 `base` |
+| `whisper.pure_english_environment` | 纯英文环境开关；开启后使用英文专用模型提升英文语音速度，适合 PUBG/APEX/Valorant 等几乎全英文队友语音 |
+| `whisper.fast_english_model_size` | 极速/纯英文环境使用的英文专用模型，默认 `base.en`，首次启用时按需下载 |
+| `whisper.device` | 识别设备，默认 `cpu`，用于游戏性能模式；也可手动选 `cuda` 启用 NVIDIA GPU / CUDA，或选 `auto` 使用 GPU 优先的降级策略 |
+| `whisper.compute_type` | 计算精度，默认 `int8`。CUDA 模式下 `auto` 会依次尝试 float16、int8_float16、float32，失败后降级 CPU；int8_float16 保留为实验选项，不作为默认 |
+| `whisper.auto_cpu_threads` | 是否按 CPU 核心数自动选择识别线程，默认关闭以保护游戏帧时间；关闭后使用 `whisper.cpu_threads` |
+| `whisper.cpu_threads` | CPU 加载/识别线程数，默认 2；首次下载模型后内存紧张时保持较小更稳 |
+| `whisper.num_workers` | Whisper worker 数，默认 1；调高会增加内存占用 |
+| `whisper.model_download_source` | lite 包首次下载 Whisper 模型的下载源：`modelscope` 为 ModelScope 国内源（默认、推荐国内用户），`huggingface` 为官方 Hugging Face，`custom_hf_endpoint` 为自定义 Hugging Face Endpoint |
+| `whisper.model_download_endpoint` | 仅 `custom_hf_endpoint` 使用的 Hugging Face 兼容 Endpoint；ModelScope 不是 Hugging Face endpoint，不能填在这里 |
+| `whisper.language` | 由源语言策略同步：日/韩/俄及普通英语使用 `auto`，纯英文模式使用 `en`，中文使用 `zh`；用户选择的源语言另存于 `translation.source_lang`，Beta 不写入 code |
+| `whisper.prompt_profile` | 识别提示词场景，默认 `none`，避免 Whisper 幻听提示词；必要时可手动改为 `general` 或 `game` |
+| `whisper.vad_filter` | faster-whisper 内部 VAD，默认关闭，避免和外部切段重复吞字 |
+| `audio.audio_queue_max_blocks` | 原始音频队列上限，默认 5；队列满时丢弃旧音频，避免暂停或游戏繁忙时堆积 |
+| `overlay.position` | 浮窗位置: top/bottom/left/right |
+| `overlay.text_color` | 文字颜色 (十六进制) |
+| `overlay.bg_color` | 浮窗背景色，默认深灰 `#20242A` |
+| `overlay.bg_opacity` | 浮窗背景透明度，默认 0.82；设置窗口里可调整 |
+| `audio.latency_mode` | 响应模式：`fast` 极速/游戏性能（默认）、`balanced` 均衡、`accurate` 准确、`custom` 自定义；齿轮设置里可直接选择 |
+| `audio.sample_rate` | 采样率 (推荐 16000) |
+| `audio.chunk_duration_ms` | 自定义模式下的音频块长度，均衡默认 200ms；越小响应越快但更容易切碎 |
+| `audio.silence_threshold` | 静态兜底语音阈值，单位 dBFS；默认 -40，真人语音不建议高于 -20 |
+| `audio.speech_threshold_blocks` | 自定义模式下连续多少个有声块后判定开始说话，均衡默认 2 |
+| `audio.silence_limit_blocks` | 自定义模式下连续多少个静音块后切段，均衡默认 3 |
+| `audio.speech_idle_timeout_ms` | 有语音缓冲但没有新音频帧时的主动切段时间，均衡默认 450ms |
+| `audio.pre_roll_ms` | 触发说话前保留的句首缓冲，均衡默认 450ms |
+| `audio.soft_silence_margin_db` | 当前片段峰值下降多少 dB 后按尾部静音处理，默认 10 |
+| `audio.soft_silence_gate_margin_db` | 音量接近语音门限时按尾部静音处理的余量，默认 5 |
+| `audio.noise_calibration_seconds` | 启动后采集背景噪声并自动校准阈值的秒数，默认 2 |
+| `audio.noise_margin_db` | 动态阈值相对背景噪声提高的 dB，默认 7 |
+| `audio.max_speech_seconds` | 连续有声时强制切段的最长秒数，均衡默认 4.5 秒 |
+| `audio.min_segment_seconds` | 识别前过滤低于该语音活跃时长的片段，均衡默认 0.35 秒；设为 0 可关闭 |
+| `audio.min_segment_peak_margin_db` | 识别前要求片段峰值至少高过当前语音门限的 dB，均衡默认 1.5；设为 0 可关闭 |
+| `translation.provider` | 翻译服务：`openai_compatible`、`google` 或 `local` |
+| `translation.api_key` | 当前翻译服务的 API Key；Google 模式下填写 Google Cloud Translation API Key |
+| `translation.model` | OpenAI 兼容模型名，默认 `tencent/Hunyuan-MT-7B`；Google 模式不用填写 |
+| `translation.endpoint` | OpenAI 兼容地址，可填 `/v1` base_url 或完整 `/chat/completions`；Google 模式不用填写 |
+| `translation.max_tokens` | 译文最大输出长度，默认 80，避免模型扩写 |
+| `translation.temperature` | 翻译随机性，默认 0，优先忠实稳定 |
+| `translation.source_lang` | 固定识别语言，标题栏左侧下拉框会保存到这里；可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
+| `translation.target_lang` | 固定翻译目标语言，标题栏右侧下拉框会保存到这里；可选 `en` / `zh` / `ja` / `ko` / `ru`（Beta 仅为显示标签，不写入 code） |
+| `translation.context_messages` | 翻译历史上下文条数，默认 0，避免历史污染和补全 |
+| `translation.timeout_seconds` | 单次翻译请求超时时间，默认 12 秒；服务商较慢时可适当调高 |
+| `translation.max_concurrent_requests` | 同时进行的翻译请求数，默认 2；调低更稳，调高可能让慢服务商更容易超时 |
+
+## 故障排除
+
+浮窗没有字幕时，打开「设置 → 帮助与反馈 → 自动检测」，在所选应用内播放一段能听清人声的音频。根据结果检查音源、模型或翻译服务。
+
+### 1. 无法捕获音频
+- 优先选择 `[系统声音]` / `Loopback` 设备，不要选普通麦克风
+- 先在首次向导或齿轮设置里点击“测试音频”，播放游戏、Discord 或视频声音，看音量条是否跳动
+- 运行 `python diagnostics/list_devices.py`，确认能看到系统声音设备
+- 确保游戏声音正在从你选择的扬声器/耳机播放
+- 如果你正在用蓝牙耳机/HDMI 显示器/USB 声卡输出，音频设备也要选择同名的系统声音/Loopback 项
+- 如果只看到麦克风，重新运行 `install.bat` 安装 PyAudioWPatch
+- 如果使用 VB-Cable，确保系统音频输出已切换到 VB-Cable
+- NVIDIA 显卡用户可尝试 NVIDIA Broadcast / RTX Voice 虚拟设备，但采集游戏整体系统声音仍优先选择 `[系统声音]` / `Loopback`
+- 尝试以管理员身份运行
+
+### 2. 语音识别不准确
+- 真人语音比视频声音更容易偏小，确认 `audio.silence_threshold` 不要设得过高；推荐 -40 左右
+- 启动后先保持 2 秒相对安静，让程序完成背景噪声校准
+- 调高 `whisper.model_size` (small → medium)
+- 默认保持 `whisper.prompt_profile=none`；如果出现“请准确转写...”这类文本，说明 Whisper 正在幻听提示词，不要开启长提示词
+- 如果句子开头或结尾容易丢字，先保持 `whisper.vad_filter=false`，避免双重 VAD 切音
+- 降低游戏内背景音乐音量
+- 确保游戏语音输出清晰，且选择的是正在播放游戏声音的系统声音设备
+- 如果口音重、句子较长或直播/会议场景优先完整度，在齿轮设置里把“响应模式”切到“准确”
+
+### 3. 启动时提示 cublas64_12.dll 缺失
+- 这是 CUDA/cuBLAS 运行库缺失，不是翻译 API 问题
+- Lite 和 Full 不内置 CUDA DLL，默认不会下载；Full-CUDA / GPU 版已内置
+- 如果选择 `NVIDIA GPU / CUDA`，程序会检测 NVIDIA 显卡；AMD/Intel 显卡会提示无法使用 GPU 并保持原设置
+- NVIDIA 显卡用户在 Lite/Full 中选择 GPU 时，程序会按需下载 CUDA 运行库，完成后重启生效；下载失败时会说明原因并降级 CPU
+
+### 4. 独占全屏游戏里看不到浮窗
+- 优先把游戏显示模式改成“无边框窗口”或“窗口化全屏”；独占全屏可能会压住所有桌面浮窗
+- 先在桌面把浮窗拖到合适位置，再点击锁定，减少鼠标干扰
+- 使用系统托盘或热键控制：显示/隐藏、暂停/恢复、清空字幕都不需要打开设置窗口
+- 如果游戏以管理员身份运行，VoxGo 也建议以管理员身份启动，否则热键和置顶可能不稳定
+- 设置窗口“说明”页里有全屏兼容和系统托盘说明；“快捷键”页可查看和调整当前快捷键
+
+### 5. lite 包首次下载模型很慢或失败
+- 浮窗会显示正在下载的 Whisper 模型、仓库、下载来源、已下载大小、总大小和百分比
+- 下载失败时会显示具体网络错误，并写入程序目录的 `app.log` 和 `crash_report.txt`
+- 默认下载源是 ModelScope 国内源，会从 `modelscope.cn` 拉取 `Systran/faster-whisper-small` / `Systran/faster-whisper-base` 的必要文件
+- 开启“纯英文环境”时，会额外按需下载 `Systran/faster-whisper-base.en` 或对应英文专用模型
+- `hf-mirror.com` 目前会跳转回 `huggingface.co`，用户网络访问不了 Hugging Face 时不可靠；如需尝试，只能在“自定义 Hugging Face Endpoint”里填写
+- 如果 ModelScope 或自定义源仍失败，可以切到官方 Hugging Face 后重启，或直接下载 full 包
+- full 包已内置 Whisper small 和 base 通用模型，默认游戏性能模式不需要首次下载通用模型；英文专用模型仍按需下载
+
+### 6. 翻译延迟高
+- 在齿轮设置里开启调试模式，复现一次后通过“提交反馈”复制最近延迟
+- 真实用户默认配置就是“极速 / 游戏性能”：CPU int8、2 线程、单 worker、翻译单并发，并默认使用 base 级性能模型，优先保护 PUBG、APEX、Valorant 等竞技游戏的帧时间；GPU 模式保留为用户手动选择的高性能硬件选项，不作为游戏模式默认值
+- 如果语音几乎全是英文，开启“纯英文环境”可使用 `base.en`，通常比通用 `base` 响应更快；首次开启会按需下载该模型
+- 检查网络连接
+- 降低 `whisper.model_size` 以加快识别
+- 使用本地翻译模型 (需自行部署)
+
+### 7. 手机端无法连接
+- 检查防火墙是否放行 8765 端口
+- 确认手机和电脑在同一局域网
+- 尝试使用电脑 IP 而非 localhost
+- 如果看到 502，先在电脑浏览器打开 `http://127.0.0.1:8765/mobile`；如果本机可打开，通常是手机访问的 IP、代理或防火墙问题
+- 手机应访问浮窗二维码/启动提示里的电脑地址，不要手动使用浏览器代理给出的公网或代理地址
+
+## 📊 性能说明
+
+以下为影响因素，不是固定延迟或游戏 FPS 保证。可在调试模式查看实际阶段耗时。
+
+| 阶段 | 主要影响因素 |
+|------|------|
+| 音频捕获与切段 | 停顿、连续讲话、响应模式及音频设备 |
+| 本地 Whisper 识别 | CPU/GPU、模型大小、语音长度及游戏资源竞争 |
+| 在线翻译 | 排队、网络、服务商/模型响应及超时 |
+| 字幕更新 | 前序处理完成时间与 UI 调度 |
+
+## 🎮 适用范围
+本工具通过 Windows 系统声音设备采集音频，不针对某一款游戏做专门适配。只要游戏语音能从当前扬声器、耳机、HDMI、USB 声卡或虚拟声卡正常播放，并且系统能暴露对应的 `[系统声音]` / `Loopback` 设备，通常就可以尝试使用。
+
+未逐个实测的游戏不应标记为“已兼容”。如果某些游戏、反作弊、独占音频模式、远程串流、DRM 保护或特殊声卡驱动阻止系统声音被捕获，需要改用其他输出设备、关闭独占模式，或使用 VB-Cable 等虚拟音频设备绕路。
+
+## 从源码运行
+
+在仓库根目录双击 `install.bat` 安装依赖，然后双击 `run.bat` 启动。也可以从终端运行以下命令。
+
+```powershell
+python -m pip install -r requirements.txt
+python main.py
+```
+
+### 项目结构
+```text
+VoxGo_game_voice_trans/
+├── main.py              # 启动入口
+├── voxgo/               # 应用主包
+│   ├── app.py           # VoxGoApp 生命周期协调
+│   ├── config/          # 配置结构、加载、迁移和预设
+│   ├── audio/           # 音频捕获、设备和分段
+│   ├── asr/             # Whisper 识别和模型下载
+│   ├── translation/     # 翻译 Provider 和提示词
+│   ├── runtime/         # 运行时事件和工作项
+│   ├── ui/              # 浮窗、设置、托盘、二维码和对话框
+│   ├── mobile/          # 手机端服务和静态资源
+│   └── update/          # 更新检查
+├── tests/               # 可自动运行的轻量测试
+├── diagnostics/         # 手动排查脚本，不参与正常运行
+├── config.example.json  # 配置模板
+├── config.json          # 本地配置文件（不会提交到 Git）
+├── requirements.txt     # Python 依赖
+├── install.bat          # 安装脚本
+├── run.bat              # 启动脚本
+├── assets/voxgo.ico     # Windows 桌面/安装器图标
+├── docs/                # 官网页面和品牌图片
+├── README_EN.md         # English documentation
+└── README.md
+```
+
+自动测试可运行：
+```bash
+python -m unittest discover -s tests
+```
+
+手动排查脚本放在 `diagnostics/`，例如依赖导入检查、翻译接口检查、手机二维码生成等。需要真实 API 的脚本会读取本地 `config.json`，不会用于正常启动或打包。
+
+## 使用统计与隐私
+
+基础统计始终启用，用不跨日关联的每日标识统计「每日活跃安装数」，包含版本、安装包类型、当天是否首次启动、配置完成状态及详细统计开关和来源。它不代表真实人数，也不提供跨日留存；接收服务可见网络 IP，但不将 IP 存入 D1。
+
+详细使用与稳定性统计可在设置中关闭。新安装首次向导默认勾选，完成向导后才启用；升级保留历史开启、拒绝或未知状态。关闭详细统计不会关闭基础统计。两类统计均不上传语音、识别或翻译内容、API Key、硬件标识、文件路径、崩溃堆栈或错误正文。
+
+## 许可证与联系
+
+本社区版项目采用 GNU General Public License v3.0，详见 [LICENSE](../LICENSE)。
+
+如需闭源商业使用、私有定制发行或商业版授权，请另行取得授权。
+
+邮箱：[douyaj33@gmail.com](mailto:douyaj33@gmail.com)
+
+## 演示画面
+
+首页将 VoxGo 的 [电影字幕](screens/cinema.png) 与 [经典浮窗](screens/classic.png) Windows 截图分别叠在同一张游戏画面上。示例对白用于比较两种字幕模式。
+
+游戏底图取自《Xonotic》的 Silent Siege 地图。截图作者为 greewrfdsfsf，游戏画面署名 Justin 和 kuniu the frogg。演示图裁切了底图，并加上 VoxGo 浮窗、模式名称和语言方向。底图按 GPL-2.0-or-later 提供，组合图按 GPL-3.0 提供。[原图与授权](https://commons.wikimedia.org/wiki/File:Xonotic_Game_Play_-_Silent_Siege.jpg) · [GPL-3.0](../LICENSE)
