@@ -706,7 +706,7 @@ var _hmt = _hmt || [];
         <div class="hero-languages" aria-label="支持语言与 Beta 状态"><span>中文</span><span>English</span><span>日本語 <small>Beta</small></span><span>한국어 <small>Beta</small></span><span>Русский <small>Beta</small></span></div>
         <p class="hero-boundary">五语言20个在线翻译方向 · 日/韩/俄实验性支持 · 英中支持离线翻译</p>
         <div class="actions"><a class="btn btn-primary"
-            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">下载 VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">国内镜像下载（Lite v0.6.0）</a></div>
+            href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.1/VoxGo-v0.6.1-lite.zip">下载 VoxGo Lite</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">国内镜像下载（Lite v0.6.0）</a></div>
         <div class="hero-links"><a class="hero-community" href="#cinema">对比两种字幕模式 ↓</a><a class="hero-community" href="https://github.com/zxbb1190/VoxGo_game_voice_trans">GitHub 源码 ↗</a></div>
       </div>
       <div class="mock">
@@ -781,7 +781,7 @@ var _hmt = _hmt || [];
     </section>
     <section id="patch-notes" class="patch-notes"><div class="container"><div class="section-head"><span class="section-kicker">LATEST UPDATE / PATCH NOTES</span><h2>更新日志</h2><p>每一次改进，都能在这里追溯到 GitHub Release。</p></div>
       <!-- CHANGELOG_HOME_START -->
-      <div class="patch-board"><div class="patch-version" aria-hidden="true">0.6.0</div><div class="patch-content"><span class="patch-date">2026-10-30 / LATEST RELEASE</span><h3><a href="/changelog/v0.6.0/">VoxGo 0.6.0</a></h3><ul><li>支持中文（普通话）、英语、日语、韩语、俄语五种语言之间20个有向在线语音翻译方向，按实际源/目标语言直接翻译。</li><li>日语、韩语、俄语明确标为 Beta 实验性语言；源/目标选择统一显示 Beta 标签，并按识别/译文方向显示非阻断说明。标签不改变语言代码或内部 ASR 策略。</li><li>软件界面新增日语、韩语、俄语，覆盖设置、浮窗、首次配置、模型下载、更新、错误提示及帮助；界面语言独立于翻译方向保存。</li><li>中文译其他语言时，识别原文在浮窗和手机镜像中显示简体，保留原始 ASR、送翻译文本和实际译文。</li><li>日语、韩语内部使用兼容识别策略；俄语在极速、非极低影响模式下使用既有语音完整性策略。正式界面不提供策略开关，标准、精准及自定义调校保留原逻辑。</li></ul></div></div><div class="patch-history"><a href="/changelog/v0.5.2/">VoxGo 0.5.2</a><time datetime="2026-10-06">2026-10-06</time></div><div class="patch-history"><a href="/changelog/v0.5.1/">VoxGo 0.5.1</a><time datetime="2026-09-23">2026-09-23</time></div>
+      <div class="patch-board"><div class="patch-version" aria-hidden="true">0.6.1</div><div class="patch-content"><span class="patch-date">2026-11-18 / LATEST RELEASE</span><h3><a href="/changelog/v0.6.1/">VoxGo 0.6.1</a></h3><ul><li>现在可以看电影字幕了：译文在上，原文小字在下。按 Ctrl+Alt+M 即可切换。</li><li>可以只翻译选中的游戏或应用，让字幕只显示你想听的内容。</li><li>没有字幕时，在「设置 → 帮助与反馈」点「自动检测」即可查找原因。</li><li>使用 0.6.0 Lite？请到官网下载新版 Lite，避免下载较大的完整包。</li><li>修复已知问题。</li></ul></div></div><div class="patch-history"><a href="/changelog/v0.6.0/">VoxGo 0.6.0</a><time datetime="2026-10-30">2026-10-30</time></div><div class="patch-history"><a href="/changelog/v0.5.2/">VoxGo 0.5.2</a><time datetime="2026-10-06">2026-10-06</time></div>
       <!-- CHANGELOG_HOME_END -->
       <a class="patch-more" href="/changelog/">查看完整更新日志 →</a>
     </div></section>
@@ -792,8 +792,8 @@ var _hmt = _hmt || [];
           <p>适合大多数玩家。首次运行按向导测试翻译和系统声音，并下载所需的语音识别模型。</p>
         </div>
         <div class="download">
-          <div class="download-primary"><div><span class="tag">RECOMMENDED / VoxGo v0.6.0</span><h3>VoxGo Lite</h3><p>下载包更小，适合第一次体验。支持本地 Whisper 识别、API 或本地翻译，以及游戏字幕浮窗。</p></div><div class="download-actions"><a class="btn btn-primary" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">下载 Lite 版</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">国内镜像下载（Lite v0.6.0）</a></div></div>
-          <div class="download-secondary"><div class="download-option"><div><h3>Full</h3><p>内置 Whisper small/base 通用模型，减少首次下载等待。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-full.zip">下载 Full ↗</a></div><div class="download-option"><div><h3>Full-CUDA / GPU</h3><p>内置通用模型和 CUDA DLL，适合 NVIDIA GPU 用户。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.0/VoxGo-v0.6.0-full-cuda.zip">下载 GPU ↗</a></div></div>
+          <div class="download-primary"><div><span class="tag">RECOMMENDED / VoxGo v0.6.1</span><h3>VoxGo Lite</h3><p>下载包更小，适合第一次体验。支持本地 Whisper 识别、API 或本地翻译，以及游戏字幕浮窗。</p></div><div class="download-actions"><a class="btn btn-primary" href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.1/VoxGo-v0.6.1-lite.zip">下载 Lite 版</a><a class="btn" href="https://gitcode.com/zxbb1190/VoxGo/releases/download/v0.6.0/VoxGo-v0.6.0-lite.zip">国内镜像下载（Lite v0.6.0）</a></div></div>
+          <div class="download-secondary"><div class="download-option"><div><h3>Full</h3><p>内置 Whisper small/base 通用模型，减少首次下载等待。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.1/VoxGo-v0.6.1-full.zip">下载 Full ↗</a></div><div class="download-option"><div><h3>Full-CUDA / GPU</h3><p>内置通用模型和 CUDA DLL，适合 NVIDIA GPU 用户。</p></div><a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/download/v0.6.1/VoxGo-v0.6.1-full-cuda.zip">下载 GPU ↗</a></div></div>
         </div>
         <p class="download-latest">想查看全部附件和校验信息？<a href="https://github.com/zxbb1190/VoxGo_game_voice_trans/releases/latest">查看 Latest Release</a></p>
       </div>
